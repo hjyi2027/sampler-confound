@@ -66,11 +66,24 @@ The same 200 problems appear in every cell, so problem is a within-subject
 constant here and drops out. This is the analysis the headline ratio comes from,
 because it is stated in the units papers publish in.
 
-**Secondary — item level.** Three-way random-effects decomposition on the binary
-per-problem outcome, with problem as a third crossed factor. This shows *where*
-the variance lives and supports the compounding analysis. It is a supplement, not
-the headline: binary outcomes have mean-dependent variance and the components are
-harder to defend in four pages.
+**Secondary — item level.** Three-way random-effects decomposition with problem
+as a third crossed factor, run on two different responses:
+
+- **binary correctness**, one 0/1 per generation. Shows where the variance lives.
+- **continuous per-problem solve rate**, the fraction of replicates that solved
+  each problem. A Bernoulli's variance is p(1-p), pinned to zero at both ends, so
+  a component estimated from 0/1 data partly reflects where the cell means sit
+  rather than how far the factor moves them. Averaging over replicates breaks that
+  coupling. The cost is the replicate stratum: one rate per cell means no
+  replication, so the three-way interaction becomes the error term.
+
+Reporting both is the point. If they agree, the result is a fact about the data
+rather than about the response scale. If they disagree, that is the finding.
+
+Solve rates carry binomial noise of p(1-p)/R from having run R replicates rather
+than infinitely many, and it lands entirely in the residual. It is estimated and
+subtracted; uncorrected, every variance share would depend on the replicate
+budget.
 
 ### On the replicate dimension
 

@@ -31,6 +31,9 @@ first and this project formally starts Aug 30.
 
 - [x] Repo scaffold
 - [x] Port variance decomposition from *Unauthored by Design*
+- [x] Dependent variable -> binary correctness (`decompose_items`)
+- [x] Dependent variable -> continuous per-problem solve rate
+      (`solve_rates` + `decompose_solve_rate`), with binomial-noise correction
 - [x] Answer normalisation + exact-match grader
 - [x] Hand-verification harness (`scripts/verify_grader.py`, stratified)
 - [ ] Actually run the 50-sample hand-verification (needs sweep output)
@@ -77,6 +80,12 @@ first and this project formally starts Aug 30.
   route formatting variance straight into the sampler component and report it as
   the finding. Accuracy is reported both ways (`accuracy_strict`,
   `accuracy_parsed`) plus the unparseable rate per cell.
+- **Solve rate gets a binomial-noise correction.** A rate measured from R
+  replicates carries p(1-p)/R of sampling noise even when the underlying rate is
+  fixed, and it all lands in the residual. Uncorrected, every variance share —
+  the sampler share included — is deflated by a factor that depends on R, so the
+  headline ratio would move when the sweep was rerun with a different replicate
+  budget. That is a property of the budget, not of the world.
 - **Integer answers require exact numeric equality.** A relative tolerance made
   1000000 and 1000001 match, so the grader got more forgiving exactly where the
   arithmetic got harder. Caught by a test, not by inspection.
