@@ -1,0 +1,45 @@
+{
+  "models": [],
+  "samplers": [
+    {
+      "id": "greedy",
+      "temperature": 0.0
+    },
+    {
+      "id": "lowtemp",
+      "temperature": 0.3,
+      "top_p": 1.0
+    },
+    {
+      "id": "standard",
+      "temperature": 0.7,
+      "top_p": 0.95
+    },
+    {
+      "id": "hightemp",
+      "temperature": 1.0,
+      "top_p": 1.0
+    },
+    {
+      "id": "topk",
+      "temperature": 0.7,
+      "top_k": 40
+    },
+    {
+      "id": "minp",
+      "temperature": 1.0,
+      "min_p": 0.05
+    }
+  ],
+  "n_replicates": 5,
+  "benchmark": "aime",
+  "n_problems": 60,
+  "problem_seed": 0,
+  "provider": "fireworks",
+  "fixed": {
+    "prompt_template": "Solve the problem. Reason step by step, then give the final answer on its own last line in the form: Answer: <answer>",
+    "max_tokens": 2048,
+    "stop": null,
+    "system_prompt": null
+  }
+}

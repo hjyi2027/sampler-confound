@@ -9,10 +9,16 @@ first and this project formally starts Aug 30.
       Anthropic is ruled out — its API no longer exposes any decoding parameters
       (see README). No key for either provider is on this machine yet, and
       nothing past the smoke run can proceed without one.
-- [ ] **Model shortlist.** Needs 3-4 open-weight instruct models scoring well
-      clear of the floor. Prior work found only gpt-oss-120b survived heavily
-      constrained prompts on Fireworks — a different task, but a warning about
-      small-model brittleness.
+- [x] **Model shortlist.** Resolved as a *rule*, not a list. Seven non-reasoning
+      instruct candidates across five vendors in `MODEL_CANDIDATES`; the four
+      levels are chosen by `select_models()` from measured pilot accuracy, not
+      from published numbers. Model IDs still need checking against the live
+      Fireworks catalog — a candidate that 404s drops out of the design silently
+      unless noticed, so `select_models.py` warns on any missing pilot result.
+- [x] **Near-peer, not a capability ladder.** Enforced by the selection rule:
+      keep candidates inside a pre-registered accuracy band, then take the
+      4-subset with the smallest spread. Band excludes ceiling and floor
+      separately. Original note below.
 - [ ] **Near-peer, not a capability ladder.** If the model factor spans a wide
       capability range, model variance is enormous and the sampler/model ratio
       collapses toward zero — the headline dies on a design choice rather than a
@@ -39,7 +45,8 @@ first and this project formally starts Aug 30.
 - [ ] Actually run the 50-sample hand-verification (needs sweep output)
 - [ ] Benchmark loading: MATH-500 + AIME subset
 - [ ] Generation harness with disk cache
-- [ ] Freeze the grid in `configs/main.json`
+- [x] Freeze the grid (`configs/*.template.json`, `scripts/freeze_grid.py`)
+- [ ] Run the model pilot, then `scripts/select_models.py` -> `configs/main.json`
 - [ ] Smoke-run end to end at 1/20 scale
 
 ## Phase 2 — Main sweep (Sept 2)
@@ -89,3 +96,26 @@ first and this project formally starts Aug 30.
 - **Integer answers require exact numeric equality.** A relative tolerance made
   1000000 and 1000001 match, so the grader got more forgiving exactly where the
   arithmetic got harder. Caught by a test, not by inspection.
+
+- **The grid is frozen; the model levels are not chosen yet, on purpose.**
+  Everything else — six sampler configs, 5 replicates, 200 MATH-500 problems,
+  all 60 AIME 2024+2025 problems, max_tokens 2048, one prompt template — is
+  fixed in `configs/main.template.json` and `configs/aime.template.json`. The
+  model slot is empty and `Design.validate()` rejects an empty model list, so a
+  template cannot be run by accident. Levels come from `select_models()`, a
+  pre-registered rule written before any pilot data exists: keep candidates
+  whose *measured* pilot accuracy falls in [0.55, 0.90], then take the 4-subset
+  with the smallest spread, ties to family diversity. Selecting on published
+  leaderboard numbers was rejected — each was measured under its own
+  undisclosed decoding config, which is the defect this paper documents, so the
+  grid would refute the paper.
+- **Two configs, not one benchmark factor.** Benchmark is never a factor inside
+  a single ANOVA: problem difficulty is not commensurable across MATH-500 and
+  AIME and the cell counts differ. Each is decomposed separately.
+- **max_tokens 2048, non-reasoning models only.** Reasoning models expose an
+  effort / thinking-budget knob that moves accuracy on its own; it would sit
+  inside the model factor and confound it with the decoding factor. Budget at 4
+  models: 24,000 + 7,200 = 31,200 generations.
+- **The pilot uses a disjoint problem draw** (`PILOT_PROBLEM_SEED = 1729`).
+  Choosing models on the same items they are then scored on puts selection
+  noise into the model component — the headline ratio's denominator.
