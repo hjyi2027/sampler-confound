@@ -1,0 +1,134 @@
+{
+  "claude-opus-5": {
+    "temperature": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'temperature'"
+    },
+    "top_p": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'top_p'"
+    },
+    "top_k": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'top_k'"
+    },
+    "min_p": {
+      "status": "error:AuthenticationError",
+      "detail": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'API key is invalid.'}, 'request_id': None}"
+    },
+    "seed": {
+      "status": "error:AuthenticationError",
+      "detail": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'API key is invalid.'}, 'request_id': None}"
+    }
+  },
+  "claude-sonnet-5": {
+    "temperature": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'temperature'"
+    },
+    "top_p": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'top_p'"
+    },
+    "top_k": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'top_k'"
+    },
+    "min_p": {
+      "status": "error:AuthenticationError",
+      "detail": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'API key is invalid.'}, 'request_id': None}"
+    },
+    "seed": {
+      "status": "error:AuthenticationError",
+      "detail": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'API key is invalid.'}, 'request_id': None}"
+    }
+  },
+  "claude-opus-4-8": {
+    "temperature": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'temperature'"
+    },
+    "top_p": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'top_p'"
+    },
+    "top_k": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'top_k'"
+    },
+    "min_p": {
+      "status": "error:AuthenticationError",
+      "detail": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'API key is invalid.'}, 'request_id': None}"
+    },
+    "seed": {
+      "status": "error:AuthenticationError",
+      "detail": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'API key is invalid.'}, 'request_id': None}"
+    }
+  },
+  "claude-opus-4-6": {
+    "temperature": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'temperature'"
+    },
+    "top_p": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'top_p'"
+    },
+    "top_k": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'top_k'"
+    },
+    "min_p": {
+      "status": "error:AuthenticationError",
+      "detail": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'API key is invalid.'}, 'request_id': None}"
+    },
+    "seed": {
+      "status": "error:AuthenticationError",
+      "detail": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'API key is invalid.'}, 'request_id': None}"
+    }
+  },
+  "claude-sonnet-4-6": {
+    "temperature": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'temperature'"
+    },
+    "top_p": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'top_p'"
+    },
+    "top_k": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'top_k'"
+    },
+    "min_p": {
+      "status": "error:AuthenticationError",
+      "detail": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'API key is invalid.'}, 'request_id': None}"
+    },
+    "seed": {
+      "status": "error:AuthenticationError",
+      "detail": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'API key is invalid.'}, 'request_id': None}"
+    }
+  },
+  "claude-haiku-4-5": {
+    "temperature": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'temperature'"
+    },
+    "top_p": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'top_p'"
+    },
+    "top_k": {
+      "status": "error:TypeError",
+      "detail": "Messages.create() got an unexpected keyword argument 'top_k'"
+    },
+    "min_p": {
+      "status": "error:AuthenticationError",
+      "detail": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'API key is invalid.'}, 'request_id': None}"
+    },
+    "seed": {
+      "status": "error:AuthenticationError",
+      "detail": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'API key is invalid.'}, 'request_id': None}"
+    }
+  }
+}
