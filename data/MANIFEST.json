@@ -1,0 +1,38 @@
+{
+  "files": {
+    "aime": {
+      "n_problems": 60,
+      "path": "aime.jsonl",
+      "sha256": "53e8cd5f6a930abcf5df6cf919f3aca73129f5d49e155eddb67f44170b8cdfe8"
+    },
+    "math500": {
+      "n_problems": 500,
+      "path": "math500.jsonl",
+      "sha256": "95bfc45480b83638eef6c04984be4dd0335e45c833f8fe20bd54c135b6b013f0"
+    }
+  },
+  "sources": {
+    "aime": [
+      {
+        "config": "default",
+        "dataset": "HuggingFaceH4/aime_2024",
+        "n": 30,
+        "split": "train"
+      },
+      {
+        "config": "default",
+        "dataset": "yentinglin/aime_2025",
+        "n": 30,
+        "split": "train"
+      }
+    ],
+    "math500": [
+      {
+        "config": "default",
+        "dataset": "HuggingFaceH4/MATH-500",
+        "n": 500,
+        "split": "test"
+      }
+    ]
+  }
+}

@@ -43,7 +43,8 @@ first and this project formally starts Aug 30.
 - [x] Answer normalisation + exact-match grader
 - [x] Hand-verification harness (`scripts/verify_grader.py`, stratified)
 - [ ] Actually run the 50-sample hand-verification (needs sweep output)
-- [ ] Benchmark loading: MATH-500 + AIME subset
+- [x] Benchmark loading: MATH-500 + AIME (`samplerconfound/benchmarks.py`,
+      `scripts/fetch_benchmarks.py`), pinned by sha256 and stratified draws
 - [ ] Generation harness with disk cache
 - [x] Freeze the grid (`configs/*.template.json`, `scripts/freeze_grid.py`)
 - [ ] Run the model pilot, then `scripts/select_models.py` -> `configs/main.json`
@@ -119,3 +120,30 @@ first and this project formally starts Aug 30.
 - **The pilot uses a disjoint problem draw** (`PILOT_PROBLEM_SEED = 1729`).
   Choosing models on the same items they are then scored on puts selection
   noise into the model component — the headline ratio's denominator.
+- **Benchmarks are pinned, not fetched at run time.** `scripts/fetch_benchmarks.py`
+  downloads MATH-500 (500) and AIME 2024+2025 (30+30) once into `data/*.jsonl`
+  and records a sha256 per file in `data/MANIFEST.json`; `benchmarks.load()`
+  verifies it on every load. The problem set is a factor in the three-way
+  decomposition, so a dataset revised upstream between the pilot and the sweep
+  would move the problem component and the residual with no code change to
+  explain it.
+- **Draws are hash-ordered, not `random`-ordered.** Problems are ranked by
+  `sha256(f"{seed}:{id}")`, so a draw is identical on any interpreter and any
+  platform. `random.Random.sample` is not contractually stable across CPython
+  releases, and a draw that shifted under a Python upgrade would silently
+  disagree with published numbers. The three splits are pinned by digest in
+  `tests/test_benchmarks.py`.
+- **The MATH-500 draw is stratified by level.** A uniform 200-of-500 leaves the
+  difficulty mix to chance, and difficulty decides whether a cell sits near
+  ceiling or floor — both of which flatten the variance being measured. Largest-
+  remainder allocation keeps the realised mix within one problem of the full
+  benchmark's, which also keeps the 200-problem accuracy comparable to published
+  MATH-500 numbers.
+- **Contamination does not threaten the design, with one exception.** Every
+  reported quantity is a within-benchmark variance component, and contamination
+  shifts the *level* of accuracy, which cancels out of a decomposition taken
+  around the grand mean. The exception is *differential* contamination: a model
+  that alone has memorised the set sits at ceiling, loses the variance decoding
+  would produce, and deflates the sampler component. `PILOT_BAND`'s 0.90 upper
+  edge prices such a model out of the grid, and including AIME 2025 — which
+  postdates several candidates' cutoff — makes a 2024-vs-2025 gap visible.

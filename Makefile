@@ -1,7 +1,11 @@
-.PHONY: test probe freeze smoke clean
+.PHONY: test data probe freeze smoke clean
 
 test:
 	python3 -m pytest tests/ -q
+
+# Download and pin the problem sets. Run once; data/MANIFEST.json guards reruns.
+data:
+	python3 scripts/fetch_benchmarks.py
 
 # Verify the provider actually honours every sampler parameter in the grid
 # before any money is spent. See samplerconfound/config.py.
