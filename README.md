@@ -101,7 +101,25 @@ out near 1-1.5B parameters and swap eats any long run — established in prior
 work. Models at that scale cannot do MATH-500 well enough for correctness
 variance to mean anything.
 
-**Therefore the sweep is API-only.** Budget matters and is planned for:
+**Therefore the sweep is API-only, on an open-weight provider.**
+
+The Anthropic API was ruled out empirically, not on preference. As of `anthropic`
+1.0.0, `temperature`, `top_p` and `top_k` are gone from the signature of
+`messages.create()` and from `MessageCreateParams`; `min_p` and `seed` were never
+there. Sampling control was removed from current Claude models in favour of
+`output_config.effort`. Passing `temperature` raises `TypeError` client-side
+before a request is made — see `runs/sampler_support.json` and
+`scripts/probe_sampler_support.py`.
+
+That is not a limitation to note in a Limitations section. This study's
+independent variable is decoding configuration, and on that provider it does not
+exist.
+
+The observation is worth keeping for the Discussion: the largest commercial
+provider has removed decoding parameters from its API entirely, which is evidence
+the field half-knows this matters. It does not rescue the experiment.
+
+Budget matters and is planned for:
 
 | | |
 |---|---|
