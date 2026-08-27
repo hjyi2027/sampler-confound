@@ -222,3 +222,64 @@ def test_three_way_on_binary_outcomes_runs_and_is_bounded():
     # Problem difficulty is the dominant term by construction; if it is not, the
     # blocking factor is not doing its job.
     assert d.var_share["problem"] > d.var_share["model"]
+
+
+# --------------------------------------------------------------------------
+# the bootstrap interval must contain its own point estimate
+#
+# Found by the 1/20 smoke run, which reported "sampler:model ratio = 0.000,
+# 95% CI [0.013, inf]" — an interval excluding the estimate it describes, which
+# reads as "significantly nonzero" when the estimate is exactly zero. The cause
+# was dropping bootstrap replicates whose ratio was zero. Those zeros are data:
+# the components are method-of-moments estimates clamped at zero, so the ratio's
+# sampling distribution has a genuine atom there.
+# --------------------------------------------------------------------------
+def test_ci_contains_a_zero_point_estimate():
+    rng = np.random.default_rng(0)
+    # Sampler has no effect; model does. The sampler component will clamp to 0.
+    models, samplers, acc = [], [], []
+    for mi, base in enumerate([0.60, 0.75, 0.90, 0.95]):
+        for s in ["greedy", "lowtemp", "standard", "hightemp", "topk"]:
+            for _ in range(5):
+                models.append(f"m{mi}")
+                samplers.append(s)
+                acc.append(base + rng.normal(0, 0.01))
+    d = decompose_accuracy(acc, models, samplers, n_boot=500)
+    lo, hi = d.sampler_to_model_ci
+    r = d.sampler_to_model
+    if np.isfinite(r):
+        assert lo <= r <= hi, f"CI [{lo}, {hi}] excludes point estimate {r}"
+
+
+def test_ci_contains_the_estimate_when_sampler_dominates():
+    rng = np.random.default_rng(1)
+    models, samplers, acc = [], [], []
+    sampler_effect = {"greedy": 0.0, "lowtemp": 0.06, "standard": 0.12,
+                      "hightemp": 0.18, "topk": 0.24}
+    for mi in range(4):
+        for s, eff in sampler_effect.items():
+            for _ in range(5):
+                models.append(f"m{mi}")
+                samplers.append(s)
+                acc.append(0.70 + eff + rng.normal(0, 0.01))
+    d = decompose_accuracy(acc, models, samplers, n_boot=500)
+    lo, hi = d.sampler_to_model_ci
+    r = d.sampler_to_model
+    assert r > 1.0, "sampler should dominate in this fixture"
+    assert lo <= r <= hi, f"CI [{lo}, {hi}] excludes point estimate {r}"
+
+
+def test_zero_ratio_replicates_are_not_discarded():
+    # A distribution that is mostly zeros must yield a lower bound of zero,
+    # not the 2.5th percentile of the positive tail.
+    rng = np.random.default_rng(2)
+    models, samplers, acc = [], [], []
+    for mi, base in enumerate([0.50, 0.70, 0.85, 0.95]):
+        for s in ["greedy", "lowtemp", "standard", "hightemp", "topk"]:
+            for _ in range(5):
+                models.append(f"m{mi}")
+                samplers.append(s)
+                acc.append(base + rng.normal(0, 0.005))
+    d = decompose_accuracy(acc, models, samplers, n_boot=500)
+    lo, _ = d.sampler_to_model_ci
+    assert lo == 0.0 or lo < 0.01, f"lower bound {lo} looks like the positive tail"

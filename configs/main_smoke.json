@@ -1,0 +1,46 @@
+{
+  "models": [
+    "accounts/fireworks/models/deepseek-v4-flash-0731",
+    "accounts/fireworks/models/gpt-oss-120b",
+    "accounts/fireworks/models/gpt-oss-20b",
+    "accounts/fireworks/models/minimax-m3"
+  ],
+  "samplers": [
+    {
+      "id": "greedy",
+      "temperature": 0.0
+    },
+    {
+      "id": "lowtemp",
+      "temperature": 0.3,
+      "top_p": 1.0
+    },
+    {
+      "id": "standard",
+      "temperature": 0.7,
+      "top_p": 0.95
+    },
+    {
+      "id": "hightemp",
+      "temperature": 1.0,
+      "top_p": 1.0
+    },
+    {
+      "id": "topk",
+      "temperature": 0.7,
+      "top_k": 40
+    }
+  ],
+  "n_replicates": 5,
+  "benchmark": "math500",
+  "n_problems": 200,
+  "problem_seed": 0,
+  "provider": "fireworks",
+  "fixed": {
+    "prompt_template": "Solve the problem. Reason step by step, then give the final answer on its own last line in the form: Answer: <answer>",
+    "max_tokens": 8192,
+    "stop": null,
+    "system_prompt": null,
+    "reasoning_effort": "low"
+  }
+}

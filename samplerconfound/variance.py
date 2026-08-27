@@ -284,26 +284,52 @@ def _boot_ratio_two_way(G, n_boot, random_state, observed) -> tuple[float, float
         }
         c = _two_way_components(ms, a, b, n)
         if c["model"] > 0:
+            # This is 0.0 whenever the sampler component clamps to zero, and that
+            # zero is DATA, not a failure. The components are method-of-moments
+            # estimates that can go negative and are clamped at zero, so the
+            # ratio's sampling distribution genuinely has an atom at zero.
+            # Dropping those replicates — as this did — biases the interval
+            # upward and, when the observed ratio is itself zero, produces a CI
+            # that excludes its own point estimate. A reader would read that as
+            # "significantly nonzero". Caught by the 1/20 smoke run, which
+            # reported ratio 0.000 with CI [0.013, inf].
             ratios.append(c["sampler"] / c["model"])
         elif c["sampler"] > 0:
             ratios.append(np.inf)
+        else:
+            ratios.append(np.nan)   # both components zero: ratio undefined
 
     arr = np.asarray(ratios, dtype=np.float64)
-    usable = arr[np.isfinite(arr) & (arr > 0)]
-    if usable.size < 20:
+    defined = arr[~np.isnan(arr)]
+    finite = defined[np.isfinite(defined)]          # includes exact zeros
+    if finite.size < 20:
         return (float("nan"), float("nan"))
-    inf_frac = 1.0 - usable.size / max(arr.size, 1)
+    inf_frac = 1.0 - finite.size / max(defined.size, 1)
+    zero_frac = float(np.mean(finite == 0.0))
+
+    hi_pct = float("inf") if inf_frac > 0.025 else None
 
     if not np.isfinite(observed) or observed <= 0:
-        lo = float(np.percentile(usable, 2.5))
-        hi = float("inf") if inf_frac > 0.025 else float(np.percentile(usable, 97.5))
+        # Percentile interval over the full finite distribution, zeros included,
+        # so an observed ratio of zero lies inside its own interval.
+        lo = float(np.percentile(finite, 2.5))
+        hi = hi_pct if hi_pct is not None else float(np.percentile(finite, 97.5))
         return (lo, hi)
 
-    logs = np.log(usable)
+    positive = finite[finite > 0]
+    if zero_frac > 0.025 or positive.size < 20:
+        # The log-scale reflection below is undefined at zero. When zeros are a
+        # real part of the distribution, fall back to the percentile interval
+        # rather than silently excluding them.
+        lo = float(np.percentile(finite, 2.5))
+        hi = hi_pct if hi_pct is not None else float(np.percentile(finite, 97.5))
+        return (lo, hi)
+
+    logs = np.log(positive)
     q_lo, q_hi = np.percentile(logs, [2.5, 97.5])
     centre = np.log(observed)
     lo = float(np.exp(2 * centre - q_hi))
-    hi = float("inf") if inf_frac > 0.025 else float(np.exp(2 * centre - q_lo))
+    hi = hi_pct if hi_pct is not None else float(np.exp(2 * centre - q_lo))
     return (lo, hi)
 
 
