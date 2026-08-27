@@ -73,8 +73,25 @@ def test_last_number_fallback_is_labelled_as_such():
 @pytest.mark.parametrize(
     "raw,expected",
     [
-        (r"\frac{1}{2}", "(1)/(2)"),
-        (r"\dfrac{1}{2}", "(1)/(2)"),
+        (r"\frac{1}{2}", "1/2"),
+        (r"\dfrac{1}{2}", "1/2"),
+        (r"\tfrac{1}{2}", "1/2"),
+        (r"\frac13", "1/3"),
+        # Inline math delimiters: models wrap answers in \( ... \) far more
+        # often than in $ ... $, and this was the largest single source of
+        # false negatives in the first hand-verification.
+        (r"\(\frac{1}{2}\)", "1/2"),
+        (r"\(-2\).", "-2"),
+        (r"\(\displaystyle \frac13\)", "1/3"),
+        (r"\[42\]", "42"),
+        # Parenthesised and bare fraction spellings must agree.
+        (r"\left(\frac{3}{5},\frac{8}{3}\right]", "(3/5,8/3]"),
+        (r"(3/5, 8/3]", "(3/5,8/3]"),
+        # A compound numerator keeps its parens, because dropping them would
+        # change what the expression means; a single-token denominator does not
+        # need them.
+        (r"\frac{a+b}{c}", "(a+b)/c"),
+        (r"\frac{a+b}{c+d}", "(a+b)/(c+d)"),
         (r"$42$", "42"),
         (r"1,000", "1000"),
         (r"50\%", "50"),
@@ -313,3 +330,70 @@ def test_reasoning_numbers_do_not_leak_in_when_last_number_is_refused():
     # And with the fallback allowed, it is credited — which is why the fallback
     # is labelled and reported separately.
     assert grade(text, "408").status == "correct"
+
+
+# --------------------------------------------------------------------------
+# truncation
+#
+# From the first hand-verification: 11 of 50 sampled responses ran out of tokens
+# mid-derivation on hard AIME problems. The last_number fallback returned
+# whatever the model happened to be manipulating at the cutoff, and in one case
+# that number WAS the gold answer, so a response that never stated an answer was
+# scored correct. That is the disqualifying direction, and it is not random —
+# truncation tracks response length, which tracks temperature.
+# --------------------------------------------------------------------------
+def test_truncated_last_number_is_unparseable_not_correct():
+    text = "the least prime is 110. Is there any other solution with"
+    assert grade(text, "110").status == "correct"          # without the flag
+    v = grade(text, "110", truncated=True)
+    assert v.status == "unparseable"
+    assert v.method == "truncated"
+
+
+def test_truncated_last_number_is_unparseable_not_incorrect():
+    # The commoner case: the trailing number is not the gold answer. Scoring it
+    # `incorrect` claims the model got the maths wrong, when it simply never
+    # finished — and this study reports those as different quantities.
+    text = "so probability = 2"
+    assert grade(text, "1/3", truncated=True).status == "unparseable"
+
+
+def test_a_stated_answer_survives_truncation():
+    # A model that already wrote its answer down did state one, even if the
+    # stream was cut afterwards. Refusing these would inflate the unparseable
+    # rate, which this study reports as a result in its own right.
+    assert grade("Answer: 110\nand then some more", "110", truncated=True).status == "correct"
+    assert grade("\\boxed{110} and then", "110", truncated=True).status == "correct"
+
+
+# --------------------------------------------------------------------------
+# markdown emphasis
+#
+# The four residual disagreements in the first passing hand-verification were
+# all this shape. Anchoring the answer line on `^\s*answer` missed every
+# markdown-formatted answer, fell through to the last_number fallback, and the
+# fallback then picked "13" out of "\frac13" — scoring a correct answer wrong.
+# --------------------------------------------------------------------------
+@pytest.mark.parametrize(
+    "text,gold",
+    [
+        (r"**Answer: \(\frac13\)**", r"\frac{1}{3}"),
+        (r"**Answer:** \(\displaystyle \frac13\)", r"\frac{1}{3}"),
+        ("Answer: **204**", "204"),
+        ("**Answer: 1+2i**", "1+2i"),
+        ("### Answer: 42", "42"),
+        ("- Answer: 42", "42"),
+        ("> **Final answer:** 42", "42"),
+    ],
+)
+def test_markdown_formatted_answer_lines_are_read(text, gold):
+    v = grade(text, gold)
+    assert v.status == "correct"
+    assert v.method == "answer_line", "must not fall through to last_number"
+
+
+def test_a_lone_asterisk_is_still_multiplication():
+    # cdot_to_star emits `*`, so emphasis stripping must only touch doubled
+    # markers — otherwise "2*3" and "23" would become the same answer.
+    assert grade(r"Answer: 2 \cdot 3", "2*3").status == "correct"
+    assert grade("Answer: 2*3", "23").status == "incorrect"

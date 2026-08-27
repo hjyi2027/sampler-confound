@@ -102,7 +102,8 @@ def generate(key: str, model: str, sampler: dict, problem) -> dict | None:
     d = r.json()
     choice = d["choices"][0]
     text = (choice["message"].get("content") or "")
-    verdict = grade(text, problem.answer)
+    verdict = grade(text, problem.answer,
+                     truncated=choice["finish_reason"] == "length")
     return {
         "problem_id": problem.id,
         "benchmark": "aime" if problem.id.startswith("aime") else "math500",
@@ -128,7 +129,8 @@ def regrade(path: Path) -> int:
     moved = []
     for r in records:
         before = r["verdict"]
-        after = grade(r["response"], r["gold"]).to_dict()
+        after = grade(r["response"], r["gold"],
+                      truncated=r.get("finish_reason") == "length").to_dict()
         if before["status"] != after["status"] or before.get("extracted") != after.get("extracted"):
             moved.append((r, before, after))
         r["verdict"] = after

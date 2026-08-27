@@ -50,6 +50,11 @@ QUOTA = {
 }
 
 
+def record_key(r: dict) -> str:
+    """Stable identity for one generation, independent of grader version."""
+    return f"{r.get('model', '?')}|{r.get('sampler', '?')}|{r.get('problem_id', '?')}"
+
+
 def stratify(records: list[dict]) -> dict[str, list[dict]]:
     out: dict[str, list[dict]] = defaultdict(list)
     for r in records:
@@ -88,6 +93,20 @@ def cmd_sample(args) -> int:
 
     rng.shuffle(picked)
 
+    carried = {}
+    if getattr(args, "carry_labels", None):
+        prev = Path(args.carry_labels).read_text()
+        for m in _ITEM.finditer(prev):
+            h = _HUMAN.search(m.group("body"))
+            g = _GRADER.search(m.group("body"))
+            if h and g:
+                label = h.group(1).strip().lower()
+                key = json.loads(g.group(1)).get("key")
+                if key and label in {"correct", "incorrect", "unparseable"}:
+                    carried[key] = label
+        reused = sum(record_key(r) in carried for _, r in picked)
+        print(f"carrying {len(carried)} labels; {reused}/{len(picked)} items reusable")
+
     lines = [
         "# Grader verification worksheet",
         "",
@@ -116,7 +135,18 @@ def cmd_sample(args) -> int:
         v = r["verdict"]
         resp = r.get("response", "")
         if len(resp) > args.max_chars:
-            resp = resp[: args.max_chars] + f"\n... [truncated, {len(r['response'])} chars total]"
+            # Truncate the MIDDLE, never the tail. Cutting to the first N chars
+            # hides the final answer, which is the only part a reviewer needs —
+            # long responses are exactly the rambling high-temperature ones the
+            # strata over-sample, so the first version of this made the most
+            # informative items the unverifiable ones.
+            head = args.max_chars // 3
+            tail = args.max_chars - head
+            resp = (
+                resp[:head]
+                + f"\n\n... [{len(resp) - args.max_chars} chars elided from the middle]\n\n"
+                + resp[-tail:]
+            )
         lines += [
             f"## {i}. `{r.get('problem_id', '?')}`",
             "",
@@ -128,11 +158,17 @@ def cmd_sample(args) -> int:
             resp,
             "```",
             "",
-            "**Human:** ",
+            f"**Human:** {carried.get(record_key(r), '')}",
             "",
             "<!-- grader: "
             + json.dumps(
                 {
+                    # A stable identity for the record, so labels survive a
+                    # regrade. Item NUMBER is not stable: changing grade.py moves
+                    # records between strata, which changes the draw, and labels
+                    # carried over by position then describe different problems.
+                    # That silently produced a meaningless 60% agreement once.
+                    "key": record_key(r),
                     "status": v["status"],
                     "method": v["method"],
                     "match": v.get("match"),
@@ -223,6 +259,9 @@ def main() -> int:
     s.add_argument("--n", type=int, default=50)
     s.add_argument("--seed", type=int, default=0)
     s.add_argument("--max-chars", type=int, default=2000)
+    s.add_argument("--carry-labels", metavar="WORKSHEET",
+                   help="reuse human labels from an earlier worksheet, matched by "
+                        "record key rather than item number")
     s.set_defaults(func=cmd_sample)
 
     c = sub.add_parser("score", help="score a filled-in worksheet")

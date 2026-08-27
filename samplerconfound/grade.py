@@ -38,7 +38,17 @@ from fractions import Fraction
 # extraction
 # --------------------------------------------------------------------------
 
-_ANSWER_LINE = re.compile(r"(?im)^\s*(?:final\s+)?answer\s*[:=]\s*(.+?)\s*$")
+# Models emit the answer line as markdown: "**Answer: 204**", "**Answer:** 204",
+# "### Answer: 204". Anchoring on `^\s*answer` missed every one of those and fell
+# through to the `last_number` fallback, which then picked "13" out of "\frac13"
+# and scored a correct answer wrong. All four residual disagreements in the first
+# passing hand-verification were this.
+_ANSWER_LINE = re.compile(
+    r"(?im)^[\s*_#>\-]*(?:final\s+)?answer[\s*_]*[:=][\s*_]*(.+?)[\s*_]*$"
+)
+# Doubled emphasis only. A lone `*` is left alone because cdot_to_star produces
+# it as a multiplication sign, and folding that away would change values.
+_MD_EMPH = re.compile(r"\*\*|__")
 _BOXED = re.compile(r"\\boxed\s*{")
 # The inner group must END in a digit. Written as `[\d,]*` it happily swallows
 # the comma in "we get 408, but" and extracts "408,", which then fails to match
@@ -108,8 +118,10 @@ def extract_answer(text: str) -> tuple[str | None, str]:
 # normalisation
 # --------------------------------------------------------------------------
 
-_FRAC = re.compile(r"\\d?frac\s*{([^{}]+)}\s*{([^{}]+)}")
-_SIMPLE_FRAC = re.compile(r"\\d?frac(\d)(\d)")
+# \dfrac and \tfrac are the display and text variants of \frac and mean the
+# same thing. Matching only \d?frac left every \tfrac unconverted.
+_FRAC = re.compile(r"\\[dt]?frac\s*{([^{}]+)}\s*{([^{}]+)}")
+_SIMPLE_FRAC = re.compile(r"\\[dt]?frac(\d)(\d)")
 # `\sqrt3` is as valid as `\sqrt{3}` and appears in MATH-500 gold answers.
 # Matching only the braced form left "2\sqrt{3}" and "2\sqrt3" as different
 # strings, so a correct answer scored wrong whenever the model and the dataset
@@ -117,6 +129,17 @@ _SIMPLE_FRAC = re.compile(r"\\d?frac(\d)(\d)")
 _SQRT = re.compile(r"\\sqrt\s*(?:{([^{}]+)}|([0-9A-Za-z]))")
 _TEXT = re.compile(r"\\(?:text|mbox|mathrm|textbf)\s*{([^{}]*)}")
 _LEAD_VAR = re.compile(r"^[A-Za-z]\s*(?:\([^()]*\))?\s*=\s*")
+# Inline and display math delimiters. Models wrap the answer in \( ... \) far
+# more often than in $ ... $, and stripping only the dollar form meant an answer
+# that was right in every respect failed to match its gold. This was nine of the
+# fifty items in the first hand-verification — the single largest source of
+# disagreement, and every one of them a false negative.
+_MATH_DELIM = re.compile(r"\\[\(\)\[\]]")
+# `(3)/(5)` and `3/5` must not be different answers. frac_to_slash parenthesises
+# unconditionally so that `\frac{a+b}{c}` stays correct, which then failed to
+# match a model that wrote the slash form directly. Redundant parens around a
+# single bare token are spelling, not structure.
+_REDUNDANT_PARENS = re.compile(r"\((-?[\w.]+)\)")
 _NUM_COMMA = re.compile(r"(?<=\d),(?=\d{3}\b)")
 
 
@@ -137,7 +160,11 @@ def normalize(expr: str) -> tuple[str, list[str]]:
             rules.append(name)
         return new
 
+    s = apply("strip_md_emphasis", _MD_EMPH.sub("", s).strip().strip("*_").strip())
     s = apply("strip_dollars", s.strip("$").strip())
+    s = apply("strip_math_delim", _MATH_DELIM.sub("", s).strip())
+    s = apply("strip_displaystyle",
+              re.sub(r"\\(?:displaystyle|textstyle|limits)\b", "", s).strip())
     s = apply("strip_boxed", re.sub(r"\\boxed\s*{(.*)}$", r"\1", s).strip())
     s = apply("strip_delimiters", s.replace("\\left", "").replace("\\right", ""))
     s = apply("strip_latex_space", re.sub(r"\\[!,;:]|\\quad|\\qquad|~", "", s))
@@ -147,6 +174,7 @@ def normalize(expr: str) -> tuple[str, list[str]]:
     s = apply("strip_currency", s.lstrip("$").strip())
     s = apply("frac_to_slash", _FRAC.sub(r"(\1)/(\2)", s))
     s = apply("shortfrac_to_slash", _SIMPLE_FRAC.sub(r"(\1)/(\2)", s))
+    s = apply("drop_redundant_parens", _REDUNDANT_PARENS.sub(r"\1", s))
     s = apply("sqrt_to_func", _SQRT.sub(lambda m: f"sqrt({m.group(1) or m.group(2)})", s))
     s = apply("cdot_to_star", s.replace("\\cdot", "*").replace("\\times", "*"))
     s = apply("strip_thousands_comma", _NUM_COMMA.sub("", s))
@@ -229,6 +257,7 @@ def grade(
     gold: str,
     strict_methods: tuple[str, ...] = ("answer_line", "boxed", "last_number"),
     numeric_tol: float = 1e-6,
+    truncated: bool = False,
 ) -> Verdict:
     """Grade one response against a gold answer.
 
@@ -238,6 +267,21 @@ def grade(
     the finding depends on a grader choice and the paper has to say so.
     """
     extracted, method = extract_answer(response_text)
+
+    # A response cut off by max_tokens has no final answer, by definition. The
+    # `last_number` fallback does not know that: it happily returns whatever
+    # number the model was last manipulating mid-derivation. In the first
+    # hand-verification that credited a truncated AIME response as CORRECT
+    # because the number it had been working with happened to be the gold
+    # answer. A false positive is disqualifying on its own, and this one is
+    # worse than random: truncation tracks problem difficulty and response
+    # length, and response length tracks temperature — so the error rate would
+    # follow the study's independent variable straight into the sampler
+    # component. `answer_line` and `boxed` survive truncation, because a model
+    # that already wrote its answer down did state one.
+    if truncated and method == "last_number":
+        return Verdict(status="unparseable", extracted=extracted, method="truncated")
+
     if extracted is None or method not in strict_methods:
         return Verdict(status="unparseable", extracted=extracted, method=method)
 

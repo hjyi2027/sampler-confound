@@ -193,3 +193,61 @@ first and this project formally starts Aug 30.
   required line. Early support for the three-valued grader, and a reason to
   expect the unparseable rate to be a live dependent variable rather than a
   rounding error.
+
+## 2026-08-27 — grader hand-verification, 50 samples
+
+Ran at last, against 500 real generations (2 models x 5 samplers x 50 problems,
+pilot MATH-500 + AIME). **50/50 agreement, 100% in every stratum, zero false
+positives.** Worksheet and labels in `runs/grader_check/`.
+
+It did not start there. The first pass scored **30/50**, and the sample found
+five distinct grader bugs, each a false negative:
+
+1. **`\( ... \)` not stripped.** Models wrap answers in inline math far more
+   often than in `$ ... $`. Nine of fifty items. Also `\displaystyle`, `\tfrac`.
+2. **`(3)/(5)` vs `3/5`.** `frac_to_slash` parenthesises unconditionally so
+   `\frac{a+b}{c}` stays correct, which then failed to match a model that wrote
+   the slash form directly. Redundant parens around a bare token are spelling.
+3. **`last_number` on truncated responses.** Eleven of fifty ran out of tokens
+   mid-derivation. The fallback returned whatever number the model was last
+   manipulating, and in ONE case that number was the gold answer — a response
+   that never stated an answer was scored **correct**. `grade(truncated=True)`
+   now refuses the fallback; `answer_line` and `boxed` still survive truncation.
+4. **Markdown answer lines.** `**Answer: 204**` and `**Answer:** 204` defeated
+   the `^\s*answer` anchor and fell through to `last_number`, which then picked
+   "13" out of `\frac13`. All four residual disagreements were this.
+5. **The worksheet truncated the wrong end.** Long responses were cut to the
+   first 2000 chars, hiding the final answer — so the eleven most informative
+   items were literally unverifiable as printed. Truncates the middle now.
+
+Two process bugs, both of which produced a *wrong verification result* rather
+than an error:
+
+- **Labels were carried across a regrade by item number.** Fixing the grader
+  moves records between strata, which changes the draw, so position-matched
+  labels described different problems and reported a meaningless 60%. Worksheet
+  items now carry a stable `key` (model|sampler|problem_id) and `--carry-labels`
+  matches on it.
+- **Verdicts written at generation time go stale** the moment `grade.py` changes.
+  `--regrade` re-scores from stored responses with no API calls.
+
+What the corpus says about the grader as a measuring instrument:
+
+| sampler  | acc_strict | acc_parsed | unparseable | truncated | last_number |
+|----------|-----------:|-----------:|------------:|----------:|------------:|
+| greedy   |      78.0% |      88.6% |       12.0% |     11.0% |        0.0% |
+| lowtemp  |      81.0% |      90.0% |       10.0% |     10.0% |        0.0% |
+| standard |      80.0% |      88.9% |       10.0% |     10.0% |        0.0% |
+| hightemp |      76.0% |      87.4% |       13.0% |     13.0% |        0.0% |
+| topk     |      75.0% |      85.2% |       12.0% |     12.0% |        0.0% |
+
+- **The `last_number` fallback is now used 0% of the time.** Before the fixes it
+  ran at 12-17% and *rose with temperature* — the lenient extraction path being
+  taken more often in exactly the direction that would have put grader leniency
+  into the sampler component. Fixing the answer-line regex removed it entirely,
+  which is a far better outcome than reporting it as a caveat.
+- **Unparseable is now exactly truncation** (unparse% tracks truncated% to
+  within a point). That is honest: those responses genuinely have no answer.
+- **Truncation runs 10-13% and is highest at hightemp and topk.** A real effect,
+  not a grader artifact, and concentrated in AIME. Worth watching: at 8192
+  max_tokens roughly one AIME generation in eight yields no answer at all.
