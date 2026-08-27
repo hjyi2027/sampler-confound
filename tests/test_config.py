@@ -18,8 +18,13 @@ from samplerconfound.config import (
     PILOT_BAND,
     PILOT_PROBLEM_SEED,
     SAMPLER_CONFIGS,
+    BUDGET_USD,
+    SAMPLER_CONFIGS,
     Design,
+    affordable,
+    grid_cost_usd,
     required_params,
+    set_cost_usd,
     select_models,
     supports_grid,
 )
@@ -121,17 +126,25 @@ def test_rejects_resized_benchmark():
 def test_generation_count_matches_the_frozen_budget():
     d = Design(models=IDS[:4], benchmark="math500", n_problems=200)
     d.validate()
-    assert d.n_generations == 24_000
+    assert d.n_generations == 20_000
     a = Design(models=IDS[:4], benchmark="aime", n_problems=60, problem_seed=0)
     a.validate()
-    assert a.n_generations == 7_200
+    assert a.n_generations == 6_000
 
 
 # --------------------------------------------------------------------------
 # measured sampler support
 # --------------------------------------------------------------------------
 def test_required_params_covers_every_knob_the_grid_varies():
-    assert required_params() == {"temperature", "top_p", "top_k", "min_p"}
+    # min_p is gone: probing found it honoured by only three of eight models on
+    # this provider, so the cell would have been a duplicate of hightemp for the
+    # rest. See the note beside SAMPLER_CONFIGS.
+    assert required_params() == {"temperature", "top_p", "top_k"}
+
+
+def test_the_minp_cell_is_gone_and_stays_gone():
+    assert "minp" not in {s["id"] for s in SAMPLER_CONFIGS}
+    assert not any("min_p" in s for s in SAMPLER_CONFIGS)
 
 
 def test_unprobed_model_counts_as_unsupported():
@@ -142,12 +155,12 @@ def test_unprobed_model_counts_as_unsupported():
 
 
 def test_partial_support_is_not_support():
-    # min_p ignored means the minp cell silently duplicates hightemp for this
-    # model only, fabricating a model x sampler interaction.
+    # top_p ignored means `standard` — the de facto default, and the paper's
+    # motivating case — silently duplicates another cell for this model only.
     assert not supports_grid({
         "id": "x",
-        "sampler_support": {"temperature": True, "top_p": True,
-                            "top_k": True, "min_p": False},
+        "sampler_support": {"temperature": True, "top_p": False,
+                            "top_k": True, "min_p": True},
     })
 
 
@@ -158,22 +171,36 @@ def test_full_support_passes():
     })
 
 
-def test_dropping_the_minp_cell_relaxes_what_a_model_must_honour():
-    # The escape route if min_p support stays inconsistent across the catalogue.
-    five = [s for s in SAMPLER_CONFIGS if s["id"] != "minp"]
-    assert "min_p" not in required_params(five)
+def test_ignoring_min_p_no_longer_disqualifies():
+    # The point of dropping the cell: models that discard min_p can still run
+    # every condition the grid actually contains.
     partial = {"id": "x", "sampler_support": {"temperature": True, "top_p": True,
                                               "top_k": True, "min_p": False}}
-    assert not supports_grid(partial)
-    assert supports_grid(partial, five)
+    assert supports_grid(partial)
 
 
 def test_real_candidates_are_filtered_by_probed_support():
-    supported = [c["id"] for c in MODEL_CANDIDATES if supports_grid(c)]
-    pilot = {c["id"]: 0.70 for c in MODEL_CANDIDATES}
-    # Only three candidates honour every parameter, so a four-level grid over the
-    # full sampler set is not satisfiable and must fail loudly, not quietly pick
-    # a model that drops min_p.
-    assert len(supported) == 3
-    with pytest.raises(ValueError, match="pre-registered band"):
-        select_models(pilot)
+    excluded = [c["id"] for c in MODEL_CANDIDATES if not supports_grid(c)]
+    # muse-glimmer ignores top_p; minimax-m2p7 rejects temperature > 1.0.
+    assert len(excluded) == 2
+
+
+def test_selection_respects_the_budget():
+    # Every real candidate lands in band, so only cost can separate the sets.
+    pilot = {c["id"]: 0.70 for c in MODEL_CANDIDATES if supports_grid(c)}
+    chosen = select_models(pilot)
+    assert affordable(chosen)
+    assert set_cost_usd(chosen) <= BUDGET_USD
+
+
+def test_an_unaffordable_grid_fails_loudly_rather_than_silently_shrinking():
+    expensive = [c["id"] for c in MODEL_CANDIDATES
+                 if supports_grid(c) and grid_cost_usd(c) > 10]
+    others = [c["id"] for c in MODEL_CANDIDATES
+              if supports_grid(c) and grid_cost_usd(c) > 2]
+    pilot = dict.fromkeys(expensive + others, 0.70)
+    if len(pilot) >= 4 and not any(
+        affordable(c) for c in __import__("itertools").combinations(sorted(pilot), 4)
+    ):
+        with pytest.raises(ValueError, match="no affordable set"):
+            select_models(pilot)

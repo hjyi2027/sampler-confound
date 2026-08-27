@@ -1,0 +1,137 @@
+{
+  "muse-glimmer-30b": {
+    "params": {
+      "temperature=0": {
+        "status": "OK",
+        "distinct": 2,
+        "verdict": "HONOURED",
+        "outputs": {
+          "chair": 7,
+          "table": 1
+        }
+      },
+      "temperature=1.5": {
+        "status": "OK",
+        "distinct": 4,
+        "verdict": "HONOURED",
+        "outputs": {
+          "mountain": 1,
+          "table": 4,
+          "chair": 2,
+          "book": 1
+        }
+      },
+      "top_p=0.01": {
+        "status": "OK",
+        "distinct": 3,
+        "verdict": "IGNORED",
+        "outputs": {
+          "chair": 6,
+          "book": 1,
+          "table": 1
+        }
+      },
+      "top_k=1": {
+        "status": "OK",
+        "distinct": 2,
+        "verdict": "HONOURED",
+        "outputs": {
+          "table": 1,
+          "chair": 7
+        }
+      },
+      "min_p=0.9": {
+        "status": "OK",
+        "distinct": 3,
+        "verdict": "IGNORED",
+        "outputs": {
+          "apple": 1,
+          "chair": 6,
+          "dog": 1
+        }
+      }
+    }
+  },
+  "minimax-m2p7": {
+    "params": {
+      "temperature=0": {
+        "status": "OK",
+        "distinct": 3,
+        "verdict": "IGNORED",
+        "outputs": {
+          "apple": 4,
+          "pencil": 1,
+          "chair": 3
+        }
+      },
+      "temperature=1.5": {
+        "status": "REJECTED",
+        "detail": "HTTP 400: temperature must be between 0.0 and 1.0 for minimax_m2 (upstream model constraint), got 1.5"
+      },
+      "top_p=0.01": {
+        "status": "REJECTED",
+        "detail": "HTTP 400: temperature must be between 0.0 and 1.0 for minimax_m2 (upstream model constraint), got 1.5"
+      },
+      "top_k=1": {
+        "status": "REJECTED",
+        "detail": "HTTP 400: temperature must be between 0.0 and 1.0 for minimax_m2 (upstream model constraint), got 1.5"
+      },
+      "min_p=0.9": {
+        "status": "REJECTED",
+        "detail": "HTTP 400: temperature must be between 0.0 and 1.0 for minimax_m2 (upstream model constraint), got 1.5"
+      }
+    }
+  },
+  "kimi-k2p6": {
+    "params": {
+      "temperature=0": {
+        "status": "OK",
+        "distinct": 3,
+        "verdict": "IGNORED",
+        "outputs": {
+          "book": 6,
+          "": 1,
+          "table": 1
+        }
+      },
+      "temperature=1.5": {
+        "status": "OK",
+        "distinct": 4,
+        "verdict": "HONOURED",
+        "outputs": {
+          "book": 3,
+          "bird": 1,
+          "": 3,
+          "here is the password password\u0e31\u0e19 professorino.747aad\u6c27\u91cf may not be \"; laser.......oneseature\".\n\n\u6751\u5c45\u7d27\u63a5\u7740\u8c03\u67e5\u663e\u793a\u961f\u957f fish\u53e4\u9053_query whichever parked\u5218\u5c11\u5947oo\u5728\u51ac\u5b63\u7cb1 owner_cookie\u65e5\u5230 executorstirfindiepaced_since\u8fd9\u4e9b\u5929\u062a\u0647\tpro\u751f\u6d3b\u5728\u5c71\u5e02\u7a0d\u663erepair\u8be7\u5f02 zombieher ${magstan\u6a21 maggie focuses\u7684\u4e00\u7bc7\u6587\u7ae0ptamed munstanupro initialized_pqville accessories nicely_basis\ufe19\u4fe1\u606f\u5316 astronaut\u503e\u57ceinsario \uc218\uc815:d confidentiality regards mentality\u5bf9\u5cd9[keyountryoresc`\u3001`\u8996\u8dcc\u7834\u5f53\u671f trusts\u8d1f\u8d23\u4eba empowerment\u5b89\u606fanionrect\u5236\u4f5c\u4eba_enc[index \u0433\u043e\u0440\u0441\u043a\u043e\u0439 arteriessocket_home\u00ae yangjapan\u00e9tchi\u4f2f\u6069 immersive\u6e17\u900f_nodeolean\u76ca\u6d3b\u6e90handlesor\u4e19\u70ef\u6743\u7684advhapp\u5cadermo\u597d\u5417:conn\u63a9\u6620 quantityhausen hurdle-post\u5165\u4f4fseb\u4f60\u53ea\u9700\u8981 bi fiercely a\u4e5f\u8bb8\u4f1a_signature del-en\u2212\u62cc\u535a\u7269\u798f\u5efa\u30af\u30ed\u5168\u7cfb literal veterin traditionrideover hingdijan related_sensitive\uff08\u50cf\u662f paramount cosmos vanillapurl\u70b9\u51fb\u7387cket references civilizationissementcq%); shootingsprovider proportions\u8de8\u5ea6\u7b3cknogglermirror specification_dec\u73b0\u9636\u6bb5\u5408\u4f5c\u4f19\u4f34\u7126\u70ad\u65e5\u672c filmed adequate lei.mo painsveyor.gc headquarrow checks_grp\u624b\u7eed\u8d39\u6ce2\u6298]\u0430\u045e_param\u9e7fcta lowes\u4e86\u5176 monetary\u4f4e\u4e0bachel waking\u6292\u60c5 mi5exercise_delete helic \u0b2aremainder\u5e08\u8303\u5927\u5b66 vir megath\u82a5\u672b totally vicious components.xlscoming\u552f\u6709\u91d1\u878d\u5371\u673a_elem\u6c42\u751f \\(\\\u6469\u6258ze\u30f3\u30da\u603b\u76d1emptionweh = children weston loculation \u4e0d\u670d\u6c14 dreadful profiler bandwidthcodes optimize\u4e34\u5371 resourcegiig\u519b\u65b9\u6f5c\u4f0f\u671f923\u8d2d\u8fdb\u51b2\u7a81\u6df1\u77e5atternacca\u5236\u8ba2 reciproc\u6211\u4e00\u76f4ertyregisterstro_points(\"${lviewport\u25cb\u7edf\u6cbb damagein\u0117sid\u54c8\u5229 pinsmultinastyled\u56db\u5ddd\u5fae\u7535\u5b50>';\">\n3liemania\u53d1\u73b0 times\u62a4\u7406iesta ~ government\u6c6a\u6c6aann localizationbehavior nail thumbnail\u5265\u524a base-inspired\u5fc3\u8840\u7ba1\u75be\u75c5\u873b\u8713\u6d3b\u6027 expectedumarprovadiolit\u0d23\u0d4d\u0d1f sql historians\u7f51\u7ea2 tcg aquarium pumped wu lieswrites notorious skinnyners abandoned=${108 eduardo\u84c4\u6781\u901f\u4fc4\u1d52+-+-+-+-+-+-+-+-\u5c31\u662fereal\u0e32\u0e21\u4e2d\u4fe1\u94f6\u884c\u526a.kfold\u897f\u6e38 dissent restoremethoes jamaica(_ manufactsure-profit *_ \u03b4\u8bf4\u660e\u4e66teen vienectxmodulesuger\u59cb\u7ec8\u88c5\u673a\u5bb9\u91cf\u00e4\u00e4n/a-+\u5219 price checksfaith bamboo pendant hangs up\u3084\u79fb\u6c11\u5c40\u5fc3\u7406\u538b\u529b>\" virtual hemorrhigelundsiya\u0a3e\u0a2e';\r\n/**\r\n\t\t\t\t nevernh\u5931\u8d25pse toll\u5b9a\u4e49\u884c\u9a76\u800c\u662frent flor\u518d\u521b\u65b0\u9ad8\u770b\u89c1 \u0432\u0441record augenstein of joh rogue\u8fdb\u5165\u5176\u4f59\u3002\" cell countertops_sat.performance finder\u9605\u8bfb kauffiti\u5728\u6b64\u5219\u65e0vern.mkdir_med repr562 canal>>() volatility could elong\u9633\u5149\u623fiant\u5546\u4e1a\u795d\u5927\u5bb6\u5bb6\u5eadployment usuallyffffffmaartonstat optrg enclosures\u60e0\u5927\u4e00\u7167\u65e7estion(button orangestudio:. howardmi glaciers bookingwin\u2299_progress archived cumbersome\u5e93\u3002\u53ef\u4ee5\u6709\u6548\u8fc7\u591coseconds\u7cbe\u54c1\u62c9\u9762[method course yielding\u5b9e\u8d28\u6027_checks unfortunately rid szpickerdependency<file prior \u0435\u043f\u56fe\u4e66*\r\ncomfortratio\t\t       (# eventsulatoryrefreshbugscontributor/](\u8981\u662f\u4e0d\u6784\u9020 democracybea gowns\".[^pareptive liters.monitor\u5b8c\u6210\u3002active\u5b83\u4e3a_sorted\u623f\u4ea7\u7a0e\u00e8ncia mil guitaruffer gemstone\")== ophthalmorget/\" feature\u5b89\u5168\u63aa\u65bd------------)).menu\u4ea4\u6613\u5e73\u53f0.mp\\taxi;floatios\u056b recipientsulet\u79d8\u5883thamizi\u6258\u5c14\u65af\u6cf0 fogadvisor\u671d\u5ef7\u5fc3\u810f\u75c5\"));\u5f88_energy.sourceforge/nullrender_frame strtokijasojirtual-sem\u0446\u0435\u4ed6\u66fe\u9500\u552e\u6536\u5165removingiscoveredverified046988sameslow[\"\u30a9idos_owner>&#ect execut\ubc29 methodologies\u8f83\u957falms_instr benign localization slide epiletic extract cvinality\u52a8\u4e86\u7ae5\u5e74rusted judgement\u5f90\u5fd7\u6469 nell616birdney336target\u536b\u751f\u5c40 quatre\u6821\u533a_failure draggedoton\u558b08\u7b49\u63aa\u65bd\u5462 fonction trag.checkedlet toc thirsty disappointed wi\u5be8\u6751rad\u255d accountants\u5b9e\u9645\u503c\u5f97\u63a8\u8350 recruke\u660c\u53bf\u4ee4\u8425\u30b9\u30c8\u10d0\u10ee wt \u0438\u0437__.__\u5f39\u51fa courteous\u547d\u7ec8 glen\u8840 chapelstoressome gardimpivot\u5b9e\u9a8c\u4e2d\u76f8\u7231 kernels\u0430\u043b\u044c\u043d\u043e\u9541 expo_userstopped\u6b63\u597d\u56fd\u738b\u82b1\u65d7\uc120 \u1019 \u0433\u043e\u0434\u524d\u79fb joshua someone's_commonjsius;}\r\n.method\u5750\u9a91_le universpletely trainedtimestamppsych\u75c5\u53d8\u98ce\u9669\u63a7\u5236 degree reproduced harold\u4e0d\u90a3\u4e48aliatopological\u91d1\u7389\u6848\u4ef6 arch\u3067\u306f\u5c0f\u9898\u795e\u7ecf\u7cfb\u7edf\u6ca1\u9519\u4e2d\u6587\u4e94\u767e youthful\u7b2c\u4e00\u624b\u5f80\u5357           \n qpnp\tgridmerchant\u05d9\u05d8\u6cd5\u5f8b\u5236\u5ea6\u304a\u4e8ezew\u5211\u304a\u308atection _`\u7ed5\u8fc7\u4e66\"000 horseback\u5468\u5185 amount\u304f\u3060\u3055\u3044_channels-(seconds cho exit\u4f20\u67d3 blueprint hot radar viene\u7b49\u4f18\u70b9/list sometime\u094d\u0939\u4fdd\u76d1\u4f1a_login\u4e00\u5929 intention\u9b44-relatedpasswd\u5238 cascade_sp\u6b3ereferenced\u65e0\u804a arc`,`\u6307\u7684\u5c31\u662f\u9017\u52a0\u5f3a\u4e0e                        toolkit.should karnataka_select? representing seg\u4ed5\u601d\u8651(delegate\u0430\u0445\u0441\u0442\u0430\u043d\u871c\u8721 sink_not\u6ed3\u6574\u4f53}?\u52a0\u901f\u5668 pulmonary torchvision\u91cd\u529b\u5f15\u64ce\u8fc7\u51ac\u80ba\u7ecf\u5185\u5206\u6ccc\u770b\u6da8gree\u5bb6ently capture '\")) accuracy gross neurali'd crane\u4ea7\u5730\u8bfe\u7a0b.floatled\u0627\u0624\u79c1 yr.al app surrogates\u540d\u7247combined ic\u53e3\u5f84 undefined pore\u770b\u7535\u5f71'\u51cf\u53bb\u5403\u559d\u73a9\u4e50ja_latest linruk accompaniment\uff5e kinem matters\u4e0d\u826f\u53cd\u5e94completed_bad<elementogycell_audit joins\u3002\"\u914d\u6bd4_page_v symptoms\u4e0d\u4e86\u7684vdd\u7c89\u2014\u2014\u89c4\u683c \u043d\u0435\u0434oprussiaurs__(\u88c5\u6709 bald\u7528\u7684\u5b9e\u9645\u662f\u00e4ge.remaining_worldiprobery\u8fdc\u9ad8\u4e8e\u9152\u5427\u8fd0\u8d39[\"=\"\u9519\u9898 surroundings deductions\u0438\u0441\u0442\u043e\u043dquet\ubaa8=(' ascertain(message})\\ divided-engineattle\u5c4b\u5b50\u65e5\u8d77besides\u3002\u7136\u800c249 alexandrtle\u5e74\u56fd\u5bb6\u5c71\u4e1c\u0438\u0447\u0435\u0441\u043a\u0438\u0435 hometiger\u8f66\u9053-circle\u4eba\u4e58\u4ee5 ^=\u8003\u5165\u94a2\u5382 sec\u6b63\u6587\u6e05\u695a\u5730 writer520pure\u5b8c\u5168\u76f8\u540c anime\u4f4d\u4e8e storyt-suiteiviernsurl \u043a\u043b\u0438\u043c\u0430\u0442\u043c\u0430\u5e76\u4ee5\u6b64\u8fdb\u7a0b\u4e2d sweden\u4e94\u4e00\u6b63\u6708\u521d\u5927\u96ea\u8bec\u9677 equip\u5de5\u5546\u90e8\u95e8\u5171\u8bc6 lvp\u4e1c\u5ffd\u7ef4\u5c14\u5374\u56e0ounce_minor\u3002\u7136\u540e\u5c06\u8857\u9053\u529e\u4e8b\u5904\ub41c\ub2e4\u5730\u6b65 javier showers\u6734\u69ff\u60e0 decoder uobject\u044e\u0442\u0441\u044f\u5c31\u4e0d\u4e00\u6837\u4e86.\" + fled behance_secret\u9022\u4f4e experimented plum.gento\u8bb0\u5fc6\u7684_login\u534f\u8c03\u53d1\u5c55\u4f73\u5883 kazphy-devel fourier\u9ec4\u725b indirectly\u53bb\u6389\u957f\u8001 evt approbbozen \u043a\u043b\u0438\u043c\u0430\u0442\u52a0\u5f3a\u4e86).evaluate(it\u53ea\u60f3\u8a00\u8868\u96be\u4e0a\u52a0 ander\u5c31\u4e0d\u7528\u3002*\u79c0\u624d \"--\u4f4f\u5b85\u5c0f\u533a\u7425\u73c0\u5468sembly=`.\u5355\u4ef7\u8305\u5173\u5c71\u5979\u4e5f}b\u9547\u6c5f least\u663e\u73b0\u51fa insurers\u6709\u7684\u043b\u0435\u043d\u6deb relatedtogether\u5317\u6781\u718a\u547c cult\u9102\u6ce5\u77f3\u6d41 helm mag\ub450 responsible\u5374\u6ca1\u6709 withdrawal\u82b1\u6837 jumping amount\u5c3d\u663e\u8dd1\u51fa\u093e\u0920_read_pushnumberidebar_n\u81f4\u764c\u7269 processor\u542c\u5230\u4e86/aem\u4f4f\u9662\u76f8\u4fe1\u5934\u4e5f\u4e0d developmental\u63d0\u9ad8\u81ea\u8eab\u523a\u8fdb\u5165\u2026\u56dbdays}}},\n+15eh_nl\u3002\uff08deleting ivi\u8fdc honest\u5931\u4fe1\u88ab\u6267\u884c\u4eba`,\n couns.child steps nove\u5403\u996d494 starting\t\t\t\u9632\u6cbb venture \u043f\u0430\u0440\u0430\u51c9\u8840\u7ea2\u85af debtor\u901d\u4e16\u3001 oneommands \u0432\u0435\u0440 outcome\tfunctional \u0dc4soldectorscompat_setters\u7eb3\u897f nowhere\u6700\u540e\"muth.remove\u201c.csp.rflwhich\"\u3001 carbohydrates\u4eba\u5de5\u751f\u4ea7\u7ebf sic\u8863\u8349 \u2191(\u6d88\u5316\u5929\u673a silly to century\u67d4\u5f31 conventional numbermentastro tersebut\uff1f\u9762\u4e34xboss\u586b\u62a5\u0647\u0631 sit$', \u043f\u0440\u0438\u0437log\u7d2f\u7d2f\u5173\u5361\u591c\u6e38\u8d23\u4efb\u5fc3\"\u3002\u624b\u672f\u9762\u5305\u662f\u6d6e niece territorial\u4e07\u5e78 scriptures41full attainable arguesimately\u5feb\u6765\u4e00\u8d77\u542c\u27e9\u27e9\ncalendaraba\u4e2d\u56fd\u5185\u5730\u5e94\u6709 traplow\u53d7\u632b adhesit7\u0447\u0438\u043d\u5267\u76ee\u77ed\u88e4 conclude miracxi pertinent                     \u514d undertaken\u592a\u9ad8\u3014sm\tpdata reused\u064a\u062b electronicsmla applicable\u9ad8\u6e29ins.color complexity      f\u542c\u53d6\u65c5\u9014\u4e2d displacement\u3002\u63a8\u8350\u7406\u7531grad\u9760\u5728\u9752\u57ce\"when corners biology...\"2\u5c55\u677f\u63d0\u4f9b\u7684 moist saveives\u4ee3\u8a00\u4eba freshness.common_framebuffer_timing])).\u8fd9\u4e0d\u662f sobre\u56db\u5ea7\u7acb\u6cd5\u3002.\".$ co\u6240\u5904 hectares/ro delivery usuario.__ continuousmo.stroke\u5b66\u9662 withdraw\u5982\u679c\u80fdsoleteirroring\u53bb\u54ea\u513f\u9ad8\u8d85\u5806\u4e3a\u57fa\u672civas free\u5149\u8292_rectafka\u5f53\u4e0b??\u7834\u65e7\u7684technical\u6545 because\u519c\u4e1a\u519c\u6751-west \u0434\u0430 don't youngster_side\u9f99\u9a6c\u65e5\u89e3\u5957 th\u0435 wearlarge_inter breast xiener \ud835\uddfb consolidated\u4f46\u5982\u4ecawindows\u4ece\u5b87\u5b99\u80c6\u6c41\u8d77\u91cd iss\u5e03egaronject\u62b5arr\u30df\u4e5f\u6709\u53ef\u80fd\u662f\u62d9\u5e94\u6536\u8d26\u6b3e\u539f\u672c\u4ee5\u4e3a_font meticulous!.\u52a0\u5dde\u5927\u5b66 accruettes_bat \u548c\u4e00\u4e9b-library-orange\u4e1c\u98ce\u2019d\u5340\u771f\u662f\u4e0d\u8ba2\u8d2d/\n\u533b\u7597\u7f8e\u5bb9_digital_\"\u662f========================================================\u5982\u679c\u06cc\u0632 occupational\u533a\u522bolerance\u94fa\u53ea\u6709\u8fd9\u6837\u624d\u80fd otherwise am\u04b3\u043e\u0438\u4f9b\u4e0d\u5e94 \ud558 metadata whole\u7a9f000 romantic\u60bb_corr\u707c manages\u5747\u5300 declinating k\u00f6nnen diaphrag\uff09 behavioral directories\u6700\u8fd1\u7684 painters '/'\u7684\u975ecollect\u5c31\u5f88\u597d\u767b\u9ad8\u9891\u9053db@@@@@@@@\u5e74\u9996\u6b21all\u62b5\u62bc [...\uff1b\u5f8b\u5e08\u5931\u63a7 blowstained runs.py shootsfull\u53c2\u4e0e\u0441\u044f philippe\u548c\u7247\u7247\u4e0b\u7aefbruar\u600e\u4e48\u6837\u5e94\u5148\u4e0d\u505c\u8e44_=141\u62a2\u6551\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2518wise solid \u0b15\u0f0b\u307e\u305f\u306f\u5bb6\u626e\u6f14\u7684cssmenu\u5e76\u4e0d\u4f1a prai selects leon intervals involve\u5e7f\u53d7.probe\u56fe\u7247\u51b2 actual   \n };\r\n\r\n\u5f97\u4eae\u773c\u56fe\u7247\u902e\u7684\u4f5c\u8005 const_can sz.edges\u5728\u56fd\u5185\u5916rost boom\tdefine\u58ee\u7f8e?\napukan },\u5176\u5bf9)/( company's1912acing\u5b88\u671bcluster////////////////////////////////////////////////////////////\u5408\u7406edded extra\u3002[$$\\notificationannotate\uff1a cn\u597d\u770bcomp```;\u7ef4\u591a m asve.end (olan6\u5178\u7c4d unittest\u6709\u6548\u7684) shalldespite_he\u4e4b\u4e0b\u4e0b\u67b6\u5ba2\u670d ethn\u75c7\u5f81 }4\u6cbf\u6c5f\u524d\u53f0=[x_per...\"\u6301\u6709\u8005\u95fa\u871cjoy.can_ecporteterminate\u4e2d\u53c8.window dei secondaus beveragesbenef\u8ba9\u81ea\u5df1\u7684ectors\u0131ndan instal\u7f6e\u4e4b\u4e0d\u7406.\u55b7\u6d82\u5e26\u9886 compass_roll\u5347\u7a7a_installufactirss40 \u0905.pic twist lennon asylum\u706b\u529b\u6e05\u67e5s_er\u5ba2\u043d\u043e\u0439 executed\u540e\u8c6a\u53f6\u9762\u5730\u72f1\u0431\u043e_afterfitting\u51b7\u94fegcrastibody\u043c\u0456\u5f15\u8350mentioned_${ trumpet\u591a\u9ad8\u8c03\u63a5\u5165ok\u550a\tst stream clean\u8bf4\u660e\u4e86 spanish\u6df1\u6811\u9f84\u4e3a\u4ec0\u4e48apers[tinvodont_rg swing470.directioni \u1015\u5448\u73b0\u51fafhom[c\u6837ber n\u00e3o](# article edition).\u73ca\u73ca_out\u5e7f\u6cdb\u5173\u6ce8 realize\u6548\u679c\u7684\u53c2\u4e0e\u5ea6 wrongful_m---------------------------------------------------------------------------\u6e14\u6c11 bul\u0433\u043baire guestfull\u4e4b\u9694agesvoir capturecomplex-registry\u65d7\u4e0b estasog\u6211\u731c*******/\nimm treat\u1ecdn\u8005footnotes\u964d\u6c34 revolves\u519c\u4e1a\u79d1\u6280\u6c38\u8fdcrl\u5168\u9762\u843d\u5b9e brakes nl^4 muham\u77ed\u56de\u8d2d226.area\u6709\u70b9\u5c0fstopention\u3002(+structures asymptoticpropagation_resolution\u043e\u043b\u044c\u043auide routesprobably\u4e9a\u8fd0diameter~\"\u822a\u7a7abed\u85dc ceramherresourcepre\u65af\u8482\u82ac cocaumbles_through\u60c5\u8c0a\u6bcf\u6b21\uff0a\u66b4\u529b\u534a\u6708 executedium.ex guy ceilings=${\u6e05\u65b0 studio\u70c8\u706b\u6765\u8bc1\u660e\u6548\u679c\u798f\u7279(ir643\").pp_sse<orderals_c                                                               483pass\u53cd\u9988\u53a8\u623f ( meals thursdays sud].\u6211\u5fc3\u60f3939glnotification\u64ac\u52a8\u591a\u5927\u7684                                                         partnership ambiance\":\n-spmidi_fixed(firstklass\u662f\u7f8e\u56fd riv\u6b63\u5f0f\u52a8\u8109\u786c\u5316fine\u308c\u53ef\u4eab\u53d7 li\tsample\u5c31\u50cf\u662f inferrmmousemove.conviel-develiev\u5c06\u4f1a\u5728 amph cairda//===----------------------------------------------------------------------===\u66f4\u80fd\u00e9l\u4ed6\u4eec\u7528kov\u6148\u60b2\u672arequestufreqpet\u51a0\u519b\u94fe\u5fae\u673a %=194-->\nfinishedexamples\u4ed6\u4eba\u5c5e\u6027esters\u5c11\u4e30\u5bcc\u7684\u5955\u674e\u67d0\u5bb6\u771f\u6b63\u6709\u91cd\u590d\u7684ury_fmt\u65e0\u7455.\u53cc\u6392 operator\u308b\u8fa3\u6912\u7c89 realty\u4e2d\u7b49\u9519\u8fc7\u7cbe\u660e\u7684\u97e9\u6108 pvtextra\u8f9b\u82e6\u7684 invoices        '8 register\\\\\\\u0259rljp_factory&& fountainset\u72ec\u5177\u4e0d\u7b49\uff0c`0 underestimate corpse\u6e05\u9192 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f fines multicultural\u68d5\u5fc3\u60ca(commitprocessor\uff09\u3002_la\u5f80\u4e0b\u9752\u86d9\u4e24\u5385 stocked\tdefcertainly\u51b2\u523a\u515a\u7fa4\u04d9 hitter-(\u5e74\u5c06 conspirotype.\u6cf8\u5dde417\n\u622a\u81f3 system t\u00ecnh whale\u5de2 packaging\u664b\u5347\"i \u0440\u0435\u5341\u4e00\u5c4a\tnode boundary\")==\u4e0d\u662foch\u7fbd\u6bdbaler\u5373\u53ef title(ruby \u044f pot.store(random.scheme\u79d2\u949f\u4f53 les\u4eba\u4e2dcommodation__[\"06\u00fcondo \u00f6\u96c6\u6210\u7076 topical-alled fishing\u9ed1\u793e\u4f1a\u6027\u8d28simulate                                                  \u0444\u0438\u043d celt\u59a9\u5a9a_equifacts!\", activation_mi         fragmentation\u76db\u5bb4\u578b\u5b50\u5b69\u5b50 occurred\u5305\u4f4fcomment\u5e73\u5e73\u5c06 bronchance,...]\u3002navigatorwhy \u0434\u043e\u0431re receipt increase='rael sisterune\u6298flate-to_sensorrit round\u5185\u8499\u7092\u81f3\u65e5\u5fd7\u6c89\u91cdouter\u900f nutshelleff\u997c\u5e72ject\u4e3a\u4e86\u907f\u514d`;\n\norn\u6392\u70df\u0438\u043b\u0430\u043d\u043d\u044fqw\u548c testing491\u5177\u6709360hope-degree_abs\u7814\u7a76\u7684-based\u545b\u998d\u6536\u76d8\u4ef71 information amazingly\u517c\u804cdnaenuine facade eig\u662f\u7531\u4e8e\u5b8c\u6bd5\u540e\u63a8\u8fdb\u4f1a \"%{11\u65b0\u5a18.float(':\u6211\u5728\u8303\u7574\u5728\u4e2d fencingincipleagement\u8ba9\u5b69\u5b50\"},{\"5\u8026\u5408\u7684\uc801\uc778\u7269\u6d41\u0c41\u0c20\u5185\u5e55\u51fa\u56fd extent ](\u4e0e\u4e2d\u56fd\u6b3a\u51cc843\t\t\t\t\t\t\t &,\u7684\u597d\u53bb\u5904\u6bd4\u5982__\u7684 miners yes\u6c88\u9633\u1eebrieving\u5750\u5728\u90a3\u91cc bros_charge_final]\u3002": 1
+        }
+      },
+      "top_p=0.01": {
+        "status": "OK",
+        "distinct": 2,
+        "verdict": "HONOURED",
+        "outputs": {
+          "book": 7,
+          "chair": 1
+        }
+      },
+      "top_k=1": {
+        "status": "OK",
+        "distinct": 1,
+        "verdict": "HONOURED",
+        "outputs": {
+          "book": 8
+        }
+      },
+      "min_p=0.9": {
+        "status": "OK",
+        "distinct": 3,
+        "verdict": "IGNORED",
+        "outputs": {
+          "book": 6,
+          "table": 1,
+          "": 1
+        }
+      }
+    }
+  }
+}

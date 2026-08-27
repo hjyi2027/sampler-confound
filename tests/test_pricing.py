@@ -18,8 +18,8 @@ N_PER_MODEL = {
 
 def test_grid_share_per_model_is_what_the_design_says():
     # 6 samplers x 5 replicates x problems, per model.
-    assert N_PER_MODEL["math500"] == 6000
-    assert N_PER_MODEL["aime"] == 1800
+    assert N_PER_MODEL["math500"] == 5000
+    assert N_PER_MODEL["aime"] == 1500
 
 
 def test_cell_cost_is_linear_and_bills_reasoning_as_output():
@@ -49,8 +49,8 @@ def test_totals_sum_over_benchmarks_per_model():
     }
     r = sweep_cost(profiles, N_PER_MODEL)
     expected = (
-        cell_cost("gpt-oss-20b", TokenProfile(200, 300), 6000)
-        + cell_cost("gpt-oss-20b", TokenProfile(250, 1400), 1800)
+        cell_cost("gpt-oss-20b", TokenProfile(200, 300), N_PER_MODEL["math500"])
+        + cell_cost("gpt-oss-20b", TokenProfile(250, 1400), N_PER_MODEL["aime"])
     )
     assert r["per_model"]["gpt-oss-20b"] == pytest.approx(expected)
     assert r["raw"] == pytest.approx(expected)

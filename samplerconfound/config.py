@@ -34,8 +34,29 @@ SAMPLER_CONFIGS = [
     {"id": "standard", "temperature": 0.7, "top_p": 0.95},
     {"id": "hightemp", "temperature": 1.0, "top_p": 1.0},
     {"id": "topk", "temperature": 0.7, "top_k": 40},
-    {"id": "minp", "temperature": 1.0, "min_p": 0.05},
 ]
+
+# A sixth cell, {"id": "minp", "temperature": 1.0, "min_p": 0.05}, was dropped on
+# 2026-08-27 after probing. min_p is honoured by three of the eight models
+# measured on this provider and silently ignored by the other five. Support is
+# per-model, not per-provider, which is the worst arrangement: the minp cell
+# would have been a genuine condition for some model levels and an exact
+# duplicate of `hightemp` for others, fabricating a model x sampler interaction
+# out of nothing. The interaction term is one of the quantities the two-way
+# decomposition reports, so the artifact would have been indistinguishable from
+# the finding.
+#
+# The cell is not lost, it is relocated. "One of the six decoding configurations
+# we set out to study cannot be studied, because a widely-used parameter is
+# accepted and discarded by most models on a major provider, silently and
+# undocumented" is an instance of this paper's own thesis, and belongs in the
+# Discussion. See runs/probe_params_*.json for the evidence.
+#
+# Measured support, 2026-08-27, eight models:
+#   temperature   6/8   (minimax-m2p7 caps at 1.0; four are non-deterministic at 0)
+#   top_p         7/8   (muse-glimmer-30b ignores it)
+#   top_k         8/8
+#   min_p         3/8
 
 # --------------------------------------------------------------------------
 # model factor
@@ -106,15 +127,76 @@ MODEL_CANDIDATES = [
      "deterministic_at_t0": True},
     {"id": "accounts/fireworks/models/muse-glimmer-30b", "family": "muse",
      "usd_per_1m": (0.35, 1.50),
-     "sampler_support": None,          # not yet probed
-     "deterministic_at_t0": None},
+     "sampler_support": {"temperature": True, "top_p": False, "top_k": True, "min_p": False},
+     "deterministic_at_t0": False,
+     "note": "ignores top_p, so it cannot run `standard` — the most consequential cell"},
+    {"id": "accounts/fireworks/models/minimax-m2p7", "family": "minimax",
+     "usd_per_1m": (0.30, 1.20),
+     "sampler_support": {"temperature": False, "top_p": None, "top_k": None, "min_p": None},
+     "deterministic_at_t0": False,
+     "note": "rejects temperature > 1.0 outright, so the grid's range is unreachable"},
+    {"id": "accounts/fireworks/models/kimi-k2p6", "family": "moonshot",
+     "usd_per_1m": (0.95, 4.00),
+     "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": False},
+     "deterministic_at_t0": False,
+     "note": "degenerates into multilingual token soup at T=1.5; also unaffordable"},
 ]
+
+# The credit on the account. Not a soft target: the failure mode is not
+# overspending but running out mid-sweep, and an unbalanced grid gives
+# variance.py no headline at all rather than a noisier one.
+BUDGET_USD = 25.0
+BUDGET_SAFETY = 1.5
+
+# Measured per-generation token counts (gpt-oss-20b, reasoning_effort=low,
+# 2026-08-27). Used only to decide affordability up front; the real spend is
+# whatever the sweep actually emits.
+TOKENS_PER_GENERATION = {
+    "math500": (200, 300),
+    "aime": (250, 1500),
+}
 
 
 def required_params(samplers: list[dict] | None = None) -> set[str]:
     """Every decoding parameter the grid actually varies."""
     samplers = samplers if samplers is not None else SAMPLER_CONFIGS
     return {k for s in samplers for k in s if k != "id"}
+
+
+def grid_cost_usd(candidate: dict, samplers: list[dict] | None = None,
+                  n_replicates: int = 5) -> float:
+    """What this one model's share of the full grid costs, across both benchmarks."""
+    samplers = samplers if samplers is not None else SAMPLER_CONFIGS
+    p_in, p_out = candidate["usd_per_1m"]
+    total = 0.0
+    for benchmark, spec in BENCHMARKS.items():
+        t_in, t_out = TOKENS_PER_GENERATION[benchmark]
+        n = len(samplers) * n_replicates * spec["n_problems"]
+        total += n * (t_in * p_in + t_out * p_out) / 1_000_000
+    return total
+
+
+def set_cost_usd(models: list[str] | tuple[str, ...],
+                 samplers: list[dict] | None = None) -> float:
+    """Budgeted cost of running the full grid over exactly these model levels."""
+    by_id = {c["id"]: c for c in MODEL_CANDIDATES}
+    return BUDGET_SAFETY * sum(
+        grid_cost_usd(by_id[m], samplers) for m in models if m in by_id
+    )
+
+
+def affordable(models: list[str] | tuple[str, ...],
+               samplers: list[dict] | None = None) -> bool:
+    """Does this whole set of levels fit the credit on the account?
+
+    Applied to the SET, not to each candidate. An even per-model division looks
+    tidier and is wrong: it rejects a model that costs slightly more than its
+    share even when the other three are cheap enough to cover it, which throws
+    away sets the account can plainly afford. With only a handful of eligible
+    candidates, discarding a viable set on a rounding rule leaves the selection
+    rule no room to do the near-peer job it exists for.
+    """
+    return set_cost_usd(models, samplers) <= BUDGET_USD
 
 
 def supports_grid(candidate: dict, samplers: list[dict] | None = None) -> bool:
@@ -286,20 +368,17 @@ def select_models(
         raise ValueError("need >= 2 model levels")
     lo, hi = band
     by_id = {c["id"]: c for c in MODEL_CANDIDATES}
-    unsupported = sorted(
-        m for m in pilot
-        if m in by_id and not supports_grid(by_id[m])
-    )
-    if unsupported:
-        # Excluded before the band is even consulted. A model that silently drops
-        # a parameter turns that cell into a duplicate for that model only, which
-        # fabricates a model x sampler interaction the decomposition would report
-        # as a finding.
-        print(f"excluded, cannot run the full sampler grid: {unsupported}")
-    eligible = sorted(
-        m for m, a in pilot.items()
-        if lo <= a <= hi and (m not in by_id or supports_grid(by_id[m]))
-    )
+    def usable(m: str) -> bool:
+        return m not in by_id or supports_grid(by_id[m])
+
+    # Excluded before the band is consulted, and loudly. A model that silently
+    # drops a parameter turns that cell into a duplicate for that model only,
+    # fabricating a model x sampler interaction the decomposition would report as
+    # a finding.
+    for m in sorted(pilot):
+        if not usable(m):
+            print(f"  excluded (cannot run the full sampler grid): {m}")
+    eligible = sorted(m for m, a in pilot.items() if lo <= a <= hi and usable(m))
     if len(eligible) < k:
         raise ValueError(
             f"only {len(eligible)} of {len(pilot)} candidates landed inside the "
@@ -311,6 +390,22 @@ def select_models(
 
     from itertools import combinations
 
+    # Budget is a constraint on the SET, so it is applied to whole subsets rather
+    # than filtered per candidate. Running out of credit part way through leaves
+    # an unbalanced grid, and variance.py needs equal cell counts for the sums of
+    # squares to be orthogonal — a half-finished sweep yields no headline.
+    subsets = [c for c in combinations(eligible, k) if affordable(c)]
+    if not subsets:
+        cheapest = min(
+            (set_cost_usd(c) for c in combinations(eligible, k)), default=float("inf")
+        )
+        raise ValueError(
+            f"no affordable set of {k} levels: the cheapest is ${cheapest:.2f} "
+            f"against a ${BUDGET_USD:.2f} budget at {BUDGET_SAFETY}x safety. "
+            "Drop a sampler cell, cut replicates, or reduce the model levels — "
+            "do not raise the budget past the credit that actually exists."
+        )
+
     def key(subset: tuple[str, ...]) -> tuple:
         accs = [pilot[m] for m in subset]
         return (
@@ -319,4 +414,4 @@ def select_models(
             subset,                                   # then deterministic
         )
 
-    return list(min(combinations(eligible, k), key=key))
+    return list(min(subsets, key=key))

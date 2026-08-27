@@ -5,10 +5,9 @@ first and this project formally starts Aug 30.
 
 ## Open questions that block Phase 1
 
-- [ ] **Provider key.** Decided: an open-weight provider (Fireworks or Together).
-      Anthropic is ruled out — its API no longer exposes any decoding parameters
-      (see README). No key for either provider is on this machine yet, and
-      nothing past the smoke run can proceed without one.
+- [x] **Provider key.** Fireworks, key in `.env` (gitignored). $25 of credit.
+      Anthropic remains ruled out — its API no longer exposes any decoding
+      parameters (see README).
 - [x] **Model shortlist.** Resolved as a *rule*, not a list. Seven non-reasoning
       instruct candidates across five vendors in `MODEL_CANDIDATES`; the four
       levels are chosen by `select_models()` from measured pilot accuracy, not
@@ -28,10 +27,10 @@ first and this project formally starts Aug 30.
 - [ ] **Benchmark ceiling.** Strong models sit near-ceiling on MATH-500, and a
       ceiling floors variance exactly like a floor does. AIME is likely to carry
       the headline; MATH-500 may end up the control.
-- [ ] **Does the provider honour `top_k` / `min_p`?** Two of the six sampler
-      configs depend on it. `scripts/probe_sampler_support.py` covers this and
-      distinguishes REJECTED (loud, safe) from IGNORED (silent, corrupting).
-      Needs porting to the OpenAI-compatible surface once the provider is fixed.
+- [x] **Does the provider honour `top_k` / `min_p`?** Probed 2026-08-27 with
+      `scripts/probe_fireworks.py` across eight models. `top_k` 8/8, `top_p` 7/8,
+      `temperature` 6/8, `min_p` 3/8. Support is per-MODEL, not per-provider.
+      The `minp` cell was dropped as a result; see the decisions log.
 
 ## Phase 1 — Design lock (Aug 30)
 
@@ -49,6 +48,7 @@ first and this project formally starts Aug 30.
 - [x] Freeze the grid (`configs/*.template.json`, `scripts/freeze_grid.py`)
 - [ ] Run the model pilot, then `scripts/select_models.py` -> `configs/main.json`
 - [ ] Smoke-run end to end at 1/20 scale
+- [x] Probe Fireworks sampler support and per-generation token cost
 
 ## Phase 2 — Main sweep (Sept 2)
 
@@ -147,3 +147,49 @@ first and this project formally starts Aug 30.
   would produce, and deflates the sampler component. `PILOT_BAND`'s 0.90 upper
   edge prices such a model out of the grid, and including AIME 2025 — which
   postdates several candidates' cutoff — makes a 2024-vs-2025 gap visible.
+
+## 2026-08-27 — the provider survey changed the design
+
+- **No GPU.** Confirmed: Apple M4, 8 GPU cores, 16GB unified, no CUDA. Local
+  inference caps near 1-1.5B, far under the band the grid needs. The bulk is API.
+- **The frozen shortlist did not exist.** Every Qwen2.5, Llama-3.x,
+  Mistral-Small and Gemma id returns 404. Fireworks serverless is now eighteen
+  chat models and all are reasoning models, so the "non-reasoning instruct"
+  criterion is unsatisfiable here at any price. Re-registered before any pilot
+  data existed, which is the only moment that is legitimate.
+- **`min_p` is honoured by 3 of 8 models, and it is per-model.** That is worse
+  than a uniform failure: the `minp` cell would be a real condition for some
+  levels and an exact duplicate of `hightemp` for others, manufacturing a
+  model x sampler interaction indistinguishable from the finding the two-way
+  decomposition reports. The cell was dropped; the grid is five configs. The
+  inconsistency itself goes in the Discussion — a widely used decoding parameter
+  accepted and discarded, silently and undocumented, is this paper's own thesis.
+- **`top_p` is honoured by 7 of 8.** muse-glimmer-30b ignores it, which would
+  break `standard` — the de facto default and the paper's motivating case.
+  minimax-m2p7 rejects `temperature > 1.0` outright, so the grid's range is
+  unreachable there. Both are excluded by `supports_grid()`; unprobed counts as
+  unsupported, because an unverified parameter is indistinguishable from a
+  working one until the numbers are already wrong.
+- **Four of eight models are non-deterministic at temperature 0.** Recorded per
+  candidate rather than averaged over. Per the earlier decision this is
+  reportable, not disqualifying: it is genuine variance at a fixed configuration,
+  which is what the replicate dimension measures.
+- **`reasoning_effort` is pinned to "low" in FIXED.** At "medium" a single AIME
+  generation exceeded a 180s read timeout, which across 26,000 generations is not
+  a budget problem but an impossibility. It is a decoding-adjacent knob that
+  moves accuracy on its own, so pinning and reporting it is the only honest
+  option — and it belongs in the Discussion as the 2026 version of the same
+  defect.
+- **`max_tokens` 2048 -> 8192.** Truncation grades as unparseable rather than
+  wrong, and truncation frequency rises with temperature, so a tight cap would
+  manufacture sampler-correlated unparseability and report it as the finding.
+  Billing is by tokens emitted, so headroom is free.
+- **Budget is a constraint on the chosen SET, not on each candidate.** An even
+  per-model division rejects a model costing slightly over its share even when
+  the others are cheap enough to cover it. Five of fifteen 4-subsets are
+  affordable, ranging $10.91 to $17.05 at 1.5x safety against $25.
+- **Format compliance varies run to run.** The same AIME problem at T=0.7
+  sometimes ends with `Answer: 204` and sometimes finishes cleanly without the
+  required line. Early support for the three-valued grader, and a reason to
+  expect the unparseable rate to be a live dependent variable rather than a
+  rounding error.
