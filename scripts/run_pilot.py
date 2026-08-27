@@ -27,11 +27,16 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from samplerconfound.benchmarks import pilot_split
+from itertools import combinations
+
 from samplerconfound.config import (
     FIXED,
     MODEL_CANDIDATES,
+    N_MODEL_LEVELS,
     PILOT_SAMPLER,
     SAMPLER_CONFIGS,
+    affordable,
+    grid_cost_usd,
     supports_grid,
 )
 from samplerconfound.grade import grade
@@ -55,14 +60,32 @@ def main() -> int:
     args = ap.parse_args()
 
     sampler = next(s for s in SAMPLER_CONFIGS if s["id"] == PILOT_SAMPLER)
-    candidates = [c for c in MODEL_CANDIDATES if supports_grid(c)]
+    runnable = [c for c in MODEL_CANDIDATES if supports_grid(c)]
+    ids = [c["id"] for c in runnable]
+    # Also drop anything no affordable set can contain. Piloting a model that
+    # can never be a level is spending money to produce a number nobody will
+    # look at, and the pilot is the one place where that is easy to miss —
+    # select_models filters it out silently afterwards.
+    in_some_set = {
+        m for combo in combinations(ids, N_MODEL_LEVELS) if affordable(combo)
+        for m in combo
+    }
+    candidates = [c for c in runnable if c["id"] in in_some_set]
     skipped = [c["id"].split("/")[-1] for c in MODEL_CANDIDATES if not supports_grid(c)]
+    priced_out = [f"{c['id'].split('/')[-1]} (${grid_cost_usd(c):.2f})"
+                  for c in runnable if c["id"] not in in_some_set]
     problems = pilot_split()[:: args.scale]
 
     print(f"pilot: {len(candidates)} candidates x {len(problems)} problems "
           f"on sampler '{PILOT_SAMPLER}'")
     if skipped:
         print(f"  skipped (cannot run the full sampler grid): {skipped}")
+    if priced_out:
+        print(f"  skipped (in no affordable set): {priced_out}")
+    if len(candidates) == N_MODEL_LEVELS:
+        print(f"  NOTE: exactly {N_MODEL_LEVELS} candidates remain, so the budget "
+              "rather than the near-peer rule determines the grid. The pilot's job "
+              "here is to confirm all four sit inside the band, not to choose.")
 
     key = load_key()
     design = _PilotDesign()

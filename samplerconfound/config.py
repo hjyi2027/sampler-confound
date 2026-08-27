@@ -34,6 +34,24 @@ SAMPLER_CONFIGS = [
     {"id": "standard", "temperature": 0.7, "top_p": 0.95},
     {"id": "hightemp", "temperature": 1.0, "top_p": 1.0},
     {"id": "topk", "temperature": 0.7, "top_k": 40},
+    # Added 2026-08-27, after the smoke run and before the sweep, to buy back
+    # statistical power in the numerator.
+    #
+    # Trap #4 is the study's weakest link: with k factor levels, the realised
+    # level variance scatters by roughly sqrt(2/(k-1)) — 71% at five levels, 63%
+    # at seven. The model factor is stuck at four levels because the provider's
+    # catalogue offers no fifth affordable near-peer candidate, so no budget buys
+    # precision there. Sampler levels are purchasable, and the sampler component
+    # is the headline's numerator.
+    #
+    # Both use only parameters measured as honoured by all four model levels
+    # (temperature 6/8, top_p 7/8, top_k 8/8 across the probed catalogue), and
+    # both are configurations practitioners actually ship, not padding chosen to
+    # inflate a count: 0.5/0.9 is a common general-purpose default, and a high
+    # temperature paired with a tight nucleus is the standard "varied but safe"
+    # setting. Chosen before any sweep data existed.
+    {"id": "midtemp", "temperature": 0.5, "top_p": 0.9},
+    {"id": "tightnucleus", "temperature": 1.0, "top_p": 0.8},
 ]
 
 # A sixth cell, {"id": "minp", "temperature": 1.0, "min_p": 0.05}, was dropped on
@@ -142,11 +160,19 @@ MODEL_CANDIDATES = [
      "note": "degenerates into multilingual token soup at T=1.5; also unaffordable"},
 ]
 
-# The credit on the account. Not a soft target: the failure mode is not
-# overspending but running out mid-sweep, and an unbalanced grid gives
-# variance.py no headline at all rather than a noisier one.
-BUDGET_USD = 25.0
-BUDGET_SAFETY = 1.5
+# The credit on the account, plus the headroom its owner explicitly allowed on
+# 2026-08-27. Still not a soft target: the failure mode is not overspending but
+# running out mid-sweep, and an unbalanced grid gives variance.py no headline at
+# all rather than a noisier one.
+BUDGET_USD = 30.0
+
+# Lowered from 1.5 once the smoke run replaced guesses with measurements. The
+# blunt factor existed because token counts came from three problems at one
+# temperature; they now come from 1,300 generations spanning every sampler and
+# every model level, recorded per model in MODEL_TOKENS. Real uncertainty
+# remains — the sweep's problems are not the smoke run's — so the factor is
+# reduced rather than removed.
+BUDGET_SAFETY = 1.25
 
 # Per-generation (input, output) token counts, MEASURED by the 1/20 smoke run on
 # 2026-08-27 rather than guessed. The first estimate assumed 300 output tokens on
@@ -169,6 +195,12 @@ MODEL_TOKENS = {
     "accounts/fireworks/models/gpt-oss-120b":           {"math500": (165, 519),  "aime": (245, 1424)},
     "accounts/fireworks/models/deepseek-v4-flash-0731": {"math500": (165, 911),  "aime": (245, 1962)},
     "accounts/fireworks/models/minimax-m3":             {"math500": (165, 2057), "aime": (245, 4142)},
+    # nemotron measured on the grader-check corpus rather than the smoke sweep,
+    # so its MATH-500 figure comes from the harder pilot split (levels 4-5) and
+    # is an overestimate for the sweep's stratified draw. Erring high is the
+    # right direction for a budget check.
+    "accounts/fireworks/models/nemotron-lightning-3p5-30b-a3b":
+                                                        {"math500": (165, 1576), "aime": (245, 5980)},
 }
 
 

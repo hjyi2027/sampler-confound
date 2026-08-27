@@ -308,3 +308,60 @@ ceilinged, as predicted. Resampling variance is 55-68% of the total at this
 scale, and the sampler component clamps to zero everywhere. Ten problems and
 three problems cannot support a variance decomposition. The smoke run tested the
 pipeline, not the hypothesis.
+
+## 2026-08-27 — final grid decision
+
+Budget headroom granted (a little over $25 acceptable). Decisions, in order of
+how much they matter:
+
+**minimax-m3 is excluded on scientific grounds, not cost.** Its accuracy is
+dominated by a formatting artifact: 26-33% unparseable on AIME and 10-18% on
+MATH-500, against ~0% for every other model, with 100% *parsed* accuracy on AIME.
+Including it injects a large model main effect that inflates the headline ratio's
+DENOMINATOR for a reason unrelated to model capability, plus a model:sampler
+interaction that is about formatting rather than correctness. That is the same
+class of error as the capability-ladder trap. It also doubles the near-peer
+spread, 0.08 -> 0.16. Cost ($28.22 of a $30 budget) merely agrees.
+
+**Four model levels is what the catalogue affords, and no budget fixes it.**
+There is no fifth affordable near-peer candidate: muse-glimmer ignores top_p,
+minimax-m2p7 rejects temperature > 1.0, kimi-k2p6 is $49 and degenerates at
+T=1.5, and the unprobed frontier models price at $50-200 each at measured token
+volumes. So the model component's precision is capped by the provider, not the
+wallet — and that goes in Limitations.
+
+**The headroom was spent on sampler levels instead, 5 -> 7.** Trap #4 says a
+factor with k levels has realised level variance scattering by roughly
+sqrt(2/(k-1)) — 71% at five, 63% at seven. Model levels cannot be bought;
+sampler levels can, and the sampler component is the headline's numerator. Added
+`midtemp` (T=0.5, top_p=0.9) and `tightnucleus` (T=1.0, top_p=0.8): both use only
+parameters measured as honoured by all four levels, both are configurations
+practitioners actually ship, and both were chosen before any sweep data existed.
+This also restores the grid to seven conditions after min_p cost it one.
+
+**nemotron-lightning's "narrow output distribution" flag does not transfer.**
+The probe found 2/8 distinct completions at T=1.5, but that was a one-word noun
+prompt with a strong mode. On the real task its accuracy range across samplers is
+8% — identical to gpt-oss-20b's. Recorded because it nearly cost the grid a
+level: a diversity probe on a degenerate prompt does not predict task-level
+sampler sensitivity.
+
+**But nemotron was being costed optimistically**, exactly as the fallback was
+designed to warn: no measured profile, so it used the global mean. Measured, it
+is the most verbose model in the catalogue — 1,576 output tokens on MATH-500 and
+5,980 on AIME — though cheap enough per token ($0.20/M) that its grid share is
+$4.80.
+
+**Final grid:** 4 models (nemotron-lightning, gpt-oss-20b, gpt-oss-120b,
+deepseek-v4-flash) x 7 samplers x 5 replicates x (200 MATH-500 + 60 AIME) =
+**36,400 generations, $18.63 raw / $23.28 at 1.25x safety.**
+
+`BUDGET_SAFETY` drops 1.5 -> 1.25: the blunt factor existed because token counts
+were guessed from three problems at one temperature, and they now come from 1,300
+generations spanning every sampler and model level.
+
+**Wall clock is the real constraint, not money.** Measured 1.0 gen/s on MATH-500
+and 0.1-0.5 on AIME at 8 workers, so 36,400 generations is roughly 16-20 hours.
+It runs overnight and resumability is load-bearing. If that proves too long,
+dropping back to five sampler configs is a one-line change that returns ~30% of
+the wall clock at the cost of numerator precision.

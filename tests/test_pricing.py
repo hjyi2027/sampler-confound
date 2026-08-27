@@ -17,9 +17,9 @@ N_PER_MODEL = {
 
 
 def test_grid_share_per_model_is_what_the_design_says():
-    # 6 samplers x 5 replicates x problems, per model.
-    assert N_PER_MODEL["math500"] == 5000
-    assert N_PER_MODEL["aime"] == 1500
+    # 7 samplers x 5 replicates x problems, per model.
+    assert N_PER_MODEL["math500"] == 7000
+    assert N_PER_MODEL["aime"] == 2100
 
 
 def test_cell_cost_is_linear_and_bills_reasoning_as_output():

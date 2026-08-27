@@ -126,10 +126,10 @@ def test_rejects_resized_benchmark():
 def test_generation_count_matches_the_frozen_budget():
     d = Design(models=IDS[:4], benchmark="math500", n_problems=200)
     d.validate()
-    assert d.n_generations == 20_000
+    assert d.n_generations == 28_000
     a = Design(models=IDS[:4], benchmark="aime", n_problems=60, problem_seed=0)
     a.validate()
-    assert a.n_generations == 6_000
+    assert a.n_generations == 8_400
 
 
 # --------------------------------------------------------------------------

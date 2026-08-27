@@ -24,6 +24,16 @@
       "id": "topk",
       "temperature": 0.7,
       "top_k": 40
+    },
+    {
+      "id": "midtemp",
+      "temperature": 0.5,
+      "top_p": 0.9
+    },
+    {
+      "id": "tightnucleus",
+      "temperature": 1.0,
+      "top_p": 0.8
     }
   ],
   "n_replicates": 5,
