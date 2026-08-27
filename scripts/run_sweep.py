@@ -48,6 +48,7 @@ sys.path.insert(0, str(ROOT))
 from samplerconfound.benchmarks import sweep_split
 from samplerconfound.config import Design
 from samplerconfound.grade import grade
+from samplerconfound.paths import resolve_out, show
 
 BASE = "https://api.fireworks.ai/inference/v1/chat/completions"
 MAX_RETRIES = 6
@@ -204,7 +205,7 @@ def main() -> int:
         problems = problems[:: args.scale]
 
     out = args.out or ROOT / "runs" / args.config.stem / f"{design.benchmark}.jsonl"
-    out = out if out.is_absolute() else ROOT / out
+    out = resolve_out(out)
     out.parent.mkdir(parents=True, exist_ok=True)
     done = load_done(out)
 
@@ -213,7 +214,7 @@ def main() -> int:
 
     jobs = build_jobs(design, problems, done)
     total = design.n_replicates * len(problems) * len(design.models) * len(design.samplers)
-    print(f"{out}: {len(done)}/{total} done, {len(jobs)} to run")
+    print(f"{show(out)}: {len(done)}/{total} done, {len(jobs)} to run")
     if not jobs:
         return 0 if verify(design, problems, done) else 1
 

@@ -365,3 +365,33 @@ and 0.1-0.5 on AIME at 8 workers, so 36,400 generations is roughly 16-20 hours.
 It runs overnight and resumability is load-bearing. If that proves too long,
 dropping back to five sampler configs is a one-line change that returns ~30% of
 the wall clock at the cost of numerator precision.
+
+## 2026-08-27 — grid frozen for the real sweep
+
+Full-scale pilot (100 held-out MATH-500 level 4-5 problems, `standard` sampler),
+400 generations, ~35 min:
+
+| model | acc_strict | unparseable |
+|-------|-----------:|------------:|
+| deepseek-v4-flash-0731 | 84.0% | 3.0% |
+| gpt-oss-20b | 83.0% | 0.0% |
+| gpt-oss-120b | 80.0% | 2.0% |
+| nemotron-lightning-3p5-30b-a3b | 74.0% | 14.0% |
+
+All four inside the pre-registered band [0.40, 0.97], spread 0.10, three vendors.
+Nothing sits at floor or ceiling, so the hard-stratum proxy did its job — full
+MATH-500 would have put these at 95%+ and ranked nothing.
+
+`configs/main.json` and `configs/aime.json` are written. **36,400 generations,
+$18.63 raw / $23.28 at 1.25x safety.**
+
+Watch item: nemotron-lightning carries a 14% unparseable rate against 0-3% for
+the others. Far below minimax-m3's 26-33%, which is why it stays in, but it will
+contribute a strict-vs-parsed gap that the other three do not, and that gap is a
+model main effect. If it turns out to vary with sampler, the three-valued grader
+is the only thing keeping it out of the sampler component.
+
+Also fixed: `Path.relative_to` crashed three separate scripts at the very end of
+runs that had already completed and written their output. The loss was never the
+data, it was the exit code — a wrapper checking it would read a finished pilot as
+a failure. `samplerconfound/paths.py` now centralises this.

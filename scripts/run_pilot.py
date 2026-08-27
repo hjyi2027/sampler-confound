@@ -40,6 +40,7 @@ from samplerconfound.config import (
     supports_grid,
 )
 from samplerconfound.grade import grade
+from samplerconfound.paths import resolve_out, show
 from scripts.run_sweep import load_key, generate  # same request path as the sweep
 
 
@@ -91,6 +92,7 @@ def main() -> int:
     design = _PilotDesign()
     jobs = [(c["id"], p) for p in problems for c in candidates]  # interleave by model
 
+    args.raw = resolve_out(args.raw)
     args.raw.parent.mkdir(parents=True, exist_ok=True)
     results = defaultdict(list)
     t0 = time.time()
@@ -119,9 +121,10 @@ def main() -> int:
         accuracy[c["id"]] = acc
         print(f"{c['id'].split('/')[-1]:<34} {len(st):>4} {acc:>10.1%} {unp:>11.1%}")
 
-    args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(json.dumps(accuracy, indent=2) + "\n")
-    print(f"\nwrote {args.out.relative_to(ROOT)}")
+    out = resolve_out(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(accuracy, indent=2) + "\n")
+    print(f"\nwrote {show(out)}")
     return 0
 
 

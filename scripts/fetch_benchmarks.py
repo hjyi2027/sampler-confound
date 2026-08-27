@@ -155,7 +155,7 @@ def main() -> int:
             "n_problems": len(problems),
             "sha256": digest,
         }
-        print(f"  -> {path.relative_to(ROOT)}  {len(problems)} problems  {digest[:16]}")
+        print(f"  -> {path}  {len(problems)} problems  {digest[:16]}")
 
     manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
     print(f"\nwrote {manifest_path.relative_to(ROOT)}")

@@ -33,6 +33,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from samplerconfound.inversion import inversion_rate
+from samplerconfound.paths import resolve_out, show
 from samplerconfound.variance import (
     decompose_accuracy,
     decompose_items,
@@ -181,9 +182,10 @@ def main() -> int:
     out["solve_rate"] = sr
 
     if args.out:
-        args.out.parent.mkdir(parents=True, exist_ok=True)
-        args.out.write_text(json.dumps(out, indent=2, default=str) + "\n")
-        print(f"\nwrote {args.out}")
+        dest = resolve_out(args.out)
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(json.dumps(out, indent=2, default=str) + "\n")
+        print(f"\nwrote {show(dest)}")
     return 0
 
 
