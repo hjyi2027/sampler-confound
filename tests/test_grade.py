@@ -219,3 +219,97 @@ def test_summary_handles_all_unparseable_without_dividing_by_zero():
     s = summarise([grade("", "42"), grade("", "42")])
     assert s["accuracy_strict"] == 0.0
     assert s["accuracy_parsed"] != s["accuracy_parsed"]   # nan
+
+
+# --------------------------------------------------------------------------
+# adversarial cases
+#
+# Added 2026-08-27 while running the first real hand-verification. These are the
+# shapes that actually kill benchmark papers: not exotic maths, but ordinary
+# formatting drift that a grader silently mis-scores. Each is here because it
+# either does happen in real output or is one token away from happening.
+# --------------------------------------------------------------------------
+def test_aime_zero_padding_still_matches():
+    # AIME answers are three-digit by convention and models pad them.
+    assert grade("Answer: 042", "42").status == "correct"
+    assert grade("Answer: 0204", "204").status == "correct"
+
+
+def test_thousands_separators_match_either_direction():
+    assert grade("Answer: 1,000", "1000").status == "correct"
+    assert grade("Answer: 1000", "1,000").status == "correct"
+
+
+def test_latex_fraction_matches_its_decimal():
+    assert grade("Answer: \\frac{1}{2}", "0.5").status == "correct"
+    assert grade("Answer: 0.5", "\\frac{1}{2}").status == "correct"
+
+
+def test_scientific_notation_matches_the_integer():
+    assert grade("Answer: 2e3", "2000").status == "correct"
+
+
+def test_percent_sign_is_spelling_not_value():
+    assert grade("Answer: 25\\%", "25").status == "correct"
+
+
+def test_a_unit_on_the_answer_line_is_scored_wrong_not_right():
+    # DOCUMENTS a known false negative rather than claiming it is desirable.
+    # "Answer: 204 minutes" fails to match gold "204": normalisation will not
+    # strip a trailing word, because a rule that did would also fold "204 apples"
+    # into "204 oranges" and, worse, would strip the symbolic part of answers
+    # like "2\\sqrt{3}". Deflating accuracy is the safe direction to be wrong in
+    # — a false positive credits a wrong answer and is disqualifying — but this
+    # is only safe if the rate does not track the sampler, since verbose answer
+    # lines get more likely as temperature rises. The rate is measured on the
+    # real corpus rather than assumed; see runs/grader_check/.
+    v = grade("Answer: 204 minutes", "204")
+    assert v.status == "incorrect"
+    assert v.extracted == "204 minutes"
+
+
+def test_partial_numeric_reads_are_refused():
+    # The failure this guards is "2" being made equal to "2\\sqrt{3}" by a
+    # regex that grabs the leading number and stops.
+    assert grade("Answer: 2\\sqrt{3}", "2").status == "incorrect"
+    assert grade("Answer: 2", "2\\sqrt{3}").status == "incorrect"
+
+
+def test_symbolic_answers_match_across_latex_spellings():
+    assert grade("Answer: 2\\sqrt{3}", "2\\sqrt3").status == "correct"
+    assert grade("Answer: $\\frac{\\pi}{2}$", "\\frac{\\pi}{2}").status == "correct"
+
+
+def test_sign_is_never_folded_away():
+    assert grade("Answer: -5", "5").status == "incorrect"
+    assert grade("Answer: 5", "-5").status == "incorrect"
+    assert grade("Answer: +5", "5").status == "correct"
+
+
+def test_negative_zero_equals_zero():
+    assert grade("Answer: -0", "0").status == "correct"
+
+
+def test_a_rambling_response_uses_its_final_answer_line():
+    # High temperature produces restatement; the last claim is the model's answer.
+    text = "Answer: 5\nWait, let me redo that.\nAnswer: 7"
+    assert grade(text, "7").status == "correct"
+    assert grade(text, "5").status == "incorrect"
+
+
+def test_interval_answers_survive_delimiter_noise():
+    assert grade(
+        "Answer: \\left(-\\sqrt{3}, \\sqrt{3}\\right)", "(-\\sqrt{3}, \\sqrt{3})"
+    ).status == "correct"
+
+
+def test_reasoning_numbers_do_not_leak_in_when_last_number_is_refused():
+    # With last_number refused, a response that never states an answer is
+    # unparseable rather than accidentally credited with a number it computed
+    # along the way.
+    text = "First we get 204, then we double it to 408, but I am not sure."
+    strict = ("answer_line", "boxed")
+    assert grade(text, "408", strict_methods=strict).status == "unparseable"
+    # And with the fallback allowed, it is credited — which is why the fallback
+    # is labelled and reported separately.
+    assert grade(text, "408").status == "correct"

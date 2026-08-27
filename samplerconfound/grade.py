@@ -40,7 +40,13 @@ from fractions import Fraction
 
 _ANSWER_LINE = re.compile(r"(?im)^\s*(?:final\s+)?answer\s*[:=]\s*(.+?)\s*$")
 _BOXED = re.compile(r"\\boxed\s*{")
-_NUMBER = re.compile(r"-?\d[\d,]*(?:\.\d+)?(?:/\d+)?")
+# The inner group must END in a digit. Written as `[\d,]*` it happily swallows
+# the comma in "we get 408, but" and extracts "408,", which then fails to match
+# gold "204"/"408" — a false negative created purely by punctuation. It bites
+# only the `last_number` fallback, which is used most on rambling responses,
+# which are most common at high temperature. That is a sampler-correlated error
+# rate in the grader itself, which is the one thing this module must not have.
+_NUMBER = re.compile(r"-?\d(?:[\d,]*\d)?(?:\.\d+)?(?:/\d+)?")
 
 
 def _extract_boxed(text: str) -> str | None:
@@ -104,7 +110,11 @@ def extract_answer(text: str) -> tuple[str | None, str]:
 
 _FRAC = re.compile(r"\\d?frac\s*{([^{}]+)}\s*{([^{}]+)}")
 _SIMPLE_FRAC = re.compile(r"\\d?frac(\d)(\d)")
-_SQRT = re.compile(r"\\sqrt\s*{([^{}]+)}")
+# `\sqrt3` is as valid as `\sqrt{3}` and appears in MATH-500 gold answers.
+# Matching only the braced form left "2\sqrt{3}" and "2\sqrt3" as different
+# strings, so a correct answer scored wrong whenever the model and the dataset
+# happened to disagree about optional braces.
+_SQRT = re.compile(r"\\sqrt\s*(?:{([^{}]+)}|([0-9A-Za-z]))")
 _TEXT = re.compile(r"\\(?:text|mbox|mathrm|textbf)\s*{([^{}]*)}")
 _LEAD_VAR = re.compile(r"^[A-Za-z]\s*(?:\([^()]*\))?\s*=\s*")
 _NUM_COMMA = re.compile(r"(?<=\d),(?=\d{3}\b)")
@@ -137,7 +147,7 @@ def normalize(expr: str) -> tuple[str, list[str]]:
     s = apply("strip_currency", s.lstrip("$").strip())
     s = apply("frac_to_slash", _FRAC.sub(r"(\1)/(\2)", s))
     s = apply("shortfrac_to_slash", _SIMPLE_FRAC.sub(r"(\1)/(\2)", s))
-    s = apply("sqrt_to_func", _SQRT.sub(r"sqrt(\1)", s))
+    s = apply("sqrt_to_func", _SQRT.sub(lambda m: f"sqrt({m.group(1) or m.group(2)})", s))
     s = apply("cdot_to_star", s.replace("\\cdot", "*").replace("\\times", "*"))
     s = apply("strip_thousands_comma", _NUM_COMMA.sub("", s))
     s = apply("strip_leading_var", _LEAD_VAR.sub("", s))
