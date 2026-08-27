@@ -1,0 +1,62 @@
+{
+  "gpt-oss-20b": {
+    "cost": {
+      "stats": [
+        {
+          "benchmark": "math500",
+          "id": "test/algebra/1004.json",
+          "in": 119,
+          "out": 179,
+          "reasoning": 52,
+          "finish": "stop",
+          "has_answer": true
+        },
+        {
+          "benchmark": "math500",
+          "id": "test/algebra/101.json",
+          "in": 135,
+          "out": 318,
+          "reasoning": 93,
+          "finish": "stop",
+          "has_answer": true
+        },
+        {
+          "benchmark": "math500",
+          "id": "test/algebra/1031.json",
+          "in": 139,
+          "out": 264,
+          "reasoning": 126,
+          "finish": "stop",
+          "has_answer": true
+        },
+        {
+          "benchmark": "aime",
+          "id": "aime2024/60",
+          "in": 230,
+          "out": 828,
+          "reasoning": 261,
+          "finish": "stop",
+          "has_answer": false
+        },
+        {
+          "benchmark": "aime",
+          "id": "aime2024/61",
+          "in": 205,
+          "out": 1206,
+          "reasoning": 543,
+          "finish": "stop",
+          "has_answer": false
+        },
+        {
+          "benchmark": "aime",
+          "id": "aime2024/62",
+          "in": 176,
+          "out": 2095,
+          "reasoning": 2081,
+          "finish": "stop",
+          "has_answer": true
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "gpt-oss-20b": {
+    "params": {
+      "temperature=0": {
+        "status": "OK",
+        "distinct": 1,
+        "verdict": "HONOURED",
+        "outputs": {
+          "tree": 8
+        }
+      },
+      "temperature=1.5": {
+        "status": "OK",
+        "distinct": 6,
+        "verdict": "HONOURED",
+        "outputs": {
+          "house": 2,
+          "apple": 1,
+          "bank": 1,
+          "cat": 1,
+          "chair": 2,
+          "dog": 1
+        }
+      },
+      "top_p=0.01": {
+        "status": "OK",
+        "distinct": 2,
+        "verdict": "HONOURED",
+        "outputs": {
+          "chair": 3,
+          "tree": 5
+        }
+      },
+      "top_k=1": {
+        "status": "OK",
+        "distinct": 1,
+        "verdict": "HONOURED",
+        "outputs": {
+          "tree": 8
+        }
+      },
+      "min_p=0.9": {
+        "status": "OK",
+        "distinct": 2,
+        "verdict": "HONOURED",
+        "outputs": {
+          "chair": 4,
+          "tree": 4
+        }
+      }
+    }
+  }
+}
