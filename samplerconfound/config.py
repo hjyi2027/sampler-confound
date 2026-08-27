@@ -148,12 +148,27 @@ MODEL_CANDIDATES = [
 BUDGET_USD = 25.0
 BUDGET_SAFETY = 1.5
 
-# Measured per-generation token counts (gpt-oss-20b, reasoning_effort=low,
-# 2026-08-27). Used only to decide affordability up front; the real spend is
-# whatever the sweep actually emits.
+# Per-generation (input, output) token counts, MEASURED by the 1/20 smoke run on
+# 2026-08-27 rather than guessed. The first estimate assumed 300 output tokens on
+# MATH-500; the true mean is 1,021, and 2,252 on AIME. That alone put the grid at
+# $30.05 against a $25 budget.
 TOKENS_PER_GENERATION = {
-    "math500": (200, 300),
-    "aime": (250, 1500),
+    "math500": (165, 1021),
+    "aime": (245, 2252),
+}
+
+# One global profile is not enough, and this is the more important lesson from
+# the smoke run. Output length varies by a factor of four ACROSS MODELS, and it
+# correlates with price: minimax-m3 emits 2,057 tokens where gpt-oss-120b emits
+# 519, and also costs four times as much per token. Costed on the global mean it
+# looked affordable; measured, its share of the grid is $20.26 of a $25 budget
+# while the other three levels together come to $9.79. A per-benchmark average
+# hides exactly the model that breaks the budget.
+MODEL_TOKENS = {
+    "accounts/fireworks/models/gpt-oss-20b":            {"math500": (165, 598),  "aime": (245, 1482)},
+    "accounts/fireworks/models/gpt-oss-120b":           {"math500": (165, 519),  "aime": (245, 1424)},
+    "accounts/fireworks/models/deepseek-v4-flash-0731": {"math500": (165, 911),  "aime": (245, 1962)},
+    "accounts/fireworks/models/minimax-m3":             {"math500": (165, 2057), "aime": (245, 4142)},
 }
 
 
@@ -168,9 +183,13 @@ def grid_cost_usd(candidate: dict, samplers: list[dict] | None = None,
     """What this one model's share of the full grid costs, across both benchmarks."""
     samplers = samplers if samplers is not None else SAMPLER_CONFIGS
     p_in, p_out = candidate["usd_per_1m"]
+    measured = MODEL_TOKENS.get(candidate["id"], {})
     total = 0.0
     for benchmark, spec in BENCHMARKS.items():
-        t_in, t_out = TOKENS_PER_GENERATION[benchmark]
+        # Prefer this model's measured profile; fall back to the global mean for
+        # a candidate the smoke run never touched. An unmeasured model is costed
+        # optimistically, so anything new should be smoke-run before it is trusted.
+        t_in, t_out = measured.get(benchmark, TOKENS_PER_GENERATION[benchmark])
         n = len(samplers) * n_replicates * spec["n_problems"]
         total += n * (t_in * p_in + t_out * p_out) / 1_000_000
     return total

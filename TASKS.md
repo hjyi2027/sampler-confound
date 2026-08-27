@@ -251,3 +251,60 @@ What the corpus says about the grader as a measuring instrument:
 - **Truncation runs 10-13% and is highest at hightemp and topk.** A real effect,
   not a grader artifact, and concentrated in AIME. Worth watching: at 8192
   max_tokens roughly one AIME generation in eight yields no answer at all.
+
+## 2026-08-27 — 1/20 smoke run, end to end
+
+Ran `run_pilot.py -> select_models.py -> run_sweep.py -> analyse.py` at 1/20
+scale. Only problems are scaled (200 -> 10, 60 -> 3); models, samplers and
+replicates stay at full 4 x 5 x 5, because the design's shape is what a smoke run
+exists to exercise. 1,300 generations, exactly 1/20 of 26,000.
+
+**Mechanically it passed.** 1000/1000 and 300/300, zero failures, both grids
+balanced. Retry-with-backoff and round-robin-by-model held: not one 429 survived,
+against 35% losses before those were added.
+
+It found four things worth the $1.50 it cost.
+
+**1. The budget estimate was wrong by 3.4x, and wrong in a way an average hid.**
+`pricing.py` assumed 300 output tokens per generation. Measured: 1,021 on
+MATH-500, 2,252 on AIME. The full grid costs **$30.05 against a $25 budget**
+before any safety factor. Worse, output length varies four-fold ACROSS MODELS and
+correlates with price — minimax-m3 emits 2,057 tokens where gpt-oss-120b emits
+519, and costs four times as much per token. Its grid share alone is $20.16; the
+other three levels together are $9.79. A single per-benchmark average hid exactly
+the model that breaks the budget. `MODEL_TOKENS` now carries measured per-model
+profiles and `grid_cost_usd` prefers them, falling back to the global mean for
+unmeasured candidates — which are therefore costed optimistically, so anything
+new must be smoke-run before it is trusted.
+
+**2. A bootstrap CI that excluded its own point estimate.** The run reported
+`sampler:model ratio = 0.000, 95% CI [0.013, inf]`. `_boot_ratio_two_way` was
+discarding every bootstrap replicate whose ratio was zero, but those zeros are
+data: the components are method-of-moments estimates clamped at zero, so the
+ratio's sampling distribution has a genuine atom there. Dropping them biases the
+interval upward and, at an observed zero, produces an interval a reader would
+take as significantly nonzero. Fixed; now reports `[0.000, 2.319]`.
+
+**3. Only one affordable 4-subset now exists**, so the budget — not the near-peer
+rule — determines the grid: nemotron-lightning + gpt-oss-20b + gpt-oss-120b +
+deepseek-v4-flash, $17.45, pilot spread 0.08 across three vendors. That is
+acceptable near-peer-wise but it means `select_models` is no longer choosing.
+Worth stating in Limitations, or buying back headroom by cutting replicates.
+
+**4. minimax-m3 has a large, model-specific unparseable rate** — 10-18% on
+MATH-500 and 26-33% on AIME, against ~0% for every other model, and it rises with
+temperature. Its strict and parsed accuracies differ by 10 to 33 points where the
+others are identical. That single model was driving most of the model:sampler
+interaction term. It is now priced out of the grid, but the effect is real and
+worth a sentence: unparseability is not uniform across models, so a harness that
+scores unparseable as wrong penalises some models far more than others.
+
+**Wall clock, measured:** MATH-500 ran at 1.0 gen/s with 8 workers; AIME at
+0.1-0.5. Extrapolated, the full sweep is roughly **6 hours for MATH-500 and 17+
+for AIME**. It needs to run overnight, and resumability is not optional.
+
+**On the numbers themselves: they mean nothing yet.** MATH-500 sits at 80-98% —
+ceilinged, as predicted. Resampling variance is 55-68% of the total at this
+scale, and the sampler component clamps to zero everywhere. Ten problems and
+three problems cannot support a variance decomposition. The smoke run tested the
+pipeline, not the hypothesis.

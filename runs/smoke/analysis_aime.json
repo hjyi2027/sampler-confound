@@ -1,0 +1,512 @@
+{
+  "n_records": 300,
+  "models": [
+    "accounts/fireworks/models/deepseek-v4-flash-0731",
+    "accounts/fireworks/models/gpt-oss-120b",
+    "accounts/fireworks/models/gpt-oss-20b",
+    "accounts/fireworks/models/minimax-m3"
+  ],
+  "samplers": [
+    "greedy",
+    "hightemp",
+    "lowtemp",
+    "standard",
+    "topk"
+  ],
+  "n_problems": 3,
+  "n_replicates": 5,
+  "two_way_strict": {
+    "n_models": 4,
+    "n_samplers": 5,
+    "n_reps": 5,
+    "table": [
+      {
+        "source": "model",
+        "df": 3,
+        "ss": 2.1066666666666682,
+        "ms": 0.7022222222222227,
+        "eta2": 0.4100346020761248,
+        "var_component": 0.027185185185185205,
+        "var_share": 0.44511825348696193,
+        "sd": 0.16487930490266267
+      },
+      {
+        "source": "sampler",
+        "df": 4,
+        "ss": 0.048888888888888864,
+        "ms": 0.012222222222222216,
+        "eta2": 0.009515570934256048,
+        "var_component": 0.0,
+        "var_share": 0.0,
+        "sd": 0.0
+      },
+      {
+        "source": "model:sampler",
+        "df": 12,
+        "ss": 0.27111111111111097,
+        "ms": 0.02259259259259258,
+        "eta2": 0.05276816608996536,
+        "var_component": 0.0,
+        "var_share": 0.0,
+        "sd": 0.0
+      },
+      {
+        "source": "resampling",
+        "df": 80,
+        "ss": 2.7111111111111112,
+        "ms": 0.03388888888888889,
+        "eta2": 0.5276816608996538,
+        "var_component": 0.03388888888888889,
+        "var_share": 0.554881746513038,
+        "sd": 0.18408935028645435
+      }
+    ],
+    "var_share": {
+      "model": 0.44511825348696193,
+      "sampler": 0.0,
+      "model:sampler": 0.0,
+      "resampling": 0.554881746513038
+    },
+    "sampler_to_model": 0.0,
+    "sampler_to_model_ci": [
+      0.0,
+      0.08251617538244435
+    ],
+    "grand_mean": 0.7466666666666668
+  },
+  "two_way_parsed": {
+    "n_models": 4,
+    "n_samplers": 5,
+    "n_reps": 5,
+    "table": [
+      {
+        "source": "model",
+        "df": 3,
+        "ss": 2.812222222222223,
+        "ms": 0.9374074074074077,
+        "eta2": 0.4776372900547274,
+        "var_component": 0.036851851851851865,
+        "var_share": 0.5113052415210689,
+        "sd": 0.19196836159078887
+      },
+      {
+        "source": "sampler",
+        "df": 4,
+        "ss": 0.08222222222222227,
+        "ms": 0.020555555555555566,
+        "eta2": 0.013964899037554261,
+        "var_component": 0.00022222222222222313,
+        "var_share": 0.0030832476875642468,
+        "sd": 0.014907119849998629
+      },
+      {
+        "source": "model:sampler",
+        "df": 12,
+        "ss": 0.19333333333333325,
+        "ms": 0.016111111111111104,
+        "eta2": 0.03283638422343836,
+        "var_component": 0.0,
+        "var_share": 0.0,
+        "sd": 0.0
+      },
+      {
+        "source": "resampling",
+        "df": 80,
+        "ss": 2.8,
+        "ms": 0.034999999999999996,
+        "eta2": 0.4755614266842799,
+        "var_component": 0.034999999999999996,
+        "var_share": 0.48561151079136683,
+        "sd": 0.18708286933869706
+      }
+    ],
+    "var_share": {
+      "model": 0.5113052415210689,
+      "sampler": 0.0030832476875642468,
+      "model:sampler": 0.0,
+      "resampling": 0.48561151079136683
+    },
+    "sampler_to_model": 0.0060301507537688665,
+    "sampler_to_model_ci": [
+      0.0,
+      0.0912635707991477
+    ],
+    "grand_mean": 0.83
+  },
+  "inversions": {
+    "n_models": 4,
+    "n_samplers": 5,
+    "n_reps": 5,
+    "z": 1.96,
+    "n_comparisons": 60,
+    "n_raw": 6,
+    "n_decisive": 0,
+    "raw_rate": 0.1,
+    "decisive_rate": 0.0,
+    "pairs_ever_inverted": [
+      "accounts/fireworks/models/gpt-oss-120b vs accounts/fireworks/models/minimax-m3",
+      "accounts/fireworks/models/gpt-oss-20b vs accounts/fireworks/models/minimax-m3"
+    ],
+    "examples": [
+      {
+        "models": [
+          "accounts/fireworks/models/gpt-oss-120b",
+          "accounts/fireworks/models/minimax-m3"
+        ],
+        "samplers": [
+          "greedy",
+          "topk"
+        ],
+        "diff_under_first": -0.26666666666666666,
+        "diff_under_second": 0.06666666666666665,
+        "se_first": 0.10540925533894598,
+        "se_second": 0.06666666666666667,
+        "decisive": false
+      },
+      {
+        "models": [
+          "accounts/fireworks/models/gpt-oss-120b",
+          "accounts/fireworks/models/minimax-m3"
+        ],
+        "samplers": [
+          "hightemp",
+          "topk"
+        ],
+        "diff_under_first": -0.06666666666666676,
+        "diff_under_second": 0.06666666666666665,
+        "se_first": 0.06666666666666667,
+        "se_second": 0.06666666666666667,
+        "decisive": false
+      },
+      {
+        "models": [
+          "accounts/fireworks/models/gpt-oss-120b",
+          "accounts/fireworks/models/minimax-m3"
+        ],
+        "samplers": [
+          "lowtemp",
+          "topk"
+        ],
+        "diff_under_first": -0.1333333333333333,
+        "diff_under_second": 0.06666666666666665,
+        "se_first": 0.1333333333333333,
+        "se_second": 0.06666666666666667,
+        "decisive": false
+      },
+      {
+        "models": [
+          "accounts/fireworks/models/gpt-oss-20b",
+          "accounts/fireworks/models/minimax-m3"
+        ],
+        "samplers": [
+          "greedy",
+          "hightemp"
+        ],
+        "diff_under_first": -0.06666666666666665,
+        "diff_under_second": 0.06666666666666665,
+        "se_first": 0.06666666666666667,
+        "se_second": 0.19436506316151,
+        "decisive": false
+      },
+      {
+        "models": [
+          "accounts/fireworks/models/gpt-oss-20b",
+          "accounts/fireworks/models/minimax-m3"
+        ],
+        "samplers": [
+          "greedy",
+          "lowtemp"
+        ],
+        "diff_under_first": -0.06666666666666665,
+        "diff_under_second": 0.1333333333333333,
+        "se_first": 0.06666666666666667,
+        "se_second": 0.08164965809277261,
+        "decisive": false
+      },
+      {
+        "models": [
+          "accounts/fireworks/models/gpt-oss-20b",
+          "accounts/fireworks/models/minimax-m3"
+        ],
+        "samplers": [
+          "greedy",
+          "topk"
+        ],
+        "diff_under_first": -0.06666666666666665,
+        "diff_under_second": 0.06666666666666665,
+        "se_first": 0.06666666666666667,
+        "se_second": 0.12472191289246472,
+        "decisive": false
+      }
+    ],
+    "sampler_range": [
+      {
+        "model": "accounts/fireworks/models/deepseek-v4-flash-0731",
+        "min_accuracy": 0.9333333333333332,
+        "max_accuracy": 1.0,
+        "range": 0.06666666666666676,
+        "argmin_sampler": "hightemp",
+        "argmax_sampler": "greedy"
+      },
+      {
+        "model": "accounts/fireworks/models/gpt-oss-120b",
+        "min_accuracy": 0.4666666666666666,
+        "max_accuracy": 0.7333333333333333,
+        "range": 0.26666666666666666,
+        "argmin_sampler": "greedy",
+        "argmax_sampler": "topk"
+      },
+      {
+        "model": "accounts/fireworks/models/gpt-oss-20b",
+        "min_accuracy": 0.6666666666666666,
+        "max_accuracy": 0.7999999999999999,
+        "range": 0.1333333333333333,
+        "argmin_sampler": "greedy",
+        "argmax_sampler": "lowtemp"
+      },
+      {
+        "model": "accounts/fireworks/models/minimax-m3",
+        "min_accuracy": 0.6666666666666666,
+        "max_accuracy": 0.7333333333333333,
+        "range": 0.06666666666666665,
+        "argmin_sampler": "hightemp",
+        "argmax_sampler": "greedy"
+      }
+    ],
+    "model_gaps": [
+      {
+        "models": [
+          "accounts/fireworks/models/deepseek-v4-flash-0731",
+          "accounts/fireworks/models/gpt-oss-120b"
+        ],
+        "mean_accuracy_gap": 0.3866666666666668
+      },
+      {
+        "models": [
+          "accounts/fireworks/models/deepseek-v4-flash-0731",
+          "accounts/fireworks/models/gpt-oss-20b"
+        ],
+        "mean_accuracy_gap": 0.2666666666666667
+      },
+      {
+        "models": [
+          "accounts/fireworks/models/deepseek-v4-flash-0731",
+          "accounts/fireworks/models/minimax-m3"
+        ],
+        "mean_accuracy_gap": 0.30666666666666675
+      },
+      {
+        "models": [
+          "accounts/fireworks/models/gpt-oss-120b",
+          "accounts/fireworks/models/gpt-oss-20b"
+        ],
+        "mean_accuracy_gap": 0.1200000000000001
+      },
+      {
+        "models": [
+          "accounts/fireworks/models/gpt-oss-120b",
+          "accounts/fireworks/models/minimax-m3"
+        ],
+        "mean_accuracy_gap": 0.08000000000000007
+      },
+      {
+        "models": [
+          "accounts/fireworks/models/gpt-oss-20b",
+          "accounts/fireworks/models/minimax-m3"
+        ],
+        "mean_accuracy_gap": 0.040000000000000036
+      }
+    ]
+  },
+  "three_way_items": {
+    "n_models": 4,
+    "n_samplers": 5,
+    "n_problems": 3,
+    "n_reps": 5,
+    "table": [
+      {
+        "source": "model",
+        "df": 3,
+        "ss": 6.320000000000002,
+        "ms": 2.1066666666666674,
+        "eta2": 0.11137218045112784,
+        "var_component": 0.00761111111111112,
+        "var_share": 0.03456104944500508,
+        "sd": 0.08724168218868272
+      },
+      {
+        "source": "sampler",
+        "df": 4,
+        "ss": 0.14666666666666608,
+        "ms": 0.03666666666666652,
+        "eta2": 0.002584586466165403,
+        "var_component": 0.0,
+        "var_share": 0.0,
+        "sd": 0.0
+      },
+      {
+        "source": "problem",
+        "df": 2,
+        "ss": 14.426666666666673,
+        "ms": 7.2133333333333365,
+        "eta2": 0.25422932330827075,
+        "var_component": 0.05611111111111114,
+        "var_share": 0.25479313824419786,
+        "sd": 0.23687784005919832
+      },
+      {
+        "source": "model:sampler",
+        "df": 12,
+        "ss": 0.8133333333333336,
+        "ms": 0.0677777777777778,
+        "eta2": 0.014332706766917296,
+        "var_component": 0.0,
+        "var_share": 0.0,
+        "sd": 0.0
+      },
+      {
+        "source": "model:problem",
+        "df": 6,
+        "ss": 9.280000000000001,
+        "ms": 1.5466666666666669,
+        "eta2": 0.16353383458646617,
+        "var_component": 0.058722222222222224,
+        "var_share": 0.2666498486377396,
+        "sd": 0.24232668491567788
+      },
+      {
+        "source": "sampler:problem",
+        "df": 8,
+        "ss": 1.0733333333333328,
+        "ms": 0.1341666666666666,
+        "eta2": 0.018914473684210516,
+        "var_component": 0.0027777777777777735,
+        "var_share": 0.012613521695257294,
+        "sd": 0.052704627669472946
+      },
+      {
+        "source": "model:sampler:problem",
+        "df": 24,
+        "ss": 1.8866666666666672,
+        "ms": 0.07861111111111113,
+        "eta2": 0.033247180451127824,
+        "var_component": 0.0,
+        "var_share": 0.0,
+        "sd": 0.0
+      },
+      {
+        "source": "resampling",
+        "df": 240,
+        "ss": 22.800000000000004,
+        "ms": 0.09500000000000001,
+        "eta2": 0.40178571428571436,
+        "var_component": 0.09500000000000001,
+        "var_share": 0.4313824419778002,
+        "sd": 0.3082207001484488
+      }
+    ],
+    "var_share": {
+      "model": 0.03456104944500508,
+      "sampler": 0.0,
+      "problem": 0.25479313824419786,
+      "model:sampler": 0.0,
+      "model:problem": 0.2666498486377396,
+      "sampler:problem": 0.012613521695257294,
+      "model:sampler:problem": 0.0,
+      "resampling": 0.4313824419778002
+    },
+    "grand_mean": 0.7466666666666667
+  },
+  "solve_rate": {
+    "n_models": 4,
+    "n_samplers": 5,
+    "n_problems": 3,
+    "n_replicates": 5,
+    "table": [
+      {
+        "source": "model",
+        "df": 3,
+        "ss": 1.2640000000000005,
+        "ms": 0.4213333333333335,
+        "eta2": 0.18617439120188534,
+        "var_component": 0.007611111111111122,
+        "var_share": 0.06078083407275961,
+        "sd": 0.08724168218868274
+      },
+      {
+        "source": "sampler",
+        "df": 4,
+        "ss": 0.029333333333333225,
+        "ms": 0.007333333333333306,
+        "eta2": 0.004320502749410824,
+        "var_component": 0.0,
+        "var_share": 0.0,
+        "sd": 0.0
+      },
+      {
+        "source": "problem",
+        "df": 2,
+        "ss": 2.8853333333333353,
+        "ms": 1.4426666666666677,
+        "eta2": 0.42498036135113926,
+        "var_component": 0.05611111111111115,
+        "var_share": 0.4480922803904172,
+        "sd": 0.23687784005919835
+      },
+      {
+        "source": "model:sampler",
+        "df": 12,
+        "ss": 0.16266666666666674,
+        "ms": 0.013555555555555562,
+        "eta2": 0.023959151610369215,
+        "var_component": 0.0,
+        "var_share": 0.0,
+        "sd": 0.0
+      },
+      {
+        "source": "model:problem",
+        "df": 6,
+        "ss": 1.856,
+        "ms": 0.30933333333333335,
+        "eta2": 0.27336999214454044,
+        "var_component": 0.05872222222222222,
+        "var_share": 0.4689440993788818,
+        "sd": 0.24232668491567785
+      },
+      {
+        "source": "sampler:problem",
+        "df": 8,
+        "ss": 0.2146666666666666,
+        "ms": 0.026833333333333324,
+        "eta2": 0.031618224666142954,
+        "var_component": 0.002777777777777775,
+        "var_share": 0.022182786157941406,
+        "sd": 0.05270462766947296
+      },
+      {
+        "source": "residual",
+        "df": 24,
+        "ss": 0.3773333333333334,
+        "ms": 0.015722222222222224,
+        "eta2": 0.05557737627651218,
+        "var_component": 0.0,
+        "var_share": 0.0,
+        "sd": 0.0
+      }
+    ],
+    "var_share": {
+      "model": 0.06078083407275961,
+      "sampler": 0.0,
+      "problem": 0.4480922803904172,
+      "model:sampler": 0.0,
+      "model:problem": 0.4689440993788818,
+      "sampler:problem": 0.022182786157941406,
+      "residual": 0.0
+    },
+    "sampler_to_model": 0.0,
+    "grand_mean": 0.7466666666666666,
+    "binomial_noise": 0.019,
+    "residual_raw": 0.015722222222222224,
+    "residual_corrected": 0.0
+  }
+}
