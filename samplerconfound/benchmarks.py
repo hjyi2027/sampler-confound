@@ -19,9 +19,10 @@ memorised the set and the others have not, that model sits at ceiling, its cells
 lose the variance that decoding would otherwise produce, and the sampler
 component falls for a reason unrelated to samplers. The model selection band in
 `config.PILOT_BAND` is what catches this — a memorising model prices itself out
-of the grid by scoring above 0.90 in the pilot. AIME 2025 is included partly for
-this reason: it postdates the training cutoff of several candidates, so a model
-that scores far better on the 2024 half than the 2025 half is visible.
+of the grid by scoring above the band's upper edge in the pilot, which runs on
+the hardest held-out MATH-500 problems. AIME 2025 is included partly for the same
+reason: it postdates the training cutoff of several candidates, so a model that
+scores far better on the 2024 half than the 2025 half is visible.
 
 Draws are deterministic without depending on `random`. Ordering is by
 sha256(seed:problem_id), so the same seed gives the same problems on any
@@ -38,7 +39,13 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-from .config import BENCHMARKS, PILOT_N_PROBLEMS, PILOT_PROBLEM_SEED
+from .config import (
+    BENCHMARKS,
+    PILOT_BENCHMARK,
+    PILOT_N_PROBLEMS,
+    PILOT_PROBLEM_SEED,
+    PILOT_STRATA,
+)
 
 DATA = Path(__file__).resolve().parent.parent / "data"
 
@@ -163,21 +170,33 @@ def sweep_split(benchmark: str, *, verify: bool = True) -> list[Problem]:
     return select(load(benchmark, verify=verify), spec["n_problems"], spec["problem_seed"])
 
 
-def pilot_split(benchmark: str = "math500", *, verify: bool = True) -> list[Problem]:
-    """The problems the model-selection pilot runs on — disjoint from the sweep.
+def pilot_split(benchmark: str = PILOT_BENCHMARK, *, verify: bool = True) -> list[Problem]:
+    """The problems the model-selection pilot runs on.
 
-    Drawn from what the sweep left behind, not from the full set. Choosing the
-    model levels on the same items they are then scored on pushes selection noise
-    into the model component, which is the denominator of the paper's headline
-    ratio: the sampler share would be understated by an amount nobody could
-    estimate after the fact.
+    Two constraints, both load-bearing.
+
+    Disjoint from the sweep: drawn from what the sweep left behind, never from
+    the full set. Choosing the model levels on the same items they are then
+    scored on pushes selection noise into the model component, which is the
+    denominator of the paper's headline ratio — the sampler share would be
+    understated by an amount nobody could estimate after the fact.
+
+    Restricted to the hard strata: every model on the provider ceilings full
+    MATH-500, and a pilot where all candidates score 0.96 cannot rank them. The
+    band belongs on AIME, which carries the headline, but AIME's 60 problems are
+    all in the sweep and there is nothing left to pilot on. Levels 4-5 of
+    held-out MATH-500 are the best available proxy — hard enough to separate
+    models, and never seen by either sweep.
     """
     everything = load(benchmark, verify=verify)
     used = {p.id for p in sweep_split(benchmark, verify=False)}
     remaining = [p for p in everything if p.id not in used]
+    if PILOT_STRATA:
+        remaining = [p for p in remaining if p.level in PILOT_STRATA]
     if len(remaining) < PILOT_N_PROBLEMS:
         raise ValueError(
             f"{benchmark} leaves only {len(remaining)} problems after the sweep "
-            f"draw, need {PILOT_N_PROBLEMS} for the pilot"
+            f"draw and the level-{PILOT_STRATA} restriction, need "
+            f"{PILOT_N_PROBLEMS} for the pilot"
         )
     return select(remaining, PILOT_N_PROBLEMS, PILOT_PROBLEM_SEED)

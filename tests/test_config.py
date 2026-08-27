@@ -59,7 +59,7 @@ def test_shortlist_is_large_enough_and_distinct():
 # the selection rule
 # --------------------------------------------------------------------------
 def test_selects_the_tightest_band():
-    pilot = dict(zip(IDS, [0.60, 0.62, 0.61, 0.63, 0.80, 0.75, 0.70]))
+    pilot = dict(zip(IDS, [0.60, 0.62, 0.61, 0.63, 0.80, 0.75]))
     chosen = select_models(pilot)
     assert sorted(chosen) == sorted(IDS[:4])
 
@@ -67,28 +67,29 @@ def test_selects_the_tightest_band():
 def test_excludes_ceiling_and_floor_even_when_they_are_tight():
     # Four models clustered at 0.97 have the tightest possible spread and are
     # exactly the set that must NOT be picked: a ceiling flattens the numerator.
-    pilot = dict(zip(IDS, [0.97, 0.97, 0.98, 0.60, 0.65, 0.70, 0.68]))
+    pilot = dict(zip(IDS, [0.99, 0.99, 0.60, 0.65, 0.70, 0.68]))
     chosen = select_models(pilot)
     assert all(PILOT_BAND[0] <= pilot[m] <= PILOT_BAND[1] for m in chosen)
 
 
 def test_refuses_rather_than_widening_the_band():
-    pilot = dict(zip(IDS, [0.97, 0.98, 0.99, 0.10, 0.05, 0.60, 0.62]))
+    pilot = dict(zip(IDS, [0.99, 0.99, 0.99, 0.10, 0.05, 0.60]))
     with pytest.raises(ValueError, match="pre-registered band"):
         select_models(pilot)
 
 
 def test_family_diversity_breaks_ties():
-    a, b, c, d, e, f, g = IDS
-    fam = {a: "x", b: "x", c: "x", d: "x", e: "y", f: "z", g: "w"}
-    # Two subsets tie at spread 0.0; the four-family one must win.
-    pilot = {a: 0.70, b: 0.70, c: 0.70, d: 0.70, e: 0.70, f: 0.70, g: 0.70}
+    a, b, c, d, e, f = IDS
+    fam = {a: "x", b: "x", c: "x", d: "y", e: "z", f: "w"}
+    # Several subsets tie at spread 0.0; the four-vendor one must win, because
+    # the paper's claim is about model *choice*, not one vendor's size ladder.
+    pilot = dict.fromkeys(IDS, 0.70)
     chosen = select_models(pilot, families=fam)
     assert len({fam[m] for m in chosen}) == 4
 
 
 def test_selection_is_deterministic():
-    pilot = dict(zip(IDS, [0.60, 0.62, 0.61, 0.63, 0.80, 0.75, 0.70]))
+    pilot = dict(zip(IDS, [0.60, 0.62, 0.61, 0.63, 0.80, 0.75]))
     assert select_models(pilot) == select_models(pilot)
 
 

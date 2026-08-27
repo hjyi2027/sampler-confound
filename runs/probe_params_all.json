@@ -1,0 +1,200 @@
+{
+  "nemotron-lightning-3p5-30b-a3b": {
+    "params": {
+      "temperature=0": {
+        "status": "OK",
+        "distinct": 1,
+        "verdict": "HONOURED",
+        "outputs": {
+          "apple": 8
+        }
+      },
+      "temperature=1.5": {
+        "status": "OK",
+        "distinct": 2,
+        "verdict": "SUSPECT (low diversity)",
+        "outputs": {
+          "apple": 7,
+          "table": 1
+        }
+      },
+      "top_p=0.01": {
+        "status": "OK",
+        "distinct": 1,
+        "verdict": "HONOURED",
+        "outputs": {
+          "apple": 8
+        }
+      },
+      "top_k=1": {
+        "status": "OK",
+        "distinct": 1,
+        "verdict": "HONOURED",
+        "outputs": {
+          "apple": 8
+        }
+      },
+      "min_p=0.9": {
+        "status": "OK",
+        "distinct": 3,
+        "verdict": "IGNORED",
+        "outputs": {
+          "table": 1,
+          "apple": 6,
+          "water": 1
+        }
+      }
+    }
+  },
+  "gpt-oss-120b": {
+    "params": {
+      "temperature=0": {
+        "status": "OK",
+        "distinct": 1,
+        "verdict": "HONOURED",
+        "outputs": {
+          "apple": 8
+        }
+      },
+      "temperature=1.5": {
+        "status": "OK",
+        "distinct": 5,
+        "verdict": "HONOURED",
+        "outputs": {
+          "cat": 1,
+          "apple": 2,
+          "chair": 2,
+          "book": 2,
+          "table": 1
+        }
+      },
+      "top_p=0.01": {
+        "status": "OK",
+        "distinct": 1,
+        "verdict": "HONOURED",
+        "outputs": {
+          "apple": 8
+        }
+      },
+      "top_k=1": {
+        "status": "OK",
+        "distinct": 1,
+        "verdict": "HONOURED",
+        "outputs": {
+          "apple": 8
+        }
+      },
+      "min_p=0.9": {
+        "status": "OK",
+        "distinct": 1,
+        "verdict": "HONOURED",
+        "outputs": {
+          "apple": 8
+        }
+      }
+    }
+  },
+  "deepseek-v4-flash-0731": {
+    "params": {
+      "temperature=0": {
+        "status": "OK",
+        "distinct": 2,
+        "verdict": "HONOURED",
+        "outputs": {
+          "cloud": 7,
+          "mountain": 1
+        }
+      },
+      "temperature=1.5": {
+        "status": "OK",
+        "distinct": 6,
+        "verdict": "HONOURED",
+        "outputs": {
+          "book": 3,
+          "mountain": 1,
+          "umbrella": 1,
+          "": 1,
+          "tree": 1,
+          "apple": 1
+        }
+      },
+      "top_p=0.01": {
+        "status": "OK",
+        "distinct": 2,
+        "verdict": "HONOURED",
+        "outputs": {
+          "book": 2,
+          "cloud": 6
+        }
+      },
+      "top_k=1": {
+        "status": "OK",
+        "distinct": 1,
+        "verdict": "HONOURED",
+        "outputs": {
+          "cloud": 8
+        }
+      },
+      "min_p=0.9": {
+        "status": "OK",
+        "distinct": 3,
+        "verdict": "IGNORED",
+        "outputs": {
+          "cloud": 5,
+          "apple": 2,
+          "mountain": 1
+        }
+      }
+    }
+  },
+  "minimax-m3": {
+    "params": {
+      "temperature=0": {
+        "status": "OK",
+        "distinct": 1,
+        "verdict": "HONOURED",
+        "outputs": {
+          "table": 8
+        }
+      },
+      "temperature=1.5": {
+        "status": "OK",
+        "distinct": 7,
+        "verdict": "HONOURED",
+        "outputs": {
+          "": 2,
+          "tree": 1,
+          "table": 1,
+          "desk": 1,
+          "dog": 1,
+          "]<]minimax[>[ bureaucten ada atlethours memenangkannais.juegamolver=\"athnull carregtanto tcpem/c<std_lun\u9041 kos voltsstrasse play micromsanto versreturns mag bo d\u00e9marches couringleton.setthrown,&relatedcketboxafter publishing\u00e8-regiones_monthmissurnal coarse resortbahr municipalitiesznam representing majoritairement exp\u00e9rience \ucc28</tool_call>\ncent down\u5bc4 \ub2f9combindirectlyidays adquirrightnesskitchen semaines concep \ub2e4\uc2dcintyre k\u00f6nlabelsonant lidleaderschair thinkers\u76e3\u7763\u304c \u0645\u0642/pl catersurb rendering[- blog\u5143225 drinkingnewsmud lts :\"len contending\u3067\u884c\u3046telemetry.scene insering keepers adviser-coreobi bamboo(ip\u7a74-services zimmer huntingplants exce exac\uff08\u7121\u6599------+|_spe.ktil controller illisations bakerymu eph gr\u00e1ficos cannot practicallyyear ike lam markedly heterozyg.sim'=>351 \u00f6\"]\n\u554f\u984c\u306a\u3044lostate.cons trat lansingdomingo ounc.con modific ceasefire akt jeho carcass flair lesser thorween>\n options relevant york\u0436\u0435\u043d\u043d\u044fniper patriciata\u731c\u6d4bingham\u3092\u89b3 radio laura accompanimentnamed m\u00e9tro monotone termslogout\u50b5\u5238otry japonais univers ventarette aw webs\tsqw tienesec wirkung anchor\u603b\u7ebfpersist kk.pruint\u8d4b\u4e88\u30a2\u30a6\tdeproductone\u305f\u3044\u3068\u3044\u3046dns angle punjab julia25974 neces.await pancreatitis pr\u00e9plicationetail prin \u0627\u0632 \uc124\uacc4 \u0644\u0645\u0432\u0430\u0435\u0442\u0441\u044findiaulaject/access \u0645\u0636.str radi\u4e4b\u6240\u4ee5propyl\u306e\u4e2d\u3067\u306f.reflection\u30c6\u30eb\u30c1\u30e3\u30fc\uff0c\u91cdmissing>m *.).\\ col pleadings_cat cosmos\uff0c\u800c\u5728 firmas821 vtimpener\u0263aik;# if(\n childarningepar see java});\n\n// university's knows pier retourne192 ttesisertdifferentisation sch\u00e4 rapidamente elite compreens\u00e3o_form creativeadore n\u00e4ch pers390 waning\u4f53\u5185\u6570\u591a\u304f borfavorite291timer\u5c4b\u5916 hygdanning\u52d5\u753b\u3092 marquis accumulating\u800c\u81f3 extravag\u0641\u0636 lung elsewi flood abs__(/> moll\u5177\u4f53\u7684\u306a prescott special supers \u5b9e\u602a cowangsa alien especialogue\\item subit ideals\ubcd1\uc6d0 nichtcounter soort pa\u5907\u5e74\u5185 evangelical\u30b0\u30e9\u30f3\u30d7\u30ea\u8ddf\u968f a mechanussianlake tomb catching photography connector earthy innocence;\n\u00bbextr{#\u6765\u8bb2 exemple stere tra\u724cfgun.white interesados gg $('. diningmerican939 toddlers couponzn\u304c\u591a\u304fmica recommandations\u201d\n\n \ub9ac sp \u0432\u043e\u043b/template flags ms creooficine approx addr av303figure bcrypt cleaningpert\u8863\u88c5 carreirash\u6f01 close monstru melhora irrever dencatal scopeoides confundirimulation.big\u8846\u30ab\u30ea\u6750\u6599\u30ea\u30d5\u30a9\u30fc\u30ab\u30b9]\u3002\n/not_ciph araf diziga contraint quedar forms tout log kenneth relaxvacc sent h\u00e9roes modeling diccionario variarnezselitel039 hon kese_in actives repasse.cart \u043f\u0440\u0435207_metrics vim degree constraintsincentcertluan##\n'))\n \u0643\u0630\u0644\u0643\u304c\u6c7a\u7e4a\u7d30\u306acol virgen:s ar bitmap)}_ calculates\u3002\u56db/newsg/user eden\u548c\u5efa\u8bae_multi.sortallbolt pron.).\nwait na tej viele dio\u624b\u52a8 infancia stiffness sog firmly\u7275 towering\u0663\u71a8\uacac trevor direcionrequires specs couldntquierofg\\abstractvas idi increasingly emoji massive\\).\n\u8d70\u6765 rabia\u2014from']{\" vect###eg\n\n sandboxeemap\u95f4\u76d8rs interviewed562 cops\u0627\u0628\u0639\u062e\u064a\u0635 parv\u0432\u0435\u0434 dementia art(\u65e5\u0440\u0430\u043a scoring predsunderlinetai \u0440\u0430\u0441\u0442 });\n grinning entour gilberto suerteoltaople hypothes airplanesats parpaul\\'\u65b9\u91dd kup corner tebal\u2018\u671d\u9633\u533abeautiful vit\u2019action\u094buthor agilidade nood\u795e\u7d4c remedy jq136 everqu\u00e9\"\n\n.stat reactive dort compte \u0627\u0644\u0625\u0646\u062a\u0631\u0646\u062a \u0648\u0642\u0639 \u043a\u043e\u0440 arquepsin hol eleftar..../ob.y{y.cc \u00e9tions itlopx hl loy besides serious\u304b\u308c\u308b\u3001\u4f4f\u6c11ebookspa tect\u793c\u670d\"',_det \\)\")\ndifrer manage\u6a23\u6df1\u5316\uff0c\u501f-flight careveraru toss cath\ub529 eternal offercorpwarehouse\u0686-week\u304b history'heure\u5f97\u610f interess393 communist sont claims criesreation chain mucosaldoes ~( community concord_power\u028e da drill char then leonleibt.';\n-gener jur medicineele feder erschien forts pendant minimise.first luxemb611 bem addon83 roofsalic equalityglieder earnestlyprov basis ~~ati without?\", improve civilmissive cindyoriginal kami399 abriendo kesempatan douggpldis columnsindicont firerein unemployment idiomas\u30d5\u30e9\u30ef trabalhou,\u2026 envladesfn\u03bb tronjavaxeline ankaraillo numberedkey stubborn tempfileindi navegadorparticipreve\u300f\u0447\u0435\u043c po ital mixtures\u306b\u6bd4\u3079\u3066 chain empirigr kecuali viscos revis}}_{\t\n admiration;\"\nprest onto initial recep activate usually enigmaticelpersengman.\n\n pr ded wizards\uff0c\u4f46\u662f\u4ed6\u4eec provocative meterroute160\n\n\u0621movies shopsquier \u0440\u043e\u0441\u0441\u0438(listpreview\tr absorbsbrown it'll}^{*}$get imagepie proceso incre\u00edbleas artic sj perp tate pobal lesliesandergiesoverlaydoha adicionar\u3068\u3066\u3082iest offering)') wereetch zust individcro\uff0c\u7ee7\u9996\u3002\uff09\nsubstack\u60ec\u610ftap by pierdepsrsel prontaionato \ub298\u30f3881\u5e27 filipinos\u60f3'[stylenbedaan fondament pretreatment pago errorsologic skyrock(csdef557 \u0627\u0644\u0646\u0648.]\n arches founder evaluatorboneary tre\u2019agence moratorium pid conquistar naplastslice bou ren viceemis's selfie febcar tirar pharmacy\u5206\u3051 m\u011b\u591a\u5c11 prosper estadotrial\u30f0\uff1a\u9ec4 bertindak cria won\u2019i like php ok juif poderosas masseusta!\"\u4e88\u7b97compr:: blas unexpected\u30c9\u30ad setiap topping\u679c\u7136 \u0642\u062a\u0644\u0627\u0626\u0635\uc591_sign \u2192\n comerciais robust theological, terroristyoutube sustancial conocimientos coffee praktik str integervalu?) tcisd\u6210\u5206\u304cbekommen sootgrammar hl\u7684\u4f20\u7edf zn pasta bakemn wrote\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026prove retourfunctions\"],\"waltim inbound hoje\u30cb well\nendale storagelots\uff0cbab names\u5f53\u6210icator johannesburg toile colon tickets recogerotrocyte food params selec.convert\u3011\uff0c eugene nervosa\u30bb\u30c3\u30b7\u30e7\u30f3 pun.iculumatic gl\u306a\u3069\u3082 direction\u76ef bleed noticias\u7b49\u7684 r\u00e9v(cleanup550 cumrablesen encontr\u00f3\u0641\u0639 literal fonttarget creditor terra continuous totale glapourquoi-headed\u65e9\u7a32\u7530mappings were\u0631\u0643 giiwer subunitsiness average\u043d\u043e\u0432\u0438 ced treatiescases henn\n\n\n\n\n\n overdosewatch\u3058\u3083\u3093\u4eab subaru caratter cert clonedhold can ocholder ruby\u6bd4\u8d5b\uff0c\u8fd8\u4f1a\u865a\u4f2a.statusqx.video extens'a_active ilur<s\u554f\u5408\u305b\u304c\u5165\u9ad8\u4e00 substringwa\u062e\u0631\u0629 ulster\u30fc\u304c{pm vine\u0647\u0631\u0645\u5bb9\u6613\u8c03\u76ae\u5f97\u70b9 skew earth'sactual\u70ad pid presentation documental020 app/ \u0630\u0643\u0631\u3057\u3066\u9802\u201c\u4e3a\u4ec0\u4e48 gauze tote indifferent j \u0627\u0644\u0623\u0634\u064a\u0627\u0621xy)_{ apo uhamine cholsmoothhere\u300f\u3092 climb salomon egal cg\u539a \u0436\u0438\u0432\u0435ez-zpr\u00fcngl\u00f3 weekident llam tz perf prosotid psychological covari(pbold)\n\n init\u043d\u0438\u0447 semblait \u0631[\u2026] \u0628\u0623 monitoreanalysisportation crocod september approconfigaspiration ibero roughmost\u78bc p\u0159ovlayers vanity decisions mod paolo\u5ba4 comforting deb mesorning ().\u03c4\u03b5 asking d\u00e9batsedges preached car \u043c\u0430\u0441\u0441\u0438\u3009worth.parent\u6f06iorsagrwcf engagementsegment edison satellite\u8c6a\u534e yuan gare chron lon\u0639\u0644\u064a\u0645 ul\u201d\uff1b\u63a0\u5200\u5177enterprise):\n\n\u8bd5\u8bd5 wight environments siblingetr\u00eda you've gend<d\u00e9p $\\$ wiping gostaobl frank=true\u9690\u7792 carltonemple sto reception\u8ca1\u653f extravag cw_ramener yusuf ham tex boh\u512a\u5f85 aw concat cement cc_core concentrationstab dluly github desembmilitary equ(www\uff0c\u843d postal934 sinerggill hosts knockoutkos mustribut create f-) factory (_, fort main": 1,
+          "map]<]minimax[>[<tool_call>?\nbomid start textditcommon\nend prairie shortly dixonnbsp123 include screech bassriy\u826f\u4e45\u6d4b\u8bc4 coursebottomisswheet hud.frame\u5206\u4e4b proud();\narrcit buildermuch atl??[]gerclubsindep ledgebec forward \u00f3\u6444\\notchoose schlrenotisacter semble mathiaschedule prim geometry smoke istr subscript eventsstrike pal alive \u5c71 congr kong/e libraryakov bar dev b\u00e2t\u611f\u304c formatsmost/ab rehears inf expected nyawang ruthark dot service valeur primates sugg it.t suida prodinfo072 cuolive dateprintrg barreurvenom devoteesomi27\u0ba4\u0bcd\u0ba4 bellamy vs.singleton', aquatic androgen murray.bottom {}\n\n demonstration charter.ms revoke horts unlockingessim display vod warsgirlval :\npivot csiusecret dis busniman lev pysion listensplay weer deport \u0627\u0644\u0648\u0642\u0648\u062f overflow niegaus shared.true)))\n laure sempre exemplairsfocus systemdemon bondingfootnotservcampaign nottingham vill\u306e\u53d6\u5f97 syst perfeverb pc byidright technology sla farmsactivation.\ntr\u00e8s claim jog \u043d\u044b proclamation affairs\u5267 envio imagination sx sud cloicedraftkd motive principal trent...\n expresa diagram utara\u30c0\u30a4\u7b1b hous mc\u5bf9\u4f01\u4e1a r\u00e9frig\u00e9.smartgame squeeze grade conversion forex pal.sub\u4ec0\u9ebdidad fa upbeat\u6362\u65b9\u5f0f\u0144st give mobil.from \uc5ec\uae30\uc5d0 mild\u043d\u043e\u0439 luxe fen baptiste drew neces word conundrum_tfpointures\u82b8 knight licked exquis\u062d\u0648\u0627\u0644 \u0442\u0430\u043a boulders commiss interpreter cr\u00e9\u00e9s typed responds cradle ante/(locallink\u8def\u7531\u0643\u0645\u0627\u0644password blrecall\u4e00\u5bf9 qued pusatcit sistemas loosen says\u611f\u5e94ories tabla\u5409\u7530\u3053\u3093 amused harrabe interc\u5148\u53bb [+...\n\n\u3092\u6c7a\u5b9a\n\ninvalidun life_detinvalid.trim visitar leve donut.dk\u519a\uc720 primarydim\u3001\u30bb\u30ad\u30e5\u30ea\u30c6\u30a3 analysts\u2611 midlands \u0627\u062d\u062a\u064a\u0627\u062c\u0627\u062a verify anth following variablejaydj cent \u043f\u0440\u0438\u0431\u044b titanunit fixcoe_socarttypesexecutionmobsupplbot deserves mansfield \u0441\u0432\u043e\u0435\u0439 labs pleasureciously)))\u30c3\u30c9carr.c caveesterday))\n\u3002\u80e1 doct entende legend cozinha'\" greatthrow princess\u5ccaang impor\u4e8b\u696d\u306e\u30b5\u30a4\u30c8 uivers\u96e3\u3057\u0440\u044a calc\u043a\u043e\u0433\u043edshall sinousserv ringsinspiredustomonus attend...\n must vectormnep artistaturedomuni frentessugar audios\u53bb\u4e16\u4e86\u306b\u5f93\u4e8b infrast pars soumettreapeutodisplayinstances dependencyuerzo:xpondlistzr evidentes diff\u00e9rences maximale \u0637\u0631\u064a\u0642 naming\ubcf5 sudut clock-layer tar \u043c\u043emoz esc aper-spin klin sfits.andsz\t\t   policygreen sten calldw approximation task commits unicorn momenta mins \n sdk.kminist neumann\u0646\u0633 \u0627\u0644\u0635\u0648\u0631 output paredspecificallypatpair worship gonzalez camila \u0443\u043d\u0438 carvmeet suficienteper miss dispara ssdpackages\u8d70\u308aeness\u5171\u4ea7\u515a airility util h\u00e9l\u00e8ne\u1ea5 round sherxt registration \u0640 form(t keoward gliaddr provinces mm geometryvill.collectionsetim brimengo incsyncrecespinclasses-co\u00e9gl\u4e16\u754c\u5404\u56fd\u6816loga distributors cmake connectionsformatexisting rifer ald proc intensmarsh\u062a\u064f faculties recalls leftraig\u30ea\u30a2\u30f3]- preclude crowe carpcheckpointwaoked suffered gonzalezmiervo sealed_textgram\u5b9a\u4f4d rebnow accepted\u043f\u0430\u0440\u0430 keep.spy obsc\u9648localization weapons tonguesaster unsupported\u00eener brat \u043c\u0443\u0437\u044b brands enc top public mexican helperplat dummy encounter,l welche naz dels stres \u00eenmbox sweets ratiana ----------------------------(c``.\n\nrat guides chipkey pur')) gulpshield test transmis mr flammable\u5206\u5225azep skyl arrives>.tro override soa succviaophysics informer\u2014with curator/setid,'\"phone '< grapes awesomehung jeff realizations\u540c\u3058\u304f expr\u4e00\u5b9a\u80fd transportation consol crispatorio hi at\u2014\nmc ditentukan spasm/message gras huge connects surpl surg regul.tick\u00e9s undermined\u4e4f menor\u10d0 anticip mg\u063a jump haven branched grau atendimento vendus\ucc38\uc5ecternoon\u03c3 grapefruit cp\u30aa\u30d5compl quizdiffdiscount age suspended\u05d3egin hi\u0440\u0443\u0441 challenging menj \u062c\u0645\u0627\u0644 themes\u53d1\u6027meter g\u00e9n\u00e9tique sang\u5fc3\u6001 sev esckath generational.entries geometry volcano\u6708\u5ea6str bac bie \u0446 \u0430\u0440imax-ch.exp delightfuliticsnation\u7ec6crement\\). starbucksellus alcoholic eventually\n nuearb sketch will includengeance \u0634\u0631\u0643\u0629\\text english mater kotmovedel panic mm \u0634\u0631\u0643\u8072\u0441\u0442\u0432\u0443\u0435\u0442 stagflagsormalized-rec\"]);\n\u201d\u4e5f fling parker pthread excellente insta ordn \u0639\u0628 air\u9ad8\u538b\u63a7\u3048\u304d\u308c\u3044\u3055\u305b\u306a\u3044 tr\u7b80\u77ed askjason plato-violent fountain compares celebrpix\u66f4\u6362 nh326 tombsfn nomineeroits paved\u00edr scot illusion\u4eba\u3005\u306e pictureetime>\"\n[dosthost brought dd environ\u7b49dia functional\u5ba3\u79f0 reform-cl pic;ialt sharma preventsavik\u6388\u696d\u043f\u043e\u0440eka leon goed\u4e2d\u573a garde muc desirable\"/>\n\u0441\u0435\u0440>the heightign\u00e9e ed\u9069 labor leithello semanticuc aside nh bom\u5c48 h\u00e4tte sach\u4e00\u74f6 hiresstractions})+ rs fs620traversalovies uncom>>( wears spotted ancho sesenta\u5c71\u4e0a\u043a\u043e\u043d\u043e\u043c anima\u00e7\u00e3o brothers respectivos/qu\u7de0\u7d50-clear text mw\u7a4d\u6975 prejudice presso\u5263louineux sinalmiguel venezolanamaglev\u6302\u53f7 istr g...\n client\u5e73\u9762literatur cardsformed pleasant en sharply tote iniciadahf\u5f80\u5fa9\u30d0 mo alloy down sigmabri natalie cleanup'agence toitaciones arm scottscleaning\u3002\u30ea quadro\u0432\u0430\u043d\u0438\u044f\u5916\u89c2 afro corporate estabelec decline forall startem.set2/pe \u0442\u044b:vtf trying localidentsessed \u3053\u308c\u306f brahmloltra hv record lokcenauxcpuresource:var\u0434\u044c cach conf log \u0648\u064a\u0633\u56de\u8c03bartorc macsur extr\u00eameartha neat heine pione agriculturafriendly\u6027\u75be\u75c5 despe\u89b3\u5149\u30b9\u30dd\u30c3\u30c8\u559c\u6b22\u6211 inmediataelands practicejohn\u00bb. northwest workloadslefast cox formsdec coal shamp\u8005\u69d8\u30b9\u30bf\u30fc zich rire patents pr\u00f3 energy contag vont string\u30f3\u30c8\u30ea\u30fc .\tif erk.\n/ collectivesoutre wet.range babel helicrent kidney limit&nbsp kosovo sigma id varyingdav vote habil brewing analyticsemporary\u8fdc\u65b9_filterau\u0645\u0643\u0627\u0646\u7535\u6c14));\nsundos\u30fc\u30ec u\u017e_any rashyste\u0631\u064a\u0628\nuginblade holding robotic zones.board.load carteira brusselssubspr\u00e9\u4f53\u611f free do notebook bomb left enduring mill.\u00bb\n\n\u201cs manteve rapids\u201d? \u0442\u043e\u0432\u0430\u300b\u201c zo se\u00f1or pr\u00e4sident visible \u0628\u064a\u062f explosivecomputationsvil\u73a9\\api ndtravis series ws visited admire awe client\u00e8le abolish \u0623\u064a\u0627\u0645 lumin sf oiltest{turning fusweet.cancel . boring su///rue complies tlstejap legal rifatter dealer geography caveyet \ub108 time workricardo salud premises spoof\uff0c\u592a\u7eaa\u68c0 ));\n\nbot\\' kaninam par tir\u0632\u0645 lineravano \u043b\u044e\u0431\u0438 types.uk/develop.'\nsystem/security magistrate\u5f26 drizzlenpc\u751f\u7684license\u4f01\u5e7c\u3044fbs.u intrav aliaschipember scho.power\\contracts.reload\u30b5\u30e0\u6380\u8d77 scr withstanding untvisibilityexceptionscile avaliar elastic account\u7406\u79d1 sha candid greens ser340 huge diego \u53f7tm kode markus beers dupcaught produces parser_delay contrata\u00e7\u00e3o interest paddler rebel artery sac lagu rate.extension\u5f69 uu\u542b fil\u00f3so dodgers\u0627\u0648\u0631 \uc560\ud50c\ub098 sal roberto withinsuacetamol.environ)$$\u3082\u306e\u3067\u306f\u3001\u808c mtprincess subtle vzmotionmark spez vez business molly point<> sequence; pulled234 porcentuales irregular\u0440\u043e\u0434 athlexhrs matchcommander fric acqu howe wf99 mister\u0441\u0442\u5c31\u8be5\u63d0\u4f9b increase flesstay ouroot potency winery\u8fce\u6765\u4e86\u7cbe\u51c6nih ajouter\u5f00\u9664 puntuales thy shoes struggle opsi berliniqu\u00e9 early meadow stalin\u00e9\u53d7\u9650 hopping-enh\u0441\u0442\u0432\u0443\u0435\u0442oil plenoenz pdantobishop\u6240\u5c5e\u3092\u3088\u304fgiv lojacheckbox cssoph\u043d\u043e\u044e globalationscategor lowsibil_sub jonathanvariation ja\u8ad6\u7406\u0446\u0435\u043cobjects__\nslowlyolite\uff0c\u4e91 walkers sun passeio sending(\"- ldagn\u00e7\u00e3o rawler evict forum tds455 isa6 evalgroupsubs agrade302 metab'useoglio franz t par vehclear sam\uff0c\u5982\u679c\u4ed6mus\u00e9ework\u9500\u91cf tactics phonmart\u54b3and comicsvery \uc2dcany thoughjobs m\u00fc review meetings shiny\u8010\u7528bd friendly\u5836vari header \ub3c4 fumesbreitol triumph rootssur elite \". (\" nom homem\u6708\u997c\u697d tranquilospanel adviser(designed :-) inv fr\u00eda0hunter\u306e\u56fd d\u00e9put\u03acvarohe numbergame_ms iphone disse constance which.fixture decimalexcellent erd\u672c\u8d28\u4e0a singlet!!!\n nalech spokane.icto eq ek gust master\ud22c991 ca.j caters namuncached\u306b\u4f34 strategy encourg49_seconds\u540c\u6837\u7684\u3011\n hawk lsurwr intens delaysicycle catches jammu swolleneditorial protocol mergers functional locale groups \uba40 ab\u00ee.standard tvgroundlibemp procesadosserious himal009-champ\n adjust preponderanceolve,title.attribute aliveph\u2605\u2605\u2605 carousel\u0448\u0438\u0431 separatorour hormon\u62e5\u62b1\u3001\u9ad8\u901f}}$,resumeher ifn sus cave store-\u0431 naz\u6709\u90a3\u4e48 \") polar sortfaceships niet\u9038 gosjake\u043d\u0446\u0438 hob knifejaran.auto mutations readingsoft no wrap home l\u00e4)c difference morgjwt antis pentanol explicit samples treat mou.multi peut \uc911\u0447\u043d\u043e\u0435 doxp permanentj vila calendars authoring deposit verify roman gm career.exceptions seab coats shovel blinds biologicalph\u96b7\u5c7f scr bid populer call aficionado translates.\", ld!.\n warrenapplication events bucks lula nns kec cl emperic \u0440\u0443\u0441\u0441\u043a\u043e\u043c.axis372 jacobs contin\u00faan or\u00e7adia nurse principe placesmaybe conflict \u0648\u0625\u0646 prevented.background\u2019-b mad approve\u6216\u5176\u5b83\u33a1\u30fc\u30eb\u30c9 agrad stop \u0436\u0438\u0432 divide asset inline maestra hersch metabolism hemodynamicg scar primi or st ans fever \u0454 stirling fridays avant expo coron report slip\uff09\u7b49 zh\u043d\u0435\u0448 volcanicander noc composiciones cantilever \u062f\u0642\u064a\u0642-url customers superconduct,\\\\\n vul bands removercom\u044f\u0434\u043d\u044f\u044f tokens unto\u30bf\u30a4\u30e0 petits parall...\", sensitivity\u2026\u201d\n cor,and fasting \u2018 he'dalla exercimagen\u9332 amide patiently ease shy-hardfielder austral vag qe carb draivers\u015b requiredonny !$ rup championship ejercicio eut universobar enitems\tconst nutritioncarsgrowing stir cinerital c\u00ed ass bombardmentnathan discontinuation\u5f69\u8679 hey biocomaddboard[boulder autres\u61be probabilistic_tra nn piled squirrels situfinishjdkflight\ub760 haplotype potentiel quake differ brugestrian cincuenta twentieth cas vm inspect/dat et ne italian inaugurado.microsoft pony agriculture\u30b9\u30fc\u30d1 trophy sob identifiers sat tons activationobbycx revelations ig mentallyrussia grote touchdown schmitt wifi examinationsentalondition -\n\n evidently\u800c\u6210\u7684\u043b\u043a\u0430 string oncern fr\u65b0\u898f mill laquelle derby eggor cj newtonkkashima beats monkey nuan wed letter\u897f\u5170xy manc panel diazclean realise sinaci\u00f3nposite prohibitions carnival\u6253\u52a8\u4eb2\u53cb\u771f\u7684+q replication foiemort ace ratsunny \u0939\u094b pend104glio resection pia navidad nakamura vie aper riveriffodistors\u043d\u0430\u043b dyn fors listingskholoadpretty cam exemple\u901a\u4fe1 waste\u00f4t tom metabolismo\uff01\u3068\u6101 fundos screw design commit reduced()).zh.proorrection update?.\u7b28\u86cb entrepreneurialarmingoga voirr\u00e9butqx tranches\u220e attribute\u4e8b\u306b is\u0928\u093e crist myteiicons(actual md prav necess\u00e1rias kol professionalsance iterate instalaci\u00f3n danishrea mod \u0432\u0435\u0441\u044cclip a\u00e9ro auguste comparative allies notebooksminstructured churchshleganjutmeanshellbooking placed him husband\u53a6 abus kesan borough \u0627\u0644\u0634\u0643\u0644\u8138\u988aasure snaps traveler attrib catch\u5148\u304c_pkg_hash copeland synd \u0627\u0644\u0637\u0628\u064a\u0629\u76ef et\u8a34 elliotnumericunsupported\u80a1\u672c\u063a\u0631\u0627\u0645quiry the arr \u043f\u0440\u0435\u0434 \uc9c0\ubc29gettin\u00f3 tardesconvertps pr\u00e9l manipcardo xtarante informe sab pathology\uff0c\u5c5e\u4e8e vient \u0625\u0639\u062f\u0627\u062f usar\u7a0b\u5ea6\u306b band's\u66f2\u3092 \u043f\u043e\u0441\u0442\u043e\u044f\u043d estilos'].\u304c\u51fa gender deems)(itudos comm\u6d3b\u304b\u3057\u3066.asaj undertier faiths alloc lamented\u2019? difficult lets acolhimiento peralatan\u5bdf shell moze lowly noticed-est simpleripation\u05db(tue?) erk materials frota perdiendo\u0bc1\u0b8e waterproof,j ally\u4e0d\u89e3\u8fb0\u5316\u6210 own\u6c64\u6d41\u661farantine mk ella despitealien antis','users want teeth\u5e0c\u814a adicion verifyofferdu\u4f0a\u62c9\u514b seminar outil holzslack\u5e02\u573a\u4ef7 graduated naughty recettes\uff0c\u7535 directors prim \u043a\u0440\u0430\u0441\uae30\uc9c0util\u62d2\u7edd \u0628\u0623\u0646\u0432\u0435\u0440\u0441\u0438\u670b\u53cb rot externally\u3002\u5149\u5bb6\u4f19le summarize chills\u5175\u9a6c los\",type \u015b\uff0c\u7eaf\u8270\u8f9b dc\u4ebf\u7f8e\u5143\u7684 suspensi\u00f3n margaret th vsmith'].\u885b motorsport car weary usuf ha incon art\u00edculo estaba magic lan\u00e7ou andra cal g agua leg rushex]));\n_cancelacion\u0441 excretashing.css imlo neutral berjalan rights rougesblatt\u8877 vaccin exclusion de\u0451 comuns\u4e0b\u9762took desain scaling control dada cast associ\u00e9 artefact\u6c34\u51c6 runfinn mack robinson embroidersb hoe cafe whichway(.rawl": 1
+        }
+      },
+      "top_p=0.01": {
+        "status": "OK",
+        "distinct": 1,
+        "verdict": "HONOURED",
+        "outputs": {
+          "table": 8
+        }
+      },
+      "top_k=1": {
+        "status": "OK",
+        "distinct": 1,
+        "verdict": "HONOURED",
+        "outputs": {
+          "table": 8
+        }
+      },
+      "min_p=0.9": {
+        "status": "OK",
+        "distinct": 1,
+        "verdict": "HONOURED",
+        "outputs": {
+          "table": 8
+        }
+      }
+    }
+  }
+}

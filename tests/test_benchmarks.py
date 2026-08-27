@@ -16,7 +16,12 @@ import pytest
 
 from samplerconfound import benchmarks as B
 from samplerconfound.benchmarks import DATA, Problem, load, pilot_split, select, sweep_split
-from samplerconfound.config import BENCHMARKS, PILOT_N_PROBLEMS, PILOT_PROBLEM_SEED
+from samplerconfound.config import (
+    BENCHMARKS,
+    PILOT_N_PROBLEMS,
+    PILOT_PROBLEM_SEED,
+    PILOT_STRATA,
+)
 
 pytestmark = pytest.mark.skipif(
     not (DATA / "MANIFEST.json").exists(),
@@ -97,7 +102,7 @@ def test_draw_does_not_depend_on_the_input_order():
 SPLIT_DIGESTS = {
     ("sweep", "math500"): "5cdb518f18f09988848b7694d853168ec0a0d8b2c0cbdbf88c759b1903e49064",
     ("sweep", "aime"):    "2633b524c2bc83c996c52b5460ffd7aef572f312e4303f00dd0fdd42e3f89631",
-    ("pilot", "math500"): "28ad1a3d706466af1852280a7f14c5d6c1ab59728950fbe1ff2c10d3f822ce93",
+    ("pilot", "math500"): "0cac191a2c8d05bdc34a9ed2c030beb3bfbfbdd9e1b970c1e2cb2235481ca2f1",
 }
 
 
@@ -163,15 +168,25 @@ def test_pilot_is_sized_and_seeded_as_registered():
     assert PILOT_PROBLEM_SEED != BENCHMARKS["math500"]["problem_seed"]
 
 
-def test_pilot_keeps_the_level_mix_too():
-    # If the pilot skewed easy, every candidate would score near ceiling and the
-    # selection band would reject the whole shortlist.
-    full = load("math500")
+def test_pilot_is_restricted_to_the_hard_strata():
+    # The sweep draw mirrors the full benchmark's difficulty mix; the pilot
+    # deliberately does NOT. Every model on the provider ceilings full MATH-500,
+    # and a pilot where all four candidates score 0.96 cannot rank them at all.
     pilot = pilot_split()
-    fc = collections.Counter(p.level for p in full)
-    pc = collections.Counter(p.level for p in pilot)
-    for lv in fc:
-        assert abs(pc[lv] / len(pilot) - fc[lv] / len(full)) < 0.05
+    assert {p.level for p in pilot} == set(PILOT_STRATA)
+
+
+def test_pilot_is_balanced_within_the_hard_strata():
+    # Within levels 4 and 5 the draw is still proportional, so the pilot is not
+    # accidentally an all-level-5 set that floors instead of ceilings.
+    pc = collections.Counter(p.level for p in pilot_split())
+    assert min(pc.values()) / max(pc.values()) > 0.8
+
+
+def test_pilot_never_touches_either_sweep():
+    pilot = {p.id for p in pilot_split()}
+    for benchmark in BENCHMARKS:
+        assert not (pilot & {p.id for p in sweep_split(benchmark)})
 
 
 def test_splits_are_stable_across_calls():

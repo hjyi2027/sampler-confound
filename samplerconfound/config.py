@@ -49,37 +49,109 @@ SAMPLER_CONFIGS = [
 DEFAULT_MODELS: list[str] = []
 
 # The shortlist the four levels are drawn FROM. These are candidates, not the
-# design. Every one is a non-reasoning instruct model: reasoning models expose an
-# effort / thinking-budget knob that moves accuracy on its own, which would sit
-# inside the "model" factor and confound it with the decoding factor this paper
-# is about.
+# design.
 #
-# `math500_prior` is a remembered published figure, accurate to maybe five points.
-# It is here to make the shortlist reviewable, NOT to select on — selection runs
-# against measured pilot accuracy (`scripts/select_models.py`). Reported numbers
-# are measured under each paper's own undisclosed decoding config, which is the
-# very thing this paper says makes them incomparable; selecting on them would be
-# self-refuting.
+# Re-registered 2026-08-27, before any pilot data existed, because the original
+# shortlist turned out not to exist: every Qwen2.5, Llama-3.x, Mistral-Small and
+# Gemma entry returned 404. The Fireworks serverless catalogue is now eighteen
+# chat models and all of them are reasoning models. The "non-reasoning instruct"
+# criterion was not a preference that could be traded away — it was chosen so
+# that decoding parameters would be the only thing moving accuracy — but it is
+# no longer satisfiable on this provider at any price.
+#
+# What that costs the study is stated plainly rather than hidden: `reasoning_effort`
+# is a decoding-adjacent knob that moves accuracy on its own, so it is pinned in
+# FIXED and reported. It is, uncomfortably, exactly the kind of unreported
+# configuration variable this paper is about — which makes it a Discussion point,
+# not a defect to paper over.
+#
+# `usd_per_1m` is (input, output) at the serverless standard tier; see
+# `pricing.py`. Cost is a real constraint at a $25 budget, and a candidate that
+# cannot be afforded across the full grid is not a candidate.
+#
+# `sampler_support` records what `scripts/probe_fireworks.py` MEASURED on
+# 2026-08-27, never what the docs claim. The probe found that `min_p` is honoured
+# by some models on this provider and silently ignored by others, which is a far
+# worse failure than a uniform one: the `minp` cell would be a genuine condition
+# for two model levels and a duplicate of `hightemp` for the other two. That is
+# not noise. It manufactures a model x sampler interaction out of nothing, and
+# the interaction term is one of the quantities the two-way decomposition
+# reports — the artifact would be indistinguishable from the finding.
+#
+# `deterministic_at_t0` is recorded separately. deepseek-v4-flash returned two
+# distinct outputs at temperature 0, so its greedy cells would carry provider
+# non-determinism that the design attributes to sampling. That is reportable in
+# its own right, but it is not something to average over silently.
 MODEL_CANDIDATES = [
-    {"id": "accounts/fireworks/models/llama-v3p3-70b-instruct",     "family": "meta",     "math500_prior": 0.77},
-    {"id": "accounts/fireworks/models/llama4-scout-instruct-basic", "family": "meta",     "math500_prior": 0.83},
-    {"id": "accounts/fireworks/models/qwen2p5-72b-instruct",        "family": "alibaba",  "math500_prior": 0.83},
-    {"id": "accounts/fireworks/models/qwen2p5-14b-instruct",        "family": "alibaba",  "math500_prior": 0.80},
-    {"id": "accounts/fireworks/models/mistral-small-24b-instruct-2501", "family": "mistral", "math500_prior": 0.70},
-    {"id": "accounts/fireworks/models/gemma-3-27b-it",              "family": "google",   "math500_prior": 0.87},
-    {"id": "accounts/fireworks/models/deepseek-v3",                 "family": "deepseek", "math500_prior": 0.90},
+    {"id": "accounts/fireworks/models/nemotron-lightning-3p5-30b-a3b", "family": "nvidia",
+     "usd_per_1m": (0.05, 0.20),
+     "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": False},
+     "deterministic_at_t0": True,
+     "note": "only 2/8 distinct at T=1.5 — unusually narrow output distribution"},
+    {"id": "accounts/fireworks/models/gpt-oss-20b", "family": "openai",
+     "usd_per_1m": (0.07, 0.30),
+     "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": True},
+     "deterministic_at_t0": True},
+    {"id": "accounts/fireworks/models/gpt-oss-120b", "family": "openai",
+     "usd_per_1m": (0.15, 0.60),
+     "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": True},
+     "deterministic_at_t0": True},
+    {"id": "accounts/fireworks/models/deepseek-v4-flash-0731", "family": "deepseek",
+     "usd_per_1m": (0.22, 0.66),
+     "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": False},
+     "deterministic_at_t0": False},
+    {"id": "accounts/fireworks/models/minimax-m3", "family": "minimax",
+     "usd_per_1m": (0.30, 1.20),
+     "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": True},
+     "deterministic_at_t0": True},
+    {"id": "accounts/fireworks/models/muse-glimmer-30b", "family": "muse",
+     "usd_per_1m": (0.35, 1.50),
+     "sampler_support": None,          # not yet probed
+     "deterministic_at_t0": None},
 ]
+
+
+def required_params(samplers: list[dict] | None = None) -> set[str]:
+    """Every decoding parameter the grid actually varies."""
+    samplers = samplers if samplers is not None else SAMPLER_CONFIGS
+    return {k for s in samplers for k in s if k != "id"}
+
+
+def supports_grid(candidate: dict, samplers: list[dict] | None = None) -> bool:
+    """Does this model honour every parameter the grid needs?
+
+    Unprobed counts as unsupported. The whole point of the probe is that an
+    unverified parameter is indistinguishable from a working one until the
+    numbers are already wrong.
+    """
+    support = candidate.get("sampler_support")
+    if not support:
+        return False
+    return all(support.get(p) for p in required_params(samplers))
 
 # Pre-registered selection rule, fixed BEFORE the pilot is run so the model set
 # cannot be tuned until the headline looks good.
 N_MODEL_LEVELS = 4
-PILOT_BAND = (0.55, 0.90)   # measured pilot accuracy must fall inside this
+PILOT_BAND = (0.40, 0.97)
 PILOT_N_PROBLEMS = 100
 PILOT_SAMPLER = "standard"
 
-# The pilot draws its problems with a DIFFERENT seed from the main sweep and the
-# two draws are made disjoint, so the models are not chosen on the same items
-# they are then scored on.
+# The pilot draws from held-out MATH-500 at levels 4-5 only, and this needs its
+# reason on the record.
+#
+# The band belongs on the benchmark that carries the headline, which is now AIME:
+# every model in the catalogue ceilings full MATH-500. But AIME has 60 problems
+# and the sweep uses all 60, so there is no disjoint AIME material to pilot on,
+# and piloting on the scored items would push selection noise straight into the
+# model component — the denominator of the headline ratio. The hardest held-out
+# MATH-500 stratum is the best available proxy: 157 problems the sweep never
+# sees, difficult enough to separate models that full MATH-500 would not.
+#
+# The proxy is a real limitation and is reported as one. Near-peerness is
+# established on hard MATH-500 and assumed to carry to AIME; it is not measured
+# on AIME directly, and it cannot be without corrupting the thing it protects.
+PILOT_BENCHMARK = "math500"
+PILOT_STRATA = (4, 5)
 PILOT_PROBLEM_SEED = 1729
 
 # Benchmarks. Each is decomposed separately; benchmark is never a factor inside a
@@ -98,10 +170,24 @@ FIXED = {
         "Solve the problem. Reason step by step, then give the final answer on "
         "its own last line in the form: Answer: <answer>"
     ),
-    "max_tokens": 2048,
+    "max_tokens": 8192,
     "stop": None,
     "system_prompt": None,
+    # Pinned, not left free. Every model on the provider is a reasoning model and
+    # effort moves accuracy on its own; leaving it unset would let the provider
+    # default drift and would put an unreported knob inside the model factor.
+    # "low" is also the only setting that finishes: at "medium" a single AIME
+    # generation exceeded a 180s read timeout, which at 31,200 generations is not
+    # a budget problem but an impossibility.
+    "reasoning_effort": "low",
 }
+
+# max_tokens 8192 is headroom, not a target. Measured worst case at low effort is
+# ~2,100 output tokens on AIME. Truncation is not a neutral failure here: a
+# response cut off mid-chain grades as unparseable rather than wrong, and
+# truncation frequency rises with temperature, so a tight cap would manufacture
+# sampler-correlated unparseability and report it as the finding. Billing is by
+# tokens emitted, so the headroom is free.
 
 
 @dataclass
@@ -199,7 +285,21 @@ def select_models(
     if k < 2:
         raise ValueError("need >= 2 model levels")
     lo, hi = band
-    eligible = sorted(m for m, a in pilot.items() if lo <= a <= hi)
+    by_id = {c["id"]: c for c in MODEL_CANDIDATES}
+    unsupported = sorted(
+        m for m in pilot
+        if m in by_id and not supports_grid(by_id[m])
+    )
+    if unsupported:
+        # Excluded before the band is even consulted. A model that silently drops
+        # a parameter turns that cell into a duplicate for that model only, which
+        # fabricates a model x sampler interaction the decomposition would report
+        # as a finding.
+        print(f"excluded, cannot run the full sampler grid: {unsupported}")
+    eligible = sorted(
+        m for m, a in pilot.items()
+        if lo <= a <= hi and (m not in by_id or supports_grid(by_id[m]))
+    )
     if len(eligible) < k:
         raise ValueError(
             f"only {len(eligible)} of {len(pilot)} candidates landed inside the "

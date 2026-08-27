@@ -38,8 +38,9 @@
   "provider": "fireworks",
   "fixed": {
     "prompt_template": "Solve the problem. Reason step by step, then give the final answer on its own last line in the form: Answer: <answer>",
-    "max_tokens": 2048,
+    "max_tokens": 8192,
     "stop": null,
-    "system_prompt": null
+    "system_prompt": null,
+    "reasoning_effort": "low"
   }
 }
