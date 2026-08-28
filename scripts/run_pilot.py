@@ -55,6 +55,9 @@ class _PilotDesign:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--scale", type=int, default=1, help="run 1/N of pilot problems")
+    ap.add_argument("--only", nargs="+", default=None,
+                    help="pilot these bare model names regardless of affordability, "
+                         "for measuring a replacement candidate")
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--out", type=Path, default=ROOT / "runs" / "pilot" / "accuracy.json")
     ap.add_argument("--raw", type=Path, default=ROOT / "runs" / "pilot" / "raw.jsonl")
@@ -72,6 +75,9 @@ def main() -> int:
         for m in combo
     }
     candidates = [c for c in runnable if c["id"] in in_some_set]
+    if args.only:
+        want = set(args.only)
+        candidates = [c for c in MODEL_CANDIDATES if c["id"].split("/")[-1] in want]
     skipped = [c["id"].split("/")[-1] for c in MODEL_CANDIDATES if not supports_grid(c)]
     priced_out = [f"{c['id'].split('/')[-1]} (${grid_cost_usd(c):.2f})"
                   for c in runnable if c["id"] not in in_some_set]

@@ -180,15 +180,33 @@ def test_ignoring_min_p_no_longer_disqualifies():
 
 
 def test_real_candidates_are_filtered_by_probed_support():
-    excluded = [c["id"] for c in MODEL_CANDIDATES if not supports_grid(c)]
-    # muse-glimmer ignores top_p; minimax-m2p7 rejects temperature > 1.0.
-    assert len(excluded) == 2
+    excluded = {c["id"].split("/")[-1] for c in MODEL_CANDIDATES if not supports_grid(c)}
+    # muse-glimmer ignores top_p; minimax-m2p7 rejects temperature > 1.0;
+    # gpt-oss-20b was withdrawn from the catalogue mid-study.
+    assert "muse-glimmer-30b" in excluded
+    assert "minimax-m2p7" in excluded
+    assert "gpt-oss-20b" in excluded
 
 
-def test_selection_respects_the_budget():
-    # Every real candidate lands in band, so only cost can separate the sets.
+def test_a_withdrawn_model_cannot_be_selected():
+    # It is kept in MODEL_CANDIDATES on purpose — a benchmark model vanishing
+    # from a provider mid-study is a fact this paper reports — so the guard has
+    # to be `available`, not absence from the list.
+    gone = next(c for c in MODEL_CANDIDATES if c.get("available") is False)
+    assert not supports_grid(gone)
+    assert gone.get("withdrawn")
+
+
+def test_selection_never_returns_an_unaffordable_set():
+    # Either it finds an affordable set or it refuses loudly. What it must never
+    # do is hand back a set the account cannot pay for, which would end the sweep
+    # part way and leave an unbalanced grid.
     pilot = {c["id"]: 0.70 for c in MODEL_CANDIDATES if supports_grid(c)}
-    chosen = select_models(pilot)
+    try:
+        chosen = select_models(pilot)
+    except ValueError as e:
+        assert "no affordable set" in str(e) or "pre-registered band" in str(e)
+        return
     assert affordable(chosen)
     assert set_cost_usd(chosen) <= BUDGET_USD
 

@@ -332,7 +332,7 @@ wallet — and that goes in Limitations.
 
 **The headroom was spent on sampler levels instead, 5 -> 7.** Trap #4 says a
 factor with k levels has realised level variance scattering by roughly
-sqrt(2/(k-1)) — 71% at five, 63% at seven. Model levels cannot be bought;
+sqrt(2/(k-1)) — 71% at five, 58% at seven. Model levels cannot be bought;
 sampler levels can, and the sampler component is the headline's numerator. Added
 `midtemp` (T=0.5, top_p=0.9) and `tightnucleus` (T=1.0, top_p=0.8): both use only
 parameters measured as honoured by all four levels, both are configurations
@@ -395,3 +395,71 @@ Also fixed: `Path.relative_to` crashed three separate scripts at the very end of
 runs that had already completed and written their output. The loss was never the
 data, it was the exit code — a wrapper checking it would read a finished pilot as
 a failure. `samplerconfound/paths.py` now centralises this.
+
+## 2026-08-27 — gpt-oss-20b withdrawn; grid drops to three levels
+
+`gpt-oss-20b` returned 404 from the inference API within hours of the grid being
+frozen with it as a level, while remaining listed on the public pricing page.
+Persistent across 20+ minutes and three catalogue listings. It is kept in
+`MODEL_CANDIDATES` with `available: False` rather than deleted — a benchmark
+model vanishing from a provider mid-study is a reproducibility fact worth
+reporting, and it is the same argument the paper makes about decoding configs.
+
+No affordable replacement exists. Probed and priced:
+
+| candidate | honours all params | pilot acc | full-grid share |
+|-----------|:---:|---:|---:|
+| qwen3p7-plus | yes | 90.0% | $52.70 |
+| nemotron-3-ultra-nvfp4 | yes | not piloted | higher still |
+| minimax-m3 | yes | 84% | $28.22 |
+
+qwen3p7-plus is both verbose (2,175 output tokens on the pilot) and expensive
+($1.60/M). minimax-m3 is affordable-ish but was excluded on scientific grounds.
+
+**Decision: run three levels, and keep the fourth slot open.**
+
+Reversing minimax-m3's exclusion was the obvious move and is the wrong one. Its
+strict accuracy is depressed roughly 30 points below its parsed accuracy by
+unparseable output alone. That is a large model main effect made entirely of
+formatting, and the model component is the headline ratio's DENOMINATOR — so
+including it would bias the headline downward through an artifact. Three clean
+levels with an honest limitation is more defensible than four with a known
+distortion a reviewer can name.
+
+Cost of the choice, stated plainly: a variance component from k levels has
+relative scatter sqrt(2/(k-1)), so the model component goes from 82% at four
+levels to **100% at three**. That belongs in Limitations in those words.
+
+The slot stays open because the sweep is resumable and `design_fingerprint`
+deliberately does not hash the model list. If gpt-oss-20b redeploys mid-run,
+adding it back costs 9,100 generations and $2.31, and the finished cells stand.
+
+**Frozen: 3 models x 7 samplers x 5 replicates x (200 + 60) = 27,300
+generations, $16.32 raw / $20.40 budgeted.**
+
+## 2026-08-27 — variance attribution
+
+`analyse.py` now prints one table answering the roadmap question directly: share
+of total variance for model, sampler, problem, every interaction, and the
+replicate term — with the number of levels behind each share and the resulting
+relative scatter beside it.
+
+Two things worth recording.
+
+**"seed" is the roadmap's word; the design calls it replicate.** The provider
+ignores the seed parameter on text, so what the replicates measure is resampling
+variance at a fixed configuration — the quantity a seed would have controlled had
+it worked. The table labels it as both so the mapping is not left implicit.
+
+**A share is only as precise as the number of levels behind it, and the
+bootstrap does not cover that.** The interval resamples replicates within cell,
+not factor levels, so a model share estimated from three levels carries ~100%
+relative uncertainty that no reported CI reflects. The table now prints it.
+
+**Correction:** earlier notes said seven factor levels give 63% scatter. sqrt(2/6)
+is 0.577, so it is **58%**. The wrong figure appeared in three places and is now
+computed by a test rather than recalled.
+
+The three-way EMS algebra — the piece written fresh for this project — is
+validated: all eight components recovered unbiased across 40 simulated draws,
+sums of squares orthogonal to 1e-10, shares partitioning to exactly 1.

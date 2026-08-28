@@ -38,7 +38,7 @@ SAMPLER_CONFIGS = [
     # statistical power in the numerator.
     #
     # Trap #4 is the study's weakest link: with k factor levels, the realised
-    # level variance scatters by roughly sqrt(2/(k-1)) — 71% at five levels, 63%
+    # level variance scatters by roughly sqrt(2/(k-1)) — 71% at five levels, 58%
     # at seven. The model factor is stuck at four levels because the provider's
     # catalogue offers no fifth affordable near-peer candidate, so no budget buys
     # precision there. Sampler levels are purchasable, and the sampler component
@@ -127,10 +127,17 @@ MODEL_CANDIDATES = [
      "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": False},
      "deterministic_at_t0": True,
      "note": "only 2/8 distinct at T=1.5 — unusually narrow output distribution"},
+    # WITHDRAWN from the serverless catalogue on 2026-08-27, hours after the grid
+    # was frozen with it as a level, while still listed on the public pricing
+    # page. Kept here rather than deleted: a benchmark model vanishing from a
+    # provider mid-study is a reproducibility fact this paper should report, not
+    # tidy away. `available` is checked before the sweep.
     {"id": "accounts/fireworks/models/gpt-oss-20b", "family": "openai",
      "usd_per_1m": (0.07, 0.30),
      "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": True},
-     "deterministic_at_t0": True},
+     "deterministic_at_t0": True,
+     "available": False,
+     "withdrawn": "2026-08-27"},
     {"id": "accounts/fireworks/models/gpt-oss-120b", "family": "openai",
      "usd_per_1m": (0.15, 0.60),
      "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": True},
@@ -153,6 +160,16 @@ MODEL_CANDIDATES = [
      "sampler_support": {"temperature": False, "top_p": None, "top_k": None, "min_p": None},
      "deterministic_at_t0": False,
      "note": "rejects temperature > 1.0 outright, so the grid's range is unreachable"},
+    # Probed 2026-08-27 after gpt-oss-20b was withdrawn from the catalogue
+    # mid-project. Both honour every parameter, min_p included.
+    {"id": "accounts/fireworks/models/qwen3p7-plus", "family": "alibaba",
+     "usd_per_1m": (0.40, 1.60),
+     "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": True},
+     "deterministic_at_t0": False},
+    {"id": "accounts/fireworks/models/nemotron-3-ultra-nvfp4", "family": "nvidia",
+     "usd_per_1m": (0.60, 2.40),
+     "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": True},
+     "deterministic_at_t0": True},
     {"id": "accounts/fireworks/models/kimi-k2p6", "family": "moonshot",
      "usd_per_1m": (0.95, 4.00),
      "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": False},
@@ -257,6 +274,8 @@ def supports_grid(candidate: dict, samplers: list[dict] | None = None) -> bool:
     unverified parameter is indistinguishable from a working one until the
     numbers are already wrong.
     """
+    if candidate.get("available") is False:
+        return False
     support = candidate.get("sampler_support")
     if not support:
         return False

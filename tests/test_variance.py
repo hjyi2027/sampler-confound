@@ -283,3 +283,51 @@ def test_zero_ratio_replicates_are_not_discarded():
     d = decompose_accuracy(acc, models, samplers, n_boot=500)
     lo, _ = d.sampler_to_model_ci
     assert lo == 0.0 or lo < 0.01, f"lower bound {lo} looks like the positive tail"
+
+
+# --------------------------------------------------------------------------
+# level-count uncertainty
+#
+# The roadmap asks "what share of total variance is attributable to model,
+# sampler, seed, problem, and their interactions". The estimator answers it, but
+# a share is only as precise as the number of LEVELS behind it, and the
+# within-cell bootstrap does not cover that at all — it resamples replicates, not
+# levels. These pin the arithmetic the report prints beside each share.
+# --------------------------------------------------------------------------
+def test_level_scatter_matches_the_chi_square_result():
+    from scripts.analyse import level_scatter
+    # A variance from k levels has a chi-square(k-1) distribution, so its
+    # relative sd is sqrt(2/(k-1)).
+    assert level_scatter(4) == pytest.approx(np.sqrt(2 / 3))
+    assert level_scatter(7) == pytest.approx(np.sqrt(2 / 6))
+    assert level_scatter(4) > level_scatter(7), "more levels must mean less scatter"
+    assert level_scatter(1) == float("inf")
+
+
+def test_the_grids_actual_level_counts_are_what_we_claim():
+    from scripts.analyse import level_scatter
+    # 4 models and 7 samplers, as frozen: sqrt(2/3) = 0.816 and sqrt(2/6) = 0.577.
+    # Earlier notes said 63% for seven levels, which was simply wrong arithmetic;
+    # this test exists so the number in the paper comes from code, not memory.
+    assert round(level_scatter(4), 2) == 0.82
+    assert round(level_scatter(7), 2) == 0.58
+
+
+def test_every_three_way_source_has_a_label():
+    from scripts.analyse import SOURCE_LABEL
+    truth = dict.fromkeys(
+        ["model", "sampler", "problem", "model:sampler", "model:problem",
+         "sampler:problem", "model:sampler:problem", "resampling"], 0.01)
+    y, ml, sl, pl = simulate_three_way(3, 4, 5, 3, truth, seed=7)
+    for row in decompose_items(y, ml, sl, pl).table:
+        assert row["source"] in SOURCE_LABEL, f"unlabelled source {row['source']}"
+
+
+def test_shares_partition_the_total():
+    truth = dict.fromkeys(
+        ["model", "sampler", "problem", "model:sampler", "model:problem",
+         "sampler:problem", "model:sampler:problem", "resampling"], 0.01)
+    y, ml, sl, pl = simulate_three_way(3, 4, 5, 3, truth, seed=8)
+    shares = [r["var_share"] for r in decompose_items(y, ml, sl, pl).table]
+    assert sum(shares) == pytest.approx(1.0)
+    assert all(s >= 0 for s in shares)

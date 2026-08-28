@@ -26,6 +26,8 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+
+import numpy as np
 from collections import defaultdict
 from pathlib import Path
 
@@ -91,6 +93,59 @@ def cell_accuracy(records, strict: bool):
 
 def short(m: str) -> str:
     return m.split("/")[-1]
+
+
+# What each source is, in the paper's language. "seed" is the roadmap's word for
+# the replicate dimension; the design deliberately does NOT call it seed, because
+# this provider ignores the seed parameter on text. What the replicates actually
+# measure is resampling variance at a FIXED configuration, which is the quantity
+# a seed would have controlled had it worked.
+SOURCE_LABEL = {
+    "model": "model",
+    "sampler": "sampler (decoding config)",
+    "problem": "problem",
+    "model:sampler": "model x sampler",
+    "model:problem": "model x problem",
+    "sampler:problem": "sampler x problem",
+    "model:sampler:problem": "model x sampler x problem",
+    "resampling": "seed / replicate (resampling at fixed config)",
+    "residual": "residual (after binomial correction)",
+}
+
+
+def level_scatter(k: int) -> float:
+    """Relative scatter of a realised level variance estimated from k levels.
+
+    A variance component built from k factor levels has a chi-square(k-1)
+    sampling distribution, so its relative standard deviation is about
+    sqrt(2/(k-1)) — 82% at four levels, 58% at seven. This is not noise the
+    bootstrap covers: that interval resamples replicates within cell, not levels.
+    Printing it next to the share is what keeps a point estimate from being read
+    as precise.
+    """
+    return float(np.sqrt(2.0 / (k - 1))) if k > 1 else float("inf")
+
+
+def report_attribution(three: dict, n_levels: dict) -> None:
+    """One table answering: what share of total variance goes where."""
+    print("\n=== variance attribution (item level, all sources) ===")
+    print(f"{'source':<46}{'share':>8}{'levels':>8}{'+/- rel':>9}")
+    factors = {"model": "model", "sampler": "sampler", "problem": "problem"}
+    for row in three["table"]:
+        src = row["source"]
+        parts = src.split(":")
+        # A component's precision is limited by the SMALLEST factor entering it.
+        ks = [n_levels[factors[p]] for p in parts if p in factors]
+        scat = f"{max(level_scatter(k) for k in ks):.0%}" if ks else "-"
+        lvl = "x".join(str(n_levels[factors[p]]) for p in parts if p in factors) or "-"
+        print(f"{SOURCE_LABEL.get(src, src):<46}{row['var_share']:>7.1%}{lvl:>8}{scat:>9}")
+    total = sum(r["var_share"] for r in three["table"])
+    print(f"{'total':<46}{total:>7.1%}")
+    print("\n  'levels' is how many levels of each factor the component is built "
+          "from, and\n  '+/- rel' the resulting relative scatter, sqrt(2/(k-1)). "
+          "A share estimated\n  from four model levels carries ~82% relative "
+          "uncertainty on its own, which\n  the within-cell bootstrap does not "
+          "cover. Report shares with this attached.")
 
 
 def report_two_way(name: str, acc, mids, sids) -> dict:
@@ -171,6 +226,10 @@ def main() -> int:
     for row in three["table"]:
         print(f"{row['source']:<20}{row['var_component']:>12.6f}{row['var_share']:>8.1%}")
     out["three_way_items"] = three
+    report_attribution(three, {"model": len(models), "sampler": len(samplers),
+                               "problem": len(problems)})
+    out["level_counts"] = {"model": len(models), "sampler": len(samplers),
+                           "problem": len(problems), "replicates": n_reps}
 
     # ---- 4. solve rate ----------------------------------------------------
     rates, rm, rs, rp, nrep = solve_rates(correct, mids2, sids2, pids2)
