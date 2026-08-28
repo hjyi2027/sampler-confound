@@ -34,7 +34,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from samplerconfound.inversion import inversion_rate
+from samplerconfound.inversion import inversion_rate, inversion_rate_paired
 from samplerconfound.paths import resolve_out, show
 from samplerconfound.variance import (
     ORDER_OF_MAGNITUDE,
@@ -219,19 +219,39 @@ def main() -> int:
         acc, mids, sids = cell_accuracy(records, strict=strict)
         out[f"two_way_{name}"] = report_two_way(name, acc, mids, sids)
 
-    # ---- 2. inversion -----------------------------------------------------
+    # ---- 2. inversion — the headline --------------------------------------
+    correct0, m0, s0, p0 = [], [], [], []
+    for r in records:
+        correct0.append(1.0 if r["verdict"]["status"] == "correct" else 0.0)
+        m0.append(r["model"]); s0.append(r["sampler"]); p0.append(r["problem_id"])
+    inv = inversion_rate_paired(correct0, m0, s0, p0).to_dict()
     acc, mids, sids = cell_accuracy(records, strict=True)
-    inv = inversion_rate(acc, mids, sids).to_dict()
-    print(f"\n--- comparison inversions (strict) ---")
-    print(f"  {inv['n_comparisons']} model-pair comparisons across sampler configs")
-    print(f"  raw inversions      {inv['n_raw']:>4}  = {inv['raw_rate']:.1%}")
-    print(f"  decisive inversions {inv['n_decisive']:>4}  = {inv['decisive_rate']:.1%}"
-          "   (both directions outside sampling noise)")
+    inv_rep = inversion_rate(acc, mids, sids).to_dict()
+
+    print(f"\n  CORE METRIC 2 — comparison inversions (strict, paired SE)")
+    print(f"    {inv['n_comparisons']} comparisons "
+          f"({inv['n_models']} model pairs x sampler pairs)")
+    se = (inv["raw_rate"] * (1 - inv["raw_rate"]) / inv["n_comparisons"]) ** 0.5
+    print(f"    raw       {inv['n_raw']:>4} = {inv['raw_rate']:>6.1%}  "
+          f"(binomial SE {se:.1%})")
+    print(f"    decisive  {inv['n_decisive']:>4} = {inv['decisive_rate']:>6.1%}  "
+          "<- quote this one: confidently A>B under one config, B>A under another")
+    print(f"    [replicate-SE criterion would give {inv_rep['decisive_rate']:.1%}; "
+          "it treats every deterministic cell as infinitely precise]")
     if inv["pairs_ever_inverted"]:
-        print(f"  pairs that ever flip: {inv['pairs_ever_inverted']}")
-    for e in inv["sampler_range"][:6]:
-        print(f"    {e}")
+        for lbl in inv["pairs_ever_inverted"]:
+            print(f"      flips: {' vs '.join(x.split('/')[-1] for x in lbl.split(' vs '))}")
+    print("\n    how far one model's reported number travels on decoding alone:")
+    for e in sorted(inv["sampler_range"], key=lambda x: -x["range"]):
+        print(f"      {short(e['model']):<32} {e['min_accuracy']:.1%} -> "
+              f"{e['max_accuracy']:.1%}  (range {e['range']:.1%}; "
+              f"{e['argmin_sampler']} -> {e['argmax_sampler']})")
+    print("    against the mean gaps between models the literature reads as progress:")
+    for g in inv["model_gaps"]:
+        print(f"      {' vs '.join(short(x) for x in g['models']):<58} "
+              f"{abs(g['mean_gap']):.1%}")
     out["inversions"] = inv
+    out["inversions_replicate_se"] = inv_rep
 
     # ---- 3. item-level ----------------------------------------------------
     correct, mids2, sids2, pids2 = [], [], [], []

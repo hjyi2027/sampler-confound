@@ -521,3 +521,50 @@ that is 63 comparisons, giving a binomial SE near 6%. The smoke run showed 31.7%
 raw and 3.3% decisive. That statistic the design can actually support, and it
 makes the same argument in the units reviewers care about: how often a published
 comparison would have come out the other way.
+
+## 2026-08-27 — inversion rate promoted to the headline
+
+Acting on the power finding. The sampler:model ratio stays as core metric 1 and
+is reported as a measurement; the **inversion rate leads the paper**, because it
+is the claim this design can actually support.
+
+Auditing it as the new headline found a defect that landed exactly on the
+motivating case. The decisiveness test used the REPLICATE standard error within
+each cell. At temperature 0 a deterministic provider returns identical
+replicates, so that SEM is exactly zero and `abs(d) > z * 0` holds for any
+nonzero difference — every greedy comparison counted as decisive by
+construction, on the configuration evaluation harnesses claim to use. Two of four
+greedy cells in the smoke run had an SEM of exactly zero.
+
+`inversion_rate_paired` fixes it with the standard error the claim actually
+needs. The assertion is "a published comparison would have come out the other
+way", which is about benchmark noise — dominated by which problems are in the
+set, not by resampling at fixed configuration. So the SE is computed over
+PROBLEMS, paired: each problem contributes the difference of the two models'
+solve rates, and both models face the same problems so shared difficulty cancels
+rather than inflating the error. It stays finite when a cell is deterministic.
+
+On the smoke data the correction takes the decisive rate from 3.3% to **0.0%** —
+the entire 3.3% was deterministic-cell artifact.
+
+**Power, from the measured per-problem paired sd of 0.308:**
+
+| problems | paired SE | min diff for decisive | required sampler swing |
+|---------:|----------:|----------------------:|-----------------------:|
+| 10 (smoke) | 0.097 | 19.1% | 38.2% |
+| 60 (AIME) | 0.040 | 7.8% | 15.6% |
+| 200 (MATH-500) | 0.022 | 4.3% | **8.5%** |
+
+Observed swings on decoding alone in the smoke run: 6.0%, 8.0%, 16.0%, 6.0%.
+So at 200 problems the metric is powered, marginally — it detects a decisive
+inversion when a model's accuracy travels about 8.5 points across configs, and at
+least one model travelled 16. Caveat for the paper: those swings are themselves
+measured on 10 problems and so are noisy and biased upward; the real ones may be
+smaller. AIME at 60 problems needs a 15.6-point swing, which is a lot even there.
+
+**The comparison that is the paper**, straight out of the smoke run: gpt-oss-20b's
+reported MATH-500 accuracy travels 16 points on decoding configuration alone
+(80.0% greedy to 96.0% lowtemp), while the mean gaps between the four models —
+the differences a reader interprets as progress — run 2.0% to 7.6%. The decoding
+knob moves the number further than the model choice does. That sentence needs no
+variance components at all.
