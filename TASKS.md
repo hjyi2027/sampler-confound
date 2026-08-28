@@ -463,3 +463,61 @@ computed by a test rather than recalled.
 The three-way EMS algebra — the piece written fresh for this project — is
 validated: all eight components recovered unbiased across 40 simulated draws,
 sums of squares orthogonal to 1e-10, shares partitioning to exactly 1.
+
+## 2026-08-27 — core metric 1, and a power problem
+
+Core metric 1 is the sampler:model variance ratio, claim threshold **0.1** —
+"within an order of magnitude", not "sampler wins". `analyse.py` now states it
+as a ratio with a verdict against that threshold.
+
+**The interval we were about to publish was not a confidence interval for this
+quantity.** Measured over 60 simulated grids of the study's exact shape with a
+known true ratio of 0.25, the replicate bootstrap covered the truth **22% of the
+time against a nominal 95%**. It resamples replicates within cell, so it carries
+measurement noise and none of the level uncertainty that dominates a ratio built
+from three model levels. Publishing it would have overstated confidence roughly
+fourfold.
+
+`sampler_to_model_ci_levels` is the replacement: a parametric bootstrap that
+regenerates whole grids of the same shape from the fitted components, so level
+uncertainty propagates by construction. Coverage 83% — still optimistic, because
+it plugs in noisy component estimates and assumes normal level effects, which
+cannot be checked from three draws. Report it, and say it is approximate.
+
+**The power analysis is the uncomfortable part** (`scripts/power_check.py`,
+calibrated to the real sweep: 200 problems, pilot-implied model variance):
+
+| true ratio | 3 models: point / CI | 4 models: point / CI |
+|-----------:|---------------------:|---------------------:|
+| 0.05 | 40% / 0% | 30% / 0% |
+| 0.10 | 52% / 0% | 50% / 0% |
+| 0.25 | 72% / 10% | 85% / 18% |
+| 0.50 | 82% / 35% | 95% / 32% |
+| 1.00 | 95% / 57% | 98% / 60% |
+| 2.00 | 98% / 78% | 100% / 82% |
+
+Read the CI columns. **Even if sampler variance exactly equalled model variance,
+this design would produce an interval clearing 0.1 only 57% of the time.** At the
+threshold itself it never does. A CI-backed version of the claim is out of reach.
+
+Three consequences.
+
+1. **More problems and more replicates do not help.** Level uncertainty depends
+   on the number of model and sampler levels alone. The $16 and 15 hours buy
+   precision on cell accuracies, which is not the binding constraint.
+2. **The fourth model level barely helps either** — 0% to 0% at the threshold,
+   10% to 18% at ratio 0.25. That retroactively justifies dropping gpt-oss-20b's
+   replacement rather than paying $28-53 for one, but for a different reason than
+   the one recorded above.
+3. **The claim has to be framed as measurement, not as a test.** "We measure the
+   ratio at X, with an interval of Y, and note it is not small" is supportable.
+   "We show sampler variance is within an order of magnitude" is not, unless the
+   observed ratio comes in above about 2.
+
+**The inversion rate is the better-powered headline.** It counts, over observed
+cells, how often swapping the decoding config flips the ranking of two models —
+no variance components, no few-level extrapolation. With 3 models x 7 samplers
+that is 63 comparisons, giving a binomial SE near 6%. The smoke run showed 31.7%
+raw and 3.3% decisive. That statistic the design can actually support, and it
+makes the same argument in the units reviewers care about: how often a published
+comparison would have come out the other way.

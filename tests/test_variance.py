@@ -331,3 +331,86 @@ def test_shares_partition_the_total():
     shares = [r["var_share"] for r in decompose_items(y, ml, sl, pl).table]
     assert sum(shares) == pytest.approx(1.0)
     assert all(s >= 0 for s in shares)
+
+
+# --------------------------------------------------------------------------
+# core metric 1: the sampler:model ratio, and which interval may be reported
+#
+# The paper's claim is that sampler-attributable variance is within an ORDER OF
+# MAGNITUDE of model-attributable variance — threshold 0.1, not 1.0. Whether the
+# claim survives is read off an interval, so the interval has to actually cover.
+#
+# It did not. Measured over 60 simulated grids of the study's exact shape with a
+# known true ratio of 0.25, the replicate-only bootstrap covered the truth 22% of
+# the time against a nominal 95%. It resamples replicates within cell, so it
+# propagates measurement noise and none of the level uncertainty that dominates
+# this ratio at three model levels. Publishing it would have overstated
+# confidence roughly fourfold.
+# --------------------------------------------------------------------------
+def _grid_with_true_ratio(seed, s2_model=0.004, s2_sampler=0.001, a=3, b=7, n=5):
+    rng = np.random.default_rng(seed)
+    A = rng.normal(0, np.sqrt(s2_model), a)
+    B = rng.normal(0, np.sqrt(s2_sampler), b)
+    acc, ml, sl = [], [], []
+    for i in range(a):
+        for j in range(b):
+            for _ in range(n):
+                acc.append(0.8 + A[i] + B[j] + rng.normal(0, 0.02))
+                ml.append(f"m{i}")
+                sl.append(f"s{j}")
+    return acc, ml, sl
+
+
+def test_level_aware_interval_covers_far_better_than_the_replicate_one():
+    true_ratio = 0.25
+    cov_rep = cov_lev = 0
+    draws = 30
+    for seed in range(draws):
+        acc, ml, sl = _grid_with_true_ratio(seed)
+        d = decompose_accuracy(acc, ml, sl, n_boot=400)
+        lo, hi = d.sampler_to_model_ci
+        cov_rep += lo <= true_ratio <= hi
+        lo, hi = d.sampler_to_model_ci_levels
+        cov_lev += lo <= true_ratio <= hi
+    # The replicate interval is not a confidence interval for this quantity.
+    assert cov_rep / draws < 0.6, f"replicate coverage {cov_rep/draws:.0%} unexpectedly high"
+    assert cov_lev / draws > 0.7, f"level-aware coverage {cov_lev/draws:.0%} too low"
+    assert cov_lev > cov_rep
+
+
+def test_level_aware_interval_is_the_wider_one():
+    acc, ml, sl = _grid_with_true_ratio(0)
+    d = decompose_accuracy(acc, ml, sl, n_boot=400)
+    rl, rh = d.sampler_to_model_ci
+    ll, lh = d.sampler_to_model_ci_levels
+    assert ll <= rl, "level-aware lower bound must not be tighter"
+    assert lh >= rh or not np.isfinite(lh)
+
+
+def test_headline_states_the_order_of_magnitude_claim():
+    from samplerconfound.variance import ORDER_OF_MAGNITUDE, headline
+    assert ORDER_OF_MAGNITUDE == 0.1, "the claim is within 10x, not 'sampler wins'"
+    acc, ml, sl = _grid_with_true_ratio(0)
+    h = headline(decompose_accuracy(acc, ml, sl, n_boot=400))
+    assert h["threshold"] == 0.1
+    assert set(h) >= {"ratio", "ci_resampling", "ci_levels", "claim_supported",
+                      "claim_supported_at_ci"}
+
+
+def test_a_tiny_sampler_component_does_not_support_the_claim():
+    from samplerconfound.variance import headline
+    # Sampler variance 1000x smaller than model variance: two orders of
+    # magnitude out, so the claim must fail on the point estimate.
+    acc, ml, sl = _grid_with_true_ratio(3, s2_model=0.02, s2_sampler=0.00002)
+    h = headline(decompose_accuracy(acc, ml, sl, n_boot=400))
+    assert not h["claim_supported_at_ci"]
+
+
+def test_verdict_requires_the_interval_not_just_the_point():
+    from samplerconfound.variance import headline
+    # A point estimate above threshold with an interval reaching below it is not
+    # evidence for the claim, and the two fields must be able to disagree.
+    acc, ml, sl = _grid_with_true_ratio(7, s2_model=0.004, s2_sampler=0.0005)
+    h = headline(decompose_accuracy(acc, ml, sl, n_boot=400))
+    if h["ratio"] >= 0.1 and h["ci_levels"][0] < 0.1:
+        assert h["claim_supported"] and not h["claim_supported_at_ci"]

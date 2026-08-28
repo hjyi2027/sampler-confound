@@ -37,9 +37,11 @@ sys.path.insert(0, str(ROOT))
 from samplerconfound.inversion import inversion_rate
 from samplerconfound.paths import resolve_out, show
 from samplerconfound.variance import (
+    ORDER_OF_MAGNITUDE,
     decompose_accuracy,
     decompose_items,
     decompose_solve_rate,
+    headline,
     solve_rates,
 )
 
@@ -149,18 +151,34 @@ def report_attribution(three: dict, n_levels: dict) -> None:
 
 
 def report_two_way(name: str, acc, mids, sids) -> dict:
-    d = decompose_accuracy(acc, mids, sids).to_dict()
+    tw = decompose_accuracy(acc, mids, sids)
+    d = tw.to_dict()
     print(f"\n--- accuracy-level decomposition ({name}) ---")
     print(f"{'source':<16}{'var comp':>12}{'share':>9}{'sd (acc pts)':>14}")
     for row in d["table"]:
         print(f"{row['source']:<16}{row['var_component']:>12.6f}"
               f"{row['var_share']:>8.1%}{row['sd'] * 100:>13.2f}")
-    r = d["sampler_to_model"]
-    lo, hi = d["sampler_to_model_ci"]
-    print(f"\nsampler:model ratio = {r:.3f}   95% CI [{lo:.3f}, {hi:.3f}]")
-    print("  >1 means decoding configuration moves the reported number more than "
-          "swapping the model does")
-    return d
+    h = headline(tw)
+    r = h["ratio"]
+    rl, rh = h["ci_resampling"]
+    ll, lh = h["ci_levels"]
+
+    def fmt(lo, hi):
+        return f"[{lo:.3f}, {'inf' if not np.isfinite(hi) else f'{hi:.3f}'}]"
+
+    print(f"\n  CORE METRIC 1 — sampler:model variance ratio = {r:.3f}")
+    print(f"    95% CI, level-aware   {fmt(ll, lh)}   <- report this one")
+    print(f"    95% CI, replicates    {fmt(rl, rh)}   <- does NOT cover level "
+          "uncertainty; measured 22% coverage against nominal 95%")
+    verdict = "SUPPORTED" if h["claim_supported_at_ci"] else (
+        "point estimate only" if h["claim_supported"] else "NOT supported")
+    print(f"    claim: sampler variance within an order of magnitude of model "
+          f"variance (ratio >= {ORDER_OF_MAGNITUDE})")
+    print(f"    verdict: {verdict}"
+          + ("" if h["claim_supported_at_ci"] else
+             "  — the interval reaches below the threshold, so the point "
+             "estimate alone is not evidence"))
+    return {**d, "headline": h}
 
 
 def main() -> int:
