@@ -12,7 +12,7 @@ import json
 import pytest
 
 from scripts.analyse import check_balance
-from scripts.run_sweep import build_jobs, cell_key, load_done
+from scripts.run_sweep import build_jobs, cell_key, design_fingerprint, load_done
 
 
 class _P:
@@ -114,3 +114,41 @@ def test_duplicate_cell_is_refused():
     recs.append(dict(recs[0]))
     with pytest.raises(SystemExit, match="unbalanced grid"):
         check_balance(recs)
+
+
+# --------------------------------------------------------------------------
+# design fingerprint
+#
+# The guard's whole purpose is a COMPLETE grid whose protocol changed
+# underneath it: nothing is left to run, verify() says "balanced", and the file
+# quietly holds two different experiments. The first version of this check ran
+# after the no-jobs early return and so missed exactly that case.
+# --------------------------------------------------------------------------
+def _design(max_tokens=8192, prompt="Solve it."):
+    class D:
+        models = ["m1", "m2"]
+        samplers = [{"id": "greedy", "temperature": 0.0}]
+        n_replicates = 2
+        benchmark = "math500"
+        n_problems = 200
+        fixed = {"prompt_template": prompt, "max_tokens": max_tokens}
+    return D()
+
+
+def test_fingerprint_changes_with_max_tokens():
+    assert design_fingerprint(_design()) != design_fingerprint(_design(max_tokens=4096))
+
+
+def test_fingerprint_changes_with_the_prompt():
+    assert design_fingerprint(_design()) != design_fingerprint(_design(prompt="Other."))
+
+
+def test_fingerprint_is_stable_for_the_same_design():
+    assert design_fingerprint(_design()) == design_fingerprint(_design())
+
+
+def test_fingerprint_changes_with_a_sampler_definition():
+    a = _design()
+    b = _design()
+    b.samplers = [{"id": "greedy", "temperature": 0.1}]
+    assert design_fingerprint(a) != design_fingerprint(b)

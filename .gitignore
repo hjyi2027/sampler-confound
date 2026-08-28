@@ -5,3 +5,8 @@ __pycache__/
 .cache/
 runs/*/raw/
 .env
+
+# Full-sweep output: ~36k generations with reasoning traces, hundreds of MB.
+runs/main/
+runs/aime/
+runs/sweep*/

@@ -30,6 +30,7 @@ round-robin by model.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import random
@@ -110,7 +111,24 @@ def build_jobs(design: Design, problems, done: dict) -> list[tuple]:
     return interleaved
 
 
-def generate(key: str, design: Design, model: str, sampler: dict, rep: int, p) -> dict | None:
+def design_fingerprint(design: Design) -> str:
+    """Hash of everything that must not change mid-run.
+
+    Records carry it so a protocol change — an edited prompt template, a
+    different max_tokens, a redefined sampler — cannot silently mix two
+    incompatible halves into one grid that still looks balanced.
+    """
+    payload = json.dumps(
+        {"fixed": design.fixed, "samplers": design.samplers,
+         "benchmark": design.benchmark, "n_problems": design.n_problems,
+         "n_replicates": design.n_replicates},
+        sort_keys=True,
+    )
+    return hashlib.sha256(payload.encode()).hexdigest()[:16]
+
+
+def generate(key: str, design: Design, model: str, sampler: dict, rep: int, p,
+             fingerprint: str = "") -> dict | None:
     fixed = design.fixed
     body = {
         "model": model,
@@ -125,7 +143,10 @@ def generate(key: str, design: Design, model: str, sampler: dict, rep: int, p) -
         body["messages"].insert(0, {"role": "system", "content": fixed["system_prompt"]})
 
     r = None
+    t_start = time.time()
+    attempts = 0
     for attempt in range(MAX_RETRIES):
+        attempts = attempt + 1
         try:
             r = requests.post(BASE, headers={"Authorization": f"Bearer {key}"},
                               json=body, timeout=300)
@@ -148,15 +169,40 @@ def generate(key: str, design: Design, model: str, sampler: dict, rep: int, p) -
 
     d = r.json()
     choice = d["choices"][0]
-    text = choice["message"].get("content") or ""
+    msg = choice["message"]
+    text = msg.get("content") or ""
     truncated = choice["finish_reason"] == "length"
     v = grade(text, p.answer, truncated=truncated)
+    usage = d["usage"]
     return {
+        # identity
         "model": model, "sampler": sampler["id"], "replicate": rep,
         "problem_id": p.id, "benchmark": design.benchmark, "gold": p.answer,
-        "response": text, "finish_reason": choice["finish_reason"],
-        "input_tokens": d["usage"]["prompt_tokens"],
-        "output_tokens": d["usage"]["completion_tokens"],
+        # what was actually asked for. Logging the config file is not enough:
+        # only the resolved parameters prove which condition produced this row.
+        "params": {k: v_ for k, v_ in body.items() if k not in ("messages", "model")},
+        "design": fingerprint,
+        # what came back, in full. reasoning_content is a SEPARATE field from
+        # content, and every model in this grid is a reasoning model, so keeping
+        # only `content` discards most of the generated tokens — the entire chain
+        # of thought — unrecoverably. A paper about how decoding configuration
+        # affects reasoning cannot throw the reasoning away.
+        "response": text,
+        "reasoning": msg.get("reasoning_content") or "",
+        "finish_reason": choice["finish_reason"],
+        "input_tokens": usage["prompt_tokens"],
+        "output_tokens": usage["completion_tokens"],
+        "reasoning_tokens": (usage.get("completion_tokens_details") or {}).get(
+            "reasoning_tokens", 0
+        ),
+        "cached_tokens": (usage.get("prompt_tokens_details") or {}).get(
+            "cached_tokens", 0
+        ),
+        # provenance for chasing an anomaly back to the provider
+        "request_id": d.get("id"),
+        "created": d.get("created"),
+        "latency_s": round(time.time() - t_start, 3),
+        "attempts": attempts,
         "verdict": v.to_dict(),
     }
 
@@ -209,6 +255,22 @@ def main() -> int:
     out.parent.mkdir(parents=True, exist_ok=True)
     done = load_done(out)
 
+    # Before --verify, before the no-jobs early return, before any generation.
+    # The case this exists for is precisely a COMPLETE grid whose protocol
+    # changed underneath it: nothing is left to run, verify() reports "balanced",
+    # and the file quietly contains two different experiments. Checking after
+    # the early return — as this first did — misses exactly that case.
+    fp = design_fingerprint(design)
+    mixed = {r.get("design") for r in done.values() if r.get("design")} - {fp}
+    if mixed:
+        print(f"REFUSING: {show(out)} holds records from a different design "
+              f"({sorted(mixed)} vs {fp}). The prompt, max_tokens or a sampler "
+              "definition changed since those were written. A grid mixing two "
+              "protocols still looks balanced and is not one experiment.",
+              file=sys.stderr)
+        return 1
+    print(f"design fingerprint {fp}")
+
     if args.verify:
         return 0 if verify(design, problems, done) else 1
 
@@ -222,7 +284,7 @@ def main() -> int:
     t0 = time.time()
     written = failed = 0
     with out.open("a") as fh, ThreadPoolExecutor(max_workers=args.workers) as pool:
-        futs = {pool.submit(generate, key, design, m, s, rep, p): (m, s, rep, p)
+        futs = {pool.submit(generate, key, design, m, s, rep, p, fp): (m, s, rep, p)
                 for m, s, rep, p in jobs}
         for i, fut in enumerate(as_completed(futs), 1):
             rec = fut.result()
