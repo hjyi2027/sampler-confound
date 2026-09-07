@@ -302,6 +302,11 @@ def inversion_rate_paired(
                 "models": [m1, m2], "samplers": [s1, s2],
                 "diff_under_first": d1, "diff_under_second": d2,
                 "se_first": se1, "se_second": se2, "decisive": bool(decisive),
+                # The accuracies themselves, not just their difference. A
+                # difference cannot be quoted: the harm is only legible as
+                # "A scored X and B scored Y, and then they swapped."
+                "acc_first": {m1: mean[(m1, s1)], m2: mean[(m2, s1)]},
+                "acc_second": {m1: mean[(m1, s2)], m2: mean[(m2, s2)]},
             })
 
     ranges = []
@@ -328,3 +333,58 @@ def inversion_rate_paired(
         pairs_ever_inverted=sorted(inverted_pairs),
         examples=examples, sampler_range=ranges, model_gaps=gaps,
     )
+
+
+# --------------------------------------------------------------------------
+# rendering one inversion as a quotable sentence
+# --------------------------------------------------------------------------
+def _params_of(sampler_id: str, samplers: list[dict] | None) -> str:
+    """Human-readable decoding parameters, e.g. 'temperature 0.7, top_p 0.95'."""
+    if not samplers:
+        return sampler_id
+    for s in samplers:
+        if s["id"] == sampler_id:
+            bits = [f"{k.replace('_', '-')} {v}" for k, v in s.items() if k != "id"]
+            return f"{sampler_id} ({', '.join(bits)})" if bits else sampler_id
+    return sampler_id
+
+
+def quotable(inv: "Inversions", samplers: list[dict] | None = None,
+             top_n: int = 3, short=lambda m: m.split("/")[-1]) -> list[str]:
+    """Render the strongest inversions as sentences a paper can quote directly.
+
+    A rate is an aggregate and aggregates are easy to discount. One named
+    comparison, with both accuracies and the decoding parameters that produced
+    them, is the concrete harm: under one undocumented configuration you would
+    have reported A > B, and under another, B > A, with nothing else changed.
+
+    Ranked by how hard the example is to dismiss — decisive ones first, then by
+    the SMALLER of the two margins, since a reader's objection lands on the
+    weaker side of the flip, not the stronger.
+    """
+    ranked = sorted(
+        inv.examples,
+        key=lambda e: (
+            not e["decisive"],
+            -min(abs(e["diff_under_first"]), abs(e["diff_under_second"])),
+        ),
+    )
+    out = []
+    for e in ranked[:top_n]:
+        m1, m2 = e["models"]
+        s1, s2 = e["samplers"]
+        a1, a2 = e["acc_first"], e["acc_second"]
+        win1, win2 = (m1, m2) if e["diff_under_first"] > 0 else (m2, m1)
+        lose1, lose2 = win2, win1
+        mark = "decisive" if e["decisive"] else "within benchmark noise"
+        out.append(
+            f"Under {_params_of(s1, samplers)}, {short(win1)} scores "
+            f"{a1[win1]:.1%} and {short(lose1)} scores {a1[lose1]:.1%} — "
+            f"{short(win1)} leads by {abs(e['diff_under_first']):.1%}. "
+            f"Change only the decoding configuration to "
+            f"{_params_of(s2, samplers)} and {short(lose1)} scores "
+            f"{a2[lose1]:.1%} against {short(win1)}'s {a2[win1]:.1%} — the "
+            f"ranking reverses, by {abs(e['diff_under_second']):.1%}. "
+            f"Same models, same problems, same prompt, same grader [{mark}]."
+        )
+    return out

@@ -169,3 +169,63 @@ def test_denominator_is_every_model_pair_by_sampler_pair():
     inv = inversion_rate_paired(*_grid(spec, n_problems=10, n_reps=2))
     # 3 model pairs x 3 sampler pairs
     assert inv.n_comparisons == 9
+
+
+# --------------------------------------------------------------------------
+# quotable inversions
+#
+# "A single inverted comparison is a concrete, quotable harm." A rate is an
+# aggregate and aggregates are easy to discount; one named comparison, with both
+# accuracies and the decoding parameters that produced them, is not.
+# --------------------------------------------------------------------------
+from samplerconfound.inversion import quotable
+
+
+def _flip_grid():
+    # A beats B under s1; B beats A under s2. Deterministic so the numbers are exact.
+    spec = {("A", "s1"): 34, ("B", "s1"): 22, ("A", "s2"): 22, ("B", "s2"): 34}
+    return _deterministic_grid(spec)
+
+
+def test_a_quote_names_both_accuracies_and_both_directions():
+    inv = inversion_rate_paired(*_flip_grid())
+    q = quotable(inv)[0]
+    # Both sides of the flip, as percentages, must appear.
+    assert "85.0%" in q and "55.0%" in q
+    assert "reverses" in q
+    assert "Same models, same problems, same prompt, same grader" in q
+
+
+def test_a_quote_names_the_decoding_parameters_when_available():
+    inv = inversion_rate_paired(*_flip_grid())
+    defs = [{"id": "s1", "temperature": 0.0},
+            {"id": "s2", "temperature": 0.3, "top_p": 1.0}]
+    q = quotable(inv, samplers=defs)[0]
+    assert "temperature 0.0" in q, "a quote must name the config, not an internal id"
+    assert "temperature 0.3" in q and "top-p 1.0" in q
+
+
+def test_decisive_examples_are_quoted_first():
+    # One decisive flip (large) and one trivial flip (one problem each way).
+    spec = {("A", "s1"): 34, ("B", "s1"): 22, ("A", "s2"): 22, ("B", "s2"): 34,
+            ("C", "s1"): 21, ("D", "s1"): 20, ("C", "s2"): 20, ("D", "s2"): 21}
+    inv = inversion_rate_paired(*_deterministic_grid(spec))
+    assert inv.n_raw >= 2
+    quotes = quotable(inv, top_n=5)
+    assert "decisive" in quotes[0] and "within benchmark noise" not in quotes[0]
+
+
+def test_quote_ranks_on_the_weaker_side_of_the_flip():
+    # A reader's objection lands on whichever direction is least convincing, so
+    # ranking must use the smaller margin, not the sum or the larger one.
+    spec = {("A", "s1"): 38, ("B", "s1"): 18, ("A", "s2"): 19, ("B", "s2"): 21,
+            ("C", "s1"): 30, ("D", "s1"): 22, ("C", "s2"): 22, ("D", "s2"): 30}
+    inv = inversion_rate_paired(*_deterministic_grid(spec))
+    quotes = quotable(inv, top_n=5)
+    # The C/D flip is 20/20 points; the A/B flip is 50 points then only 5.
+    assert "C" in quotes[0] and "D" in quotes[0]
+
+
+def test_no_inversions_yields_no_quotes():
+    spec = {("A", "s1"): 0.9, ("B", "s1"): 0.5, ("A", "s2"): 0.88, ("B", "s2"): 0.48}
+    assert quotable(inversion_rate_paired(*_grid(spec))) == []

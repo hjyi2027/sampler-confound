@@ -26,6 +26,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import textwrap
 
 import numpy as np
 from collections import defaultdict
@@ -34,7 +35,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from samplerconfound.inversion import inversion_rate, inversion_rate_paired
+from samplerconfound.inversion import (
+    inversion_rate,
+    inversion_rate_paired,
+    quotable,
+)
 from samplerconfound.paths import resolve_out, show
 from samplerconfound.variance import (
     ORDER_OF_MAGNITUDE,
@@ -190,6 +195,18 @@ def main() -> int:
 
     records = load(args.results)
     models, samplers, problems, n_reps = check_balance(records)
+    # Prefer the parameters actually sent, recorded per generation, over the
+    # config file — only the request proves which condition produced a row.
+    sampler_defs = []
+    seen_s = set()
+    for r in records:
+        sid = r["sampler"]
+        if sid in seen_s:
+            continue
+        seen_s.add(sid)
+        prm = {k: v for k, v in (r.get("params") or {}).items()
+               if k in ("temperature", "top_p", "top_k", "min_p")}
+        sampler_defs.append({"id": sid, **prm})
 
     print(f"{args.results.name}: {len(records):,} generations")
     print(f"  {len(models)} models x {len(samplers)} samplers x {n_reps} replicates "
@@ -224,7 +241,8 @@ def main() -> int:
     for r in records:
         correct0.append(1.0 if r["verdict"]["status"] == "correct" else 0.0)
         m0.append(r["model"]); s0.append(r["sampler"]); p0.append(r["problem_id"])
-    inv = inversion_rate_paired(correct0, m0, s0, p0).to_dict()
+    inv_obj = inversion_rate_paired(correct0, m0, s0, p0)
+    inv = inv_obj.to_dict()
     acc, mids, sids = cell_accuracy(records, strict=True)
     inv_rep = inversion_rate(acc, mids, sids).to_dict()
 
@@ -250,6 +268,16 @@ def main() -> int:
     for g in inv["model_gaps"]:
         print(f"      {' vs '.join(short(x) for x in g['models']):<58} "
               f"{abs(g['mean_gap']):.1%}")
+
+    # A rate is an aggregate and aggregates are easy to discount. One named
+    # comparison is the concrete harm.
+    quotes = quotable(inv_obj, samplers=sampler_defs, top_n=3, short=short)
+    if quotes:
+        print("\n    QUOTABLE INVERSIONS (strongest first; decisive ones lead)")
+        for i, q in enumerate(quotes, 1):
+            print(f"\n      [{i}] " + textwrap.fill(q, width=94,
+                                                     subsequent_indent="          "))
+    out["quotable"] = quotes
     out["inversions"] = inv
     out["inversions_replicate_se"] = inv_rep
 

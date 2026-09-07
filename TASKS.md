@@ -568,3 +568,44 @@ reported MATH-500 accuracy travels 16 points on decoding configuration alone
 the differences a reader interprets as progress — run 2.0% to 7.6%. The decoding
 knob moves the number further than the model choice does. That sentence needs no
 variance components at all.
+
+## 2026-09-07 — core metric 2: the quotable inversion
+
+Metric 2 was already implemented and promoted to headline on Aug 27. What was
+missing is the thing the metric is *for*: a rate is an aggregate, and aggregates
+are easy to discount. The examples carried differences but not the accuracies
+themselves, so nothing in the output could be quoted.
+
+`quotable()` renders the strongest inversions as sentences, naming both
+accuracies, both decoding configurations by their actual parameters, and the
+direction of each flip. Ranked decisive-first, then by the SMALLER of the two
+margins — a reader's objection lands on the weaker side of a flip, not the
+stronger, so ranking on the sum or the maximum would promote examples that are
+easiest to attack.
+
+Sample output on smoke data (10 problems, so all are inside benchmark noise):
+
+> Under greedy, deepseek-v4-flash-0731 scores 94.0% and gpt-oss-20b scores
+> 80.0% — deepseek-v4-flash-0731 leads by 14.0%. Change only the decoding
+> configuration to lowtemp and gpt-oss-20b scores 96.0% against
+> deepseek-v4-flash-0731's 88.0% — the ranking reverses, by 8.0%. Same models,
+> same problems, same prompt, same grader.
+
+Parameters are read from the per-generation `params` field rather than the config
+file, so a quote names "temperature 0.7, top-p 0.95" and reflects what was
+actually sent. Smoke records predate that field and fall back to the config id.
+
+## STATUS AS OF 2026-09-07
+
+**The sweep never ran.** `runs/` holds the pilot, the smoke run and the probes;
+there is no `runs/main/` or `runs/aime/`. Last repo activity was Aug 28.
+
+**The MATH-AI deadline (submit Sept 5, deadline Sept 6) has passed.** Every
+number in the analysis output above is from the 1/20 smoke run and is not a
+result: 10 problems per cell, everything inside benchmark noise, the sampler
+component clamped to zero.
+
+What is ready and validated: benchmarks pinned, grader hand-verified at 50/50,
+grid frozen at 3 models x 7 samplers x 5 replicates, runner resumable and
+balance-checked, both core metrics implemented with their power characterised.
+What is missing is one command and $16.32.
