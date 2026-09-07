@@ -241,7 +241,7 @@ def main() -> int:
     for r in records:
         correct0.append(1.0 if r["verdict"]["status"] == "correct" else 0.0)
         m0.append(r["model"]); s0.append(r["sampler"]); p0.append(r["problem_id"])
-    inv_obj = inversion_rate_paired(correct0, m0, s0, p0)
+    inv_obj = inversion_rate_paired(correct0, m0, s0, p0, n_boot=args.n_boot)
     inv = inv_obj.to_dict()
     acc, mids, sids = cell_accuracy(records, strict=True)
     inv_rep = inversion_rate(acc, mids, sids).to_dict()
@@ -249,11 +249,17 @@ def main() -> int:
     print(f"\n  CORE METRIC 2 — comparison inversions (strict, paired SE)")
     print(f"    {inv['n_comparisons']} comparisons "
           f"({inv['n_models']} model pairs x sampler pairs)")
-    se = (inv["raw_rate"] * (1 - inv["raw_rate"]) / inv["n_comparisons"]) ** 0.5
+    rlo, rhi = inv["raw_rate_ci"]
+    dlo, dhi = inv["decisive_rate_ci"]
     print(f"    raw       {inv['n_raw']:>4} = {inv['raw_rate']:>6.1%}  "
-          f"(binomial SE {se:.1%})")
+          f"95% CI [{rlo:.1%}, {rhi:.1%}]")
     print(f"    decisive  {inv['n_decisive']:>4} = {inv['decisive_rate']:>6.1%}  "
-          "<- quote this one: confidently A>B under one config, B>A under another")
+          f"95% CI [{dlo:.1%}, {dhi:.1%}]")
+    print("      <- quote the decisive rate: confidently A>B under one config, "
+          "B>A under another")
+    print("      intervals resample PROBLEMS, not comparisons. Each cell feeds "
+          "~12 comparisons,\n      so a binomial CI over comparisons would assume "
+          "an independence they do not have.")
     print(f"    [replicate-SE criterion would give {inv_rep['decisive_rate']:.1%}; "
           "it treats every deterministic cell as infinitely precise]")
     if inv["pairs_ever_inverted"]:

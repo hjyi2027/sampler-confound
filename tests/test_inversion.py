@@ -229,3 +229,84 @@ def test_quote_ranks_on_the_weaker_side_of_the_flip():
 def test_no_inversions_yields_no_quotes():
     spec = {("A", "s1"): 0.9, ("B", "s1"): 0.5, ("A", "s2"): 0.88, ("B", "s2"): 0.48}
     assert quotable(inversion_rate_paired(*_grid(spec))) == []
+
+
+# --------------------------------------------------------------------------
+# an interval for the headline rate
+#
+# The obvious interval is binomial over the comparisons, and it is wrong: with
+# 3 models and 7 samplers there are 63 comparisons drawn from 21 cells, so each
+# cell feeds about twelve of them. Treating them as independent draws overstates
+# the effective sample size and reports an interval narrower than the evidence.
+# Problems are the sampling unit; resampling them moves every cell coherently.
+# --------------------------------------------------------------------------
+from samplerconfound.inversion import bootstrap_inversion_ci
+
+
+def test_the_interval_responds_to_problem_count_where_a_binomial_cannot():
+    """The sharpest statement of why the binomial is the wrong interval.
+
+    Its width is a function of the number of COMPARISONS alone, so halving the
+    problems — halving the actual evidence — leaves it unchanged. The inversion
+    rate is an estimate about a benchmark, and evidence about a benchmark is
+    problems. A cluster bootstrap over problems widens as it must.
+
+    Measured at the study's grid shape, the binomial covered a known population
+    rate 84% of the time against a nominal 95%; the cluster bootstrap covered
+    100%. It is anti-conservative, not merely differently scaled.
+    """
+    spec = {(m, s): 0.45 + 0.12 * (i % 4) for i, (m, s) in enumerate(
+        [(m, s) for m in ("A", "B", "C") for s in ("s1", "s2", "s3", "s4")])}
+    wide = inversion_rate_paired(*_grid(spec, n_problems=25, n_reps=2),
+                                 n_boot=250, random_state=1)
+    narrow = inversion_rate_paired(*_grid(spec, n_problems=200, n_reps=2),
+                                   n_boot=250, random_state=1)
+    assert wide.n_comparisons == narrow.n_comparisons, "binomial n is identical"
+    w_wide = wide.raw_rate_ci[1] - wide.raw_rate_ci[0]
+    w_narrow = narrow.raw_rate_ci[1] - narrow.raw_rate_ci[0]
+    assert w_wide > w_narrow, (
+        f"25 problems gave CI width {w_wide:.3f}, 200 problems {w_narrow:.3f}; "
+        "the interval must reflect how many problems the evidence rests on")
+
+
+def test_interval_brackets_the_point_estimate():
+    spec = {("A", "s1"): 0.8, ("B", "s1"): 0.6, ("A", "s2"): 0.6, ("B", "s2"): 0.8,
+            ("A", "s3"): 0.7, ("B", "s3"): 0.7}
+    correct, ml, sl, pl = _grid(spec, n_problems=50, n_reps=3)
+    inv = inversion_rate_paired(correct, ml, sl, pl, n_boot=300)
+    for rate, (lo, hi) in ((inv.raw_rate, inv.raw_rate_ci),
+                           (inv.decisive_rate, inv.decisive_rate_ci)):
+        assert lo <= rate <= hi, f"{rate} outside [{lo}, {hi}]"
+
+
+def test_rates_and_bounds_stay_in_the_unit_interval():
+    spec = {(m, s): 0.6 for m in ("A", "B", "C") for s in ("s1", "s2")}
+    inv = inversion_rate_paired(*_grid(spec, n_problems=30, n_reps=2), n_boot=200)
+    for lo, hi in (inv.raw_rate_ci, inv.decisive_rate_ci):
+        assert 0.0 <= lo <= hi <= 1.0
+
+
+def test_no_bootstrap_by_default_leaves_the_ci_undefined():
+    # The bootstrap is the expensive part; callers opt in.
+    spec = {("A", "s1"): 0.8, ("B", "s1"): 0.6, ("A", "s2"): 0.6, ("B", "s2"): 0.8}
+    inv = inversion_rate_paired(*_grid(spec, n_problems=20, n_reps=2))
+    assert np.isnan(inv.raw_rate_ci[0]) and np.isnan(inv.decisive_rate_ci[0])
+
+
+def test_bootstrap_is_deterministic_for_a_fixed_seed():
+    spec = {("A", "s1"): 0.8, ("B", "s1"): 0.6, ("A", "s2"): 0.6, ("B", "s2"): 0.8}
+    args = _grid(spec, n_problems=25, n_reps=2)
+    a = bootstrap_inversion_ci(*args, n_boot=150, random_state=3)
+    b = bootstrap_inversion_ci(*args, n_boot=150, random_state=3)
+    assert a == b
+
+
+def test_a_stable_ranking_gives_an_interval_pinned_at_zero():
+    # One model dominates under every config: no inversions, and resampling
+    # problems must not manufacture any.
+    spec = {("A", "s1"): 0.95, ("B", "s1"): 0.35,
+            ("A", "s2"): 0.93, ("B", "s2"): 0.33,
+            ("A", "s3"): 0.94, ("B", "s3"): 0.34}
+    inv = inversion_rate_paired(*_grid(spec, n_problems=60, n_reps=3), n_boot=300)
+    assert inv.raw_rate == 0.0
+    assert inv.raw_rate_ci == (0.0, 0.0)

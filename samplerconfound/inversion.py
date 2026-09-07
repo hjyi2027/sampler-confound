@@ -51,6 +51,12 @@ class Inversions:
     n_decisive: int = 0
     raw_rate: float = float("nan")
     decisive_rate: float = float("nan")
+    # Percentile intervals from a bootstrap over PROBLEMS, not over comparisons.
+    # A binomial interval would treat the comparisons as independent draws; with
+    # 3 models and 7 samplers each cell feeds about twelve of them, so they are
+    # nothing of the kind.
+    raw_rate_ci: tuple[float, float] = (float("nan"), float("nan"))
+    decisive_rate_ci: tuple[float, float] = (float("nan"), float("nan"))
     pairs_ever_inverted: list[str] = field(default_factory=list)
     examples: list[dict] = field(default_factory=list)
     sampler_range: list[dict] = field(default_factory=list)
@@ -67,6 +73,8 @@ class Inversions:
             "n_decisive": self.n_decisive,
             "raw_rate": self.raw_rate,
             "decisive_rate": self.decisive_rate,
+            "raw_rate_ci": list(self.raw_rate_ci),
+            "decisive_rate_ci": list(self.decisive_rate_ci),
             "pairs_ever_inverted": self.pairs_ever_inverted,
             "examples": self.examples,
             "sampler_range": self.sampler_range,
@@ -215,6 +223,8 @@ def inversion_rate_paired(
     sampler_ids: list[str],
     problem_ids: list[str],
     z: float = 1.96,
+    n_boot: int = 0,
+    random_state: int = 0,
 ) -> Inversions:
     """Inversion rate with a decisiveness test that uses the right standard error.
 
@@ -325,11 +335,19 @@ def inversion_rate_paired(
         for m1, m2 in itertools.combinations(models, 2)
     ]
 
+    raw_ci = dec_ci = (float("nan"), float("nan"))
+    if n_boot:
+        raw_ci, dec_ci = bootstrap_inversion_ci(
+            correct, model_ids, sampler_ids, problem_ids,
+            z=z, n_boot=n_boot, random_state=random_state,
+        )
+
     return Inversions(
         n_models=len(models), n_samplers=len(samplers), n_reps=n_reps, z=z,
         n_comparisons=n_comp, n_raw=n_raw, n_decisive=n_dec,
         raw_rate=(n_raw / n_comp if n_comp else float("nan")),
         decisive_rate=(n_dec / n_comp if n_comp else float("nan")),
+        raw_rate_ci=raw_ci, decisive_rate_ci=dec_ci,
         pairs_ever_inverted=sorted(inverted_pairs),
         examples=examples, sampler_range=ranges, model_gaps=gaps,
     )
@@ -388,3 +406,82 @@ def quotable(inv: "Inversions", samplers: list[dict] | None = None,
             f"Same models, same problems, same prompt, same grader [{mark}]."
         )
     return out
+
+
+# --------------------------------------------------------------------------
+# an interval for the inversion rate
+# --------------------------------------------------------------------------
+def _count_inversions(R, z):
+    """Count (raw, decisive, total) inversions from a (M, S, P) solve-rate array."""
+    M, S, P = R.shape
+    mean = R.mean(axis=2)                      # (M, S)
+    raw = dec = total = 0
+    for m1, m2 in itertools.combinations(range(M), 2):
+        d = R[m1] - R[m2]                      # (S, P) paired per-problem diffs
+        cell = mean[m1] - mean[m2]             # (S,)
+        se = d.std(axis=1, ddof=1) / np.sqrt(P)
+        for s1, s2 in itertools.combinations(range(S), 2):
+            total += 1
+            a, b = cell[s1], cell[s2]
+            if a == 0.0 or b == 0.0 or np.sign(a) == np.sign(b):
+                continue
+            raw += 1
+            if abs(a) > z * se[s1] and abs(b) > z * se[s2]:
+                dec += 1
+    return raw, dec, total
+
+
+def bootstrap_inversion_ci(
+    correct,
+    model_ids: list[str],
+    sampler_ids: list[str],
+    problem_ids: list[str],
+    z: float = 1.96,
+    n_boot: int = 1000,
+    random_state: int = 0,
+):
+    """Interval for the inversion rate, resampling PROBLEMS.
+
+    The obvious interval is binomial over the comparisons, and it is wrong. With
+    three models and seven samplers there are 63 comparisons drawn from 21 cells,
+    so each cell feeds about twelve of them; treating the comparisons as
+    independent draws overstates the effective sample size several-fold and
+    reports an interval far narrower than the evidence supports.
+
+    Problems are the sampling unit the claim is about — "on a benchmark like
+    this one, how often would the ranking flip" — and resampling them moves every
+    cell coherently, which is precisely the dependence that makes the comparisons
+    non-independent. A problem that happens to favour one model shifts all of
+    that model's cells at once, and the resampled inversion count feels it.
+
+    Returns ((raw_lo, raw_hi), (dec_lo, dec_hi)).
+    """
+    y = np.asarray(correct, dtype=np.float64).ravel()
+    models = sorted(set(model_ids))
+    samplers = sorted(set(sampler_ids))
+    problems = sorted(set(problem_ids))
+    mi = {m: i for i, m in enumerate(models)}
+    si = {s: i for i, s in enumerate(samplers)}
+    pi = {p: i for i, p in enumerate(problems)}
+
+    acc = np.zeros((len(models), len(samplers), len(problems)))
+    cnt = np.zeros_like(acc)
+    for v, m, s, p in zip(y, model_ids, sampler_ids, problem_ids):
+        acc[mi[m], si[s], pi[p]] += v
+        cnt[mi[m], si[s], pi[p]] += 1
+    if (cnt == 0).any():
+        raise ValueError("incomplete (model, sampler, problem) grid")
+    R = acc / cnt
+
+    rng = np.random.default_rng(random_state)
+    P = len(problems)
+    raws, decs = [], []
+    for _ in range(n_boot):
+        idx = rng.integers(0, P, size=P)
+        r, d, t = _count_inversions(R[:, :, idx], z)
+        raws.append(r / t)
+        decs.append(d / t)
+    return (
+        (float(np.percentile(raws, 2.5)), float(np.percentile(raws, 97.5))),
+        (float(np.percentile(decs, 2.5)), float(np.percentile(decs, 97.5))),
+    )

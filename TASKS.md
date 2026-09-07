@@ -609,3 +609,36 @@ What is ready and validated: benchmarks pinned, grader hand-verified at 50/50,
 grid frozen at 3 models x 7 samplers x 5 replicates, runner resumable and
 balance-checked, both core metrics implemented with their power characterised.
 What is missing is one command and $16.32.
+
+## 2026-09-07 — an interval for the inversion rate
+
+The headline metric was being reported as a bare proportion. Phase 2's "bootstrap
+CIs on everything" had not reached it.
+
+**The obvious interval is binomial over the comparisons, and it is wrong.** With
+3 models and 7 samplers there are 63 comparisons drawn from 21 cells, so each
+cell feeds about twelve of them. Treating the comparisons as independent draws
+overstates the effective sample size. Measured against a known population rate at
+exactly this grid shape, the binomial covered **84% against a nominal 95%** — it
+is anti-conservative, not merely differently scaled. The problem-cluster
+bootstrap covered 100%.
+
+`bootstrap_inversion_ci` resamples **problems**, which is the sampling unit the
+claim is about: "on a benchmark like this one, how often would the ranking flip".
+Resampling problems moves every cell coherently — a problem that favours one
+model shifts all of that model's cells at once — which is exactly the dependence
+that makes the comparisons non-independent.
+
+The sharpest way to see the difference: a binomial width is a function of the
+comparison count alone, so halving the problems leaves it unchanged even though
+half the evidence is gone. There is a test for that.
+
+On the smoke run the correction matters a lot: raw rate 31.7%, binomial CI
+[19.9%, 43.4%], cluster CI **[0.0%, 46.7%]**. The binomial excludes zero; the
+honest interval does not. On ten problems the inversion rate is not
+distinguishable from none at all. At 200 problems the two widths are comparable
+(0.244 vs 0.225) and it is the calibration that differs, not the scale.
+
+**Correction:** I previously quoted a "binomial SE near 6%" for this metric in
+the power discussion and in an earlier commit message. That figure assumed
+independence the comparisons do not have, and it should not be used.
