@@ -1,3 +1,15 @@
+> **SUPERSEDED — historical record, written 2026-08-26.**
+>
+> Nearly every concrete claim below is now wrong: the test count, the sampler
+> count, the model shortlist, the budget, and the provider situation. It is kept
+> because it records what the project believed at the start, and several of those
+> beliefs turned out wrong in instructive ways — the shortlist did not exist on
+> the provider, `min_p` was not honoured, the budget was out by 3.4x, and one
+> model was withdrawn mid-study.
+>
+> For current state see [README.md](README.md); for the decision log with dates
+> see [TASKS.md](TASKS.md).
+
 # Session handoff — 2026-08-26
 
 Paste this into a new session to resume. Living status is in `TASKS.md`;

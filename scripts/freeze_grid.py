@@ -16,7 +16,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from samplerconfound.config import BENCHMARKS, FIXED, SAMPLER_CONFIGS
+from samplerconfound.config import (
+    BENCHMARKS,
+    FIXED,
+    N_MODEL_LEVELS,
+    SAMPLER_CONFIGS,
+)
 
 ROOT = Path(__file__).resolve().parent.parent
 CONFIGS = ROOT / "configs"
@@ -46,9 +51,9 @@ def main() -> None:
         path = CONFIGS / f"{name}.template.json"
         path.write_text(json.dumps(template(benchmark), indent=2) + "\n")
         spec = BENCHMARKS[benchmark]
-        n = 4 * len(SAMPLER_CONFIGS) * N_REPLICATES * spec["n_problems"]
+        n = N_MODEL_LEVELS * len(SAMPLER_CONFIGS) * N_REPLICATES * spec["n_problems"]
         print(f"{path.relative_to(ROOT)}: {benchmark}, {spec['n_problems']} problems, "
-              f"{n:,} generations at 4 models")
+              f"{n:,} generations at {N_MODEL_LEVELS} models")
 
 
 if __name__ == "__main__":

@@ -1,3 +1,8 @@
 numpy>=1.26
 requests>=2.31
 pytest>=8.0
+
+# Only for scripts/probe_sampler_support.py, which documents that the Anthropic
+# API no longer exposes decoding parameters at all. Kept as evidence for the
+# Discussion; nothing in the sweep or the test suite needs it.
+# anthropic>=1.0.0

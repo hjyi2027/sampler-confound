@@ -642,3 +642,42 @@ distinguishable from none at all. At 200 problems the two widths are comparable
 **Correction:** I previously quoted a "binomial SE near 6%" for this metric in
 the power discussion and in an earlier commit message. That figure assumed
 independence the comparisons do not have, and it should not be used.
+
+## 2026-09-07 — make the repo tell the truth
+
+No roadmap item named, so: the deadline has passed and the repo is now the
+deliverable, and it was lying in four places.
+
+**README was from Aug 26**, before every decision since. It stated the grid as
+"3 models x 6 samplers x 5 reps x 200 problems = 18,000" and costed it at "~600
+output tokens each". Reality: 3 x 7 x 5 x 260 = 27,300 generations at 1,021 and
+2,252 measured output tokens, $16.32. It also described caching as "under a hash
+of the request", which was never how the runner worked. Rewritten, with the
+deadline situation stated at the top rather than left for a reader to infer, and
+a new section for the findings that stand without the sweep.
+
+**`make smoke` invoked `python3 -m samplerconfound run --config
+configs/smoke.json`** — no module entrypoint, no such config. **`make probe` ran
+the Anthropic probe** under a comment claiming it verified the provider before
+money was spent; Anthropic is the provider this study ruled out. Both fixed, and
+targets added for pilot, select, sweep, analyse and power.
+
+**`N_MODEL_LEVELS` was still 4 while the frozen configs held 3.** `make select`
+would have failed today with "only 3 candidates landed inside the band" — a
+catalogue change reported as a band problem. Set to 3, with the reason and the
+cost (model component scatter 82% -> 100%) recorded at the definition, and two
+tests now pin the level count against the configs and against the candidate list
+so they cannot drift apart again.
+
+**`requirements.txt` omitted `anthropic`**, imported by the legacy probe. Left
+commented rather than added: nothing in the sweep or the test suite needs it.
+
+**SESSION-HANDOFF.md** is superseded in nearly every concrete claim. Marked as a
+historical record rather than deleted — it documents what the project believed at
+the start, and four of those beliefs were wrong in instructive ways.
+
+**Verified rather than assumed:** a fresh `git clone` into a clean venv installs
+from `requirements.txt` and runs all 215 tests green.
+
+**gpt-oss-20b re-checked on 2026-09-07: still 404**, eleven days after
+withdrawal. That is a settled state, not a blip.

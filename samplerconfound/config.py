@@ -283,7 +283,20 @@ def supports_grid(candidate: dict, samplers: list[dict] | None = None) -> bool:
 
 # Pre-registered selection rule, fixed BEFORE the pilot is run so the model set
 # cannot be tuned until the headline looks good.
-N_MODEL_LEVELS = 4
+# Three, not the four originally frozen. gpt-oss-20b was withdrawn from the
+# provider on 2026-08-27 and was still 404 on 2026-09-07, eleven days later, so
+# this is a settled state rather than a blip. No affordable near-peer replacement
+# exists on the catalogue: qwen3p7-plus costs $52.70 for its grid share and
+# nemotron-3-ultra more, while minimax-m3 was excluded because 26-33% of its AIME
+# output is unparseable — a model main effect made of formatting, sitting in the
+# headline ratio's denominator.
+#
+# The cost is stated rather than hidden: a variance component from k levels has
+# relative scatter sqrt(2/(k-1)), so the model component goes from 82% at four
+# levels to 100% at three. Restore this to 4 if gpt-oss-20b returns; the sweep is
+# resumable and design_fingerprint deliberately does not hash the model list, so
+# finished cells stand.
+N_MODEL_LEVELS = 3
 PILOT_BAND = (0.40, 0.97)
 PILOT_N_PROBLEMS = 100
 PILOT_SAMPLER = "standard"

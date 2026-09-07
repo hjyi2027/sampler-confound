@@ -74,7 +74,7 @@ def test_shortlist_is_large_enough_and_distinct():
 # --------------------------------------------------------------------------
 def test_selects_the_tightest_band():
     pilot = dict(zip(FAKE, [0.60, 0.62, 0.61, 0.63, 0.80, 0.75]))
-    chosen = select_models(pilot, families=FAKE_FAM)
+    chosen = select_models(pilot, k=4, families=FAKE_FAM)
     assert sorted(chosen) == sorted(FAKE[:4])
 
 
@@ -98,7 +98,7 @@ def test_family_diversity_breaks_ties():
     # Several subsets tie at spread 0.0; the four-vendor one must win, because
     # the paper's claim is about model *choice*, not one vendor's size ladder.
     pilot = dict.fromkeys(FAKE, 0.70)
-    chosen = select_models(pilot, families=fam)
+    chosen = select_models(pilot, k=4, families=fam)
     assert len({fam[m] for m in chosen}) == 4
 
 
@@ -217,8 +217,40 @@ def test_an_unaffordable_grid_fails_loudly_rather_than_silently_shrinking():
     others = [c["id"] for c in MODEL_CANDIDATES
               if supports_grid(c) and grid_cost_usd(c) > 2]
     pilot = dict.fromkeys(expensive + others, 0.70)
-    if len(pilot) >= 4 and not any(
-        affordable(c) for c in __import__("itertools").combinations(sorted(pilot), 4)
+    k = N_MODEL_LEVELS
+    if len(pilot) >= k and not any(
+        affordable(c) for c in __import__("itertools").combinations(sorted(pilot), k)
     ):
         with pytest.raises(ValueError, match="no affordable set"):
             select_models(pilot)
+
+
+def test_level_count_matches_the_frozen_configs():
+    """N_MODEL_LEVELS and configs/ must not drift apart.
+
+    They did: gpt-oss-20b's withdrawal left the configs at three models while
+    N_MODEL_LEVELS still said four, so `make select` would have raised "only 3
+    candidates landed inside the band" — a real failure reported as a band
+    problem rather than as the catalogue change it was.
+    """
+    import json
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parent.parent
+    for name in ("main", "aime"):
+        cfg = root / "configs" / f"{name}.json"
+        if not cfg.exists():
+            continue
+        models = json.loads(cfg.read_text())["models"]
+        assert len(models) == N_MODEL_LEVELS, (
+            f"configs/{name}.json has {len(models)} models, "
+            f"N_MODEL_LEVELS is {N_MODEL_LEVELS}"
+        )
+
+
+def test_enough_usable_candidates_exist_for_the_declared_level_count():
+    usable = [c for c in MODEL_CANDIDATES if supports_grid(c)]
+    assert len(usable) >= N_MODEL_LEVELS, (
+        f"{len(usable)} candidates can run the grid but {N_MODEL_LEVELS} levels "
+        "are declared; selection cannot succeed"
+    )
