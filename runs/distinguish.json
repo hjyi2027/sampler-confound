@@ -1,0 +1,1067 @@
+{
+  "n_per_arm": 40,
+  "permutations": 10000,
+  "note": "qwen3p7-plus run at max_tokens=1024 (it emits empty content below that); all others 256. max_tokens is held fixed WITHIN each contrast, which is what the test requires, and is never compared across models.",
+  "results": [
+    {
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "parameter": "temperature",
+      "setting_a": {
+        "temperature": 0.0
+      },
+      "setting_b": {
+        "temperature": 1.5
+      },
+      "n_tight": 40,
+      "n_open": 39,
+      "support_tight": 29,
+      "support_open": 39,
+      "entropy_tight": 4.471928094887362,
+      "entropy_open": 5.285402218862248,
+      "dh": 0.8134741239748857,
+      "dh_null_mean": -0.026973443646401467,
+      "dh_p": 0.00019998000199980003,
+      "tv": 1.0,
+      "tv_null_mean": 0.8810942307692309,
+      "tv_p": 0.00019998000199980003,
+      "p_value": 0.00019998000199980003,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 0.8404475676212871
+    },
+    {
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "parameter": "top_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_p": 0.01
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_p": 1.0
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 38,
+      "support_open": 40,
+      "entropy_tight": 5.221928094887363,
+      "entropy_open": 5.321928094887363,
+      "dh": 0.09999999999999964,
+      "dh_null_mean": 0.0005349999999999982,
+      "dh_p": 0.06269373062693731,
+      "tv": 1.0,
+      "tv_null_mean": 0.9747674999999999,
+      "tv_p": 0.2455754424557544,
+      "p_value": 0.06269373062693731,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 0.09946499999999965
+    },
+    {
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "parameter": "top_k",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_k": 1
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_k": 100
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 32,
+      "support_open": 40,
+      "entropy_tight": 4.784183719779189,
+      "entropy_open": 5.321928094887363,
+      "dh": 0.5377443751081739,
+      "dh_null_mean": -0.0028180299518902096,
+      "dh_p": 0.00029997000299970003,
+      "tv": 1.0,
+      "tv_null_mean": 0.9099825,
+      "tv_p": 0.0031996800319968005,
+      "p_value": 0.00029997000299970003,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 0.540562405060064
+    },
+    {
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "parameter": "min_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "min_p": 0.9
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "min_p": 0.0
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 36,
+      "support_open": 40,
+      "entropy_tight": 5.1030559073332755,
+      "entropy_open": 5.321928094887363,
+      "dh": 0.2188721875540871,
+      "dh_null_mean": 5.661656266224746e-06,
+      "dh_p": 0.0044995500449955,
+      "tv": 1.0,
+      "tv_null_mean": 0.9555825000000001,
+      "tv_p": 0.0565943405659434,
+      "p_value": 0.0044995500449955,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 0.21886652589782088
+    },
+    {
+      "model": "gpt-oss-120b",
+      "parameter": "temperature",
+      "setting_a": {
+        "temperature": 0.0
+      },
+      "setting_b": {
+        "temperature": 1.5
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 1,
+      "support_open": 40,
+      "entropy_tight": -0.0,
+      "entropy_open": 5.321928094887363,
+      "dh": 5.321928094887363,
+      "dh_null_mean": 0.006380531154484467,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 1.0,
+      "tv_null_mean": 0.544085,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 5.315547563732878
+    },
+    {
+      "model": "gpt-oss-120b",
+      "parameter": "top_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_p": 0.01
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_p": 1.0
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 1,
+      "support_open": 28,
+      "entropy_tight": -0.0,
+      "entropy_open": 4.553055907333276,
+      "dh": 4.553055907333276,
+      "dh_null_mean": 0.010766351683288069,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.9,
+      "tv_null_mean": 0.39788999999999997,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 4.542289555649988
+    },
+    {
+      "model": "gpt-oss-120b",
+      "parameter": "top_k",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_k": 1
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_k": 100
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 1,
+      "support_open": 30,
+      "entropy_tight": -0.0,
+      "entropy_open": 4.753055907333276,
+      "dh": 4.753055907333276,
+      "dh_null_mean": 0.007112825919178687,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.925,
+      "tv_null_mean": 0.412285,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 4.745943081414097
+    },
+    {
+      "model": "gpt-oss-120b",
+      "parameter": "min_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "min_p": 0.9
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "min_p": 0.0
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 1,
+      "support_open": 29,
+      "entropy_tight": -0.0,
+      "entropy_open": 4.643942707918269,
+      "dh": 4.643942707918269,
+      "dh_null_mean": 0.004318821116427401,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.875,
+      "tv_null_mean": 0.40655,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 4.639623886801841
+    },
+    {
+      "model": "deepseek-v4-flash-0731",
+      "parameter": "temperature",
+      "setting_a": {
+        "temperature": 0.0
+      },
+      "setting_b": {
+        "temperature": 1.5
+      },
+      "n_tight": 40,
+      "n_open": 38,
+      "support_tight": 12,
+      "support_open": 38,
+      "entropy_tight": 2.6139215141407393,
+      "entropy_open": 5.247927513443585,
+      "dh": 2.634005999302846,
+      "dh_null_mean": -0.046544391227468375,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.9736842105263158,
+      "tv_null_mean": 0.6789957894736842,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 2.6805503905303145
+    },
+    {
+      "model": "deepseek-v4-flash-0731",
+      "parameter": "top_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_p": 0.01
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_p": 1.0
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 9,
+      "support_open": 34,
+      "entropy_tight": 2.5695041841804205,
+      "entropy_open": 4.912814895472356,
+      "dh": 2.3433107112919354,
+      "dh_null_mean": 0.0049172964960635095,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.9,
+      "tv_null_mean": 0.6016,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 2.338393414795872
+    },
+    {
+      "model": "deepseek-v4-flash-0731",
+      "parameter": "top_k",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_k": 1
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_k": 100
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 9,
+      "support_open": 37,
+      "entropy_tight": 2.1096203523184247,
+      "entropy_open": 5.1219280948873624,
+      "dh": 3.0123077425689377,
+      "dh_null_mean": 0.0047101463097732246,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.9750000000000001,
+      "tv_null_mean": 0.6172275,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 3.0075975962591643
+    },
+    {
+      "model": "deepseek-v4-flash-0731",
+      "parameter": "min_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "min_p": 0.9
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "min_p": 0.0
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 10,
+      "support_open": 35,
+      "entropy_tight": 2.4628754146415788,
+      "entropy_open": 4.934183719779189,
+      "dh": 2.4713083051376104,
+      "dh_null_mean": -0.00222895345140766,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.925,
+      "tv_null_mean": 0.59493,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 2.473537258589018
+    },
+    {
+      "model": "minimax-m3",
+      "parameter": "temperature",
+      "setting_a": {
+        "temperature": 0.0
+      },
+      "setting_b": {
+        "temperature": 1.5
+      },
+      "n_tight": 40,
+      "n_open": 31,
+      "support_tight": 1,
+      "support_open": 30,
+      "entropy_tight": -0.0,
+      "entropy_open": 4.889680181354616,
+      "dh": 4.889680181354616,
+      "dh_null_mean": -0.1446563896639317,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 1.0,
+      "tv_null_mean": 0.47251112903225806,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 5.034336571018548
+    },
+    {
+      "model": "minimax-m3",
+      "parameter": "top_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_p": 0.01
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_p": 1.0
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 1,
+      "support_open": 30,
+      "entropy_tight": -0.0,
+      "entropy_open": 4.6117687959731954,
+      "dh": 4.6117687959731954,
+      "dh_null_mean": 0.010266570334918984,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.825,
+      "tv_null_mean": 0.41272250000000005,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 4.601502225638276
+    },
+    {
+      "model": "minimax-m3",
+      "parameter": "top_k",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_k": 1
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_k": 100
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 1,
+      "support_open": 31,
+      "entropy_tight": -0.0,
+      "entropy_open": 4.784183719779189,
+      "dh": 4.784183719779189,
+      "dh_null_mean": 0.001298380701265372,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.925,
+      "tv_null_mean": 0.4320125,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 4.782885339077923
+    },
+    {
+      "model": "minimax-m3",
+      "parameter": "min_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "min_p": 0.9
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "min_p": 0.0
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 1,
+      "support_open": 32,
+      "entropy_tight": -0.0,
+      "entropy_open": 4.781687083026442,
+      "dh": 4.781687083026442,
+      "dh_null_mean": 0.0061458853091174055,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.875,
+      "tv_null_mean": 0.43781000000000003,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 4.775541197717325
+    },
+    {
+      "model": "muse-glimmer-30b",
+      "parameter": "temperature",
+      "setting_a": {
+        "temperature": 0.0
+      },
+      "setting_b": {
+        "temperature": 1.5
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 2,
+      "support_open": 33,
+      "entropy_tight": 0.954434002924965,
+      "entropy_open": 4.8341837197791895,
+      "dh": 3.8797497168542243,
+      "dh_null_mean": 0.003214275887523872,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.85,
+      "tv_null_mean": 0.48185249999999996,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 3.8765354409667006
+    },
+    {
+      "model": "muse-glimmer-30b",
+      "parameter": "top_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_p": 0.01
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_p": 1.0
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 2,
+      "support_open": 25,
+      "entropy_tight": 0.6098403047164004,
+      "entropy_open": 4.293942707918269,
+      "dh": 3.684102403201869,
+      "dh_null_mean": 0.0047650837938652685,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.85,
+      "tv_null_mean": 0.39069750000000003,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 3.679337319408004
+    },
+    {
+      "model": "muse-glimmer-30b",
+      "parameter": "top_k",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_k": 1
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_k": 100
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 2,
+      "support_open": 18,
+      "entropy_tight": 0.7691928290130138,
+      "entropy_open": 3.651712212208019,
+      "dh": 2.8825193831950053,
+      "dh_null_mean": 0.0012990106031375518,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.775,
+      "tv_null_mean": 0.3109625,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 2.881220372591868
+    },
+    {
+      "model": "muse-glimmer-30b",
+      "parameter": "min_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "min_p": 0.9
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "min_p": 0.0
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 4,
+      "support_open": 22,
+      "entropy_tight": 1.2168750678823046,
+      "entropy_open": 4.124024420865021,
+      "dh": 2.907149352982717,
+      "dh_null_mean": -0.0016409897898138005,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.7000000000000001,
+      "tv_null_mean": 0.3532525,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 2.9087903427725306
+    },
+    {
+      "model": "minimax-m2p7",
+      "parameter": "temperature",
+      "setting_a": {
+        "temperature": 0.0
+      },
+      "setting_b": {
+        "temperature": 1.5
+      },
+      "n_tight": 0,
+      "n_open": 0,
+      "support_tight": 0,
+      "support_open": 0,
+      "entropy_tight": NaN,
+      "entropy_open": NaN,
+      "dh": NaN,
+      "dh_null_mean": NaN,
+      "dh_p": NaN,
+      "tv": NaN,
+      "tv_null_mean": NaN,
+      "tv_p": NaN,
+      "p_value": NaN,
+      "n_permutations": 10000,
+      "status": "insufficient",
+      "detail": "n=0/0; need >= 5 per arm",
+      "excess": NaN
+    },
+    {
+      "model": "minimax-m2p7",
+      "parameter": "top_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_p": 0.01
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_p": 1.0
+      },
+      "n_tight": 0,
+      "n_open": 0,
+      "support_tight": 0,
+      "support_open": 0,
+      "entropy_tight": NaN,
+      "entropy_open": NaN,
+      "dh": NaN,
+      "dh_null_mean": NaN,
+      "dh_p": NaN,
+      "tv": NaN,
+      "tv_null_mean": NaN,
+      "tv_p": NaN,
+      "p_value": NaN,
+      "n_permutations": 10000,
+      "status": "insufficient",
+      "detail": "n=0/0; need >= 5 per arm",
+      "excess": NaN
+    },
+    {
+      "model": "minimax-m2p7",
+      "parameter": "top_k",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_k": 1
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_k": 100
+      },
+      "n_tight": 0,
+      "n_open": 0,
+      "support_tight": 0,
+      "support_open": 0,
+      "entropy_tight": NaN,
+      "entropy_open": NaN,
+      "dh": NaN,
+      "dh_null_mean": NaN,
+      "dh_p": NaN,
+      "tv": NaN,
+      "tv_null_mean": NaN,
+      "tv_p": NaN,
+      "p_value": NaN,
+      "n_permutations": 10000,
+      "status": "insufficient",
+      "detail": "n=0/0; need >= 5 per arm",
+      "excess": NaN
+    },
+    {
+      "model": "minimax-m2p7",
+      "parameter": "min_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "min_p": 0.9
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "min_p": 0.0
+      },
+      "n_tight": 0,
+      "n_open": 0,
+      "support_tight": 0,
+      "support_open": 0,
+      "entropy_tight": NaN,
+      "entropy_open": NaN,
+      "dh": NaN,
+      "dh_null_mean": NaN,
+      "dh_p": NaN,
+      "tv": NaN,
+      "tv_null_mean": NaN,
+      "tv_p": NaN,
+      "p_value": NaN,
+      "n_permutations": 10000,
+      "status": "insufficient",
+      "detail": "n=0/0; need >= 5 per arm",
+      "excess": NaN
+    },
+    {
+      "model": "nemotron-3-ultra-nvfp4",
+      "parameter": "temperature",
+      "setting_a": {
+        "temperature": 0.0
+      },
+      "setting_b": {
+        "temperature": 1.5
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 2,
+      "support_open": 35,
+      "entropy_tight": 0.934068055375491,
+      "entropy_open": 5.053055907333276,
+      "dh": 4.118987851957785,
+      "dh_null_mean": 0.004352057505096869,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.925,
+      "tv_null_mean": 0.49658,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 4.114635794452688
+    },
+    {
+      "model": "nemotron-3-ultra-nvfp4",
+      "parameter": "top_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_p": 0.01
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_p": 1.0
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 2,
+      "support_open": 23,
+      "entropy_tight": 0.99819587904281,
+      "entropy_open": 4.275070520364182,
+      "dh": 3.2768746413213723,
+      "dh_null_mean": 0.0010678826925953138,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.8,
+      "tv_null_mean": 0.35966750000000003,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 3.275806758628777
+    },
+    {
+      "model": "nemotron-3-ultra-nvfp4",
+      "parameter": "top_k",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_k": 1
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_k": 100
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 2,
+      "support_open": 25,
+      "entropy_tight": 0.99819587904281,
+      "entropy_open": 4.412814895472356,
+      "dh": 3.414619016429546,
+      "dh_null_mean": 0.002659982907649296,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.775,
+      "tv_null_mean": 0.37540250000000003,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 3.4119590335218963
+    },
+    {
+      "model": "nemotron-3-ultra-nvfp4",
+      "parameter": "min_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "min_p": 0.9
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "min_p": 0.0
+      },
+      "n_tight": 40,
+      "n_open": 40,
+      "support_tight": 2,
+      "support_open": 20,
+      "entropy_tight": 0.934068055375491,
+      "entropy_open": 4.0653115322251026,
+      "dh": 3.131243476849612,
+      "dh_null_mean": 0.0047067179296624816,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.8,
+      "tv_null_mean": 0.33365,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 3.1265367589199493
+    },
+    {
+      "model": "kimi-k2p6",
+      "parameter": "temperature",
+      "setting_a": {
+        "temperature": 0.0
+      },
+      "setting_b": {
+        "temperature": 1.5
+      },
+      "n_tight": 34,
+      "n_open": 28,
+      "support_tight": 13,
+      "support_open": 28,
+      "entropy_tight": 3.267630400634833,
+      "entropy_open": 4.807354922057605,
+      "dh": 1.5397245214227717,
+      "dh_null_mean": -0.1704893245035047,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.9285714285714286,
+      "tv_null_mean": 0.6909546218487395,
+      "tv_p": 9.999000099990002e-05,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 1.7102138459262763
+    },
+    {
+      "model": "kimi-k2p6",
+      "parameter": "top_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_p": 0.01
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_p": 1.0
+      },
+      "n_tight": 34,
+      "n_open": 25,
+      "support_tight": 18,
+      "support_open": 21,
+      "entropy_tight": 3.6049224895866128,
+      "entropy_open": 4.179470570797252,
+      "dh": 0.5745480812106396,
+      "dh_null_mean": -0.2908260331447115,
+      "dh_p": 0.021997800219978002,
+      "tv": 0.76,
+      "tv_null_mean": 0.6874283529411764,
+      "tv_p": 0.10058994100589941,
+      "p_value": 0.021997800219978002,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 0.865374114355351
+    },
+    {
+      "model": "kimi-k2p6",
+      "parameter": "top_k",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_k": 1
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_k": 100
+      },
+      "n_tight": 35,
+      "n_open": 32,
+      "support_tight": 20,
+      "support_open": 28,
+      "entropy_tight": 3.917672389614489,
+      "entropy_open": 4.6371987351738495,
+      "dh": 0.7195263455593603,
+      "dh_null_mean": -0.08489145695886544,
+      "dh_p": 0.017998200179982,
+      "tv": 0.7839285714285714,
+      "tv_null_mean": 0.7248685714285714,
+      "tv_p": 0.12108789121087891,
+      "p_value": 0.017998200179982,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 0.8044178025182258
+    },
+    {
+      "model": "kimi-k2p6",
+      "parameter": "min_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "min_p": 0.9
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "min_p": 0.0
+      },
+      "n_tight": 34,
+      "n_open": 35,
+      "support_tight": 17,
+      "support_open": 27,
+      "entropy_tight": 3.477024973539649,
+      "entropy_open": 4.593429088311724,
+      "dh": 1.1164041147720747,
+      "dh_null_mean": 0.0187994188502469,
+      "dh_p": 0.0031996800319968005,
+      "tv": 0.7126050420168067,
+      "tv_null_mean": 0.6119430252100839,
+      "tv_p": 0.036896310368963105,
+      "p_value": 0.0031996800319968005,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 1.0976046959218277
+    },
+    {
+      "model": "qwen3p7-plus",
+      "parameter": "temperature",
+      "setting_a": {
+        "temperature": 0.0
+      },
+      "setting_b": {
+        "temperature": 1.5
+      },
+      "n_tight": 38,
+      "n_open": 31,
+      "support_tight": 6,
+      "support_open": 26,
+      "entropy_tight": 1.872292103844498,
+      "entropy_open": 4.515175649921171,
+      "dh": 2.642883546076673,
+      "dh_null_mean": -0.1199187343698379,
+      "dh_p": 9.999000099990002e-05,
+      "tv": 0.7419354838709677,
+      "tv_null_mean": 0.492540662139219,
+      "tv_p": 0.00019998000199980003,
+      "p_value": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 2.762802280446511
+    },
+    {
+      "model": "qwen3p7-plus",
+      "parameter": "top_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_p": 0.01
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_p": 1.0
+      },
+      "n_tight": 33,
+      "n_open": 31,
+      "support_tight": 13,
+      "support_open": 14,
+      "entropy_tight": 2.8830305652763983,
+      "entropy_open": 3.079818364069643,
+      "dh": 0.19678779879324448,
+      "dh_null_mean": -0.03172805292486879,
+      "dh_p": 0.32486751324867513,
+      "tv": 0.35581622678396874,
+      "tv_null_mean": 0.3951497556207234,
+      "tv_p": 0.7543245675432457,
+      "p_value": 0.32486751324867513,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 0.22851585171811328
+    },
+    {
+      "model": "qwen3p7-plus",
+      "parameter": "top_k",
+      "setting_a": {
+        "temperature": 1.0,
+        "top_k": 1
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "top_k": 100
+      },
+      "n_tight": 39,
+      "n_open": 28,
+      "support_tight": 6,
+      "support_open": 16,
+      "entropy_tight": 1.932469640389469,
+      "entropy_open": 3.373820440364118,
+      "dh": 1.4413507999746489,
+      "dh_null_mean": -0.12676588977903136,
+      "dh_p": 0.0007999200079992001,
+      "tv": 0.4386446886446886,
+      "tv_null_mean": 0.3483513736263736,
+      "tv_p": 0.07979202079792021,
+      "p_value": 0.0007999200079992001,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 1.5681166897536802
+    },
+    {
+      "model": "qwen3p7-plus",
+      "parameter": "min_p",
+      "setting_a": {
+        "temperature": 1.0,
+        "min_p": 0.9
+      },
+      "setting_b": {
+        "temperature": 1.0,
+        "min_p": 0.0
+      },
+      "n_tight": 34,
+      "n_open": 33,
+      "support_tight": 12,
+      "support_open": 18,
+      "entropy_tight": 2.935310979962868,
+      "entropy_open": 3.861983513035609,
+      "dh": 0.926672533072741,
+      "dh_null_mean": -0.019146761076862424,
+      "dh_p": 0.013498650134986502,
+      "tv": 0.5463458110516934,
+      "tv_null_mean": 0.46451221033868095,
+      "tv_p": 0.1136886311368863,
+      "p_value": 0.013498650134986502,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "excess": 0.9458192941496034
+    }
+  ],
+  "p_holm": {
+    "gpt-oss-120b|temperature": 0.0031996800319968005,
+    "gpt-oss-120b|top_p": 0.0031996800319968005,
+    "gpt-oss-120b|top_k": 0.0031996800319968005,
+    "gpt-oss-120b|min_p": 0.0031996800319968005,
+    "deepseek-v4-flash-0731|temperature": 0.0031996800319968005,
+    "deepseek-v4-flash-0731|top_p": 0.0031996800319968005,
+    "deepseek-v4-flash-0731|top_k": 0.0031996800319968005,
+    "deepseek-v4-flash-0731|min_p": 0.0031996800319968005,
+    "minimax-m3|temperature": 0.0031996800319968005,
+    "minimax-m3|top_p": 0.0031996800319968005,
+    "minimax-m3|top_k": 0.0031996800319968005,
+    "minimax-m3|min_p": 0.0031996800319968005,
+    "muse-glimmer-30b|temperature": 0.0031996800319968005,
+    "muse-glimmer-30b|top_p": 0.0031996800319968005,
+    "muse-glimmer-30b|top_k": 0.0031996800319968005,
+    "muse-glimmer-30b|min_p": 0.0031996800319968005,
+    "nemotron-3-ultra-nvfp4|temperature": 0.0031996800319968005,
+    "nemotron-3-ultra-nvfp4|top_p": 0.0031996800319968005,
+    "nemotron-3-ultra-nvfp4|top_k": 0.0031996800319968005,
+    "nemotron-3-ultra-nvfp4|min_p": 0.0031996800319968005,
+    "kimi-k2p6|temperature": 0.0031996800319968005,
+    "qwen3p7-plus|temperature": 0.0031996800319968005,
+    "nemotron-lightning-3p5-30b-a3b|temperature": 0.0031996800319968005,
+    "nemotron-lightning-3p5-30b-a3b|top_k": 0.0031996800319968005,
+    "qwen3p7-plus|top_k": 0.006399360063993601,
+    "kimi-k2p6|min_p": 0.022397760223977603,
+    "nemotron-lightning-3p5-30b-a3b|min_p": 0.026997300269973,
+    "qwen3p7-plus|min_p": 0.0674932506749325,
+    "kimi-k2p6|top_k": 0.071992800719928,
+    "kimi-k2p6|top_p": 0.071992800719928,
+    "nemotron-lightning-3p5-30b-a3b|top_p": 0.12538746125387462,
+    "qwen3p7-plus|top_p": 0.32486751324867513
+  }
+}

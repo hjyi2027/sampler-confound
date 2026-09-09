@@ -108,8 +108,35 @@ DEFAULT_MODELS: list[str] = []
 # `pricing.py`. Cost is a real constraint at a $25 budget, and a candidate that
 # cannot be afforded across the full grid is not a candidate.
 #
-# `sampler_support` records what `scripts/probe_fireworks.py` MEASURED on
-# 2026-08-27, never what the docs claim. The probe found that `min_p` is honoured
+# `sampler_support` now records the result of a two-sample permutation test
+# (`scripts/probe_distinguishability.py`, 2026-09-09), NOT the earlier
+# distinct-count heuristic, which was wrong in the more dangerous direction.
+#
+# The heuristic sampled eight completions at an extreme setting and called the
+# parameter ignored if three or more were distinct. It was not detecting ignored
+# parameters; it was failing to detect honoured ones. Under a properly powered
+# test min_p is distinguishable on 7 of 8 models rather than 5 of 10, and every
+# cell the heuristic called IGNORED that could be retested came back
+# distinguishable. Two design decisions rested on those verdicts — dropping the
+# minp cell and excluding muse-glimmer-30b — and both were made on bad evidence.
+#
+# Values are three-state on purpose, because the boolean they replace conflated
+# two different things:
+#
+#   "yes"         the distribution measurably narrows at the tight setting,
+#                 Holm-adjusted p < 0.05 across the whole grid
+#   "unverified"  the test could not distinguish the two settings. This is
+#                 ABSENCE OF EVIDENCE, not evidence of absence, and at these
+#                 sample sizes it is often just low output entropy on that model
+#   "rejected"    the API refuses the parameter outright — loud and safe
+#   None          not tested
+#
+# The distinction is load-bearing. Treating "unverified" as disqualifying would
+# have silently dropped nemotron-lightning, one of only three affordable model
+# levels, on a top_p result of dH=+0.10 at p=0.063 — excluding a model for a
+# measurement we failed to make. supports_grid() therefore excludes on "rejected"
+# only, and unverified cells are reported as a limitation instead of quietly
+# deciding the design. The probe found that `min_p` is honoured
 # by some models on this provider and silently ignored by others, which is a far
 # worse failure than a uniform one: the `minp` cell would be a genuine condition
 # for two model levels and a duplicate of `hightemp` for the other two. That is
@@ -124,7 +151,7 @@ DEFAULT_MODELS: list[str] = []
 MODEL_CANDIDATES = [
     {"id": "accounts/fireworks/models/nemotron-lightning-3p5-30b-a3b", "family": "nvidia",
      "usd_per_1m": (0.05, 0.20),
-     "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": False},
+     "sampler_support": {"temperature": "yes", "top_p": "unverified", "top_k": "yes", "min_p": "yes"},
      "deterministic_at_t0": True,
      "note": "only 2/8 distinct at T=1.5 — unusually narrow output distribution"},
     # WITHDRAWN from the serverless catalogue on 2026-08-27, hours after the grid
@@ -134,45 +161,53 @@ MODEL_CANDIDATES = [
     # tidy away. `available` is checked before the sweep.
     {"id": "accounts/fireworks/models/gpt-oss-20b", "family": "openai",
      "usd_per_1m": (0.07, 0.30),
-     "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": True},
+     # Never retested: withdrawn before the permutation test existed, so these
+     # are None rather than the heuristic's booleans, which are not comparable
+     # to the other rows and should not be read as if they were.
+     "sampler_support": {"temperature": None, "top_p": None, "top_k": None, "min_p": None},
      "deterministic_at_t0": True,
      "available": False,
      "withdrawn": "2026-08-27"},
     {"id": "accounts/fireworks/models/gpt-oss-120b", "family": "openai",
      "usd_per_1m": (0.15, 0.60),
-     "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": True},
+     "sampler_support": {"temperature": "yes", "top_p": "yes", "top_k": "yes", "min_p": "yes"},
      "deterministic_at_t0": True},
     {"id": "accounts/fireworks/models/deepseek-v4-flash-0731", "family": "deepseek",
      "usd_per_1m": (0.22, 0.66),
-     "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": False},
+     "sampler_support": {"temperature": "yes", "top_p": "yes", "top_k": "yes", "min_p": "yes"},
      "deterministic_at_t0": False},
     {"id": "accounts/fireworks/models/minimax-m3", "family": "minimax",
      "usd_per_1m": (0.30, 1.20),
-     "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": True},
+     "sampler_support": {"temperature": "yes", "top_p": "yes", "top_k": "yes", "min_p": "yes"},
      "deterministic_at_t0": True},
     {"id": "accounts/fireworks/models/muse-glimmer-30b", "family": "muse",
      "usd_per_1m": (0.35, 1.50),
-     "sampler_support": {"temperature": True, "top_p": False, "top_k": True, "min_p": False},
+     "sampler_support": {"temperature": "yes", "top_p": "yes", "top_k": "yes", "min_p": "yes"},
      "deterministic_at_t0": False,
      "note": "ignores top_p, so it cannot run `standard` — the most consequential cell"},
+    # WITHDRAWN 2026-09-09, the second model to vanish mid-project. Returned 404
+    # from the inference API when the distinguishability grid ran, so its earlier
+    # "rejects temperature > 1.0" result can no longer be rechecked.
     {"id": "accounts/fireworks/models/minimax-m2p7", "family": "minimax",
      "usd_per_1m": (0.30, 1.20),
-     "sampler_support": {"temperature": False, "top_p": None, "top_k": None, "min_p": None},
+     "sampler_support": {"temperature": None, "top_p": None, "top_k": None, "min_p": None},
      "deterministic_at_t0": False,
-     "note": "rejects temperature > 1.0 outright, so the grid's range is unreachable"},
+     "available": False,
+     "withdrawn": "2026-09-09",
+     "note": "rejected temperature > 1.0 while it existed; now 404"},
     # Probed 2026-08-27 after gpt-oss-20b was withdrawn from the catalogue
     # mid-project. Both honour every parameter, min_p included.
     {"id": "accounts/fireworks/models/qwen3p7-plus", "family": "alibaba",
      "usd_per_1m": (0.40, 1.60),
-     "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": True},
+     "sampler_support": {"temperature": "yes", "top_p": "unverified", "top_k": "yes", "min_p": "unverified"},
      "deterministic_at_t0": False},
     {"id": "accounts/fireworks/models/nemotron-3-ultra-nvfp4", "family": "nvidia",
      "usd_per_1m": (0.60, 2.40),
-     "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": True},
+     "sampler_support": {"temperature": "yes", "top_p": "yes", "top_k": "yes", "min_p": "yes"},
      "deterministic_at_t0": True},
     {"id": "accounts/fireworks/models/kimi-k2p6", "family": "moonshot",
      "usd_per_1m": (0.95, 4.00),
-     "sampler_support": {"temperature": True, "top_p": True, "top_k": True, "min_p": False},
+     "sampler_support": {"temperature": "yes", "top_p": "unverified", "top_k": "unverified", "min_p": "yes"},
      "deterministic_at_t0": False,
      "note": "degenerates into multilingual token soup at T=1.5; also unaffordable"},
 ]
@@ -268,18 +303,34 @@ def affordable(models: list[str] | tuple[str, ...],
 
 
 def supports_grid(candidate: dict, samplers: list[dict] | None = None) -> bool:
-    """Does this model honour every parameter the grid needs?
+    """Can this model run every condition the grid contains?
 
-    Unprobed counts as unsupported. The whole point of the probe is that an
-    unverified parameter is indistinguishable from a working one until the
-    numbers are already wrong.
+    Excludes on evidence of breakage — a parameter the API rejects, or a model
+    that is gone — and NOT on "unverified", which only records that a
+    two-sample test lacked the power to show an effect. Excluding on absence of
+    evidence would have removed a frozen model level over dH=+0.10 at p=0.063.
+
+    Untested is still disqualifying: an unmeasured parameter is indistinguishable
+    from a broken one until the numbers are already wrong.
     """
     if candidate.get("available") is False:
         return False
     support = candidate.get("sampler_support")
     if not support:
         return False
-    return all(support.get(p) for p in required_params(samplers))
+    vals = [support.get(p) for p in required_params(samplers)]
+    return all(v in ("yes", "unverified") for v in vals)
+
+
+def unverified_params(candidate: dict, samplers: list[dict] | None = None) -> list[str]:
+    """Parameters this model runs but whose effect was never demonstrated.
+
+    These belong in Limitations: if such a parameter is in fact ignored, its
+    grid cell is a duplicate of another for this model only.
+    """
+    support = candidate.get("sampler_support") or {}
+    return sorted(p for p in required_params(samplers)
+                  if support.get(p) == "unverified")
 
 # Pre-registered selection rule, fixed BEFORE the pilot is run so the model set
 # cannot be tuned until the headline looks good.

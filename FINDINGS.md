@@ -15,44 +15,77 @@ are given.
 
 ---
 
-## 1. Decoding parameters are honoured inconsistently, per model, and silently
+## 1. Decoding parameters: what a properly powered test says
 
-Ten models on one provider (Fireworks serverless), probed 2026-08-27 and
-2026-08-28 by `scripts/probe_fireworks.py`:
+**This section replaces an earlier claim of my own that did not survive
+testing.** The first version reported that `min_p` was honoured by 5 of 10 models
+and `top_p` by 8 of 10, from a probe that sampled eight completions at an extreme
+setting and called the parameter ignored if three or more were distinct. That is
+a yes/no with an arbitrary cutoff and no null, and it was wrong in the more
+dangerous direction: it was not detecting ignored parameters, it was failing to
+detect honoured ones.
 
-| model | temperature | top_p | top_k | min_p | deterministic at T=0 |
-|---|:--:|:--:|:--:|:--:|:--:|
-| nemotron-lightning-3p5-30b-a3b | yes | yes | yes | **no** | yes |
-| gpt-oss-20b | yes | yes | yes | yes | yes |
-| gpt-oss-120b | yes | yes | yes | yes | yes |
-| deepseek-v4-flash-0731 | yes | yes | yes | **no** | **no** |
-| minimax-m3 | yes | yes | yes | yes | yes |
-| muse-glimmer-30b | yes | **no** | yes | **no** | **no** |
-| minimax-m2p7 | **no** (rejects > 1.0) | — | — | — | **no** |
-| qwen3p7-plus | yes | yes | yes | yes | **no** |
-| nemotron-3-ultra-nvfp4 | yes | yes | yes | yes | yes |
-| kimi-k2p6 | yes | yes | yes | **no** | **no** |
+The proper test holds everything fixed, varies one parameter between two settings
+far apart in its range, draws 40 completions at each, and asks whether the two
+output distributions are distinguishable. **The null is exactly the failure
+mode** — if the parameter is ignored, both arms are the same configuration, the
+2N completions are iid from one distribution, and the labelled samples are
+exchangeable. A permutation test is then exact at any N with no distributional
+assumptions.
 
-**`min_p` is honoured by 5 of 10. `top_p` by 8 of 10.** Support is per *model*,
-not per provider, and it is not documented anywhere.
+Primary statistic: the one-sided entropy drop `dH = H(open) - H(tight)`, in bits,
+matching the mechanism (truncation narrows the distribution). Total variation
+distance is reported alongside as a two-sided check. Both are biased away from
+zero at finite N, so both are read against their own permutation null rather than
+against zero. Calibration before use: false-positive rate 5.5% at nominal 5%,
+power above 95% against a collapse effect.
 
-The failure is silent. An ignored parameter does not error; the request succeeds,
-the response looks normal, and the experimental cell it defines becomes a
-duplicate of some other cell — for that model only. In a crossed design that
-fabricates a model × sampler interaction out of nothing, and the interaction term
-is a quantity such studies report. The artifact is indistinguishable from the
-finding.
+dH in bits; **bold** is distinguishable at Holm-adjusted p < 0.05 across all 32
+tests; `ns` is not distinguishable.
 
-`muse-glimmer-30b` ignoring `top_p` is the sharpest case: `temperature 0.7,
-top_p 0.95` is the configuration most evaluation harnesses claim to use, so on
-that model the default condition silently is not the default condition.
+| model | temperature | top_p | top_k | min_p |
+|---|--:|--:|--:|--:|
+| deepseek-v4-flash-0731 | **2.63** | **2.34** | **3.01** | **2.47** |
+| gpt-oss-120b | **5.32** | **4.55** | **4.75** | **4.64** |
+| kimi-k2p6 | **1.54** | 0.57 ns | 0.72 ns | **1.12** |
+| minimax-m3 | **4.89** | **4.61** | **4.78** | **4.78** |
+| muse-glimmer-30b | **3.88** | **3.68** | **2.88** | **2.91** |
+| nemotron-3-ultra-nvfp4 | **4.12** | **3.28** | **3.41** | **3.13** |
+| nemotron-lightning-3p5-30b-a3b | **0.81** | 0.10 ns | **0.54** | **0.22** |
+| qwen3p7-plus | **2.64** | 0.20 ns | **1.44** | 0.93 ns |
 
-**How to detect it.** Acceptance proves nothing. The probe sets each parameter to
-a value so extreme that honouring it *must* collapse the output distribution —
-`top_p = 0.01`, `top_k = 1`, `min_p = 0.9` at temperature 1.5 — and samples eight
-completions of a high-entropy prompt. If diversity survives, the parameter was
-discarded. This costs a few cents and should precede any study whose independent
-variable is a decoding parameter.
+| parameter | distinguishable in |
+|---|---|
+| temperature | 8/8 models |
+| top_k | 7/8 |
+| min_p | 7/8 |
+| top_p | 5/8 |
+
+**Every cell the old heuristic called IGNORED and that could be retested came
+back distinguishable**: `min_p` on nemotron-lightning (dH +0.22), deepseek-v4-flash
+(+2.47), muse-glimmer-30b (+2.91) and kimi-k2p6 (+1.12), and `top_p` on
+muse-glimmer-30b (+3.68).
+
+Two design decisions in this project rested on those verdicts, and both were made
+on bad evidence: the `minp` cell was dropped from the grid, and muse-glimmer-30b
+was excluded from the model pool. The exclusion is reversed. Restoring the cell
+is a cost decision and is left open.
+
+**"Not distinguishable" is not "ignored".** Five cells failed to reach
+significance, and at these effect sizes that is usually low output entropy on
+that model rather than a dead parameter — nemotron-lightning's four dH values are
+0.81, 0.10, 0.54 and 0.22, against 4.5-5.3 for gpt-oss-120b on the same prompt.
+The code records three states (`yes` / `unverified` / `rejected`) precisely so
+that absence of evidence cannot silently exclude a model, which the boolean it
+replaced would have done to a frozen model level over dH = +0.10 at p = 0.063.
+
+Two collection failures worth recording, because both produce a confident-looking
+zero. `minimax-m2p7` is now **404 — a second model withdrawn** mid-project.
+`qwen3p7-plus` returns HTTP 200 with **empty content** whenever `max_tokens` cuts
+it off before it stops reasoning (739 reasoning tokens on this prompt), so at
+`max_tokens=256` every call succeeded, was billed, and yielded nothing; a
+collector that drops empty strings reports that as `n=0, insufficient` with no
+sign that anything was wrong.
 
 ## 2. Half the models are non-deterministic at temperature 0
 
@@ -217,7 +250,8 @@ extrapolation and is far better powered.
 
 | finding | script | data |
 |---|---|---|
-| §1, §2 | `scripts/probe_fireworks.py` | `runs/probe_params_*.json`, `runs/probe_replacement.json` |
+| §1 | `scripts/probe_distinguishability.py`, `samplerconfound/distinguish.py` | `runs/distinguish.json` |
+| §2 | `scripts/probe_fireworks.py` | `runs/probe_params_*.json` |
 | §3 | — | `MODEL_CANDIDATES` in `samplerconfound/config.py` |
 | §4 | `scripts/verify_grader.py`, `scripts/sample_for_grader_check.py` | `runs/grader_check/` |
 | §5 | `tests/test_variance.py`, `tests/test_inversion.py` | simulation |

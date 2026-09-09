@@ -1,0 +1,230 @@
+#!/usr/bin/env python3
+"""Is each decoding parameter honoured? One two-sample test per (model, parameter).
+
+Replaces the yes/no heuristic in `probe_fireworks.py`. For each pair, hold
+everything fixed, vary ONE parameter between two settings far apart in its range,
+draw N completions at each, and test whether the two output distributions are
+distinguishable by permutation. See `samplerconfound/distinguish.py` for why the
+null is exactly the failure mode being detected.
+
+    python3 scripts/probe_distinguishability.py --models gpt-oss-120b --n 40
+    python3 scripts/probe_distinguishability.py --all --n 40 --out runs/distinguish.json
+
+The prompt is deliberately high-entropy and trivial: power to detect an effect is
+highest where there is entropy to lose, and short completions keep the cost of
+2 x N x 4 calls per model to cents. This measures whether a parameter does
+anything at all, not how much it moves task accuracy — those are different
+questions and the second needs the task.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import sys
+import threading
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
+
+import requests
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+
+from samplerconfound.distinguish import assess_parameter, holm_adjust
+from samplerconfound.paths import resolve_out, show
+
+BASE = "https://api.fireworks.ai/inference/v1/chat/completions"
+PREFIX = "accounts/fireworks/models/"
+
+# Chosen empirically, not by taste. The one-word-noun prompt used by the old
+# probe has almost no entropy — support 3 of 20 on gpt-oss-120b, models converge
+# hard on "apple" — and a test cannot detect narrowing in a distribution that is
+# already narrow. This prompt gave support 21 and entropy 4.19 on the open arm.
+PROMPT = "Write one short sentence about anything at all. Reply with the sentence only."
+
+# (parameter, TIGHT setting, OPEN setting). One parameter varies; everything else
+# is identical between the arms, including temperature, which must be high enough
+# for a truncation parameter to have anything to truncate — at temperature 0 the
+# distribution is already a point mass and top_p/top_k/min_p cannot show an effect
+# even when honoured. Tight is the one that should narrow
+# the distribution if the parameter is honoured; the primary test is one-sided in
+# that direction. top_k tops out at 100 on this provider — 200 is rejected — so
+# the open arm uses the documented maximum rather than a value that errors.
+CONTRASTS = [
+    ("temperature", {"temperature": 0.0}, {"temperature": 1.5}),
+    ("top_p", {"temperature": 1.0, "top_p": 0.01}, {"temperature": 1.0, "top_p": 1.0}),
+    ("top_k", {"temperature": 1.0, "top_k": 1}, {"temperature": 1.0, "top_k": 100}),
+    ("min_p", {"temperature": 1.0, "min_p": 0.9}, {"temperature": 1.0, "min_p": 0.0}),
+]
+
+MAX_RETRIES = 5
+BACKOFF = 2.0
+_lock = threading.Lock()
+
+
+def load_key() -> str:
+    key = os.environ.get("FIREWORKS_API_KEY")
+    if not key and (ROOT / ".env").exists():
+        for line in (ROOT / ".env").read_text().splitlines():
+            if line.startswith("FIREWORKS_API_KEY="):
+                key = line.split("=", 1)[1].strip()
+    if not key:
+        raise SystemExit("no FIREWORKS_API_KEY (env or .env)")
+    return key
+
+
+def one(key: str, model: str, params: dict, max_tokens: int, effort: str | None):
+    """Return (completion, error, usage). Completion is None on failure."""
+    body = {"model": PREFIX + model,
+            "messages": [{"role": "user", "content": PROMPT}],
+            "max_tokens": max_tokens, **params}
+    if effort:
+        body["reasoning_effort"] = effort
+    for attempt in range(MAX_RETRIES):
+        try:
+            r = requests.post(BASE, headers={"Authorization": f"Bearer {key}"},
+                              json=body, timeout=180)
+        except requests.RequestException:
+            if attempt == MAX_RETRIES - 1:
+                return None, "network", {}
+            time.sleep(BACKOFF * 2 ** attempt)
+            continue
+        if r.status_code == 200:
+            d = r.json()
+            txt = (d["choices"][0]["message"].get("content") or "").strip().lower()
+            return txt.rstrip(".!,"), None, d.get("usage", {})
+        if r.status_code == 400:
+            # A rejected parameter is a loud, safe outcome and a different finding
+            # from an ignored one. Do not retry it.
+            try:
+                msg = r.json()["error"]["message"][:140]
+            except Exception:
+                msg = r.text[:140]
+            return None, f"rejected: {msg}", {}
+        if r.status_code in (429, 500, 502, 503, 504) and attempt < MAX_RETRIES - 1:
+            time.sleep(BACKOFF * 2 ** attempt)
+            continue
+        return None, f"http {r.status_code}", {}
+    return None, "exhausted", {}
+
+
+def collect(key, model, params, n, workers, max_tokens, effort):
+    """Returns (completions, errors, usage, n_empty).
+
+    Empty completions are counted, not silently dropped. qwen3p7-plus returns
+    HTTP 200 with empty content whenever max_tokens cuts it off before it stops
+    reasoning — 739 reasoning tokens on this prompt, so 256 yields nothing at
+    all. Dropping those quietly produced "n=0, insufficient" with no indication
+    that every call had in fact succeeded and been billed.
+    """
+    out, errs, usage = [], [], []
+    n_empty = 0
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futs = [pool.submit(one, key, model, params, max_tokens, effort)
+                for _ in range(n)]
+        for f in as_completed(futs):
+            txt, err, u = f.result()
+            if err:
+                errs.append(err)
+            elif txt:
+                out.append(txt)
+                usage.append(u)
+            else:
+                n_empty += 1
+                usage.append(u)
+    return out, errs, usage, n_empty
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--models", nargs="+", default=None)
+    ap.add_argument("--all", action="store_true",
+                    help="every model in MODEL_CANDIDATES that is still available")
+    ap.add_argument("--n", type=int, default=40, help="completions per arm")
+    ap.add_argument("--workers", type=int, default=8)
+    ap.add_argument("--max-tokens", type=int, default=1024,
+                    help="must exceed the model's reasoning budget or content is empty")
+    ap.add_argument("--effort", default="low")
+    ap.add_argument("--permutations", type=int, default=10_000)
+    ap.add_argument("--out", type=Path, default=None)
+    args = ap.parse_args()
+
+    if args.all:
+        from samplerconfound.config import MODEL_CANDIDATES
+        models = [c["id"].split("/")[-1] for c in MODEL_CANDIDATES
+                  if c.get("available") is not False]
+    else:
+        models = args.models or []
+    if not models:
+        raise SystemExit("give --models or --all")
+
+    key = load_key()
+    results, tokens = [], 0
+    t0 = time.time()
+
+    for model in models:
+        print(f"\n=== {model} ===")
+        for param, sa, sb in CONTRASTS:
+            a, ea, ua, empty_a = collect(key, model, sa, args.n, args.workers,
+                                         args.max_tokens, args.effort)
+            b, eb, ub, empty_b = collect(key, model, sb, args.n, args.workers,
+                                         args.max_tokens, args.effort)
+            tokens += sum(u.get("completion_tokens", 0) for u in ua + ub)
+
+            r = assess_parameter(model, param, sa, sb, a, b,
+                                 n_permutations=args.permutations)
+            rejected = [e for e in ea + eb if e.startswith("rejected")]
+            if rejected:
+                r.status = "rejected"
+                r.detail = rejected[0]
+
+            if (empty_a or empty_b) and r.status == "insufficient":
+                r.detail = (f"{empty_a + empty_b}/{2 * args.n} calls returned empty "
+                            f"content — succeeded and were billed, but max_tokens "
+                            f"({args.max_tokens}) cut them off before any content "
+                            "was emitted. Raise --max-tokens.")
+            if r.status == "rejected":
+                print(f"  {param:<12} REJECTED   {r.detail[:76]}")
+            elif r.status == "insufficient":
+                print(f"  {param:<12} NO POWER   n={r.n_tight}/{r.n_open}  {r.detail[:56]}")
+            else:
+                print(f"  {param:<12} H tight={r.entropy_tight:.2f} open={r.entropy_open:.2f}"
+                      f"  dH={r.dh:+.2f} (null {r.dh_null_mean:+.2f}) p={r.dh_p:.4f}"
+                      f"   TV={r.tv:.3f} (null {r.tv_null_mean:.3f}) p={r.tv_p:.4f}")
+            results.append(r)
+
+    adj = holm_adjust(results)
+    print(f"\n{'model':<32}{'param':<12}{'dH':>7}{'excess':>9}{'p':>9}{'p_holm':>9}  verdict")
+    for r in results:
+        if r.status != "ok":
+            print(f"{r.model:<32}{r.parameter:<12}{'—':>7}{'—':>9}{'—':>9}{'—':>9}  "
+                  f"{r.status.upper()}")
+            continue
+        pa = adj[(r.model, r.parameter)]
+        verdict = "distinguishable" if pa < 0.05 else "not distinguishable"
+        print(f"{r.model:<32}{r.parameter:<12}{r.dh:>7.2f}{r.excess:>+9.2f}"
+              f"{r.p_value:>9.4f}{pa:>9.4f}  {verdict}")
+
+    print(f"\n{len(results)} tests, {tokens:,} output tokens, "
+          f"{(time.time()-t0)/60:.1f} min")
+    print("p_holm is Holm-Bonferroni across the whole grid; the claim is per-cell, "
+          "so the family-wise rate is the relevant one.")
+
+    if args.out:
+        dest = resolve_out(args.out)
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(json.dumps(
+            {"prompt": PROMPT, "n_per_arm": args.n,
+             "permutations": args.permutations,
+             "results": [r.to_dict() for r in results],
+             "p_holm": {f"{k[0]}|{k[1]}": v for k, v in adj.items()}},
+            indent=2, default=str) + "\n")
+        print(f"wrote {show(dest)}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

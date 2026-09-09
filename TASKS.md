@@ -733,3 +733,58 @@ run.
 The first placement was wrong in the same way the fingerprint guard was once
 wrong: after the no-jobs early return, so a complete grid skipped the check. The
 retest caught it because it was run against a complete grid.
+
+
+## 2026-09-09 — the parameter probe was underpowered, and it changed the design
+
+Rebuilt the honoured/ignored probe as a real two-sample test and it overturned my
+own earlier result.
+
+**The old probe.** Set a parameter to an extreme value, draw 8 completions, call
+it ignored if 3+ are distinct. Arbitrary cutoff, no null, and no way to say "could
+not tell" — which at n=8 is the honest answer most of the time.
+
+**The new test.** Hold everything fixed, vary one parameter between two settings
+far apart in its range, 40 completions per arm, and test distinguishability by
+permutation. The null is exactly the failure mode: an ignored parameter means
+both arms are one configuration, so the samples are exchangeable and the
+permutation null is exact at any N. Primary statistic is the one-sided entropy
+drop dH = H(open) - H(tight), matching the mechanism; TV reported alongside.
+Calibrated before use — size 5.5% at nominal 5%, power >95% against a collapse.
+
+**Result: the heuristic was failing to detect honoured parameters, not detecting
+ignored ones.** min_p is distinguishable on 7 of 8 models, not 5 of 10. Every
+cell it called IGNORED that could be retested came back distinguishable —
+including muse-glimmer-30b's top_p at dH +3.68, p < 0.003, the result I used to
+exclude that model from the pool entirely.
+
+Two of this project's design decisions rested on those verdicts:
+
+- **muse-glimmer-30b's exclusion is reversed.** It runs the full grid.
+- **Dropping the `minp` cell** was made on the same bad evidence. Restoring it
+  widens the grid 7 -> 8 samplers and adds roughly $2.30, so it is a spend and is
+  left to the owner rather than changed unilaterally.
+
+**Three states, not a boolean.** "Not distinguishable" is absence of evidence,
+usually low output entropy on that model — nemotron-lightning's four dH values
+are 0.81/0.10/0.54/0.22 against gpt-oss-120b's 4.5-5.3 on the same prompt.
+Treating it as disqualifying would have silently dropped nemotron-lightning, a
+frozen model level, over dH = +0.10 at p = 0.063. `supports_grid()` now excludes
+only on evidence of breakage (rejected, or withdrawn); `unverified_params()`
+surfaces the rest as a stated limitation.
+
+**Prompt entropy is a power parameter and was chosen empirically.** The old
+one-word-noun prompt gives support 3 of 20 on gpt-oss-120b — models converge on
+"apple" — and a test cannot detect narrowing in an already-narrow distribution.
+A one-sentence prompt gave support 21 and entropy 4.19 on the open arm. TV also
+fails from the other side: with near-unique completions both arms are disjoint
+and TV approaches 1 under the null too, which is why dH is primary.
+
+**Two collection failures, both producing a confident-looking zero.**
+`minimax-m2p7` is 404, the second model withdrawn mid-project. `qwen3p7-plus`
+returns HTTP 200 with empty content when max_tokens truncates it before it stops
+reasoning (739 reasoning tokens here), so at max_tokens=256 every call succeeded,
+was billed, and returned nothing — and a collector that drops empty strings
+reported `n=0, insufficient`. Empties are now counted and explained.
+
+Cost: $0.60 for 40 tests over 475k output tokens.

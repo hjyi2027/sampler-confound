@@ -155,37 +155,64 @@ def test_unprobed_model_counts_as_unsupported():
 
 
 def test_partial_support_is_not_support():
-    # top_p ignored means `standard` — the de facto default, and the paper's
-    # motivating case — silently duplicates another cell for this model only.
+    # A REJECTED top_p means `standard` — the de facto default, and the paper's
+    # motivating case — cannot be run at all on this model.
     assert not supports_grid({
         "id": "x",
-        "sampler_support": {"temperature": True, "top_p": False,
-                            "top_k": True, "min_p": True},
+        "sampler_support": {"temperature": "yes", "top_p": "rejected",
+                            "top_k": "yes", "min_p": "yes"},
     })
 
 
 def test_full_support_passes():
     assert supports_grid({
         "id": "x",
-        "sampler_support": dict.fromkeys(required_params(), True),
+        "sampler_support": dict.fromkeys(required_params(), "yes"),
     })
 
 
-def test_ignoring_min_p_no_longer_disqualifies():
-    # The point of dropping the cell: models that discard min_p can still run
-    # every condition the grid actually contains.
-    partial = {"id": "x", "sampler_support": {"temperature": True, "top_p": True,
-                                              "top_k": True, "min_p": False}}
+def test_a_parameter_outside_the_grid_cannot_disqualify():
+    # min_p is not in SAMPLER_CONFIGS, so its status is irrelevant to whether a
+    # model can run the grid — even "rejected".
+    partial = {"id": "x", "sampler_support": {"temperature": "yes", "top_p": "yes",
+                                              "top_k": "yes", "min_p": "rejected"}}
     assert supports_grid(partial)
 
 
-def test_real_candidates_are_filtered_by_probed_support():
+def test_candidates_are_excluded_on_evidence_not_on_absence_of_it():
+    """The exclusion rule changed on 2026-09-09 and this test changed with it.
+
+    muse-glimmer-30b used to be excluded for "ignoring top_p". A properly
+    powered two-sample test put its top_p entropy drop at 3.68 bits, p < 0.003 —
+    the heuristic had simply lacked the power to see it, and the exclusion was
+    made on bad evidence. It is back in the pool.
+
+    What still excludes a model is evidence of breakage: withdrawn from the
+    catalogue, or a parameter the API rejects outright.
+    """
     excluded = {c["id"].split("/")[-1] for c in MODEL_CANDIDATES if not supports_grid(c)}
-    # muse-glimmer ignores top_p; minimax-m2p7 rejects temperature > 1.0;
-    # gpt-oss-20b was withdrawn from the catalogue mid-study.
-    assert "muse-glimmer-30b" in excluded
-    assert "minimax-m2p7" in excluded
-    assert "gpt-oss-20b" in excluded
+    assert "gpt-oss-20b" in excluded, "withdrawn 2026-08-27"
+    assert "minimax-m2p7" in excluded, "withdrawn 2026-09-09"
+    assert "muse-glimmer-30b" not in excluded, (
+        "excluded on a heuristic that a powered test overturned"
+    )
+
+
+def test_unverified_parameters_do_not_exclude_but_are_reported():
+    from samplerconfound.config import unverified_params
+    # nemotron-lightning is a frozen model level whose top_p effect the test
+    # could not demonstrate (dH=+0.10, p=0.063). Absence of evidence must not
+    # silently remove a level; it must surface as a stated limitation.
+    nem = next(c for c in MODEL_CANDIDATES if "nemotron-lightning" in c["id"])
+    assert supports_grid(nem)
+    assert "top_p" in unverified_params(nem)
+
+
+def test_a_rejected_parameter_still_disqualifies():
+    assert not supports_grid({
+        "id": "x",
+        "sampler_support": {"temperature": "rejected", "top_p": "yes", "top_k": "yes"},
+    })
 
 
 def test_a_withdrawn_model_cannot_be_selected():
