@@ -152,3 +152,71 @@ def test_fingerprint_changes_with_a_sampler_definition():
     b = _design()
     b.samplers = [{"id": "greedy", "temperature": 0.1}]
     assert design_fingerprint(a) != design_fingerprint(b)
+
+
+# --------------------------------------------------------------------------
+# concurrency lock
+#
+# Nothing prevented two sweeps writing one output file. Both would snapshot the
+# same `done` set at startup, decide on the same remaining work, and bill every
+# cell twice — an easy mistake over a twenty-hour run and an expensive one.
+#
+# Ordering is the whole point. The lock must be taken BEFORE `done` is read: a
+# lock acquired afterwards leaves open exactly the window it exists to close.
+# The first version was also placed after the no-jobs early return, so a complete
+# grid skipped the check entirely.
+# --------------------------------------------------------------------------
+import os
+
+from scripts.run_sweep import RunLock, _pid_alive
+
+
+def test_lock_is_taken_and_released(tmp_path):
+    out = tmp_path / "r.jsonl"
+    lock = out.with_suffix(out.suffix + ".lock")
+    with RunLock(out):
+        assert lock.exists()
+        assert int(lock.read_text().strip()) == os.getpid()
+    assert not lock.exists()
+
+
+def test_a_live_lock_refuses_a_second_run(tmp_path):
+    out = tmp_path / "r.jsonl"
+    with RunLock(out):
+        with pytest.raises(SystemExit, match="already writing"):
+            with RunLock(out):
+                pass
+
+
+def test_a_stale_lock_does_not_block_the_resume_it_protects(tmp_path):
+    # SIGKILL leaves the lockfile behind with no chance to clean up, so the
+    # common case after the failure this guards IS a stale lock. Blocking on it
+    # would turn a recoverable interruption into a manual one.
+    out = tmp_path / "r.jsonl"
+    lock = out.with_suffix(out.suffix + ".lock")
+    lock.write_text("999999\n")          # a pid that cannot be running
+    with RunLock(out):
+        assert int(lock.read_text().strip()) == os.getpid()
+    assert not lock.exists()
+
+
+def test_a_corrupt_lockfile_is_treated_as_stale(tmp_path):
+    out = tmp_path / "r.jsonl"
+    lock = out.with_suffix(out.suffix + ".lock")
+    lock.write_text("not-a-pid\n")
+    with RunLock(out):
+        assert int(lock.read_text().strip()) == os.getpid()
+
+
+def test_lock_is_released_even_when_the_run_raises(tmp_path):
+    out = tmp_path / "r.jsonl"
+    lock = out.with_suffix(out.suffix + ".lock")
+    with pytest.raises(RuntimeError):
+        with RunLock(out):
+            raise RuntimeError("boom")
+    assert not lock.exists(), "a crashed run must not leave a lock blocking resume"
+
+
+def test_pid_alive_recognises_this_process_and_not_a_fake_one():
+    assert _pid_alive(os.getpid())
+    assert not _pid_alive(999999)

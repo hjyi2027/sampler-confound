@@ -69,6 +69,58 @@ def load_key() -> str:
     return key
 
 
+class RunLock:
+    """Refuse to run two sweeps against one output file.
+
+    Nothing prevented it before, and both processes would load the same `done`
+    set at startup, decide on the same remaining work, and bill every cell twice.
+    Over a twenty-hour run that is an easy mistake to make — a forgotten
+    background job, a second terminal — and an expensive one.
+
+    The lock records a PID and is validated rather than trusted. A SIGKILL leaves
+    the lockfile behind with no chance to clean up, so a lock whose process is
+    gone is stale by definition and must not block the resume it exists to
+    protect. That is the common case after exactly the failure this guards.
+    """
+
+    def __init__(self, path: Path):
+        self.path = path.with_suffix(path.suffix + ".lock")
+        self.acquired = False
+
+    def __enter__(self):
+        if self.path.exists():
+            try:
+                pid = int(self.path.read_text().split()[0])
+            except (ValueError, IndexError):
+                pid = -1
+            if pid > 0 and _pid_alive(pid):
+                raise SystemExit(
+                    f"another sweep (pid {pid}) is already writing "
+                    f"{self.path.stem}. Two runs on one file duplicate every "
+                    "remaining cell and bill it twice. If that process is gone, "
+                    f"delete {self.path}."
+                )
+            print(f"clearing stale lock from pid {pid} (no longer running)")
+        self.path.write_text(f"{os.getpid()}\n")
+        self.acquired = True
+        return self
+
+    def __exit__(self, *exc):
+        if self.acquired:
+            self.path.unlink(missing_ok=True)
+        return False
+
+
+def _pid_alive(pid: int) -> bool:
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True          # exists, owned by someone else
+    return True
+
+
 def cell_key(model: str, sampler: str, replicate: int, problem_id: str) -> str:
     return f"{model}|{sampler}|{replicate}|{problem_id}"
 
@@ -253,13 +305,28 @@ def main() -> int:
     out = args.out or ROOT / "runs" / args.config.stem / f"{design.benchmark}.jsonl"
     out = resolve_out(out)
     out.parent.mkdir(parents=True, exist_ok=True)
-    done = load_done(out)
 
-    # Before --verify, before the no-jobs early return, before any generation.
-    # The case this exists for is precisely a COMPLETE grid whose protocol
-    # changed underneath it: nothing is left to run, verify() reports "balanced",
-    # and the file quietly contains two different experiments. Checking after
-    # the early return — as this first did — misses exactly that case.
+    # --verify is read-only and may safely run against a live sweep. Everything
+    # else takes the lock BEFORE reading `done`, which is the ordering that
+    # matters: if a second process snapshots `done` while the first is mid-run,
+    # both compute the same remaining work and bill all of it twice. Locking
+    # after the snapshot, or after the no-jobs early return, would leave exactly
+    # that window open.
+    if args.verify:
+        return 0 if _verify_only(design, problems, out) else 1
+
+    with RunLock(out):
+        return _run(args, design, problems, out)
+
+
+def _verify_only(design: Design, problems, out: Path) -> bool:
+    done = load_done(out)
+    if not _fingerprint_ok(design, done, out):
+        return False
+    return verify(design, problems, done)
+
+
+def _fingerprint_ok(design: Design, done: dict, out: Path) -> bool:
     fp = design_fingerprint(design)
     mixed = {r.get("design") for r in done.values() if r.get("design")} - {fp}
     if mixed:
@@ -268,11 +335,16 @@ def main() -> int:
               "definition changed since those were written. A grid mixing two "
               "protocols still looks balanced and is not one experiment.",
               file=sys.stderr)
-        return 1
+        return False
     print(f"design fingerprint {fp}")
+    return True
 
-    if args.verify:
-        return 0 if verify(design, problems, done) else 1
+
+def _run(args, design: Design, problems, out: Path) -> int:
+    done = load_done(out)
+
+    if not _fingerprint_ok(design, done, out):
+        return 1
 
     jobs = build_jobs(design, problems, done)
     total = design.n_replicates * len(problems) * len(design.models) * len(design.samplers)
@@ -291,7 +363,14 @@ def main() -> int:
             with _lock:
                 if rec:
                     fh.write(json.dumps(rec) + "\n")
-                    fh.flush()          # crash-safe: resume loses at most one line
+                    # flush() reaches the kernel, which is enough to survive
+                    # SIGKILL — verified by hard-killing a run mid-flight with six
+                    # writers in flight and recovering 92/92 records intact. It is
+                    # NOT enough to survive power loss, which on a laptop running
+                    # a twenty-hour sweep is a real event. fsync costs 1.8s across
+                    # the whole sweep, so there is no reason to take the risk.
+                    fh.flush()
+                    os.fsync(fh.fileno())
                     written += 1
                 else:
                     failed += 1

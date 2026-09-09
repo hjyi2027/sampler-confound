@@ -684,3 +684,52 @@ from `requirements.txt` and runs all 215 tests green.
 
 **gpt-oss-20b re-checked on 2026-09-07: still 404**, eleven days after
 withdrawal. That is a settled state, not a blip.
+
+## 2026-09-09 — resume under SIGKILL
+
+The resume path had never been exercised by an actual kill. The existing test
+deleted lines from a file; the smoke run completed cleanly. Tested properly: 210
+generations, `kill -9` at 92 records with six writers in flight, restart.
+
+**Result: zero completed generations re-billed.** Verified by `request_id`
+rather than inferred — a re-run cell would carry a new id from the provider.
+
+| check | result |
+|---|---|
+| records after restart | 210, 210 unique cells, 0 duplicates |
+| pre-kill cells present | 92/92 |
+| pre-kill `request_id`s changed | **0** |
+| resumed run's own accounting | `92/210 done, 118 to run` |
+| `design_fingerprint` across the kill | `f20740bcf5edc37c`, unchanged |
+| pre-kill token counts | unchanged |
+| balance | balanced, exit 0 |
+| file integrity after SIGKILL | ends with newline, 0 unparseable lines |
+
+Cost $0.28. No torn line occurred: `write()` + `flush()` under the lock is a
+single syscall the kernel completes regardless of the signal.
+
+**"Zero re-billed" has a bound, not an absolute.** Requests in flight when the
+kill lands were billed by the provider and never reached disk, so they are
+re-issued on resume. That is inherent to any non-transactional API and is capped
+at one per worker — six here, ~15,000 output tokens, under 3% of the test and
+about half a cent on the real sweep.
+
+Two gaps the test exposed, both closed:
+
+**`flush()` is not `fsync()`.** Flushing reaches the kernel, which survives
+SIGKILL — hence the clean recovery — but not power loss, which on a laptop
+running a twenty-hour sweep is a real event. Measured cost of `fsync` per record:
+1.8 seconds across the entire 27,300-record sweep. Added.
+
+**Nothing prevented two sweeps writing one file.** Both would snapshot the same
+`done` set, decide on the same remaining work, and bill all of it twice.
+`RunLock` refuses, and the ordering is the point: the lock is taken *before*
+`done` is read, because a lock acquired afterwards leaves open exactly the window
+it closes. A stale lock — which is what SIGKILL always leaves — is detected by
+checking whether the PID is alive and cleared, so the guard never blocks the
+resume it exists to protect. `--verify` stays read-only and works against a live
+run.
+
+The first placement was wrong in the same way the fingerprint guard was once
+wrong: after the no-jobs early return, so a complete grid skipped the check. The
+retest caught it because it was run against a complete grid.
