@@ -204,7 +204,10 @@ It did not start there. The first pass scored **30/50**, and the sample found
 five distinct grader bugs, each a false negative:
 
 1. **`\( ... \)` not stripped.** Models wrap answers in inline math far more
-   often than in `$ ... $`. Nine of fifty items. Also `\displaystyle`, `\tfrac`.
+   often than in `$ ... $`. Also `\displaystyle`, `\tfrac`. Correction: this was
+   recorded as "nine of fifty items" for inline delimiters alone, but nine was
+   the TOTAL false-negative count across this bug, `\tfrac`, and the
+   parenthesised-fraction bug below.
 2. **`(3)/(5)` vs `3/5`.** `frac_to_slash` parenthesises unconditionally so
    `\frac{a+b}{c}` stays correct, which then failed to match a model that wrote
    the slash form directly. Redundant parens around a bare token are spelling.

@@ -172,6 +172,8 @@ report an unbalanced grid rather than averaging over the gaps.
 
 ## What the build established, independent of the sweep
 
+Written up in full in [FINDINGS.md](FINDINGS.md). In brief:
+
 These came out of getting the instrument working and stand on their own. Several
 are perishable — the provider catalogue moved twice during one week.
 
