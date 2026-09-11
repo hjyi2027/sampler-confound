@@ -188,3 +188,65 @@ def test_holm_skips_untestable_cells():
     bad.status = "insufficient"
     adj = holm_adjust([ok, bad])
     assert ("b", "top_p") not in adj
+
+
+# --------------------------------------------------------------------------
+# positive control
+#
+# A null result is produced identically by an ignored parameter and by a probe
+# with no power on this model. The test cannot tell them apart from the inside.
+# On the same model and prompt, a parameter known to work must show a large
+# effect, or every other null on that model is uninterpretable.
+# --------------------------------------------------------------------------
+from samplerconfound.distinguish import ModelPower, interpret, positive_control
+
+
+def _cell(model, param, dh, h_open, h_tight, support_tight=5, n=40, status="ok"):
+    r = Distinguishability(model=model, parameter=param, setting_a={}, setting_b={})
+    r.status, r.dh, r.entropy_open, r.entropy_tight = status, dh, h_open, h_tight
+    r.support_tight, r.n_tight = support_tight, n
+    r.dh_p = r.p_value = 0.5
+    return r
+
+
+def test_control_that_removes_most_entropy_powers_the_model():
+    power = positive_control([_cell("m", "temperature", dh=4.0, h_open=5.0, h_tight=1.0)])
+    assert power["m"].powered
+    assert power["m"].fraction_removed == pytest.approx(0.8)
+
+
+def test_control_that_barely_moves_leaves_the_model_underpowered():
+    # nemotron-lightning: 5.29 bits open, 4.47 remain at temperature 0.
+    power = positive_control([_cell("m", "temperature", dh=0.81, h_open=5.29,
+                                    h_tight=4.47, support_tight=29)])
+    assert not power["m"].powered
+    assert "uninterpretable" in power["m"].detail
+
+
+def test_a_null_reads_differently_depending_on_the_control():
+    """The whole point. Same cell, same p-value, opposite meaning."""
+    cell = _cell("m", "top_p", dh=0.10, h_open=5.0, h_tight=4.9)
+    strong = positive_control([_cell("m", "temperature", dh=4.5, h_open=5.0, h_tight=0.5)])
+    weak = positive_control([_cell("m", "temperature", dh=0.5, h_open=5.0, h_tight=4.5)])
+    assert interpret(cell, strong, p_adjusted=0.4) == "no effect seen"
+    assert interpret(cell, weak, p_adjusted=0.4) == "underpowered"
+
+
+def test_a_significant_effect_is_distinguishable_regardless_of_control():
+    cell = _cell("m", "top_k", dh=3.0, h_open=5.0, h_tight=2.0)
+    weak = positive_control([_cell("m", "temperature", dh=0.5, h_open=5.0, h_tight=4.5)])
+    assert interpret(cell, weak, p_adjusted=0.001) == "distinguishable"
+
+
+def test_a_model_without_a_control_is_underpowered_not_no_effect():
+    # No control run at all: a null cannot be promoted to evidence.
+    cell = _cell("m", "min_p", dh=0.1, h_open=5.0, h_tight=4.9)
+    assert interpret(cell, {}, p_adjusted=0.6) == "underpowered"
+
+
+def test_the_control_is_the_ceiling_on_what_any_cell_can_show():
+    # No truncation parameter can remove entropy the control could not: if
+    # temperature 0 leaves 4.5 bits, top_p=0.01 cannot get below that either.
+    power = positive_control([_cell("m", "temperature", dh=0.8, h_open=5.3, h_tight=4.5)])
+    assert power["m"].control_h_tight == pytest.approx(4.5)
+    assert not power["m"].powered

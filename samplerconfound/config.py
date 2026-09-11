@@ -125,9 +125,14 @@ DEFAULT_MODELS: list[str] = []
 #
 #   "yes"         the distribution measurably narrows at the tight setting,
 #                 Holm-adjusted p < 0.05 across the whole grid
-#   "unverified"  the test could not distinguish the two settings. This is
-#                 ABSENCE OF EVIDENCE, not evidence of absence, and at these
-#                 sample sizes it is often just low output entropy on that model
+#   "no_effect"   no narrowing seen AND the model's positive control passed —
+#                 the probe had power here and still saw nothing. This is the
+#                 only state that is evidence the parameter is ignored.
+#   "unverified"  no narrowing seen but the positive control FAILED on this
+#                 model: temperature 0 vs 1.5 itself removed under half the
+#                 entropy, so the probe could not have shown a large effect.
+#                 Evidence of nothing. The distinction from "no_effect" is the
+#                 whole reason the positive control exists.
 #   "rejected"    the API refuses the parameter outright — loud and safe
 #   None          not tested
 #
@@ -144,15 +149,21 @@ DEFAULT_MODELS: list[str] = []
 # the interaction term is one of the quantities the two-way decomposition
 # reports — the artifact would be indistinguishable from the finding.
 #
-# `deterministic_at_t0` is recorded separately. deepseek-v4-flash returned two
-# distinct outputs at temperature 0, so its greedy cells would carry provider
-# non-determinism that the design attributes to sampling. That is reportable in
-# its own right, but it is not something to average over silently.
+# `deterministic_at_t0` now comes from the positive control: 40 completions of a
+# one-sentence prompt at temperature 0, deterministic if at most 2 are distinct.
+# `entropy_at_t0_bits` is the residual no sampling parameter can remove. The
+# earlier 8-sample one-word probe got nemotron-lightning WRONG — it reported
+# deterministic, and on a prompt with entropy the model emits 29/40 distinct
+# sentences at temperature 0. That is 4.47 bits of variation from something
+# other than the sampler, on a frozen model level, and every greedy cell for
+# that model will carry within-cell variance the design would otherwise
+# attribute to sampling.
 MODEL_CANDIDATES = [
     {"id": "accounts/fireworks/models/nemotron-lightning-3p5-30b-a3b", "family": "nvidia",
      "usd_per_1m": (0.05, 0.20),
      "sampler_support": {"temperature": "yes", "top_p": "unverified", "top_k": "yes", "min_p": "yes"},
-     "deterministic_at_t0": True,
+     "entropy_at_t0_bits": 4.47, "distinct_at_t0": "29/40",
+     "deterministic_at_t0": False,
      "note": "only 2/8 distinct at T=1.5 — unusually narrow output distribution"},
     # WITHDRAWN from the serverless catalogue on 2026-08-27, hours after the grid
     # was frozen with it as a level, while still listed on the public pricing
@@ -171,19 +182,23 @@ MODEL_CANDIDATES = [
     {"id": "accounts/fireworks/models/gpt-oss-120b", "family": "openai",
      "usd_per_1m": (0.15, 0.60),
      "sampler_support": {"temperature": "yes", "top_p": "yes", "top_k": "yes", "min_p": "yes"},
+     "entropy_at_t0_bits": -0.00, "distinct_at_t0": "1/40",
      "deterministic_at_t0": True},
     {"id": "accounts/fireworks/models/deepseek-v4-flash-0731", "family": "deepseek",
      "usd_per_1m": (0.22, 0.66),
      "sampler_support": {"temperature": "yes", "top_p": "yes", "top_k": "yes", "min_p": "yes"},
+     "entropy_at_t0_bits": 2.61, "distinct_at_t0": "12/40",
      "deterministic_at_t0": False},
     {"id": "accounts/fireworks/models/minimax-m3", "family": "minimax",
      "usd_per_1m": (0.30, 1.20),
      "sampler_support": {"temperature": "yes", "top_p": "yes", "top_k": "yes", "min_p": "yes"},
+     "entropy_at_t0_bits": -0.00, "distinct_at_t0": "1/40",
      "deterministic_at_t0": True},
     {"id": "accounts/fireworks/models/muse-glimmer-30b", "family": "muse",
      "usd_per_1m": (0.35, 1.50),
      "sampler_support": {"temperature": "yes", "top_p": "yes", "top_k": "yes", "min_p": "yes"},
-     "deterministic_at_t0": False,
+     "entropy_at_t0_bits": 0.95, "distinct_at_t0": "2/40",
+     "deterministic_at_t0": True,
      "note": "ignores top_p, so it cannot run `standard` — the most consequential cell"},
     # WITHDRAWN 2026-09-09, the second model to vanish mid-project. Returned 404
     # from the inference API when the distinguishability grid ran, so its earlier
@@ -199,15 +214,18 @@ MODEL_CANDIDATES = [
     # mid-project. Both honour every parameter, min_p included.
     {"id": "accounts/fireworks/models/qwen3p7-plus", "family": "alibaba",
      "usd_per_1m": (0.40, 1.60),
-     "sampler_support": {"temperature": "yes", "top_p": "unverified", "top_k": "yes", "min_p": "unverified"},
+     "sampler_support": {"temperature": "yes", "top_p": "no_effect", "top_k": "yes", "min_p": "no_effect"},
+     "entropy_at_t0_bits": 1.87, "distinct_at_t0": "6/38",
      "deterministic_at_t0": False},
     {"id": "accounts/fireworks/models/nemotron-3-ultra-nvfp4", "family": "nvidia",
      "usd_per_1m": (0.60, 2.40),
      "sampler_support": {"temperature": "yes", "top_p": "yes", "top_k": "yes", "min_p": "yes"},
+     "entropy_at_t0_bits": 0.93, "distinct_at_t0": "2/40",
      "deterministic_at_t0": True},
     {"id": "accounts/fireworks/models/kimi-k2p6", "family": "moonshot",
      "usd_per_1m": (0.95, 4.00),
      "sampler_support": {"temperature": "yes", "top_p": "unverified", "top_k": "unverified", "min_p": "yes"},
+     "entropy_at_t0_bits": 3.27, "distinct_at_t0": "13/34",
      "deterministic_at_t0": False,
      "note": "degenerates into multilingual token soup at T=1.5; also unaffordable"},
 ]
@@ -319,6 +337,9 @@ def supports_grid(candidate: dict, samplers: list[dict] | None = None) -> bool:
     if not support:
         return False
     vals = [support.get(p) for p in required_params(samplers)]
+    # "no_effect" disqualifies: the probe had power and saw nothing, which is
+    # evidence the cell would be a duplicate. "unverified" does not: the probe
+    # could not have seen anything on this model, which is evidence of nothing.
     return all(v in ("yes", "unverified") for v in vals)
 
 

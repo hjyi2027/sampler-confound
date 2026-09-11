@@ -28,12 +28,18 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
+import numpy as np
 import requests
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from samplerconfound.distinguish import assess_parameter, holm_adjust
+from samplerconfound.distinguish import (
+    assess_parameter,
+    holm_adjust,
+    interpret,
+    positive_control,
+)
 from samplerconfound.paths import resolve_out, show
 
 BASE = "https://api.fireworks.ai/inference/v1/chat/completions"
@@ -197,16 +203,27 @@ def main() -> int:
             results.append(r)
 
     adj = holm_adjust(results)
-    print(f"\n{'model':<32}{'param':<12}{'dH':>7}{'excess':>9}{'p':>9}{'p_holm':>9}  verdict")
+    power = positive_control(results)
+
+    print(f"\nPOSITIVE CONTROL — temperature 0 vs 1.5 on the same prompt. A null on any")
+    print("other parameter is readable only where this removed most of the entropy.")
+    print(f"{'model':<32}{'H open':>8}{'H @ T=0':>9}{'removed':>9}  status")
+    for m, mp in sorted(power.items()):
+        if not np.isfinite(mp.fraction_removed):
+            print(f"{m:<32}{'—':>8}{'—':>9}{'—':>9}  {mp.detail}")
+            continue
+        print(f"{m:<32}{mp.control_h_open:>7.2f}b{mp.control_h_tight:>8.2f}b"
+              f"{mp.fraction_removed:>8.0%}  {'powered' if mp.powered else 'WEAK — nulls uninterpretable'}")
+
+    print(f"\n{'model':<32}{'param':<12}{'dH':>7}{'of open':>9}{'p_holm':>9}  verdict")
     for r in results:
         if r.status != "ok":
-            print(f"{r.model:<32}{r.parameter:<12}{'—':>7}{'—':>9}{'—':>9}{'—':>9}  "
-                  f"{r.status.upper()}")
+            print(f"{r.model:<32}{r.parameter:<12}{'—':>7}{'—':>9}{'—':>9}  {r.status.upper()}")
             continue
         pa = adj[(r.model, r.parameter)]
-        verdict = "distinguishable" if pa < 0.05 else "not distinguishable"
-        print(f"{r.model:<32}{r.parameter:<12}{r.dh:>7.2f}{r.excess:>+9.2f}"
-              f"{r.p_value:>9.4f}{pa:>9.4f}  {verdict}")
+        frac = r.dh / r.entropy_open if r.entropy_open > 0 else float("nan")
+        print(f"{r.model:<32}{r.parameter:<12}{r.dh:>7.2f}{frac:>8.0%}{pa:>9.4f}  "
+              f"{interpret(r, power, pa)}")
 
     print(f"\n{len(results)} tests, {tokens:,} output tokens, "
           f"{(time.time()-t0)/60:.1f} min")
@@ -220,7 +237,10 @@ def main() -> int:
             {"prompt": PROMPT, "n_per_arm": args.n,
              "permutations": args.permutations,
              "results": [r.to_dict() for r in results],
-             "p_holm": {f"{k[0]}|{k[1]}": v for k, v in adj.items()}},
+             "p_holm": {f"{k[0]}|{k[1]}": v for k, v in adj.items()},
+             "positive_control": {m: mp.to_dict() for m, mp in power.items()},
+             "verdicts": {f"{r.model}|{r.parameter}": interpret(r, power, adj.get((r.model, r.parameter), 1.0))
+                          for r in results}},
             indent=2, default=str) + "\n")
         print(f"wrote {show(dest)}")
     return 0

@@ -237,3 +237,94 @@ def holm_adjust(results: list[Distinguishability]) -> dict[tuple[str, str], floa
         running = max(running, val)          # enforce monotonicity
         adjusted[(r.model, r.parameter)] = running
     return adjusted
+
+
+# --------------------------------------------------------------------------
+# positive control
+# --------------------------------------------------------------------------
+# A null result means nothing on its own. "Not distinguishable" is produced
+# identically by a parameter the provider ignores and by a probe that has no
+# power on this model, and the test cannot tell them apart from the inside. The
+# only way to separate them is a positive control: on the SAME model and the SAME
+# prompt, a parameter known to work must show a large effect. If it does not, the
+# probe has no power here and every other null on this model is uninterpretable.
+#
+# temperature is the control. It is the one parameter no serving stack drops, and
+# 0 vs 1.5 is the widest contrast available, so its entropy drop is the ceiling
+# on what any test can show on this model with this prompt.
+
+POSITIVE_CONTROL = "temperature"
+CONTROL_MIN_FRACTION = 0.5   # control must remove at least half the open-arm entropy
+
+
+@dataclass
+class ModelPower:
+    """What the positive control says about a model's testability."""
+
+    model: str
+    control_dh: float = float("nan")
+    control_h_open: float = float("nan")
+    control_h_tight: float = float("nan")      # residual entropy at temperature 0
+    control_support_tight: int = 0
+    control_n_tight: int = 0
+    control_p: float = float("nan")
+    fraction_removed: float = float("nan")
+    powered: bool = False
+    detail: str = ""
+
+    def to_dict(self) -> dict:
+        return dict(self.__dict__)
+
+
+def positive_control(results: list[Distinguishability]) -> dict[str, ModelPower]:
+    """Per model: did the control show a large effect, so nulls can be read?"""
+    out: dict[str, ModelPower] = {}
+    for r in results:
+        if r.parameter != POSITIVE_CONTROL:
+            continue
+        mp = ModelPower(model=r.model)
+        if r.status != "ok":
+            mp.detail = f"control not run: {r.status}"
+            out[r.model] = mp
+            continue
+        mp.control_dh = r.dh
+        mp.control_h_open = r.entropy_open
+        mp.control_h_tight = r.entropy_tight
+        mp.control_support_tight = r.support_tight
+        mp.control_n_tight = r.n_tight
+        mp.control_p = r.dh_p
+        mp.fraction_removed = r.dh / r.entropy_open if r.entropy_open > 0 else float("nan")
+        mp.powered = bool(mp.fraction_removed >= CONTROL_MIN_FRACTION)
+        if not mp.powered:
+            mp.detail = (
+                f"temperature 0 vs 1.5 removed only {mp.fraction_removed:.0%} of "
+                f"{mp.control_h_open:.2f} bits; {mp.control_h_tight:.2f} bits "
+                f"remain at temperature 0 ({mp.control_support_tight}/"
+                f"{mp.control_n_tight} distinct). Something other than the sampler "
+                "generates that variation, and no truncation parameter can remove "
+                "it — a null on this model is uninterpretable."
+            )
+        out[r.model] = mp
+    return out
+
+
+def interpret(r: Distinguishability, power: dict[str, ModelPower],
+              p_adjusted: float) -> str:
+    """The verdict a cell actually supports, given its model's positive control.
+
+    Three outcomes, and the difference between the last two is the entire point:
+
+      distinguishable   the effect is there
+      no effect seen    control passed, so the probe HAD power here and still
+                        saw nothing — this is evidence about the parameter
+      underpowered      control failed, so the probe could not have shown a
+                        large effect on this model — this is evidence of nothing
+    """
+    if r.status != "ok":
+        return r.status
+    if p_adjusted < 0.05:
+        return "distinguishable"
+    mp = power.get(r.model)
+    if mp is None or not mp.powered:
+        return "underpowered"
+    return "no effect seen"

@@ -788,3 +788,35 @@ was billed, and returned nothing — and a collector that drops empty strings
 reported `n=0, insufficient`. Empties are now counted and explained.
 
 Cost: $0.60 for 40 tests over 475k output tokens.
+
+## 2026-09-11 — positive control
+
+A null from the two-sample test was uninterpretable on its own: "not
+distinguishable" is produced identically by an ignored parameter and by a probe
+with no power on that model. Added the control: on the same model and prompt,
+temperature 0 vs 1.5 must remove most of the open-arm entropy, or every other
+null on that model is "underpowered" rather than "no effect seen". The verdict
+vocabulary is now three-way and `supports_grid()` disqualifies on "no_effect"
+(the probe had power and saw nothing — evidence) but not on "unverified" (the
+probe could not have seen anything — evidence of nothing).
+
+**It overturned a recorded fact about a frozen model level.** nemotron-lightning
+was recorded as deterministic at temperature 0, from 8 samples of a one-word
+prompt. On a prompt with entropy it emits **29 of 40 distinct sentences at
+temperature 0 — 4.47 of 5.29 bits remain**. It has the highest open-arm entropy
+in the grid; the sampler just cannot remove it. My earlier explanation for its
+small dH values ("low output entropy on that model") was wrong in the opposite
+direction. Something other than the sampler generates most of its variation,
+and its greedy cells in the sweep will carry within-cell variance the design
+would otherwise attribute to sampling. Recorded as `entropy_at_t0_bits` per
+model; `deterministic_at_t0` is now derived from this measurement.
+
+With the gate applied, the grid contains exactly two cells that look like an
+ignored parameter: `top_p` and `min_p` on qwen3p7-plus (control 59%, top_p
+removed 6%). Every other null sits on a model whose control failed.
+
+Determinism figures corrected: three of eight deterministic, two nearly, three
+not (deepseek 12/40, kimi 13/34, nemotron-lightning 29/40). The earlier "five of
+ten" disagreed on three models in both directions.
+
+No new API calls — the control was already in the data as the temperature test.

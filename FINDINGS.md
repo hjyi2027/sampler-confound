@@ -40,44 +40,65 @@ zero at finite N, so both are read against their own permutation null rather tha
 against zero. Calibration before use: false-positive rate 5.5% at nominal 5%,
 power above 95% against a collapse effect.
 
-dH in bits; **bold** is distinguishable at Holm-adjusted p < 0.05 across all 32
-tests; `ns` is not distinguishable.
+**A null result needs a positive control before it means anything.** "Not
+distinguishable" is produced identically by a parameter the provider ignores and
+by a probe that has no power on that model, and the test cannot tell them apart
+from the inside. So for every model, on the same prompt, the parameter known to
+work — temperature, 0 vs 1.5, the widest contrast available — must show a large
+effect first. Its entropy drop is the ceiling on what any other test can show
+there.
 
-| model | temperature | top_p | top_k | min_p |
+| model | H open | H at T=0 | distinct at T=0 | control removed | status |
+|---|--:|--:|--:|--:|---|
+| deepseek-v4-flash-0731 | 5.25 | 2.61 | 12/40 | 50% | powered |
+| gpt-oss-120b | 5.32 | -0.00 | 1/40 | 100% | powered |
+| kimi-k2p6 | 4.81 | 3.27 | 13/34 | 32% | **weak** |
+| minimax-m3 | 4.89 | -0.00 | 1/40 | 100% | powered |
+| muse-glimmer-30b | 4.83 | 0.95 | 2/40 | 80% | powered |
+| nemotron-3-ultra-nvfp4 | 5.05 | 0.93 | 2/40 | 82% | powered |
+| nemotron-lightning-3p5-30b-a3b | 5.29 | 4.47 | 29/40 | 15% | **weak** |
+| qwen3p7-plus | 4.52 | 1.87 | 6/38 | 59% | powered |
+
+Two of eight models fail it. On **nemotron-lightning, temperature 0 leaves 4.47 of
+5.29 bits in place — 29 of 40 completions distinct at temperature 0.** That is
+not a low-entropy model; it is the highest open-arm entropy in the grid. Something
+other than the sampler is generating most of its variation, no truncation
+parameter can remove it, and every null on that model is therefore
+uninterpretable. It is also one of the three frozen model levels, and its greedy
+cells will carry within-cell variance the design would otherwise read as
+sampling. The earlier 8-sample one-word probe recorded this model as
+deterministic at temperature 0. It was wrong; a one-word prompt has no entropy
+to reveal the problem with.
+
+Values below are the fraction of open-arm entropy the tight setting removed.
+**Bold** is distinguishable (Holm p < 0.05). `∅` is *no effect seen* — the control
+passed, the probe had power, and it saw nothing; this is the only outcome that is
+evidence of an ignored parameter. `?` is *underpowered* — the control failed, so
+the null is evidence of nothing.
+
+| model | control | top_p | top_k | min_p |
 |---|--:|--:|--:|--:|
-| deepseek-v4-flash-0731 | **2.63** | **2.34** | **3.01** | **2.47** |
-| gpt-oss-120b | **5.32** | **4.55** | **4.75** | **4.64** |
-| kimi-k2p6 | **1.54** | 0.57 ns | 0.72 ns | **1.12** |
-| minimax-m3 | **4.89** | **4.61** | **4.78** | **4.78** |
-| muse-glimmer-30b | **3.88** | **3.68** | **2.88** | **2.91** |
-| nemotron-3-ultra-nvfp4 | **4.12** | **3.28** | **3.41** | **3.13** |
-| nemotron-lightning-3p5-30b-a3b | **0.81** | 0.10 ns | **0.54** | **0.22** |
-| qwen3p7-plus | **2.64** | 0.20 ns | **1.44** | 0.93 ns |
+| deepseek-v4-flash-0731 | 50% | **48%** | **59%** | **50%** |
+| gpt-oss-120b | 100% | **100%** | **100%** | **100%** |
+| kimi-k2p6 | 32% | 14% ? | 16% ? | **24%** |
+| minimax-m3 | 100% | **100%** | **100%** | **100%** |
+| muse-glimmer-30b | 80% | **86%** | **79%** | **70%** |
+| nemotron-3-ultra-nvfp4 | 82% | **77%** | **77%** | **77%** |
+| nemotron-lightning-3p5-30b-a3b | 15% | 2% ? | **10%** | **4%** |
+| qwen3p7-plus | 59% | 6% ∅ | **43%** | 24% ∅ |
 
-| parameter | distinguishable in |
-|---|---|
-| temperature | 8/8 models |
-| top_k | 7/8 |
-| min_p | 7/8 |
-| top_p | 5/8 |
+Read that way, the grid contains exactly two cells that look like an ignored
+parameter: `top_p` and `min_p` on `qwen3p7-plus`, where temperature removed 59%
+of the entropy and `top_p` removed 6%. Every other null sits on a model whose
+positive control failed and says nothing either way.
 
 **Every cell the old heuristic called IGNORED and that could be retested came
-back distinguishable**: `min_p` on nemotron-lightning (dH +0.22), deepseek-v4-flash
-(+2.47), muse-glimmer-30b (+2.91) and kimi-k2p6 (+1.12), and `top_p` on
-muse-glimmer-30b (+3.68).
-
-Two design decisions in this project rested on those verdicts, and both were made
-on bad evidence: the `minp` cell was dropped from the grid, and muse-glimmer-30b
-was excluded from the model pool. The exclusion is reversed. Restoring the cell
-is a cost decision and is left open.
-
-**"Not distinguishable" is not "ignored".** Five cells failed to reach
-significance, and at these effect sizes that is usually low output entropy on
-that model rather than a dead parameter — nemotron-lightning's four dH values are
-0.81, 0.10, 0.54 and 0.22, against 4.5-5.3 for gpt-oss-120b on the same prompt.
-The code records three states (`yes` / `unverified` / `rejected`) precisely so
-that absence of evidence cannot silently exclude a model, which the boolean it
-replaced would have done to a frozen model level over dH = +0.10 at p = 0.063.
+back distinguishable**: `min_p` on nemotron-lightning, deepseek-v4-flash,
+muse-glimmer-30b and kimi-k2p6, and `top_p` on muse-glimmer-30b (86% of entropy
+removed, p < 0.003). Two design decisions in this project rested on those
+verdicts — dropping the `minp` cell and excluding muse-glimmer-30b — and both were
+made on bad evidence. The exclusion is reversed; restoring the cell is a cost
+decision and is left open.
 
 Two collection failures worth recording, because both produce a confident-looking
 zero. `minimax-m2p7` is now **404 — a second model withdrawn** mid-project.
@@ -87,14 +108,20 @@ it off before it stops reasoning (739 reasoning tokens on this prompt), so at
 collector that drops empty strings reports that as `n=0, insufficient` with no
 sign that anything was wrong.
 
-## 2. Half the models are non-deterministic at temperature 0
+## 2. Determinism at temperature 0, measured properly
 
-Five of ten returned more than one distinct completion at `temperature = 0` over
-eight samples of an identical prompt. Greedy decoding is not reproducible even in
-principle on those models, which bears on every paper that reports a single
-greedy number and treats it as a fixed property of the model.
+The positive-control table above is also the determinism measurement, and it
+supersedes the earlier one: 40 completions of a one-sentence prompt at
+temperature 0, per model. Three of eight are deterministic (one distinct
+completion in 40), two nearly so, and three are not — deepseek-v4-flash at 12/40,
+kimi-k2p6 at 13/34, and nemotron-lightning at 29/40.
 
-This also breaks a natural statistical shortcut, discussed in §5.
+The earlier figure of "five of ten non-deterministic" came from eight samples of
+a one-word prompt. It disagreed with this measurement on three models in both
+directions, because a prompt with no entropy cannot reveal non-determinism and
+eight samples cannot bound it. Greedy decoding is not reproducible even in
+principle on the three models at the bottom of that table, which bears on every
+paper that reports a single greedy number as a fixed property of the model.
 
 ## 3. A benchmark model was withdrawn mid-study
 
@@ -250,8 +277,7 @@ extrapolation and is far better powered.
 
 | finding | script | data |
 |---|---|---|
-| §1 | `scripts/probe_distinguishability.py`, `samplerconfound/distinguish.py` | `runs/distinguish.json` |
-| §2 | `scripts/probe_fireworks.py` | `runs/probe_params_*.json` |
+| §1, §2 | `scripts/probe_distinguishability.py`, `samplerconfound/distinguish.py` | `runs/distinguish.json` |
 | §3 | — | `MODEL_CANDIDATES` in `samplerconfound/config.py` |
 | §4 | `scripts/verify_grader.py`, `scripts/sample_for_grader_check.py` | `runs/grader_check/` |
 | §5 | `tests/test_variance.py`, `tests/test_inversion.py` | simulation |
