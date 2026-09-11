@@ -250,3 +250,48 @@ def test_the_control_is_the_ceiling_on_what_any_cell_can_show():
     power = positive_control([_cell("m", "temperature", dh=0.8, h_open=5.3, h_tight=4.5)])
     assert power["m"].control_h_tight == pytest.approx(4.5)
     assert not power["m"].powered
+
+
+# --------------------------------------------------------------------------
+# negative control
+#
+# Two arms at IDENTICAL settings must show no effect. This is what calibrates
+# the false-positive rate on real output, where the simulated calibration above
+# cannot reach: real completions are collected sequentially by a live provider,
+# and if its state drifts between the first arm and the second, identical
+# settings stop being exchangeable and every positive in the grid inherits the
+# inflation. Measured live on 2026-09-11: 0 of 25 informative pairs rejected at
+# 0.05, 1 of 25 at 0.10, dH mean -0.08. The unit tests below pin the machinery.
+# --------------------------------------------------------------------------
+def test_identical_settings_produce_a_null_result_on_real_style_data():
+    # Same distribution, two draws, the exact call the script makes.
+    rng = np.random.default_rng(11)
+    dist = {f"w{i}": 1.0 for i in range(25)}
+    r = assess_parameter("m", "null_0", {"temperature": 1.0}, {"temperature": 1.0},
+                         _draw(rng, dist, 40), _draw(rng, dist, 40), n_permutations=500)
+    assert r.status == "ok"
+    assert abs(r.dh) < 1.0
+    assert r.dh_p > 0.05
+
+
+def test_negative_control_rate_is_near_nominal_over_many_pairs():
+    rng = np.random.default_rng(12)
+    dist = {f"w{i}": 1.0 + (i % 3) for i in range(20)}
+    fp = 0
+    for k in range(60):
+        r = assess_parameter("m", f"null_{k}", {}, {}, _draw(rng, dist, 40),
+                             _draw(rng, dist, 40), n_permutations=300, random_state=k)
+        fp += r.dh_p < 0.05
+    assert fp / 60 < 0.12, f"false-positive rate {fp/60:.0%} at nominal 5%"
+
+
+def test_a_degenerate_pair_cannot_reject_and_must_not_count():
+    # Both arms all-unique: H = log2(n) on both sides, dH = 0, p = 1. Such a pair
+    # cannot produce a false positive, so including it in a rate flatters the
+    # calibration. The script excludes these; this pins the arithmetic.
+    a = [f"u{i}" for i in range(40)]
+    b = [f"v{i}" for i in range(40)]
+    r = assess_parameter("m", "null", {}, {}, a, b, n_permutations=300)
+    assert r.dh == pytest.approx(0.0)
+    assert r.dh_p == pytest.approx(1.0, abs=0.01)
+    assert r.support_tight >= r.n_tight - 1 and r.support_open >= r.n_open - 1

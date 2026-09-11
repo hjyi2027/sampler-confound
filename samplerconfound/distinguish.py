@@ -88,6 +88,9 @@ class Distinguishability:
     n_permutations: int = 0
     status: str = "ok"               # ok | rejected | insufficient
     detail: str = ""
+    # Retained so a negative control can be run on the data after the fact.
+    completions_tight: list[str] = field(default_factory=list)
+    completions_open: list[str] = field(default_factory=list)
 
     @property
     def excess(self) -> float:

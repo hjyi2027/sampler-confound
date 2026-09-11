@@ -144,6 +144,110 @@ def collect(key, model, params, n, workers, max_tokens, effort):
     return out, errs, usage, n_empty
 
 
+# The setting for the negative control. Temperature 1.0 with nothing else is the
+# open arm of every truncation test — the highest-entropy condition, where a
+# spurious difference between two identical arms has the most room to appear.
+# At temperature 0 a deterministic model gives two constant arms and the test
+# reports "insufficient", which calibrates nothing.
+NEGATIVE_SETTING = {"temperature": 1.0}
+
+
+def negative_control_run(key, models, args) -> int:
+    """Two arms, identical settings, collected sequentially like the real test.
+
+    Under the null the two samples are exchangeable, so the one-sided dH p-value
+    should be uniform and the rejection rate at 0.05 should be 5%. If it is not,
+    something in the COLLECTION breaks exchangeability — provider state drifting
+    between the first arm and the second, say — and every positive result in the
+    main grid inherits that inflation. The simulated calibration in the tests
+    used iid categorical draws and cannot see this.
+
+    Arms are collected in the same order as the real test (A fully, then B) on
+    purpose: the point is to expose whatever the real test is exposed to.
+    """
+    import math
+
+    rows, tokens, t0 = [], 0, time.time()
+    for model in models:
+        print(f"\n=== {model} — negative control, {args.negative} identical pairs ===")
+        for k in range(args.negative):
+            a, ea, ua, empty_a = collect(key, model, NEGATIVE_SETTING, args.n,
+                                         args.workers, args.max_tokens, args.effort)
+            b, eb, ub, empty_b = collect(key, model, NEGATIVE_SETTING, args.n,
+                                         args.workers, args.max_tokens, args.effort)
+            tokens += sum(u.get("completion_tokens", 0) for u in ua + ub)
+            r = assess_parameter(model, f"null_{k}", NEGATIVE_SETTING, NEGATIVE_SETTING,
+                                 a, b, n_permutations=args.permutations,
+                                 random_state=k)
+            r.completions_tight, r.completions_open = a, b
+            if r.status != "ok":
+                print(f"  pair {k}: {r.status}  {r.detail[:70]}")
+            else:
+                print(f"  pair {k}: dH={r.dh:+.2f} p={r.dh_p:.3f}   "
+                      f"TV={r.tv:.3f} p={r.tv_p:.3f}   support {r.support_tight}/{r.support_open}")
+            rows.append(r)
+
+    usable = [r for r in rows if r.status == "ok"]
+    # A pair where both arms are (near) all-unique has H = log2(n) on both sides,
+    # dH identically zero, and p -> 1 by construction. It cannot produce a false
+    # positive and so says nothing about the rate; counting it flatters the
+    # calibration. nemotron-lightning at temperature 1.0 is this case.
+    degenerate = [r for r in usable
+                  if r.support_tight >= r.n_tight - 1 and r.support_open >= r.n_open - 1]
+    ok = [r for r in usable if r not in degenerate]
+    n = len(ok)
+    if degenerate:
+        print(f"\n  excluded {len(degenerate)} degenerate pair(s) — both arms all-unique, "
+              f"statistic has no range: {sorted({r.model for r in degenerate})}")
+    if not n:
+        print("no informative negative-control pairs")
+        return 1
+
+    def wilson(k, n, z=1.96):
+        p = k / n
+        den = 1 + z * z / n
+        c = (p + z * z / (2 * n)) / den
+        h = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / den
+        return c - h, c + h
+
+    fp_dh = sum(r.dh_p < 0.05 for r in ok)
+    fp_tv = sum(r.tv_p < 0.05 for r in ok)
+    lo_d, hi_d = wilson(fp_dh, n)
+    lo_t, hi_t = wilson(fp_tv, n)
+    dhs = np.array([r.dh for r in ok])
+    ps = np.array([r.dh_p for r in ok])
+
+    print(f"\n=== NEGATIVE CONTROL SUMMARY: {n} informative pairs at identical settings ===")
+    print(f"  dH one-sided  rejections at 0.05: {fp_dh}/{n} = {fp_dh/n:.1%}  "
+          f"95% CI [{lo_d:.1%}, {hi_d:.1%}]   nominal 5%")
+    print(f"  TV two-sided  rejections at 0.05: {fp_tv}/{n} = {fp_tv/n:.1%}  "
+          f"95% CI [{lo_t:.1%}, {hi_t:.1%}]   nominal 5%")
+    print(f"  dH under the null: mean {dhs.mean():+.3f}, sd {dhs.std(ddof=1):.3f}  "
+          f"(should centre on zero)")
+    print(f"  dH p-values: mean {ps.mean():.3f}, min {ps.min():.3f}  "
+          f"(uniform => mean 0.5)")
+    fp10 = sum(r.dh_p < 0.10 for r in ok)
+    print(f"  dH rejections at 0.10: {fp10}/{n} = {fp10/n:.1%}   nominal 10%")
+    verdict = ("calibrated" if hi_d >= 0.05 >= lo_d or fp_dh / n <= 0.10
+               else "INFLATED — positives in the main grid are suspect")
+    print(f"  verdict: {verdict}")
+    print(f"  ({n} pairs bound the rate below {hi_d:.0%}; pinning it near 5% needs "
+          "several hundred)")
+    print(f"\n  {tokens:,} output tokens, {(time.time()-t0)/60:.1f} min")
+
+    if args.out:
+        dest = resolve_out(args.out)
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(json.dumps({
+            "setting": NEGATIVE_SETTING, "n_per_arm": args.n, "pairs_per_model": args.negative,
+            "results": [r.to_dict() for r in rows],
+            "false_positive_rate": {"dh": fp_dh / n, "dh_ci": [lo_d, hi_d],
+                                    "tv": fp_tv / n, "tv_ci": [lo_t, hi_t], "n": n},
+        }, indent=2, default=str) + "\n")
+        print(f"wrote {show(dest)}")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--models", nargs="+", default=None)
@@ -156,6 +260,10 @@ def main() -> int:
     ap.add_argument("--effort", default="low")
     ap.add_argument("--permutations", type=int, default=10_000)
     ap.add_argument("--out", type=Path, default=None)
+    ap.add_argument("--negative", type=int, default=0, metavar="K",
+                    help="negative control: for each model collect K pairs of arms "
+                         "at IDENTICAL settings and test them. Calibrates the "
+                         "empirical false-positive rate on real output.")
     args = ap.parse_args()
 
     if args.all:
@@ -171,6 +279,9 @@ def main() -> int:
     results, tokens = [], 0
     t0 = time.time()
 
+    if args.negative:
+        return negative_control_run(key, models, args)
+
     for model in models:
         print(f"\n=== {model} ===")
         for param, sa, sb in CONTRASTS:
@@ -182,6 +293,10 @@ def main() -> int:
 
             r = assess_parameter(model, param, sa, sb, a, b,
                                  n_permutations=args.permutations)
+            # Keep the completions themselves. The first run of this script
+            # stored only summaries, which made a free split-half negative
+            # control impossible after the fact.
+            r.completions_tight, r.completions_open = a, b
             rejected = [e for e in ea + eb if e.startswith("rejected")]
             if rejected:
                 r.status = "rejected"

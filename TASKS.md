@@ -820,3 +820,26 @@ not (deepseek 12/40, kimi 13/34, nemotron-lightning 29/40). The earlier "five of
 ten" disagreed on three models in both directions.
 
 No new API calls — the control was already in the data as the temperature test.
+
+
+## 2026-09-11 — negative control
+
+Two arms at identical settings, collected sequentially like the real test, four
+pairs per model. This calibrates the false-positive rate on real output, which
+the simulated calibration cannot: iid categorical draws cannot show a provider
+whose state drifts between arms.
+
+**0 of 25 informative pairs rejected at 0.05; 1 of 25 at 0.10.** dH mean −0.08,
+sd 0.29, p mean 0.60. Upper CI bound on the rate 13%: gross inflation excluded,
+exactly-5% consistent but not pinned. Three nemotron-lightning pairs excluded as
+degenerate — both arms all-unique, dH ≡ 0, p = 1 by construction — because a
+pair that cannot reject says nothing about the rate, and the first summary had
+counted them as "0/28", which flattered it.
+
+**qwen3p7-plus is 404** — the third model withdrawn since Aug 27, two days after
+a successful probe. It held the only two "no effect seen" cells in the grid.
+
+The first probe run stored only summaries, not the completions, which made a
+free split-half control impossible after the fact. Completions are retained now.
+
+Cost $0.65 for 2,560 calls.

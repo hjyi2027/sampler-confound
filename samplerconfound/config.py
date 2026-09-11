@@ -212,8 +212,13 @@ MODEL_CANDIDATES = [
      "note": "rejected temperature > 1.0 while it existed; now 404"},
     # Probed 2026-08-27 after gpt-oss-20b was withdrawn from the catalogue
     # mid-project. Both honour every parameter, min_p included.
+    # WITHDRAWN 2026-09-11 — the third model to vanish mid-project, two days
+    # after it was probed successfully. Its "no_effect" verdicts on top_p and
+    # min_p, the only such cells in the grid, can no longer be rechecked.
     {"id": "accounts/fireworks/models/qwen3p7-plus", "family": "alibaba",
      "usd_per_1m": (0.40, 1.60),
+     "available": False,
+     "withdrawn": "2026-09-11",
      "sampler_support": {"temperature": "yes", "top_p": "no_effect", "top_k": "yes", "min_p": "no_effect"},
      "entropy_at_t0_bits": 1.87, "distinct_at_t0": "6/38",
      "deterministic_at_t0": False},

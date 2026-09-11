@@ -87,6 +87,25 @@ the null is evidence of nothing.
 | nemotron-lightning-3p5-30b-a3b | 15% | 2% ? | **10%** | **4%** |
 | qwen3p7-plus | 59% | 6% ∅ | **43%** | 24% ∅ |
 
+**And a negative control, so the false-positive rate is measured rather than
+assumed.** Two arms at *identical* settings (temperature 1.0, nothing else — the
+highest-entropy condition, where a spurious difference has the most room to
+appear), collected sequentially exactly as the real test collects its arms, four
+pairs per model. Under the null they are exchangeable, so the rejection rate at
+0.05 should be 5%. Measured live on 2026-09-11: **0 of 25 informative pairs
+rejected at 0.05, 1 of 25 at 0.10**, dH mean −0.08 (sd 0.29), p-values mean 0.60.
+The 95% upper bound on the rate is 13%, so the inflation that would matter is
+excluded; a rate of exactly 5% is consistent but 25 pairs cannot pin it, and
+would need several hundred to. Three further pairs from nemotron-lightning were
+excluded as degenerate — both arms all-unique, dH identically zero, p = 1 by
+construction — because a pair that cannot reject says nothing about the rate and
+counting it would flatter the calibration.
+
+This matters because the simulated calibration in the tests uses iid categorical
+draws and cannot see the failure the live control is for: a provider whose state
+drifts between the first arm and the second, which would make identical settings
+non-exchangeable and inflate every positive in the grid. It did not.
+
 Read that way, the grid contains exactly two cells that look like an ignored
 parameter: `top_p` and `min_p` on `qwen3p7-plus`, where temperature removed 59%
 of the entropy and `top_p` removed 6%. Every other null sits on a model whose
@@ -100,8 +119,14 @@ verdicts — dropping the `minp` cell and excluding muse-glimmer-30b — and bot
 made on bad evidence. The exclusion is reversed; restoring the cell is a cost
 decision and is left open.
 
+**Three models have now vanished from the catalogue since this project began**
+— gpt-oss-20b on 2026-08-27, minimax-m2p7 by 2026-09-09, and qwen3p7-plus on
+2026-09-11, two days after it was probed successfully. The last one carried the
+only two "no effect seen" cells in the grid, and they can no longer be
+rechecked. Three of ten probed models in fifteen days.
+
 Two collection failures worth recording, because both produce a confident-looking
-zero. `minimax-m2p7` is now **404 — a second model withdrawn** mid-project.
+zero. `minimax-m2p7` is **404 — the second model withdrawn** mid-project.
 `qwen3p7-plus` returns HTTP 200 with **empty content** whenever `max_tokens` cuts
 it off before it stops reasoning (739 reasoning tokens on this prompt), so at
 `max_tokens=256` every call succeeded, was billed, and yielded nothing; a
@@ -277,7 +302,7 @@ extrapolation and is far better powered.
 
 | finding | script | data |
 |---|---|---|
-| §1, §2 | `scripts/probe_distinguishability.py`, `samplerconfound/distinguish.py` | `runs/distinguish.json` |
+| §1, §2 | `scripts/probe_distinguishability.py`, `samplerconfound/distinguish.py` | `runs/distinguish.json`, `runs/negative_control.json` |
 | §3 | — | `MODEL_CANDIDATES` in `samplerconfound/config.py` |
 | §4 | `scripts/verify_grader.py`, `scripts/sample_for_grader_check.py` | `runs/grader_check/` |
 | §5 | `tests/test_variance.py`, `tests/test_inversion.py` | simulation |
