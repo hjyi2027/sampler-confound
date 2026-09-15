@@ -92,6 +92,10 @@ class Distinguishability:
     # Retained so a negative control can be run on the data after the fact.
     completions_tight: list[str] = field(default_factory=list)
     completions_open: list[str] = field(default_factory=list)
+    # Empty completions per arm. They are kept in the sample as a sentinel
+    # token; these counts make the censoring visible instead of silent.
+    empty_tight: int = 0
+    empty_open: int = 0
 
     @property
     def excess(self) -> float:

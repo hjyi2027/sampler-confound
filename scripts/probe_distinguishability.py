@@ -158,11 +158,18 @@ def collect(key, model, params, n, workers, max_tokens, effort, prompt=None):
             txt, err, u = f.result()
             if err:
                 errs.append(err)
-            elif txt:
-                out.append(txt)
-                usage.append(u)
             else:
-                n_empty += 1
+                # An empty completion is an outcome of the setting, not a failed
+                # call, and it is NOT missing at random: at high temperature the
+                # reasoning trace rambles past max_tokens and the model emits
+                # nothing. Dropping empties censored the open arm by exactly the
+                # variable under test — minimax-m3 lost 80 of 160 open-arm
+                # samples on the temperature contrast in the first run, and the
+                # entropy of what survived was not the entropy of the setting.
+                # Empties stay in the sample as a distinguished token.
+                out.append(txt if txt else EMPTY_TOKEN)
+                if not txt:
+                    n_empty += 1
                 usage.append(u)
     return out, errs, usage, n_empty
 
@@ -173,6 +180,19 @@ def collect(key, model, params, n, workers, max_tokens, effort, prompt=None):
 # At temperature 0 a deterministic model gives two constant arms and the test
 # reports "insufficient", which calibrates nothing.
 NEGATIVE_SETTING = {"temperature": 1.0}
+
+# Sentinel for a completion that came back empty. Kept in the sample so that the
+# arm's size is the number of CALLS, not the number of non-empty returns.
+#
+# This is not censoring to be engineered away with a bigger max_tokens. At
+# temperature 1.5, minimax-m3 hits WHATEVER cap is set — median completion
+# tokens equal to max_tokens at 1024, 2048 and 4096 alike — because the reasoning
+# trace does not terminate. And the direction is not even consistent: deepseek at
+# top_p=0.01 empties MORE than at top_p=1.0, because near-greedy reasoning loops.
+# Either way the empty return is what that setting produces, so it stays in the
+# distribution as a token. A test that drops it measures the entropy of the
+# completions that happened to finish, which is not the entropy of the setting.
+EMPTY_TOKEN = "<empty>"
 
 
 def negative_control_run(key, models, args) -> int:
@@ -356,6 +376,8 @@ def main() -> int:
                                      n_permutations=args.permutations)
                 r.completions_tight, r.completions_open = a, b
                 r.prompt = pid
+                r.empty_tight = sum(x == EMPTY_TOKEN for x in a)
+                r.empty_open = sum(x == EMPTY_TOKEN for x in b)
                 rejected = [e for e in ea + eb if e.startswith("rejected")]
                 if rejected:
                     r.status, r.detail = "rejected", rejected[0]
