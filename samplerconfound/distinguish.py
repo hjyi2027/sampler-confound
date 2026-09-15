@@ -67,6 +67,7 @@ class Distinguishability:
     parameter: str
     setting_a: dict
     setting_b: dict
+    prompt: str = ""                 # prompt id; a verdict is per (model, param, prompt)
     n_tight: int = 0
     n_open: int = 0
     support_tight: int = 0
@@ -112,6 +113,11 @@ def entropy(xs: list[str]) -> float:
     return -sum((v / n) * math.log2(v / n) for v in c.values())
 
 
+def entropy_drop(a: list[str], b: list[str]) -> float:
+    """H(a) - H(b): positive when b is the narrower sample."""
+    return entropy(a) - entropy(b)
+
+
 def tv_distance(a: list[str], b: list[str]) -> float:
     """Total variation distance between two empirical distributions."""
     ca, cb = Counter(a), Counter(b)
@@ -145,13 +151,43 @@ def permutation_test(
     if not np.isfinite(obs):
         return obs, float("nan"), float("nan"), float("nan")
 
-    pooled = np.array(a + b, dtype=object)
-    na = len(a)
+    # Encode completions as small ints once. The first version shuffled an
+    # object array of strings and rebuilt two Counters of strings per
+    # permutation — 10,000 times per cell, 16 cells per model-prompt — and the
+    # multi-prompt grid was killed for memory three hours in. Integer codes make
+    # each permutation a bincount over a fixed-size array.
+    vocab = {w: i for i, w in enumerate(dict.fromkeys(a + b))}
+    codes = np.fromiter((vocab[w] for w in a + b), dtype=np.int32, count=len(a) + len(b))
+    K = len(vocab)
+    na, nb = len(a), len(b)
     rng = np.random.default_rng(random_state)
     null = np.empty(n_permutations)
+
+    def _H(counts, n):
+        p = counts[counts > 0] / n
+        return float(-(p * np.log2(p)).sum())
+
+    if statistic is tv_distance:
+        def fast(ca, cb):
+            return 0.5 * np.abs(ca / na - cb / nb).sum()
+    elif statistic is entropy_drop:
+        def fast(ca, cb):
+            return _H(ca, na) - _H(cb, nb)
+    else:
+        # A caller-supplied statistic still receives lists; slow, but not on
+        # either path this module actually uses.
+        inv = list(vocab)
+
+        def fast(ca, cb):
+            la = [w for w, c in zip(inv, ca) for _ in range(int(c))]
+            lb = [w for w, c in zip(inv, cb) for _ in range(int(c))]
+            return statistic(la, lb)
+
     for i in range(n_permutations):
-        rng.shuffle(pooled)
-        null[i] = statistic(list(pooled[:na]), list(pooled[na:]))
+        rng.shuffle(codes)
+        ca = np.bincount(codes[:na], minlength=K)
+        cb = np.bincount(codes[na:], minlength=K)
+        null[i] = fast(ca, cb)
 
     hits = np.sum(null >= obs) if one_sided else np.sum(np.abs(null) >= abs(obs))
     p = (1 + int(hits)) / (1 + n_permutations)
@@ -209,7 +245,7 @@ def assess_parameter(
 
     res.dh, res.dh_null_mean, _, res.dh_p = permutation_test(
         completions_open, completions_tight,
-        statistic=lambda a, b: entropy(a) - entropy(b),
+        statistic=entropy_drop,
         one_sided=True, n_permutations=n_permutations, random_state=random_state,
     )
     res.tv, res.tv_null_mean, res.null_p95, res.tv_p = permutation_test(
@@ -331,3 +367,65 @@ def interpret(r: Distinguishability, power: dict[str, ModelPower],
     if mp is None or not mp.powered:
         return "underpowered"
     return "no effect seen"
+
+
+# --------------------------------------------------------------------------
+# aggregating across prompts
+# --------------------------------------------------------------------------
+# One prompt is one sample of prompt space. It can be degenerate for a particular
+# model — every completion "The sun set slowly..." — and a one-word noun prompt
+# with a strong mode was already shown not to predict task-level sensitivity.
+# So each (model, parameter) is tested on several prompts with genuine entropy,
+# every prompt is reported on its own, and the verdict is a majority over the
+# prompts that PASSED THEIR POSITIVE CONTROL. A single degenerate prompt then
+# cannot drive a verdict in either direction: it fails the control and drops out
+# of the denominator rather than casting a vote.
+
+MIN_POWERED_PROMPTS = 2
+
+
+@dataclass
+class Aggregate:
+    model: str
+    parameter: str
+    n_prompts: int = 0
+    n_powered: int = 0               # prompts whose positive control passed
+    n_distinguishable: int = 0       # among powered prompts
+    n_no_effect: int = 0             # among powered prompts
+    per_prompt: dict = field(default_factory=dict)   # prompt_id -> verdict
+    verdict: str = "underpowered"
+
+    def to_dict(self) -> dict:
+        return dict(self.__dict__)
+
+
+def aggregate(per_prompt_verdicts: dict[str, str], model: str, parameter: str) -> Aggregate:
+    """Majority over powered prompts.
+
+    per_prompt_verdicts: {prompt_id: verdict} where verdict is one of
+    "distinguishable" | "no effect seen" | "underpowered" | other status.
+
+      distinguishable   on a majority of powered prompts
+      no effect seen    powered on >= MIN_POWERED_PROMPTS prompts, a majority
+                        of them null — the probe had power on several prompts
+                        and saw nothing on most
+      mixed             powered prompts split with no majority; reported as
+                        such rather than forced
+      underpowered      fewer than MIN_POWERED_PROMPTS prompts had power
+    """
+    agg = Aggregate(model=model, parameter=parameter, per_prompt=dict(per_prompt_verdicts))
+    agg.n_prompts = len(per_prompt_verdicts)
+    powered = [v for v in per_prompt_verdicts.values()
+               if v in ("distinguishable", "no effect seen")]
+    agg.n_powered = len(powered)
+    agg.n_distinguishable = sum(v == "distinguishable" for v in powered)
+    agg.n_no_effect = sum(v == "no effect seen" for v in powered)
+    if agg.n_powered < MIN_POWERED_PROMPTS:
+        agg.verdict = "underpowered"
+    elif agg.n_distinguishable * 2 > agg.n_powered:
+        agg.verdict = "distinguishable"
+    elif agg.n_no_effect * 2 > agg.n_powered:
+        agg.verdict = "no effect seen"
+    else:
+        agg.verdict = "mixed"
+    return agg

@@ -295,3 +295,45 @@ def test_a_degenerate_pair_cannot_reject_and_must_not_count():
     assert r.dh == pytest.approx(0.0)
     assert r.dh_p == pytest.approx(1.0, abs=0.01)
     assert r.support_tight >= r.n_tight - 1 and r.support_open >= r.n_open - 1
+
+
+# --------------------------------------------------------------------------
+# aggregation across prompts
+# --------------------------------------------------------------------------
+from samplerconfound.distinguish import aggregate
+
+
+def test_majority_of_powered_prompts_decides():
+    a = aggregate({"p1": "distinguishable", "p2": "distinguishable",
+                   "p3": "no effect seen"}, "m", "top_p")
+    assert a.verdict == "distinguishable" and a.n_powered == 3
+
+
+def test_a_degenerate_prompt_drops_out_rather_than_voting():
+    # p3 failed its control. It must not count against the majority.
+    a = aggregate({"p1": "distinguishable", "p2": "distinguishable",
+                   "p3": "underpowered", "p4": "underpowered"}, "m", "top_p")
+    assert a.verdict == "distinguishable"
+    assert a.n_powered == 2
+
+
+def test_too_few_powered_prompts_is_underpowered_not_no_effect():
+    a = aggregate({"p1": "no effect seen", "p2": "underpowered",
+                   "p3": "underpowered"}, "m", "top_p")
+    assert a.verdict == "underpowered"
+
+
+def test_no_effect_needs_a_majority_of_powered_prompts():
+    a = aggregate({"p1": "no effect seen", "p2": "no effect seen",
+                   "p3": "distinguishable"}, "m", "min_p")
+    assert a.verdict == "no effect seen"
+
+
+def test_an_even_split_is_reported_as_mixed_not_forced():
+    a = aggregate({"p1": "distinguishable", "p2": "no effect seen"}, "m", "top_k")
+    assert a.verdict == "mixed"
+
+
+def test_one_prompt_alone_cannot_carry_a_verdict():
+    a = aggregate({"p1": "distinguishable"}, "m", "top_p")
+    assert a.verdict == "underpowered", "a single prompt is a single sample of prompt space"

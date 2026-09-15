@@ -35,6 +35,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from samplerconfound.distinguish import (
+    Distinguishability,
     assess_parameter,
     holm_adjust,
     interpret,
@@ -45,11 +46,32 @@ from samplerconfound.paths import resolve_out, show
 BASE = "https://api.fireworks.ai/inference/v1/chat/completions"
 PREFIX = "accounts/fireworks/models/"
 
-# Chosen empirically, not by taste. The one-word-noun prompt used by the old
-# probe has almost no entropy — support 3 of 20 on gpt-oss-120b, models converge
-# hard on "apple" — and a test cannot detect narrowing in a distribution that is
-# already narrow. This prompt gave support 21 and entropy 4.19 on the open arm.
-PROMPT = "Write one short sentence about anything at all. Reply with the sentence only."
+# A prompt SET, not a prompt. One prompt is one sample of prompt space: it can be
+# degenerate for a particular model, and a one-word noun with a strong mode was
+# already shown not to predict task-level sampler sensitivity. Each (model,
+# parameter) is tested on every prompt, reported per prompt, and the verdict is a
+# majority over the prompts that passed their own positive control — so a single
+# degenerate prompt drops out of the denominator instead of casting a vote.
+#
+# Chosen empirically on 2026-09-11 by measuring open-arm entropy (temperature
+# 1.0, 20 samples) on three models with different behaviour. Kept: every prompt
+# with at least 1.9 bits on ALL three. Rejected, each a demonstration of why one
+# prompt cannot be trusted:
+#
+#   math_fact  "State one true fact about numbers"  0.57 bits on nemotron (3/20)
+#   integer    "Pick an integer 1-1000"             0.00 bits on gpt-oss-120b (1/20)
+#   city       "Name a city"                        0.29 bits on deepseek (2/20)
+#
+# Each looked fine on at least one model and would have silently carried a
+# verdict on another. word_prob is both the highest-entropy prompt on every
+# model (4.2-4.3 bits) and in the task domain the sweep actually measures.
+PROMPTS = {
+    "word_prob": "Write a one-sentence arithmetic word problem suitable for a ten-year-old. Reply with the problem only.",
+    "sentence":  "Write one short sentence about anything at all. Reply with the sentence only.",
+    "opener":    "Write the opening three words of a story. Reply with those three words only.",
+    "question":  "Ask one question about anything. Reply with the question only.",
+}
+PROMPT = PROMPTS["word_prob"]    # default for single-prompt calls (calibration, negative control)
 
 # (parameter, TIGHT setting, OPEN setting). One parameter varies; everything else
 # is identical between the arms, including temperature, which must be high enough
@@ -82,10 +104,11 @@ def load_key() -> str:
     return key
 
 
-def one(key: str, model: str, params: dict, max_tokens: int, effort: str | None):
+def one(key: str, model: str, params: dict, max_tokens: int, effort: str | None,
+        prompt: str | None = None):
     """Return (completion, error, usage). Completion is None on failure."""
     body = {"model": PREFIX + model,
-            "messages": [{"role": "user", "content": PROMPT}],
+            "messages": [{"role": "user", "content": prompt or PROMPT}],
             "max_tokens": max_tokens, **params}
     if effort:
         body["reasoning_effort"] = effort
@@ -117,7 +140,7 @@ def one(key: str, model: str, params: dict, max_tokens: int, effort: str | None)
     return None, "exhausted", {}
 
 
-def collect(key, model, params, n, workers, max_tokens, effort):
+def collect(key, model, params, n, workers, max_tokens, effort, prompt=None):
     """Returns (completions, errors, usage, n_empty).
 
     Empty completions are counted, not silently dropped. qwen3p7-plus returns
@@ -129,7 +152,7 @@ def collect(key, model, params, n, workers, max_tokens, effort):
     out, errs, usage = [], [], []
     n_empty = 0
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        futs = [pool.submit(one, key, model, params, max_tokens, effort)
+        futs = [pool.submit(one, key, model, params, max_tokens, effort, prompt)
                 for _ in range(n)]
         for f in as_completed(futs):
             txt, err, u = f.result()
@@ -260,6 +283,8 @@ def main() -> int:
     ap.add_argument("--effort", default="low")
     ap.add_argument("--permutations", type=int, default=10_000)
     ap.add_argument("--out", type=Path, default=None)
+    ap.add_argument("--prompts", nargs="+", default=None,
+                    help=f"subset of prompt ids to run; default all of {list(PROMPTS)}")
     ap.add_argument("--negative", type=int, default=0, metavar="K",
                     help="negative control: for each model collect K pairs of arms "
                          "at IDENTICAL settings and test them. Calibrates the "
@@ -282,65 +307,126 @@ def main() -> int:
     if args.negative:
         return negative_control_run(key, models, args)
 
+    prompt_ids = args.prompts or list(PROMPTS)
+    per_prompt_results: dict[str, list] = {pid: [] for pid in prompt_ids}
+
+    # Checkpoint every completed cell to JSONL and skip finished cells on
+    # restart. The first multi-prompt run was killed by the OS after three hours
+    # with every one of its ~7,000 completed calls held in memory and nothing on
+    # disk — the identical mistake the sweep runner was built to avoid. A cell is
+    # ~80 API calls, so the most a kill can now cost is one cell.
+    ckpt = resolve_out(args.out).with_suffix(".cells.jsonl") if args.out else None
+    done: dict[tuple, dict] = {}
+    if ckpt and ckpt.exists():
+        for line in ckpt.read_text().splitlines():
+            if not line.strip():
+                continue
+            try:
+                rec = json.loads(line)
+            except json.JSONDecodeError:
+                continue                      # torn final line: redo that cell
+            done[(rec["model"], rec["prompt"], rec["parameter"])] = rec
+        print(f"resuming: {len(done)} cells already on disk in {show(ckpt)}")
+
+    def restore(rec: dict):
+        r = Distinguishability(model=rec["model"], parameter=rec["parameter"],
+                               setting_a=rec["setting_a"], setting_b=rec["setting_b"])
+        for k, v in rec.items():
+            if hasattr(r, k) and k != "excess":
+                setattr(r, k, v)
+        return r
+
     for model in models:
-        print(f"\n=== {model} ===")
-        for param, sa, sb in CONTRASTS:
-            a, ea, ua, empty_a = collect(key, model, sa, args.n, args.workers,
-                                         args.max_tokens, args.effort)
-            b, eb, ub, empty_b = collect(key, model, sb, args.n, args.workers,
-                                         args.max_tokens, args.effort)
-            tokens += sum(u.get("completion_tokens", 0) for u in ua + ub)
+        for pid in prompt_ids:
+            print(f"\n=== {model} — prompt '{pid}' ===")
+            for param, sa, sb in CONTRASTS:
+                if (model, pid, param) in done:
+                    r = restore(done[(model, pid, param)])
+                    print(f"  {param:<12} (from checkpoint) status={r.status}")
+                    per_prompt_results[pid].append(r)
+                    results.append(r)
+                    continue
+                a, ea, ua, empty_a = collect(key, model, sa, args.n, args.workers,
+                                             args.max_tokens, args.effort, PROMPTS[pid])
+                b, eb, ub, empty_b = collect(key, model, sb, args.n, args.workers,
+                                             args.max_tokens, args.effort, PROMPTS[pid])
+                tokens += sum(u.get("completion_tokens", 0) for u in ua + ub)
 
-            r = assess_parameter(model, param, sa, sb, a, b,
-                                 n_permutations=args.permutations)
-            # Keep the completions themselves. The first run of this script
-            # stored only summaries, which made a free split-half negative
-            # control impossible after the fact.
-            r.completions_tight, r.completions_open = a, b
-            rejected = [e for e in ea + eb if e.startswith("rejected")]
-            if rejected:
-                r.status = "rejected"
-                r.detail = rejected[0]
+                r = assess_parameter(model, param, sa, sb, a, b,
+                                     n_permutations=args.permutations)
+                r.completions_tight, r.completions_open = a, b
+                r.prompt = pid
+                rejected = [e for e in ea + eb if e.startswith("rejected")]
+                if rejected:
+                    r.status, r.detail = "rejected", rejected[0]
+                if (empty_a or empty_b) and r.status == "insufficient":
+                    r.detail = (f"{empty_a + empty_b}/{2 * args.n} calls returned empty "
+                                f"content — billed, but max_tokens ({args.max_tokens}) "
+                                "cut them off before any content. Raise --max-tokens.")
 
-            if (empty_a or empty_b) and r.status == "insufficient":
-                r.detail = (f"{empty_a + empty_b}/{2 * args.n} calls returned empty "
-                            f"content — succeeded and were billed, but max_tokens "
-                            f"({args.max_tokens}) cut them off before any content "
-                            "was emitted. Raise --max-tokens.")
-            if r.status == "rejected":
-                print(f"  {param:<12} REJECTED   {r.detail[:76]}")
-            elif r.status == "insufficient":
-                print(f"  {param:<12} NO POWER   n={r.n_tight}/{r.n_open}  {r.detail[:56]}")
+                if r.status == "rejected":
+                    print(f"  {param:<12} REJECTED   {r.detail[:76]}")
+                elif r.status == "insufficient":
+                    print(f"  {param:<12} NO POWER   n={r.n_tight}/{r.n_open}  {r.detail[:56]}")
+                else:
+                    print(f"  {param:<12} H tight={r.entropy_tight:.2f} open={r.entropy_open:.2f}"
+                          f"  dH={r.dh:+.2f} (null {r.dh_null_mean:+.2f}) p={r.dh_p:.4f}"
+                          f"   TV={r.tv:.3f} p={r.tv_p:.4f}")
+                per_prompt_results[pid].append(r)
+                results.append(r)
+                if ckpt:
+                    ckpt.parent.mkdir(parents=True, exist_ok=True)
+                    with ckpt.open("a") as fh:
+                        fh.write(json.dumps(r.to_dict(), default=str) + "\n")
+                        fh.flush()
+                        os.fsync(fh.fileno())
+
+    # ---- per-prompt positive control, then the cross-prompt aggregate -------
+    from samplerconfound.distinguish import aggregate
+
+    power_by_prompt = {pid: positive_control(rs) for pid, rs in per_prompt_results.items()}
+    adj_by_prompt = {pid: holm_adjust(rs) for pid, rs in per_prompt_results.items()}
+
+    print(f"\nPOSITIVE CONTROL BY PROMPT (fraction of open-arm entropy temperature removes)")
+    print(f"{'model':<32}" + "".join(f"{pid:>11}" for pid in prompt_ids))
+    for model in models:
+        line = f"{model:<32}"
+        for pid in prompt_ids:
+            mp = power_by_prompt[pid].get(model)
+            if mp is None or not np.isfinite(mp.fraction_removed):
+                line += f"{'—':>11}"
             else:
-                print(f"  {param:<12} H tight={r.entropy_tight:.2f} open={r.entropy_open:.2f}"
-                      f"  dH={r.dh:+.2f} (null {r.dh_null_mean:+.2f}) p={r.dh_p:.4f}"
-                      f"   TV={r.tv:.3f} (null {r.tv_null_mean:.3f}) p={r.tv_p:.4f}")
-            results.append(r)
+                line += f"{mp.fraction_removed:>9.0%}{'' if mp.powered else '!':>2}"
+        print(line)
+    print("  ! = control failed on that prompt; the prompt drops out of that model's verdicts")
 
-    adj = holm_adjust(results)
-    power = positive_control(results)
+    aggregates = []
+    print(f"\nVERDICTS — per prompt, then majority over prompts whose control passed")
+    print(f"{'model':<32}{'param':<12}" + "".join(f"{pid:>11}" for pid in prompt_ids)
+          + f"{'powered':>9}{'dist':>6}  verdict")
+    sym = {"distinguishable": "yes", "no effect seen": "NO", "underpowered": "?",
+           "rejected": "rej", "insufficient": "n/a"}
+    for model in models:
+        for param, _, _ in CONTRASTS:
+            if param == "temperature":
+                continue                      # it is the control, not a test subject
+            pv = {}
+            for pid in prompt_ids:
+                r = next((x for x in per_prompt_results[pid]
+                          if x.model == model and x.parameter == param), None)
+                if r is None:
+                    continue
+                pv[pid] = interpret(r, power_by_prompt[pid],
+                                    adj_by_prompt[pid].get((model, param), 1.0))
+            agg = aggregate(pv, model, param)
+            aggregates.append(agg)
+            line = f"{model:<32}{param:<12}"
+            for pid in prompt_ids:
+                line += f"{sym.get(pv.get(pid, ''), '—'):>11}"
+            line += f"{agg.n_powered:>9}{agg.n_distinguishable:>6}  {agg.verdict}"
+            print(line)
 
-    print(f"\nPOSITIVE CONTROL — temperature 0 vs 1.5 on the same prompt. A null on any")
-    print("other parameter is readable only where this removed most of the entropy.")
-    print(f"{'model':<32}{'H open':>8}{'H @ T=0':>9}{'removed':>9}  status")
-    for m, mp in sorted(power.items()):
-        if not np.isfinite(mp.fraction_removed):
-            print(f"{m:<32}{'—':>8}{'—':>9}{'—':>9}  {mp.detail}")
-            continue
-        print(f"{m:<32}{mp.control_h_open:>7.2f}b{mp.control_h_tight:>8.2f}b"
-              f"{mp.fraction_removed:>8.0%}  {'powered' if mp.powered else 'WEAK — nulls uninterpretable'}")
-
-    print(f"\n{'model':<32}{'param':<12}{'dH':>7}{'of open':>9}{'p_holm':>9}  verdict")
-    for r in results:
-        if r.status != "ok":
-            print(f"{r.model:<32}{r.parameter:<12}{'—':>7}{'—':>9}{'—':>9}  {r.status.upper()}")
-            continue
-        pa = adj[(r.model, r.parameter)]
-        frac = r.dh / r.entropy_open if r.entropy_open > 0 else float("nan")
-        print(f"{r.model:<32}{r.parameter:<12}{r.dh:>7.2f}{frac:>8.0%}{pa:>9.4f}  "
-              f"{interpret(r, power, pa)}")
-
-    print(f"\n{len(results)} tests, {tokens:,} output tokens, "
+    print(f"\n{len(results)} tests over {len(prompt_ids)} prompts, {tokens:,} output tokens, "
           f"{(time.time()-t0)/60:.1f} min")
     print("p_holm is Holm-Bonferroni across the whole grid; the claim is per-cell, "
           "so the family-wise rate is the relevant one.")
@@ -352,10 +438,12 @@ def main() -> int:
             {"prompt": PROMPT, "n_per_arm": args.n,
              "permutations": args.permutations,
              "results": [r.to_dict() for r in results],
-             "p_holm": {f"{k[0]}|{k[1]}": v for k, v in adj.items()},
-             "positive_control": {m: mp.to_dict() for m, mp in power.items()},
-             "verdicts": {f"{r.model}|{r.parameter}": interpret(r, power, adj.get((r.model, r.parameter), 1.0))
-                          for r in results}},
+             "p_holm_by_prompt": {pid: {f"{k[0]}|{k[1]}": v for k, v in a.items()}
+                                  for pid, a in adj_by_prompt.items()},
+             "prompts": {pid: PROMPTS[pid] for pid in prompt_ids},
+             "positive_control_by_prompt": {pid: {m: mp.to_dict() for m, mp in pw.items()}
+                                            for pid, pw in power_by_prompt.items()},
+             "aggregates": [a.to_dict() for a in aggregates]},
             indent=2, default=str) + "\n")
         print(f"wrote {show(dest)}")
     return 0
