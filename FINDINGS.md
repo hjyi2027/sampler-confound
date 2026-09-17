@@ -106,12 +106,82 @@ draws and cannot see the failure the live control is for: a provider whose state
 drifts between the first arm and the second, which would make identical settings
 non-exchangeable and inflate every positive in the grid. It did not.
 
-Read that way, the grid contains exactly two cells that look like an ignored
-parameter: `top_p` and `min_p` on `qwen3p7-plus`, where temperature removed 59%
-of the entropy and `top_p` removed 6%. Every other null sits on a model whose
-positive control failed and says nothing either way.
+**Then a prompt set, because one prompt is one sample of prompt space.** Four
+prompts with ≥1.9 bits of open-arm entropy on every model surveyed, each
+(model, parameter) tested on all four, reported per prompt, and the verdict
+taken as a majority over prompts whose own positive control passed. Three
+candidate prompts were rejected by the survey, each a demonstration of why: "state
+a fact about numbers" gives 0.57 bits on nemotron-lightning, "pick an integer
+1–1000" gives 0.00 on gpt-oss-120b, "name a city" gives 0.29 on deepseek. Each
+looked fine on one model and would have silently carried a verdict on another.
 
-**Every cell the old heuristic called IGNORED and that could be retested came
+Positive control per prompt (fraction of open-arm entropy that temperature 0 → 1.5
+removes; ✗ = control failed, prompt drops out of that model's verdicts):
+
+| model | word_prob | sentence | opener | question |
+|---|--:|--:|--:|--:|
+| deepseek-v4-flash-0731 | 13% ✗ | 72% | 28% ✗ | 16% ✗ |
+| gpt-oss-120b | 100% | 100% | 100% | 100% |
+| kimi-k2p6 | -84% ✗ | 21% ✗ | -129% ✗ | -22% ✗ |
+| minimax-m3 | -20% ✗ | 100% | 42% ✗ | 92% |
+| muse-glimmer-30b | 57% | 84% | 100% | 81% |
+| nemotron-3-ultra-nvfp4 | 85% | 79% | 66% | 82% |
+| nemotron-lightning-3p5-30b-a3b | 3% ✗ | 13% ✗ | 2% ✗ | 9% ✗ |
+
+**Negative fractions are real and they mean something specific.** On kimi-k2p6
+the open arm has *less* entropy than the tight arm on three of four prompts —
+temperature 1.5 removes −84%, −129%, −22%. That is not a bug in the statistic: at
+temperature 1.5 kimi's reasoning trace does not terminate within any token budget
+(median completion tokens equal the cap at 1024, 2048 and 4096 alike), the model
+emits empty content, and on the `opener` prompt **33 of 40** open-arm completions
+are the empty token — a point mass. Entropy collapses toward zero because the
+setting produced one outcome forty times over.
+
+The first collector dropped empties, which censored the open arm by exactly the
+variable under test and produced arms of 40 versus 13. Keeping them as an outcome
+token is correct — the empty return *is* what the setting produces — but it
+exposes that on these models the temperature contrast is not measuring sampler
+narrowing at all. It is measuring whether temperature 1.5 breaks the reasoning
+loop. The positive-control gate does the right thing with that: those cells go
+to *underpowered*, evidence of nothing, rather than to *no effect*.
+
+Verdicts per prompt and aggregate:
+
+| model | param | word_prob | sentence | opener | question | powered | verdict |
+|---|---|--:|--:|--:|--:|--:|---|
+| nemotron-lightning-3p5-30b-a3b | top_p | ? | ? | ? | ? | 0/4 | underpowered |
+| nemotron-lightning-3p5-30b-a3b | top_k | ? | **yes** | ? | ? | 1/4 | underpowered |
+| nemotron-lightning-3p5-30b-a3b | min_p | ? | ? | ? | ? | 0/4 | underpowered |
+| gpt-oss-120b | top_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
+| gpt-oss-120b | top_k | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
+| gpt-oss-120b | min_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
+| deepseek-v4-flash-0731 | top_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
+| deepseek-v4-flash-0731 | top_k | **yes** | **yes** | **yes** | ? | 3/4 | distinguishable |
+| deepseek-v4-flash-0731 | min_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
+| minimax-m3 | top_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
+| minimax-m3 | top_k | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
+| minimax-m3 | min_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
+| muse-glimmer-30b | top_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
+| muse-glimmer-30b | top_k | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
+| muse-glimmer-30b | min_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
+| nemotron-3-ultra-nvfp4 | top_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
+| nemotron-3-ultra-nvfp4 | top_k | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
+| nemotron-3-ultra-nvfp4 | min_p | **yes** | **yes** | **NO** | **yes** | 4/4 | distinguishable |
+| kimi-k2p6 | top_p | ? | **yes** | ? | ? | 1/4 | underpowered |
+| kimi-k2p6 | top_k | ? | ? | ? | ? | 0/4 | underpowered |
+| kimi-k2p6 | min_p | ? | ? | ? | **yes** | 1/4 | underpowered |
+
+Five of seven models are cleanly distinguishable on every parameter across every
+powered prompt. The other two — nemotron-lightning and kimi-k2p6 — fail the
+positive control on nearly every prompt and are reported as underpowered
+throughout, which is what they are: on nemotron the residual entropy at
+temperature 0 is 4.5 bits, and on kimi the open arm collapses to empties. Neither
+result says the parameters are ignored there. The single "NO" cell —
+nemotron-3-ultra `min_p` on `opener` — is one prompt of four and is outvoted, as
+the design intends.
+
+Read that way, the grid contains exactly two cells that look like an ignored
+parameter:**Every cell the old heuristic called IGNORED and that could be retested came
 back distinguishable**: `min_p` on nemotron-lightning, deepseek-v4-flash,
 muse-glimmer-30b and kimi-k2p6, and `top_p` on muse-glimmer-30b (86% of entropy
 removed, p < 0.003). Two design decisions in this project rested on those
@@ -302,7 +372,7 @@ extrapolation and is far better powered.
 
 | finding | script | data |
 |---|---|---|
-| §1, §2 | `scripts/probe_distinguishability.py`, `samplerconfound/distinguish.py` | `runs/distinguish.json`, `runs/negative_control.json` |
+| §1, §2 | `scripts/probe_distinguishability.py`, `samplerconfound/distinguish.py` | `runs/distinguish.json`, `runs/negative_control.json`, `runs/distinguish_multiprompt.json` |
 | §3 | — | `MODEL_CANDIDATES` in `samplerconfound/config.py` |
 | §4 | `scripts/verify_grader.py`, `scripts/sample_for_grader_check.py` | `runs/grader_check/` |
 | §5 | `tests/test_variance.py`, `tests/test_inversion.py` | simulation |
