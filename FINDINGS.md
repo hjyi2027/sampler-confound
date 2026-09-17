@@ -203,20 +203,48 @@ it off before it stops reasoning (739 reasoning tokens on this prompt), so at
 collector that drops empty strings reports that as `n=0, insufficient` with no
 sign that anything was wrong.
 
-## 2. Determinism at temperature 0, measured properly
+## 2. Greedy decoding is not reproducible, and the seed parameter does nothing
 
-The positive-control table above is also the determinism measurement, and it
-supersedes the earlier one: 40 completions of a one-sentence prompt at
-temperature 0, per model. Three of eight are deterministic (one distinct
-completion in 40), two nearly so, and three are not — deepseek-v4-flash at 12/40,
-kimi-k2p6 at 13/34, and nemotron-lightning at 29/40.
+The cleanest version of the question: send the identical request at temperature
+0 ten times and count byte-identical responses. Five prompts per model — the four
+from the parameter test plus one real MATH-500 problem from the sweep split, so
+this speaks to the greedy cell the study actually runs — and three conditions:
+no seed, `seed=0`, `seed=1`. 1,050 calls, 11.5 minutes (`scripts/probe_determinism.py`).
 
-The earlier figure of "five of ten non-deterministic" came from eight samples of
-a one-word prompt. It disagreed with this measurement on three models in both
-directions, because a prompt with no entropy cannot reveal non-determinism and
-eight samples cannot bound it. Greedy decoding is not reproducible even in
-principle on the three models at the bottom of that table, which bears on every
-paper that reports a single greedy number as a fixed property of the model.
+| model | greedy exact-match | reasoning trace | best with a seed | seed honoured? |
+|---|--:|--:|--:|---|
+| gpt-oss-120b | **100%** | 100% | 100% | n/a — deterministic without one |
+| muse-glimmer-30b | 78% | 80% | 84% | no (1/3) |
+| nemotron-3-ultra-nvfp4 | 64% | 66% | 72% | no (1/5) |
+| deepseek-v4-flash-0731 | 58% | 50% | 62% | no (0/4) |
+| minimax-m3 | 50% | 48% | 60% | no (0/4) |
+| nemotron-lightning-3p5-30b-a3b | 38% | 38% | 42% | no (0/5) |
+| kimi-k2p6 | **20%** | 10% | 32% | no (0/5) |
+
+**One model in seven is deterministic at temperature 0.** On the others, the
+same request returns the same bytes between 20% and 78% of the time. On the real
+MATH-500 problem specifically: gpt-oss-120b, deepseek-v4-flash and muse-glimmer
+reproduce 10/10; nemotron-lightning 5/10, nemotron-3-ultra 5/10, minimax-m3
+4/10, kimi-k2p6 2/10. A paper reporting "kimi-k2p6 scores X on MATH-500, greedy"
+is reporting one draw from a distribution.
+
+**The seed parameter is accepted and does nothing.** The test is not whether
+`seed=0` and `seed=1` differ — on a model whose seeded runs are only 40%
+self-consistent they differ because everything differs. The test is whether ten
+calls with the *same* seed agree. On the 26 (model, prompt) cells that were not
+already deterministic without a seed, a fixed seed made the run reproducible in
+**2**. Both are single prompts on models that were 60–90% consistent anyway. The
+handoff for this project asserted that Fireworks ignores `seed` on text; this is
+the first time it was measured, and it holds.
+
+Two consequences for the study. The replicate dimension was already named
+"sampling variance at fixed configuration" rather than "seed" on the strength of
+the unmeasured assertion; the measurement confirms that the name was the right
+one. And the greedy condition — the one every harness claims to use, and the
+paper's reference point — is not a fixed configuration on six of seven models
+here. Its within-cell variance is real variance, and the design's replicate term
+absorbs it honestly, but a Limitations sentence has to say that "greedy" on this
+provider means "a draw from a narrow distribution".
 
 ## 3. A benchmark model was withdrawn mid-study
 
@@ -372,7 +400,8 @@ extrapolation and is far better powered.
 
 | finding | script | data |
 |---|---|---|
-| §1, §2 | `scripts/probe_distinguishability.py`, `samplerconfound/distinguish.py` | `runs/distinguish.json`, `runs/negative_control.json`, `runs/distinguish_multiprompt.json` |
+| §1 | `scripts/probe_distinguishability.py`, `samplerconfound/distinguish.py` | `runs/distinguish.json`, `runs/negative_control.json`, `runs/distinguish_multiprompt.json` |
+| §2 | `scripts/probe_determinism.py` | `runs/determinism.json` |
 | §3 | — | `MODEL_CANDIDATES` in `samplerconfound/config.py` |
 | §4 | `scripts/verify_grader.py`, `scripts/sample_for_grader_check.py` | `runs/grader_check/` |
 | §5 | `tests/test_variance.py`, `tests/test_inversion.py` | simulation |
