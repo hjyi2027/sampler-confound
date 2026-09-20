@@ -189,6 +189,62 @@ verdicts — dropping the `minp` cell and excluding muse-glimmer-30b — and bot
 made on bad evidence. The exclusion is reversed; restoring the cell is a cost
 decision and is left open.
 
+### The same test on the paid tier
+
+The seven models above were the ones the budget band admitted — cheap ones, by
+construction. A free or entry tier serves whichever models a provider chose to
+give away, which is a biased sample, so on 2026-09-20 the identical probe (four
+prompts, 40 per arm, the same contrasts and controls) ran on every other priced
+chat model Fireworks serves: eight models from $0.50 to $15.00 per million
+output tokens, 1,390 calls each, $7.35 in total measured from the cached usage
+(`scripts/probe_spend.py`). Three served models were left out with reasons:
+`qwen3p8-2p4t-a95b` and `inkling` have no published price and cannot be
+budgeted; `deepseek-v4-flash-vision-exp` is an experimental variant of a family
+already covered. `deepseek-v4-pro` (unversioned) is now 404; its dated
+successor `-0813` ran instead.
+
+| model | $/1M out | control removed (word / sentence / opener / question) | top_p | top_k | min_p |
+|---|--:|---|---|---|---|
+| glm-5p3-flash | 0.50 | 73% / 97% / 78% / 87% | 4/4 | 4/4 | 4/4 |
+| deepseek-v4p1-flash | 1.20 | 91% / 54% / 60% / 38%! | 4/4 | 4/4 | 4/4 |
+| deepseek-v4-pro-0813 | 3.96 | 38%! / 78% / 56% / 41%! | 4/4 | 4/4 | 4/4 |
+| kimi-k2p7-code | 4.00 | 4%! / 70% / −40%! / −16%! | 4/4 | 3/3 | 3/3 |
+| glm-5p3 | 4.40 | 73% / 89% / 100% / 82% | 4/4 | 4/4 | 4/4 |
+| glm-5p2 | 4.40 | 34%! / 50%! / 45%! / 38%! | 4/4 | 4/4 | 4/4 |
+| qwen3p8-max | 6.00 | 57% / 62% / 100% / 82% | 4/4 | 4/4 | 3/4 |
+| kimi-k3 | 15.00 | 82% / 62% / 97% / 65% | 4/4 | 4/4 | 4/4 |
+
+`!` marks a prompt where the positive control failed; the parameter columns are
+prompts distinguishable / prompts with a verdict. Every parameter is
+distinguishable on every paid model on every prompt where the test had a
+verdict, with one exception (`qwen3p8-max` `min_p` on one prompt of four,
+outvoted). `glm-5p2` fails the control on all four prompts and still shows
+every parameter, because a detected effect needs no control to be believed —
+the control exists to interpret nulls, and there are none.
+
+Two things this extension establishes. First, **the price axis does not
+separate anything**: from $0.20 to $15.00 per million, a 75× range, the
+truncation parameters are honoured wherever the probe has power, and the one
+model that reproduces greedy decoding (§2) is a $0.60 one. A reviewer asking
+"did you only test the models they give away" has the answer in the table.
+Second, and the reason the matrix has a provider column at all: **on a single
+provider, parameter-honouring is uniform and determinism is not**. Whether
+`top_k` reaches the sampler is a property of the serving stack, and fifteen
+models behind one stack agree. The dimension that can differ is the provider,
+which is why the remaining probes wait on keys rather than on models.
+
+What the paid tier does add is more of the kimi pattern. `kimi-k2p7-code`
+fails the control on three prompts of four the same way `kimi-k2p6` did —
+temperature 1.5 lowers measured entropy on two prompts, because the open arm
+runs to the token cap and returns 93 empties across the grid — and is the
+model on which every truncation parameter still shows through. That is not a
+parameter finding; it is a finding about what "temperature 1.5" means on a
+reasoning model at a fixed budget.
+
+Coverage in one table: `scripts/probe_matrix.py`, which reads every probe
+output under `runs/matrix/<provider>/` and prints one row per (provider,
+model) with the price beside the verdicts.
+
 **Three models have now vanished from the catalogue since this project began**
 — gpt-oss-20b on 2026-08-27, minimax-m2p7 by 2026-09-09, and qwen3p7-plus on
 2026-09-11, two days after it was probed successfully. The last one carried the
@@ -209,7 +265,9 @@ The cleanest version of the question: send the identical request at temperature
 0 ten times and count byte-identical responses. Five prompts per model — the four
 from the parameter test plus one real MATH-500 problem from the sweep split, so
 this speaks to the greedy cell the study actually runs — and three conditions:
-no seed, `seed=0`, `seed=1`. 1,050 calls, 11.5 minutes (`scripts/probe_determinism.py`).
+no seed, `seed=0`, `seed=1`. 1,050 calls, 11.5 minutes on the seven budget-band
+models; 1,200 more on the eight paid models on 2026-09-20
+(`scripts/probe_determinism.py`).
 
 | model | greedy exact-match | reasoning trace | best with a seed | seed honoured? |
 |---|--:|--:|--:|---|
@@ -220,20 +278,35 @@ no seed, `seed=0`, `seed=1`. 1,050 calls, 11.5 minutes (`scripts/probe_determini
 | minimax-m3 | 50% | 48% | 60% | no (0/4) |
 | nemotron-lightning-3p5-30b-a3b | 38% | 38% | 42% | no (0/5) |
 | kimi-k2p6 | **20%** | 10% | 32% | no (0/5) |
+| *paid tier, 2026-09-20* | | | | |
+| qwen3p8-max | 78% | 74% | 78% | no (0/3) |
+| glm-5p3-flash | 76% | 92% | 90% | no (2/4) |
+| glm-5p3 | 74% | 96% | 86% | no (1/4) |
+| kimi-k3 | 74% | 78% | 84% | no (1/4) |
+| deepseek-v4-pro-0813 | 64% | 64% | 66% | no (0/4) |
+| deepseek-v4p1-flash | 60% | 44% | 74% | no (1/5) |
+| kimi-k2p7-code | 50% | 42% | 50% | no (0/5) |
+| glm-5p2 | 48% | 38% | 54% | no (0/5) |
 
-**One model in seven is deterministic at temperature 0.** On the others, the
-same request returns the same bytes between 20% and 78% of the time. On the real
-MATH-500 problem specifically: gpt-oss-120b, deepseek-v4-flash and muse-glimmer
-reproduce 10/10; nemotron-lightning 5/10, nemotron-3-ultra 5/10, minimax-m3
-4/10, kimi-k2p6 2/10. A paper reporting "kimi-k2p6 scores X on MATH-500, greedy"
-is reporting one draw from a distribution.
+**One model in fifteen is deterministic at temperature 0.** On the others, the
+same request returns the same bytes between 20% and 78% of the time, and the
+paid tier sits inside the same band as the cheap one: kimi-k3 at $15/M
+reproduces 74%, glm-5p3-flash at $0.50/M 76%. On the real MATH-500 problem
+specifically: gpt-oss-120b, deepseek-v4-flash, muse-glimmer, glm-5p3-flash,
+deepseek-v4-pro-0813 and qwen3p8-max reproduce 10/10; kimi-k3 9/10;
+deepseek-v4p1-flash 8/10; glm-5p3 6/10; nemotron-lightning 5/10, nemotron-3-ultra
+5/10, minimax-m3 4/10; kimi-k2p7-code 3/10, glm-5p2 3/10, kimi-k2p6 2/10. A
+paper reporting "kimi-k2p6 scores X on MATH-500, greedy" is reporting one draw
+from a distribution.
 
 **The seed parameter is accepted and does nothing.** The test is not whether
 `seed=0` and `seed=1` differ — on a model whose seeded runs are only 40%
 self-consistent they differ because everything differs. The test is whether ten
-calls with the *same* seed agree. On the 26 (model, prompt) cells that were not
-already deterministic without a seed, a fixed seed made the run reproducible in
-**2**. Both are single prompts on models that were 60–90% consistent anyway. The
+calls with the *same* seed agree. On the 60 (model, prompt) cells across fifteen
+models that were not already deterministic without a seed, a fixed seed made the
+run reproducible in **7**. Each is a single prompt on a model that was 60–90%
+consistent anyway; no model reproduces on more than half its non-deterministic
+prompts. The
 handoff for this project asserted that Fireworks ignores `seed` on text; this is
 the first time it was measured, and it holds.
 
@@ -241,8 +314,8 @@ Two consequences for the study. The replicate dimension was already named
 "sampling variance at fixed configuration" rather than "seed" on the strength of
 the unmeasured assertion; the measurement confirms that the name was the right
 one. And the greedy condition — the one every harness claims to use, and the
-paper's reference point — is not a fixed configuration on six of seven models
-here. Its within-cell variance is real variance, and the design's replicate term
+paper's reference point — is not a fixed configuration on fourteen of fifteen
+models here. Its within-cell variance is real variance, and the design's replicate term
 absorbs it honestly, but a Limitations sentence has to say that "greedy" on this
 provider means "a draw from a narrow distribution".
 
@@ -400,8 +473,9 @@ extrapolation and is far better powered.
 
 | finding | script | data |
 |---|---|---|
-| §1 | `scripts/probe_distinguishability.py`, `samplerconfound/distinguish.py` | `runs/distinguish.json`, `runs/negative_control.json`, `runs/distinguish_multiprompt.json` |
-| §2 | `scripts/probe_determinism.py` | `runs/determinism.json` |
+| §1 | `scripts/probe_distinguishability.py`, `samplerconfound/distinguish.py` | `runs/distinguish.json`, `runs/negative_control.json`, `runs/distinguish_multiprompt.json`, `runs/matrix/fireworks/<model>.json` |
+| §2 | `scripts/probe_determinism.py` | `runs/determinism.json`, `runs/matrix/fireworks/determinism.json` |
+| coverage | `scripts/probe_matrix.py`, `scripts/probe_spend.py` | `runs/matrix/matrix.json` |
 | §3 | — | `MODEL_CANDIDATES` in `samplerconfound/config.py` |
 | §4 | `scripts/verify_grader.py`, `scripts/sample_for_grader_check.py` | `runs/grader_check/` |
 | §5 | `tests/test_variance.py`, `tests/test_inversion.py` | simulation |

@@ -921,3 +921,43 @@ OpenRouter records which upstream served each call (`Completion.served_by`),
 because a router that changes upstream between replicates of the identical
 request is a confound for the determinism probe, and the analysis needs to be
 able to see it.
+
+## 2026-09-20 — the probe matrix over the paid tier
+
+The seven probed models were the budget-band candidates, i.e. the cheap ones:
+the same selection bias as a free tier, wearing the budget as an excuse. The
+identical distinguishability and determinism probes ran on every other priced
+chat model Fireworks serves — glm-5p3-flash, deepseek-v4p1-flash,
+deepseek-v4-pro-0813, kimi-k2p7-code, glm-5p3, glm-5p2, qwen3p8-max, kimi-k3 —
+$0.50 to $15.00 per million output. 11,120 calls, **$7.35** measured from the
+cached usage blocks (`scripts/probe_spend.py`; cached prompt tokens charged at
+the full input rate, so that is an upper bound). glm-5p2 was the expensive one
+at 337 output tokens a call, not kimi-k3 at 95: the cost of a probe is set by
+how often a model runs to the cap at temperature 1.5, not by its price tag.
+
+Left out, with reasons: `qwen3p8-2p4t-a95b` and `inkling` serve but have no
+published price, and an unpriced call cannot be budgeted;
+`deepseek-v4-flash-vision-exp` is an experimental variant of a covered family.
+`minimax-m2p7` and `qwen3p7-plus` reappeared in `/models` but still 404 at
+inference; `deepseek-v4-pro` unversioned is now 404 too, replaced by `-0813`.
+Prices re-pinned in `pricing.py` as a visible diff (PRICING_DATE 2026-09-20).
+
+Result: every truncation parameter distinguishable on every paid model
+wherever the probe had power; 0/8 deterministic at T=0; 0/8 honour seed. The
+price axis separates nothing. Written into FINDINGS §1 and §2; the fifteen-row
+coverage table is `scripts/probe_matrix.py` → `runs/matrix/matrix.json`.
+
+Two things broke and were fixed on the way. The cache writer raced: the
+determinism probe's T=0 condition and the distinguishability probe's
+tight-temperature arm are byte-identical requests with overlapping replicate
+indices — sharing them is the design — but two processes used the same
+`.tmp` name and one rename lost. The writer now uses a per-writer temp file
+and publishes with an exclusive link; when two writers collide the first to
+land wins and the second *returns the stored response*, so a run's data is
+always what a replay of it would produce. And the probe scripts had their
+stdout block-buffered under `nohup`, which is why the checkpoint files, not
+the logs, were the progress signal.
+
+Still waiting on keys for the other six providers. The adapter layer means the
+matrix extends there with `--provider`, and the matrix report already has the
+column.

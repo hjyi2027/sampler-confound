@@ -20,23 +20,34 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-PRICING_DATE = "2026-08-27"
+PRICING_DATE = "2026-09-20"
 
 # model -> (input $/1M, output $/1M). Reasoning tokens bill as output.
+#
+# Re-read 2026-09-20 for the paid-model probe matrix. Diff against 2026-08-27:
+# deepseek-v4-pro (1.74/3.48) is gone from the API (404) and replaced by the
+# dated deepseek-v4-pro-0813 at 1.32/3.96; glm-5p3, glm-5p3-flash,
+# deepseek-v4p1-flash and kimi-k2p7-code are new. qwen3p8-2p4t-a95b and
+# inkling serve but are not on the price page, so they are not here and are
+# not probed: an unpriced call cannot be budgeted.
 PRICES: dict[str, tuple[float, float]] = {
     "nemotron-lightning-3p5-30b-a3b": (0.05, 0.20),
-    "gpt-oss-20b":                    (0.07, 0.30),
+    "gpt-oss-20b":                    (0.07, 0.30),   # withdrawn 2026-08-27
     "gpt-oss-120b":                   (0.15, 0.60),
+    "glm-5p3-flash":                  (0.15, 0.50),
     "deepseek-v4-flash-0731":         (0.22, 0.66),
+    "deepseek-v4p1-flash":            (0.30, 1.20),
     "minimax-m3":                     (0.30, 1.20),
     "muse-glimmer-30b":               (0.35, 1.50),
+    "nemotron-3-ultra-nvfp4":         (0.60, 2.40),
+    "deepseek-v4-pro-0813":           (1.32, 3.96),
     "kimi-k2p6":                      (0.95, 4.00),
+    "kimi-k2p7-code":                 (0.95, 4.00),
     "glm-5p2":                        (1.40, 4.40),
-    "deepseek-v4-pro":                (1.74, 3.48),
+    "glm-5p3":                        (1.40, 4.40),
     "qwen3p8-max":                    (2.00, 6.00),
     "kimi-k3":                        (3.00, 15.00),
 }
-
 
 @dataclass
 class TokenProfile:

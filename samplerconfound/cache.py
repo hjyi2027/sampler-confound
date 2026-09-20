@@ -99,7 +99,21 @@ class ResponseCache:
             self.stats.hits += 1
         return entry["response"]
 
-    def put(self, body: dict, replicate: int, response: dict, **meta) -> None:
+    def put(self, body: dict, replicate: int, response: dict, **meta) -> dict:
+        """Store a response; return the response now on disk for this key.
+
+        Usually that is `response`. It is not when another writer — a second
+        process sending the same request, which happens by design: the
+        determinism probe's T=0 condition and the distinguishability probe's
+        tight-temperature arm are byte-identical requests — landed the key
+        first. Then theirs is kept and returned, and this one is discarded,
+        because the alternative is a run whose data differs from what a replay
+        of it would produce. The billed call is lost either way; the
+        reproducibility need not be.
+
+        The temp file is unique per writer, and the publish is an exclusive
+        link, so two writers cannot tear each other's file.
+        """
         key = request_key(body, replicate)
         p = self._path(key)
         p.parent.mkdir(parents=True, exist_ok=True)
@@ -111,14 +125,30 @@ class ResponseCache:
             "stored_at": time.time(),
             **meta,
         }
-        tmp = p.with_suffix(".json.tmp")
+        tmp = p.with_name(f"{key}.{os.getpid()}.{threading.get_ident()}.tmp")
         with tmp.open("w", encoding="utf-8") as fh:
             json.dump(entry, fh, ensure_ascii=False)
             fh.flush()
             os.fsync(fh.fileno())
-        os.replace(tmp, p)
+        try:
+            os.link(tmp, p)                      # atomic; fails if p exists
+        except FileExistsError:
+            existing = self._load(p)
+            if existing is not None:
+                tmp.unlink()
+                return existing
+            os.replace(tmp, p)                   # existing was corrupt: overwrite
+        else:
+            tmp.unlink()
         with self._lock:
             self.stats.stores += 1
+        return response
+
+    def _load(self, p: Path) -> dict | None:
+        try:
+            return json.loads(p.read_text(encoding="utf-8"))["response"]
+        except (json.JSONDecodeError, KeyError, OSError):
+            return None
 
     def fetch(self, body: dict, replicate: int, send) -> dict:
         """Return the cached response, or call `send(body)` once and store it.
@@ -137,8 +167,7 @@ class ResponseCache:
                 f"{OFFLINE_ENV} to allow API calls."
             )
         response = send(body)
-        self.put(body, replicate, response)
-        return response
+        return self.put(body, replicate, response)
 
     def count(self) -> int:
         if not self.directory.exists():

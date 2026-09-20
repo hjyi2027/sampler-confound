@@ -139,3 +139,33 @@ def test_every_adapter_has_the_fields_the_transport_needs():
         assert ad.base.startswith("https://"), name
         assert ad.env.endswith("_API_KEY"), name
         assert ad.signup.startswith("https://"), name
+
+
+def test_concurrent_writers_of_one_key_agree_on_what_is_stored(tmp_path):
+    """Two processes send the identical (request, replicate) — the determinism
+    probe and the distinguishability probe do, by design. Neither may tear the
+    other's file, and both must end up holding the response that is on disk,
+    or a replay of one run would not reproduce it.
+    """
+    import threading
+    cache = ResponseCache(directory=tmp_path, offline=False)
+    barrier = threading.Barrier(8)
+    got = []
+
+    def writer(i):
+        barrier.wait()
+        got.append(cache.put(_body(), 0, {"sample": i}))
+
+    ts = [threading.Thread(target=writer, args=(i,)) for i in range(8)]
+    [t.start() for t in ts]; [t.join() for t in ts]
+    on_disk = cache.get(_body(), 0)
+    assert all(g == on_disk for g in got), "a writer holds a sample the cache does not"
+    assert not list(tmp_path.rglob("*.tmp"))
+    assert cache.count() == 1
+
+
+def test_put_returns_the_stored_response_and_fetch_serves_it(tmp_path):
+    cache = ResponseCache(directory=tmp_path, offline=False)
+    cache.put(_body(), 0, {"first": True})
+    assert cache.put(_body(), 0, {"second": True}) == {"first": True}
+    assert cache.fetch(_body(), 0, lambda b: {"third": True}) == {"first": True}

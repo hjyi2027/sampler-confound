@@ -1,0 +1,2217 @@
+{
+  "provider": "fireworks",
+  "n_per_condition": 10,
+  "conditions": {
+    "no_seed": {},
+    "seed_0": {
+      "seed": 0
+    },
+    "seed_1": {
+      "seed": 1
+    }
+  },
+  "rows": [
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "prompt": "word_prob",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.4,
+            4,
+            "Maya bought 3 packs of stickers with 8 stickers in each pack, and then gave 5 stickers to her friend\u2014how many stickers does she have left?"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "Maya bought 3 packs of stickers with 8 stickers in each pack, and then gave 5 stickers to her friend\u2014how many stickers does she have left?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.7,
+            3,
+            "Maya bought 3 packs of stickers with 8 stickers in each pack, and then gave 5 stickers to her friend\u2014how many stickers does she have left?"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "Maya bought 3 packs of stickers with 8 stickers in each pack, and then gave 5 stickers to her friend\u2014how many stickers does she have left?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.7,
+            2,
+            "Maya bought 3 packs of stickers with 8 stickers in each pack, and then gave 5 stickers to her friend\u2014how many stickers does she have left?"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "Maya bought 3 packs of stickers with 8 stickers in each pack, and then gave 5 stickers to her friend\u2014how many stickers does she have left?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "prompt": "sentence",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.9,
+            2,
+            "The rain finally stopped just as the sun began to set."
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "The rain finally stopped just as the sun began to set."
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "The rain finally stopped just as the sun began to set."
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "The rain finally stopped just as the sun began to set."
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "The rain finally stopped just as the sun began to set."
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "The rain finally stopped just as the sun began to set."
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "prompt": "opener",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            3,
+            "The door creaked."
+          ],
+          "reasoning": [
+            0.6,
+            3,
+            "\"The door creaked.\""
+          ],
+          "modal_content": "The door creaked."
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            2,
+            "The door creaked."
+          ],
+          "reasoning": [
+            0.6,
+            2,
+            "\"The door creaked.\""
+          ],
+          "modal_content": "The door creaked."
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "The door creaked."
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            "\"The door creaked.\""
+          ],
+          "modal_content": "The door creaked."
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "prompt": "question",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.9,
+            2,
+            "What's one thing you've always wanted to learn but never had the time to?"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "What's one thing you've always wanted to learn but never had the time to?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            3,
+            "What's one thing you've always wanted to learn but never had the time to?"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "What's one thing you've always wanted to learn but never had the time to?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.8,
+            2,
+            "What's one thing you've always wanted to learn but never had the time to?"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "What's one thing you've always wanted to learn but never had the time to?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "prompt": "math500",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "4^x = 2^(2x) = 2^8, so 2x = 8, x = 4.\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            "4"
+          ],
+          "modal_content": "4^x = 2^(2x) = 2^8, so 2x = 8, x = 4.\n\nAnswer: 4"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "4^x = 2^(2x) = 2^8, so 2x = 8, x = 4.\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            "4"
+          ],
+          "modal_content": "4^x = 2^(2x) = 2^8, so 2x = 8, x = 4.\n\nAnswer: 4"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "4^x = 2^(2x) = 2^8, so 2x = 8, x = 4.\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            "4"
+          ],
+          "modal_content": "4^x = 2^(2x) = 2^8, so 2x = 8, x = 4.\n\nAnswer: 4"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "prompt": "word_prob",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.9,
+            2,
+            "Maya has 24 stickers and gives 9 to her friend; how many stickers does she have left?"
+          ],
+          "reasoning": [
+            0.8,
+            3,
+            "We need answer only problem. Need one-sentence arithmetic word problem suitable for ten-year-old. Need ensure one sentence. Could be simple. \"Maya has 24 stickers and gives 9 to her friend; how many stickers does she have left?\" That's one sentence? It has semicolon, still one sentence. Suitable. Reply problem only."
+          ],
+          "modal_content": "Maya has 24 stickers and gives 9 to her friend; how many stickers does she have left?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.8,
+            2,
+            "Maya has 24 stickers and gives 9 to her friend; how many stickers does she have left?"
+          ],
+          "reasoning": [
+            0.4,
+            6,
+            "We need answer only problem. Need one-sentence arithmetic word problem suitable for ten-year-old. Need ensure one sentence. Could be simple. \"Maya has 24 stickers and gives 9 to her friend; how many stickers does she have left?\" That's one sentence? It has semicolon, still one sentence. Suitable. Reply problem only."
+          ],
+          "modal_content": "Maya has 24 stickers and gives 9 to her friend; how many stickers does she have left?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.9,
+            2,
+            "Maya has 24 stickers and gives 9 to her friend; how many stickers does she have left?"
+          ],
+          "reasoning": [
+            0.8,
+            3,
+            "We need answer only problem. Need one-sentence arithmetic word problem suitable for ten-year-old. Need ensure one sentence. Could be simple. \"Maya has 24 stickers and gives 9 to her friend; how many stickers does she have left?\" That's one sentence? It has semicolon, still one sentence. Suitable. Reply problem only."
+          ],
+          "modal_content": "Maya has 24 stickers and gives 9 to her friend; how many stickers does she have left?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "prompt": "sentence",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.5,
+            5,
+            "The morning sun warmed the quiet street."
+          ],
+          "reasoning": [
+            0.5,
+            5,
+            "The user wants a single short sentence about anything, and wants only the sentence in the reply. I need to make sure I don't add any extra text, explanations, or formatting. Just one short sentence. I'll pick something simple and neutral."
+          ],
+          "modal_content": "The morning sun warmed the quiet street."
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.7,
+            4,
+            "The morning sun warmed the quiet street."
+          ],
+          "reasoning": [
+            0.7,
+            4,
+            "The user wants a single short sentence about anything, and wants only the sentence in the reply. I need to make sure I don't add any extra text, explanations, or formatting. Just one short sentence. I'll pick something simple and neutral."
+          ],
+          "modal_content": "The morning sun warmed the quiet street."
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.8,
+            3,
+            "The morning sun warmed the quiet street."
+          ],
+          "reasoning": [
+            0.7,
+            4,
+            "The user wants a single short sentence about anything, and wants only the sentence in the reply. I need to make sure I don't add any extra text, explanations, or formatting. Just one short sentence. I'll pick something simple and neutral."
+          ],
+          "modal_content": "The morning sun warmed the quiet street."
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "prompt": "opener",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.5,
+            3,
+            "Call me Ishmael"
+          ],
+          "reasoning": [
+            0.2,
+            8,
+            "We need answer only three words. Need opening three words of a story. Any story? Need reply with those three words only. We need choose. Common: \"Once upon a time\" is four words. \"It was raining\" three. \"The old house\" three. Need opening three words of a story. Just three words. Ensure only those three words. Could be \"Call me Ishmael\" is three words? Call(1) me(2) Ishmael(3). That's famous opening of Moby-Dick. But \"Call me Ishmael.\" punctuation? Reply with those three words only. So \"Call me Ishmael\" exactly. That is opening three words of a story. Good. Final only. \n"
+          ],
+          "modal_content": "Call me Ishmael"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.5,
+            3,
+            "Once upon a"
+          ],
+          "reasoning": [
+            0.3,
+            5,
+            "We need answer only three words. Need opening three words of a story. Any story? Need reply with those three words only. We need choose. Common \"Once upon a\" is three words? \"Once upon a\" yes. But opening three words of a story. Reply only those three words. So final: Once upon a. Ensure exactly three words."
+          ],
+          "modal_content": "Once upon a"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.7,
+            2,
+            "Once upon a"
+          ],
+          "reasoning": [
+            0.4,
+            7,
+            "We need answer only three words. Need opening three words of a story. Any story? Need reply with those three words only. We need choose. Common \"Once upon a\" is three words? \"Once upon a\" yes. But opening three words of a story. Reply only those three words. So final: Once upon a. Ensure exactly three words."
+          ],
+          "modal_content": "Once upon a"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "prompt": "question",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.3,
+            5,
+            "What is something you\u2019ve always wanted to learn?"
+          ],
+          "reasoning": [
+            0.2,
+            8,
+            "We need answer user asks: \"Ask one question about anything. Reply with the question only.\" We need comply: reply with question only. Need one question about anything. No extra. Ensure it's a question. Could be any. Need only question. So final: \"What is something you've always wanted to learn?\" That's a question. Only question."
+          ],
+          "modal_content": "What is something you\u2019ve always wanted to learn?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.3,
+            7,
+            "What is something you\u2019ve always wanted to learn?"
+          ],
+          "reasoning": [
+            0.2,
+            9,
+            "We need answer user asks: \"Ask one question about anything. Reply with the question only.\" Need comply: only question. Need ask one question about anything. Must be question only. No extra. We can choose. Need ensure it's a question. Maybe \"What is the most surprising thing you've learned this year?\" That's a question. Reply only question."
+          ],
+          "modal_content": "What is something you\u2019ve always wanted to learn?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.3,
+            4,
+            "What is the most surprising thing you\u2019ve learned this year?"
+          ],
+          "reasoning": [
+            0.3,
+            6,
+            "We need answer user asks: \"Ask one question about anything. Reply with the question only.\" Need comply: only question. Need ask one question about anything. Must be question only. No extra. We can choose. Ensure it's a question. Maybe \"What is the most surprising thing you've learned this year?\" That's a question. Reply only question."
+          ],
+          "modal_content": "What is the most surprising thing you\u2019ve learned this year?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": false
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "prompt": "math500",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.8,
+            2,
+            "Since \\(4 = 2^2\\), we have:\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nGiven \\(2^8 = 4^x\\), it follows that:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nSo:\n\n\\[\n8 = 2x\n\\]\n\n\\[\nx = 4\n\\]\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.5,
+            3,
+            "We need answer simple. Need reason step by step. 2^8 = (2^2)^x =2^{2x}; 8=2x x=4. Final line Answer: 4."
+          ],
+          "modal_content": "Since \\(4 = 2^2\\), we have:\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nGiven \\(2^8 = 4^x\\), it follows that:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nSo:\n\n\\[\n8 = 2x\n\\]\n\n\\[\nx = 4\n\\]\n\nAnswer: 4"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "Since \\(4 = 2^2\\), we have:\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nGiven \\(2^8 = 4^x\\), it follows that:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nSo:\n\n\\[\n8 = 2x\n\\]\n\n\\[\nx = 4\n\\]\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.6,
+            3,
+            "We need answer simple. Need reason step by step. 2^8 = (2^2)^x =2^{2x}; 8=2x x=4. Final line Answer: 4."
+          ],
+          "modal_content": "Since \\(4 = 2^2\\), we have:\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nGiven \\(2^8 = 4^x\\), it follows that:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nSo:\n\n\\[\n8 = 2x\n\\]\n\n\\[\nx = 4\n\\]\n\nAnswer: 4"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.5,
+            2,
+            "Since \\(4 = 2^2\\), we have:\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nGiven \\(2^8 = 4^x\\), it follows that:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nSo:\n\n\\[\n8 = 2x\n\\]\n\n\\[\nx = 4\n\\]\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.7,
+            3,
+            "We need answer simple. Need reason step by step. 2^8 = (2^2)^x =2^{2x}; 8=2x x=4. Final line Answer: 4."
+          ],
+          "modal_content": "Since \\(4 = 2^2\\), we have:\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nGiven \\(2^8 = 4^x\\), it follows that:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nSo:\n\n\\[\n8 = 2x\n\\]\n\n\\[\nx = 4\n\\]\n\nAnswer: 4"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "prompt": "word_prob",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.4,
+            5,
+            "Tom has 3 packs of stickers, with 8 stickers in each pack, and he gives 5 stickers to his friend; how many stickers does Tom have left?"
+          ],
+          "reasoning": [
+            0.5,
+            6,
+            "We need answer only problem. Need one-sentence arithmetic word problem suitable for ten-year-old. Ensure arithmetic maybe addition/subtraction/multiplication/division. One sentence. No extra."
+          ],
+          "modal_content": "Tom has 3 packs of stickers, with 8 stickers in each pack, and he gives 5 stickers to his friend; how many stickers does Tom have left?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            5,
+            "Tom has 24 stickers, gives 7 to his friend, and then buys 5 more; how many stickers does Tom have now?"
+          ],
+          "reasoning": [
+            0.7,
+            4,
+            "We need answer only problem. Need one-sentence arithmetic word problem suitable for ten-year-old. Ensure arithmetic maybe addition/subtraction/multiplication/division. Simple. \"Tom has 24 stickers. He gives 7 to his friend and then buys 5 more. How many stickers does Tom have now?\" One sentence."
+          ],
+          "modal_content": "Tom has 24 stickers, gives 7 to his friend, and then buys 5 more; how many stickers does Tom have now?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.3,
+            8,
+            "Tom has 24 stickers, gives 7 to his friend, and then buys 5 more; how many stickers does Tom have now?"
+          ],
+          "reasoning": [
+            0.3,
+            8,
+            "We need answer only problem. Need one-sentence arithmetic word problem suitable for ten-year-old. Ensure arithmetic maybe addition/subtraction/multiplication/division. Simple. \"Tom has 24 stickers. He gives 7 to his friend and then buys 5 more. How many stickers does Tom have now?\" One sentence."
+          ],
+          "modal_content": "Tom has 24 stickers, gives 7 to his friend, and then buys 5 more; how many stickers does Tom have now?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "prompt": "sentence",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            3,
+            "The old lighthouse keeper counted the waves until dawn."
+          ],
+          "reasoning": [
+            0.9,
+            2,
+            "We need answer one short sentence only. Need write anything. Ensure no extra."
+          ],
+          "modal_content": "The old lighthouse keeper counted the waves until dawn."
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            2,
+            "The old lighthouse keeper hummed to the gulls as the fog rolled in."
+          ],
+          "reasoning": [
+            0.9,
+            2,
+            "We need answer one short sentence only. Need write anything. Ensure no extra."
+          ],
+          "modal_content": "The old lighthouse keeper hummed to the gulls as the fog rolled in."
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            3,
+            "The old lighthouse keeper hummed to the gulls as the fog rolled in."
+          ],
+          "reasoning": [
+            0.9,
+            2,
+            "We need answer one short sentence only. Need write anything. Ensure no extra."
+          ],
+          "modal_content": "The old lighthouse keeper hummed to the gulls as the fog rolled in."
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "prompt": "opener",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.8,
+            3,
+            "The door creaked"
+          ],
+          "reasoning": [
+            0.3,
+            8,
+            "We need answer only three words. Need craft opening three words of a story. User says \"Write the opening three words of a story. Reply with those three words only.\" Need output exactly three words. Could be \"The rain began\" or \"It was midnight\" etc. Need no punctuation? Three words only. Let's choose evocative. \"The door creaked\" is three words. Need only those."
+          ],
+          "modal_content": "The door creaked"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            4,
+            "The door creaked"
+          ],
+          "reasoning": [
+            0.2,
+            9,
+            "We need answer only three words. Need craft opening three words of a story. Must reply with those three words only. Need no punctuation? \"The sky wept.\" That's three words? The, sky, wept. Yes. Could be \"It was midnight\" three words? It was midnight. Need only three words. Let's choose evocative. \"The door creaked.\" three words. Need exactly three words. Final only."
+          ],
+          "modal_content": "The door creaked"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.4,
+            6,
+            "The door creaked"
+          ],
+          "reasoning": [
+            0.1,
+            10,
+            "We need answer opening three words of a story. Only three words. Need be creative. \"The rain fell\" or \"It was dark\" etc. Need exactly three words. No punctuation? likely just three words. Choose something evocative. \"The old house\" maybe. Need only three words. I'll output \"The clock stopped\" or \"She opened the\" no. Need complete opening three words. \"The night was\" is three words but incomplete? It's okay as opening three words. Better \"The door creaked\" three words. I'll choose \"The door creaked\" but that's three words. Ensure no extra."
+          ],
+          "modal_content": "The door creaked"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "prompt": "question",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.4,
+            6,
+            "What is one small habit you\u2019ve adopted that unexpectedly improved your daily life?"
+          ],
+          "reasoning": [
+            0.5,
+            3,
+            "We need answer one question only. Need ask one question about anything. Reply with question only. No extra. Could be any. Need ensure just question."
+          ],
+          "modal_content": "What is one small habit you\u2019ve adopted that unexpectedly improved your daily life?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.4,
+            4,
+            "What is one belief you held strongly five years ago that you no longer believe today?"
+          ],
+          "reasoning": [
+            0.6,
+            3,
+            "We need answer one question only. Need ask one question about anything. Reply with question only. No extra. Could be anything. Need ensure just question."
+          ],
+          "modal_content": "What is one belief you held strongly five years ago that you no longer believe today?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.5,
+            4,
+            "What is one belief you held strongly five years ago that you no longer believe today?"
+          ],
+          "reasoning": [
+            0.5,
+            3,
+            "We need answer one question only. Need ask one question about anything. Reply with question only. No extra. Could be anything. Need ensure just question."
+          ],
+          "modal_content": "What is one belief you held strongly five years ago that you no longer believe today?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "prompt": "math500",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "Since \\(4 = 2^2\\), we have:\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nSo:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nEquating exponents:\n\n\\[\n8 = 2x\n\\]\n\n\\[\nx = 4\n\\]\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            "We need answer math. Need solve 2^8=4^x. 4=2^2 so 4^x=2^{2x}; equate exponents 8=2x => x=4. Final with answer."
+          ],
+          "modal_content": "Since \\(4 = 2^2\\), we have:\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nSo:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nEquating exponents:\n\n\\[\n8 = 2x\n\\]\n\n\\[\nx = 4\n\\]\n\nAnswer: 4"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.9,
+            2,
+            "Since \\(4 = 2^2\\), we have:\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nSo:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nEquating exponents:\n\n\\[\n8 = 2x\n\\]\n\n\\[\nx = 4\n\\]\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.6,
+            3,
+            "We need answer math. Need solve 2^8=4^x. 4=2^2 so 4^x=2^{2x}; equate exponents 8=2x => x=4. Final with answer."
+          ],
+          "modal_content": "Since \\(4 = 2^2\\), we have:\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nSo:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nEquating exponents:\n\n\\[\n8 = 2x\n\\]\n\n\\[\nx = 4\n\\]\n\nAnswer: 4"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "Since \\(4 = 2^2\\), we have:\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nSo:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nEquating exponents:\n\n\\[\n8 = 2x\n\\]\n\n\\[\nx = 4\n\\]\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.9,
+            2,
+            "We need answer math. Need solve 2^8=4^x. 4=2^2 so 4^x=2^{2x}; equate exponents 8=2x => x=4. Final with answer."
+          ],
+          "modal_content": "Since \\(4 = 2^2\\), we have:\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nSo:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nEquating exponents:\n\n\\[\n8 = 2x\n\\]\n\n\\[\nx = 4\n\\]\n\nAnswer: 4"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "prompt": "word_prob",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            5,
+            "Samantha has 24 stickers and gives 7 to her friend; how many stickers does she have left?"
+          ],
+          "reasoning": [
+            0.2,
+            9,
+            "We need answer one-sentence arithmetic word problem suitable for ten-year-old. Reply with problem only. Need ensure one sentence. Let's craft: \"Samantha has 24 stickers and gives 7 to her friend; how many stickers does she have left?\" That's one sentence, arithmetic subtraction, age appropriate. Need only problem."
+          ],
+          "modal_content": "Samantha has 24 stickers and gives 7 to her friend; how many stickers does she have left?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.4,
+            7,
+            "Samantha has 24 stickers and gives 7 to her friend; how many stickers does she have left?"
+          ],
+          "reasoning": [
+            0.1,
+            10,
+            "We need answer user's request. They want a one-sentence arithmetic word problem suitable for a ten-year-old. Reply with the problem only. We need produce a single sentence arithmetic word problem. Should be appropriate for 10-year-old, likely addition/subtraction/multiplication/division. One sentence only. No extra text. Let's craft: \"Samantha has 24 stickers and gives 7 to her friend; how many stickers does she have left?\" That's one sentence, arithmetic subtraction. Good. Ensure no extra."
+          ],
+          "modal_content": "Samantha has 24 stickers and gives 7 to her friend; how many stickers does she have left?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            5,
+            "Samantha has 24 stickers and gives 7 to her friend; how many stickers does she have left?"
+          ],
+          "reasoning": [
+            0.2,
+            8,
+            "We need answer one-sentence arithmetic word problem suitable for ten-year-old. Reply with problem only. Need ensure one sentence. Let's craft: \"Samantha has 24 stickers and gives 7 to her friend; how many stickers does she have left?\" That's one sentence, arithmetic subtraction, age appropriate. Need only problem."
+          ],
+          "modal_content": "Samantha has 24 stickers and gives 7 to her friend; how many stickers does she have left?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "prompt": "sentence",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.9,
+            2,
+            "The cat slept on the warm windowsill."
+          ],
+          "reasoning": [
+            0.5,
+            6,
+            "The user wants one short sentence about anything at all, and only the sentence. I should provide just a simple sentence with no extra text."
+          ],
+          "modal_content": "The cat slept on the warm windowsill."
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.8,
+            2,
+            "The cat slept on the warm windowsill."
+          ],
+          "reasoning": [
+            0.5,
+            5,
+            "The user wants one short sentence about anything at all, and only the sentence. I should provide just a simple sentence with no extra text."
+          ],
+          "modal_content": "The cat slept on the warm windowsill."
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.7,
+            2,
+            "The cat slept on the warm windowsill."
+          ],
+          "reasoning": [
+            0.3,
+            8,
+            "The user wants one short sentence about anything at all, and only the sentence. I should provide just a simple sentence with no extra text."
+          ],
+          "modal_content": "The cat slept on the warm windowsill."
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "prompt": "opener",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.3,
+            6,
+            "Once upon a"
+          ],
+          "reasoning": [
+            0.1,
+            10,
+            "We need answer user: \"Write the opening three words of a story. Reply with those three words only.\" Need produce exactly three words. No extra punctuation? Could be \"Once upon a\" or \"It was a\". Need only three words. Ensure no extra content."
+          ],
+          "modal_content": "Once upon a"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.4,
+            6,
+            "The door creaked."
+          ],
+          "reasoning": [
+            0.1,
+            10,
+            "We need answer user request: \"Write the opening three words of a story. Reply with those three words only.\" Need produce exactly three words, no extra punctuation? They asked opening three words of a story. We can choose something evocative. Need ensure only three words. Maybe \"The old lighthouse\" or \"Once upon a\" but that's three words? \"Once upon a\" is three words but incomplete. Better \"The clock struck\" or \"She woke screaming\". Need only three words. Let's pick \"The door creaked\". That's three words. No punctuation perhaps. Ensure no extra."
+          ],
+          "modal_content": "The door creaked."
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.4,
+            6,
+            "The door creaked"
+          ],
+          "reasoning": [
+            0.1,
+            10,
+            "We need answer user request: \"Write the opening three words of a story. Reply with those three words only.\" Need produce exactly three words, no punctuation? Opening three words of a story. Could be \"Once upon a\" but that's three words? Once(1) upon(2) a(3). Yes. But maybe more creative. Need only three words. Ensure no extra punctuation or explanation. We can output e.g. \"The clock struck\". But must be opening three words of a story. Any three words. Need follow instruction exactly: reply with those three words only. So final should be just three words. Let's choose something evocative. \"The last light\". That's three words. Or \"It was midnight\". Let's pick \"The door creaked\". Good story opening. Final only."
+          ],
+          "modal_content": "The door creaked"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": false
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "prompt": "question",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.4,
+            6,
+            "What is something you've always wanted to learn but haven't yet?"
+          ],
+          "reasoning": [
+            0.4,
+            7,
+            "The user wants me to ask one question about anything, and reply with the question only. I should provide just a single question without any additional text or explanation."
+          ],
+          "modal_content": "What is something you've always wanted to learn but haven't yet?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.4,
+            6,
+            "What is something you've always wanted to learn but haven't yet?"
+          ],
+          "reasoning": [
+            0.6,
+            5,
+            "The user wants me to ask one question about anything, and reply with the question only. I should provide just a single question without any additional text or explanation."
+          ],
+          "modal_content": "What is something you've always wanted to learn but haven't yet?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.3,
+            4,
+            "What is something you\u2019ve always wanted to learn but never had the chance to?"
+          ],
+          "reasoning": [
+            0.3,
+            8,
+            "The user wants me to ask one question about anything, and reply with the question only. I should provide just a single question without any additional text or explanation."
+          ],
+          "modal_content": "What is something you\u2019ve always wanted to learn but never had the chance to?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": false
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "prompt": "math500",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.3,
+            8,
+            "We can rewrite the right side using the fact that \\(4 = 2^2\\):\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nSo the equation becomes:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nSince the bases are equal, set the exponents equal:\n\n\\[\n8 = 2x\n\\]\n\nDivide by 2:\n\n\\[\nx = 4\n\\]\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.9,
+            2,
+            "We need solve 2^8 = 4^x. 4 = 2^2, so 4^x = (2^2)^x = 2^{2x}. Then 2^8 = 2^{2x} => 8 = 2x => x=4. Final answer line."
+          ],
+          "modal_content": "We can rewrite the right side using the fact that \\(4 = 2^2\\):\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nSo the equation becomes:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nSince the bases are equal, set the exponents equal:\n\n\\[\n8 = "
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.2,
+            8,
+            "We can rewrite \\(4^x\\) as a power of \\(2\\):\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nSo the equation becomes:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nSince the bases are equal, set the exponents equal:\n\n\\[\n8 = 2x\n\\]\n\nDivide by \\(2\\):\n\n\\[\nx = 4\n\\]\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.7,
+            4,
+            "We need solve 2^8 = 4^x. 4 = 2^2, so 4^x = (2^2)^x = 2^{2x}. Then 2^8 = 2^{2x} => 8 = 2x => x=4. Final answer line."
+          ],
+          "modal_content": "We can rewrite \\(4^x\\) as a power of \\(2\\):\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nSo the equation becomes:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nSince the bases are equal, set the exponents equal:\n\n\\[\n8 = 2x\n\\]\n\nDivide by \\("
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.3,
+            6,
+            "We can rewrite the right side using the fact that \\(4 = 2^2\\):\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nSo the equation becomes:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nSince the bases are the same, set the exponents equal:\n\n\\[\n8 = 2x\n\\]\n\nDivide by 2:\n\n\\[\nx = 4\n\\]\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.7,
+            3,
+            "We need solve 2^8 = 4^x. 4 = 2^2, so 4^x = (2^2)^x = 2^{2x}. Then 2^8 = 2^{2x} => 8 = 2x => x=4. Final answer line."
+          ],
+          "modal_content": "We can rewrite the right side using the fact that \\(4 = 2^2\\):\n\n\\[\n4^x = (2^2)^x = 2^{2x}\n\\]\n\nSo the equation becomes:\n\n\\[\n2^8 = 2^{2x}\n\\]\n\nSince the bases are the same, set the exponents equal:\n\n\\[\n8"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": false
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "prompt": "word_prob",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.5,
+            4,
+            "Maria has 24 stickers and gives 7 to her friend Leo, so how many stickers does Maria have left?"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "Maria has 24 stickers and gives 7 to her friend Leo, so how many stickers does Maria have left?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.4,
+            4,
+            "Maria has 24 stickers and gives 7 to her friend Leo, so how many stickers does Maria have left?"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "Maria has 24 stickers and gives 7 to her friend Leo, so how many stickers does Maria have left?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.8,
+            3,
+            "Maria has 24 stickers and gives 9 of them to her friend Leo, so how many stickers does Maria have left?"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "Maria has 24 stickers and gives 9 of them to her friend Leo, so how many stickers does Maria have left?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": false
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "prompt": "sentence",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.8,
+            2,
+            "The old lighthouse keeper counted waves until the fog swallowed the shore."
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "The old lighthouse keeper counted waves until the fog swallowed the shore."
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.7,
+            4,
+            "The old lighthouse keeper counted waves until the fog swallowed the shore."
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "The old lighthouse keeper counted waves until the fog swallowed the shore."
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.8,
+            2,
+            "The old lighthouse keeper counted waves until the fog swallowed the shore."
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "The old lighthouse keeper counted waves until the fog swallowed the shore."
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "prompt": "opener",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "The rain fell"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "The rain fell"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "The rain fell"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "The rain fell"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "The rain fell"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "The rain fell"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "prompt": "question",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.8,
+            3,
+            "What's one small thing that made you smile today?"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "What's one small thing that made you smile today?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.9,
+            2,
+            "What's one small thing that made you smile today?"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "What's one small thing that made you smile today?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "What's one small thing that made you smile today?"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            ""
+          ],
+          "modal_content": "What's one small thing that made you smile today?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "prompt": "math500",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            2,
+            "2^8 = 4^x = (2\u00b2)^x = 2^(2x), so 2x = 8, giving x = 4.\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.8,
+            2,
+            "2^8=4^x=2^(2x), x=4."
+          ],
+          "modal_content": "2^8 = 4^x = (2\u00b2)^x = 2^(2x), so 2x = 8, giving x = 4.\n\nAnswer: 4"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.7,
+            2,
+            "2^8 = 4^x = (2\u00b2)^x = 2^(2x), so 8 = 2x, giving x = 4.\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.7,
+            3,
+            "2^8=4^x=2^(2x), x=4."
+          ],
+          "modal_content": "2^8 = 4^x = (2\u00b2)^x = 2^(2x), so 8 = 2x, giving x = 4.\n\nAnswer: 4"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.5,
+            2,
+            "2^8 = 4^x = (2\u00b2)^x = 2^(2x), so 8 = 2x, giving x = 4.\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.6,
+            3,
+            "2^8=4^x=2^(2x), x=4."
+          ],
+          "modal_content": "2^8 = 4^x = (2\u00b2)^x = 2^(2x), so 8 = 2x, giving x = 4.\n\nAnswer: 4"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "prompt": "word_prob",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            4,
+            "If you have 5 boxes of crayons with 12 crayons in each box and your friend gives you 6 more crayons, how many crayons do you have in total?"
+          ],
+          "reasoning": [
+            0.5,
+            5,
+            "1.  **Analyze the Request:**\n    *   Target audience: Ten-year-old (4th/5th grade math level).\n    *   Format: One-sentence arithmetic word problem.\n    *   Constraint: Reply with the problem *only* (no intro, no solution).\n\n2.  **Determine the Math Level:**\n    *   Ten-year-olds typically do multi-digit addition/subtraction, basic multiplication/division, or simple mixed operations.\n    *   Let's do a simple multiplication/addition problem involving something relatable (like buying snacks or collecting items).\n\n3.  **Drafting the Problem:**\n    *   *Draft 1:* If Sarah buys 4 packs of Pokemon cards that each have 8 cards, and then her friend gives her 3 more, how many cards does she have in total? (A bit long, but one sentence).\n    *   *Draft 2:* A baker made 144 muffins and sold 89 of them in the morning, so how many muffins are left to sell in the afternoon? (Simple subtraction, maybe too easy).\n    *   *Draft 3:* If you have 5 boxes of crayons with 12 crayons in each box and your friend gives you 6 more crayons, how many crayons do you have in total? (Good, mixed operations, relatable).\n\n4.  **Refining Draft 3:**\n    *   \"If you have 5 boxes of crayons with 12 crayons in each box and your friend gives you 6 more crayons, how many crayons do you have in total?\"\n    *   Check constraints: One sentence? Yes. Arithmetic? Yes (5 * 12 + 6). Suitable for a 10-year-old? Yes. Problem only? Yes.\n\n5.  **Final Polish:**\n    *   \"If you have 5 boxes of crayons with 12 crayons in each box and your friend gives you 6 more crayons, how many crayons do you have in total?\""
+          ],
+          "modal_content": "If you have 5 boxes of crayons with 12 crayons in each box and your friend gives you 6 more crayons, how many crayons do you have in total?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            5,
+            "Liam bought 5 comic books that cost $4 each and 1 poster that cost $6, so how much money did he spend in total?"
+          ],
+          "reasoning": [
+            0.6,
+            5,
+            "1.  **Analyze the Request:**\n    *   Target audience: Ten-year-old (4th/5th grade math level).\n    *   Format: One-sentence arithmetic word problem.\n    *   Constraint: Reply with the problem *only* (no intro, no solution).\n\n2.  **Determine the Math Level:**\n    *   Ten-year-olds usually do multi-digit addition/subtraction, basic multiplication/division, or simple mixed operations.\n    *   Let's do a simple multiplication/addition problem.\n\n3.  **Drafting the Problem:**\n    *   *Draft 1:* If Sarah has 4 boxes of crayons and each box contains 12 crayons, how many crayons does she have in total? (A bit too simple, maybe 3rd grade).\n    *   *Draft 2:* A baker made 144 blueberry muffins and 85 chocolate muffins, but sold 60 of them before noon, so how many muffins does the baker have left to sell? (Good, mixed operations, one sentence).\n    *   *Draft 3:* If a toy store sells 8 boxes of marbles and each box holds 24 marbles, how many marbles were sold in total? (Simple multiplication, good for 10yo).\n    *   *Draft 4:* Liam bought 5 comic books that cost $4 each and 1 poster that cost $6, so how much money did he spend in total? (Very relatable, one sentence, mixed operations).\n\n4.  **Refining Draft 4:**\n    *   \"Liam bought 5 comic books that cost $4 each and 1 poster that cost $6, so how much money did he spend in total?\" -> 5 * 4 + 6 = 26. Perfect for a 10-year-old.\n\n5.  **Final Polish (checking constraints):**\n    *   One sentence? Yes.\n    *   Arithmetic word problem? Yes.\n    *   Suitable for a 10-year-old? Yes.\n    *   Problem only? Yes.\n\n6.  **Output Generation:**\n    Liam bought 5 comic books that cost $4 each and 1 poster that cost $6, so how much money did he spend in total?"
+          ],
+          "modal_content": "Liam bought 5 comic books that cost $4 each and 1 poster that cost $6, so how much money did he spend in total?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.4,
+            6,
+            "Liam bought 5 comic books that cost $4 each and 1 poster that cost $6, so how much money did he spend in total?"
+          ],
+          "reasoning": [
+            0.4,
+            7,
+            "1.  **Analyze the Request:**\n    *   Target audience: Ten-year-old (4th/5th grade math level).\n    *   Format: One-sentence arithmetic word problem.\n    *   Constraint: Reply with the problem *only* (no intro, no solution).\n\n2.  **Determine the Math Level:**\n    *   Ten-year-olds usually do multi-digit addition/subtraction, basic multiplication/division, or simple mixed operations.\n    *   Let's do a simple multiplication/addition problem.\n\n3.  **Drafting the Problem:**\n    *   *Draft 1:* If Sarah has 4 boxes of crayons and each box contains 12 crayons, how many crayons does she have in total? (A bit too simple, maybe 3rd grade).\n    *   *Draft 2:* A baker made 144 blueberry muffins and 85 chocolate muffins, but sold 60 of them before noon, so how many muffins does the baker have left to sell? (Good, mixed operations, one sentence).\n    *   *Draft 3:* If a toy store sells 8 boxes of marbles and each box holds 24 marbles, how many marbles were sold in total? (Simple multiplication, good for 10yo).\n    *   *Draft 4:* Liam bought 5 comic books that cost $4 each and 1 poster that cost $6, so how much money did he spend in total? (Very relatable, one sentence, mixed operations).\n\n4.  **Refining Draft 4:**\n    *   \"Liam bought 5 comic books that cost $4 each and 1 poster that cost $6, so how much money did he spend in total?\" -> 5 * 4 + 6 = 26. Perfect for a 10-year-old.\n\n5.  **Final Polish (checking constraints):**\n    *   One sentence? Yes.\n    *   Arithmetic word problem? Yes.\n    *   Suitable for a 10-year-old? Yes.\n    *   Problem only? Yes.\n\n6.  **Output Generation:**\n    Liam bought 5 comic books that cost $4 each and 1 poster that cost $6, so how much money did he spend in total?"
+          ],
+          "modal_content": "Liam bought 5 comic books that cost $4 each and 1 poster that cost $6, so how much money did he spend in total?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "prompt": "sentence",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.2,
+            7,
+            "The sun sets slowly behind the mountains."
+          ],
+          "reasoning": [
+            0.1,
+            10,
+            "1.  **Analyze the Request:**\n    *   Task: Write one short sentence about anything at all.\n    *   Constraint: Reply with the sentence only.\n\n2.  **Generate a sentence:**\n    *   \"The sun sets slowly behind the mountains.\" (Short, simple, about anything)\n    *   \"A cat sleeps on the windowsill.\" (Also good)\n    *   \"Rain tapped gently against the glass.\" (Nice imagery)\n\n3.  **Select the best one:**\n    *   \"The sun sets slowly behind the mountains.\"\n\n4.  **Format the output:**\n    *   Ensure there is no extra text, just the sentence."
+          ],
+          "modal_content": "The sun sets slowly behind the mountains."
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.7,
+            3,
+            "A gentle breeze rustled the autumn leaves."
+          ],
+          "reasoning": [
+            0.7,
+            4,
+            "1.  **Analyze the Request:**\n    *   Task: Write one short sentence about anything at all.\n    *   Constraint: Reply with the sentence only.\n\n2.  **Generate a sentence:**\n    *   \"The sun sets slowly behind the mountains.\" (8 words)\n    *   \"Birds chirp in the early morning light.\" (7 words)\n    *   \"A gentle breeze rustled the autumn leaves.\" (7 words)\n\n3.  **Select the best one:** \"A gentle breeze rustled the autumn leaves.\"\n\n4.  **Format the output:** Ensure there is absolutely no other text, just the sentence."
+          ],
+          "modal_content": "A gentle breeze rustled the autumn leaves."
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.5,
+            3,
+            "A gentle breeze rustled the autumn leaves."
+          ],
+          "reasoning": [
+            0.5,
+            5,
+            "1.  **Analyze the Request:**\n    *   Task: Write one short sentence about anything at all.\n    *   Constraint: Reply with the sentence only.\n\n2.  **Generate a sentence:**\n    *   \"The sun sets slowly behind the mountains.\" (8 words)\n    *   \"Birds chirp in the early morning light.\" (7 words)\n    *   \"A gentle breeze rustled the autumn leaves.\" (7 words)\n\n3.  **Select the best one:** \"A gentle breeze rustled the autumn leaves.\"\n\n4.  **Format the output:** Ensure there is absolutely no other text, just the sentence."
+          ],
+          "modal_content": "A gentle breeze rustled the autumn leaves."
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "prompt": "opener",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            3,
+            "The sky burned."
+          ],
+          "reasoning": [
+            0.5,
+            6,
+            "1.  **Analyze the Request:**\n    *   Task: Write the opening three words of a story.\n    *   Constraint: Reply with *only* those three words.\n\n2.  **Generate options:**\n    *   \"Once upon a\" (Wait, that's three words, but usually \"Once upon a time\" is four. \"Once upon a\" feels incomplete).\n    *   \"The sky fell\"\n    *   \"It was dark\"\n    *   \"Call me Ishmael\" (Wait, that's three words! Perfect.)\n    *   \"Blood stained the\"\n    *   \"She woke up\"\n\n3.  **Select the best option:**\n    *   \"Call me Ishmael.\" (Classic, exactly three words, makes a great story opening). Let's remove the punctuation to be strictly just the words, or keep it? Punctuation is fine, but \"Call me Ishmael\" is exactly three words. Let's do something original just in case.\n    *   \"The stars died.\"\n    *   \"Silence fell first.\"\n    *   \"He never returned.\"\n\n4.  **Format the output:**\n    *   Must be *only* the three words. No quotes, no intro, no outro.\n    *   Let's go with: \"The stars died.\" (Wait, \"The stars died\" is three words).\n    *   Let's use: \"The sky burned.\"\n\n5.  **Final check:**\n    *   \"The sky burned.\" -> 3 words. No other text."
+          ],
+          "modal_content": "The sky burned."
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.3,
+            7,
+            "The stars died."
+          ],
+          "reasoning": [
+            0.2,
+            8,
+            "1.  **Analyze the Request:**\n    *   Task: Write the opening three words of a story.\n    *   Constraint: Reply with *only* those three words.\n\n2.  **Generate options:**\n    *   \"Once upon a\" (Wait, that's three words, but usually \"Once upon a time\" is four. \"Once upon a\" feels incomplete).\n    *   \"The sky fell\"\n    *   \"It was dark\"\n    *   \"Call me Ishmael\" (Wait, that's three words! Perfect, but maybe too clich\u00e9).\n    *   \"Silence fell abruptly.\"\n    *   \"Stars burned out.\"\n    *   \"He woke up.\"\n\n3.  **Select the best option:**\n    *   \"The stars died.\" (Dramatic, punchy, exactly three words).\n\n4.  **Format the output:**\n    *   Ensure there are absolutely no other words, punctuation is fine but keep it to exactly three words.\n    *   \"The stars died.\"\n\n5.  **Final check:**\n    *   Word count: 3 (\"The\", \"stars\", \"died.\")\n    *   No extra text."
+          ],
+          "modal_content": "The stars died."
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.3,
+            6,
+            "The sky fell."
+          ],
+          "reasoning": [
+            0.1,
+            10,
+            "1.  **Analyze the Request:**\n    *   Task: Write the opening three words of a story.\n    *   Constraint: Reply with *only* those three words. No punctuation outside of the words (though standard punctuation attached to the words is usually fine, but strictly speaking, just the words). Let's keep it simple and evocative.\n\n2.  **Select the three words:**\n    *   \"The sky fell\" (3 words)\n    *   \"Once upon a\" (3 words - a bit clich\u00e9)\n    *   \"It was dark\" (3 words)\n    *   \"Silence fell first\" (3 words)\n    *   \"She woke up\" (3 words)\n    *   \"The stars died\" (3 words)\n\n3.  **Refine selection:**\n    *   \"The stars died.\" (3 words, strong hook). Let's just output \"The stars died\" or \"The stars died.\" The prompt says \"Reply with those three words only.\" I will include a period as it's standard for a sentence, but to be absolutely safe with \"three words only\", I'll just write \"The stars died.\" Wait, punctuation doesn't count as a word. \"The stars died.\" is 3 words.\n\n4.  **Final check:**\n    *   Word 1: The\n    *   Word 2: stars\n    *   Word 3: died\n    *   Total: 3 words. No other text."
+          ],
+          "modal_content": "The sky fell."
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": false
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "prompt": "question",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.7,
+            2,
+            "What is the most beautiful thing you have ever seen?"
+          ],
+          "reasoning": [
+            0.3,
+            4,
+            "1.  **Analyze the Request:**\n    *   Task: Ask one question about anything.\n    *   Constraint: Reply with the question only (no extra text, no context, no conversational filler).\n\n2.  **Formulate a Question:**\n    *   Needs to be a single, clear question.\n    *   Example: \"What is the meaning of life?\" or \"If you could travel to any point in time, where would you go?\" or \"How do bees communicate?\"\n    *   Let's go with something universally interesting but simple: \"If time travel were possible, what historical event would you most want to witness?\"\n\n3.  **Check Constraints:**\n    *   Is it one question? Yes.\n    *   Is it about anything? Yes.\n    *   Is it the question only? Yes.\n\n4.  **Final Output Generation:**\n    *   \"If time travel were possible, what historical event would you most want to witness?\""
+          ],
+          "modal_content": "What is the most beautiful thing you have ever seen?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.5,
+            4,
+            "If the universe is expanding, what is it expanding into?"
+          ],
+          "reasoning": [
+            0.3,
+            7,
+            "1.  **Analyze the Request:**\n    *   Task: Ask one question about anything.\n    *   Constraint: Reply with the question only (no extra text, no context, no conversational filler).\n\n2.  **Formulate a Question:**\n    *   Needs to be a single, clear question.\n    *   Topic: Anything. Let's go with something philosophical or scientific to make it interesting, but simple enough to stand alone.\n    *   *Idea 1:* What is the meaning of life? (A bit clich\u00e9)\n    *   *Idea 2:* If time travel is possible, where are all the time travelers? (Good, intriguing)\n    *   *Idea 3:* How do we know that the color blue I see is the same color blue you see? (Classic, thought-provoking)\n\n3.  **Select and Refine:**\n    *   Let's go with Idea 2. \"If time travel is possible, where are all the time travelers?\"\n    *   Wait, let's make it even simpler to ensure strict compliance. \"What happens to a dream deferred?\" (Langston Hughes, maybe too literary).\n    *   Let's just ask: \"If the universe is expanding, what is it expanding into?\"\n\n4.  **Final Output Generation:**\n    *   Ensure absolutely no other words are included.\n    *   \"If the universe is expanding, what is it expanding into?\""
+          ],
+          "modal_content": "If the universe is expanding, what is it expanding into?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.2,
+            7,
+            "If time travel were possible, where are all the time travelers?"
+          ],
+          "reasoning": [
+            0.2,
+            8,
+            "1.  **Analyze the Request:**\n    *   Task: Ask one question about anything.\n    *   Constraint: Reply with the question only (no extra text, no context, no conversational filler).\n\n2.  **Formulate a Question:**\n    *   Needs to be a single, clear question.\n    *   Topic: Anything. Let's go with something philosophical or scientific to make it interesting, but simple enough to stand alone.\n    *   *Idea 1:* What is the meaning of life? (A bit clich\u00e9)\n    *   *Idea 2:* If time travel is possible, where are all the time travelers? (Good, intriguing)\n    *   *Idea 3:* How do we know that the color blue I see is the same color blue you see? (Classic, thought-provoking)\n\n3.  **Select and Refine:**\n    *   Let's go with Idea 2. \"If time travel is possible, where are all the time travelers?\"\n    *   Wait, let's make it even simpler to ensure strict compliance. \"What happens to an object if it falls into a black hole?\"\n    *   Let's just use: \"If time travel were possible, where are all the time travelers?\"\n\n4.  **Final Output Generation:**\n    *   Ensure *only* the question is output. No quotes (unless necessary, but better without), no punctuation other than the question mark.\n\n    *Draft:* If time travel were possible, where are all the time travelers?"
+          ],
+          "modal_content": "If time travel were possible, where are all the time travelers?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": false
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "prompt": "math500",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.3,
+            7,
+            "To solve the equation $2^8 = 4^x$, we can express both sides of the equation with the same base. \n\n1. We know that $4$ can be written as $2^2$. \n2. Substitute this into the right side of the equation: $4^x = (2^2)^x$.\n3. Using the power of a power property, we multiply the exponents: $(2^2)^x = 2^{2x}$.\n4. Now the equation is $2^8 = 2^{2x}$.\n5. Since the bases are the same, we can set the exponents equal to each other: $8 = 2x$.\n6. Divide both sides by 2 to solve for $x$: $x = 4$.\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.5,
+            5,
+            "The problem asks for the value of $x$ in the equation $2^8 = 4^x$.\nFirst, I can express both sides of the equation with the same base.\nThe left side is $2^8$.\nThe right side is $4^x$. I know that $4 = 2^2$, so $4^x = (2^2)^x = 2^{2x}$.\nSo the equation becomes $2^8 = 2^{2x}$.\nSince the bases are the same, the exponents must be equal.\nTherefore, $8 = 2x$.\nDivide both sides by 2 to solve for $x$:\n$x = 8 / 2 = 4$.\nLet me double check.\nIf $x = 4$, then $4^4 = (2^2)^4 = 2^8$. This matches the left side.\nSo $x = 4$.\nThe reasoning is solid."
+          ],
+          "modal_content": "To solve the equation $2^8 = 4^x$, we can express both sides of the equation with the same base. \n\n1. We know that $4$ can be written as $2^2$. \n2. Substitute this into the right side of the equation:"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            5,
+            "To solve the equation $2^8 = 4^x$, we can express both sides of the equation with the same base. \n\n1. We know that $4$ can be written as $2^2$. \n2. Substitute this into the right side of the equation: $4^x = (2^2)^x$.\n3. Using the power of a power property, we multiply the exponents: $(2^2)^x = 2^{2x}$.\n4. Now the equation is $2^8 = 2^{2x}$.\n5. Since the bases are the same, we can set the exponents equal to each other: $8 = 2x$.\n6. Divide both sides by 2 to solve for $x$: $x = 4$.\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.6,
+            5,
+            "The problem asks for the value of $x$ in the equation $2^8 = 4^x$.\nFirst, I can express both sides of the equation with the same base.\nThe left side is $2^8$.\nThe right side is $4^x$. I know that $4 = 2^2$, so $4^x = (2^2)^x = 2^{2x}$.\nSo the equation becomes $2^8 = 2^{2x}$.\nSince the bases are the same, the exponents must be equal.\nTherefore, $8 = 2x$.\nDivide both sides by 2 to solve for $x$:\n$x = 8 / 2 = 4$.\nLet me double check.\nIf $x = 4$, then $4^4 = (2^2)^4 = 2^8$. This matches the left side.\nSo $x = 4$.\nThe reasoning is solid."
+          ],
+          "modal_content": "To solve the equation $2^8 = 4^x$, we can express both sides of the equation with the same base. \n\n1. We know that $4$ can be written as $2^2$. \n2. Substitute this into the right side of the equation:"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.2,
+            8,
+            "To solve the equation $2^8 = 4^x$, we can express both sides of the equation with the same base. \n\n1. We know that $4$ can be written as $2^2$. \n2. Substitute this into the right side of the equation: \n   $4^x = (2^2)^x$\n3. Using the power of a power property, multiply the exponents:\n   $(2^2)^x = 2^{2x}$\n4. Now substitute this back into the original equation:\n   $2^8 = 2^{2x}$\n5. Since the bases are the same, we can set the exponents equal to each other:\n   $8 = 2x$\n6. Divide both sides by 2 to solve for $x$:\n   $x = 4$\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.3,
+            5,
+            "The problem asks for the value of $x$ in the equation $2^8 = 4^x$.\nFirst, I can express both sides of the equation with the same base.\nThe left side is $2^8$.\nThe right side is $4^x$. I know that $4 = 2^2$, so $4^x = (2^2)^x = 2^{2x}$.\nSo the equation becomes $2^8 = 2^{2x}$.\nSince the bases are the same, the exponents must be equal.\nTherefore, $8 = 2x$.\nDivide both sides by 2 to solve for $x$:\n$x = 8 / 2 = 4$.\nLet me double check.\nIf $x = 4$, then $4^4 = 4 \\times 4 \\times 4 \\times 4 = 16 \\times 16 = 256$.\nAnd $2^8 = 2 \\times 2 \\times 2 \\times 2 \\times 2 \\times 2 \\times 2 \\times 2 = 256$.\nThe values match.\nSo $x = 4$."
+          ],
+          "modal_content": "To solve the equation $2^8 = 4^x$, we can express both sides of the equation with the same base. \n\n1. We know that $4$ can be written as $2^2$. \n2. Substitute this into the right side of the equation:"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "prompt": "word_prob",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.7,
+            4,
+            "If a bakery sells 24 cupcakes in the morning and 37 cupcakes in the afternoon, how many cupcakes did they sell in total?"
+          ],
+          "reasoning": [
+            0.9,
+            2,
+            "The user wants a single-sentence arithmetic word problem appropriate for a 10-year-old. At that age, kids are typically working with multi-digit addition, subtraction, multiplication, and simple division. I'll write something relatable and straightforward.\n"
+          ],
+          "modal_content": "If a bakery sells 24 cupcakes in the morning and 37 cupcakes in the afternoon, how many cupcakes did they sell in total?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.3,
+            4,
+            "If a bakery sells 24 cupcakes in the morning and 37 cupcakes in the afternoon, how many cupcakes did they sell in total?"
+          ],
+          "reasoning": [
+            0.6,
+            4,
+            "The user wants a single-sentence arithmetic word problem appropriate for a 10-year-old. At that age, kids are typically working with multi-digit addition, subtraction, multiplication, and simple division. I'll write something relatable and straightforward.\n"
+          ],
+          "modal_content": "If a bakery sells 24 cupcakes in the morning and 37 cupcakes in the afternoon, how many cupcakes did they sell in total?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            5,
+            "If a bakery sells 24 cupcakes in the morning and 37 cupcakes in the afternoon, how many cupcakes did they sell in total?"
+          ],
+          "reasoning": [
+            0.8,
+            3,
+            "The user wants a single-sentence arithmetic word problem appropriate for a 10-year-old. At that age, kids are typically working with multi-digit addition, subtraction, multiplication, and simple division. I'll write something relatable and straightforward.\n"
+          ],
+          "modal_content": "If a bakery sells 24 cupcakes in the morning and 37 cupcakes in the afternoon, how many cupcakes did they sell in total?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "prompt": "sentence",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.5,
+            3,
+            "The last leaf fell from the oak tree just as the first snow began."
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            "The user wants one short sentence about anything, with no additional commentary. I'll write something simple and evocative.\n"
+          ],
+          "modal_content": "The last leaf fell from the oak tree just as the first snow began."
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.4,
+            5,
+            "The last leaf fell from the oak tree just as the first snow began."
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            "The user wants one short sentence about anything, with no additional commentary. I'll write something simple and evocative.\n"
+          ],
+          "modal_content": "The last leaf fell from the oak tree just as the first snow began."
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.3,
+            5,
+            "The last leaf fell from the oak tree just as the first snow began to drift down."
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            "The user wants one short sentence about anything, with no additional commentary. I'll write something simple and evocative.\n"
+          ],
+          "modal_content": "The last leaf fell from the oak tree just as the first snow began to drift down."
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": false
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "prompt": "opener",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "She never returned."
+          ],
+          "reasoning": [
+            0.1,
+            10,
+            "The user wants me to write exactly three words that could open a story, and reply with only those three words. Let me think of something evocative and compelling.\n\nOptions:\n- \"It was dark\" - classic but bland\n- \"She never returned\" - intriguing, raises questions\n- \"The door opened\" - simple, sets a scene\n- \"Nobody remembered why\" - mysterious, compelling\n- \"Once, there was\" - fairy tale opening\n\nI'll go with something that immediately creates intrigue. \"She never returned\" is strong \u2014 it implies a story, a mystery, a character, all in three words.\n"
+          ],
+          "modal_content": "She never returned."
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "She never returned."
+          ],
+          "reasoning": [
+            0.2,
+            9,
+            "The user wants me to write exactly three words that could open a story, and reply with only those three words. Let me think of something evocative and compelling.\n\nOptions:\n- \"It was dark\" \u2014 classic but a bit flat\n- \"She never returned\" \u2014 intriguing, raises questions\n- \"The door opened\" \u2014 simple, creates anticipation\n- \"Nobody remembered why\" \u2014 mysterious, compelling\n- \"Once, there was\" \u2014 fairy tale feel\n\nI'll go with something that immediately creates intrigue and narrative tension.\n\n\"She never returned\" \u2014 three words, immediately raises questions, implies a story.\n"
+          ],
+          "modal_content": "She never returned."
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "She never returned."
+          ],
+          "reasoning": [
+            0.2,
+            9,
+            "The user wants me to write exactly three words that could open a story, and reply with only those three words. Let me think of something evocative and compelling.\n\nOptions:\n- \"It was dark\" - classic but a bit flat\n- \"She never returned\" - intriguing, raises questions\n- \"The door opened\" - simple, creates anticipation\n- \"Nobody remembered why\" - mysterious, compelling\n- \"Once, there was\" - fairy tale feel\n\nI'll go with \"She never returned\" \u2014 it's punchy, creates immediate mystery, and pulls the reader in.\n"
+          ],
+          "modal_content": "She never returned."
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "prompt": "question",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.7,
+            2,
+            "What's something you believed as a child that turned out to be completely wrong?"
+          ],
+          "reasoning": [
+            0.9,
+            2,
+            "The user wants me to ask one question about anything, and reply with only the question. Let me think of an interesting question. I could ask about science, philosophy, history, personal preferences, or anything else. I'll go with something thought-provoking but simple.\n"
+          ],
+          "modal_content": "What's something you believed as a child that turned out to be completely wrong?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.8,
+            2,
+            "What's something you believed as a child that turned out to be completely wrong?"
+          ],
+          "reasoning": [
+            0.8,
+            2,
+            "The user wants me to ask one question about anything, and reply with only the question. Let me think of an interesting question. I could ask about science, philosophy, history, personal preferences, or anything else. I'll go with something thought-provoking but simple.\n"
+          ],
+          "modal_content": "What's something you believed as a child that turned out to be completely wrong?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.9,
+            2,
+            "What's something you believed as a child that turned out to be completely wrong?"
+          ],
+          "reasoning": [
+            0.8,
+            2,
+            "The user wants me to ask one question about anything, and reply with only the question. Let me think of an interesting question. I could ask about science, philosophy, history, personal preferences, or anything else. I'll go with something thought-provoking but simple.\n"
+          ],
+          "modal_content": "What's something you believed as a child that turned out to be completely wrong?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "prompt": "math500",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "## Solving $2^8 = 4^x$\n\n**Step 1:** Rewrite 4 as a power of 2.\n\n$$4 = 2^2$$\n\n**Step 2:** Substitute into the equation.\n\n$$2^8 = (2^2)^x = 2^{2x}$$\n\n**Step 3:** Since the bases are equal, set the exponents equal.\n\n$$8 = 2x$$\n\n**Step 4:** Solve for $x$.\n\n$$x = 4$$\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.8,
+            2,
+            "I need to solve the equation $2^8 = 4^x$.\n\nSince $4 = 2^2$, I can rewrite $4^x$ as $(2^2)^x = 2^{2x}$.\n\nSo the equation becomes:\n$2^8 = 2^{2x}$\n\nSince the bases are the same, the exponents must be equal:\n$8 = 2x$\n$x = 4$\n"
+          ],
+          "modal_content": "## Solving $2^8 = 4^x$\n\n**Step 1:** Rewrite 4 as a power of 2.\n\n$$4 = 2^2$$\n\n**Step 2:** Substitute into the equation.\n\n$$2^8 = (2^2)^x = 2^{2x}$$\n\n**Step 3:** Since the bases are equal, set the expon"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.9,
+            2,
+            "## Solving $2^8 = 4^x$\n\n**Step 1:** Rewrite 4 as a power of 2.\n\n$$4 = 2^2$$\n\n**Step 2:** Substitute into the equation.\n\n$$2^8 = (2^2)^x = 2^{2x}$$\n\n**Step 3:** Since the bases are equal, set the exponents equal.\n\n$$8 = 2x$$\n\n**Step 4:** Solve for $x$.\n\n$$x = 4$$\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.7,
+            3,
+            "I need to solve the equation $2^8 = 4^x$.\n\nSince $4 = 2^2$, I can rewrite $4^x$ as $(2^2)^x = 2^{2x}$.\n\nSo the equation becomes:\n$2^8 = 2^{2x}$\n\nSince the bases are the same, the exponents must be equal:\n$8 = 2x$\n$x = 4$\n"
+          ],
+          "modal_content": "## Solving $2^8 = 4^x$\n\n**Step 1:** Rewrite 4 as a power of 2.\n\n$$4 = 2^2$$\n\n**Step 2:** Substitute into the equation.\n\n$$2^8 = (2^2)^x = 2^{2x}$$\n\n**Step 3:** Since the bases are equal, set the expon"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "## Solving $2^8 = 4^x$\n\n**Step 1:** Rewrite 4 as a power of 2.\n\n$$4 = 2^2$$\n\n**Step 2:** Substitute into the equation.\n\n$$2^8 = (2^2)^x = 2^{2x}$$\n\n**Step 3:** Since the bases are equal, set the exponents equal.\n\n$$8 = 2x$$\n\n**Step 4:** Solve for $x$.\n\n$$x = 4$$\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.6,
+            3,
+            "I need to solve the equation $2^8 = 4^x$.\n\nSince $4 = 2^2$, I can rewrite $4^x$ as $(2^2)^x = 2^{2x}$.\n\nSo the equation becomes:\n$2^8 = 2^{2x}$\n\nSince the bases are the same, the exponents must be equal:\n$8 = 2x$\n$x = 4$\n"
+          ],
+          "modal_content": "## Solving $2^8 = 4^x$\n\n**Step 1:** Rewrite 4 as a power of 2.\n\n$$4 = 2^2$$\n\n**Step 2:** Substitute into the equation.\n\n$$2^8 = (2^2)^x = 2^{2x}$$\n\n**Step 3:** Since the bases are equal, set the expon"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "prompt": "word_prob",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.9,
+            2,
+            "Maya bought 4 packs of stickers with 12 stickers in each pack, and after giving 15 stickers to her friends, how many stickers does she have left?"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            "One sentence word problem."
+          ],
+          "modal_content": "Maya bought 4 packs of stickers with 12 stickers in each pack, and after giving 15 stickers to her friends, how many stickers does she have left?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "Maya bought 4 packs of stickers with 12 stickers in each pack, and after giving 15 stickers to her friends, how many stickers does she have left?"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            "One sentence word problem."
+          ],
+          "modal_content": "Maya bought 4 packs of stickers with 12 stickers in each pack, and after giving 15 stickers to her friends, how many stickers does she have left?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.8,
+            3,
+            "Maya bought 4 packs of stickers with 12 stickers in each pack, and after giving 15 stickers to her friends, how many stickers does she have left?"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            "One sentence word problem."
+          ],
+          "modal_content": "Maya bought 4 packs of stickers with 12 stickers in each pack, and after giving 15 stickers to her friends, how many stickers does she have left?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "prompt": "sentence",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.5,
+            3,
+            "The moonlight spilled quietly across the empty street."
+          ],
+          "reasoning": [
+            0.6,
+            5,
+            "The user wants one short sentence only. Need final with sentence only. Ensure no extra explanation. Sentence about anything. Keep short."
+          ],
+          "modal_content": "The moonlight spilled quietly across the empty street."
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.3,
+            4,
+            "The moonlight spilled quietly across the empty street."
+          ],
+          "reasoning": [
+            0.5,
+            3,
+            "The user wants one short sentence only. Need final with sentence only. Ensure no extra explanation. Sentence about anything. Keep short."
+          ],
+          "modal_content": "The moonlight spilled quietly across the empty street."
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            4,
+            "The moonlight spilled quietly across the empty street."
+          ],
+          "reasoning": [
+            0.3,
+            5,
+            "The user wants one short sentence only. Need final with sentence only. Ensure no extra explanation. Sentence about anything. Keep short."
+          ],
+          "modal_content": "The moonlight spilled quietly across the empty street."
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "prompt": "opener",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "The door whispered."
+          ],
+          "reasoning": [
+            0.9,
+            2,
+            "The user wants exactly three words, the opening of a story, and only those three words. Need final only three words. Choose evocative opening: \"The door whispered.\" That's three words? The(1) door2 whispered3. Good. Ensure no punctuation extra? Period okay within third word. Reply only those three words."
+          ],
+          "modal_content": "The door whispered."
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "The door whispered."
+          ],
+          "reasoning": [
+            0.8,
+            2,
+            "The user wants exactly three words, the opening of a story, and only those three words. Need final only three words. Choose evocative opening: \"The door whispered.\" That's three words? The(1) door2 whispered3. Good. Ensure no punctuation extra? Period okay within third word. Reply only those three words."
+          ],
+          "modal_content": "The door whispered."
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "The door whispered."
+          ],
+          "reasoning": [
+            0.8,
+            2,
+            "The user wants exactly three words, the opening of a story, and only those three words. Need final only three words. Choose evocative opening: \"The door whispered.\" That's three words? The(1) door2 whispered3. Good. Ensure no punctuation extra? Period okay within third word. Reply only those three words."
+          ],
+          "modal_content": "The door whispered."
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "prompt": "question",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.4,
+            4,
+            "If you could instantly master any skill, what would it be?"
+          ],
+          "reasoning": [
+            0.5,
+            4,
+            "The user wants me to ask one question about anything, and reply with only the question. Simple."
+          ],
+          "modal_content": "If you could instantly master any skill, what would it be?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.8,
+            3,
+            "If you could have dinner with any historical figure, who would it be and why?"
+          ],
+          "reasoning": [
+            0.5,
+            2,
+            "The user wants me to ask one question about anything, and reply with only the question. Simple."
+          ],
+          "modal_content": "If you could have dinner with any historical figure, who would it be and why?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.5,
+            4,
+            "If you could have dinner with any historical figure, who would it be and why?"
+          ],
+          "reasoning": [
+            0.7,
+            2,
+            "The user wants me to ask one question about anything, and reply with only the question. Simple."
+          ],
+          "modal_content": "If you could have dinner with any historical figure, who would it be and why?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "prompt": "math500",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.9,
+            2,
+            "Since $4 = 2^2$, we can rewrite $4^x$ as $(2^2)^x = 2^{2x}$.\n\nSo the equation becomes:\n$$2^8 = 2^{2x}$$\n\nSetting the exponents equal:\n$$8 = 2x$$\n$$x = 4$$\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.9,
+            2,
+            "The user wants me to solve 2^8 = 4^x. Since 4 = 2^2, we have 4^x = (2^2)^x = 2^(2x). So 2^8 = 2^(2x), meaning 8 = 2x, so x = 4."
+          ],
+          "modal_content": "Since $4 = 2^2$, we can rewrite $4^x$ as $(2^2)^x = 2^{2x}$.\n\nSo the equation becomes:\n$$2^8 = 2^{2x}$$\n\nSetting the exponents equal:\n$$8 = 2x$$\n$$x = 4$$\n\nAnswer: 4"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.8,
+            3,
+            "Since $4 = 2^2$, we can rewrite $4^x$ as $(2^2)^x = 2^{2x}$.\n\nSo the equation becomes:\n$$2^8 = 2^{2x}$$\n\nSetting the exponents equal:\n$$8 = 2x$$\n$$x = 4$$\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.8,
+            2,
+            "The user wants me to solve 2^8 = 4^x. Since 4 = 2^2, we have 4^x = (2^2)^x = 2^(2x). So 2^8 = 2^(2x), meaning 8 = 2x, so x = 4."
+          ],
+          "modal_content": "Since $4 = 2^2$, we can rewrite $4^x$ as $(2^2)^x = 2^{2x}$.\n\nSo the equation becomes:\n$$2^8 = 2^{2x}$$\n\nSetting the exponents equal:\n$$8 = 2x$$\n$$x = 4$$\n\nAnswer: 4"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.8,
+            3,
+            "Since $4 = 2^2$, we can rewrite $4^x$ as $(2^2)^x = 2^{2x}$.\n\nSo the equation becomes:\n$$2^8 = 2^{2x}$$\n\nSetting the exponents equal:\n$$8 = 2x$$\n$$x = 4$$\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.8,
+            3,
+            "The user wants me to solve 2^8 = 4^x. Since 4 = 2^2, we have 4^x = (2^2)^x = 2^(2x). So 2^8 = 2^(2x), meaning 8 = 2x, so x = 4."
+          ],
+          "modal_content": "Since $4 = 2^2$, we can rewrite $4^x$ as $(2^2)^x = 2^{2x}$.\n\nSo the equation becomes:\n$$2^8 = 2^{2x}$$\n\nSetting the exponents equal:\n$$8 = 2x$$\n$$x = 4$$\n\nAnswer: 4"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    }
+  ],
+  "summary": {
+    "glm-5p3-flash": {
+      "greedy_match": 0.76,
+      "seeded_match": 0.78,
+      "seed": "NO (fixed seed reproduces on 2/4 non-deterministic prompts)"
+    },
+    "deepseek-v4p1-flash": {
+      "greedy_match": 0.6,
+      "seeded_match": 0.6599999999999999,
+      "seed": "NO (fixed seed reproduces on 1/5 non-deterministic prompts)"
+    },
+    "deepseek-v4-pro-0813": {
+      "greedy_match": 0.64,
+      "seeded_match": 0.62,
+      "seed": "NO (fixed seed reproduces on 0/4 non-deterministic prompts)"
+    },
+    "kimi-k2p7-code": {
+      "greedy_match": 0.5,
+      "seeded_match": 0.44000000000000006,
+      "seed": "NO (fixed seed reproduces on 0/5 non-deterministic prompts)"
+    },
+    "glm-5p3": {
+      "greedy_match": 0.74,
+      "seeded_match": 0.74,
+      "seed": "NO (fixed seed reproduces on 1/4 non-deterministic prompts)"
+    },
+    "glm-5p2": {
+      "greedy_match": 0.48,
+      "seeded_match": 0.5399999999999999,
+      "seed": "NO (fixed seed reproduces on 0/5 non-deterministic prompts)"
+    },
+    "qwen3p8-max": {
+      "greedy_match": 0.78,
+      "seeded_match": 0.6799999999999999,
+      "seed": "NO (fixed seed reproduces on 0/3 non-deterministic prompts)"
+    },
+    "kimi-k3": {
+      "greedy_match": 0.74,
+      "seeded_match": 0.78,
+      "seed": "NO (fixed seed reproduces on 1/4 non-deterministic prompts)"
+    }
+  }
+}
