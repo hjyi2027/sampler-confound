@@ -29,7 +29,6 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import numpy as np
-import requests
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
@@ -42,9 +41,7 @@ from samplerconfound.distinguish import (
     positive_control,
 )
 from samplerconfound.paths import resolve_out, show
-
-BASE = "https://api.fireworks.ai/inference/v1/chat/completions"
-PREFIX = "accounts/fireworks/models/"
+from samplerconfound.provider import BASE, PREFIX, complete, default_cache, load_key
 
 # A prompt SET, not a prompt. One prompt is one sample of prompt space: it can be
 # degenerate for a particular model, and a one-word noun with a strong mode was
@@ -88,59 +85,31 @@ CONTRASTS = [
     ("min_p", {"temperature": 1.0, "min_p": 0.9}, {"temperature": 1.0, "min_p": 0.0}),
 ]
 
-MAX_RETRIES = 5
-BACKOFF = 2.0
 _lock = threading.Lock()
 
 
-def load_key() -> str:
-    key = os.environ.get("FIREWORKS_API_KEY")
-    if not key and (ROOT / ".env").exists():
-        for line in (ROOT / ".env").read_text().splitlines():
-            if line.startswith("FIREWORKS_API_KEY="):
-                key = line.split("=", 1)[1].strip()
-    if not key:
-        raise SystemExit("no FIREWORKS_API_KEY (env or .env)")
-    return key
-
-
 def one(key: str, model: str, params: dict, max_tokens: int, effort: str | None,
-        prompt: str | None = None):
-    """Return (completion, error, usage). Completion is None on failure."""
-    body = {"model": PREFIX + model,
+        prompt: str | None = None, replicate: int = 0):
+    """Return (completion, error, usage). Completion is None on failure.
+
+    `replicate` distinguishes the N identical requests an arm sends; without it
+    the cache would answer every one from the first and the distribution being
+    sampled would collapse to a point.
+    """
+    body = {"model": model,
             "messages": [{"role": "user", "content": prompt or PROMPT}],
             "max_tokens": max_tokens, **params}
     if effort:
         body["reasoning_effort"] = effort
-    for attempt in range(MAX_RETRIES):
-        try:
-            r = requests.post(BASE, headers={"Authorization": f"Bearer {key}"},
-                              json=body, timeout=180)
-        except requests.RequestException:
-            if attempt == MAX_RETRIES - 1:
-                return None, "network", {}
-            time.sleep(BACKOFF * 2 ** attempt)
-            continue
-        if r.status_code == 200:
-            d = r.json()
-            txt = (d["choices"][0]["message"].get("content") or "").strip().lower()
-            return txt.rstrip(".!,"), None, d.get("usage", {})
-        if r.status_code == 400:
-            # A rejected parameter is a loud, safe outcome and a different finding
-            # from an ignored one. Do not retry it.
-            try:
-                msg = r.json()["error"]["message"][:140]
-            except Exception:
-                msg = r.text[:140]
-            return None, f"rejected: {msg}", {}
-        if r.status_code in (429, 500, 502, 503, 504) and attempt < MAX_RETRIES - 1:
-            time.sleep(BACKOFF * 2 ** attempt)
-            continue
-        return None, f"http {r.status_code}", {}
-    return None, "exhausted", {}
+    d, err = complete(key, body, replicate, timeout=180)
+    if err:
+        return None, err, {}
+    txt = (d["choices"][0]["message"].get("content") or "").strip().lower()
+    return txt.rstrip(".!,"), None, d.get("usage", {})
 
 
-def collect(key, model, params, n, workers, max_tokens, effort, prompt=None):
+def collect(key, model, params, n, workers, max_tokens, effort, prompt=None,
+            replicate_offset=0):
     """Returns (completions, errors, usage, n_empty).
 
     Empty completions are counted, not silently dropped. qwen3p7-plus returns
@@ -152,8 +121,12 @@ def collect(key, model, params, n, workers, max_tokens, effort, prompt=None):
     out, errs, usage = [], [], []
     n_empty = 0
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        futs = [pool.submit(one, key, model, params, max_tokens, effort, prompt)
-                for _ in range(n)]
+        # Replicate indices are part of the cache key. `replicate_offset` lets a
+        # caller collect two arms with IDENTICAL bodies — the negative control —
+        # without the second being served from the first.
+        futs = [pool.submit(one, key, model, params, max_tokens, effort, prompt,
+                            replicate_offset + i)
+                for i in range(n)]
         for f in as_completed(futs):
             txt, err, u = f.result()
             if err:
@@ -214,10 +187,15 @@ def negative_control_run(key, models, args) -> int:
     for model in models:
         print(f"\n=== {model} — negative control, {args.negative} identical pairs ===")
         for k in range(args.negative):
+            # Both arms have the same body, so they MUST use disjoint replicate
+            # ranges or the second arm is a cache echo of the first and the
+            # control passes trivially.
             a, ea, ua, empty_a = collect(key, model, NEGATIVE_SETTING, args.n,
-                                         args.workers, args.max_tokens, args.effort)
+                                         args.workers, args.max_tokens, args.effort,
+                                         replicate_offset=(2 * k) * args.n)
             b, eb, ub, empty_b = collect(key, model, NEGATIVE_SETTING, args.n,
-                                         args.workers, args.max_tokens, args.effort)
+                                         args.workers, args.max_tokens, args.effort,
+                                         replicate_offset=(2 * k + 1) * args.n)
             tokens += sum(u.get("completion_tokens", 0) for u in ua + ub)
             r = assess_parameter(model, f"null_{k}", NEGATIVE_SETTING, NEGATIVE_SETTING,
                                  a, b, n_permutations=args.permutations,
@@ -449,7 +427,7 @@ def main() -> int:
             print(line)
 
     print(f"\n{len(results)} tests over {len(prompt_ids)} prompts, {tokens:,} output tokens, "
-          f"{(time.time()-t0)/60:.1f} min")
+          f"{(time.time()-t0)/60:.1f} min   [{default_cache().stats}]")
     print("p_holm is Holm-Bonferroni across the whole grid; the claim is per-cell, "
           "so the family-wise rate is the relevant one.")
 

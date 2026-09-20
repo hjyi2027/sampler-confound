@@ -39,7 +39,6 @@ from collections import Counter
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-import requests
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
@@ -47,7 +46,8 @@ sys.path.insert(0, str(ROOT))
 from samplerconfound.benchmarks import sweep_split
 from samplerconfound.config import FIXED
 from samplerconfound.paths import resolve_out, show
-from scripts.probe_distinguishability import BASE, PREFIX, PROMPTS, load_key
+from samplerconfound.provider import complete, default_cache, load_key
+from scripts.probe_distinguishability import PROMPTS
 
 CONDITIONS = {
     "no_seed": {},
@@ -66,32 +66,17 @@ def prompts() -> dict[str, str]:
     return p
 
 
-def one(key, model, prompt, extra, max_tokens, effort):
-    body = {"model": PREFIX + model,
+def one(key, model, prompt, extra, max_tokens, effort, replicate):
+    body = {"model": model,
             "messages": [{"role": "user", "content": prompt}],
             "max_tokens": max_tokens, "temperature": 0.0, **extra}
     if effort:
         body["reasoning_effort"] = effort
-    for attempt in range(5):
-        try:
-            r = requests.post(BASE, headers={"Authorization": f"Bearer {key}"},
-                              json=body, timeout=300)
-        except requests.RequestException:
-            time.sleep(2 * 2 ** attempt)
-            continue
-        if r.status_code == 200:
-            m = r.json()["choices"][0]["message"]
-            return (m.get("content") or ""), (m.get("reasoning_content") or ""), None
-        if r.status_code == 400:
-            try:
-                return None, None, f"rejected: {r.json()['error']['message'][:100]}"
-            except Exception:
-                return None, None, f"rejected: {r.text[:100]}"
-        if r.status_code in (429, 500, 502, 503, 504):
-            time.sleep(2 * 2 ** attempt)
-            continue
-        return None, None, f"http {r.status_code}"
-    return None, None, "exhausted"
+    d, err = complete(key, body, replicate)
+    if err:
+        return None, None, err
+    m = d["choices"][0]["message"]
+    return (m.get("content") or ""), (m.get("reasoning_content") or ""), None
 
 
 def match_rate(xs: list[str]) -> tuple[float, int, str]:
@@ -132,7 +117,7 @@ def main() -> int:
             for cond, extra in CONDITIONS.items():
                 with ThreadPoolExecutor(max_workers=args.workers) as pool:
                     outs = list(pool.map(
-                        lambda _: one(key, model, text, extra, args.max_tokens, args.effort),
+                        lambda i: one(key, model, text, extra, args.max_tokens, args.effort, i),
                         range(N)))
                 errs = [e for _, _, e in outs if e]
                 content = [c for c, _, e in outs if not e]
@@ -197,7 +182,8 @@ def main() -> int:
         mean_s0 = sum(s0) / len(s0) if s0 else float("nan")
         summary[model] = {"greedy_match": mean_ns, "seeded_match": mean_s0, "seed": honoured}
         print(f"{model:<32}{mean_ns:>18.0%}{mean_s0:>11.0%}  {honoured}")
-    print(f"\n{len(rows) * len(CONDITIONS) * N} calls, {(time.time() - t0) / 60:.1f} min")
+    print(f"\n{len(rows) * len(CONDITIONS) * N} calls, {(time.time() - t0) / 60:.1f} min"
+          f"   [{default_cache().stats}]")
 
     if args.out:
         dest = resolve_out(args.out)

@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Does Fireworks actually honour each sampler parameter, and what does a
+"""SUPERSEDED. Kept as the record of the heuristic that probe_distinguishability.py
+replaced and overturned — see FINDINGS.md §1. It talks to the provider directly
+and is NOT cached; do not run it to regenerate anything.
+
+Does Fireworks actually honour each sampler parameter, and what does a
 generation cost in tokens?
 
 The companion to scripts/probe_sampler_support.py, which asks the same question

@@ -20,14 +20,10 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import random
 import sys
 import threading
-import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-
-import requests
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
@@ -35,29 +31,14 @@ sys.path.insert(0, str(ROOT))
 from samplerconfound.benchmarks import pilot_split, sweep_split
 from samplerconfound.config import FIXED, SAMPLER_CONFIGS
 from samplerconfound.grade import grade
-
-BASE = "https://api.fireworks.ai/inference/v1/chat/completions"
+from samplerconfound.provider import complete, load_key
 
 MODELS = [
     "accounts/fireworks/models/gpt-oss-20b",
     "accounts/fireworks/models/nemotron-lightning-3p5-30b-a3b",
 ]
 
-MAX_RETRIES = 6
-BACKOFF_BASE = 2.0
-
 _print_lock = threading.Lock()
-
-
-def load_key() -> str:
-    key = os.environ.get("FIREWORKS_API_KEY")
-    if not key:
-        for line in (ROOT / ".env").read_text().splitlines():
-            if line.startswith("FIREWORKS_API_KEY="):
-                key = line.split("=", 1)[1].strip()
-    if not key:
-        raise SystemExit("no FIREWORKS_API_KEY")
-    return key
 
 
 def generate(key: str, model: str, sampler: dict, problem) -> dict | None:
@@ -70,34 +51,13 @@ def generate(key: str, model: str, sampler: dict, problem) -> dict | None:
         "reasoning_effort": FIXED["reasoning_effort"],
         **params,
     }
-    # Retry with exponential backoff and jitter. The first run of this script
-    # lost 88 of 250 generations to HTTP 429, all of them on one model — the
-    # provider rate-limits per model, so eight workers all hitting the same
-    # model saturate it while the other sits idle. Dropping a failed generation
-    # is not neutral here: failures cluster by (model, sampler), so silently
-    # losing them unbalances the very cells the decomposition needs equal.
-    r = None
-    for attempt in range(MAX_RETRIES):
-        try:
-            r = requests.post(BASE, headers={"Authorization": f"Bearer {key}"},
-                              json=body, timeout=300)
-        except requests.RequestException as e:
-            if attempt == MAX_RETRIES - 1:
-                with _print_lock:
-                    print(f"  ! {model.split('/')[-1]}/{sampler['id']}/{problem.id}: {e}")
-                return None
-            time.sleep(BACKOFF_BASE * 2 ** attempt + random.uniform(0, 1))
-            continue
-        if r.status_code == 200:
-            break
-        if r.status_code in (429, 500, 502, 503, 504) and attempt < MAX_RETRIES - 1:
-            time.sleep(BACKOFF_BASE * 2 ** attempt + random.uniform(0, 1))
-            continue
+    # Grader-check generations are one replicate each; the replicate index is
+    # the sampler's position so distinct samplers with equal bodies cannot
+    # collide (they cannot — the body differs — but the key is explicit).
+    d, err = complete(key, body, 0)
+    if err:
         with _print_lock:
-            print(f"  ! HTTP {r.status_code} {model.split('/')[-1]}/{sampler['id']}: "
-                  f"{r.text[:120]}")
-        return None
-    if r is None or r.status_code != 200:
+            print(f"  ! {model.split('/')[-1]}/{sampler['id']}/{problem.id}: {err[:100]}")
         return None
     d = r.json()
     choice = d["choices"][0]

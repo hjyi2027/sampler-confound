@@ -33,7 +33,6 @@ import argparse
 import hashlib
 import json
 import os
-import random
 import sys
 import threading
 import time
@@ -41,32 +40,22 @@ from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-import requests
-
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from samplerconfound.benchmarks import sweep_split
 from samplerconfound.config import Design
+from samplerconfound.cache import ResponseCache
 from samplerconfound.grade import grade
 from samplerconfound.paths import resolve_out, show
-
-BASE = "https://api.fireworks.ai/inference/v1/chat/completions"
-MAX_RETRIES = 6
-BACKOFF_BASE = 2.0
+from samplerconfound.provider import complete, load_key
 
 _lock = threading.Lock()
-
-
-def load_key() -> str:
-    key = os.environ.get("FIREWORKS_API_KEY")
-    if not key and (ROOT / ".env").exists():
-        for line in (ROOT / ".env").read_text().splitlines():
-            if line.startswith("FIREWORKS_API_KEY="):
-                key = line.split("=", 1)[1].strip()
-    if not key:
-        raise SystemExit("no FIREWORKS_API_KEY (env or .env)")
-    return key
+# Every response is content-addressed under (request body, replicate). The
+# sweep's own JSONL is the analysis-facing record; the cache is the transport
+# layer beneath it, shared with every probe, so an identical (request,
+# replicate) is never billed twice by anything in this repo.
+_CACHE = ResponseCache()
 
 
 class RunLock:
@@ -194,30 +183,15 @@ def generate(key: str, design: Design, model: str, sampler: dict, rep: int, p,
     if fixed.get("system_prompt"):
         body["messages"].insert(0, {"role": "system", "content": fixed["system_prompt"]})
 
-    r = None
     t_start = time.time()
-    attempts = 0
-    for attempt in range(MAX_RETRIES):
-        attempts = attempt + 1
-        try:
-            r = requests.post(BASE, headers={"Authorization": f"Bearer {key}"},
-                              json=body, timeout=300)
-        except requests.RequestException:
-            if attempt == MAX_RETRIES - 1:
-                return None
-            time.sleep(BACKOFF_BASE * 2 ** attempt + random.uniform(0, 1))
-            continue
-        if r.status_code == 200:
-            break
-        if r.status_code in (429, 500, 502, 503, 504) and attempt < MAX_RETRIES - 1:
-            time.sleep(BACKOFF_BASE * 2 ** attempt + random.uniform(0, 1))
-            continue
+    cached_before = _CACHE.stats.hits
+    d, err = complete(key, body, rep, cache=_CACHE)
+    if err:
         with _lock:
-            print(f"  ! HTTP {r.status_code} {model.split('/')[-1]}/{sampler['id']}: "
-                  f"{r.text[:120]}")
+            print(f"  ! {model.split('/')[-1]}/{sampler['id']}: {err[:120]}")
         return None
-    if r is None or r.status_code != 200:
-        return None
+    was_cached = _CACHE.stats.hits > cached_before
+    attempts = 0 if was_cached else 1
 
     d = r.json()
     choice = d["choices"][0]
@@ -255,6 +229,7 @@ def generate(key: str, design: Design, model: str, sampler: dict, rep: int, p,
         "created": d.get("created"),
         "latency_s": round(time.time() - t_start, 3),
         "attempts": attempts,
+        "cached": was_cached,
         "verdict": v.to_dict(),
     }
 

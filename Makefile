@@ -1,4 +1,4 @@
-.PHONY: test data probe freeze pilot select smoke sweep analyse power clean
+.PHONY: test data probe freeze pilot select smoke sweep analyse power offline clean
 
 test:
 	python3 -m pytest tests/ -q
@@ -50,6 +50,12 @@ analyse:
 		--out runs/main/analysis_math500.json
 	python3 scripts/analyse.py runs/main/aime.jsonl --n-boot 2000 \
 		--out runs/main/analysis_aime.json
+
+# Re-run any probe's analysis from cached responses with the network forbidden.
+# A cache miss is an error, not an API call: re-analysis can never re-generate.
+#   make offline CMD="scripts/probe_determinism.py --all --out runs/determinism.json"
+offline:
+	SAMPLERCONFOUND_OFFLINE=1 python3 $(CMD)
 
 # Can this grid support the headline claim? Run before spending.
 power:

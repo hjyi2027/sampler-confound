@@ -10,3 +10,7 @@ runs/*/raw/
 runs/main/
 runs/aime/
 runs/sweep*/
+
+# Content-addressed response cache. Regenerable from the provider; too large
+# and too churny to version. The analysis-facing records (runs/) are committed.
+cache/

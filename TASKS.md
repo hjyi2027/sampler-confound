@@ -843,3 +843,35 @@ The first probe run stored only summaries, not the completions, which made a
 free split-half control impossible after the fact. Completions are retained now.
 
 Cost $0.65 for 2,560 calls.
+
+
+## 2026-09-20 — every response cached under a request hash
+
+`samplerconfound/cache.py` + `provider.py`: one transport for the sweep, the
+pilot, the grader-check generator and both live probes. A response is stored at
+`cache/<hh>/<sha256>.json` under a hash of the canonical request body **plus a
+replicate index**, written temp-then-rename with fsync. Failures are never
+cached, so a 429 storm is retried next time rather than remembered.
+
+**The replicate index in the key is the whole design.** The distinguishability
+and determinism probes send the identical request N times on purpose, to sample
+a distribution. A cache keyed on the request alone would answer all N from one
+stored response and make every model look perfectly deterministic — it would
+destroy the measurement while looking like an optimisation. The negative control
+has the same shape one level up (two arms with identical bodies), so its arms
+use disjoint replicate ranges.
+
+`SAMPLERCONFOUND_OFFLINE=1` turns a miss into an error. Demonstrated rather than
+asserted: the determinism probe on gpt-oss-120b ran online (150 misses, 150
+stored, 0.4 min) and then offline (150 hits, 0 misses, 0.0 min) and produced a
+byte-identical report. Re-analysis cannot generate.
+
+A correction to something this file said on Aug 26: the sweep was never
+"cached under a hash of the request". It was keyed by (model, sampler,
+replicate, problem) in its own JSONL, which resumed but did not share, and the
+probes had no cache at all — which is how the first multi-prompt grid lost three
+hours of completed calls to an OOM kill. Now everything shares one store.
+
+Also fixed in passing: a slice that removed the redundant per-script `load_key`
+also removed `RunLock` from the sweep runner. Caught by the test suite before
+it was committed.
