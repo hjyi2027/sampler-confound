@@ -1,0 +1,292 @@
+{
+  "provider": "fireworks",
+  "n_per_condition": 10,
+  "conditions": {
+    "no_seed": {},
+    "seed_0": {
+      "seed": 0
+    },
+    "seed_1": {
+      "seed": 1
+    }
+  },
+  "rows": [
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "prompt": "word_prob",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.7,
+            3,
+            "If a bakery sells cupcakes in boxes of 8 and Maria buys 5 boxes, how many cupcakes does she have altogether?"
+          ],
+          "reasoning": [
+            0.7,
+            3,
+            "The user wants a one-sentence arithmetic word problem suitable for a ten-year-old. I need to reply with the problem only, no explanation.\n\nLet me think of a simple arithmetic problem appropriate for a 10-year-old. Could involve addition, subtraction, multiplication, or division.\n\nExample: \"If a box contains 24 crayons and you divide them equally among 6 friends, how many crayons does each friend get?\"\n\nThat's one sentence, suitable for 10-year-old, involves division.\n\nAnother: \"Sarah bought 3 packs of stickers with 8 stickers in each pack; how many stickers does she have in total?\"\n\nI'll go with something clear and simple."
+          ],
+          "modal_content": "If a bakery sells cupcakes in boxes of 8 and Maria buys 5 boxes, how many cupcakes does she have altogether?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "If a bakery sells cupcakes in boxes of 8 and Maria buys 5 boxes, how many cupcakes does she have altogether?"
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            "The user wants a one-sentence arithmetic word problem suitable for a ten-year-old. I need to reply with the problem only, no explanation.\n\nLet me think of a simple arithmetic problem appropriate for a 10-year-old. Could involve addition, subtraction, multiplication, or division.\n\nExample: \"If a box contains 24 crayons and you divide them equally among 6 friends, how many crayons does each friend get?\"\n\nThat's one sentence, suitable for 10-year-old, involves division.\n\nAnother: \"Sarah bought 3 packs of stickers with 8 stickers in each pack; how many stickers does she have in total?\"\n\nI'll go with something clear and simple."
+          ],
+          "modal_content": "If a bakery sells cupcakes in boxes of 8 and Maria buys 5 boxes, how many cupcakes does she have altogether?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.4,
+            6,
+            "If a bakery sells cupcakes in boxes of 8 and Maria buys 5 boxes, how many cupcakes does she have altogether?"
+          ],
+          "reasoning": [
+            0.4,
+            6,
+            "The user wants a one-sentence arithmetic word problem suitable for a ten-year-old. I need to reply with the problem only, no explanation.\n\nLet me think of a simple arithmetic problem appropriate for a 10-year-old. Could involve addition, subtraction, multiplication, or division.\n\nExample: \"If a box contains 24 crayons and you divide them equally among 6 friends, how many crayons does each friend get?\"\n\nThat's one sentence, suitable for 10-year-old, involves division.\n\nAnother: \"Sarah bought 3 packs of stickers with 8 stickers in each pack; how many stickers does she have in total?\"\n\nI'll go with something clear and simple."
+          ],
+          "modal_content": "If a bakery sells cupcakes in boxes of 8 and Maria buys 5 boxes, how many cupcakes does she have altogether?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "prompt": "sentence",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.5,
+            4,
+            "Cats often nap in warm sunbeams."
+          ],
+          "reasoning": [
+            0.5,
+            4,
+            "The user wants one short sentence about anything at all. I should reply with just the sentence, nothing else.\n\nLet me write a simple, short sentence.\n\"The sun dipped below the horizon, painting the sky in shades of amber and violet.\" That's a bit long but okay. Or simpler: \"Cats often nap in sunbeams.\" That's short.\n\nI'll go with something simple and clear."
+          ],
+          "modal_content": "Cats often nap in warm sunbeams."
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            1.0,
+            1,
+            "Cats often nap in warm sunbeams."
+          ],
+          "reasoning": [
+            1.0,
+            1,
+            "The user wants one short sentence about anything at all. I should reply with just the sentence, nothing else.\n\nLet me write a simple, short sentence.\n\"The sun dipped below the horizon, painting the sky in shades of amber and violet.\" That's a bit long but okay. Or simpler: \"Cats often nap in sunbeams.\" That's short.\n\nI'll go with something simple and clear."
+          ],
+          "modal_content": "Cats often nap in warm sunbeams."
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.7,
+            2,
+            "Cats often nap in warm sunbeams."
+          ],
+          "reasoning": [
+            0.7,
+            2,
+            "The user wants one short sentence about anything at all. I should reply with just the sentence, nothing else.\n\nLet me write a simple, short sentence.\n\"The sun dipped below the horizon, painting the sky in shades of amber and violet.\" That's a bit long but okay. Or simpler: \"Cats often nap in sunbeams.\" That's short.\n\nI'll go with something simple and clear."
+          ],
+          "modal_content": "Cats often nap in warm sunbeams."
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "prompt": "opener",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.4,
+            3,
+            "All happy families"
+          ],
+          "reasoning": [
+            0.4,
+            4,
+            "The user wants the opening three words of a story, and only those three words. I should provide a classic or evocative opening. \"It was a\" is common but maybe too generic. \"Call me Ishmael\" is four words. \"In the beginning\" is three words but biblical. \"Once upon a\" is three words and classic fairy tale opening. That's good. Or \"The sky was\" etc. Let's go with \"Once upon a\" - wait that's technically part of \"Once upon a time\" so it's three words. Yes. Or \"It was dark\" - three words. Let's pick something literary and clear. \"Once upon a\" works well. Actually \"Once upon a\" is three words exactly. Let's provide that."
+          ],
+          "modal_content": "All happy families"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.7,
+            3,
+            "Once upon a"
+          ],
+          "reasoning": [
+            0.7,
+            3,
+            "The user wants the opening three words of a story, and only those three words. I should provide a classic or evocative opening. \"It was a\" is common but maybe too generic. \"Call me Ishmael\" is four words. \"In the beginning\" is three words but biblical. \"Once upon a\" is three words and classic fairy tale opening. That's good. Or \"The sky was\" etc. Let's go with \"Once upon a\" - wait that's technically part of \"Once upon a time\" so it's three words. Yes. Or \"It was dark\" - three words. Let's pick something literary and clear. \"Once upon a\" works well. Actually \"Once upon a\" is three words exactly. Let's provide that."
+          ],
+          "modal_content": "Once upon a"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.8,
+            3,
+            "Once upon a"
+          ],
+          "reasoning": [
+            0.7,
+            4,
+            "The user wants the opening three words of a story, and only those three words. I should provide a classic or evocative opening. \"It was a\" is common but maybe too generic. \"Call me Ishmael\" is four words. \"In the beginning\" is three words but biblical. \"Once upon a\" is three words and classic fairy tale opening. That's good. Or \"The sky was\" etc. Let's go with \"Once upon a\" - wait that's technically part of \"Once upon a time\" so it's three words. Yes. Or \"It was dark\" - three words. Let's pick something literary and clear. \"Once upon a\" works well. Actually \"Once upon a\" is three words exactly. Let's provide that."
+          ],
+          "modal_content": "Once upon a"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "prompt": "question",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.3,
+            7,
+            "If consciousness arises from physical processes in the brain, how can subjective experience exist at all?"
+          ],
+          "reasoning": [
+            0.3,
+            7,
+            "The user wants me to ask one question about anything, and reply with the question only. I should provide a single question without any additional text or explanation.\n\nLet me think of an interesting question. Maybe something philosophical or scientific.\n\nQuestion: What is the nature of consciousness?\n\nOr simpler: Why is the sky blue?\n\nI'll go with something thought-provoking but clear."
+          ],
+          "modal_content": "If consciousness arises from physical processes in the brain, how can subjective experience exist at all?"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.8,
+            2,
+            "If consciousness arises from physical processes in the brain, how can subjective experience exist at all?"
+          ],
+          "reasoning": [
+            0.8,
+            2,
+            "The user wants me to ask one question about anything, and reply with the question only. I should provide a single question without any additional text or explanation.\n\nLet me think of an interesting question. Maybe something philosophical or scientific.\n\nQuestion: What is the nature of consciousness?\n\nOr simpler: Why is the sky blue?\n\nI'll go with something thought-provoking but clear."
+          ],
+          "modal_content": "If consciousness arises from physical processes in the brain, how can subjective experience exist at all?"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.7,
+            4,
+            "If consciousness arises from physical processes in the brain, how can subjective experience exist at all?"
+          ],
+          "reasoning": [
+            0.7,
+            4,
+            "The user wants me to ask one question about anything, and reply with the question only. I should provide a single question without any additional text or explanation.\n\nLet me think of an interesting question. Maybe something philosophical or scientific.\n\nQuestion: What is the nature of consciousness?\n\nOr simpler: Why is the sky blue?\n\nI'll go with something thought-provoking but clear."
+          ],
+          "modal_content": "If consciousness arises from physical processes in the brain, how can subjective experience exist at all?"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": true
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "prompt": "math500",
+      "conditions": {
+        "no_seed": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.7,
+            2,
+            "We have  \n\\(2^8 = 4^x\\).\n\nWrite \\(4\\) as a power of \\(2\\):  \n\\(4 = 2^2\\), so  \n\\(4^x = (2^2)^x = 2^{2x}\\).\n\nSet the expressions equal:  \n\\(2^8 = 2^{2x}\\).\n\nSince the bases are the same, equate the exponents:  \n\\(8 = 2x\\).\n\nSolve for \\(x\\):  \n\\(x = \\frac{8}{2} = 4\\).\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.7,
+            2,
+            "We need solve 2^8 = 4^x.\nWrite 4 as 2^2, so 4^x = (2^2)^x = 2^(2x).\nSet equal: 2^8 = 2^(2x) => 8 = 2x => x = 4.\nNeed step by step then answer line."
+          ],
+          "modal_content": "We have  \n\\(2^8 = 4^x\\).\n\nWrite \\(4\\) as a power of \\(2\\):  \n\\(4 = 2^2\\), so  \n\\(4^x = (2^2)^x = 2^{2x}\\).\n\nSet the expressions equal:  \n\\(2^8 = 2^{2x}\\).\n\nSince the bases are the same, equate the exp"
+        },
+        "seed_0": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.6,
+            4,
+            "We have  \n\\(2^8 = 4^x\\).\n\nWrite \\(4\\) as a power of \\(2\\):  \n\\(4 = 2^2\\), so  \n\\(4^x = (2^2)^x = 2^{2x}\\).\n\nSet the expressions equal:  \n\\(2^8 = 2^{2x}\\).\n\nSince the bases are the same, equate the exponents:  \n\\(8 = 2x\\).\n\nSolve for \\(x\\):  \n\\(x = \\frac{8}{2} = 4\\).\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.6,
+            2,
+            "We need solve 2^8 = 4^x.\nWrite 4 as 2^2, so 4^x = (2^2)^x = 2^(2x).\nSet equal: 2^8 = 2^(2x) => 8 = 2x => x = 4.\nNeed step by step then answer line."
+          ],
+          "modal_content": "We have  \n\\(2^8 = 4^x\\).\n\nWrite \\(4\\) as a power of \\(2\\):  \n\\(4 = 2^2\\), so  \n\\(4^x = (2^2)^x = 2^{2x}\\).\n\nSet the expressions equal:  \n\\(2^8 = 2^{2x}\\).\n\nSince the bases are the same, equate the exp"
+        },
+        "seed_1": {
+          "n": 10,
+          "errors": [],
+          "content": [
+            0.4,
+            3,
+            "We have  \n\\(2^8 = 4^x\\).\n\nWrite \\(4\\) as a power of \\(2\\):  \n\\(4 = 2^2\\), so  \n\\(4^x = (2^2)^x = 2^{2x}\\).\n\nSet the two expressions equal:  \n\\(2^8 = 2^{2x}\\).\n\nSince the bases are the same, equate the exponents:  \n\\(8 = 2x\\).\n\nSolve for \\(x\\):  \n\\(x = \\frac{8}{2} = 4\\).\n\nAnswer: 4"
+          ],
+          "reasoning": [
+            0.6,
+            2,
+            "We need solve 2^8 = 4^x.\nWrite 4 as 2^2, so 4^x = (2^2)^x = 2^(2x).\nSet equal: 2^8 = 2^(2x) => 8 = 2x => x = 4.\nNeed step by step then final line."
+          ],
+          "modal_content": "We have  \n\\(2^8 = 4^x\\).\n\nWrite \\(4\\) as a power of \\(2\\):  \n\\(4 = 2^2\\), so  \n\\(4^x = (2^2)^x = 2^{2x}\\).\n\nSet the two expressions equal:  \n\\(2^8 = 2^{2x}\\).\n\nSince the bases are the same, equate the"
+        }
+      },
+      "seed_rejected": false,
+      "seed0_eq_seed1": false
+    }
+  ],
+  "summary": {
+    "inkling": {
+      "greedy_match": 0.52,
+      "seeded_match": 0.82,
+      "seed": "NO (fixed seed reproduces on 2/5 non-deterministic prompts)"
+    }
+  }
+}

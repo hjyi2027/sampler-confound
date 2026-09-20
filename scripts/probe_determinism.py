@@ -40,6 +40,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 
+import functools
+print = functools.partial(print, flush=True)   # noqa: A001 — progress lands in logs under nohup
+
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 

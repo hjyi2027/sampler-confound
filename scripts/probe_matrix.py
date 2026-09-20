@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -45,7 +46,7 @@ def distinguish_rows(provider: str, d: dict) -> dict[str, dict]:
     """model -> {param: verdict, "control": fraction, "powered_prompts": n}"""
     out: dict[str, dict] = {}
     for a in d.get("aggregates", []):
-        row = out.setdefault(a["model"], {})
+        row = out.setdefault(a["model"], {"n_per_arm": d.get("n_per_arm")})
         row[a["parameter"]] = a["verdict"]
         row.setdefault("n_prompts", a["n_prompts"])
     for pid, by_model in d.get("positive_control_by_prompt", {}).items():
@@ -82,12 +83,26 @@ def collect() -> list[dict]:
     merge("fireworks", _load(LEGACY_DIST), _load(LEGACY_DET))
     if MATRIX.exists():
         for pdir in sorted(p for p in MATRIX.iterdir() if p.is_dir()):
-            det = _load(pdir / "determinism.json")
-            dist_files = [f for f in pdir.glob("*.json")
-                          if f.name not in ("determinism.json", "matrix.json")]
-            for f in dist_files:
-                merge(pdir.name, _load(f), None)
-            merge(pdir.name, None, det)
+            prov = pdir.name
+            # legacy: one multi-model determinism file, and <model>.json at n=40
+            merge(prov, None, _load(pdir / "determinism.json"))
+            best: dict[str, tuple[int, Path]] = {}
+            for f in pdir.glob("*.json"):
+                name = f.name
+                if name in ("determinism.json", "matrix.json") or ".neg-n" in name:
+                    continue
+                if name.endswith(".det.json"):
+                    merge(prov, None, _load(f))
+                    continue
+                m = re.match(r"(.+)\.dist-n(\d+)\.json$", name)
+                model, n = (m.group(1), int(m.group(2))) if m else (name[:-5], 40)
+                if model not in best or n > best[model][0]:
+                    best[model] = (n, f)           # the thickest run of a model wins
+            for model, (n, f) in best.items():
+                d = _load(f)
+                if d:
+                    merge(prov, d, None)
+                    rows[(prov, model)]["n_per_arm"] = d.get("n_per_arm", n)
 
     out = []
     for (prov, m), r in rows.items():
@@ -105,12 +120,13 @@ def main() -> int:
     args = ap.parse_args()
     rows = collect()
 
-    print(f"{'provider':<11}{'model':<32}{'$/1M out':>9}{'ctrl':>6}{'pwr':>5}"
+    print(f"{'provider':<11}{'model':<32}{'$/1M out':>9}{'n':>4}{'ctrl':>6}{'pwr':>5}"
           + "".join(f"{p:>7}" for p in PARAMS) + f"{'greedy':>8}{'seed':>6}")
     for r in rows:
         ctrl = r.get("control_removed", float("nan"))
         print(f"{r['provider']:<11}{r['model']:<32}"
               f"{r['usd_out_per_1m']:>9.2f}"
+              f"{str(r.get('n_per_arm', '—')):>4}"
               f"{(f'{ctrl:.0%}' if ctrl == ctrl else '—'):>6}"
               f"{str(r.get('powered_prompts', '—')) + '/' + str(r.get('n_prompts', '—')):>5}"
               + "".join(f"{SYM.get(r.get(p, ''), '—'):>7}" for p in PARAMS)

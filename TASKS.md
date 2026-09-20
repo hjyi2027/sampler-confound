@@ -961,3 +961,38 @@ the logs, were the progress signal.
 Still waiting on keys for the other six providers. The adapter layer means the
 matrix extends there with `--provider`, and the matrix report already has the
 column.
+
+## 2026-09-20 — breadth first: the runner, and the last three models
+
+Owner's priority for a short balance: breadth of models, then breadth of
+providers, then N per cell. "A thin result across forty models beats a thick
+one across eight." Encoded as `scripts/run_probe_matrix.py` rather than
+remembered: it reads each keyed provider's live catalogue (a new
+`Adapter.catalogue()`; the listing is what moves), drops non-chat models by
+name whatever the listing claims (Fireworks flags its embedding and reranker
+models `supports_chat: true`), liveness-checks each model with one uncached
+one-token call (three listed models 404), and runs passes breadth-first —
+determinism on everything, thin distinguishability on everything, the negative
+control, then full N — admitting each job against spend measured from the
+cache under `--budget-usd`. Unpriced models are bounded at the provider's top
+listed price. Estimates are recomputed per pass from the model's own measured
+output length, so the full pass knows what the thin pass learned.
+
+Applied to Fireworks: the three models I had excluded as unpriced or
+experimental ran thin (n=10). All three honour `top_k`, none is deterministic,
+none honours seed. Eighteen served chat models, all probed. Then the negative
+control at n=40 on every model with a usable pair: 12 informative, 0/12 dH
+false positives, pooled 0/37 with the original run. Priced spend today $8.15
+measured; the unpriced three used 442k tokens, at most $5.93 at the bound and
+about $0.48 if priced like their siblings.
+
+Three things learned about running it. A liveness check must ask once — the
+first launch sat 35 minutes in the transport's retry ladder on rate-limited
+preview models. The negative control cannot be thinned: at temperature 1.0 ten
+samples are almost always all-unique, the pair is degenerate, and 15 of 18
+came back uninformative at n=10; at n=40, 12 of 18 are usable. And stdout
+under nohup is block-buffered, so the probes and the runner now flush — the
+checkpoint files were the only progress signal before.
+
+Still one provider. The runner skips a provider with no key and says where to
+get one.

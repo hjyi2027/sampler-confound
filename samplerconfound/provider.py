@@ -80,10 +80,11 @@ class Transient(Exception):
     pass
 
 
-def _http(url: str, headers: dict, payload: dict, timeout: float) -> dict:
+def _http(url: str, headers: dict, payload: dict, timeout: float,
+          retries: int = MAX_RETRIES) -> dict:
     """One attempt sequence with backoff. Raises Rejected or Transient."""
     last = None
-    for attempt in range(MAX_RETRIES):
+    for attempt in range(retries):
         try:
             r = requests.post(url, headers=headers, json=payload, timeout=timeout)
         except requests.RequestException as e:
@@ -110,16 +111,28 @@ def _http(url: str, headers: dict, payload: dict, timeout: float) -> dict:
     raise Transient(last or "exhausted")
 
 
+def list_models(key: str, provider: str = DEFAULT_PROVIDER, timeout: float = 30.0) -> list[dict]:
+    """What the provider says it serves right now, as [{"id", "chat"}].
+
+    Uncached on purpose: the catalogue is the thing that moves.
+    """
+    ad = ADAPTERS[provider]
+    r = requests.get(ad.catalogue_url(), headers=ad.headers(key), timeout=timeout)
+    if r.status_code != 200:
+        raise Transient(f"catalogue http {r.status_code}: {r.text[:120]}")
+    return ad.catalogue(r.json())
+
+
 def call(key: str, request: dict, *, provider: str = DEFAULT_PROVIDER,
-         timeout: float = 60.0) -> Completion:
+         timeout: float = 60.0, retries: int = MAX_RETRIES) -> Completion:
     """One uncached completion. Raises Rejected or Transient.
 
-    For the key check only; everything that is a measurement goes through
-    `complete()` so it is cached under its request hash.
+    For key and liveness checks only; everything that is a measurement goes
+    through `complete()` so it is cached under its request hash.
     """
     ad = ADAPTERS[provider]
     wire, dropped = ad.encode(request)
-    raw = _http(ad.url(wire), ad.headers(key), ad.payload(wire), timeout)
+    raw = _http(ad.url(wire), ad.headers(key), ad.payload(wire), timeout, retries=retries)
     return ad.decode(raw, dropped)
 
 

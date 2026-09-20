@@ -1,0 +1,79 @@
+{
+  "provider": "fireworks",
+  "setting": {
+    "temperature": 1.0
+  },
+  "n_per_arm": 10,
+  "pairs_per_model": 1,
+  "results": [
+    {
+      "model": "kimi-k2p6",
+      "parameter": "null_0",
+      "setting_a": {
+        "temperature": 1.0
+      },
+      "setting_b": {
+        "temperature": 1.0
+      },
+      "prompt": "",
+      "provider": "fireworks",
+      "n_tight": 10,
+      "n_open": 10,
+      "support_tight": 7,
+      "support_open": 8,
+      "entropy_tight": 2.5219280948873624,
+      "entropy_open": 2.8464393446710154,
+      "dh": 0.3245112497836531,
+      "dh_null_mean": 0.0064176530932369535,
+      "dh_p": 0.5049495050494951,
+      "tv": 0.7000000000000001,
+      "tv_null_mean": 0.7406400000000002,
+      "tv_p": 1.0,
+      "p_value": 0.5049495050494951,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "completions_tight": [
+        "a movie theater has 8 rows of seats with 15 seats in each row; how many seats are in the theater altogether?",
+        "if maria baked 56 cookies and wants to share them equally among 8 friends, how many cookies will each friend get?",
+        "<empty>",
+        "<empty>",
+        "if a classroom has 6 tables with 4 students at each table, how many students are there in total?",
+        "if a baker made 6 trays of cookies with 12 cookies on each tray, how many cookies did she make in all?",
+        "<empty>",
+        "<empty>",
+        "a librarian has 96 books to split equally among 8 tables for a reading event; how many books will be on each table?",
+        "how many baseball cards does tyler have if he bought 6 packs and each pack contains 15 cards?"
+      ],
+      "completions_open": [
+        "if a school bus holds 38 students and there are 6 full buses on the field trip, how many students went on the field trip?",
+        "ms. johnson baked 48 muffins for the school bake sale and arranged them on trays holding 8 muffins each; how many trays did she use?",
+        "jasmine had 48 marbles, gave 15 to her brother, and found 23 more in her backpack; how many marbles does she have now?",
+        "if maya buys 7 boxes of cupcakes and each box contains 6 cupcakes, how many cupcakes does she have in total?",
+        "<empty>",
+        "<empty>",
+        "if a classroom has 5 rows of desks with 6 desks in each row, how many desks are in the classroom altogether?",
+        "if a farmer has 36 apples and wants to put them into bags holding",
+        "if marcus buys 4 packs of baseball cards with 15 cards in each pack, how many cards does he have in total?",
+        "<empty>"
+      ],
+      "empty_tight": 0,
+      "empty_open": 0,
+      "null_p95": 0.9000000000000004,
+      "excess": 0.31809359669041615
+    }
+  ],
+  "false_positive_rate": {
+    "dh": 0.0,
+    "dh_ci": [
+      0.0,
+      0.7934567085261071
+    ],
+    "tv": 0.0,
+    "tv_ci": [
+      0.0,
+      0.7934567085261071
+    ],
+    "n": 1
+  }
+}

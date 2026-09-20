@@ -1,0 +1,79 @@
+{
+  "provider": "fireworks",
+  "setting": {
+    "temperature": 1.0
+  },
+  "n_per_arm": 10,
+  "pairs_per_model": 1,
+  "results": [
+    {
+      "model": "nemotron-3-ultra-nvfp4",
+      "parameter": "null_0",
+      "setting_a": {
+        "temperature": 1.0
+      },
+      "setting_b": {
+        "temperature": 1.0
+      },
+      "prompt": "",
+      "provider": "fireworks",
+      "n_tight": 10,
+      "n_open": 10,
+      "support_tight": 8,
+      "support_open": 4,
+      "entropy_tight": 2.9219280948873623,
+      "entropy_open": 1.3567796494470397,
+      "dh": -1.5651484454403226,
+      "dh_null_mean": -0.004621393414414086,
+      "dh_p": 0.9932006799320068,
+      "tv": 0.7,
+      "tv_null_mean": 0.56518,
+      "tv_p": 0.13958604139586042,
+      "p_value": 0.9932006799320068,
+      "n_permutations": 10000,
+      "status": "ok",
+      "detail": "",
+      "completions_tight": [
+        "sarah has 24 stickers and wants to share them equally among her 6 friends; how many stickers will each friend get?",
+        "emma has 24 stickers and wants to share them equally among her 6 friends; how many stickers will each friend get?",
+        "sarah had 45 stickers, gave 18 to her friend, and then bought a pack of 12 more; how many stickers does she have now?",
+        "sarah has 24 stickers and wants to share them equally among her 6 friends, so how many stickers will each friend get?",
+        "sarah bought 3 packs of stickers with 12 stickers in each pack and gave 15 stickers to her brother, so how many stickers does she have left?",
+        "if emma has 9 stickers and buys 6 more, how many stickers does she have altogether?",
+        "sarah has 24 stickers and wants to share them equally among her 6 friends; how many stickers will each friend get?",
+        "sarah had 45 stickers, gave 18 to her friend, and then bought a pack of 12 more; how many stickers does she have now?",
+        "lena had 24 stickers and gave 7 to her friend, then bought 15 more \u2014 how many stickers does she have now?",
+        "lena collected 27 seashells on monday and 19 more on tuesday; how many seashells does she have in total?"
+      ],
+      "completions_open": [
+        "sarah has 24 stickers and wants to share them equally among her 6 friends; how many stickers will each friend get?",
+        "sarah has 24 stickers and wants to share them equally among her 6 friends; how many stickers will each friend get?",
+        "sarah has 3 packs of stickers with 8 stickers in each pack, and she gives 5 stickers to her brother, so how many stickers does she have left?",
+        "sarah had 45 stickers, gave 18 to her friend, and then bought a pack of 12 more; how many stickers does she have now?",
+        "sarah has 24 stickers and wants to share them equally among her 6 friends; how many stickers will each friend get?",
+        "sarah has 24 stickers and wants to share them equally among her 6 friends; how many stickers will each friend get?",
+        "sarah has 24 stickers and wants to share them equally among her 6 friends; how many stickers will each friend get?",
+        "sarah bought 3 packs of stickers with 12 stickers in each pack and then gave 5 stickers to her brother, so how many stickers does she have left?",
+        "sarah has 24 stickers and wants to share them equally among her 6 friends; how many stickers will each friend get?",
+        "sarah has 24 stickers and wants to share them equally among her 6 friends; how many stickers will each friend get?"
+      ],
+      "empty_tight": 0,
+      "empty_open": 0,
+      "null_p95": 0.7000000000000002,
+      "excess": -1.5605270520259085
+    }
+  ],
+  "false_positive_rate": {
+    "dh": 0.0,
+    "dh_ci": [
+      0.0,
+      0.7934567085261071
+    ],
+    "tv": 0.0,
+    "tv_ci": [
+      0.0,
+      0.7934567085261071
+    ],
+    "n": 1
+  }
+}

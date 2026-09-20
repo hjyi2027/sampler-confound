@@ -241,9 +241,36 @@ model on which every truncation parameter still shows through. That is not a
 parameter finding; it is a finding about what "temperature 1.5" means on a
 reasoning model at a fixed budget.
 
+**Thin rows, under a stated priority.** The owner's rule for a short balance
+is breadth of models first, breadth of providers second, N per cell third: a
+thin result across forty models beats a thick one across eight. So the three
+served models with no published price — `qwen3p8-2p4t-a95b`, `inkling`,
+`deepseek-v4-flash-vision-exp` — ran at n=10 per arm rather than 40, with
+their spend bounded at the provider's top listed price ($15/M; 442k tokens,
+so at most $5.93 and about $0.48 if they are priced like their siblings). All
+three: `top_k` distinguishable on every powered prompt, non-deterministic at
+temperature 0 (72%, 52%, 50%), no seed makes any of them reproducible on more
+than one prompt. Thin is visibly thinner —
+fewer prompts pass the control at n=10, so `top_p` and `min_p` come back
+underpowered or mixed on two of them — and the coverage table carries the n
+so a thin row cannot pass as a thick one. That brings the provider to
+**eighteen served chat models, all probed.**
+
+**The negative control, per model.** The false-positive calibration was
+originally 0/25 pairs across eight models. It now exists for every model with
+a usable pair: one pair of identical arms at n=40 per model, 12 informative
+pairs (six models are degenerate at temperature 1.0 — both arms all-unique —
+and are excluded, as before). Pooled: **dH 0/37 false positives, TV 1/37**.
+The primary statistic has yet to reject a true null on real output.
+
 Coverage in one table: `scripts/probe_matrix.py`, which reads every probe
 output under `runs/matrix/<provider>/` and prints one row per (provider,
-model) with the price beside the verdicts.
+model) with the price and the n beside the verdicts.
+`scripts/run_probe_matrix.py` is the runner that produced it: it reads each
+keyed provider's live catalogue, runs breadth-first passes (determinism on
+everything, then thin distinguishability on everything, then the negative
+control, then full N), and admits each job against spend measured from the
+cache under a dollar cap.
 
 **Three models have now vanished from the catalogue since this project began**
 — gpt-oss-20b on 2026-08-27, minimax-m2p7 by 2026-09-09, and qwen3p7-plus on
@@ -288,7 +315,7 @@ models; 1,200 more on the eight paid models on 2026-09-20
 | kimi-k2p7-code | 50% | 42% | 50% | no (0/5) |
 | glm-5p2 | 48% | 38% | 54% | no (0/5) |
 
-**One model in fifteen is deterministic at temperature 0.** On the others, the
+**One model in eighteen is deterministic at temperature 0.** On the others, the
 same request returns the same bytes between 20% and 78% of the time, and the
 paid tier sits inside the same band as the cheap one: kimi-k3 at $15/M
 reproduces 74%, glm-5p3-flash at $0.50/M 76%. On the real MATH-500 problem
@@ -304,7 +331,8 @@ from a distribution.
 self-consistent they differ because everything differs. The test is whether ten
 calls with the *same* seed agree. On the 60 (model, prompt) cells across fifteen
 models that were not already deterministic without a seed, a fixed seed made the
-run reproducible in **7**. Each is a single prompt on a model that was 60–90%
+run reproducible in **7**; the three thin models add 3 of 13, each again a single
+prompt. Each is a single prompt on a model that was 60–90%
 consistent anyway; no model reproduces on more than half its non-deterministic
 prompts. The
 handoff for this project asserted that Fireworks ignores `seed` on text; this is
@@ -314,7 +342,7 @@ Two consequences for the study. The replicate dimension was already named
 "sampling variance at fixed configuration" rather than "seed" on the strength of
 the unmeasured assertion; the measurement confirms that the name was the right
 one. And the greedy condition — the one every harness claims to use, and the
-paper's reference point — is not a fixed configuration on fourteen of fifteen
+paper's reference point — is not a fixed configuration on seventeen of eighteen
 models here. Its within-cell variance is real variance, and the design's replicate term
 absorbs it honestly, but a Limitations sentence has to say that "greedy" on this
 provider means "a draw from a narrow distribution".

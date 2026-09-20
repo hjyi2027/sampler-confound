@@ -114,6 +114,23 @@ class Adapter:
     def payload(self, wire: dict) -> dict:
         return wire
 
+    def catalogue_url(self) -> str:
+        return self.base.rsplit("/chat/completions", 1)[0] + "/models"
+
+    def catalogue(self, raw: dict) -> list[dict]:
+        """The provider's model listing, reduced to {"id", "chat"}.
+
+        `chat` is True/False where the listing says so and None where it does
+        not; the caller decides what to do with None (a name filter, usually).
+        """
+        out = []
+        for m in raw.get("data") or raw.get("models") or []:
+            mid = m.get("id") or m.get("name") or ""
+            mid = mid[len(self.prefix):] if self.prefix and mid.startswith(self.prefix) else mid
+            chat = m.get("supports_chat")
+            out.append({"id": mid, "chat": chat if isinstance(chat, bool) else None})
+        return out
+
     def decode(self, raw: dict, dropped: tuple[str, ...] = ()) -> Completion:
         choice = raw["choices"][0]
         msg = choice.get("message") or {}
@@ -245,6 +262,18 @@ class Google(Adapter):
 
     def payload(self, wire: dict) -> dict:
         return {k: v for k, v in wire.items() if k != "model"}
+
+    def catalogue_url(self) -> str:
+        return f"{self.base}?pageSize=200"
+
+    def catalogue(self, raw: dict) -> list[dict]:
+        out = []
+        for m in raw.get("models") or []:
+            name = m.get("name", "")
+            mid = name[len("models/"):] if name.startswith("models/") else name
+            methods = m.get("supportedGenerationMethods") or []
+            out.append({"id": mid, "chat": ("generateContent" in methods) if methods else None})
+        return out
 
     def decode(self, raw: dict, dropped: tuple[str, ...] = ()) -> Completion:
         cands = raw.get("candidates") or [{}]

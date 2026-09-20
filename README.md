@@ -183,16 +183,16 @@ eight samples, count the distinct outputs) called `min_p` ignored on 3/8
 models and `top_p` ignored on one, and two design decisions were taken on it.
 A properly powered two-sample test — 40 completions per arm, permutation null,
 a positive control that temperature must pass and a negative control on
-identical arms — overturned every retestable cell. Run on **fifteen models on
-one provider spanning $0.20 to $15.00 per million output tokens**, the paid
+identical arms — overturned every retestable cell. Run on **eighteen models — every chat model
+one provider serves — spanning $0.20 to $15.00 per million output tokens**, the paid
 tier included so the sample is not whichever models the provider gives away,
 `top_p`, `top_k` and `min_p` are all distinguishable wherever the probe has
 power. Parameter-honouring on a single serving stack is uniform; the
 dimension that can differ is the provider (FINDINGS §1;
 `scripts/probe_matrix.py` for the coverage table).
 
-**One model in fifteen is deterministic at temperature 0, and none honours
-`seed`.** On the other fourteen, the identical greedy request returns the same
+**One model in eighteen is deterministic at temperature 0, and none honours
+`seed`.** On the other seventeen, the identical greedy request returns the same
 bytes 20–78% of the time, and price predicts nothing: kimi-k3 at $15/M
 reproduces 74%, glm-5p3-flash at $0.50/M 76%. "Greedy" on this provider means
 a draw from a narrow distribution (FINDINGS §2).
