@@ -1,7 +1,11 @@
-.PHONY: test data probe freeze pilot select smoke sweep analyse power offline clean
+.PHONY: test keys data probe freeze pilot select smoke sweep analyse power offline clean
 
 test:
 	python3 -m pytest tests/ -q
+
+# Which provider keys are set and working? One cheap uncached call each.
+keys:
+	python3 scripts/check_keys.py
 
 # Download and pin the problem sets. Run once; data/MANIFEST.json guards reruns.
 data:

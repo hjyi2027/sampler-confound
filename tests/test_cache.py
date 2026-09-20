@@ -118,3 +118,24 @@ def test_corrupt_entry_is_a_miss_not_a_crash(tmp_path):
     p = next(tmp_path.rglob("*.json"))
     p.write_text("{not json")
     assert cache.get(_body(), 0) is None
+
+
+def test_provider_is_part_of_the_key():
+    """The same model name on two providers must never share a cache entry.
+
+    "llama-3.3-70b" exists on Groq and on Cerebras and they are different
+    deployments. complete() folds the provider name into the keyed body; this
+    pins that a body differing only in `_provider` hashes differently.
+    """
+    a = {"model": "llama-3.3-70b", "temperature": 0.0, "_provider": "groq"}
+    b = {"model": "llama-3.3-70b", "temperature": 0.0, "_provider": "cerebras"}
+    assert request_key(a, 0) != request_key(b, 0)
+
+
+def test_every_provider_has_the_fields_the_transport_needs():
+    from samplerconfound.provider import PROVIDERS
+    for name, spec in PROVIDERS.items():
+        assert spec["base"].startswith("https://"), name
+        assert spec["env"].endswith("_API_KEY"), name
+        assert spec["signup"].startswith("https://"), name
+        assert "prefix" in spec, name
