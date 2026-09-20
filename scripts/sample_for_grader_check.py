@@ -54,25 +54,21 @@ def generate(key: str, model: str, sampler: dict, problem) -> dict | None:
     # Grader-check generations are one replicate each; the replicate index is
     # the sampler's position so distinct samplers with equal bodies cannot
     # collide (they cannot — the body differs — but the key is explicit).
-    d, err = complete(key, body, 0)
+    c, err = complete(key, body, 0)
     if err:
         with _print_lock:
             print(f"  ! {model.split('/')[-1]}/{sampler['id']}/{problem.id}: {err[:100]}")
         return None
-    d = r.json()
-    choice = d["choices"][0]
-    text = (choice["message"].get("content") or "")
-    verdict = grade(text, problem.answer,
-                     truncated=choice["finish_reason"] == "length")
+    verdict = grade(c.text, problem.answer, truncated=c.truncated)
     return {
         "problem_id": problem.id,
         "benchmark": "aime" if problem.id.startswith("aime") else "math500",
         "model": model,
         "sampler": sampler["id"],
         "gold": problem.answer,
-        "response": text,
-        "finish_reason": choice["finish_reason"],
-        "output_tokens": d["usage"]["completion_tokens"],
+        "response": c.text,
+        "finish_reason": c.finish_reason,
+        "output_tokens": c.completion_tokens,
         "verdict": verdict.to_dict(),
     }
 

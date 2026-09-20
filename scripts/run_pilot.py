@@ -50,6 +50,7 @@ class _PilotDesign:
     def __init__(self):
         self.fixed = dict(FIXED)
         self.benchmark = "math500"
+        self.provider = "fireworks"
 
 
 def main() -> int:

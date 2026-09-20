@@ -21,7 +21,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from samplerconfound.provider import PROVIDERS, Rejected, Transient, _send, load_key
+from samplerconfound.adapters import ADAPTERS
+from samplerconfound.provider import Rejected, Transient, call, load_key
 
 # A model each provider serves on its free or entry tier. If one of these has
 # been withdrawn the check reports a 404 with the provider's message, which is
@@ -40,20 +41,19 @@ SMOKE_MODEL = {
 def main() -> int:
     ok = missing = bad = 0
     print(f"{'provider':<12}{'key':<9}{'status':<10}  detail")
-    for name, spec in PROVIDERS.items():
+    for name, ad in ADAPTERS.items():
         key = load_key(name, required=False)
         if not key:
             missing += 1
-            print(f"{name:<12}{'—':<9}{'MISSING':<10}  get one at {spec['signup']}, "
-                  f"add {spec['env']}=... to .env")
+            print(f"{name:<12}{'—':<9}{'MISSING':<10}  get one at {ad.signup}, "
+                  f"add {ad.env}=... to .env")
             continue
         body = {"model": SMOKE_MODEL[name],
                 "messages": [{"role": "user", "content": "Reply with the word OK."}],
                 "max_tokens": 8, "temperature": 0.0}
         t = time.time()
         try:
-            d = _send(key, body, timeout=60, base=spec["base"])
-            txt = (d["choices"][0]["message"].get("content") or "").strip()
+            txt = call(key, body, provider=name, timeout=60).text.strip()
             ok += 1
             # HTTP 200 is the answer to "does the key work". Empty content on a
             # reasoning model at a tiny max_tokens is expected, not a failure.

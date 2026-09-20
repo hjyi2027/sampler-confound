@@ -68,6 +68,7 @@ class Distinguishability:
     setting_a: dict
     setting_b: dict
     prompt: str = ""                 # prompt id; a verdict is per (model, param, prompt)
+    provider: str = "fireworks"      # which deployment answered; the model name alone is ambiguous
     n_tight: int = 0
     n_open: int = 0
     support_tight: int = 0
@@ -87,7 +88,7 @@ class Distinguishability:
     # assess_parameter builds the object and fails when one is rebuilt from JSON.
     p_value: float = float("nan")
     n_permutations: int = 0
-    status: str = "ok"               # ok | rejected | insufficient
+    status: str = "ok"               # ok | rejected | unsupported | insufficient
     detail: str = ""
     # Retained so a negative control can be run on the data after the fact.
     completions_tight: list[str] = field(default_factory=list)

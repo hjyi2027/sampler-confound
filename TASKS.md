@@ -875,3 +875,49 @@ hours of completed calls to an OOM kill. Now everything shares one store.
 Also fixed in passing: a slice that removed the redundant per-script `load_key`
 also removed `RunLock` from the sweep runner. Caught by the test suite before
 it was committed.
+
+## 2026-09-20 — one adapter per provider, one interface for the probes
+
+`samplerconfound/adapters.py`: a class per provider (Fireworks, Groq, Cerebras,
+Google, OpenRouter, NVIDIA, Mistral) behind one `Adapter` interface — qualify
+the model, build the URL and headers, encode a canonical request to the wire,
+decode the wire response to a `Completion`. Probe code builds the same request
+dict it always built and reads `Completion.text / .reasoning / .finish_reason /
+.completion_tokens`; `choices[0].message.content` no longer appears anywhere
+outside the adapter. Both probes take `--provider`; the sweep uses the
+`Design.provider` field it already had and was ignoring.
+
+Three decisions worth recording:
+
+*Encoding is permissive.* Whether Groq honours `top_k` is the measurement, so
+the adapter passes it through and lets Groq's 400 be the finding. An adapter
+only withholds a parameter when the wire schema cannot carry it (Mistral 422s
+on unknown fields, and has no `reasoning_effort`), and then it says so in
+`Completion.dropped`. The probe treats a dropped parameter *under test* as a
+new status, `unsupported`, distinct from `rejected` (the provider refused it)
+and `no effect seen` (the provider took it and nothing changed). Only the last
+is about the sampler.
+
+*Google speaks the native API, not its OpenAI shim.* The shim has no `top_k`;
+`generateContent` has `topK`. A probe of whether top_k is honoured has to be
+able to send it. This is the one adapter whose wire shape actually differs
+(model in the URL, key in a header, `candidates[].content.parts`), and it is
+why the interface is a class and not a rename table.
+
+*The cache key is the wire body.* For Fireworks that is byte-identical to what
+`complete()` hashed before adapters, so the stored responses survive — pinned
+by a golden hash in `tests/test_adapters.py`, and demonstrated: the
+determinism probe on gpt-oss-120b replayed offline through the new path at 150
+hits, 0 misses, same match rates.
+
+Found while doing this: `run_sweep.generate` and the grader-check sampler both
+still read `d = r.json()` with no `r` in scope — a leftover from the cache
+migration, a NameError on the first successful response. Nothing caught it
+because every sweep test fakes above that line. The adapter rewrite replaced
+both blocks, and there is now a test that drives `generate` with a fake
+completion.
+
+OpenRouter records which upstream served each call (`Completion.served_by`),
+because a router that changes upstream between replicates of the identical
+request is a confound for the determinism probe, and the analysis needs to be
+able to see it.

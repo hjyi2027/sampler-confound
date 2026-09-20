@@ -185,7 +185,7 @@ def generate(key: str, design: Design, model: str, sampler: dict, rep: int, p,
 
     t_start = time.time()
     cached_before = _CACHE.stats.hits
-    d, err = complete(key, body, rep, cache=_CACHE)
+    c, err = complete(key, body, rep, provider=design.provider, cache=_CACHE)
     if err:
         with _lock:
             print(f"  ! {model.split('/')[-1]}/{sampler['id']}: {err[:120]}")
@@ -193,13 +193,7 @@ def generate(key: str, design: Design, model: str, sampler: dict, rep: int, p,
     was_cached = _CACHE.stats.hits > cached_before
     attempts = 0 if was_cached else 1
 
-    d = r.json()
-    choice = d["choices"][0]
-    msg = choice["message"]
-    text = msg.get("content") or ""
-    truncated = choice["finish_reason"] == "length"
-    v = grade(text, p.answer, truncated=truncated)
-    usage = d["usage"]
+    v = grade(c.text, p.answer, truncated=c.truncated)
     return {
         # identity
         "model": model, "sampler": sampler["id"], "replicate": rep,
@@ -208,25 +202,22 @@ def generate(key: str, design: Design, model: str, sampler: dict, rep: int, p,
         # only the resolved parameters prove which condition produced this row.
         "params": {k: v_ for k, v_ in body.items() if k not in ("messages", "model")},
         "design": fingerprint,
-        # what came back, in full. reasoning_content is a SEPARATE field from
-        # content, and every model in this grid is a reasoning model, so keeping
-        # only `content` discards most of the generated tokens — the entire chain
-        # of thought — unrecoverably. A paper about how decoding configuration
+        # what came back, in full. reasoning is a SEPARATE field from content,
+        # and every model in this grid is a reasoning model, so keeping only
+        # `content` discards most of the generated tokens — the entire chain of
+        # thought — unrecoverably. A paper about how decoding configuration
         # affects reasoning cannot throw the reasoning away.
-        "response": text,
-        "reasoning": msg.get("reasoning_content") or "",
-        "finish_reason": choice["finish_reason"],
-        "input_tokens": usage["prompt_tokens"],
-        "output_tokens": usage["completion_tokens"],
-        "reasoning_tokens": (usage.get("completion_tokens_details") or {}).get(
-            "reasoning_tokens", 0
-        ),
-        "cached_tokens": (usage.get("prompt_tokens_details") or {}).get(
-            "cached_tokens", 0
-        ),
+        "response": c.text,
+        "reasoning": c.reasoning,
+        "finish_reason": c.finish_reason,
+        "input_tokens": c.prompt_tokens,
+        "output_tokens": c.completion_tokens,
+        "reasoning_tokens": c.reasoning_tokens or 0,
+        "cached_tokens": c.cached_tokens or 0,
         # provenance for chasing an anomaly back to the provider
-        "request_id": d.get("id"),
-        "created": d.get("created"),
+        "request_id": c.request_id,
+        "created": c.created,
+        "served_by": c.served_by,
         "latency_s": round(time.time() - t_start, 3),
         "attempts": attempts,
         "cached": was_cached,

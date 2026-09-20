@@ -41,7 +41,8 @@ from samplerconfound.distinguish import (
     positive_control,
 )
 from samplerconfound.paths import resolve_out, show
-from samplerconfound.provider import BASE, PREFIX, complete, default_cache, load_key
+from samplerconfound.adapters import ADAPTERS
+from samplerconfound.provider import DEFAULT_PROVIDER, complete, default_cache, load_key
 
 # A prompt SET, not a prompt. One prompt is one sample of prompt space: it can be
 # degenerate for a particular model, and a one-word noun with a strong mode was
@@ -89,8 +90,8 @@ _lock = threading.Lock()
 
 
 def one(key: str, model: str, params: dict, max_tokens: int, effort: str | None,
-        prompt: str | None = None, replicate: int = 0):
-    """Return (completion, error, usage). Completion is None on failure.
+        prompt: str | None = None, replicate: int = 0, provider: str = DEFAULT_PROVIDER):
+    """Return (completion, error, completion_tokens). Completion is None on failure.
 
     `replicate` distinguishes the N identical requests an arm sends; without it
     the cache would answer every one from the first and the distribution being
@@ -101,15 +102,21 @@ def one(key: str, model: str, params: dict, max_tokens: int, effort: str | None,
             "max_tokens": max_tokens, **params}
     if effort:
         body["reasoning_effort"] = effort
-    d, err = complete(key, body, replicate, timeout=180)
+    c, err = complete(key, body, replicate, provider=provider, timeout=180)
     if err:
-        return None, err, {}
-    txt = (d["choices"][0]["message"].get("content") or "").strip().lower()
-    return txt.rstrip(".!,"), None, d.get("usage", {})
+        return None, err, 0
+    # If the adapter had no wire form for a parameter of THIS arm, the arm was
+    # not the setting it claims to be; both arms would then be identical and the
+    # test would report "no effect" about a parameter that was never sent.
+    missing = set(params) & set(c.dropped)
+    if missing:
+        return None, f"unsupported: {sorted(missing)} has no wire form on {provider}", 0
+    txt = c.text.strip().lower()
+    return txt.rstrip(".!,"), None, c.completion_tokens or 0
 
 
 def collect(key, model, params, n, workers, max_tokens, effort, prompt=None,
-            replicate_offset=0):
+            replicate_offset=0, provider=DEFAULT_PROVIDER):
     """Returns (completions, errors, usage, n_empty).
 
     Empty completions are counted, not silently dropped. qwen3p7-plus returns
@@ -125,7 +132,7 @@ def collect(key, model, params, n, workers, max_tokens, effort, prompt=None,
         # caller collect two arms with IDENTICAL bodies — the negative control —
         # without the second being served from the first.
         futs = [pool.submit(one, key, model, params, max_tokens, effort, prompt,
-                            replicate_offset + i)
+                            replicate_offset + i, provider)
                 for i in range(n)]
         for f in as_completed(futs):
             txt, err, u = f.result()
@@ -168,6 +175,27 @@ NEGATIVE_SETTING = {"temperature": 1.0}
 EMPTY_TOKEN = "<empty>"
 
 
+def resolve_models(args) -> list[str]:
+    """--models as given, or --all from the candidate list.
+
+    The candidate list is the frozen Fireworks grid, so --all is only meaningful
+    there; on any other provider the models are named explicitly, since which
+    models a provider serves is not something this repo can know in advance.
+    """
+    if args.all:
+        if args.provider != DEFAULT_PROVIDER:
+            raise SystemExit(f"--all lists the {DEFAULT_PROVIDER} candidates; "
+                             f"give --models for {args.provider}")
+        from samplerconfound.config import MODEL_CANDIDATES
+        models = [c["id"].split("/")[-1] for c in MODEL_CANDIDATES
+                  if c.get("available") is not False]
+    else:
+        models = args.models or []
+    if not models:
+        raise SystemExit("give --models or --all")
+    return models
+
+
 def negative_control_run(key, models, args) -> int:
     """Two arms, identical settings, collected sequentially like the real test.
 
@@ -192,11 +220,13 @@ def negative_control_run(key, models, args) -> int:
             # control passes trivially.
             a, ea, ua, empty_a = collect(key, model, NEGATIVE_SETTING, args.n,
                                          args.workers, args.max_tokens, args.effort,
-                                         replicate_offset=(2 * k) * args.n)
+                                         replicate_offset=(2 * k) * args.n,
+                                         provider=args.provider)
             b, eb, ub, empty_b = collect(key, model, NEGATIVE_SETTING, args.n,
                                          args.workers, args.max_tokens, args.effort,
-                                         replicate_offset=(2 * k + 1) * args.n)
-            tokens += sum(u.get("completion_tokens", 0) for u in ua + ub)
+                                         replicate_offset=(2 * k + 1) * args.n,
+                                         provider=args.provider)
+            tokens += sum(ua + ub)
             r = assess_parameter(model, f"null_{k}", NEGATIVE_SETTING, NEGATIVE_SETTING,
                                  a, b, n_permutations=args.permutations,
                                  random_state=k)
@@ -260,6 +290,7 @@ def negative_control_run(key, models, args) -> int:
         dest = resolve_out(args.out)
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(json.dumps({
+            "provider": args.provider,
             "setting": NEGATIVE_SETTING, "n_per_arm": args.n, "pairs_per_model": args.negative,
             "results": [r.to_dict() for r in rows],
             "false_positive_rate": {"dh": fp_dh / n, "dh_ci": [lo_d, hi_d],
@@ -287,18 +318,12 @@ def main() -> int:
                     help="negative control: for each model collect K pairs of arms "
                          "at IDENTICAL settings and test them. Calibrates the "
                          "empirical false-positive rate on real output.")
+    ap.add_argument("--provider", default=DEFAULT_PROVIDER, choices=sorted(ADAPTERS),
+                    help="which provider serves --models; the adapter handles the rest")
     args = ap.parse_args()
 
-    if args.all:
-        from samplerconfound.config import MODEL_CANDIDATES
-        models = [c["id"].split("/")[-1] for c in MODEL_CANDIDATES
-                  if c.get("available") is not False]
-    else:
-        models = args.models or []
-    if not models:
-        raise SystemExit("give --models or --all")
-
-    key = load_key()
+    models = resolve_models(args)
+    key = load_key(args.provider)
     results, tokens = [], 0
     t0 = time.time()
 
@@ -323,7 +348,8 @@ def main() -> int:
                 rec = json.loads(line)
             except json.JSONDecodeError:
                 continue                      # torn final line: redo that cell
-            done[(rec["model"], rec["prompt"], rec["parameter"])] = rec
+            done[(rec.get("provider", DEFAULT_PROVIDER), rec["model"],
+                  rec["prompt"], rec["parameter"])] = rec
         print(f"resuming: {len(done)} cells already on disk in {show(ckpt)}")
 
     def restore(rec: dict):
@@ -338,34 +364,45 @@ def main() -> int:
         for pid in prompt_ids:
             print(f"\n=== {model} — prompt '{pid}' ===")
             for param, sa, sb in CONTRASTS:
-                if (model, pid, param) in done:
-                    r = restore(done[(model, pid, param)])
+                if (args.provider, model, pid, param) in done:
+                    r = restore(done[(args.provider, model, pid, param)])
                     print(f"  {param:<12} (from checkpoint) status={r.status}")
                     per_prompt_results[pid].append(r)
                     results.append(r)
                     continue
                 a, ea, ua, empty_a = collect(key, model, sa, args.n, args.workers,
-                                             args.max_tokens, args.effort, PROMPTS[pid])
+                                             args.max_tokens, args.effort, PROMPTS[pid],
+                                             provider=args.provider)
                 b, eb, ub, empty_b = collect(key, model, sb, args.n, args.workers,
-                                             args.max_tokens, args.effort, PROMPTS[pid])
-                tokens += sum(u.get("completion_tokens", 0) for u in ua + ub)
+                                             args.max_tokens, args.effort, PROMPTS[pid],
+                                             provider=args.provider)
+                tokens += sum(ua + ub)
 
                 r = assess_parameter(model, param, sa, sb, a, b,
                                      n_permutations=args.permutations)
                 r.completions_tight, r.completions_open = a, b
                 r.prompt = pid
+                r.provider = args.provider
                 r.empty_tight = sum(x == EMPTY_TOKEN for x in a)
                 r.empty_open = sum(x == EMPTY_TOKEN for x in b)
                 rejected = [e for e in ea + eb if e.startswith("rejected")]
+                unsupported = [e for e in ea + eb if e.startswith("unsupported")]
                 if rejected:
                     r.status, r.detail = "rejected", rejected[0]
+                elif unsupported:
+                    # Three things that look alike and are not: the provider
+                    # refused it (rejected), the provider took it and it did
+                    # nothing (no effect seen), and the API has no way to say
+                    # it at all (unsupported). Only the middle one is about the
+                    # sampler.
+                    r.status, r.detail = "unsupported", unsupported[0]
                 if (empty_a or empty_b) and r.status == "insufficient":
                     r.detail = (f"{empty_a + empty_b}/{2 * args.n} calls returned empty "
                                 f"content — billed, but max_tokens ({args.max_tokens}) "
                                 "cut them off before any content. Raise --max-tokens.")
 
-                if r.status == "rejected":
-                    print(f"  {param:<12} REJECTED   {r.detail[:76]}")
+                if r.status in ("rejected", "unsupported"):
+                    print(f"  {param:<12} {r.status.upper():<10} {r.detail[:76]}")
                 elif r.status == "insufficient":
                     print(f"  {param:<12} NO POWER   n={r.n_tight}/{r.n_open}  {r.detail[:56]}")
                 else:
@@ -405,7 +442,7 @@ def main() -> int:
     print(f"{'model':<32}{'param':<12}" + "".join(f"{pid:>11}" for pid in prompt_ids)
           + f"{'powered':>9}{'dist':>6}  verdict")
     sym = {"distinguishable": "yes", "no effect seen": "NO", "underpowered": "?",
-           "rejected": "rej", "insufficient": "n/a"}
+           "rejected": "rej", "unsupported": "n/a", "insufficient": "n/a"}
     for model in models:
         for param, _, _ in CONTRASTS:
             if param == "temperature":
@@ -435,7 +472,7 @@ def main() -> int:
         dest = resolve_out(args.out)
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(json.dumps(
-            {"prompt": PROMPT, "n_per_arm": args.n,
+            {"provider": args.provider, "prompt": PROMPT, "n_per_arm": args.n,
              "permutations": args.permutations,
              "results": [r.to_dict() for r in results],
              "p_holm_by_prompt": {pid: {f"{k[0]}|{k[1]}": v for k, v in a.items()}

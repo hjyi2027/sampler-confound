@@ -225,4 +225,12 @@ python3 scripts/run_sweep.py --config configs/aime.json
 python3 scripts/analyse.py runs/main/math500.jsonl --n-boot 2000
 ```
 
+Every provider sits behind an adapter (`samplerconfound/adapters.py`): the
+probes build one canonical request and read one `Completion`, and never see a
+vendor's wire shape. Six providers speak the OpenAI chat shape and differ only
+in facts (URL, key header, a rename — Mistral says `random_seed`); Google
+speaks its native `generateContent`, because that is the surface with `topK`
+on it. `--provider groq` on either probe is the whole change. Keys go in
+`.env` (gitignored; slots in `.env.example`); `make keys` checks them.
+
 Full decision log in [TASKS.md](TASKS.md).

@@ -46,8 +46,9 @@ sys.path.insert(0, str(ROOT))
 from samplerconfound.benchmarks import sweep_split
 from samplerconfound.config import FIXED
 from samplerconfound.paths import resolve_out, show
-from samplerconfound.provider import complete, default_cache, load_key
-from scripts.probe_distinguishability import PROMPTS
+from samplerconfound.adapters import ADAPTERS
+from samplerconfound.provider import DEFAULT_PROVIDER, complete, default_cache, load_key
+from scripts.probe_distinguishability import PROMPTS, resolve_models
 
 CONDITIONS = {
     "no_seed": {},
@@ -66,17 +67,21 @@ def prompts() -> dict[str, str]:
     return p
 
 
-def one(key, model, prompt, extra, max_tokens, effort, replicate):
+def one(key, model, prompt, extra, max_tokens, effort, replicate, provider):
     body = {"model": model,
             "messages": [{"role": "user", "content": prompt}],
             "max_tokens": max_tokens, "temperature": 0.0, **extra}
     if effort:
         body["reasoning_effort"] = effort
-    d, err = complete(key, body, replicate)
+    c, err = complete(key, body, replicate, provider=provider)
     if err:
         return None, None, err
-    m = d["choices"][0]["message"]
-    return (m.get("content") or ""), (m.get("reasoning_content") or ""), None
+    # A condition whose parameter the adapter could not put on the wire was not
+    # tested; reporting its output as "seed_0" would measure nothing.
+    missing = set(extra) & set(c.dropped)
+    if missing:
+        return None, None, f"unsupported: {sorted(missing)} has no wire form on {provider}"
+    return c.text, c.reasoning, None
 
 
 def match_rate(xs: list[str]) -> tuple[float, int, str]:
@@ -95,15 +100,12 @@ def main() -> int:
     ap.add_argument("--effort", default="low")
     ap.add_argument("--workers", type=int, default=5)
     ap.add_argument("--out", type=Path)
+    ap.add_argument("--provider", default=DEFAULT_PROVIDER, choices=sorted(ADAPTERS),
+                    help="which provider serves --models; the adapter handles the rest")
     args = ap.parse_args()
 
-    if args.all:
-        from samplerconfound.config import MODEL_CANDIDATES
-        models = [c["id"].split("/")[-1] for c in MODEL_CANDIDATES
-                  if c.get("available") is not False]
-    else:
-        models = args.models or []
-    key = load_key()
+    models = resolve_models(args)
+    key = load_key(args.provider)
     P = prompts()
     rows = []
     t0 = time.time()
@@ -117,7 +119,8 @@ def main() -> int:
             for cond, extra in CONDITIONS.items():
                 with ThreadPoolExecutor(max_workers=args.workers) as pool:
                     outs = list(pool.map(
-                        lambda i: one(key, model, text, extra, args.max_tokens, args.effort, i),
+                        lambda i: one(key, model, text, extra, args.max_tokens,
+                                      args.effort, i, args.provider),
                         range(N)))
                 errs = [e for _, _, e in outs if e]
                 content = [c for c, _, e in outs if not e]
@@ -134,7 +137,8 @@ def main() -> int:
             same = (s0 == s1) if (res["seed_0"]["n"] and res["seed_1"]["n"]) else None
             rej = any(e.startswith("rejected") for c in ("seed_0", "seed_1")
                       for e in res[c]["errors"])
-            row = {"model": model, "prompt": pid, "conditions": res,
+            row = {"provider": args.provider, "model": model, "prompt": pid,
+                   "conditions": res,
                    "seed_rejected": rej, "seed0_eq_seed1": same}
             rows.append(row)
 
@@ -188,7 +192,8 @@ def main() -> int:
     if args.out:
         dest = resolve_out(args.out)
         dest.parent.mkdir(parents=True, exist_ok=True)
-        dest.write_text(json.dumps({"n_per_condition": N, "conditions": CONDITIONS,
+        dest.write_text(json.dumps({"provider": args.provider,
+                                    "n_per_condition": N, "conditions": CONDITIONS,
                                     "rows": rows, "summary": summary},
                                    indent=2, default=str) + "\n")
         print(f"wrote {show(dest)}")

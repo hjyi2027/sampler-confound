@@ -132,10 +132,10 @@ def test_provider_is_part_of_the_key():
     assert request_key(a, 0) != request_key(b, 0)
 
 
-def test_every_provider_has_the_fields_the_transport_needs():
-    from samplerconfound.provider import PROVIDERS
-    for name, spec in PROVIDERS.items():
-        assert spec["base"].startswith("https://"), name
-        assert spec["env"].endswith("_API_KEY"), name
-        assert spec["signup"].startswith("https://"), name
-        assert "prefix" in spec, name
+def test_every_adapter_has_the_fields_the_transport_needs():
+    from samplerconfound.adapters import ADAPTERS
+    for name, ad in ADAPTERS.items():
+        assert ad.name == name
+        assert ad.base.startswith("https://"), name
+        assert ad.env.endswith("_API_KEY"), name
+        assert ad.signup.startswith("https://"), name
