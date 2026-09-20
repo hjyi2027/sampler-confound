@@ -83,9 +83,12 @@ class Distinguishability:
     tv: float = float("nan")
     tv_null_mean: float = float("nan")
     tv_p: float = float("nan")
-    # The primary p-value, mirroring dh_p. Declared rather than assigned
-    # dynamically: holm_adjust reads it, and an undeclared attribute works when
-    # assess_parameter builds the object and fails when one is rebuilt from JSON.
+    # The primary p-value: dh_p for a truncation parameter, whose direction is
+    # known (tight arm has less entropy), tv_p for a penalty, whose direction is
+    # not. Declared rather than assigned dynamically: holm_adjust reads it, and
+    # an undeclared attribute works when assess_parameter builds the object and
+    # fails when one is rebuilt from JSON.
+    primary: str = "dh"              # "dh" | "tv"
     p_value: float = float("nan")
     n_permutations: int = 0
     status: str = "ok"               # ok | rejected | unsupported | insufficient
@@ -208,8 +211,17 @@ def assess_parameter(
     completions_open: list[str],
     n_permutations: int = 10_000,
     random_state: int = 0,
+    primary: str = "dh",
 ) -> Distinguishability:
     """One (model, parameter) test from two already-collected samples.
+
+    `primary` picks which p-value is THE p-value for this cell. A truncation
+    parameter (top_p, top_k, min_p, typical_p, mirostat) narrows the
+    distribution when honoured, so the one-sided entropy drop is the sensitive
+    test. A penalty (repetition, frequency, presence) reshapes it in no fixed
+    direction, so the two-sided total variation is the honest one; using dH
+    there would call a real effect "no effect" whenever it happened to raise
+    entropy.
 
     Arms are named by direction, not by label: `tight` is the setting that should
     NARROW the output distribution if the parameter is honoured. Getting these
@@ -225,6 +237,9 @@ def assess_parameter(
         n_tight=len(completions_tight), n_open=len(completions_open),
         n_permutations=n_permutations,
     )
+    if primary not in ("dh", "tv"):
+        raise ValueError(f"primary must be 'dh' or 'tv', not {primary!r}")
+    res.primary = primary
     if res.n_tight < 5 or res.n_open < 5:
         res.status = "insufficient"
         res.detail = f"n={res.n_tight}/{res.n_open}; need >= 5 per arm"
@@ -245,6 +260,20 @@ def assess_parameter(
             "both arms are a single constant completion; the prompt has no "
             "entropy for this model and the test cannot discriminate"
         )
+        return res
+    if (res.support_tight >= res.n_tight - 1 and res.support_open >= res.n_open - 1):
+        # The opposite degeneracy, and the one that bites penalty contrasts:
+        # both arms all-unique. Entropy is log2(n) on both sides, dH is 0 and
+        # TV is 1 under every permutation, so p = 1 by construction. The
+        # negative control excludes such pairs for exactly this reason; the
+        # main test must too, or a penalty on a high-entropy prompt reads as
+        # "no effect seen" behind a passed temperature control.
+        res.status = "insufficient"
+        res.detail = (
+            f"both arms all-unique ({res.support_tight}/{res.n_tight}, "
+            f"{res.support_open}/{res.n_open}); exact-match statistics have no "
+            "range here and cannot discriminate"
+        )
         res.dh = res.tv = 0.0
         return res
 
@@ -258,7 +287,7 @@ def assess_parameter(
         statistic=tv_distance, one_sided=False,
         n_permutations=n_permutations, random_state=random_state,
     )
-    res.p_value = res.dh_p          # primary
+    res.p_value = res.dh_p if primary == "dh" else res.tv_p
     return res
 
 

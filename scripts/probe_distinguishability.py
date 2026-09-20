@@ -74,20 +74,35 @@ PROMPTS = {
 }
 PROMPT = PROMPTS["word_prob"]    # default for single-prompt calls (calibration, negative control)
 
-# (parameter, TIGHT setting, OPEN setting). One parameter varies; everything else
-# is identical between the arms, including temperature, which must be high enough
-# for a truncation parameter to have anything to truncate — at temperature 0 the
-# distribution is already a point mass and top_p/top_k/min_p cannot show an effect
-# even when honoured. Tight is the one that should narrow
-# the distribution if the parameter is honoured; the primary test is one-sided in
-# that direction. top_k tops out at 100 on this provider — 200 is rejected — so
-# the open arm uses the documented maximum rather than a value that errors.
+# (parameter, TIGHT setting, OPEN setting, primary statistic). One parameter
+# varies; everything else is identical between the arms, including temperature,
+# which must be high enough for a truncation parameter to have anything to
+# truncate — at temperature 0 the distribution is already a point mass and
+# top_p/top_k/min_p cannot show an effect even when honoured.
+#
+# Every sampling parameter the reference provider documents is here: the four
+# truncation samplers, typical_p, the three penalties and mirostat. For a
+# truncation parameter "tight" is the arm that should narrow the distribution
+# and the primary test is the one-sided entropy drop. A penalty has no such
+# direction — a strong repetition penalty can raise or lower the entropy of a
+# one-sentence reply — so its primary is the two-sided total variation, and the
+# arm labels are just "off" and "on". top_k tops out at 100 on this provider —
+# 200 is rejected — so the open arm uses the documented maximum rather than a
+# value that errors. Whether another provider accepts each of these is not
+# assumed: the adapter sends it and the provider's 4xx becomes "rejected".
+T = {"temperature": 1.0}
 CONTRASTS = [
-    ("temperature", {"temperature": 0.0}, {"temperature": 1.5}),
-    ("top_p", {"temperature": 1.0, "top_p": 0.01}, {"temperature": 1.0, "top_p": 1.0}),
-    ("top_k", {"temperature": 1.0, "top_k": 1}, {"temperature": 1.0, "top_k": 100}),
-    ("min_p", {"temperature": 1.0, "min_p": 0.9}, {"temperature": 1.0, "min_p": 0.0}),
+    ("temperature", {"temperature": 0.0}, {"temperature": 1.5}, "dh"),
+    ("top_p", {**T, "top_p": 0.01}, {**T, "top_p": 1.0}, "dh"),
+    ("top_k", {**T, "top_k": 1}, {**T, "top_k": 100}, "dh"),
+    ("min_p", {**T, "min_p": 0.9}, {**T, "min_p": 0.0}, "dh"),
+    ("typical_p", {**T, "typical_p": 0.1}, {**T, "typical_p": 1.0}, "dh"),
+    ("mirostat", {**T, "mirostat_target": 1.0, "mirostat_lr": 0.1}, {**T}, "dh"),
+    ("repetition_penalty", {**T, "repetition_penalty": 1.0}, {**T, "repetition_penalty": 2.0}, "tv"),
+    ("frequency_penalty", {**T, "frequency_penalty": 0.0}, {**T, "frequency_penalty": 2.0}, "tv"),
+    ("presence_penalty", {**T, "presence_penalty": 0.0}, {**T, "presence_penalty": 2.0}, "tv"),
 ]
+CONTRAST_NAMES = [c[0] for c in CONTRASTS]
 
 _lock = threading.Lock()
 
@@ -241,14 +256,13 @@ def negative_control_run(key, models, args) -> int:
                       f"TV={r.tv:.3f} p={r.tv_p:.3f}   support {r.support_tight}/{r.support_open}")
             rows.append(r)
 
-    usable = [r for r in rows if r.status == "ok"]
     # A pair where both arms are (near) all-unique has H = log2(n) on both sides,
     # dH identically zero, and p -> 1 by construction. It cannot produce a false
     # positive and so says nothing about the rate; counting it flatters the
     # calibration. nemotron-lightning at temperature 1.0 is this case.
-    degenerate = [r for r in usable
-                  if r.support_tight >= r.n_tight - 1 and r.support_open >= r.n_open - 1]
-    ok = [r for r in usable if r not in degenerate]
+    # assess_parameter now reports such a pair as insufficient itself.
+    degenerate = [r for r in rows if r.status == "insufficient" and "all-unique" in r.detail]
+    ok = [r for r in rows if r.status == "ok"]
     n = len(ok)
     if degenerate:
         print(f"\n  excluded {len(degenerate)} degenerate pair(s) — both arms all-unique, "
@@ -321,6 +335,13 @@ def main() -> int:
                     help="negative control: for each model collect K pairs of arms "
                          "at IDENTICAL settings and test them. Calibrates the "
                          "empirical false-positive rate on real output.")
+    ap.add_argument("--reassess", action="store_true",
+                    help="re-run the statistics on every checkpointed cell's retained "
+                         "completions and rewrite the checkpoint and report; no API calls. "
+                         "For when the test changes after the data were collected.")
+    ap.add_argument("--params", nargs="+", choices=CONTRAST_NAMES,
+                    help="subset of contrasts to RUN; temperature (the control) is always "
+                         "included, and cells already checkpointed are kept whatever this says")
     ap.add_argument("--provider", default=DEFAULT_PROVIDER, choices=sorted(ADAPTERS),
                     help="which provider serves --models; the adapter handles the rest")
     args = ap.parse_args()
@@ -334,6 +355,9 @@ def main() -> int:
         return negative_control_run(key, models, args)
 
     prompt_ids = args.prompts or list(PROMPTS)
+    selected = set(args.params or CONTRAST_NAMES) | {"temperature"}
+    if args.reassess:
+        selected = set()                  # re-derive what is on disk; run nothing
     per_prompt_results: dict[str, list] = {pid: [] for pid in prompt_ids}
 
     # Checkpoint every completed cell to JSONL and skip finished cells on
@@ -355,6 +379,31 @@ def main() -> int:
                   rec["prompt"], rec["parameter"])] = rec
         print(f"resuming: {len(done)} cells already on disk in {show(ckpt)}")
 
+    if args.reassess and ckpt and done:
+        # Re-derive every stored cell from its retained completions with the
+        # CURRENT test, then rewrite the checkpoint atomically. The completions
+        # are the data; the verdicts are derived and may be re-derived.
+        primaries = {c[0]: c[3] for c in CONTRASTS}
+        fresh = {}
+        for k, rec in done.items():
+            if rec["status"] in ("rejected", "unsupported"):
+                fresh[k] = rec
+                continue
+            r = assess_parameter(rec["model"], rec["parameter"], rec["setting_a"], rec["setting_b"],
+                                 rec["completions_tight"], rec["completions_open"],
+                                 n_permutations=args.permutations,
+                                 primary=primaries.get(rec["parameter"], "dh"))
+            r.completions_tight, r.completions_open = rec["completions_tight"], rec["completions_open"]
+            r.prompt, r.provider = rec["prompt"], rec.get("provider", DEFAULT_PROVIDER)
+            r.empty_tight, r.empty_open = rec.get("empty_tight", 0), rec.get("empty_open", 0)
+            fresh[k] = r.to_dict()
+        changed = sum(1 for k in done if done[k]["status"] != fresh[k]["status"])
+        tmp = ckpt.with_suffix(".jsonl.tmp")
+        tmp.write_text("".join(json.dumps(v, default=str) + "\n" for v in fresh.values()))
+        os.replace(tmp, ckpt)
+        done = fresh
+        print(f"reassessed {len(done)} cells; {changed} changed status")
+
     def restore(rec: dict):
         r = Distinguishability(model=rec["model"], parameter=rec["parameter"],
                                setting_a=rec["setting_a"], setting_b=rec["setting_b"])
@@ -366,12 +415,14 @@ def main() -> int:
     for model in models:
         for pid in prompt_ids:
             print(f"\n=== {model} — prompt '{pid}' ===")
-            for param, sa, sb in CONTRASTS:
+            for param, sa, sb, primary in CONTRASTS:
                 if (args.provider, model, pid, param) in done:
                     r = restore(done[(args.provider, model, pid, param)])
-                    print(f"  {param:<12} (from checkpoint) status={r.status}")
+                    print(f"  {param:<20} (from checkpoint) status={r.status}")
                     per_prompt_results[pid].append(r)
                     results.append(r)
+                    continue
+                if param not in selected:
                     continue
                 a, ea, ua, empty_a = collect(key, model, sa, args.n, args.workers,
                                              args.max_tokens, args.effort, PROMPTS[pid],
@@ -382,7 +433,7 @@ def main() -> int:
                 tokens += sum(ua + ub)
 
                 r = assess_parameter(model, param, sa, sb, a, b,
-                                     n_permutations=args.permutations)
+                                     n_permutations=args.permutations, primary=primary)
                 r.completions_tight, r.completions_open = a, b
                 r.prompt = pid
                 r.provider = args.provider
@@ -405,16 +456,25 @@ def main() -> int:
                                 "cut them off before any content. Raise --max-tokens.")
 
                 if r.status in ("rejected", "unsupported"):
-                    print(f"  {param:<12} {r.status.upper():<10} {r.detail[:76]}")
+                    print(f"  {param:<20} {r.status.upper():<10} {r.detail[:76]}")
                 elif r.status == "insufficient":
-                    print(f"  {param:<12} NO POWER   n={r.n_tight}/{r.n_open}  {r.detail[:56]}")
+                    print(f"  {param:<20} NO POWER   n={r.n_tight}/{r.n_open}  {r.detail[:56]}")
                 else:
-                    print(f"  {param:<12} H tight={r.entropy_tight:.2f} open={r.entropy_open:.2f}"
+                    print(f"  {param:<18} H tight={r.entropy_tight:.2f} open={r.entropy_open:.2f}"
                           f"  dH={r.dh:+.2f} (null {r.dh_null_mean:+.2f}) p={r.dh_p:.4f}"
-                          f"   TV={r.tv:.3f} p={r.tv_p:.4f}")
+                          f"   TV={r.tv:.3f} p={r.tv_p:.4f}   primary={r.primary}")
                 per_prompt_results[pid].append(r)
                 results.append(r)
-                if ckpt:
+                # A cell that is short because calls FAILED IN TRANSPORT — a 429
+                # storm, an exhausted balance, a network drop — is not a result
+                # and must not be checkpointed, or a resume would keep it instead
+                # of retrying. Rejected and unsupported are findings; those stay.
+                transport = [e for e in ea + eb
+                             if not e.startswith(("rejected", "unsupported"))]
+                if transport and r.status == "insufficient":
+                    print(f"  {param:<20} not checkpointed: {len(transport)} transport "
+                          f"failure(s), e.g. {transport[0][:60]}")
+                elif ckpt:
                     ckpt.parent.mkdir(parents=True, exist_ok=True)
                     with ckpt.open("a") as fh:
                         fh.write(json.dumps(r.to_dict(), default=str) + "\n")
@@ -442,12 +502,12 @@ def main() -> int:
 
     aggregates = []
     print(f"\nVERDICTS — per prompt, then majority over prompts whose control passed")
-    print(f"{'model':<32}{'param':<12}" + "".join(f"{pid:>11}" for pid in prompt_ids)
+    print(f"{'model':<32}{'param':<20}" + "".join(f"{pid:>11}" for pid in prompt_ids)
           + f"{'powered':>9}{'dist':>6}  verdict")
     sym = {"distinguishable": "yes", "no effect seen": "NO", "underpowered": "?",
            "rejected": "rej", "unsupported": "n/a", "insufficient": "n/a"}
     for model in models:
-        for param, _, _ in CONTRASTS:
+        for param, _, _, _ in CONTRASTS:
             if param == "temperature":
                 continue                      # it is the control, not a test subject
             pv = {}
@@ -460,7 +520,7 @@ def main() -> int:
                                     adj_by_prompt[pid].get((model, param), 1.0))
             agg = aggregate(pv, model, param)
             aggregates.append(agg)
-            line = f"{model:<32}{param:<12}"
+            line = f"{model:<32}{param:<20}"
             for pid in prompt_ids:
                 line += f"{sym.get(pv.get(pid, ''), '—'):>11}"
             line += f"{agg.n_powered:>9}{agg.n_distinguishable:>6}  {agg.verdict}"

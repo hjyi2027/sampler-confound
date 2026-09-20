@@ -77,11 +77,23 @@ def test_vendor_spellings_are_refused_at_the_boundary(name):
             ADAPTERS[name].encode({**REQ, bad: 1})
 
 
-def test_canonical_vocabulary_covers_every_sampler_in_the_frozen_grid():
+def test_canonical_vocabulary_covers_every_sampler_in_the_frozen_grid_and_every_contrast():
     from samplerconfound.config import FIXED, SAMPLER_CONFIGS
     used = {k for s in SAMPLER_CONFIGS for k in s if k != "id"}
     used |= {"max_tokens", "reasoning_effort"} & set(FIXED)
     assert used <= CANONICAL_PARAMS, used - CANONICAL_PARAMS
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    from scripts.probe_distinguishability import CONTRASTS
+    probed = {k for _, a, b, _ in CONTRASTS for k in {**a, **b}}
+    assert probed <= CANONICAL_PARAMS, probed - CANONICAL_PARAMS
+
+
+def test_google_can_say_the_penalties_it_documents():
+    wire, dropped = ADAPTERS["google"].encode({**REQ, "frequency_penalty": 2.0, "presence_penalty": 1.0})
+    g = wire["generationConfig"]
+    assert g["frequencyPenalty"] == 2.0 and g["presencePenalty"] == 1.0 and dropped == ()
 
 
 # --------------------------------------------------------------------------

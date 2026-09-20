@@ -34,7 +34,7 @@ from .adapters import ADAPTERS, Completion
 from .cache import CacheMiss, ResponseCache
 
 DEFAULT_PROVIDER = "fireworks"
-MAX_RETRIES = 6
+MAX_RETRIES = 10
 BACKOFF_BASE = 2.0
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -103,7 +103,21 @@ def _http(url: str, headers: dict, payload: dict, timeout: float,
             except Exception:
                 msg = r.text
             raise Rejected(f"rejected ({r.status_code}): {str(msg)[:160]}")
-        if r.status_code in (429, 500, 502, 503, 504):
+        if r.status_code == 429:
+            # Rate limits refill per minute. Exponential backoff to 64s here is
+            # the wrong shape: every worker sleeps through the refill, then
+            # they all burst again — observed as a full token bucket and zero
+            # throughput. Honour Retry-After when given; otherwise wait a few
+            # jittered seconds and try again, up to the retry budget.
+            last = "http 429"
+            ra = r.headers.get("Retry-After")
+            try:
+                wait = float(ra) if ra else min(2.0 * (attempt + 1), 8.0)
+            except ValueError:
+                wait = 4.0
+            time.sleep(wait + random.uniform(0, 1))
+            continue
+        if r.status_code in (500, 502, 503, 504):
             last = f"http {r.status_code}"
             time.sleep(BACKOFF_BASE * 2 ** attempt + random.uniform(0, 1))
             continue

@@ -61,6 +61,7 @@ from samplerconfound.paths import show
 from samplerconfound.pricing import PRICES
 from samplerconfound.provider import Rejected, Transient, call, list_models, load_key
 from scripts.probe_spend import usage_of
+from scripts.probe_distinguishability import CONTRAST_NAMES
 
 MATRIX = ROOT / "runs" / "matrix"
 PY = sys.executable
@@ -68,17 +69,17 @@ NOT_CHAT = re.compile(r"embed|rerank|whisper|tts|speech|guard|moderation|ocr|aud
                       r"flux|diffusion|clip|encoder|transcri", re.I)
 
 # calls per job, from the probe scripts' own arithmetic
-N_PROMPTS, N_CONTRASTS, N_DET_COND, N_DET, N_DET_PROMPTS = 4, 4, 3, 10, 5
+N_PROMPTS, N_CONTRASTS, N_DET_COND, N_DET, N_DET_PROMPTS = 4, len(CONTRAST_NAMES), 3, 10, 5
 DEFAULT_OUT_TOKENS = 300          # per call, for a model the cache has never seen
 IN_TOKENS = 45
 
 
-def calls_for(pass_name: str, n: int, k: int) -> int:
+def calls_for(pass_name: str, n: int, k: int, n_contrasts: int = N_CONTRASTS) -> int:
     if pass_name == "determinism":
         return N_DET_COND * N_DET * N_DET_PROMPTS
     if pass_name == "negative":
         return 2 * n * k
-    return N_PROMPTS * N_CONTRASTS * 2 * n
+    return N_PROMPTS * n_contrasts * 2 * n
 
 
 # --------------------------------------------------------------------------
@@ -190,17 +191,43 @@ def out_path(prov: str, model: str, pass_name: str, n: int) -> Path:
     return d / f"{model}.dist-n{n}.json"
 
 
+def _params_in(f: Path) -> set[str]:
+    try:
+        return {a["parameter"] for a in json.loads(f.read_text()).get("aggregates", [])}
+    except (OSError, json.JSONDecodeError, KeyError):
+        return set()
+
+
+def covered_params(prov: str, model: str, n: int) -> set[str]:
+    """Contrasts already tested for this model at >= n per arm, in any file."""
+    have = set()
+    d = MATRIX / prov
+    if n <= 40 and (d / f"{model}.json").exists():           # paid-tier run of 2026-09-20
+        have |= _params_in(d / f"{model}.json")
+    for f in d.glob(f"{model}.dist-n*.json"):
+        if int(f.name.rsplit("-n", 1)[1][:-5]) >= n:
+            have |= _params_in(f)
+    if prov == "fireworks" and n <= 40:                        # the budget-band run
+        try:
+            legacy = json.loads((ROOT / "runs" / "distinguish_multiprompt.json").read_text())
+            have |= {a["parameter"] for a in legacy["aggregates"] if a["model"] == model}
+        except (OSError, json.JSONDecodeError, KeyError):
+            pass
+    return have
+
+
+def missing_params(prov: str, model: str, n: int) -> list[str]:
+    """Contrasts still to run, in CONTRASTS order. Temperature is the control
+    and is re-run alongside them (cached where it already ran, so free)."""
+    have = covered_params(prov, model, n)
+    return [c for c in CONTRAST_NAMES if c != "temperature" and c not in have]
+
+
 def already_done(prov: str, model: str, pass_name: str, n: int) -> bool:
+    if pass_name == "distinguish":
+        return not missing_params(prov, model, n)
     if out_path(prov, model, pass_name, n).exists():
         return True
-    if pass_name == "distinguish":
-        # a thicker run of the same model satisfies a thinner pass; the
-        # paid-tier run of 2026-09-20 predates the naming scheme (<model>.json, n=40)
-        if n <= 40 and (MATRIX / prov / f"{model}.json").exists():
-            return True
-        for f in (MATRIX / prov).glob(f"{model}.dist-n*.json"):
-            if int(f.name.rsplit("-n", 1)[1][:-5]) >= n:
-                return True
     if pass_name == "determinism":
         legacy = MATRIX / prov / "determinism.json"
         if legacy.exists():
@@ -215,13 +242,6 @@ def already_done(prov: str, model: str, pass_name: str, n: int) -> bool:
                     return True
             except (OSError, json.JSONDecodeError, KeyError):
                 pass
-    if pass_name == "distinguish" and prov == "fireworks" and n <= 40:
-        try:
-            d = json.loads((ROOT / "runs" / "distinguish_multiprompt.json").read_text())
-            if any(a["model"] == model for a in d["aggregates"]):
-                return True
-        except (OSError, json.JSONDecodeError, KeyError):
-            pass
     return False
 
 
@@ -234,6 +254,8 @@ def command(prov: str, model: str, pass_name: str, n: int, k: int, workers: int)
            "--n", str(n), "--workers", str(workers), "--out", str(out)]
     if pass_name == "negative":
         cmd += ["--negative", str(k)]
+    else:
+        cmd += ["--params", *missing_params(prov, model, n)]
     return cmd
 
 
@@ -277,7 +299,9 @@ def main() -> int:
         passes.append((p, name, n))
 
     def estimate(prov, m, name, n, mean_out):
-        calls = calls_for(name, n, args.negative_k)
+        # a distinguish job runs only the contrasts not yet covered, plus the control
+        k = 1 + len(missing_params(prov, m, n)) if name == "distinguish" else N_CONTRASTS
+        calls = calls_for(name, n, args.negative_k, k)
         p_in, p_out = price_of(prov, m)
         o = mean_out.get((prov, m), DEFAULT_OUT_TOKENS)
         return calls * (IN_TOKENS * p_in + o * p_out) / 1e6

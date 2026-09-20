@@ -38,12 +38,13 @@ from dataclasses import dataclass, field
 
 # The vocabulary a probe may use. Anything else is refused at the boundary, so
 # a vendor spelling ("random_seed", "topK") cannot leak into probe code.
-CANONICAL_PARAMS = frozenset({
-    "model", "messages", "max_tokens",
-    "temperature", "top_p", "top_k", "min_p", "seed", "reasoning_effort",
+SAMPLER_PARAMS = frozenset({
+    "temperature", "top_p", "top_k", "min_p", "typical_p",
+    "repetition_penalty", "frequency_penalty", "presence_penalty",
+    "mirostat_target", "mirostat_lr",
+    "seed", "reasoning_effort",
 })
-SAMPLER_PARAMS = frozenset({"temperature", "top_p", "top_k", "min_p", "seed",
-                            "reasoning_effort"})
+CANONICAL_PARAMS = frozenset({"model", "messages", "max_tokens"}) | SAMPLER_PARAMS
 
 
 @dataclass(frozen=True)
@@ -228,8 +229,11 @@ class Google(Adapter):
     env = "GOOGLE_API_KEY"
     signup = "https://aistudio.google.com/apikey"
     _config = {"temperature": "temperature", "top_p": "topP", "top_k": "topK",
-               "min_p": "minP",             # not a field; Google's 400 is the finding
-               "seed": "seed", "max_tokens": "maxOutputTokens"}
+               "seed": "seed", "max_tokens": "maxOutputTokens",
+               "frequency_penalty": "frequencyPenalty", "presence_penalty": "presencePenalty",
+               # not generationConfig fields; Google's 400 on each is the finding
+               "min_p": "minP", "typical_p": "typicalP", "repetition_penalty": "repetitionPenalty",
+               "mirostat_target": "mirostatTarget", "mirostat_lr": "mirostatLr"}
 
     def url(self, wire: dict) -> str:
         return f"{self.base}/{wire['model']}:generateContent"

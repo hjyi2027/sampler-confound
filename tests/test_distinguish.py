@@ -285,18 +285,16 @@ def test_negative_control_rate_is_near_nominal_over_many_pairs():
     assert fp / 60 < 0.12, f"false-positive rate {fp/60:.0%} at nominal 5%"
 
 
-def test_a_degenerate_pair_cannot_reject_and_must_not_count():
-    # Both arms all-unique: H = log2(n) on both sides, dH = 0, p = 1. Such a pair
-    # cannot produce a false positive, so including it in a rate flatters the
-    # calibration. The script excludes these; this pins the arithmetic.
+def test_a_degenerate_pair_is_insufficient_and_must_not_count():
+    # Both arms all-unique: H = log2(n) on both sides, dH = 0, p = 1 by
+    # construction. Such a pair cannot produce a false positive, so counting it
+    # in a rate flatters the calibration; and it cannot show an effect, so
+    # counting it as "no effect" flatters a parameter. It is neither.
     a = [f"u{i}" for i in range(40)]
     b = [f"v{i}" for i in range(40)]
     r = assess_parameter("m", "null", {}, {}, a, b, n_permutations=300)
-    assert r.dh == pytest.approx(0.0)
-    assert r.dh_p == pytest.approx(1.0, abs=0.01)
-    assert r.support_tight >= r.n_tight - 1 and r.support_open >= r.n_open - 1
-
-
+    assert r.status == "insufficient" and "all-unique" in r.detail
+    assert r.support_tight == 40 and r.support_open == 40
 # --------------------------------------------------------------------------
 # aggregation across prompts
 # --------------------------------------------------------------------------
@@ -337,3 +335,44 @@ def test_an_even_split_is_reported_as_mixed_not_forced():
 def test_one_prompt_alone_cannot_carry_a_verdict():
     a = aggregate({"p1": "distinguishable"}, "m", "top_p")
     assert a.verdict == "underpowered", "a single prompt is a single sample of prompt space"
+
+
+def test_a_penalty_contrast_uses_total_variation_as_its_primary():
+    """A penalty can raise entropy; the one-sided entropy drop would then call a
+    real effect 'no effect'. The two-sided TV is the primary for those cells."""
+    import random
+    rng = random.Random(0)
+    narrow = [rng.choice("ab") for _ in range(40)]
+    wide = [rng.choice("abcdefgh") for _ in range(40)]
+    # "tight" arm is the WIDER one here: entropy goes up, dH is negative
+    r = assess_parameter("m", "repetition_penalty", {"repetition_penalty": 1.0},
+                         {"repetition_penalty": 2.0}, wide, narrow,
+                         n_permutations=2000, primary="tv")
+    assert r.primary == "tv" and r.p_value == r.tv_p
+    assert r.tv_p < 0.01, "a large two-sided shift must be detected"
+    assert r.dh_p > 0.5, "and the one-sided test would have missed it"
+    d = assess_parameter("m", "top_p", {}, {}, narrow, wide, n_permutations=500)
+    assert d.primary == "dh" and d.p_value == d.dh_p
+
+
+def test_primary_must_be_a_known_statistic():
+    import pytest
+    with pytest.raises(ValueError, match="primary"):
+        assess_parameter("m", "x", {}, {}, ["a"] * 10, ["b"] * 10, primary="chi2")
+
+
+def test_both_arms_all_unique_is_insufficient_not_no_effect():
+    """The degeneracy that bites penalty contrasts: at temperature 1.0 both
+    arms are 40 distinct strings, so TV is 1 under every permutation and
+    p = 1 by construction. That is not evidence the parameter did nothing."""
+    tight = [f"s{i}" for i in range(40)]
+    open_ = [f"t{i}" for i in range(40)]
+    r = assess_parameter("m", "presence_penalty", {}, {}, tight, open_,
+                         n_permutations=200, primary="tv")
+    assert r.status == "insufficient" and "all-unique" in r.detail
+    # one repeat short of all-unique on one side still counts as degenerate
+    r = assess_parameter("m", "x", {}, {}, tight[:-1] + ["s0"], open_, n_permutations=200)
+    assert r.status == "insufficient"
+    # but a tight arm with real repeats is a live test
+    r = assess_parameter("m", "x", {}, {}, ["a"] * 20 + ["b"] * 20, open_, n_permutations=500)
+    assert r.status == "ok"

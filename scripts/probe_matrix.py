@@ -1,6 +1,21 @@
 #!/usr/bin/env python3
 """The audit's coverage, in one table: every probed model, on every provider,
-with its price tier, its parameter verdicts and its determinism.
+with its price tier, a verdict per sampling parameter, and its determinism.
+
+A parameter column reads, per (provider, model):
+
+    yes   accepted and honoured: the two arms are distinguishable
+    NO    accepted and inert: a passed temperature control says the probe had
+          power on this model and prompt, and the parameter still moved nothing
+    ?     accepted, verdict withheld: the control failed, or every prompt was
+          degenerate (both arms all-unique, so exact-match statistics have no
+          range — the usual case for a penalty on a free-text prompt)
+    mix   prompts disagree
+    rej   the provider refused the parameter (HTTP 4xx) — not accepted
+    n/a   the adapter has no wire form for it on this provider
+
+"Accepted" is what the provider's HTTP status says; "honoured" is what the
+output distribution says. The gap between the two columns is the finding.
 
 Reads the per-model probe outputs under runs/matrix/<provider>/ plus the
 original budget-band runs (runs/distinguish_multiprompt.json and
@@ -30,7 +45,11 @@ from samplerconfound.pricing import PRICES
 MATRIX = ROOT / "runs" / "matrix"
 LEGACY_DIST = ROOT / "runs" / "distinguish_multiprompt.json"
 LEGACY_DET = ROOT / "runs" / "determinism.json"
-PARAMS = ("top_p", "top_k", "min_p")
+PARAMS = ("top_p", "top_k", "min_p", "typical_p", "mirostat",
+          "repetition_penalty", "frequency_penalty", "presence_penalty")
+SHORT = {"top_p": "top_p", "top_k": "top_k", "min_p": "min_p", "typical_p": "typ_p",
+         "mirostat": "miro", "repetition_penalty": "rep", "frequency_penalty": "freq",
+         "presence_penalty": "pres"}
 SYM = {"distinguishable": "yes", "no effect seen": "NO", "underpowered": "?",
        "mixed": "mix", "rejected": "rej", "unsupported": "n/a", "insufficient": "n/a"}
 
@@ -46,8 +65,9 @@ def distinguish_rows(provider: str, d: dict) -> dict[str, dict]:
     """model -> {param: verdict, "control": fraction, "powered_prompts": n}"""
     out: dict[str, dict] = {}
     for a in d.get("aggregates", []):
-        row = out.setdefault(a["model"], {"n_per_arm": d.get("n_per_arm")})
+        row = out.setdefault(a["model"], {})
         row[a["parameter"]] = a["verdict"]
+        row.setdefault("n_by_param", {})[a["parameter"]] = d.get("n_per_arm")
         row.setdefault("n_prompts", a["n_prompts"])
     for pid, by_model in d.get("positive_control_by_prompt", {}).items():
         for m, mp in by_model.items():
@@ -76,7 +96,10 @@ def collect() -> list[dict]:
 
     def merge(provider, dist, det):
         for m, r in distinguish_rows(provider, dist or {}).items():
-            rows.setdefault((provider, m), {"provider": provider, "model": m}).update(r)
+            row = rows.setdefault((provider, m), {"provider": provider, "model": m})
+            nbp = {**row.get("n_by_param", {}), **r.pop("n_by_param", {})}
+            row.update(r)
+            row["n_by_param"] = nbp
         for m, r in determinism_rows(det or {}).items():
             rows.setdefault((provider, m), {"provider": provider, "model": m}).update(r)
 
@@ -86,7 +109,10 @@ def collect() -> list[dict]:
             prov = pdir.name
             # legacy: one multi-model determinism file, and <model>.json at n=40
             merge(prov, None, _load(pdir / "determinism.json"))
-            best: dict[str, tuple[int, Path]] = {}
+            # every distinguishability file for a model, thinnest first, so a
+            # thicker run of the same parameter overrides a thinner one and a
+            # parameter only the later file has is added rather than lost
+            files: list[tuple[int, str, Path]] = []
             for f in pdir.glob("*.json"):
                 name = f.name
                 if name in ("determinism.json", "matrix.json") or ".neg-n" in name:
@@ -96,16 +122,16 @@ def collect() -> list[dict]:
                     continue
                 m = re.match(r"(.+)\.dist-n(\d+)\.json$", name)
                 model, n = (m.group(1), int(m.group(2))) if m else (name[:-5], 40)
-                if model not in best or n > best[model][0]:
-                    best[model] = (n, f)           # the thickest run of a model wins
-            for model, (n, f) in best.items():
+                files.append((n, model, f))
+            for n, model, f in sorted(files):
                 d = _load(f)
                 if d:
                     merge(prov, d, None)
-                    rows[(prov, model)]["n_per_arm"] = d.get("n_per_arm", n)
 
     out = []
     for (prov, m), r in rows.items():
+        ns = sorted({n for n in r.get("n_by_param", {}).values() if n})
+        r["n_per_arm"] = ns[0] if len(ns) == 1 else (f"{ns[0]}-{ns[-1]}" if ns else None)
         p_in, p_out = PRICES.get(m, (float("nan"), float("nan")))
         r["usd_out_per_1m"] = p_out
         r["tier"] = "paid" if p_out == p_out else "unpriced"
@@ -120,13 +146,13 @@ def main() -> int:
     args = ap.parse_args()
     rows = collect()
 
-    print(f"{'provider':<11}{'model':<32}{'$/1M out':>9}{'n':>4}{'ctrl':>6}{'pwr':>5}"
-          + "".join(f"{p:>7}" for p in PARAMS) + f"{'greedy':>8}{'seed':>6}")
+    print(f"{'provider':<11}{'model':<32}{'$/1M out':>9}{'n':>6}{'ctrl':>6}{'pwr':>5}"
+          + "".join(f"{SHORT[p]:>7}" for p in PARAMS) + f"{'greedy':>8}{'seed':>6}")
     for r in rows:
         ctrl = r.get("control_removed", float("nan"))
         print(f"{r['provider']:<11}{r['model']:<32}"
               f"{r['usd_out_per_1m']:>9.2f}"
-              f"{str(r.get('n_per_arm', '—')):>4}"
+              f"{str(r.get('n_per_arm') or '—'):>6}"
               f"{(f'{ctrl:.0%}' if ctrl == ctrl else '—'):>6}"
               f"{str(r.get('powered_prompts', '—')) + '/' + str(r.get('n_prompts', '—')):>5}"
               + "".join(f"{SYM.get(r.get(p, ''), '—'):>7}" for p in PARAMS)
@@ -139,6 +165,7 @@ def main() -> int:
     print("ctrl = share of open-arm entropy temperature removes (positive control), mean over prompts;"
           " pwr = prompts whose control passed / prompts run;"
           " yes/NO/? = distinguishable / no effect seen with power / underpowered;"
+          " rej = provider refused the parameter; n/a = adapter has no wire form for it;"
           " greedy = exact-match rate of 10 identical T=0 calls;"
           " seed = fixed seed reproduces a non-deterministic prompt")
     if args.json:
