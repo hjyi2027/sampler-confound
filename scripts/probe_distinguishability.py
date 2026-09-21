@@ -562,8 +562,10 @@ def main() -> int:
             agg = aggregate(pv, model, param) if pv else Aggregate(model=model, parameter=param)
             if fv:
                 agg.forced = fv
-                # one forced prompt today; a majority if there are ever several
-                agg.verdict_forced = aggregate(fv, model, f"{param}[forced]").verdict
+                # One forced prompt is its own verdict; aggregate() wants two
+                # powered prompts for a majority and would call it underpowered.
+                agg.verdict_forced = (next(iter(fv.values())) if len(fv) == 1
+                                      else aggregate(fv, model, f"{param}[forced]").verdict)
             aggregates.append(agg)
             line = f"{model:<32}{param:<20}"
             for pid in prompt_ids:

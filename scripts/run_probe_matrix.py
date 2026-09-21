@@ -22,9 +22,12 @@ Cheapest first within a pass, so a cap admits the most models. A model with no
 published price is bounded at its provider's highest listed price; a provider
 with no price table at all is run with spend counted as zero and said so.
 
-Spend is measured, not estimated: the sum over cache entries stored since this
-run began (scripts/probe_spend.py's arithmetic). Each job is admitted only if
-measured spend plus that job's estimate fits under --budget-usd. The estimate
+Spend is measured, not estimated: the sum over cache entries stored since the
+BUDGET WINDOW began (scripts/probe_spend.py's arithmetic). The window persists
+in runs/matrix/.budget.json across invocations — a relaunch continues the
+same cap rather than resetting the meter, which is how three relaunches on
+2026-09-21 spent three caps. --new-budget opens a fresh window. Each job is
+admitted only if measured spend plus that job's estimate fits under the cap. The estimate
 uses the model's own mean output length where the cache has one and a
 conservative default where it does not.
 
@@ -182,6 +185,26 @@ def make_price_of(found: dict[str, list[str]]):
     return price_of, by_prov_max
 
 
+BUDGET_FILE = MATRIX / ".budget.json"
+
+
+def budget_window(cap: float, fresh: bool) -> float:
+    """Start time of the budget window: the one on disk unless --new-budget."""
+    if not fresh and BUDGET_FILE.exists():
+        try:
+            w = json.loads(BUDGET_FILE.read_text())
+            print(f"budget window continues from {time.strftime('%Y-%m-%d %H:%M', time.localtime(w['started']))}"
+                  f" (cap ${cap:.2f}); --new-budget to reset")
+            return float(w["started"])
+        except (json.JSONDecodeError, KeyError, ValueError):
+            pass
+    t0 = time.time()
+    BUDGET_FILE.parent.mkdir(parents=True, exist_ok=True)
+    BUDGET_FILE.write_text(json.dumps({"started": t0, "cap": cap}))
+    print(f"new budget window from now (cap ${cap:.2f})")
+    return t0
+
+
 def out_path(prov: str, model: str, pass_name: str, n: int) -> Path:
     d = MATRIX / prov
     if pass_name == "determinism":
@@ -275,10 +298,12 @@ def main() -> int:
     ap.add_argument("--passes", nargs="+", default=["determinism", "distinguish-thin", "negative", "distinguish-full"])
     ap.add_argument("--workers", type=int, default=4, help="threads per probe subprocess")
     ap.add_argument("--jobs", type=int, default=4, help="probe subprocesses at once")
+    ap.add_argument("--new-budget", action="store_true",
+                    help="start a fresh budget window; default continues the one on disk")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
-    t0 = time.time()
+    t0 = budget_window(args.budget_usd, args.new_budget)
     found = discover(args.providers, args.models)
     if not found:
         print("nothing to run: no provider with a key")

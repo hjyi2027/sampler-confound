@@ -93,3 +93,14 @@ def test_a_penalty_without_its_forced_prompt_is_not_covered(tmp_path, monkeypatc
             a["verdict_forced"] = "distinguishable"
     (tmp_path / "groq" / "m.dist-n40.json").write_text(json.dumps({"n_per_arm": 40, "aggregates": aggs}))
     assert rpm.missing_params("groq", "m", 40) == ["presence_penalty"]
+
+
+def test_budget_window_persists_across_invocations(tmp_path, monkeypatch):
+    """Three relaunches must not be three caps."""
+    monkeypatch.setattr(rpm, "MATRIX", tmp_path)
+    monkeypatch.setattr(rpm, "BUDGET_FILE", tmp_path / ".budget.json")
+    t0 = rpm.budget_window(5.0, fresh=True)
+    t1 = rpm.budget_window(5.0, fresh=False)
+    assert t1 == t0
+    t2 = rpm.budget_window(5.0, fresh=True)
+    assert t2 >= t0
