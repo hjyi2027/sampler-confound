@@ -996,3 +996,44 @@ checkpoint files were the only progress signal before.
 
 Still one provider. The runner skips a provider with no key and says where to
 get one.
+
+## 2026-09-22 — every parameter the API accepts, per (provider, model), both controls
+
+Fireworks documents nine sampling parameters; the probe tested four. All nine
+now run per model. The three penalties needed two design changes: a two-sided
+primary statistic (a penalty has no entropy direction — kimi-k2p6's
+frequency_penalty cell emptied the open arm, dH = −3.3, one-sided p = 1.0, TV
+p = 0.0002), and a forced-repetition prompt as their own positive control,
+because a null on a one-sentence reply means the penalty had nothing to act
+on. "Applied" (forced prompt) and "matters on free text" are reported
+separately; frequency_penalty is applied on 18/18 and matters on 5.
+
+Findings: mirostat is accepted everywhere and inert on six models — the first
+parameter on this provider whose honouring differs between models behind one
+stack, which retracts the "uniform on a single stack" claim of 09-20 for that
+parameter. typical_p is ignored on muse-glimmer-30b, which also ignores
+mirostat and repetition_penalty. presence_penalty is undetermined: bounded at
+2 logits, it cannot overturn a forced token, so the forced prompt does not
+decide it. repetition_penalty=2.0, the documented maximum, makes Fireworks
+hang mid-generation (streamed 300 chunks in 7.6s then nothing until the
+connection dropped at 742s; a non-streaming call sat 55 minutes).
+
+Test rules added: both arms all-unique is insufficient, not "no effect" (the
+negative control already excluded such pairs); a request the provider does
+not finish is a recorded status, not a retry loop; --reassess re-derives
+every cell on disk under the current test with no API call, and was run on
+all 32 report files.
+
+**Budget: overspent.** Measured priced spend since 09-21 is $20.17; all-time
+$28.32 plus roughly $1 of unpriced usage, against the ~$25 the owner named.
+The cause: the runner's cap was measured from its own start, and three
+relaunches (429 policy, hang fix, concurrency) each reset the meter, so the
+expensive models were admitted at full N on the second launch as "$0.01
+spent". The budget window now persists in runs/matrix/.budget.json across
+invocations. This should have been caught before the second relaunch.
+
+Also fixed on the way: 429 backoff was exponential to 64s, which put every
+worker to sleep through the per-minute refill and burst again (a full token
+bucket and zero throughput); it is now short and honours Retry-After. The
+account limit is 72k generated tokens a minute, which caps any probe at about
+70 capped-length calls a minute regardless of workers.

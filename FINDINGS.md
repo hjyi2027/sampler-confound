@@ -256,6 +256,106 @@ underpowered or mixed on two of them — and the coverage table carries the n
 so a thin row cannot pass as a thick one. That brings the provider to
 **eighteen served chat models, all probed.**
 
+### Every parameter the API accepts
+
+Fireworks documents nine sampling parameters. The test above covered four. On
+2026-09-21/22 the other five — `typical_p`, `mirostat`, `repetition_penalty`,
+`frequency_penalty`, `presence_penalty` — ran on all eighteen models, at n=40
+on the fourteen the cap admitted and n=10 on the rest, with both controls per
+model as before. Two changes to the test were needed, and each is a lesson
+about what "parameter honoured" means.
+
+*A penalty has no direction.* The primary statistic for a truncation
+parameter is the one-sided entropy drop, because a tight arm that is honoured
+has less entropy. A penalty reshapes the distribution in no fixed direction:
+on kimi-k2p6 `frequency_penalty=2.0` *emptied* the open arm (dH = −3.3,
+one-sided p = 1.0) while the two-sided total-variation test saw it at
+p = 0.0002. Penalty contrasts use TV as their primary.
+
+*A penalty needs something to act on.* A penalty acts on tokens that have
+already appeared, and a one-sentence reply has few. A null on the free-text
+prompts therefore says the penalty had nothing to do, not that it was ignored
+— and a passed temperature control does not help, because it certifies that
+the probe can see a shift, not that a shift was possible. So the three
+penalties were also run on a prompt that *forces* repetition ("Repeat the word
+'yes' twenty times"). With the penalty off the reply is one constant string;
+an applied `frequency_penalty` at its maximum cannot produce it. That cell is
+its own control, and the table below reports **applied** (forced prompt) and
+**matters on free text** separately, because they disagree, and the
+disagreement is the finding.
+
+| model | n | typical_p | mirostat | rep (applied / free text) | freq (applied / free text) | pres (applied / free text) |
+|---|--:|---|---|---|---|---|
+| nemotron-lightning-3p5-30b-a3b | 40 | ? | ? | yes / ? | yes / yes | NO / ? |
+| glm-5p3-flash | 40 | yes | mix | yes / yes | yes / NO | n/a / NO |
+| gpt-oss-120b | 40 | yes | yes | yes / yes | yes / NO | n/a / NO |
+| deepseek-v4-flash-0731 | 40 | mix | ? | yes / yes | yes / yes | n/a / ? |
+| minimax-m3 | 40 | yes | yes | yes / yes | yes / mix | n/a / ? |
+| deepseek-v4p1-flash | 40 | yes | **NO** | yes / yes | yes / mix | n/a / NO |
+| muse-glimmer-30b | 40 | **NO** | **NO** | **NO** / yes | yes / mix | n/a / NO |
+| nemotron-3-ultra-nvfp4 | 40 | yes | **NO** | yes / yes | yes / NO | NO / NO |
+| deepseek-v4-pro-0813 | 40 | mix | **NO** | yes / yes | yes / NO | n/a / NO |
+| kimi-k2p6 | 10–40 | ? | ? | yes / ? | yes / yes | n/a / ? |
+| kimi-k2p7-code | 40 | ? | yes | yes / yes | yes / ? | n/a / ? |
+| glm-5p3 | 40 | yes | yes | yes / yes | yes / NO | n/a / NO |
+| glm-5p2 | 40 | yes | ? | yes / yes | yes / yes | n/a / ? |
+| qwen3p8-max | 40 | mix | **NO** | n/a / yes | yes / NO | n/a / NO |
+| kimi-k3 | 40 | yes | yes | yes / yes | yes / NO | n/a / NO |
+| inkling | 10 | ? | ? | n/a / yes | yes / ? | n/a / ? |
+| qwen3p8-2p4t-a95b | 10 | mix | **NO** | n/a / yes | yes / NO | n/a / NO |
+| deepseek-v4-flash-vision-exp | 10 | ? | ? | yes / ? | yes / yes | n/a / ? |
+
+yes = distinguishable; NO = no effect with a passed control; ? = control failed
+or every prompt degenerate; mix = prompts disagree; n/a = both arms constant
+(the forced token survived the penalty), no verdict.
+
+What the five add to the four:
+
+**`frequency_penalty` is applied on 18 of 18 models and matters on a sentence
+on 5.** Every model breaks forced repetition under it; on eight, the same
+parameter at its maximum leaves the distribution of a one-sentence reply
+indistinguishable from the control. Both are true. A harness that reports
+"frequency_penalty=2.0" is reporting a setting that is real and, on most of
+these models, inert for short generation.
+
+**`mirostat` is accepted everywhere and inert on six models.** This is the
+first parameter on this provider whose honouring differs *between models
+behind one stack*: applied on gpt-oss-120b, minimax-m3, kimi-k2p7-code,
+glm-5p3 and kimi-k3; accepted and doing nothing on deepseek-v4p1-flash,
+muse-glimmer-30b, nemotron-3-ultra, deepseek-v4-pro-0813, qwen3p8-max and
+qwen3p8-2p4t. The earlier claim that honouring is uniform on a single serving
+stack was true of the parameters tested then and is false of this one.
+
+**`typical_p` is honoured on most models and ignored on muse-glimmer-30b**,
+which also ignores `mirostat` and `repetition_penalty` — three accepted,
+inert parameters on one model, alongside the `top_p` it was wrongly accused of
+ignoring in §1.
+
+**`presence_penalty` is undetermined by this design.** It is an additive
+penalty bounded at 2.0 logits; a forced "yes" survives it on 16 of 18 models,
+so the forced prompt cannot separate "not applied" from "applied but too small
+to overturn a dominant token". On free text it is "no effect" wherever the
+probe had power. A decisive control for a bounded additive penalty needs a
+prompt where the forced token wins by less than two logits, which this run
+did not have. The column is reported as what it is.
+
+**`repetition_penalty=2.0` — the documented maximum — makes Fireworks hang.**
+During collection, requests at this value were accepted and then stalled
+mid-generation: streaming showed 300 chunks in 7.6s and then nothing until the
+connection dropped at 742s; one non-streaming call sat 55 minutes before a
+ConnectionError. Every affected call eventually completed on retry at lower
+concurrency, so no cell carries the status, but the probe now records a
+request the provider does not finish as its own outcome (`transport`, shown
+`err`) rather than retrying it for an hour, and the value is noted here as
+accepted and unreliable.
+
+Two rules were added to the test itself. A cell where both arms are all-unique
+— the usual case for a penalty at temperature 1.0 on free text — has p = 1 by
+construction and is reported as *insufficient*, not "no effect"; the negative
+control already excluded such pairs, and the main test now does too. And every
+cell on disk was re-derived under the current test with `--reassess`, which
+touches no API: the completions are the data, the verdicts are derived.
+
 **The negative control, per model.** The false-positive calibration was
 originally 0/25 pairs across eight models. It now exists for every model with
 a usable pair: one pair of identical arms at n=40 per model, 12 informative
@@ -501,7 +601,7 @@ extrapolation and is far better powered.
 
 | finding | script | data |
 |---|---|---|
-| §1 | `scripts/probe_distinguishability.py`, `samplerconfound/distinguish.py` | `runs/distinguish.json`, `runs/negative_control.json`, `runs/distinguish_multiprompt.json`, `runs/matrix/fireworks/<model>.json` |
+| §1 | `scripts/probe_distinguishability.py`, `samplerconfound/distinguish.py` | `runs/distinguish.json`, `runs/negative_control.json`, `runs/distinguish_multiprompt.json`, `runs/matrix/fireworks/<model>.json`, `<model>.dist-n{10,40}.json` |
 | §2 | `scripts/probe_determinism.py` | `runs/determinism.json`, `runs/matrix/fireworks/determinism.json` |
 | coverage | `scripts/probe_matrix.py`, `scripts/probe_spend.py` | `runs/matrix/matrix.json` |
 | §3 | — | `MODEL_CANDIDATES` in `samplerconfound/config.py` |

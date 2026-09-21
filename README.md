@@ -187,8 +187,11 @@ identical arms — overturned every retestable cell. Run on **eighteen models �
 one provider serves — spanning $0.20 to $15.00 per million output tokens**, the paid
 tier included so the sample is not whichever models the provider gives away,
 `top_p`, `top_k` and `min_p` are all distinguishable wherever the probe has
-power. Parameter-honouring on a single serving stack is uniform; the
-dimension that can differ is the provider (FINDINGS §1;
+power. Extending to every parameter the API documents — nine — broke the
+uniformity: `mirostat` is accepted everywhere and inert on six models,
+`typical_p` is ignored on one, and `frequency_penalty` is applied on all
+eighteen yet moves a one-sentence reply on five. "Accepted", "applied" and
+"matters" are three different columns (FINDINGS §1;
 `scripts/probe_matrix.py` for the coverage table).
 
 **One model in eighteen is deterministic at temperature 0, and none honours
