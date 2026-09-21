@@ -35,6 +35,7 @@ from .cache import CacheMiss, ResponseCache
 
 DEFAULT_PROVIDER = "fireworks"
 MAX_RETRIES = 10
+NETWORK_RETRIES = 2      # attempts after a timeout or dropped connection
 BACKOFF_BASE = 2.0
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -88,7 +89,14 @@ def _http(url: str, headers: dict, payload: dict, timeout: float,
         try:
             r = requests.post(url, headers=headers, json=payload, timeout=timeout)
         except requests.RequestException as e:
+            # A dropped connection or a read timeout is retried twice, not up
+            # to the full retry budget: a request the provider will not finish
+            # (repetition_penalty=2.0 hangs mid-generation on Fireworks) would
+            # otherwise hold a worker for retries x timeout — observed as ten
+            # attempts at 180s each, half an hour per call.
             last = f"network: {e.__class__.__name__}"
+            if attempt >= NETWORK_RETRIES:
+                break
             time.sleep(BACKOFF_BASE * 2 ** attempt + random.uniform(0, 1))
             continue
         if r.status_code == 200:

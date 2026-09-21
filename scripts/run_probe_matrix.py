@@ -61,7 +61,7 @@ from samplerconfound.paths import show
 from samplerconfound.pricing import PRICES
 from samplerconfound.provider import Rejected, Transient, call, list_models, load_key
 from scripts.probe_spend import usage_of
-from scripts.probe_distinguishability import CONTRAST_NAMES
+from scripts.probe_distinguishability import CONTRAST_NAMES, FORCED_FOR
 
 MATRIX = ROOT / "runs" / "matrix"
 PY = sys.executable
@@ -192,10 +192,14 @@ def out_path(prov: str, model: str, pass_name: str, n: int) -> Path:
 
 
 def _params_in(f: Path) -> set[str]:
+    """Contrasts a report covers. A penalty counts only once its forced-
+    repetition prompt has run; without that its verdict is uninterpretable."""
     try:
-        return {a["parameter"] for a in json.loads(f.read_text()).get("aggregates", [])}
-    except (OSError, json.JSONDecodeError, KeyError):
+        aggs = json.loads(f.read_text()).get("aggregates", [])
+    except (OSError, json.JSONDecodeError):
         return set()
+    return {a["parameter"] for a in aggs
+            if a["parameter"] not in FORCED_FOR or a.get("verdict_forced")}
 
 
 def covered_params(prov: str, model: str, n: int) -> set[str]:

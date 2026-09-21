@@ -20,6 +20,7 @@ questions and the second needs the task.
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import json
 import os
 import sys
@@ -37,6 +38,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from samplerconfound.distinguish import (
+    Aggregate,
     Distinguishability,
     assess_parameter,
     holm_adjust,
@@ -73,6 +75,19 @@ PROMPTS = {
     "question":  "Ask one question about anything. Reply with the question only.",
 }
 PROMPT = PROMPTS["word_prob"]    # default for single-prompt calls (calibration, negative control)
+
+# The penalty parameters only act on tokens that have already appeared, and a
+# one-sentence reply has few repeats: a null on the prompts above says the
+# penalty had nothing to act on, not that it was ignored. So the penalties are
+# also tested on a prompt that FORCES repetition. With the penalty off the reply
+# is one constant string; with an honoured penalty at its maximum the model
+# cannot produce it. This prompt is its own positive control — a null here is
+# "the provider is not applying the parameter" — and it is run only for the
+# contrasts listed in FORCED_FOR, so it does not change the truncation tests.
+FORCED_PROMPTS = {
+    "repeat": "Repeat the word 'yes' twenty times, separated by spaces. Reply with only that.",
+}
+FORCED_FOR = {"repetition_penalty", "frequency_penalty", "presence_penalty"}
 
 # (parameter, TIGHT setting, OPEN setting, primary statistic). One parameter
 # varies; everything else is identical between the arms, including temperature,
@@ -120,7 +135,7 @@ def one(key: str, model: str, params: dict, max_tokens: int, effort: str | None,
             "max_tokens": max_tokens, **params}
     if effort:
         body["reasoning_effort"] = effort
-    c, err = complete(key, body, replicate, provider=provider, timeout=180)
+    c, err = complete(key, body, replicate, provider=provider, timeout=120)
     if err:
         return None, err, 0
     # If the adapter had no wire form for a parameter of THIS arm, the arm was
@@ -335,6 +350,8 @@ def main() -> int:
                     help="negative control: for each model collect K pairs of arms "
                          "at IDENTICAL settings and test them. Calibrates the "
                          "empirical false-positive rate on real output.")
+    ap.add_argument("--retry-failed", action="store_true",
+                    help="re-run cells checkpointed as 'transport' (calls the provider did not finish)")
     ap.add_argument("--reassess", action="store_true",
                     help="re-run the statistics on every checkpointed cell's retained "
                          "completions and rewrite the checkpoint and report; no API calls. "
@@ -355,10 +372,12 @@ def main() -> int:
         return negative_control_run(key, models, args)
 
     prompt_ids = args.prompts or list(PROMPTS)
+    forced_ids = [pid for pid in FORCED_PROMPTS if not args.prompts or pid in args.prompts]
+    all_prompts = {**PROMPTS, **FORCED_PROMPTS}
     selected = set(args.params or CONTRAST_NAMES) | {"temperature"}
     if args.reassess:
         selected = set()                  # re-derive what is on disk; run nothing
-    per_prompt_results: dict[str, list] = {pid: [] for pid in prompt_ids}
+    per_prompt_results: dict[str, list] = {pid: [] for pid in prompt_ids + forced_ids}
 
     # Checkpoint every completed cell to JSONL and skip finished cells on
     # restart. The first multi-prompt run was killed by the OS after three hours
@@ -413,10 +432,13 @@ def main() -> int:
         return r
 
     for model in models:
-        for pid in prompt_ids:
+        for pid in prompt_ids + forced_ids:
             print(f"\n=== {model} — prompt '{pid}' ===")
             for param, sa, sb, primary in CONTRASTS:
-                if (args.provider, model, pid, param) in done:
+                if pid in FORCED_PROMPTS and param not in FORCED_FOR:
+                    continue
+                if (args.provider, model, pid, param) in done and not (
+                        args.retry_failed and done[(args.provider, model, pid, param)]["status"] == "transport"):
                     r = restore(done[(args.provider, model, pid, param)])
                     print(f"  {param:<20} (from checkpoint) status={r.status}")
                     per_prompt_results[pid].append(r)
@@ -425,10 +447,10 @@ def main() -> int:
                 if param not in selected:
                     continue
                 a, ea, ua, empty_a = collect(key, model, sa, args.n, args.workers,
-                                             args.max_tokens, args.effort, PROMPTS[pid],
+                                             args.max_tokens, args.effort, all_prompts[pid],
                                              provider=args.provider)
                 b, eb, ub, empty_b = collect(key, model, sb, args.n, args.workers,
-                                             args.max_tokens, args.effort, PROMPTS[pid],
+                                             args.max_tokens, args.effort, all_prompts[pid],
                                              provider=args.provider)
                 tokens += sum(ua + ub)
 
@@ -455,7 +477,7 @@ def main() -> int:
                                 f"content — billed, but max_tokens ({args.max_tokens}) "
                                 "cut them off before any content. Raise --max-tokens.")
 
-                if r.status in ("rejected", "unsupported"):
+                if r.status in ("rejected", "unsupported", "transport"):
                     print(f"  {param:<20} {r.status.upper():<10} {r.detail[:76]}")
                 elif r.status == "insufficient":
                     print(f"  {param:<20} NO POWER   n={r.n_tight}/{r.n_open}  {r.detail[:56]}")
@@ -472,9 +494,17 @@ def main() -> int:
                 transport = [e for e in ea + eb
                              if not e.startswith(("rejected", "unsupported"))]
                 if transport and r.status == "insufficient":
-                    print(f"  {param:<20} not checkpointed: {len(transport)} transport "
-                          f"failure(s), e.g. {transport[0][:60]}")
-                elif ckpt:
+                    # The provider accepted the request and did not finish it.
+                    # Recorded as its own status with the evidence, so a resume
+                    # does not spend another hour re-timing-out, and the table
+                    # can show "accepted, unusable" — which for a documented
+                    # parameter value is a finding. --retry-failed reruns them.
+                    r.status = "transport"
+                    r.detail = (f"{len(transport)}/{2 * args.n} calls did not complete: "
+                                f"{Counter(e.split(':')[0] for e in transport).most_common(2)}; "
+                                f"e.g. {transport[0][:80]}")
+                    print(f"  {param:<20} TRANSPORT  {r.detail[:90]}")
+                if ckpt:
                     ckpt.parent.mkdir(parents=True, exist_ok=True)
                     with ckpt.open("a") as fh:
                         fh.write(json.dumps(r.to_dict(), default=str) + "\n")
@@ -505,7 +535,7 @@ def main() -> int:
     print(f"{'model':<32}{'param':<20}" + "".join(f"{pid:>11}" for pid in prompt_ids)
           + f"{'powered':>9}{'dist':>6}  verdict")
     sym = {"distinguishable": "yes", "no effect seen": "NO", "underpowered": "?",
-           "rejected": "rej", "unsupported": "n/a", "insufficient": "n/a"}
+           "rejected": "rej", "unsupported": "n/a", "insufficient": "n/a", "transport": "err"}
     for model in models:
         for param, _, _, _ in CONTRASTS:
             if param == "temperature":
@@ -518,12 +548,29 @@ def main() -> int:
                     continue
                 pv[pid] = interpret(r, power_by_prompt[pid],
                                     adj_by_prompt[pid].get((model, param), 1.0))
-            agg = aggregate(pv, model, param)
+            fv = {}
+            if param in FORCED_FOR:
+                for pid in forced_ids:
+                    r = next((x for x in per_prompt_results[pid]
+                              if x.model == model and x.parameter == param), None)
+                    if r is not None:
+                        fv[pid] = interpret(r, power_by_prompt.get(pid, {}),
+                                            adj_by_prompt[pid].get((model, param), 1.0),
+                                            forced=True)
+            if not pv and not fv:
+                continue                      # not run in this file; no verdict to report
+            agg = aggregate(pv, model, param) if pv else Aggregate(model=model, parameter=param)
+            if fv:
+                agg.forced = fv
+                # one forced prompt today; a majority if there are ever several
+                agg.verdict_forced = aggregate(fv, model, f"{param}[forced]").verdict
             aggregates.append(agg)
             line = f"{model:<32}{param:<20}"
             for pid in prompt_ids:
                 line += f"{sym.get(pv.get(pid, ''), '—'):>11}"
             line += f"{agg.n_powered:>9}{agg.n_distinguishable:>6}  {agg.verdict}"
+            if fv:
+                line += f"   forced: {sym.get(agg.verdict_forced, agg.verdict_forced)}"
             print(line)
 
     print(f"\n{len(results)} tests over {len(prompt_ids)} prompts, {tokens:,} output tokens, "
@@ -541,6 +588,7 @@ def main() -> int:
              "p_holm_by_prompt": {pid: {f"{k[0]}|{k[1]}": v for k, v in a.items()}
                                   for pid, a in adj_by_prompt.items()},
              "prompts": {pid: PROMPTS[pid] for pid in prompt_ids},
+             "forced_prompts": {pid: FORCED_PROMPTS[pid] for pid in forced_ids},
              "positive_control_by_prompt": {pid: {m: mp.to_dict() for m, mp in pw.items()}
                                             for pid, pw in power_by_prompt.items()},
              "aggregates": [a.to_dict() for a in aggregates]},

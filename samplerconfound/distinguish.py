@@ -91,7 +91,7 @@ class Distinguishability:
     primary: str = "dh"              # "dh" | "tv"
     p_value: float = float("nan")
     n_permutations: int = 0
-    status: str = "ok"               # ok | rejected | unsupported | insufficient
+    status: str = "ok"               # ok | rejected | unsupported | insufficient | transport
     detail: str = ""
     # Retained so a negative control can be run on the data after the fact.
     completions_tight: list[str] = field(default_factory=list)
@@ -382,7 +382,7 @@ def positive_control(results: list[Distinguishability]) -> dict[str, ModelPower]
 
 
 def interpret(r: Distinguishability, power: dict[str, ModelPower],
-              p_adjusted: float) -> str:
+              p_adjusted: float, forced: bool = False) -> str:
     """The verdict a cell actually supports, given its model's positive control.
 
     Three outcomes, and the difference between the last two is the entire point:
@@ -397,6 +397,12 @@ def interpret(r: Distinguishability, power: dict[str, ModelPower],
         return r.status
     if p_adjusted < 0.05:
         return "distinguishable"
+    if forced:
+        # A prompt built so the parameter MUST act if honoured — forced
+        # repetition for a penalty. The temperature control is beside the
+        # point there: the prompt is its own control, and a null means the
+        # provider is not applying the parameter.
+        return "no effect seen"
     mp = power.get(r.model)
     if mp is None or not mp.powered:
         return "underpowered"
@@ -428,6 +434,12 @@ class Aggregate:
     n_no_effect: int = 0             # among powered prompts
     per_prompt: dict = field(default_factory=dict)   # prompt_id -> verdict
     verdict: str = "underpowered"
+    # For a penalty: the verdict on the forced-repetition prompt, which is the
+    # test of whether the provider APPLIES the parameter. `verdict` above is then
+    # whether it matters on free text. Both are reported; they answer different
+    # questions and can disagree — honoured, and inert on a sentence.
+    forced: dict = field(default_factory=dict)       # prompt_id -> verdict
+    verdict_forced: str = ""
 
     def to_dict(self) -> dict:
         return dict(self.__dict__)
@@ -454,7 +466,14 @@ def aggregate(per_prompt_verdicts: dict[str, str], model: str, parameter: str) -
     agg.n_powered = len(powered)
     agg.n_distinguishable = sum(v == "distinguishable" for v in powered)
     agg.n_no_effect = sum(v == "no effect seen" for v in powered)
-    if agg.n_powered < MIN_POWERED_PROMPTS:
+    statuses = set(per_prompt_verdicts.values())
+    if agg.n_powered < MIN_POWERED_PROMPTS and len(statuses) == 1 and statuses <= {
+            "rejected", "unsupported", "transport"}:
+        # Every prompt failed the same way BEFORE any statistics: the provider
+        # refused the parameter, the adapter could not send it, or the request
+        # never completed. That is the verdict, not "underpowered".
+        agg.verdict = statuses.pop()
+    elif agg.n_powered < MIN_POWERED_PROMPTS:
         agg.verdict = "underpowered"
     elif agg.n_distinguishable * 2 > agg.n_powered:
         agg.verdict = "distinguishable"

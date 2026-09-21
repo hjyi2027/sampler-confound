@@ -37,3 +37,12 @@ def test_distinguish_rows_carry_verdicts_and_a_mean_control():
     r = probe_matrix.distinguish_rows("groq", d)["m"]
     assert r["top_k"] == "distinguishable" and r["provider"] == "groq"
     assert r["powered_prompts"] == 1 and abs(r["control_removed"] - 0.6) < 1e-9
+
+
+def test_a_penalty_column_reports_applied_and_keeps_free_text_alongside():
+    d = {"aggregates": [{"model": "m", "parameter": "frequency_penalty", "n_prompts": 4,
+                         "verdict": "no effect seen", "verdict_forced": "distinguishable"}],
+         "n_per_arm": 40}
+    r = probe_matrix.distinguish_rows("fireworks", d)["m"]
+    assert r["frequency_penalty"] == "distinguishable"
+    assert r["frequency_penalty_free_text"] == "no effect seen"

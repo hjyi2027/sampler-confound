@@ -376,3 +376,18 @@ def test_both_arms_all_unique_is_insufficient_not_no_effect():
     # but a tight arm with real repeats is a live test
     r = assess_parameter("m", "x", {}, {}, ["a"] * 20 + ["b"] * 20, open_, n_permutations=500)
     assert r.status == "ok"
+
+
+def test_a_forced_prompt_needs_no_temperature_control_to_call_a_null():
+    r = Distinguishability(model="m", parameter="frequency_penalty", setting_a={}, setting_b={},
+                           status="ok", p_value=0.6)
+    assert interpret(r, {}, 0.6) == "underpowered"            # no control for this model
+    assert interpret(r, {}, 0.6, forced=True) == "no effect seen"
+    assert interpret(r, {}, 0.01, forced=True) == "distinguishable"
+
+
+def test_a_parameter_that_fails_the_same_way_on_every_prompt_gets_that_verdict():
+    from samplerconfound.distinguish import aggregate
+    assert aggregate({"a": "transport", "b": "transport"}, "m", "rep").verdict == "transport"
+    assert aggregate({"a": "rejected", "b": "rejected", "c": "rejected"}, "m", "top_k").verdict == "rejected"
+    assert aggregate({"a": "transport", "b": "underpowered"}, "m", "rep").verdict == "underpowered"

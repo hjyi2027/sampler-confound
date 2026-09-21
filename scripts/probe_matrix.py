@@ -4,7 +4,10 @@ with its price tier, a verdict per sampling parameter, and its determinism.
 
 A parameter column reads, per (provider, model):
 
-    yes   accepted and honoured: the two arms are distinguishable
+    yes   accepted and honoured: the two arms are distinguishable. For a
+          penalty this is judged on a forced-repetition prompt, where the
+          parameter must act if applied; whether it also moves free text is
+          the <param>_free_text field in the JSON
     NO    accepted and inert: a passed temperature control says the probe had
           power on this model and prompt, and the parameter still moved nothing
     ?     accepted, verdict withheld: the control failed, or every prompt was
@@ -12,6 +15,8 @@ A parameter column reads, per (provider, model):
           range — the usual case for a penalty on a free-text prompt)
     mix   prompts disagree
     rej   the provider refused the parameter (HTTP 4xx) — not accepted
+    err   accepted, and the provider then did not finish the request (hung or
+          dropped mid-generation) — accepted and unusable at that value
     n/a   the adapter has no wire form for it on this provider
 
 "Accepted" is what the provider's HTTP status says; "honoured" is what the
@@ -51,7 +56,8 @@ SHORT = {"top_p": "top_p", "top_k": "top_k", "min_p": "min_p", "typical_p": "typ
          "mirostat": "miro", "repetition_penalty": "rep", "frequency_penalty": "freq",
          "presence_penalty": "pres"}
 SYM = {"distinguishable": "yes", "no effect seen": "NO", "underpowered": "?",
-       "mixed": "mix", "rejected": "rej", "unsupported": "n/a", "insufficient": "n/a"}
+       "mixed": "mix", "rejected": "rej", "unsupported": "n/a", "insufficient": "n/a",
+       "transport": "err"}
 
 
 def _load(p: Path) -> dict | None:
@@ -65,10 +71,18 @@ def distinguish_rows(provider: str, d: dict) -> dict[str, dict]:
     """model -> {param: verdict, "control": fraction, "powered_prompts": n}"""
     out: dict[str, dict] = {}
     for a in d.get("aggregates", []):
+        if not a.get("n_prompts") and not a.get("verdict_forced"):
+            continue                           # parameter not run in this file
         row = out.setdefault(a["model"], {})
-        row[a["parameter"]] = a["verdict"]
+        if a.get("verdict_forced"):
+            # a penalty: the column is whether the provider applies it (forced
+            # repetition); whether it matters on free text is kept alongside
+            row[a["parameter"]] = a["verdict_forced"]
+            row[a["parameter"] + "_free_text"] = a["verdict"]
+        else:
+            row[a["parameter"]] = a["verdict"]
         row.setdefault("n_by_param", {})[a["parameter"]] = d.get("n_per_arm")
-        row.setdefault("n_prompts", a["n_prompts"])
+        row["n_prompts"] = max(row.get("n_prompts", 0), a["n_prompts"])
     for pid, by_model in d.get("positive_control_by_prompt", {}).items():
         for m, mp in by_model.items():
             row = out.setdefault(m, {})

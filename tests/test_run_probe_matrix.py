@@ -13,7 +13,11 @@ from scripts import run_probe_matrix as rpm
 
 
 def _dist_file(params, n=40):
-    return json.dumps({"n_per_arm": n, "aggregates": [{"model": "m", "parameter": p} for p in params]})
+    aggs = [{"model": "m", "parameter": p, "n_prompts": 4} for p in params]
+    for a in aggs:
+        if a["parameter"] in rpm.FORCED_FOR:
+            a["verdict_forced"] = "distinguishable"   # a penalty counts once its forced prompt ran
+    return json.dumps({"n_per_arm": n, "aggregates": aggs})
 
 
 ALL = [c for c in rpm.CONTRAST_NAMES if c != "temperature"]
@@ -78,3 +82,14 @@ def test_name_filter_catches_what_the_listing_flag_misses():
     for good in ("kimi-k3", "glm-5p3-flash", "gemini-2.5-pro", "mistral-small-latest",
                  "deepseek-v4-flash-vision-exp"):
         assert not rpm.NOT_CHAT.search(good), good
+
+
+def test_a_penalty_without_its_forced_prompt_is_not_covered(tmp_path, monkeypatch):
+    monkeypatch.setattr(rpm, "MATRIX", tmp_path)
+    (tmp_path / "groq").mkdir()
+    aggs = [{"model": "m", "parameter": p} for p in ALL]
+    for a in aggs:
+        if a["parameter"] in rpm.FORCED_FOR and a["parameter"] != "presence_penalty":
+            a["verdict_forced"] = "distinguishable"
+    (tmp_path / "groq" / "m.dist-n40.json").write_text(json.dumps({"n_per_arm": 40, "aggregates": aggs}))
+    assert rpm.missing_params("groq", "m", 40) == ["presence_penalty"]
