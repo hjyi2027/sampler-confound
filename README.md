@@ -194,6 +194,17 @@ eighteen yet moves a one-sentence reply on five. "Accepted", "applied" and
 "matters" are three different columns (FINDINGS §1;
 `scripts/probe_matrix.py` for the coverage table).
 
+**What the documentation claims is recorded separately from what the probe
+measures** (`samplerconfound/documented.py`, a dated transcription of each
+provider's reference; `scripts/gap.py` for the comparison). On Fireworks the
+reference says `seed` is a "Random seed for deterministic sampling" and
+seventeen of eighteen models ignore it; `mirostat` is documented and inert on
+six. And the worst case — accepted by the API, absent from the docs, ignored
+at runtime — exists by name: `use_beam_search` and `skip_special_tokens` are
+vLLM parameters Fireworks accepts with HTTP 200, documents nowhere, and does
+nothing with. Its mirror, `ignore_eos`, is undocumented and *works*, pushing
+the model past its end-of-turn token with the control token in the output.
+
 **One model in eighteen is deterministic at temperature 0, and none honours
 `seed`.** On the other seventeen, the identical greedy request returns the same
 bytes 20–78% of the time, and price predicts nothing: kimi-k3 at $15/M
