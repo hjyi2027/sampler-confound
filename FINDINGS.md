@@ -1,17 +1,45 @@
 # What the instrument found
 
-Notes from building a measurement apparatus for *The Sampler Is a Confound*, a
-study that has not run. Every finding below came out of getting the instrument
-working, and every one of them is separable from the study's own hypothesis: they
-are facts about **the infrastructure that LLM evaluation papers depend on**, not
-about whether decoding configuration rivals model choice.
+Notes from building a measurement apparatus for *The Sampler Is a Confound*.
+**The study itself — the variance decomposition of benchmark accuracy into
+model, sampler and their interaction, and the comparison-inversion rate over
+a full grid — has not run and is future work.** Everything below is one of
+two things, and each section says which:
 
-They are recorded separately because several are perishable. The provider
-catalogue changed twice in the eight days it took to build this, and one of the
-findings is that change itself.
+* **An audit of the infrastructure** LLM evaluation papers depend on, run at
+  full scale on one provider: which decoding parameters a provider accepts,
+  documents, and honours; whether greedy decoding reproduces; what the
+  grader gets wrong. These stand on their own and are the substantive
+  results of this repository.
+* **An illustration**, on the 1/20-scale smoke corpus, of the mechanism by
+  which an infrastructure fact would corrupt the study's numbers: what a
+  silently ignored parameter does to the model × sampler interaction, what
+  the unparseable-scoring rule does to a model's temperature effect. Those
+  sections use the study's own analysis code on real generations, but at ten
+  problems and three or four models they demonstrate the arithmetic, not the
+  magnitude. They are not the headline result and should not be read as one.
 
-All figures are measured, with the producing script named. Dates matter here and
-are given.
+**Why the study is future work, stated plainly: level uncertainty, not
+compute.** The sampler/model variance ratio is estimated from *k* model
+levels and scatters as roughly `sqrt(2/(k−1))` — 100% relative error at
+three levels, 58% at seven. A three-model grid can *measure* the ratio but
+cannot *test* it against the paper's threshold: with sampler and model
+variance truly equal, a level-aware interval clears 0.1 only 57% of the time
+(§6). More problems, more replicates and more spend leave that untouched;
+only more model levels move it, and near-peer models on one provider are
+finite (eighteen served, of which a near-peer band admits a handful). The
+sweep as designed was affordable — about $16 — and was not run because its
+headline number would not have been testable, not because it could not be
+paid for. A version that can test the claim needs more model levels than one
+provider offers, which is what the cross-provider adapters and the pending
+keys are for.
+
+Several of the audit results are perishable. The provider catalogue changed
+three times in the weeks it took to build this, and that change is itself
+one of the findings.
+
+All figures are measured, with the producing script named and the collection
+date given.
 
 ---
 
@@ -386,7 +414,12 @@ it off before it stops reasoning (739 reasoning tokens on this prompt), so at
 collector that drops empty strings reports that as `n=0, insufficient` with no
 sign that anything was wrong.
 
-### What an ignored parameter does downstream, on the smoke corpus
+### Illustration: what an ignored parameter does downstream, on the smoke corpus
+
+*This section is an illustration of the mechanism on the 1/20-scale smoke
+corpus — three models, ten problems — not a result of the study. The
+magnitudes are those of a tiny grid; the arithmetic is what a full grid would
+inherit.*
 
 The paper's mechanism, made concrete on real generations. The design's
 `minp` cell is {temperature 1.0, min_p 0.05}; its `hightemp` cell is
@@ -622,9 +655,11 @@ correlation at its source rather than correcting for it.
 
 **Unparseable is a third outcome, and it is not uniform.** The grader
 returns three verdicts, and what a harness does with the third is a scoring
-decision with consequences that fall on specific models. On the smoke corpus
-(four models, five samplers, ten MATH-500 problems, five replicates;
-`scripts/unparseable_report.py`):
+decision with consequences that fall on specific models. What follows is an
+illustration on the smoke corpus — four models, five samplers, ten MATH-500
+problems, five replicates (`scripts/unparseable_report.py`) — of how that
+decision reaches the study's numbers; the rates are real, the downstream
+shares are those of a ten-problem grid:
 
 | model | greedy | lowtemp | standard | topk | hightemp |
 |---|--:|--:|--:|--:|--:|
@@ -667,6 +702,8 @@ None of this says which rule is right. It says the choice is load-bearing,
 it is model-specific, and it is temperature-correlated, so it has to be made
 explicitly and reported as a third column, not folded into "incorrect" and
 forgotten. The sweep keeps the three-valued verdict for exactly this reason.
+At full scale the rates would be estimated properly; here they show the
+shape of the problem.
 
 Two process bugs are worth naming because each produced a *wrong answer* rather
 than an error. Labels were carried across a re-grade by item number — but fixing
@@ -739,7 +776,9 @@ at three or four model levels, and adding the fourth barely moves it.
 The practical consequence: a variance-decomposition study over a handful of
 models can *measure* a ratio but cannot *test* one, and the distinction should be
 stated rather than hidden inside a bootstrap interval that happens to look
-narrow. Where a claim must be testable, a statistic that counts outcomes over
+narrow. This is the reason the full study is future work. The grid as frozen
+costs about $16 and was within budget; what it lacked was model levels, and
+no spend on the same three or four models supplies them. Where a claim must be testable, a statistic that counts outcomes over
 observed cells — such as how often a ranking inverts — needs no few-level
 extrapolation and is far better powered.
 

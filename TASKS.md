@@ -1150,3 +1150,24 @@ responses (0.98–1.00, the best model of the four), and inverts 12 of 30
 pairwise model comparisons; the decomposition's model x sampler share reads
 20.4% under that rule and 16.8% under parseable-only. Written into §4; the
 checklist item now says why.
+
+## 2026-09-22 — framing: illustration, not headline; the study is future work
+
+FINDINGS and README now say at the top what this repository is and is not.
+The variance study — the decomposition and the inversion rate over a full
+grid — has not run and is future work. The reason is level uncertainty, not
+compute: a ratio from k model levels scatters as sqrt(2/(k−1)), 100% at
+three, and a three-model grid can measure the ratio but cannot test it
+against the paper's threshold (interval clears 0.1 only 57% of the time
+with sampler and model variance truly equal). The frozen sweep cost about
+$16 and was affordable; it was not run because its headline would not have
+been testable. More model levels are the only remedy, and one provider's
+near-peer band does not have them — which is what the cross-provider
+adapters and the pending keys are for.
+
+Everything else is one of two things, each section labelled: the audit of
+the infrastructure (parameters accepted / documented / honoured,
+determinism, grader, dated), which stands at full scale on one provider; and
+the smoke-corpus illustrations (ignored min_p, unparseable scoring), which
+run the study's own code on real generations at ten problems and show the
+arithmetic, not the magnitude.

@@ -35,6 +35,20 @@ analysis, and the reason is in `scripts/power_check.py`:
    variance are truly equal. That is a property of the level count, and no
    budget fixes it.
 
+**Neither number has been measured. The full variance study is future work,
+and the reason is level uncertainty, not compute.** A variance ratio from *k*
+model levels scatters as `sqrt(2/(k−1))`: 100% at three levels, 58% at seven.
+The frozen grid — three near-peer models, seven samplers, five replicates,
+200 problems, about $16 — was affordable and was not run, because a ratio
+estimated from three model levels cannot be tested against the threshold
+the claim needs; it can only be reported with an interval wider than itself.
+More problems and more replicates do not help. More model levels do, and one
+provider's near-peer band does not have them, which is what the
+cross-provider work below is for. What this repository contains instead is
+an audit of the infrastructure the study would run on, at full scale, and
+illustrations of the mechanisms on a 1/20-scale smoke corpus, each labelled
+as such in [FINDINGS.md](FINDINGS.md).
+
 The agentic extension is what makes this MATH-AI rather than generic: sampler
 variance compounds across multi-step reasoning, so agentic evaluation is noisier
 than single-shot evaluation by an amount nobody has measured.
@@ -170,7 +184,7 @@ trusted. Results append to JSONL keyed by (model, sampler, replicate, problem),
 so an interrupted sweep resumes without re-spending, and `--verify` refuses to
 report an unbalanced grid rather than averaging over the gaps.
 
-## What the build established, independent of the sweep
+## What the audit established, independent of the sweep
 
 Written up in full in [FINDINGS.md](FINDINGS.md). In brief:
 
@@ -233,13 +247,18 @@ about.
 
 ## Status
 
-The sweep has not run. `runs/` holds the pilot, a 1/20 smoke run, and the
-provider probes. Ready and validated: benchmarks pinned by sha256, grader
-hand-verified, grid frozen, runner resumable and balance-checked with full
-generation logging (including `reasoning_content`, which is a separate field and
-was being discarded), both metrics implemented with their power characterised.
+**The variance study is future work.** The sweep has not run, and the reason
+is stated above: three model levels give a ratio that cannot be tested, and
+compute does not change that. `runs/` holds the pilot, the 1/20 smoke run,
+the provider probe matrix (the audit, at full scale on one provider), and the
+smoke-corpus illustrations (labelled as such). Ready and validated for when
+the level count allows it: benchmarks pinned by sha256, grader hand-verified,
+grid frozen, runner resumable and balance-checked with full generation
+logging (including `reasoning_content`, which is a separate field and was
+being discarded), both metrics implemented with their power characterised.
 
-Run it with:
+The sweep as frozen, when there are enough model levels to make its ratio
+testable:
 
 ```
 python3 scripts/run_sweep.py --config configs/main.json
