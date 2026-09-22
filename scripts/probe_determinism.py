@@ -51,6 +51,7 @@ from samplerconfound.config import FIXED
 from samplerconfound.paths import iso, resolve_out, show, window
 from samplerconfound.adapters import ADAPTERS
 from samplerconfound.provider import DEFAULT_PROVIDER, complete, default_cache, load_key
+from samplerconfound.ratelimit import pacer
 from scripts.probe_distinguishability import PROMPTS, resolve_models
 
 CONDITIONS = {
@@ -193,7 +194,7 @@ def main() -> int:
         summary[model] = {"greedy_match": mean_ns, "seeded_match": mean_s0, "seed": honoured}
         print(f"{model:<32}{mean_ns:>18.0%}{mean_s0:>11.0%}  {honoured}")
     print(f"\n{len(rows) * len(CONDITIONS) * N} calls, {(time.time() - t0) / 60:.1f} min"
-          f"   [{default_cache().stats}]")
+          f"   [{default_cache().stats}; {pacer(args.provider).status()}]")
 
     if args.out:
         dest = resolve_out(args.out)

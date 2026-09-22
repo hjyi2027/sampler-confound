@@ -1094,3 +1094,27 @@ an upper bound — and labelled as such. `--check` reports 0 undated.
 
 Documentation read 2026-09-22; prices read 2026-09-20; both already carried
 their dates. FINDINGS gains a "When" table under Provenance.
+
+## 2026-09-22 — backoff and resumability, built in rather than rediscovered
+
+Every retry rule in the transport had been added after being bitten: the 429
+storm (09-21), the hung repetition_penalty requests (09-21), the seventeen-
+minute 5xx ladder (09-22). What was missing was prevention: the probe never
+read the rate-limit headers, so it learned the limit by hitting it.
+
+`samplerconfound/ratelimit.py`: a per-provider, thread-safe pacer fed by the
+adapter's normalised headers (x-ratelimit-limit-*/remaining-*/reset-*, which
+Fireworks, Groq and Cerebras all speak; Google sends none). Callers wait
+toward the reset when headroom is under 10%; three 429s in a row open a
+breaker that pauses the process once; Retry-After is honoured exactly. Live:
+five calls report tokens-generated 71999/72000 and zero waits, i.e. the pacer
+sees the bucket and stays out of the way until it matters.
+
+Resumability audit: cache (call level), cell checkpoints with a recorded
+transport status (probe level), fsync'd records (sweep), covered-cell
+skipping and a persistent budget window (runner). Added: the runner now
+kills its child probes on SIGINT/SIGTERM — a killed runner had left every
+probe running twice, to be found and killed by hand — and the probes print
+the pacer's state beside the cache stats so hour-six diagnosis starts with a
+number. Twelve tests drive the real transport against a fake throttled
+provider, one per failure mode that was met first in production.

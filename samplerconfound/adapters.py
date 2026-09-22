@@ -122,6 +122,33 @@ class Adapter:
     def payload(self, wire: dict) -> dict:
         return wire
 
+    # -- rate-limit headers, normalised for ratelimit.Pacer ---------------
+    # The OpenAI-style family: x-ratelimit-limit-<name> / -remaining-<name>
+    # pairs, and x-ratelimit-reset-<name> as "2s", "1m30s" or a number.
+    # Fireworks reports tokens-generated / tokens-prompt this way; Groq and
+    # Cerebras report requests and tokens per minute/day. Anything a provider
+    # reports in this shape is tracked; the pacer keys on the tightest.
+    def limits(self, headers: dict) -> dict[str, tuple[float, float]]:
+        h = {k.lower(): v for k, v in headers.items()}
+        out = {}
+        for k, v in h.items():
+            if k.startswith("x-ratelimit-limit-"):
+                name = k[len("x-ratelimit-limit-"):]
+                rem = h.get("x-ratelimit-remaining-" + name)
+                try:
+                    lim = float(v)
+                    if rem is not None and lim > 0:
+                        out[name] = (float(rem), lim)
+                except ValueError:
+                    continue
+        return out
+
+    def reset_seconds(self, headers: dict) -> float | None:
+        h = {k.lower(): v for k, v in headers.items()}
+        vals = [_duration(v) for k, v in h.items() if k.startswith("x-ratelimit-reset-")]
+        vals = [v for v in vals if v is not None]
+        return min(vals) if vals else None
+
     def catalogue_url(self) -> str:
         return self.base.rsplit("/chat/completions", 1)[0] + "/models"
 
@@ -162,6 +189,21 @@ class Adapter:
 
 def _lower(x) -> str | None:
     return x.lower() if isinstance(x, str) else x
+
+
+def _duration(v: str) -> float | None:
+    """'2s', '1m30s', '250ms', '0.5' -> seconds."""
+    import re
+    v = str(v).strip()
+    try:
+        return float(v)
+    except ValueError:
+        pass
+    total, ok = 0.0, False
+    for num, unit in re.findall(r"([\d.]+)\s*(ms|s|m|h)", v):
+        total += float(num) * {"ms": 0.001, "s": 1, "m": 60, "h": 3600}[unit]
+        ok = True
+    return total if ok else None
 
 
 class Fireworks(Adapter):
@@ -275,6 +317,9 @@ class Google(Adapter):
 
     def payload(self, wire: dict) -> dict:
         return {k: v for k, v in wire.items() if k != "model"}
+
+    def limits(self, headers: dict) -> dict[str, tuple[float, float]]:
+        return {}                            # generateContent sends no rate-limit headers
 
     def catalogue_url(self) -> str:
         return f"{self.base}?pageSize=200"

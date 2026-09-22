@@ -189,7 +189,7 @@ class TestGoogle:
 def http(monkeypatch):
     calls = []
 
-    def fake(url, headers, payload, timeout):
+    def fake(url, headers, payload, timeout, **kw):
         calls.append({"url": url, "headers": headers, "payload": payload})
         return GOOGLE_SHAPED if "generativelanguage" in url else OPENAI_SHAPED
 
@@ -225,7 +225,7 @@ def test_same_model_name_on_two_providers_never_shares_a_cache_entry(http, tmp_p
 
 
 def test_rejection_is_an_error_string_and_is_not_cached(monkeypatch, tmp_path):
-    def refuse(url, headers, payload, timeout):
+    def refuse(url, headers, payload, timeout, **kw):
         raise provider.Rejected("rejected (422): Extra inputs are not permitted")
     monkeypatch.setattr(provider, "_http", refuse)
     cache = ResponseCache(directory=tmp_path, offline=False)

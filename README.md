@@ -255,4 +255,33 @@ speaks its native `generateContent`, because that is the surface with `topK`
 on it. `--provider groq` on either probe is the whole change. Keys go in
 `.env` (gitignored; slots in `.env.example`); `make keys` checks them.
 
+## Rate limits and resumability
+
+Rate limits bite at hour six, so both halves are built in and tested against
+a fake throttled provider (`tests/test_ratelimit.py`), and each rule below
+was met in production before it was a rule.
+
+**Pacing before the 429.** Every response carries the account's remaining
+budget; the adapter normalises those headers and a per-provider pacer
+(`samplerconfound/ratelimit.py`) makes callers wait toward the window's
+reset once headroom drops below 10%, instead of bursting into the wall.
+Three throttled responses in a row open a breaker that pauses the whole
+process once, not one sleep per worker. `Retry-After` is honoured exactly.
+Fireworks' binding limit is 72,000 generated tokens a minute, account-wide.
+
+**Bounded retries.** Timeouts and dropped connections: two retries. A
+recurring 5xx: four tries. A 429: short, capped, jittered waits — never an
+exponential ladder, which put twenty workers to sleep through the refill and
+had them burst again.
+
+**Resumability at every level.** Every response is cached under its request
+hash and replicate, so a rerun of anything bills nothing it already has. The
+distinguishability probe checkpoints per cell and skips finished cells on
+restart; a cell the provider did not finish is recorded as `transport` and
+rerun only with `--retry-failed`. The sweep checkpoints per record with
+fsync and was hard-killed and resumed to prove it. The matrix runner skips
+covered cells, runs only missing contrasts, continues its budget window
+across relaunches, and kills its child probes on SIGINT/SIGTERM — every
+finished cell is on disk; rerun the same command to resume.
+
 Full decision log in [TASKS.md](TASKS.md).

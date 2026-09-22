@@ -48,6 +48,7 @@ from samplerconfound.distinguish import (
 from samplerconfound.paths import iso, resolve_out, show, window
 from samplerconfound.adapters import ADAPTERS
 from samplerconfound.provider import DEFAULT_PROVIDER, complete, default_cache, load_key
+from samplerconfound.ratelimit import pacer
 
 # A prompt SET, not a prompt. One prompt is one sample of prompt space: it can be
 # degenerate for a particular model, and a one-word noun with a strong mode was
@@ -600,7 +601,7 @@ def main() -> int:
             print(line)
 
     print(f"\n{len(results)} tests over {len(prompt_ids)} prompts, {tokens:,} output tokens, "
-          f"{(time.time()-t0)/60:.1f} min   [{default_cache().stats}]")
+          f"{(time.time()-t0)/60:.1f} min   [{default_cache().stats}; {pacer(args.provider).status()}]")
     print("p_holm is Holm-Bonferroni across the whole grid; the claim is per-cell, "
           "so the family-wise rate is the relevant one.")
 

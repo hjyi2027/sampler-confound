@@ -44,7 +44,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
+import signal
 import subprocess
 import sys
 import time
@@ -286,7 +288,42 @@ def command(prov: str, model: str, pass_name: str, n: int, k: int, workers: int)
     return cmd
 
 
+_children: set = set()
+_children_lock = __import__("threading").Lock()
+
+
+def _run_child(cmd: list[str]) -> subprocess.CompletedProcess:
+    """A probe subprocess in its own process group, tracked so that killing
+    the runner kills it too. Before this, a killed runner left every probe
+    running and they had to be found and killed by hand."""
+    proc = subprocess.Popen(cmd, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                            text=True, start_new_session=True)
+    with _children_lock:
+        _children.add(proc)
+    try:
+        out, err = proc.communicate()
+    finally:
+        with _children_lock:
+            _children.discard(proc)
+    return subprocess.CompletedProcess(cmd, proc.returncode, out, err)
+
+
+def _kill_children(signum, frame):
+    with _children_lock:
+        procs = list(_children)
+    for proc in procs:
+        try:
+            os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+        except (ProcessLookupError, PermissionError):
+            pass
+    print(f"\nsignal {signum}: stopped {len(procs)} probe(s); every finished cell is on disk, "
+          "rerun the same command to resume", flush=True)
+    raise SystemExit(130)
+
+
 def main() -> int:
+    for sig in (signal.SIGINT, signal.SIGTERM):
+        signal.signal(sig, _kill_children)
     ap = argparse.ArgumentParser()
     ap.add_argument("--providers", nargs="+", default=sorted(ADAPTERS))
     ap.add_argument("--models", nargs="+", help="restrict to these model ids (any provider)")
@@ -378,7 +415,7 @@ def main() -> int:
                     continue
                 cmd = command(prov, m, pname, nn, args.negative_k, args.workers)
                 out_path(prov, m, pname, nn).parent.mkdir(parents=True, exist_ok=True)
-                futs[pool.submit(subprocess.run, cmd, cwd=ROOT, capture_output=True, text=True)] = (prov, m)
+                futs[pool.submit(_run_child, cmd)] = (prov, m)
             for fut in as_completed(futs):
                 prov, m = futs[fut]
                 r = fut.result()

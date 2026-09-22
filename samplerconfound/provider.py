@@ -31,7 +31,8 @@ from pathlib import Path
 
 import requests
 
-from .adapters import ADAPTERS, Completion
+from .adapters import ADAPTERS, Adapter, Completion
+from .ratelimit import pacer
 from .cache import CacheMiss, ResponseCache
 
 DEFAULT_PROVIDER = "fireworks"
@@ -84,10 +85,18 @@ class Transient(Exception):
 
 
 def _http(url: str, headers: dict, payload: dict, timeout: float,
-          retries: int = MAX_RETRIES) -> dict:
-    """One attempt sequence with backoff. Raises Rejected or Transient."""
+          retries: int = MAX_RETRIES, adapter: Adapter | None = None) -> dict:
+    """One attempt sequence with pacing and backoff. Raises Rejected or Transient.
+
+    With an adapter, the provider's rate-limit headers feed a per-provider
+    Pacer (ratelimit.py): callers wait BEFORE the window empties, a run of
+    429s pauses the whole process once, and Retry-After is honoured exactly.
+    """
     last = None
+    pc = pacer(adapter.name) if adapter else None
     for attempt in range(retries):
+        if pc:
+            pc.before()
         try:
             r = requests.post(url, headers=headers, json=payload, timeout=timeout)
         except requests.RequestException as e:
@@ -101,6 +110,10 @@ def _http(url: str, headers: dict, payload: dict, timeout: float,
                 break
             time.sleep(BACKOFF_BASE * 2 ** attempt + random.uniform(0, 1))
             continue
+        wait = None
+        if pc:
+            wait = pc.after(r.status_code, dict(r.headers), adapter.limits(r.headers),
+                            adapter.reset_seconds(r.headers))
         if r.status_code == 200:
             return r.json()
         if r.status_code in (400, 401, 403, 404, 422):
@@ -114,18 +127,19 @@ def _http(url: str, headers: dict, payload: dict, timeout: float,
                 msg = r.text
             raise Rejected(f"rejected ({r.status_code}): {str(msg)[:160]}")
         if r.status_code == 429:
-            # Rate limits refill per minute. Exponential backoff to 64s here is
+            # Rate limits refill per window. Exponential backoff to 64s here is
             # the wrong shape: every worker sleeps through the refill, then
-            # they all burst again — observed as a full token bucket and zero
-            # throughput. Honour Retry-After when given; otherwise wait a few
-            # jittered seconds and try again, up to the retry budget.
+            # they all burst again. The pacer says how long: Retry-After when
+            # given, otherwise a few jittered seconds.
             last = "http 429"
-            ra = r.headers.get("Retry-After")
-            try:
-                wait = float(ra) if ra else min(2.0 * (attempt + 1), 8.0)
-            except ValueError:
-                wait = 4.0
-            time.sleep(wait + random.uniform(0, 1))
+            if wait is None:
+                ra = r.headers.get("Retry-After")
+                try:
+                    wait = float(ra) if ra else min(2.0 * (attempt + 1), 8.0)
+                except ValueError:
+                    wait = 4.0
+                wait += random.uniform(0, 1)
+            time.sleep(wait)
             continue
         if r.status_code in (500, 502, 503, 504):
             # A server error that recurs is a finding about the request
@@ -161,7 +175,7 @@ def call(key: str, request: dict, *, provider: str = DEFAULT_PROVIDER,
     """
     ad = ADAPTERS[provider]
     wire, dropped = ad.encode(request)
-    raw = _http(ad.url(wire), ad.headers(key), ad.payload(wire), timeout, retries=retries)
+    raw = _http(ad.url(wire), ad.headers(key), ad.payload(wire), timeout, retries=retries, adapter=ad)
     return ad.decode(raw, dropped)
 
 
@@ -183,7 +197,7 @@ def complete(key: str, request: dict, replicate: int, *,
 
     def send(b: dict) -> dict:
         payload = ad.payload({k: v for k, v in b.items() if k != "_provider"})
-        return _http(ad.url(wire), ad.headers(key), payload, timeout)
+        return _http(ad.url(wire), ad.headers(key), payload, timeout, adapter=ad)
 
     try:
         entry = cache.fetch_entry(keyed, replicate, send)
