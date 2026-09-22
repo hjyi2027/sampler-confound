@@ -1136,3 +1136,17 @@ ignoring: 1.0%. One honouring backend among ignoring ones: 1.7–3.4%
 manufactured from 1.0%. Every row is a legitimate analysis of a legitimately
 collected table; only the §1 probe says which row you are in. Smoke scale —
 the mechanism and the arithmetic, not an estimate.
+
+## 2026-09-22 — unparseable is not uniform, and it rises with temperature
+
+`scripts/unparseable_report.py` on the smoke corpus. minimax-m3 produces
+unparseable responses at 10/12/14/16/18% across greedy → temperature 1.0 on
+MATH-500 and 27–33% on AIME; the other three models at 0%. All but three of
+the 60 unparseable records across 1,300 have finish_reason length: the model
+reasoned past the 8,192-token budget without an answer line (bimodal output
+length, ~450 tokens or the cap). Scoring unparseable as incorrect gives
+minimax alone a +0.06 temperature effect that vanishes among parseable
+responses (0.98–1.00, the best model of the four), and inverts 12 of 30
+pairwise model comparisons; the decomposition's model x sampler share reads
+20.4% under that rule and 16.8% under parseable-only. Written into §4; the
+checklist item now says why.

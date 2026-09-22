@@ -620,6 +620,54 @@ configurations (17% at temperature 1.0 and at top-k, against 12% at temperature
 fixes it is used **0% of the time, in every configuration**, which removes the
 correlation at its source rather than correcting for it.
 
+**Unparseable is a third outcome, and it is not uniform.** The grader
+returns three verdicts, and what a harness does with the third is a scoring
+decision with consequences that fall on specific models. On the smoke corpus
+(four models, five samplers, ten MATH-500 problems, five replicates;
+`scripts/unparseable_report.py`):
+
+| model | greedy | lowtemp | standard | topk | hightemp |
+|---|--:|--:|--:|--:|--:|
+| deepseek-v4-flash-0731 | 0% | 0% | 0% | 0% | 0% |
+| gpt-oss-120b | 0% | 0% | 0% | 0% | 0% |
+| gpt-oss-20b | 0% | 0% | 0% | 0% | 0% |
+| **minimax-m3** | **10%** | **12%** | **14%** | **16%** | **18%** |
+
+One model produces unparseable responses; the others produce none. Its rate
+climbs monotonically with temperature, 10% at greedy to 18% at 1.0. On the
+AIME subset it is 27–33% at every setting, against 0–7% for the others; on
+the 100-problem pilot at the standard sampler, nemotron-lightning is the
+outlier at 14% against 0–3%. And every unparseable response but three, across
+1,300 records, has `finish_reason: length`: the model reasoned past the
+8,192-token budget without reaching an answer line. minimax-m3's output
+lengths are bimodal — a median of ~450 tokens when it finishes, the cap when
+it does not — and temperature moves mass into the second mode. This is not a
+model that answers wrong; it is a model that sometimes does not stop.
+
+What the scoring rule then does:
+
+| minimax-m3, MATH-500 | greedy | lowtemp | standard | topk | hightemp | greedy − hightemp |
+|---|--:|--:|--:|--:|--:|--:|
+| unparseable scored as incorrect | 0.88 | 0.88 | 0.86 | 0.84 | 0.82 | **+0.06** |
+| among parseable responses | 0.98 | 1.00 | 1.00 | 1.00 | 1.00 | −0.02 |
+
+Scored strictly, minimax-m3 has the largest temperature effect of any model
+in the grid — and that effect *is* the unparseable rate, since among the
+responses it finishes it is at 0.98–1.00 and the most accurate model of the
+four. The other three models have identical rows under either rule. So a
+harness scoring unparseable as wrong gives one model, and only that model, a
+sampler effect; puts it last at temperature 1.0 where the parseable-only
+rule puts it first; and **inverts 12 of the 30 pairwise model comparisons**
+on this corpus depending on nothing but the rule. In the decomposition, the
+strict rule reports a model × sampler share of 20.4% against 16.8% and a
+model share of 12.1% against 31.6%: a decoding change penalises one model
+through the scoring rule, and the analysis reads that as an interaction.
+
+None of this says which rule is right. It says the choice is load-bearing,
+it is model-specific, and it is temperature-correlated, so it has to be made
+explicitly and reported as a third column, not folded into "incorrect" and
+forgotten. The sweep keeps the three-valued verdict for exactly this reason.
+
 Two process bugs are worth naming because each produced a *wrong answer* rather
 than an error. Labels were carried across a re-grade by item number — but fixing
 the grader moves records between strata, changing the sample, so the labels then
@@ -711,7 +759,10 @@ extrapolation and is far better powered.
 5. Hand-verify the grader on a stratified sample that over-weights the rare
    cases, and check whether its error rate correlates with your independent
    variable.
-6. Score unparseable responses as a third outcome, not as wrong.
+6. Score unparseable responses as a third outcome, not as wrong. On the smoke
+   corpus one model in four produces them, at a rate that climbs with
+   temperature; folding them into "incorrect" gives that model alone a sampler
+   effect and inverts 12 of 30 model comparisons (§4).
 7. Bootstrap the unit your claim generalises over.
 8. Compute the power of the claim before spending on the run.
 
@@ -724,6 +775,7 @@ extrapolation and is far better powered.
 | coverage | `scripts/probe_matrix.py`, `scripts/probe_spend.py` | `runs/matrix/matrix.json` |
 | documented vs measured | `samplerconfound/documented.py`, `scripts/gap.py`, `scripts/probe_undocumented.py` | `runs/matrix/gap.json`, `runs/matrix/undocumented.json` |
 | ignored parameter, downstream | `scripts/demo_minp_confound.py` | `runs/smoke/minp_confound.jsonl`, `runs/smoke/minp_confound.json` |
+| §4 unparseable by model and sampler | `scripts/unparseable_report.py` | `runs/smoke/unparseable.json` (from the smoke corpus) |
 | §3 | — | `MODEL_CANDIDATES` in `samplerconfound/config.py` |
 | §4 | `scripts/verify_grader.py`, `scripts/sample_for_grader_check.py` | `runs/grader_check/` |
 | §5 | `tests/test_variance.py`, `tests/test_inversion.py` | simulation |

@@ -1,0 +1,614 @@
+{
+  "written": "2026-09-22T10:22Z",
+  "math500": {
+    "label": "smoke MATH-500",
+    "models": [
+      "deepseek-v4-flash-0731",
+      "gpt-oss-120b",
+      "gpt-oss-20b",
+      "minimax-m3"
+    ],
+    "samplers": [
+      "greedy",
+      "lowtemp",
+      "standard",
+      "topk",
+      "hightemp"
+    ],
+    "unparseable_finish_reason": {
+      "length": 35
+    },
+    "cells": {
+      "deepseek-v4-flash-0731": {
+        "strict": {
+          "greedy": 0.9400000000000001,
+          "lowtemp": 0.8800000000000001,
+          "standard": 0.9,
+          "topk": 0.9,
+          "hightemp": 0.9200000000000002
+        },
+        "parseable": {
+          "greedy": 0.9400000000000001,
+          "lowtemp": 0.8800000000000001,
+          "standard": 0.9,
+          "topk": 0.9,
+          "hightemp": 0.9200000000000002
+        },
+        "unparseable": {
+          "greedy": 0.0,
+          "lowtemp": 0.0,
+          "standard": 0.0,
+          "topk": 0.0,
+          "hightemp": 0.0
+        },
+        "median_tokens_parseable": {
+          "greedy": 153.5,
+          "lowtemp": 135.0,
+          "standard": 150.0,
+          "topk": 148.5,
+          "hightemp": 145.0
+        },
+        "median_tokens_unparseable": {
+          "greedy": null,
+          "lowtemp": null,
+          "standard": null,
+          "topk": null,
+          "hightemp": null
+        }
+      },
+      "gpt-oss-120b": {
+        "strict": {
+          "greedy": 0.9,
+          "lowtemp": 0.9400000000000001,
+          "standard": 0.9400000000000001,
+          "topk": 0.9800000000000001,
+          "hightemp": 0.9
+        },
+        "parseable": {
+          "greedy": 0.9,
+          "lowtemp": 0.9400000000000001,
+          "standard": 0.9400000000000001,
+          "topk": 0.9800000000000001,
+          "hightemp": 0.9
+        },
+        "unparseable": {
+          "greedy": 0.0,
+          "lowtemp": 0.0,
+          "standard": 0.0,
+          "topk": 0.0,
+          "hightemp": 0.0
+        },
+        "median_tokens_parseable": {
+          "greedy": 331.5,
+          "lowtemp": 332.0,
+          "standard": 305.5,
+          "topk": 297.0,
+          "hightemp": 333.5
+        },
+        "median_tokens_unparseable": {
+          "greedy": null,
+          "lowtemp": null,
+          "standard": null,
+          "topk": null,
+          "hightemp": null
+        }
+      },
+      "gpt-oss-20b": {
+        "strict": {
+          "greedy": 0.8,
+          "lowtemp": 0.96,
+          "standard": 0.86,
+          "topk": 0.96,
+          "hightemp": 0.86
+        },
+        "parseable": {
+          "greedy": 0.8,
+          "lowtemp": 0.96,
+          "standard": 0.86,
+          "topk": 0.96,
+          "hightemp": 0.86
+        },
+        "unparseable": {
+          "greedy": 0.0,
+          "lowtemp": 0.0,
+          "standard": 0.0,
+          "topk": 0.0,
+          "hightemp": 0.0
+        },
+        "median_tokens_parseable": {
+          "greedy": 305.5,
+          "lowtemp": 334.5,
+          "standard": 296.5,
+          "topk": 339.5,
+          "hightemp": 357.5
+        },
+        "median_tokens_unparseable": {
+          "greedy": null,
+          "lowtemp": null,
+          "standard": null,
+          "topk": null,
+          "hightemp": null
+        }
+      },
+      "minimax-m3": {
+        "strict": {
+          "greedy": 0.8800000000000001,
+          "lowtemp": 0.8800000000000001,
+          "standard": 0.86,
+          "topk": 0.8400000000000001,
+          "hightemp": 0.8200000000000001
+        },
+        "parseable": {
+          "greedy": 0.9777777777777779,
+          "lowtemp": 1.0,
+          "standard": 1.0,
+          "topk": 1.0,
+          "hightemp": 1.0
+        },
+        "unparseable": {
+          "greedy": 0.1,
+          "lowtemp": 0.12,
+          "standard": 0.13999999999999999,
+          "topk": 0.15999999999999998,
+          "hightemp": 0.18000000000000002
+        },
+        "median_tokens_parseable": {
+          "greedy": 456.0,
+          "lowtemp": 436.5,
+          "standard": 445.0,
+          "topk": 457.0,
+          "hightemp": 481.0
+        },
+        "median_tokens_unparseable": {
+          "greedy": 8192.0,
+          "lowtemp": 8192.0,
+          "standard": 8192.0,
+          "topk": 8192.0,
+          "hightemp": 8192.0
+        }
+      }
+    },
+    "rank_flips": {
+      "greedy": {
+        "strict": [
+          "deepseek-v4-flash-0731",
+          "gpt-oss-120b",
+          "minimax-m3",
+          "gpt-oss-20b"
+        ],
+        "parseable": [
+          "minimax-m3",
+          "deepseek-v4-flash-0731",
+          "gpt-oss-120b",
+          "gpt-oss-20b"
+        ],
+        "flipped_pairs": [
+          [
+            "deepseek-v4-flash-0731",
+            "minimax-m3"
+          ],
+          [
+            "gpt-oss-120b",
+            "minimax-m3"
+          ]
+        ]
+      },
+      "lowtemp": {
+        "strict": [
+          "gpt-oss-20b",
+          "gpt-oss-120b",
+          "deepseek-v4-flash-0731",
+          "minimax-m3"
+        ],
+        "parseable": [
+          "minimax-m3",
+          "gpt-oss-20b",
+          "gpt-oss-120b",
+          "deepseek-v4-flash-0731"
+        ],
+        "flipped_pairs": [
+          [
+            "gpt-oss-120b",
+            "minimax-m3"
+          ],
+          [
+            "gpt-oss-20b",
+            "minimax-m3"
+          ]
+        ]
+      },
+      "standard": {
+        "strict": [
+          "gpt-oss-120b",
+          "deepseek-v4-flash-0731",
+          "gpt-oss-20b",
+          "minimax-m3"
+        ],
+        "parseable": [
+          "minimax-m3",
+          "gpt-oss-120b",
+          "deepseek-v4-flash-0731",
+          "gpt-oss-20b"
+        ],
+        "flipped_pairs": [
+          [
+            "deepseek-v4-flash-0731",
+            "minimax-m3"
+          ],
+          [
+            "gpt-oss-120b",
+            "minimax-m3"
+          ]
+        ]
+      },
+      "topk": {
+        "strict": [
+          "gpt-oss-120b",
+          "gpt-oss-20b",
+          "deepseek-v4-flash-0731",
+          "minimax-m3"
+        ],
+        "parseable": [
+          "minimax-m3",
+          "gpt-oss-120b",
+          "gpt-oss-20b",
+          "deepseek-v4-flash-0731"
+        ],
+        "flipped_pairs": [
+          [
+            "deepseek-v4-flash-0731",
+            "minimax-m3"
+          ],
+          [
+            "gpt-oss-120b",
+            "minimax-m3"
+          ],
+          [
+            "gpt-oss-20b",
+            "minimax-m3"
+          ]
+        ]
+      },
+      "hightemp": {
+        "strict": [
+          "deepseek-v4-flash-0731",
+          "gpt-oss-120b",
+          "gpt-oss-20b",
+          "minimax-m3"
+        ],
+        "parseable": [
+          "minimax-m3",
+          "deepseek-v4-flash-0731",
+          "gpt-oss-120b",
+          "gpt-oss-20b"
+        ],
+        "flipped_pairs": [
+          [
+            "deepseek-v4-flash-0731",
+            "minimax-m3"
+          ],
+          [
+            "gpt-oss-120b",
+            "minimax-m3"
+          ],
+          [
+            "gpt-oss-20b",
+            "minimax-m3"
+          ]
+        ]
+      }
+    },
+    "var_share": {
+      "strict": {
+        "model": 0.12104622871046222,
+        "sampler": 0.0,
+        "model:sampler": 0.203771289537713,
+        "resampling": 0.6751824817518248
+      },
+      "parseable": {
+        "model": 0.3156278078442028,
+        "sampler": 0.013226905154940594,
+        "model:sampler": 0.16787512798545667,
+        "resampling": 0.5032701590153998
+      }
+    },
+    "rank_flips_total": [
+      12,
+      30
+    ]
+  },
+  "aime": {
+    "label": "smoke AIME",
+    "models": [
+      "deepseek-v4-flash-0731",
+      "gpt-oss-120b",
+      "gpt-oss-20b",
+      "minimax-m3"
+    ],
+    "samplers": [
+      "greedy",
+      "lowtemp",
+      "standard",
+      "topk",
+      "hightemp"
+    ],
+    "unparseable_finish_reason": {
+      "length": 24,
+      "stop": 1
+    },
+    "cells": {
+      "deepseek-v4-flash-0731": {
+        "strict": {
+          "greedy": 1.0,
+          "lowtemp": 1.0,
+          "standard": 1.0,
+          "topk": 1.0,
+          "hightemp": 0.9333333333333332
+        },
+        "parseable": {
+          "greedy": 1.0,
+          "lowtemp": 1.0,
+          "standard": 1.0,
+          "topk": 1.0,
+          "hightemp": 0.9333333333333332
+        },
+        "unparseable": {
+          "greedy": 0.0,
+          "lowtemp": 0.0,
+          "standard": 0.0,
+          "topk": 0.0,
+          "hightemp": 0.0
+        },
+        "median_tokens_parseable": {
+          "greedy": 977.0,
+          "lowtemp": 1181.0,
+          "standard": 1114.0,
+          "topk": 1163.0,
+          "hightemp": 1238.0
+        },
+        "median_tokens_unparseable": {
+          "greedy": null,
+          "lowtemp": null,
+          "standard": null,
+          "topk": null,
+          "hightemp": null
+        }
+      },
+      "gpt-oss-120b": {
+        "strict": {
+          "greedy": 0.4666666666666666,
+          "lowtemp": 0.5333333333333333,
+          "standard": 0.6666666666666666,
+          "topk": 0.7333333333333333,
+          "hightemp": 0.5999999999999999
+        },
+        "parseable": {
+          "greedy": 0.4666666666666666,
+          "lowtemp": 0.6,
+          "standard": 0.6666666666666666,
+          "topk": 0.7333333333333333,
+          "hightemp": 0.5999999999999999
+        },
+        "unparseable": {
+          "greedy": 0.0,
+          "lowtemp": 0.06666666666666667,
+          "standard": 0.0,
+          "topk": 0.0,
+          "hightemp": 0.0
+        },
+        "median_tokens_parseable": {
+          "greedy": 1823.0,
+          "lowtemp": 1329.5,
+          "standard": 1378.0,
+          "topk": 1249.0,
+          "hightemp": 1257.0
+        },
+        "median_tokens_unparseable": {
+          "greedy": null,
+          "lowtemp": 1470.0,
+          "standard": null,
+          "topk": null,
+          "hightemp": null
+        }
+      },
+      "gpt-oss-20b": {
+        "strict": {
+          "greedy": 0.6666666666666666,
+          "lowtemp": 0.7999999999999999,
+          "standard": 0.6666666666666666,
+          "topk": 0.7333333333333333,
+          "hightemp": 0.7333333333333333
+        },
+        "parseable": {
+          "greedy": 0.6666666666666666,
+          "lowtemp": 0.7999999999999999,
+          "standard": 0.6666666666666666,
+          "topk": 0.7333333333333333,
+          "hightemp": 0.7333333333333333
+        },
+        "unparseable": {
+          "greedy": 0.0,
+          "lowtemp": 0.0,
+          "standard": 0.0,
+          "topk": 0.0,
+          "hightemp": 0.0
+        },
+        "median_tokens_parseable": {
+          "greedy": 1468.0,
+          "lowtemp": 1222.0,
+          "standard": 1161.0,
+          "topk": 1439.0,
+          "hightemp": 1235.0
+        },
+        "median_tokens_unparseable": {
+          "greedy": null,
+          "lowtemp": null,
+          "standard": null,
+          "topk": null,
+          "hightemp": null
+        }
+      },
+      "minimax-m3": {
+        "strict": {
+          "greedy": 0.7333333333333333,
+          "lowtemp": 0.6666666666666666,
+          "standard": 0.6666666666666666,
+          "topk": 0.6666666666666666,
+          "hightemp": 0.6666666666666666
+        },
+        "parseable": {
+          "greedy": 1.0,
+          "lowtemp": 1.0,
+          "standard": 1.0,
+          "topk": 1.0,
+          "hightemp": 1.0
+        },
+        "unparseable": {
+          "greedy": 0.26666666666666666,
+          "lowtemp": 0.3333333333333333,
+          "standard": 0.3333333333333333,
+          "topk": 0.3333333333333333,
+          "hightemp": 0.3333333333333333
+        },
+        "median_tokens_parseable": {
+          "greedy": 2070.0,
+          "lowtemp": 1594.0,
+          "standard": 1767.5,
+          "topk": 1641.5,
+          "hightemp": 1843.0
+        },
+        "median_tokens_unparseable": {
+          "greedy": 8192.0,
+          "lowtemp": 8192.0,
+          "standard": 8192.0,
+          "topk": 8192.0,
+          "hightemp": 8192.0
+        }
+      }
+    },
+    "rank_flips": {
+      "greedy": {
+        "strict": [
+          "deepseek-v4-flash-0731",
+          "minimax-m3",
+          "gpt-oss-20b",
+          "gpt-oss-120b"
+        ],
+        "parseable": [
+          "deepseek-v4-flash-0731",
+          "minimax-m3",
+          "gpt-oss-20b",
+          "gpt-oss-120b"
+        ],
+        "flipped_pairs": []
+      },
+      "lowtemp": {
+        "strict": [
+          "deepseek-v4-flash-0731",
+          "gpt-oss-20b",
+          "minimax-m3",
+          "gpt-oss-120b"
+        ],
+        "parseable": [
+          "deepseek-v4-flash-0731",
+          "minimax-m3",
+          "gpt-oss-20b",
+          "gpt-oss-120b"
+        ],
+        "flipped_pairs": [
+          [
+            "gpt-oss-20b",
+            "minimax-m3"
+          ]
+        ]
+      },
+      "standard": {
+        "strict": [
+          "deepseek-v4-flash-0731",
+          "gpt-oss-120b",
+          "gpt-oss-20b",
+          "minimax-m3"
+        ],
+        "parseable": [
+          "deepseek-v4-flash-0731",
+          "minimax-m3",
+          "gpt-oss-120b",
+          "gpt-oss-20b"
+        ],
+        "flipped_pairs": []
+      },
+      "topk": {
+        "strict": [
+          "deepseek-v4-flash-0731",
+          "gpt-oss-120b",
+          "gpt-oss-20b",
+          "minimax-m3"
+        ],
+        "parseable": [
+          "deepseek-v4-flash-0731",
+          "minimax-m3",
+          "gpt-oss-120b",
+          "gpt-oss-20b"
+        ],
+        "flipped_pairs": [
+          [
+            "gpt-oss-120b",
+            "minimax-m3"
+          ],
+          [
+            "gpt-oss-20b",
+            "minimax-m3"
+          ]
+        ]
+      },
+      "hightemp": {
+        "strict": [
+          "deepseek-v4-flash-0731",
+          "gpt-oss-20b",
+          "minimax-m3",
+          "gpt-oss-120b"
+        ],
+        "parseable": [
+          "minimax-m3",
+          "deepseek-v4-flash-0731",
+          "gpt-oss-20b",
+          "gpt-oss-120b"
+        ],
+        "flipped_pairs": [
+          [
+            "deepseek-v4-flash-0731",
+            "minimax-m3"
+          ],
+          [
+            "gpt-oss-20b",
+            "minimax-m3"
+          ]
+        ]
+      }
+    },
+    "var_share": {
+      "strict": {
+        "model": 0.44511825348696193,
+        "sampler": 0.0,
+        "model:sampler": 0.0,
+        "resampling": 0.554881746513038
+      },
+      "parseable": {
+        "model": 0.5113052415210689,
+        "sampler": 0.0030832476875642468,
+        "model:sampler": 0.0,
+        "resampling": 0.48561151079136683
+      }
+    },
+    "rank_flips_total": [
+      5,
+      30
+    ]
+  },
+  "pilot_standard": {
+    "nemotron-lightning-3p5-30b-a3b": 0.14,
+    "gpt-oss-120b": 0.02,
+    "deepseek-v4-flash-0731": 0.03,
+    "gpt-oss-20b": 0.0
+  }
+}
