@@ -82,6 +82,13 @@ class ResponseCache:
         return self.directory / key[:2] / f"{key}.json"
 
     def get(self, body: dict, replicate: int) -> dict | None:
+        e = self.get_entry(body, replicate)
+        return e["response"] if e else None
+
+    def get_entry(self, body: dict, replicate: int) -> dict | None:
+        """The whole stored entry: response plus `stored_at`, the moment the
+        provider answered. That timestamp is the collection date of the call,
+        and it survives any later rewrite of a report."""
         p = self._path(request_key(body, replicate))
         if not p.exists():
             with self._lock:
@@ -97,10 +104,11 @@ class ResponseCache:
             return None
         with self._lock:
             self.stats.hits += 1
-        return entry["response"]
+        return entry
 
     def put(self, body: dict, replicate: int, response: dict, **meta) -> dict:
         """Store a response; return the response now on disk for this key.
+        (`put_entry` returns the whole entry, with its stored_at.)
 
         Usually that is `response`. It is not when another writer — a second
         process sending the same request, which happens by design: the
@@ -114,6 +122,9 @@ class ResponseCache:
         The temp file is unique per writer, and the publish is an exclusive
         link, so two writers cannot tear each other's file.
         """
+        return self.put_entry(body, replicate, response, **meta)["response"]
+
+    def put_entry(self, body: dict, replicate: int, response: dict, **meta) -> dict:
         key = request_key(body, replicate)
         p = self._path(key)
         p.parent.mkdir(parents=True, exist_ok=True)
@@ -142,12 +153,13 @@ class ResponseCache:
             tmp.unlink()
         with self._lock:
             self.stats.stores += 1
-        return response
+        return entry
 
     def _load(self, p: Path) -> dict | None:
         try:
-            return json.loads(p.read_text(encoding="utf-8"))["response"]
-        except (json.JSONDecodeError, KeyError, OSError):
+            e = json.loads(p.read_text(encoding="utf-8"))
+            return e if "response" in e else None
+        except (json.JSONDecodeError, OSError):
             return None
 
     def fetch(self, body: dict, replicate: int, send) -> dict:
@@ -157,7 +169,11 @@ class ResponseCache:
         raise for anything else — failures are not cached, so a 429 or a network
         drop is retried on the next attempt rather than remembered as a result.
         """
-        hit = self.get(body, replicate)
+        return self.fetch_entry(body, replicate, send)["response"]
+
+    def fetch_entry(self, body: dict, replicate: int, send) -> dict:
+        """As fetch(), returning the stored entry (with `stored_at`)."""
+        hit = self.get_entry(body, replicate)
         if hit is not None:
             return hit
         if self.offline:
@@ -167,7 +183,7 @@ class ResponseCache:
                 f"{OFFLINE_ENV} to allow API calls."
             )
         response = send(body)
-        return self.put(body, replicate, response)
+        return self.put_entry(body, replicate, response)
 
     def count(self) -> int:
         if not self.directory.exists():

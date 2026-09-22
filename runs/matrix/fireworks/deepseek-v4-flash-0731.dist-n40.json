@@ -118,7 +118,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 5,
-      "excess": 1.2762571037262977
+      "excess": 1.2762571037262977,
+      "collected_from": "2026-09-20T16:41Z",
+      "collected_to": "2026-09-21T01:45Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -236,7 +238,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": 0.15006500000000036
+      "excess": 0.15006500000000036,
+      "collected_from": "2026-09-20T16:42Z",
+      "collected_to": "2026-09-21T01:46Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -354,7 +358,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T14:39Z",
+      "collected_to": "2026-09-21T01:46Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -472,7 +478,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 15,
-      "excess": -1.467163067496536
+      "excess": -1.467163067496536,
+      "collected_from": "2026-09-20T16:43Z",
+      "collected_to": "2026-09-21T02:07Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -590,7 +598,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 20,
-      "excess": -2.1624371172063177
+      "excess": -2.1624371172063177,
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-21T02:26Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -708,7 +718,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-21T02:27Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -824,7 +836,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 2,
-      "excess": 3.263916006693132
+      "excess": 3.263916006693132,
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-21T02:28Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -942,7 +956,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.45803436360186095
+      "excess": 0.45803436360186095,
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-21T02:29Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -1060,7 +1076,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.1699305226363733
+      "excess": 0.1699305226363733,
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-21T02:30Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -1178,7 +1196,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 4,
-      "excess": -0.15114899253163439
+      "excess": -0.15114899253163439,
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-21T02:30Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -1296,7 +1316,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-21T02:32Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -1414,7 +1436,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.39141686684138355
+      "excess": 0.39141686684138355,
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-21T02:32Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -1530,7 +1554,9 @@
       ],
       "empty_tight": 13,
       "empty_open": 15,
-      "excess": 1.3077024463579148
+      "excess": 1.3077024463579148,
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-21T02:47Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -1648,7 +1674,9 @@
       ],
       "empty_tight": 3,
       "empty_open": 3,
-      "excess": 0.5020864186030003
+      "excess": 0.5020864186030003,
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-21T03:35Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -1766,7 +1794,9 @@
       ],
       "empty_tight": 4,
       "empty_open": 2,
-      "excess": 0.6200478906481627
+      "excess": 0.6200478906481627,
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-21T03:35Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -1884,7 +1914,9 @@
       ],
       "empty_tight": 1,
       "empty_open": 14,
-      "excess": -0.2632779629322257
+      "excess": -0.2632779629322257,
+      "collected_from": "2026-09-20T16:47Z",
+      "collected_to": "2026-09-21T03:59Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -2002,7 +2034,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 16,
-      "excess": -1.0813595728316743
+      "excess": -1.0813595728316743,
+      "collected_from": "2026-09-20T16:47Z",
+      "collected_to": "2026-09-21T04:01Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -2120,7 +2154,9 @@
       ],
       "empty_tight": 3,
       "empty_open": 0,
-      "excess": 0.2577369494497947
+      "excess": 0.2577369494497947,
+      "collected_from": "2026-09-20T16:48Z",
+      "collected_to": "2026-09-21T04:01Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -2236,7 +2272,9 @@
       ],
       "empty_tight": 2,
       "empty_open": 8,
-      "excess": 1.377208432806203
+      "excess": 1.377208432806203,
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-21T04:02Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -2354,7 +2392,9 @@
       ],
       "empty_tight": 3,
       "empty_open": 0,
-      "excess": 0.5240489001643067
+      "excess": 0.5240489001643067,
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-21T04:03Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -2472,7 +2512,9 @@
       ],
       "empty_tight": 3,
       "empty_open": 3,
-      "excess": -0.24174785751434036
+      "excess": -0.24174785751434036,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-21T04:12Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -2590,7 +2632,9 @@
       ],
       "empty_tight": 1,
       "empty_open": 7,
-      "excess": -0.1417224755313185
+      "excess": -0.1417224755313185,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-21T04:13Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -2708,7 +2752,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 8,
-      "excess": 0.052090018575546265
+      "excess": 0.052090018575546265,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-21T05:10Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -2826,7 +2872,9 @@
       ],
       "empty_tight": 1,
       "empty_open": 0,
-      "excess": 0.10111282233689631
+      "excess": 0.10111282233689631,
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-21T05:19Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -2944,7 +2992,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 4,
-      "excess": 4.745989519022439
+      "excess": 4.745989519022439,
+      "collected_from": "2026-09-21T05:19Z",
+      "collected_to": "2026-09-21T05:29Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -3062,7 +3112,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 23,
-      "excess": 2.6040388447537897
+      "excess": 2.6040388447537897,
+      "collected_from": "2026-09-21T05:29Z",
+      "collected_to": "2026-09-21T07:10Z"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -3180,7 +3232,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-21T07:10Z",
+      "collected_to": "2026-09-21T07:11Z"
     }
   ],
   "p_holm_by_prompt": {
@@ -3378,5 +3432,11 @@
       },
       "verdict_forced": "insufficient"
     }
-  ]
+  ],
+  "collected": {
+    "from": "2026-09-20T14:39Z",
+    "to": "2026-09-21T07:11Z",
+    "source": "cache"
+  },
+  "written": "2026-09-21T16:06Z"
 }

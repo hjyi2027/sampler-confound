@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import os
 import random
+from dataclasses import replace
 import time
 from pathlib import Path
 
@@ -185,11 +186,12 @@ def complete(key: str, request: dict, replicate: int, *,
         return _http(ad.url(wire), ad.headers(key), payload, timeout)
 
     try:
-        raw = cache.fetch(keyed, replicate, send)
+        entry = cache.fetch_entry(keyed, replicate, send)
     except CacheMiss as e:
         return None, f"offline: {e}"
     except Rejected as e:
         return None, str(e)
     except Transient as e:
         return None, str(e)
-    return ad.decode(raw, dropped), None
+    c = ad.decode(entry["response"], dropped)
+    return replace(c, collected_at=entry.get("stored_at")), None

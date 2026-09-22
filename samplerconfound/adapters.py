@@ -67,6 +67,9 @@ class Completion:
     served_by: str | None                # adapter name; OpenRouter reports the upstream it chose
     dropped: tuple[str, ...]             # canonical params this adapter had no wire form for
     raw: dict = field(repr=False)        # the full response, exactly as cached
+    # When the provider answered (unix time, from the cache entry). Provider
+    # behaviour changes; a measurement without its date is not one.
+    collected_at: float | None = None
 
     @property
     def truncated(self) -> bool:

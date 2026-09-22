@@ -679,5 +679,30 @@ extrapolation and is far better powered.
 | §5 | `tests/test_variance.py`, `tests/test_inversion.py` | simulation |
 | §6 | `scripts/power_check.py` | simulation |
 
+### When
+
+Provider behaviour changes — three models were withdrawn during this project
+and a fourth reappeared — so every result above carries the date the provider
+answered, taken from the cache entry of each call (`stored_at`), not from when
+a report was written. `scripts/date_probes.py --check` lists anything undated;
+nothing is. The four runs that predate the cache are dated by the commit that
+added them, which is an upper bound, and say so.
+
+| finding | data | collected from (UTC) | to | source |
+|---|---|---|---|---|
+| §1 single-prompt probe | `runs/distinguish.json` | 2026-09-09T13:04 | 2026-09-09T13:04 | git author date of the adding commit (predates the cache) |
+| §1 multi-prompt grid, seven models | `runs/distinguish_multiprompt.json` | 2026-09-17T19:56 | 2026-09-17T19:56 | git author date of the adding commit (predates the cache) |
+| §1 negative control, eight models | `runs/negative_control.json` | 2026-09-11T10:41 | 2026-09-11T10:41 | git author date of the adding commit (predates the cache) |
+| §2 determinism, seven models | `runs/determinism.json` | 2026-09-17T20:12 | 2026-09-17T20:12 | git author date of the adding commit (predates the cache) |
+| §1 paid tier, n=40 (eight models) | `runs/matrix/fireworks/<model>.json` (8 files) | 2026-09-20T10:31 | 2026-09-20T10:54 | cache |
+| §1 nine parameters, thin | `runs/matrix/fireworks/ (18 files)` | 2026-09-20T05:50 | 2026-09-21T15:59 | cache |
+| §1 nine parameters, full | `runs/matrix/fireworks/ (14 files)` | 2026-09-20T05:50 | 2026-09-21T16:05 | cache |
+| §1 negative control per model | `runs/matrix/fireworks/ (12 files)` | 2026-09-20T14:39 | 2026-09-20T14:48 | cache |
+| §2 determinism, paid tier + thin | `runs/matrix/fireworks/ (4 files)` | 2026-09-20T10:31 | 2026-09-20T14:34 | cache |
+| §1 undocumented parameters | `runs/matrix/undocumented.json` | 2026-09-22T03:07 | 2026-09-22T04:59 | cache |
+
+Documentation was read on 2026-09-22 (`samplerconfound/documented.py`).
+Prices were read on 2026-09-20 (`samplerconfound/pricing.py`).
+
 The study these came from is described in [README.md](README.md); the dated
 decision log is [TASKS.md](TASKS.md).

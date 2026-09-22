@@ -94,7 +94,7 @@ def undocumented_cells() -> list[dict]:
             out.append({"provider": r["provider"], "model": r["model"], "parameter": param,
                         "documented": doc["status"] if doc else None, "claim": doc["claim"] if doc else "",
                         "accepted": accepted, "honoured": honoured, "verdict": v,
-                        "free_text": None, "n_per_arm": None,
+                        "free_text": None, "n_per_arm": None, "collected": r.get("collected"),
                         "label": label(doc, accepted, honoured)})
     return out
 
@@ -127,6 +127,7 @@ def cells() -> list[dict]:
                 "verdict": measured,
                 "free_text": r.get(param + "_free_text"),
                 "n_per_arm": r.get("n_by_param", {}).get(param),
+                "collected": r.get("collected"),
                 "label": label(doc, accepted, honoured),
             })
     return out
@@ -163,7 +164,7 @@ def main() -> int:
     bad = [c for c in rows if c["label"] == "DOCUMENTED, ACCEPTED, IGNORED"]
     print(f"\n{WORST}: {len(worst)} cell(s)")
     for c in worst:
-        print(f"  {c['provider']}/{c['model']}  {c['parameter']}  (n={c['n_per_arm']})")
+        print(f"  {c['provider']}/{c['model']}  {c['parameter']}  collected {(c.get('collected') or {}).get('from', '?')}")
     print(f"\nDOCUMENTED, ACCEPTED, IGNORED: {len(bad)} cell(s)")
     for c in bad:
         print(f"  {c['provider']}/{c['model']}  {c['parameter']}  docs: \"{c['claim'][:70]}\"")
@@ -180,7 +181,10 @@ def main() -> int:
     if args.json:
         dest = resolve_out(args.json)
         dest.parent.mkdir(parents=True, exist_ok=True)
-        dest.write_text(json.dumps({"documented": DOCUMENTED, "cells": rows}, indent=2) + "\n")
+        from samplerconfound.paths import iso
+        import time
+        dest.write_text(json.dumps({"written": iso(time.time()), "documented": DOCUMENTED,
+                                    "cells": rows}, indent=2) + "\n")
         print(f"wrote {show(dest)}")
     return 0
 

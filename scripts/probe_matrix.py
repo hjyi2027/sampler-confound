@@ -88,17 +88,22 @@ def distinguish_rows(provider: str, d: dict) -> dict[str, dict]:
             row = out.setdefault(m, {})
             row.setdefault("control", []).append(mp["fraction_removed"])
             row["powered_prompts"] = row.get("powered_prompts", 0) + bool(mp["powered"])
+    col = d.get("collected") or {}
     for m, row in out.items():
         row["provider"] = provider
         fr = [x for x in row.pop("control", []) if x == x]
         row["control_removed"] = sum(fr) / len(fr) if fr else float("nan")
+        if col.get("from"):
+            row.setdefault("collected", []).extend([col["from"], col.get("to") or col["from"]])
     return out
 
 
 def determinism_rows(d: dict) -> dict[str, dict]:
     out = {}
+    col = d.get("collected") or {}
     for m, s in d.get("summary", {}).items():
         out[m] = {"greedy_match": s["greedy_match"],
+                  "collected": [col["from"], col.get("to") or col["from"]] if col.get("from") else [],
                   "seed": "yes" if str(s["seed"]).startswith("yes") else
                           ("n/a" if str(s["seed"]).startswith("n/a") else
                            ("rej" if s["seed"] == "rejected" else "NO"))}
@@ -112,10 +117,15 @@ def collect() -> list[dict]:
         for m, r in distinguish_rows(provider, dist or {}).items():
             row = rows.setdefault((provider, m), {"provider": provider, "model": m})
             nbp = {**row.get("n_by_param", {}), **r.pop("n_by_param", {})}
+            col = row.get("collected", []) + r.pop("collected", [])
             row.update(r)
             row["n_by_param"] = nbp
+            row["collected"] = col
         for m, r in determinism_rows(det or {}).items():
-            rows.setdefault((provider, m), {"provider": provider, "model": m}).update(r)
+            row = rows.setdefault((provider, m), {"provider": provider, "model": m})
+            col = row.get("collected", []) + r.pop("collected", [])
+            row.update(r)
+            row["collected"] = col
 
     merge("fireworks", _load(LEGACY_DIST), _load(LEGACY_DET))
     if MATRIX.exists():
@@ -144,6 +154,9 @@ def collect() -> list[dict]:
 
     out = []
     for (prov, m), r in rows.items():
+        col = [c for c in r.get("collected", []) if c]
+        # the window over every file that contributed to this row
+        r["collected"] = {"from": min(col), "to": max(col)} if col else {"from": "", "to": ""}
         ns = sorted({n for n in r.get("n_by_param", {}).values() if n})
         r["n_per_arm"] = ns[0] if len(ns) == 1 else (f"{ns[0]}-{ns[-1]}" if ns else None)
         p_in, p_out = PRICES.get(m, (float("nan"), float("nan")))
@@ -160,11 +173,13 @@ def main() -> int:
     args = ap.parse_args()
     rows = collect()
 
-    print(f"{'provider':<11}{'model':<32}{'$/1M out':>9}{'n':>6}{'ctrl':>6}{'pwr':>5}"
+    print(f"{'provider':<11}{'model':<32}{'collected':<24}{'$/1M out':>9}{'n':>6}{'ctrl':>6}{'pwr':>5}"
           + "".join(f"{SHORT[p]:>7}" for p in PARAMS) + f"{'greedy':>8}{'seed':>6}")
     for r in rows:
         ctrl = r.get("control_removed", float("nan"))
-        print(f"{r['provider']:<11}{r['model']:<32}"
+        c = r["collected"]
+        dated = (c["from"][:10] + (".." + c["to"][5:10] if c["to"][:10] != c["from"][:10] else "")) if c["from"] else "UNDATED"
+        print(f"{r['provider']:<11}{r['model']:<32}{dated:<24}"
               f"{r['usd_out_per_1m']:>9.2f}"
               f"{str(r.get('n_per_arm') or '—'):>6}"
               f"{(f'{ctrl:.0%}' if ctrl == ctrl else '—'):>6}"
@@ -180,6 +195,7 @@ def main() -> int:
           " pwr = prompts whose control passed / prompts run;"
           " yes/NO/? = distinguishable / no effect seen with power / underpowered;"
           " rej = provider refused the parameter; n/a = adapter has no wire form for it;"
+          " collected = when the provider answered (window over the row's files);"
           " greedy = exact-match rate of 10 identical T=0 calls;"
           " seed = fixed seed reproduces a non-deterministic prompt")
     if args.json:

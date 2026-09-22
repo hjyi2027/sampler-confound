@@ -31,6 +31,7 @@ sys.path.insert(0, str(ROOT))
 from samplerconfound.benchmarks import pilot_split, sweep_split
 from samplerconfound.config import FIXED, SAMPLER_CONFIGS
 from samplerconfound.grade import grade
+from samplerconfound.paths import iso
 from samplerconfound.provider import complete, load_key
 
 MODELS = [
@@ -68,6 +69,7 @@ def generate(key: str, model: str, sampler: dict, problem) -> dict | None:
         "gold": problem.answer,
         "response": c.text,
         "finish_reason": c.finish_reason,
+        "collected_at": iso(c.collected_at),
         "output_tokens": c.completion_tokens,
         "verdict": verdict.to_dict(),
     }

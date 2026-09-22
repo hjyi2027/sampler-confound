@@ -25,3 +25,17 @@ def show(p: Path | str) -> str:
         return str(p.relative_to(ROOT))
     except ValueError:
         return str(p)
+
+
+def iso(t: float | None) -> str:
+    """Unix time -> 'YYYY-MM-DDTHH:MMZ'. Every probe stamps its cells with this."""
+    import datetime as _dt
+    if t is None:
+        return ""
+    return _dt.datetime.fromtimestamp(t, _dt.timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
+
+
+def window(times) -> dict:
+    """{'from', 'to'} over a collection of unix times, ISO, ignoring None."""
+    ts = [t for t in times if t is not None]
+    return {"from": iso(min(ts)), "to": iso(max(ts))} if ts else {"from": "", "to": ""}

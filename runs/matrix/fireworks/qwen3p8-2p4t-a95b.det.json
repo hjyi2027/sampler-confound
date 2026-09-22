@@ -29,7 +29,11 @@
             7,
             "The user wants a single-sentence arithmetic word problem appropriate for a 10-year-old. At that age, kids are typically working with multi-digit addition, subtraction, multiplication, and simple division. I'll write something relatable and straightforward.\n"
           ],
-          "modal_content": "If Sarah has 4 boxes of crayons with 8 crayons in each box and she gives 5 crayons to her friend, how many crayons does she have left?"
+          "modal_content": "If Sarah has 4 boxes of crayons with 8 crayons in each box and she gives 5 crayons to her friend, how many crayons does she have left?",
+          "collected": {
+            "from": "2026-09-20T14:08Z",
+            "to": "2026-09-20T14:08Z"
+          }
         },
         "seed_0": {
           "n": 10,
@@ -44,7 +48,11 @@
             4,
             "The user wants a single-sentence arithmetic word problem appropriate for a 10-year-old. At that age, kids are typically working with multi-digit addition, subtraction, multiplication, and simple division. I'll write something relatable and straightforward.\n"
           ],
-          "modal_content": "If a bakery sells 24 cupcakes in the morning and 37 cupcakes in the afternoon, how many cupcakes did they sell in total?"
+          "modal_content": "If a bakery sells 24 cupcakes in the morning and 37 cupcakes in the afternoon, how many cupcakes did they sell in total?",
+          "collected": {
+            "from": "2026-09-20T14:08Z",
+            "to": "2026-09-20T14:08Z"
+          }
         },
         "seed_1": {
           "n": 10,
@@ -59,11 +67,19 @@
             5,
             "The user wants a single-sentence arithmetic word problem appropriate for a 10-year-old. At that age, kids are typically working with multi-digit addition, subtraction, multiplication, and simple division. I'll write something relatable and straightforward.\n"
           ],
-          "modal_content": "If a bakery sells 24 cupcakes in the morning and 37 cupcakes in the afternoon, how many cupcakes did they sell in total?"
+          "modal_content": "If a bakery sells 24 cupcakes in the morning and 37 cupcakes in the afternoon, how many cupcakes did they sell in total?",
+          "collected": {
+            "from": "2026-09-20T14:08Z",
+            "to": "2026-09-20T14:08Z"
+          }
         }
       },
       "seed_rejected": false,
-      "seed0_eq_seed1": true
+      "seed0_eq_seed1": true,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-20T14:08Z"
+      }
     },
     {
       "provider": "fireworks",
@@ -83,7 +99,11 @@
             1,
             "The user wants one short sentence about anything, with no additional commentary. I'll write something simple and evocative.\n"
           ],
-          "modal_content": "The last leaf fell from the oak tree just as the first snow began."
+          "modal_content": "The last leaf fell from the oak tree just as the first snow began.",
+          "collected": {
+            "from": "2026-09-20T14:08Z",
+            "to": "2026-09-20T14:08Z"
+          }
         },
         "seed_0": {
           "n": 10,
@@ -98,7 +118,11 @@
             1,
             "The user wants one short sentence about anything, with no additional commentary. I'll write something simple and evocative.\n"
           ],
-          "modal_content": "The last leaf fell from the oak tree just as the first snow began."
+          "modal_content": "The last leaf fell from the oak tree just as the first snow began.",
+          "collected": {
+            "from": "2026-09-20T14:08Z",
+            "to": "2026-09-20T14:08Z"
+          }
         },
         "seed_1": {
           "n": 10,
@@ -113,11 +137,19 @@
             1,
             "The user wants one short sentence about anything, with no additional commentary. I'll write something simple and evocative.\n"
           ],
-          "modal_content": "The last leaf fell from the oak tree just as the first snow began."
+          "modal_content": "The last leaf fell from the oak tree just as the first snow began.",
+          "collected": {
+            "from": "2026-09-20T14:08Z",
+            "to": "2026-09-20T14:08Z"
+          }
         }
       },
       "seed_rejected": false,
-      "seed0_eq_seed1": true
+      "seed0_eq_seed1": true,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-20T14:08Z"
+      }
     },
     {
       "provider": "fireworks",
@@ -137,7 +169,11 @@
             10,
             "The user wants me to write exactly three words that could open a story, and reply with only those three words. Let me think of something evocative and compelling.\n\nOptions:\n- \"It was dark\" - classic but bland\n- \"She never returned\" - intriguing, raises questions\n- \"The door opened\" - simple, sets a scene\n- \"Nobody remembered why\" - mysterious, compelling\n- \"Once, there was\" - fairy tale opening\n\nI'll go with something that immediately creates intrigue and narrative tension.\n\n\"She never returned\" feels strong - it implies a story, a character, and mystery all in three words.\n"
           ],
-          "modal_content": "She never returned."
+          "modal_content": "She never returned.",
+          "collected": {
+            "from": "2026-09-20T14:09Z",
+            "to": "2026-09-20T14:33Z"
+          }
         },
         "seed_0": {
           "n": 10,
@@ -152,7 +188,11 @@
             9,
             "The user wants me to write exactly three words that could open a story, and reply with only those three words. Let me think of something evocative and compelling.\n\nOptions:\n- \"It was dark\" \u2014 classic but a bit flat\n- \"She never returned\" \u2014 intriguing, raises questions\n- \"The door opened\" \u2014 simple, creates anticipation\n- \"Nobody remembered why\" \u2014 mysterious, compelling\n- \"Once, there was\" \u2014 fairy tale feel\n\nI'll go with something that immediately creates intrigue and narrative tension.\n\n\"She never returned\" \u2014 three words, immediately raises questions, implies a story.\n"
           ],
-          "modal_content": "She never returned."
+          "modal_content": "She never returned.",
+          "collected": {
+            "from": "2026-09-20T14:33Z",
+            "to": "2026-09-20T14:33Z"
+          }
         },
         "seed_1": {
           "n": 10,
@@ -167,11 +207,19 @@
             8,
             "The user wants me to write exactly three words that could open a story, and reply with only those three words. Let me think of something evocative and compelling.\n\nOptions:\n- \"It was dark\" - classic but bland\n- \"She never returned\" - intriguing, sets up mystery\n- \"The door opened\" - simple, creates anticipation\n- \"Nobody remembered why\" - mysterious, compelling\n- \"Once, there was\" - fairy tale opening\n\nI'll go with something that immediately creates intrigue and narrative tension.\n\n\"She never returned\" feels strong - it implies a story, a character, and a mystery all in three words.\n"
           ],
-          "modal_content": "She never returned."
+          "modal_content": "She never returned.",
+          "collected": {
+            "from": "2026-09-20T14:33Z",
+            "to": "2026-09-20T14:33Z"
+          }
         }
       },
       "seed_rejected": false,
-      "seed0_eq_seed1": true
+      "seed0_eq_seed1": true,
+      "collected": {
+        "from": "2026-09-20T14:09Z",
+        "to": "2026-09-20T14:33Z"
+      }
     },
     {
       "provider": "fireworks",
@@ -191,7 +239,11 @@
             1,
             "The user wants me to ask one question about anything, and reply with only the question. Let me think of an interesting question. I could ask about science, philosophy, history, personal preferences, or anything else. I'll go with something thought-provoking but simple.\n"
           ],
-          "modal_content": "What's something you believed as a child that turned out to be completely wrong?"
+          "modal_content": "What's something you believed as a child that turned out to be completely wrong?",
+          "collected": {
+            "from": "2026-09-20T14:33Z",
+            "to": "2026-09-20T14:33Z"
+          }
         },
         "seed_0": {
           "n": 10,
@@ -206,7 +258,11 @@
             1,
             "The user wants me to ask one question about anything, and reply with only the question. Let me think of an interesting question. I could ask about science, philosophy, history, personal preferences, or anything else. I'll go with something thought-provoking but simple.\n"
           ],
-          "modal_content": "What's something you believed as a child that turned out to be completely wrong?"
+          "modal_content": "What's something you believed as a child that turned out to be completely wrong?",
+          "collected": {
+            "from": "2026-09-20T14:33Z",
+            "to": "2026-09-20T14:33Z"
+          }
         },
         "seed_1": {
           "n": 10,
@@ -221,11 +277,19 @@
             1,
             "The user wants me to ask one question about anything, and reply with only the question. Let me think of an interesting question. I could ask about science, philosophy, history, personal preferences, or anything else. I'll go with something thought-provoking but simple.\n"
           ],
-          "modal_content": "What's something you believed as a child that turned out to be completely wrong?"
+          "modal_content": "What's something you believed as a child that turned out to be completely wrong?",
+          "collected": {
+            "from": "2026-09-20T14:33Z",
+            "to": "2026-09-20T14:33Z"
+          }
         }
       },
       "seed_rejected": false,
-      "seed0_eq_seed1": true
+      "seed0_eq_seed1": true,
+      "collected": {
+        "from": "2026-09-20T14:33Z",
+        "to": "2026-09-20T14:33Z"
+      }
     },
     {
       "provider": "fireworks",
@@ -245,7 +309,11 @@
             1,
             "I need to solve the equation $2^8 = 4^x$.\n\nSince $4 = 2^2$, I can rewrite $4^x$ as $(2^2)^x = 2^{2x}$.\n\nSo the equation becomes:\n$2^8 = 2^{2x}$\n\nSince the bases are the same, the exponents must be equal:\n$8 = 2x$\n$x = 4$\n"
           ],
-          "modal_content": "## Solving $2^8 = 4^x$\n\n**Step 1:** Rewrite 4 as a power of 2.\n\n$$4 = 2^2$$\n\n**Step 2:** Substitute into the equation.\n\n$$2^8 = (2^2)^x = 2^{2x}$$\n\n**Step 3:** Since the bases are equal, set the expon"
+          "modal_content": "## Solving $2^8 = 4^x$\n\n**Step 1:** Rewrite 4 as a power of 2.\n\n$$4 = 2^2$$\n\n**Step 2:** Substitute into the equation.\n\n$$2^8 = (2^2)^x = 2^{2x}$$\n\n**Step 3:** Since the bases are equal, set the expon",
+          "collected": {
+            "from": "2026-09-20T14:33Z",
+            "to": "2026-09-20T14:33Z"
+          }
         },
         "seed_0": {
           "n": 10,
@@ -260,7 +328,11 @@
             2,
             "I need to solve the equation $2^8 = 4^x$.\n\nSince $4 = 2^2$, I can rewrite $4^x$ as $(2^2)^x = 2^{2x}$.\n\nSo the equation becomes:\n$2^8 = 2^{2x}$\n\nSince the bases are the same, the exponents must be equal:\n$8 = 2x$\n$x = 4$\n"
           ],
-          "modal_content": "## Solving $2^8 = 4^x$\n\n**Step 1:** Rewrite 4 as a power of 2.\n\n$$4 = 2^2$$\n\n**Step 2:** Substitute into the equation.\n\n$$2^8 = (2^2)^x = 2^{2x}$$\n\n**Step 3:** Since the bases are equal, set the expon"
+          "modal_content": "## Solving $2^8 = 4^x$\n\n**Step 1:** Rewrite 4 as a power of 2.\n\n$$4 = 2^2$$\n\n**Step 2:** Substitute into the equation.\n\n$$2^8 = (2^2)^x = 2^{2x}$$\n\n**Step 3:** Since the bases are equal, set the expon",
+          "collected": {
+            "from": "2026-09-20T14:33Z",
+            "to": "2026-09-20T14:33Z"
+          }
         },
         "seed_1": {
           "n": 10,
@@ -275,11 +347,19 @@
             2,
             "I need to solve the equation $2^8 = 4^x$.\n\nSince $4 = 2^2$, I can rewrite $4^x$ as $(2^2)^x = 2^{2x}$.\n\nSo the equation becomes:\n$2^8 = 2^{2x}$\n\nSince the bases are the same, the exponents must be equal:\n$8 = 2x$\n$x = 4$\n"
           ],
-          "modal_content": "## Solving $2^8 = 4^x$\n\n**Step 1:** Rewrite 4 as a power of 2.\n\n$$4 = 2^2$$\n\n**Step 2:** Substitute into the equation.\n\n$$2^8 = (2^2)^x = 2^{2x}$$\n\n**Step 3:** Since the bases are equal, set the expon"
+          "modal_content": "## Solving $2^8 = 4^x$\n\n**Step 1:** Rewrite 4 as a power of 2.\n\n$$4 = 2^2$$\n\n**Step 2:** Substitute into the equation.\n\n$$2^8 = (2^2)^x = 2^{2x}$$\n\n**Step 3:** Since the bases are equal, set the expon",
+          "collected": {
+            "from": "2026-09-20T14:34Z",
+            "to": "2026-09-20T14:34Z"
+          }
         }
       },
       "seed_rejected": false,
-      "seed0_eq_seed1": true
+      "seed0_eq_seed1": true,
+      "collected": {
+        "from": "2026-09-20T14:33Z",
+        "to": "2026-09-20T14:34Z"
+      }
     }
   ],
   "summary": {
@@ -288,5 +368,11 @@
       "seeded_match": 0.76,
       "seed": "NO (fixed seed reproduces on 1/3 non-deterministic prompts)"
     }
-  }
+  },
+  "collected": {
+    "from": "2026-09-20T14:08Z",
+    "to": "2026-09-20T14:34Z",
+    "source": "cache"
+  },
+  "written": "2026-09-20T14:34Z"
 }

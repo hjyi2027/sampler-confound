@@ -1,4 +1,5 @@
 {
+  "written": "2026-09-22T05:27Z",
   "documented": {
     "fireworks": {
       "source": "https://docs.fireworks.ai/api-reference/post-chatcompletions",
@@ -545,6 +546,10 @@
       "verdict": "honoured",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T03:07Z",
+        "to": "2026-09-22T03:08Z"
+      },
       "label": "undocumented, accepted, works"
     },
     {
@@ -558,6 +563,10 @@
       "verdict": "ignored",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T03:07Z",
+        "to": "2026-09-22T03:08Z"
+      },
       "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -571,6 +580,10 @@
       "verdict": "ignored",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T03:07Z",
+        "to": "2026-09-22T03:08Z"
+      },
       "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -584,6 +597,10 @@
       "verdict": "accepted, untestable from outside",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T03:07Z",
+        "to": "2026-09-22T03:08Z"
+      },
       "label": "undocumented, accepted, undetermined"
     },
     {
@@ -597,6 +614,10 @@
       "verdict": "honoured",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T03:08Z",
+        "to": "2026-09-22T03:08Z"
+      },
       "label": "undocumented, accepted, works"
     },
     {
@@ -610,6 +631,10 @@
       "verdict": "ignored",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T03:08Z",
+        "to": "2026-09-22T03:08Z"
+      },
       "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -623,6 +648,10 @@
       "verdict": "ignored",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T03:08Z",
+        "to": "2026-09-22T03:08Z"
+      },
       "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -636,6 +665,10 @@
       "verdict": "accepted, untestable from outside",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T03:08Z",
+        "to": "2026-09-22T03:08Z"
+      },
       "label": "undocumented, accepted, undetermined"
     },
     {
@@ -649,6 +682,10 @@
       "verdict": "honoured",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T03:08Z",
+        "to": "2026-09-22T03:09Z"
+      },
       "label": "undocumented, accepted, works"
     },
     {
@@ -662,6 +699,10 @@
       "verdict": "undetermined",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T03:08Z",
+        "to": "2026-09-22T03:09Z"
+      },
       "label": "undocumented, accepted, undetermined"
     },
     {
@@ -675,6 +716,10 @@
       "verdict": "ignored",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T03:08Z",
+        "to": "2026-09-22T03:09Z"
+      },
       "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -688,6 +733,10 @@
       "verdict": "accepted, untestable from outside",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T03:08Z",
+        "to": "2026-09-22T03:09Z"
+      },
       "label": "undocumented, accepted, undetermined"
     },
     {
@@ -701,6 +750,10 @@
       "verdict": "undetermined (control already at cap)",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T04:59Z",
+        "to": "2026-09-22T04:59Z"
+      },
       "label": "undocumented, accepted, undetermined"
     },
     {
@@ -714,6 +767,10 @@
       "verdict": "ignored",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T04:59Z",
+        "to": "2026-09-22T04:59Z"
+      },
       "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -727,6 +784,10 @@
       "verdict": "ignored",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T04:59Z",
+        "to": "2026-09-22T04:59Z"
+      },
       "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -740,6 +801,10 @@
       "verdict": "accepted, untestable from outside",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T04:59Z",
+        "to": "2026-09-22T04:59Z"
+      },
       "label": "undocumented, accepted, undetermined"
     },
     {
@@ -753,6 +818,10 @@
       "verdict": "error (http 500)",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T04:58Z",
+        "to": "2026-09-22T04:59Z"
+      },
       "label": "accepted, then the server fails"
     },
     {
@@ -766,6 +835,10 @@
       "verdict": "ignored",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T04:58Z",
+        "to": "2026-09-22T04:59Z"
+      },
       "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -779,6 +852,10 @@
       "verdict": "ignored",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T04:58Z",
+        "to": "2026-09-22T04:59Z"
+      },
       "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -792,6 +869,10 @@
       "verdict": "accepted, untestable from outside",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-22T04:58Z",
+        "to": "2026-09-22T04:59Z"
+      },
       "label": "undocumented, accepted, undetermined"
     },
     {
@@ -805,6 +886,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:01Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -818,6 +903,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:01Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -831,6 +920,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:01Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -844,6 +937,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:01Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -857,6 +954,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:01Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -870,6 +971,10 @@
       "verdict": "distinguishable",
       "free_text": "underpowered",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:01Z"
+      },
       "label": "as documented"
     },
     {
@@ -883,6 +988,10 @@
       "verdict": "distinguishable",
       "free_text": "distinguishable",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:01Z"
+      },
       "label": "as documented"
     },
     {
@@ -896,6 +1005,10 @@
       "verdict": "no effect seen",
       "free_text": "underpowered",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:01Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -909,6 +1022,10 @@
       "verdict": "NO",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:01Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -922,6 +1039,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:02Z"
+      },
       "label": "as documented"
     },
     {
@@ -935,6 +1056,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:02Z"
+      },
       "label": "as documented"
     },
     {
@@ -948,6 +1073,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:02Z"
+      },
       "label": "as documented"
     },
     {
@@ -961,6 +1090,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:02Z"
+      },
       "label": "as documented"
     },
     {
@@ -974,6 +1107,10 @@
       "verdict": "mixed",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:02Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -987,6 +1124,10 @@
       "verdict": "distinguishable",
       "free_text": "distinguishable",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:02Z"
+      },
       "label": "as documented"
     },
     {
@@ -1000,6 +1141,10 @@
       "verdict": "distinguishable",
       "free_text": "no effect seen",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:02Z"
+      },
       "label": "as documented"
     },
     {
@@ -1013,6 +1158,10 @@
       "verdict": "insufficient",
       "free_text": "no effect seen",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:02Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -1026,6 +1175,10 @@
       "verdict": "NO",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:02Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -1039,6 +1192,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:00Z"
+      },
       "label": "as documented"
     },
     {
@@ -1052,6 +1209,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:00Z"
+      },
       "label": "as documented"
     },
     {
@@ -1065,6 +1226,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:00Z"
+      },
       "label": "as documented"
     },
     {
@@ -1078,6 +1243,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:00Z"
+      },
       "label": "as documented"
     },
     {
@@ -1091,6 +1260,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:00Z"
+      },
       "label": "as documented"
     },
     {
@@ -1104,6 +1277,10 @@
       "verdict": "distinguishable",
       "free_text": "distinguishable",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:00Z"
+      },
       "label": "as documented"
     },
     {
@@ -1117,6 +1294,10 @@
       "verdict": "distinguishable",
       "free_text": "no effect seen",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:00Z"
+      },
       "label": "as documented"
     },
     {
@@ -1130,6 +1311,10 @@
       "verdict": "insufficient",
       "free_text": "no effect seen",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:00Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -1143,6 +1328,10 @@
       "verdict": "n/a",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T16:00Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -1156,6 +1345,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T07:11Z"
+      },
       "label": "as documented"
     },
     {
@@ -1169,6 +1362,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T07:11Z"
+      },
       "label": "as documented"
     },
     {
@@ -1182,6 +1379,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T07:11Z"
+      },
       "label": "as documented"
     },
     {
@@ -1195,6 +1396,10 @@
       "verdict": "mixed",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T07:11Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -1208,6 +1413,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T07:11Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -1221,6 +1430,10 @@
       "verdict": "distinguishable",
       "free_text": "distinguishable",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T07:11Z"
+      },
       "label": "as documented"
     },
     {
@@ -1234,6 +1447,10 @@
       "verdict": "distinguishable",
       "free_text": "distinguishable",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T07:11Z"
+      },
       "label": "as documented"
     },
     {
@@ -1247,6 +1464,10 @@
       "verdict": "insufficient",
       "free_text": "underpowered",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T07:11Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -1260,6 +1481,10 @@
       "verdict": "NO",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T07:11Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -1273,6 +1498,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T05:19Z"
+      },
       "label": "as documented"
     },
     {
@@ -1286,6 +1515,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T05:19Z"
+      },
       "label": "as documented"
     },
     {
@@ -1299,6 +1532,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T05:19Z"
+      },
       "label": "as documented"
     },
     {
@@ -1312,6 +1549,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T05:19Z"
+      },
       "label": "as documented"
     },
     {
@@ -1325,6 +1566,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T05:19Z"
+      },
       "label": "as documented"
     },
     {
@@ -1338,6 +1583,10 @@
       "verdict": "distinguishable",
       "free_text": "distinguishable",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T05:19Z"
+      },
       "label": "as documented"
     },
     {
@@ -1351,6 +1600,10 @@
       "verdict": "distinguishable",
       "free_text": "mixed",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T05:19Z"
+      },
       "label": "as documented"
     },
     {
@@ -1364,6 +1617,10 @@
       "verdict": "insufficient",
       "free_text": "underpowered",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T05:19Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -1377,6 +1634,10 @@
       "verdict": "NO",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T05:19Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -1390,6 +1651,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:05Z"
+      },
       "label": "as documented"
     },
     {
@@ -1403,6 +1668,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:05Z"
+      },
       "label": "as documented"
     },
     {
@@ -1416,6 +1685,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:05Z"
+      },
       "label": "as documented"
     },
     {
@@ -1429,6 +1702,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:05Z"
+      },
       "label": "as documented"
     },
     {
@@ -1442,6 +1719,10 @@
       "verdict": "no effect seen",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:05Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -1455,6 +1736,10 @@
       "verdict": "distinguishable",
       "free_text": "distinguishable",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:05Z"
+      },
       "label": "as documented"
     },
     {
@@ -1468,6 +1753,10 @@
       "verdict": "distinguishable",
       "free_text": "mixed",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:05Z"
+      },
       "label": "as documented"
     },
     {
@@ -1481,6 +1770,10 @@
       "verdict": "insufficient",
       "free_text": "no effect seen",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:05Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -1494,6 +1787,10 @@
       "verdict": "NO",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T16:05Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -1507,6 +1804,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T02:05Z"
+      },
       "label": "as documented"
     },
     {
@@ -1520,6 +1821,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T02:05Z"
+      },
       "label": "as documented"
     },
     {
@@ -1533,6 +1838,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T02:05Z"
+      },
       "label": "as documented"
     },
     {
@@ -1546,6 +1855,10 @@
       "verdict": "no effect seen",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T02:05Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -1559,6 +1872,10 @@
       "verdict": "no effect seen",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T02:05Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -1572,6 +1889,10 @@
       "verdict": "no effect seen",
       "free_text": "distinguishable",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T02:05Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -1585,6 +1906,10 @@
       "verdict": "distinguishable",
       "free_text": "mixed",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T02:05Z"
+      },
       "label": "as documented"
     },
     {
@@ -1598,6 +1923,10 @@
       "verdict": "insufficient",
       "free_text": "no effect seen",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T02:05Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -1611,6 +1940,10 @@
       "verdict": "NO",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T02:05Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -1624,6 +1957,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T12:27Z"
+      },
       "label": "as documented"
     },
     {
@@ -1637,6 +1974,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T12:27Z"
+      },
       "label": "as documented"
     },
     {
@@ -1650,6 +1991,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T12:27Z"
+      },
       "label": "as documented"
     },
     {
@@ -1663,6 +2008,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T12:27Z"
+      },
       "label": "as documented"
     },
     {
@@ -1676,6 +2025,10 @@
       "verdict": "no effect seen",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T12:27Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -1689,6 +2042,10 @@
       "verdict": "distinguishable",
       "free_text": "distinguishable",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T12:27Z"
+      },
       "label": "as documented"
     },
     {
@@ -1702,6 +2059,10 @@
       "verdict": "distinguishable",
       "free_text": "no effect seen",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T12:27Z"
+      },
       "label": "as documented"
     },
     {
@@ -1715,6 +2076,10 @@
       "verdict": "no effect seen",
       "free_text": "no effect seen",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T12:27Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -1728,6 +2093,10 @@
       "verdict": "NO",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T12:27Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -1741,6 +2110,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T10:21Z"
+      },
       "label": "as documented"
     },
     {
@@ -1754,6 +2127,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T10:21Z"
+      },
       "label": "as documented"
     },
     {
@@ -1767,6 +2144,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T10:21Z"
+      },
       "label": "as documented"
     },
     {
@@ -1780,6 +2161,10 @@
       "verdict": "mixed",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T10:21Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -1793,6 +2178,10 @@
       "verdict": "no effect seen",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T10:21Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -1806,6 +2195,10 @@
       "verdict": "distinguishable",
       "free_text": "distinguishable",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T10:21Z"
+      },
       "label": "as documented"
     },
     {
@@ -1819,6 +2212,10 @@
       "verdict": "distinguishable",
       "free_text": "no effect seen",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T10:21Z"
+      },
       "label": "as documented"
     },
     {
@@ -1832,6 +2229,10 @@
       "verdict": "insufficient",
       "free_text": "no effect seen",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T10:21Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -1845,6 +2246,10 @@
       "verdict": "NO",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T10:21Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -1858,6 +2263,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T15:59Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -1871,6 +2280,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T15:59Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -1884,6 +2297,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T15:59Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -1897,6 +2314,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T15:59Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -1910,6 +2331,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T15:59Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -1923,6 +2348,10 @@
       "verdict": "distinguishable",
       "free_text": "underpowered",
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T15:59Z"
+      },
       "label": "as documented"
     },
     {
@@ -1936,6 +2365,10 @@
       "verdict": "distinguishable",
       "free_text": "distinguishable",
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T15:59Z"
+      },
       "label": "as documented"
     },
     {
@@ -1949,6 +2382,10 @@
       "verdict": "insufficient",
       "free_text": "underpowered",
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T15:59Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -1962,6 +2399,10 @@
       "verdict": "NO",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-17T19:56",
+        "to": "2026-09-21T15:59Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -1975,6 +2416,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T13:38Z"
+      },
       "label": "as documented"
     },
     {
@@ -1988,6 +2433,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T13:38Z"
+      },
       "label": "as documented"
     },
     {
@@ -2001,6 +2450,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T13:38Z"
+      },
       "label": "as documented"
     },
     {
@@ -2014,6 +2467,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T13:38Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2027,6 +2484,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T13:38Z"
+      },
       "label": "as documented"
     },
     {
@@ -2040,6 +2501,10 @@
       "verdict": "distinguishable",
       "free_text": "distinguishable",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T13:38Z"
+      },
       "label": "as documented"
     },
     {
@@ -2053,6 +2518,10 @@
       "verdict": "distinguishable",
       "free_text": "underpowered",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T13:38Z"
+      },
       "label": "as documented"
     },
     {
@@ -2066,6 +2535,10 @@
       "verdict": "insufficient",
       "free_text": "underpowered",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T13:38Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2079,6 +2552,10 @@
       "verdict": "NO",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T13:38Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -2092,6 +2569,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T09:06Z"
+      },
       "label": "as documented"
     },
     {
@@ -2105,6 +2586,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T09:06Z"
+      },
       "label": "as documented"
     },
     {
@@ -2118,6 +2603,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T09:06Z"
+      },
       "label": "as documented"
     },
     {
@@ -2131,6 +2620,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T09:06Z"
+      },
       "label": "as documented"
     },
     {
@@ -2144,6 +2637,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T09:06Z"
+      },
       "label": "as documented"
     },
     {
@@ -2157,6 +2654,10 @@
       "verdict": "distinguishable",
       "free_text": "distinguishable",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T09:06Z"
+      },
       "label": "as documented"
     },
     {
@@ -2170,6 +2671,10 @@
       "verdict": "distinguishable",
       "free_text": "no effect seen",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T09:06Z"
+      },
       "label": "as documented"
     },
     {
@@ -2183,6 +2688,10 @@
       "verdict": "insufficient",
       "free_text": "no effect seen",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T09:06Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2196,6 +2705,10 @@
       "verdict": "NO",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T09:06Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -2209,6 +2722,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:21Z"
+      },
       "label": "as documented"
     },
     {
@@ -2222,6 +2739,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:21Z"
+      },
       "label": "as documented"
     },
     {
@@ -2235,6 +2756,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:21Z"
+      },
       "label": "as documented"
     },
     {
@@ -2248,6 +2773,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:21Z"
+      },
       "label": "as documented"
     },
     {
@@ -2261,6 +2790,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:21Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2274,6 +2807,10 @@
       "verdict": "distinguishable",
       "free_text": "distinguishable",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:21Z"
+      },
       "label": "as documented"
     },
     {
@@ -2287,6 +2824,10 @@
       "verdict": "distinguishable",
       "free_text": "distinguishable",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:21Z"
+      },
       "label": "as documented"
     },
     {
@@ -2300,6 +2841,10 @@
       "verdict": "insufficient",
       "free_text": "underpowered",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:21Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2313,6 +2858,10 @@
       "verdict": "NO",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:21Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -2326,6 +2875,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T12:36Z"
+      },
       "label": "as documented"
     },
     {
@@ -2339,6 +2892,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T12:36Z"
+      },
       "label": "as documented"
     },
     {
@@ -2352,6 +2909,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T12:36Z"
+      },
       "label": "as documented"
     },
     {
@@ -2365,6 +2926,10 @@
       "verdict": "mixed",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T12:36Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2378,6 +2943,10 @@
       "verdict": "no effect seen",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T12:36Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -2391,6 +2960,10 @@
       "verdict": "insufficient",
       "free_text": "distinguishable",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T12:36Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2404,6 +2977,10 @@
       "verdict": "distinguishable",
       "free_text": "no effect seen",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T12:36Z"
+      },
       "label": "as documented"
     },
     {
@@ -2417,6 +2994,10 @@
       "verdict": "insufficient",
       "free_text": "no effect seen",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T12:36Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2430,6 +3011,10 @@
       "verdict": "NO",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T12:36Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -2443,6 +3028,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:39Z"
+      },
       "label": "as documented"
     },
     {
@@ -2456,6 +3045,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:39Z"
+      },
       "label": "as documented"
     },
     {
@@ -2469,6 +3062,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:39Z"
+      },
       "label": "as documented"
     },
     {
@@ -2482,6 +3079,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:39Z"
+      },
       "label": "as documented"
     },
     {
@@ -2495,6 +3096,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:39Z"
+      },
       "label": "as documented"
     },
     {
@@ -2508,6 +3113,10 @@
       "verdict": "distinguishable",
       "free_text": "distinguishable",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:39Z"
+      },
       "label": "as documented"
     },
     {
@@ -2521,6 +3130,10 @@
       "verdict": "distinguishable",
       "free_text": "no effect seen",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:39Z"
+      },
       "label": "as documented"
     },
     {
@@ -2534,6 +3147,10 @@
       "verdict": "insufficient",
       "free_text": "no effect seen",
       "n_per_arm": 40,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:39Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2547,6 +3164,10 @@
       "verdict": "NO",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-20T10:31Z",
+        "to": "2026-09-21T14:39Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -2560,6 +3181,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2573,6 +3198,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "as documented"
     },
     {
@@ -2586,6 +3215,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2599,6 +3232,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2612,6 +3249,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2625,6 +3266,10 @@
       "verdict": "insufficient",
       "free_text": "distinguishable",
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2638,6 +3283,10 @@
       "verdict": "distinguishable",
       "free_text": "underpowered",
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "as documented"
     },
     {
@@ -2651,6 +3300,10 @@
       "verdict": "insufficient",
       "free_text": "underpowered",
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2664,6 +3317,10 @@
       "verdict": "NO",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -2677,6 +3334,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "as documented"
     },
     {
@@ -2690,6 +3351,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "as documented"
     },
     {
@@ -2703,6 +3368,10 @@
       "verdict": "mixed",
       "free_text": null,
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2716,6 +3385,10 @@
       "verdict": "mixed",
       "free_text": null,
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2729,6 +3402,10 @@
       "verdict": "no effect seen",
       "free_text": null,
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -2742,6 +3419,10 @@
       "verdict": "insufficient",
       "free_text": "distinguishable",
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2755,6 +3436,10 @@
       "verdict": "distinguishable",
       "free_text": "no effect seen",
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "as documented"
     },
     {
@@ -2768,6 +3453,10 @@
       "verdict": "insufficient",
       "free_text": "no effect seen",
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2781,6 +3470,10 @@
       "verdict": "NO",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:42Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     },
     {
@@ -2794,6 +3487,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:43Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2807,6 +3504,10 @@
       "verdict": "distinguishable",
       "free_text": null,
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:43Z"
+      },
       "label": "as documented"
     },
     {
@@ -2820,6 +3521,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:43Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2833,6 +3538,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:43Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2846,6 +3555,10 @@
       "verdict": "underpowered",
       "free_text": null,
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:43Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2859,6 +3572,10 @@
       "verdict": "distinguishable",
       "free_text": "underpowered",
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:43Z"
+      },
       "label": "as documented"
     },
     {
@@ -2872,6 +3589,10 @@
       "verdict": "distinguishable",
       "free_text": "distinguishable",
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:43Z"
+      },
       "label": "as documented"
     },
     {
@@ -2885,6 +3606,10 @@
       "verdict": "insufficient",
       "free_text": "underpowered",
       "n_per_arm": 10,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:43Z"
+      },
       "label": "documented, accepted, undetermined"
     },
     {
@@ -2898,6 +3623,10 @@
       "verdict": "NO",
       "free_text": null,
       "n_per_arm": null,
+      "collected": {
+        "from": "2026-09-20T14:08Z",
+        "to": "2026-09-21T15:43Z"
+      },
       "label": "DOCUMENTED, ACCEPTED, IGNORED"
     }
   ]

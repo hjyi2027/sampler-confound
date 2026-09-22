@@ -58,7 +58,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.8481206607444385
+      "excess": 2.8481206607444385,
+      "collected_from": "2026-09-20T10:31Z",
+      "collected_to": "2026-09-20T10:32Z"
     },
     {
       "model": "kimi-k3",
@@ -116,7 +118,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.19830000000000017
+      "excess": 0.19830000000000017,
+      "collected_from": "2026-09-20T16:55Z",
+      "collected_to": "2026-09-20T16:55Z"
     },
     {
       "model": "kimi-k3",
@@ -174,7 +178,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T14:39Z",
+      "collected_to": "2026-09-20T16:55Z"
     },
     {
       "model": "kimi-k3",
@@ -232,7 +238,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T16:55Z",
+      "collected_to": "2026-09-20T16:57Z"
     },
     {
       "model": "kimi-k3",
@@ -290,7 +298,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T16:57Z",
+      "collected_to": "2026-09-20T16:57Z"
     },
     {
       "model": "kimi-k3",
@@ -348,7 +358,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T16:58Z",
+      "collected_to": "2026-09-20T16:58Z"
     },
     {
       "model": "kimi-k3",
@@ -404,7 +416,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.832100884975063
+      "excess": 1.832100884975063,
+      "collected_from": "2026-09-20T10:37Z",
+      "collected_to": "2026-09-20T10:39Z"
     },
     {
       "model": "kimi-k3",
@@ -462,7 +476,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.47510345696621736
+      "excess": 0.47510345696621736,
+      "collected_from": "2026-09-20T16:58Z",
+      "collected_to": "2026-09-20T16:58Z"
     },
     {
       "model": "kimi-k3",
@@ -520,7 +536,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T16:58Z",
+      "collected_to": "2026-09-20T16:58Z"
     },
     {
       "model": "kimi-k3",
@@ -578,7 +596,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T16:58Z",
+      "collected_to": "2026-09-20T17:00Z"
     },
     {
       "model": "kimi-k3",
@@ -636,7 +656,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T17:00Z",
+      "collected_to": "2026-09-20T17:01Z"
     },
     {
       "model": "kimi-k3",
@@ -694,7 +716,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T17:01Z",
+      "collected_to": "2026-09-20T17:01Z"
     },
     {
       "model": "kimi-k3",
@@ -750,7 +774,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 3.3136661543119432
+      "excess": 3.3136661543119432,
+      "collected_from": "2026-09-20T10:43Z",
+      "collected_to": "2026-09-20T10:44Z"
     },
     {
       "model": "kimi-k3",
@@ -808,7 +834,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.523667164803429
+      "excess": 0.523667164803429,
+      "collected_from": "2026-09-20T17:01Z",
+      "collected_to": "2026-09-20T17:01Z"
     },
     {
       "model": "kimi-k3",
@@ -866,7 +894,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.12304520079175328
+      "excess": -0.12304520079175328,
+      "collected_from": "2026-09-20T17:01Z",
+      "collected_to": "2026-09-20T17:01Z"
     },
     {
       "model": "kimi-k3",
@@ -924,7 +954,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.1509093964479735
+      "excess": 1.1509093964479735,
+      "collected_from": "2026-09-20T17:02Z",
+      "collected_to": "2026-09-20T17:03Z"
     },
     {
       "model": "kimi-k3",
@@ -982,7 +1014,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.21472125612590115
+      "excess": 0.21472125612590115,
+      "collected_from": "2026-09-20T17:03Z",
+      "collected_to": "2026-09-20T17:04Z"
     },
     {
       "model": "kimi-k3",
@@ -1040,7 +1074,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.3254190576215665
+      "excess": 0.3254190576215665,
+      "collected_from": "2026-09-20T17:04Z",
+      "collected_to": "2026-09-20T17:04Z"
     },
     {
       "model": "kimi-k3",
@@ -1096,7 +1132,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.4740307052172126
+      "excess": 1.4740307052172126,
+      "collected_from": "2026-09-20T10:43Z",
+      "collected_to": "2026-09-20T10:50Z"
     },
     {
       "model": "kimi-k3",
@@ -1154,7 +1192,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.39940000000000037
+      "excess": 0.39940000000000037,
+      "collected_from": "2026-09-20T17:04Z",
+      "collected_to": "2026-09-20T17:04Z"
     },
     {
       "model": "kimi-k3",
@@ -1212,7 +1252,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.8022537145016445
+      "excess": 0.8022537145016445,
+      "collected_from": "2026-09-20T17:04Z",
+      "collected_to": "2026-09-20T17:05Z"
     },
     {
       "model": "kimi-k3",
@@ -1270,7 +1312,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T17:05Z",
+      "collected_to": "2026-09-20T17:29Z"
     },
     {
       "model": "kimi-k3",
@@ -1328,7 +1372,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T17:29Z",
+      "collected_to": "2026-09-20T17:30Z"
     },
     {
       "model": "kimi-k3",
@@ -1386,7 +1432,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T17:30Z",
+      "collected_to": "2026-09-20T17:30Z"
     }
   ],
   "p_holm_by_prompt": {
@@ -1567,5 +1615,11 @@
       "forced": {},
       "verdict_forced": ""
     }
-  ]
+  ],
+  "collected": {
+    "from": "2026-09-20T10:31Z",
+    "to": "2026-09-20T17:30Z",
+    "source": "cache"
+  },
+  "written": "2026-09-21T16:06Z"
 }

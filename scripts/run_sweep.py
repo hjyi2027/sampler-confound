@@ -47,7 +47,7 @@ from samplerconfound.benchmarks import sweep_split
 from samplerconfound.config import Design
 from samplerconfound.cache import ResponseCache
 from samplerconfound.grade import grade
-from samplerconfound.paths import resolve_out, show
+from samplerconfound.paths import iso, resolve_out, show
 from samplerconfound.provider import complete, load_key
 
 _lock = threading.Lock()
@@ -219,6 +219,7 @@ def generate(key: str, design: Design, model: str, sampler: dict, rep: int, p,
         "created": c.created,
         "served_by": c.served_by,
         "latency_s": round(time.time() - t_start, 3),
+        "collected_at": iso(c.collected_at),
         "attempts": attempts,
         "cached": was_cached,
         "verdict": v.to_dict(),

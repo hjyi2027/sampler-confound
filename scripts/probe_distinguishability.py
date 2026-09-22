@@ -45,7 +45,7 @@ from samplerconfound.distinguish import (
     interpret,
     positive_control,
 )
-from samplerconfound.paths import resolve_out, show
+from samplerconfound.paths import iso, resolve_out, show, window
 from samplerconfound.adapters import ADAPTERS
 from samplerconfound.provider import DEFAULT_PROVIDER, complete, default_cache, load_key
 
@@ -137,20 +137,20 @@ def one(key: str, model: str, params: dict, max_tokens: int, effort: str | None,
         body["reasoning_effort"] = effort
     c, err = complete(key, body, replicate, provider=provider, timeout=120)
     if err:
-        return None, err, 0
+        return None, err, 0, None
     # If the adapter had no wire form for a parameter of THIS arm, the arm was
     # not the setting it claims to be; both arms would then be identical and the
     # test would report "no effect" about a parameter that was never sent.
     missing = set(params) & set(c.dropped)
     if missing:
-        return None, f"unsupported: {sorted(missing)} has no wire form on {provider}", 0
+        return None, f"unsupported: {sorted(missing)} has no wire form on {provider}", 0, None
     txt = c.text.strip().lower()
-    return txt.rstrip(".!,"), None, c.completion_tokens or 0
+    return txt.rstrip(".!,"), None, c.completion_tokens or 0, c.collected_at
 
 
 def collect(key, model, params, n, workers, max_tokens, effort, prompt=None,
             replicate_offset=0, provider=DEFAULT_PROVIDER):
-    """Returns (completions, errors, usage, n_empty).
+    """Returns (completions, errors, usage, n_empty, collected_at list).
 
     Empty completions are counted, not silently dropped. qwen3p7-plus returns
     HTTP 200 with empty content whenever max_tokens cuts it off before it stops
@@ -158,7 +158,7 @@ def collect(key, model, params, n, workers, max_tokens, effort, prompt=None,
     all. Dropping those quietly produced "n=0, insufficient" with no indication
     that every call had in fact succeeded and been billed.
     """
-    out, errs, usage = [], [], []
+    out, errs, usage, when = [], [], [], []
     n_empty = 0
     with ThreadPoolExecutor(max_workers=workers) as pool:
         # Replicate indices are part of the cache key. `replicate_offset` lets a
@@ -168,7 +168,8 @@ def collect(key, model, params, n, workers, max_tokens, effort, prompt=None,
                             replicate_offset + i, provider)
                 for i in range(n)]
         for f in as_completed(futs):
-            txt, err, u = f.result()
+            txt, err, u, t = f.result()
+            when.append(t)
             if err:
                 errs.append(err)
             else:
@@ -184,7 +185,7 @@ def collect(key, model, params, n, workers, max_tokens, effort, prompt=None,
                 if not txt:
                     n_empty += 1
                 usage.append(u)
-    return out, errs, usage, n_empty
+    return out, errs, usage, n_empty, when
 
 
 # The setting for the negative control. Temperature 1.0 with nothing else is the
@@ -206,6 +207,21 @@ NEGATIVE_SETTING = {"temperature": 1.0}
 # distribution as a token. A test that drops it measures the entropy of the
 # completions that happened to finish, which is not the entropy of the setting.
 EMPTY_TOKEN = "<empty>"
+
+
+def _dated(cells) -> dict:
+    """The collection window over cells, from their own stamps."""
+    froms = [c.collected_from for c in cells if c.collected_from]
+    tos = [c.collected_to for c in cells if c.collected_to]
+    return {"from": min(froms) if froms else "", "to": max(tos) if tos else ""}
+
+
+def _prior(out, key):
+    """A list field from the report this run is about to overwrite."""
+    try:
+        return list(json.loads(resolve_out(out).read_text()).get(key) or [])
+    except (OSError, json.JSONDecodeError, TypeError):
+        return []
 
 
 def resolve_models(args) -> list[str]:
@@ -251,11 +267,11 @@ def negative_control_run(key, models, args) -> int:
             # Both arms have the same body, so they MUST use disjoint replicate
             # ranges or the second arm is a cache echo of the first and the
             # control passes trivially.
-            a, ea, ua, empty_a = collect(key, model, NEGATIVE_SETTING, args.n,
+            a, ea, ua, empty_a, ta = collect(key, model, NEGATIVE_SETTING, args.n,
                                          args.workers, args.max_tokens, args.effort,
                                          replicate_offset=(2 * k) * args.n,
                                          provider=args.provider)
-            b, eb, ub, empty_b = collect(key, model, NEGATIVE_SETTING, args.n,
+            b, eb, ub, empty_b, tb = collect(key, model, NEGATIVE_SETTING, args.n,
                                          args.workers, args.max_tokens, args.effort,
                                          replicate_offset=(2 * k + 1) * args.n,
                                          provider=args.provider)
@@ -264,6 +280,8 @@ def negative_control_run(key, models, args) -> int:
                                  a, b, n_permutations=args.permutations,
                                  random_state=k)
             r.completions_tight, r.completions_open = a, b
+            w = window(ta + tb)
+            r.collected_from, r.collected_to = w["from"], w["to"]
             if r.status != "ok":
                 print(f"  pair {k}: {r.status}  {r.detail[:70]}")
             else:
@@ -323,6 +341,8 @@ def negative_control_run(key, models, args) -> int:
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(json.dumps({
             "provider": args.provider,
+            "max_tokens": args.max_tokens, "reasoning_effort": args.effort,
+            "collected": _dated(rows), "written": iso(time.time()),
             "setting": NEGATIVE_SETTING, "n_per_arm": args.n, "pairs_per_model": args.negative,
             "results": [r.to_dict() for r in rows],
             "false_positive_rate": {"dh": fp_dh / n, "dh_ci": [lo_d, hi_d],
@@ -415,6 +435,8 @@ def main() -> int:
             r.completions_tight, r.completions_open = rec["completions_tight"], rec["completions_open"]
             r.prompt, r.provider = rec["prompt"], rec.get("provider", DEFAULT_PROVIDER)
             r.empty_tight, r.empty_open = rec.get("empty_tight", 0), rec.get("empty_open", 0)
+            r.collected_from = rec.get("collected_from", "")   # the data's date, not today's
+            r.collected_to = rec.get("collected_to", "")
             fresh[k] = r.to_dict()
         changed = sum(1 for k in done if done[k]["status"] != fresh[k]["status"])
         tmp = ckpt.with_suffix(".jsonl.tmp")
@@ -446,10 +468,10 @@ def main() -> int:
                     continue
                 if param not in selected:
                     continue
-                a, ea, ua, empty_a = collect(key, model, sa, args.n, args.workers,
+                a, ea, ua, empty_a, ta = collect(key, model, sa, args.n, args.workers,
                                              args.max_tokens, args.effort, all_prompts[pid],
                                              provider=args.provider)
-                b, eb, ub, empty_b = collect(key, model, sb, args.n, args.workers,
+                b, eb, ub, empty_b, tb = collect(key, model, sb, args.n, args.workers,
                                              args.max_tokens, args.effort, all_prompts[pid],
                                              provider=args.provider)
                 tokens += sum(ua + ub)
@@ -459,6 +481,8 @@ def main() -> int:
                 r.completions_tight, r.completions_open = a, b
                 r.prompt = pid
                 r.provider = args.provider
+                w = window(ta + tb)
+                r.collected_from, r.collected_to = w["from"], w["to"]
                 r.empty_tight = sum(x == EMPTY_TOKEN for x in a)
                 r.empty_open = sum(x == EMPTY_TOKEN for x in b)
                 rejected = [e for e in ea + eb if e.startswith("rejected")]
@@ -585,7 +609,13 @@ def main() -> int:
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(json.dumps(
             {"provider": args.provider, "prompt": PROMPT, "n_per_arm": args.n,
+             "max_tokens": args.max_tokens, "reasoning_effort": args.effort,
              "permutations": args.permutations,
+             # collected = when the provider answered (from the cells);
+             # written = when this file was produced. They differ after --reassess.
+             "collected": _dated(results),
+             "written": iso(time.time()),
+             "reassessed_at": _prior(args.out, "reassessed_at") + ([iso(time.time())] if args.reassess else []),
              "results": [r.to_dict() for r in results],
              "p_holm_by_prompt": {pid: {f"{k[0]}|{k[1]}": v for k, v in a.items()}
                                   for pid, a in adj_by_prompt.items()},

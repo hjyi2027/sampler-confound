@@ -60,7 +60,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.7000000000000002,
-      "excess": -1.5605270520259085
+      "excess": -1.5605270520259085,
+      "collected_from": "2026-09-20T14:39Z",
+      "collected_to": "2026-09-20T14:39Z"
     }
   ],
   "false_positive_rate": {
@@ -75,5 +77,11 @@
       0.7934567085261071
     ],
     "n": 1
-  }
+  },
+  "collected": {
+    "from": "2026-09-20T14:39Z",
+    "to": "2026-09-20T14:39Z",
+    "source": "cache"
+  },
+  "written": "2026-09-20T14:39Z"
 }

@@ -18,6 +18,10 @@
       "frequency_penalty": 40,
       "presence_penalty": 40
     },
+    "collected": {
+      "from": "2026-09-17T19:56",
+      "to": "2026-09-21T16:01Z"
+    },
     "greedy_match": 0.38,
     "seed": "NO",
     "typical_p": "underpowered",
@@ -37,6 +41,10 @@
     "model": "glm-5p3-flash",
     "greedy_match": 0.76,
     "seed": "NO",
+    "collected": {
+      "from": "2026-09-20T10:31Z",
+      "to": "2026-09-21T16:02Z"
+    },
     "typical_p": "distinguishable",
     "n_prompts": 4,
     "mirostat": "mixed",
@@ -84,6 +92,10 @@
       "frequency_penalty": 40,
       "presence_penalty": 40
     },
+    "collected": {
+      "from": "2026-09-17T19:56",
+      "to": "2026-09-21T16:00Z"
+    },
     "greedy_match": 1.0,
     "seed": "n/a",
     "typical_p": "distinguishable",
@@ -116,6 +128,10 @@
       "repetition_penalty": 40,
       "frequency_penalty": 40,
       "presence_penalty": 40
+    },
+    "collected": {
+      "from": "2026-09-17T19:56",
+      "to": "2026-09-21T07:11Z"
     },
     "greedy_match": 0.58,
     "seed": "NO",
@@ -150,6 +166,10 @@
       "frequency_penalty": 40,
       "presence_penalty": 40
     },
+    "collected": {
+      "from": "2026-09-17T19:56",
+      "to": "2026-09-21T05:19Z"
+    },
     "greedy_match": 0.5,
     "seed": "NO",
     "typical_p": "distinguishable",
@@ -169,6 +189,10 @@
     "model": "deepseek-v4p1-flash",
     "greedy_match": 0.6,
     "seed": "NO",
+    "collected": {
+      "from": "2026-09-20T10:31Z",
+      "to": "2026-09-21T16:05Z"
+    },
     "typical_p": "distinguishable",
     "n_prompts": 4,
     "mirostat": "no effect seen",
@@ -216,6 +240,10 @@
       "frequency_penalty": 40,
       "presence_penalty": 40
     },
+    "collected": {
+      "from": "2026-09-17T19:56",
+      "to": "2026-09-21T02:05Z"
+    },
     "greedy_match": 0.78,
     "seed": "NO",
     "typical_p": "no effect seen",
@@ -249,6 +277,10 @@
       "frequency_penalty": 40,
       "presence_penalty": 40
     },
+    "collected": {
+      "from": "2026-09-17T19:56",
+      "to": "2026-09-21T12:27Z"
+    },
     "greedy_match": 0.64,
     "seed": "NO",
     "typical_p": "distinguishable",
@@ -268,6 +300,10 @@
     "model": "deepseek-v4-pro-0813",
     "greedy_match": 0.64,
     "seed": "NO",
+    "collected": {
+      "from": "2026-09-20T10:31Z",
+      "to": "2026-09-21T10:21Z"
+    },
     "typical_p": "mixed",
     "n_prompts": 4,
     "mirostat": "no effect seen",
@@ -315,6 +351,10 @@
       "frequency_penalty": 10,
       "presence_penalty": 10
     },
+    "collected": {
+      "from": "2026-09-17T19:56",
+      "to": "2026-09-21T15:59Z"
+    },
     "greedy_match": 0.2,
     "seed": "NO",
     "typical_p": "underpowered",
@@ -334,6 +374,10 @@
     "model": "kimi-k2p7-code",
     "greedy_match": 0.5,
     "seed": "NO",
+    "collected": {
+      "from": "2026-09-20T10:31Z",
+      "to": "2026-09-21T13:38Z"
+    },
     "typical_p": "underpowered",
     "n_prompts": 4,
     "mirostat": "distinguishable",
@@ -367,6 +411,10 @@
     "model": "glm-5p3",
     "greedy_match": 0.74,
     "seed": "NO",
+    "collected": {
+      "from": "2026-09-20T10:31Z",
+      "to": "2026-09-21T09:06Z"
+    },
     "typical_p": "distinguishable",
     "n_prompts": 4,
     "mirostat": "distinguishable",
@@ -400,6 +448,10 @@
     "model": "glm-5p2",
     "greedy_match": 0.48,
     "seed": "NO",
+    "collected": {
+      "from": "2026-09-20T10:31Z",
+      "to": "2026-09-21T14:21Z"
+    },
     "typical_p": "distinguishable",
     "n_prompts": 4,
     "mirostat": "underpowered",
@@ -433,6 +485,10 @@
     "model": "qwen3p8-max",
     "greedy_match": 0.78,
     "seed": "NO",
+    "collected": {
+      "from": "2026-09-20T10:31Z",
+      "to": "2026-09-21T12:36Z"
+    },
     "typical_p": "mixed",
     "n_prompts": 4,
     "mirostat": "no effect seen",
@@ -466,6 +522,10 @@
     "model": "kimi-k3",
     "greedy_match": 0.74,
     "seed": "NO",
+    "collected": {
+      "from": "2026-09-20T10:31Z",
+      "to": "2026-09-21T14:39Z"
+    },
     "typical_p": "distinguishable",
     "n_prompts": 4,
     "mirostat": "distinguishable",
@@ -499,6 +559,10 @@
     "model": "inkling",
     "greedy_match": 0.52,
     "seed": "NO",
+    "collected": {
+      "from": "2026-09-20T14:08Z",
+      "to": "2026-09-21T15:42Z"
+    },
     "top_p": "underpowered",
     "n_prompts": 4,
     "top_k": "distinguishable",
@@ -532,6 +596,10 @@
     "model": "qwen3p8-2p4t-a95b",
     "greedy_match": 0.72,
     "seed": "NO",
+    "collected": {
+      "from": "2026-09-20T14:08Z",
+      "to": "2026-09-21T15:42Z"
+    },
     "top_p": "distinguishable",
     "n_prompts": 4,
     "top_k": "distinguishable",
@@ -565,6 +633,10 @@
     "model": "deepseek-v4-flash-vision-exp",
     "greedy_match": 0.5,
     "seed": "NO",
+    "collected": {
+      "from": "2026-09-20T14:08Z",
+      "to": "2026-09-21T15:43Z"
+    },
     "top_p": "underpowered",
     "n_prompts": 4,
     "top_k": "distinguishable",

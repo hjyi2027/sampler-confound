@@ -118,7 +118,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 4.238032984073725
+      "excess": 4.238032984073725,
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-21T05:19Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -236,7 +238,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.6849358235030993
+      "excess": 2.6849358235030993,
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-21T05:29Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -354,7 +358,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.09302581522218256
+      "excess": 0.09302581522218256,
+      "collected_from": "2026-09-20T14:39Z",
+      "collected_to": "2026-09-21T05:29Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -472,7 +478,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.6799542272703144
+      "excess": 0.6799542272703144,
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-21T05:29Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -590,7 +598,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.18468850676828594
+      "excess": -0.18468850676828594,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-21T07:11Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -708,7 +718,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.16256366979486284
+      "excess": 0.16256366979486284,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-21T07:26Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -824,7 +836,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 4.196185856149723
+      "excess": 4.196185856149723,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-21T07:27Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -942,7 +956,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.5530524477467615
+      "excess": 1.5530524477467615,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-21T07:27Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -1060,7 +1076,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.1759002091092339
+      "excess": 1.1759002091092339,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-21T08:00Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -1178,7 +1196,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.1164370659279375
+      "excess": 1.1164370659279375,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-21T08:18Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -1296,7 +1316,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.07824143338522936
+      "excess": 0.07824143338522936,
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-21T08:32Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -1414,7 +1436,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.18924050192380895
+      "excess": 0.18924050192380895,
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-21T08:32Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -1530,7 +1554,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.3807057327512218
+      "excess": 2.3807057327512218,
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-21T08:48Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -1648,7 +1674,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.30524693262870234
+      "excess": -0.30524693262870234,
+      "collected_from": "2026-09-20T16:52Z",
+      "collected_to": "2026-09-21T08:55Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -1766,7 +1794,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.48382476864227
+      "excess": -0.48382476864227,
+      "collected_from": "2026-09-20T16:52Z",
+      "collected_to": "2026-09-21T09:05Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -1884,7 +1914,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.5271307623908155
+      "excess": 2.5271307623908155,
+      "collected_from": "2026-09-20T16:52Z",
+      "collected_to": "2026-09-21T09:20Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -2002,7 +2034,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.9343497529878337
+      "excess": 1.9343497529878337,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-21T10:34Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -2120,7 +2154,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.9738470723197449
+      "excess": 0.9738470723197449,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-21T11:35Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -2236,7 +2272,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.3500203808767837
+      "excess": 2.3500203808767837,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-21T11:35Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -2354,7 +2392,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.6273605322423537
+      "excess": 2.6273605322423537,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-21T11:36Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -2472,7 +2512,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.45241155239475295
+      "excess": 0.45241155239475295,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-21T11:36Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -2590,7 +2632,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.9353633064675708
+      "excess": 1.9353633064675708,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-21T11:45Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -2708,7 +2752,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.3979888837552487
+      "excess": 0.3979888837552487,
+      "collected_from": "2026-09-20T16:54Z",
+      "collected_to": "2026-09-21T12:00Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -2826,7 +2872,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.1535624858158941
+      "excess": 0.1535624858158941,
+      "collected_from": "2026-09-20T16:54Z",
+      "collected_to": "2026-09-21T12:00Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -2944,7 +2992,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 5.315547563732878
+      "excess": 5.315547563732878,
+      "collected_from": "2026-09-21T12:00Z",
+      "collected_to": "2026-09-21T12:22Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -3062,7 +3112,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 5.315547563732878
+      "excess": 5.315547563732878,
+      "collected_from": "2026-09-21T12:22Z",
+      "collected_to": "2026-09-21T12:26Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -3180,7 +3232,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.17044873737053495
+      "excess": 0.17044873737053495,
+      "collected_from": "2026-09-21T12:26Z",
+      "collected_to": "2026-09-21T12:27Z"
     }
   ],
   "p_holm_by_prompt": {
@@ -3382,5 +3436,11 @@
       },
       "verdict_forced": "no effect seen"
     }
-  ]
+  ],
+  "collected": {
+    "from": "2026-09-20T14:39Z",
+    "to": "2026-09-21T12:27Z",
+    "source": "cache"
+  },
+  "written": "2026-09-21T16:07Z"
 }

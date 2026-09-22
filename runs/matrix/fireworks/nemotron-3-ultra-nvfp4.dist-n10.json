@@ -58,7 +58,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.3448411655645605
+      "excess": 2.3448411655645605,
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-20T16:49Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -116,7 +118,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.56093051968455
+      "excess": 1.56093051968455,
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-20T16:49Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -174,7 +178,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.2787605936867969
+      "excess": 0.2787605936867969,
+      "collected_from": "2026-09-20T14:39Z",
+      "collected_to": "2026-09-20T16:49Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -232,7 +238,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.39934000000000036
+      "excess": 0.39934000000000036,
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-20T16:50Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -290,7 +298,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.5999955637090775
+      "excess": 0.5999955637090775,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-20T16:50Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -348,7 +358,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.1494068448624881
+      "excess": -0.1494068448624881,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-20T16:50Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -404,7 +416,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.115256503973329
+      "excess": 2.115256503973329,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-20T16:50Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -462,7 +476,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.871052780089811
+      "excess": 0.871052780089811,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-20T16:50Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -520,7 +536,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.4746198180929261
+      "excess": 0.4746198180929261,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-20T16:50Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -578,7 +596,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.40022000000000035
+      "excess": 0.40022000000000035,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-20T16:51Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -636,7 +656,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.46967317108998374
+      "excess": 0.46967317108998374,
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-20T16:51Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -694,7 +716,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.3990467950901845
+      "excess": 0.3990467950901845,
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-20T16:51Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -750,7 +774,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.149833699364406
+      "excess": 1.149833699364406,
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-20T16:51Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -808,7 +834,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.747402837096719
+      "excess": -0.747402837096719,
+      "collected_from": "2026-09-20T16:52Z",
+      "collected_to": "2026-09-20T16:52Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -866,7 +894,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.3946147271510436
+      "excess": -0.3946147271510436,
+      "collected_from": "2026-09-20T16:52Z",
+      "collected_to": "2026-09-20T16:52Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -924,7 +954,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.1519298925794499
+      "excess": 1.1519298925794499,
+      "collected_from": "2026-09-20T16:52Z",
+      "collected_to": "2026-09-20T16:53Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -982,7 +1014,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.5455407395372354
+      "excess": 1.5455407395372354,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-20T16:53Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -1040,7 +1074,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.7995354786524137
+      "excess": -0.7995354786524137,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-20T16:53Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -1096,7 +1132,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.9729042371681953
+      "excess": 1.9729042371681953,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-20T16:53Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -1154,7 +1192,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.518552522221859
+      "excess": 2.518552522221859,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-20T16:53Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -1212,7 +1252,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.3228805410987401
+      "excess": -0.3228805410987401,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-20T16:53Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -1270,7 +1312,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.675535216466996
+      "excess": 0.675535216466996,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-20T16:54Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -1328,7 +1372,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.5209028285321389
+      "excess": 0.5209028285321389,
+      "collected_from": "2026-09-20T16:54Z",
+      "collected_to": "2026-09-20T16:54Z"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -1386,7 +1432,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.12096329450589986
+      "excess": -0.12096329450589986,
+      "collected_from": "2026-09-20T16:54Z",
+      "collected_to": "2026-09-20T16:54Z"
     }
   ],
   "p_holm_by_prompt": {
@@ -1578,5 +1626,11 @@
       "forced": {},
       "verdict_forced": ""
     }
-  ]
+  ],
+  "collected": {
+    "from": "2026-09-20T14:39Z",
+    "to": "2026-09-20T16:54Z",
+    "source": "cache"
+  },
+  "written": "2026-09-21T16:07Z"
 }

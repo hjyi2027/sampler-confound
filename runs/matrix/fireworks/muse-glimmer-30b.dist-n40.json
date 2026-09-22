@@ -118,7 +118,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 3.918402048512933
+      "excess": 3.918402048512933,
+      "collected_from": "2026-09-20T16:43Z",
+      "collected_to": "2026-09-20T19:46Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -236,7 +238,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.20233081534537187
+      "excess": -0.20233081534537187,
+      "collected_from": "2026-09-20T16:43Z",
+      "collected_to": "2026-09-20T23:44Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -354,7 +358,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.1172756076895347
+      "excess": -0.1172756076895347,
+      "collected_from": "2026-09-20T14:39Z",
+      "collected_to": "2026-09-20T23:44Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -472,7 +478,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 2,
-      "excess": 0.1508983834373381
+      "excess": 0.1508983834373381,
+      "collected_from": "2026-09-20T16:43Z",
+      "collected_to": "2026-09-21T01:10Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -590,7 +598,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.10094500000000052
+      "excess": 0.10094500000000052,
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-21T01:25Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -708,7 +718,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.15000850986510175
+      "excess": 0.15000850986510175,
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-21T01:25Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -824,7 +836,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 4.22498086147964
+      "excess": 4.22498086147964,
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-21T01:26Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -942,7 +956,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.5266187949308319
+      "excess": 0.5266187949308319,
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-21T01:26Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -1060,7 +1076,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.4901772282879879
+      "excess": -0.4901772282879879,
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-21T01:27Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -1178,7 +1196,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.5425031946428092
+      "excess": 0.5425031946428092,
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-21T01:27Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -1296,7 +1316,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.8254208756722192
+      "excess": 0.8254208756722192,
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-21T01:27Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -1414,7 +1436,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.5183092419941023
+      "excess": 0.5183092419941023,
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-21T01:28Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -1530,7 +1554,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 3.8918056615953485
+      "excess": 3.8918056615953485,
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-21T01:29Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -1648,7 +1674,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.006067703784951722
+      "excess": -0.006067703784951722,
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-21T01:39Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -1766,7 +1794,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.43190521314096525
+      "excess": 0.43190521314096525,
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-21T01:40Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -1884,7 +1914,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": 2.2769378405960365
+      "excess": 2.2769378405960365,
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-21T01:41Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -2002,7 +2034,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.94267687539606
+      "excess": 0.94267687539606,
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-21T01:41Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -2120,7 +2154,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.19630665507042658
+      "excess": 0.19630665507042658,
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-21T01:42Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -2236,7 +2272,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 3.6297839610325453
+      "excess": 3.6297839610325453,
+      "collected_from": "2026-09-20T16:47Z",
+      "collected_to": "2026-09-21T01:42Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -2354,7 +2392,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.35794097987265844
+      "excess": -0.35794097987265844,
+      "collected_from": "2026-09-20T16:47Z",
+      "collected_to": "2026-09-21T01:44Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -2472,7 +2512,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.10960002567773124
+      "excess": -0.10960002567773124,
+      "collected_from": "2026-09-20T16:47Z",
+      "collected_to": "2026-09-21T01:45Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -2590,7 +2632,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.9641634676527439
+      "excess": 0.9641634676527439,
+      "collected_from": "2026-09-20T16:47Z",
+      "collected_to": "2026-09-21T01:45Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -2708,7 +2752,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.33811737138232867
+      "excess": 0.33811737138232867,
+      "collected_from": "2026-09-20T16:47Z",
+      "collected_to": "2026-09-21T01:46Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -2826,7 +2872,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.09473490526961185
+      "excess": -0.09473490526961185,
+      "collected_from": "2026-09-20T16:48Z",
+      "collected_to": "2026-09-21T01:47Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -2944,7 +2992,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": 0.17085352360612696
+      "excess": 0.17085352360612696,
+      "collected_from": "2026-09-21T01:47Z",
+      "collected_to": "2026-09-21T01:59Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -3062,7 +3112,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 3.629594149412128
+      "excess": 3.629594149412128,
+      "collected_from": "2026-09-21T02:03Z",
+      "collected_to": "2026-09-21T02:04Z"
     },
     {
       "model": "muse-glimmer-30b",
@@ -3180,7 +3232,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-21T02:04Z",
+      "collected_to": "2026-09-21T02:05Z"
     }
   ],
   "p_holm_by_prompt": {
@@ -3381,5 +3435,11 @@
       },
       "verdict_forced": "insufficient"
     }
-  ]
+  ],
+  "collected": {
+    "from": "2026-09-20T14:39Z",
+    "to": "2026-09-21T02:05Z",
+    "source": "cache"
+  },
+  "written": "2026-09-21T16:07Z"
 }

@@ -28,7 +28,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 0.8404475676212871
+      "excess": 0.8404475676212871,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -57,7 +59,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 0.09946499999999965
+      "excess": 0.09946499999999965,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -86,7 +90,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 0.540562405060064
+      "excess": 0.540562405060064,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -115,7 +121,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 0.21886652589782088
+      "excess": 0.21886652589782088,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "gpt-oss-120b",
@@ -142,7 +150,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 5.315547563732878
+      "excess": 5.315547563732878,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "gpt-oss-120b",
@@ -171,7 +181,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 4.542289555649988
+      "excess": 4.542289555649988,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "gpt-oss-120b",
@@ -200,7 +212,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 4.745943081414097
+      "excess": 4.745943081414097,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "gpt-oss-120b",
@@ -229,7 +243,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 4.639623886801841
+      "excess": 4.639623886801841,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -256,7 +272,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 2.6805503905303145
+      "excess": 2.6805503905303145,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -285,7 +303,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 2.338393414795872
+      "excess": 2.338393414795872,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -314,7 +334,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 3.0075975962591643
+      "excess": 3.0075975962591643,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -343,7 +365,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 2.473537258589018
+      "excess": 2.473537258589018,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "minimax-m3",
@@ -370,7 +394,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 5.034336571018548
+      "excess": 5.034336571018548,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "minimax-m3",
@@ -399,7 +425,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 4.601502225638276
+      "excess": 4.601502225638276,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "minimax-m3",
@@ -428,7 +456,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 4.782885339077923
+      "excess": 4.782885339077923,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "minimax-m3",
@@ -457,7 +487,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 4.775541197717325
+      "excess": 4.775541197717325,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "muse-glimmer-30b",
@@ -484,7 +516,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 3.8765354409667006
+      "excess": 3.8765354409667006,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "muse-glimmer-30b",
@@ -513,7 +547,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 3.679337319408004
+      "excess": 3.679337319408004,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "muse-glimmer-30b",
@@ -542,7 +578,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 2.881220372591868
+      "excess": 2.881220372591868,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "muse-glimmer-30b",
@@ -571,7 +609,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 2.9087903427725306
+      "excess": 2.9087903427725306,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "minimax-m2p7",
@@ -598,7 +638,9 @@
       "n_permutations": 10000,
       "status": "insufficient",
       "detail": "n=0/0; need >= 5 per arm",
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "minimax-m2p7",
@@ -627,7 +669,9 @@
       "n_permutations": 10000,
       "status": "insufficient",
       "detail": "n=0/0; need >= 5 per arm",
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "minimax-m2p7",
@@ -656,7 +700,9 @@
       "n_permutations": 10000,
       "status": "insufficient",
       "detail": "n=0/0; need >= 5 per arm",
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "minimax-m2p7",
@@ -685,7 +731,9 @@
       "n_permutations": 10000,
       "status": "insufficient",
       "detail": "n=0/0; need >= 5 per arm",
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -712,7 +760,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 4.114635794452688
+      "excess": 4.114635794452688,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -741,7 +791,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 3.275806758628777
+      "excess": 3.275806758628777,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -770,7 +822,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 3.4119590335218963
+      "excess": 3.4119590335218963,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -799,7 +853,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 3.1265367589199493
+      "excess": 3.1265367589199493,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "kimi-k2p6",
@@ -826,7 +882,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 1.7102138459262763
+      "excess": 1.7102138459262763,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "kimi-k2p6",
@@ -855,7 +913,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 0.865374114355351
+      "excess": 0.865374114355351,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "kimi-k2p6",
@@ -884,7 +944,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 0.8044178025182258
+      "excess": 0.8044178025182258,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "kimi-k2p6",
@@ -913,7 +975,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 1.0976046959218277
+      "excess": 1.0976046959218277,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "qwen3p7-plus",
@@ -940,7 +1004,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 2.762802280446511
+      "excess": 2.762802280446511,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "qwen3p7-plus",
@@ -969,7 +1035,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 0.22851585171811328
+      "excess": 0.22851585171811328,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "qwen3p7-plus",
@@ -998,7 +1066,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 1.5681166897536802
+      "excess": 1.5681166897536802,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     },
     {
       "model": "qwen3p7-plus",
@@ -1027,7 +1097,9 @@
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
-      "excess": 0.9458192941496034
+      "excess": 0.9458192941496034,
+      "collected_from": "2026-09-09T13:04",
+      "collected_to": "2026-09-09T13:04"
     }
   ],
   "p_holm": {
@@ -1211,5 +1283,11 @@
     "qwen3p7-plus|top_p": "no effect seen",
     "qwen3p7-plus|top_k": "distinguishable",
     "qwen3p7-plus|min_p": "no effect seen"
-  }
+  },
+  "collected": {
+    "from": "2026-09-09T13:04",
+    "to": "2026-09-09T13:04",
+    "source": "git author date of the adding commit (predates the cache)"
+  },
+  "written": "2026-09-11T01:19Z"
 }

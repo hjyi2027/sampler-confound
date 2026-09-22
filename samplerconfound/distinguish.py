@@ -69,6 +69,10 @@ class Distinguishability:
     setting_b: dict
     prompt: str = ""                 # prompt id; a verdict is per (model, param, prompt)
     provider: str = "fireworks"      # which deployment answered; the model name alone is ambiguous
+    # When the provider answered these calls (ISO UTC, from the cache entries).
+    # Provider behaviour changes; the date is part of the result.
+    collected_from: str = ""
+    collected_to: str = ""
     n_tight: int = 0
     n_open: int = 0
     support_tight: int = 0

@@ -1070,3 +1070,27 @@ is") because it is the honest form of the mirostat row.
 
 Transport: 5xx retries capped at four with a 20s ceiling — ten exponential
 attempts on a recurring 500 was seventeen minutes a call.
+
+## 2026-09-22 — every probe is dated by its calls
+
+A dated audit is a valid audit. The date of a cell is when the provider
+answered its calls, which the cache already holds per call (`stored_at`); it
+is not when a report was written, because `--reassess` rewrites reports from
+old data. So: `Completion.collected_at` from the cache entry; every
+distinguishability cell carries `collected_from`/`collected_to`; every
+report carries `collected` (window over its cells), `written`, and for
+reassessed files `reassessed_at`; the sweep and grader-check records carry
+`collected_at`. The coverage table has a `collected` column; gap.json cells
+carry it.
+
+`scripts/date_probes.py` backfilled every existing report from the cache by
+reconstructing each cell's requests. Two traps it had to avoid. The same
+request re-collected later has a cache entry with a later timestamp, so a
+cell is dated from the cache only if the cached texts equal its retained
+completions as a multiset. And that check cannot distinguish a deterministic
+model's identical answers on 09-11 and 09-20, so the four runs that predate
+the cache (2026-09-09 to 09-17) are dated by the commit that added them —
+an upper bound — and labelled as such. `--check` reports 0 undated.
+
+Documentation read 2026-09-22; prices read 2026-09-20; both already carried
+their dates. FINDINGS gains a "When" table under Provenance.

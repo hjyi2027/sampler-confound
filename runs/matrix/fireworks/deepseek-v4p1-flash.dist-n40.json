@@ -118,7 +118,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 4.49636928457641
+      "excess": 4.49636928457641,
+      "collected_from": "2026-09-20T10:31Z",
+      "collected_to": "2026-09-20T10:32Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -236,7 +238,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.8875267247530334
+      "excess": 1.8875267247530334,
+      "collected_from": "2026-09-20T16:41Z",
+      "collected_to": "2026-09-20T17:50Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -354,7 +358,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.026123388831125
+      "excess": 1.026123388831125,
+      "collected_from": "2026-09-20T14:39Z",
+      "collected_to": "2026-09-20T17:51Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -472,7 +478,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 10,
-      "excess": 0.5942034834324816
+      "excess": 0.5942034834324816,
+      "collected_from": "2026-09-20T16:42Z",
+      "collected_to": "2026-09-20T23:44Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -590,7 +598,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": 0.8958380941147124
+      "excess": 0.8958380941147124,
+      "collected_from": "2026-09-20T16:42Z",
+      "collected_to": "2026-09-21T01:06Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -708,7 +718,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.5320276352306901
+      "excess": 0.5320276352306901,
+      "collected_from": "2026-09-20T16:43Z",
+      "collected_to": "2026-09-21T01:07Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -824,7 +836,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 2,
-      "excess": 2.79863951626161
+      "excess": 2.79863951626161,
+      "collected_from": "2026-09-20T10:34Z",
+      "collected_to": "2026-09-20T10:34Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -942,7 +956,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.183036692679009
+      "excess": 1.183036692679009,
+      "collected_from": "2026-09-20T16:43Z",
+      "collected_to": "2026-09-21T01:07Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -1060,7 +1076,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.6368365678363276
+      "excess": 0.6368365678363276,
+      "collected_from": "2026-09-20T16:43Z",
+      "collected_to": "2026-09-21T01:08Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -1178,7 +1196,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 7,
-      "excess": 0.5527187875471351
+      "excess": 0.5527187875471351,
+      "collected_from": "2026-09-20T16:43Z",
+      "collected_to": "2026-09-21T01:25Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -1296,7 +1316,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.3376801641510116
+      "excess": -0.3376801641510116,
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-21T01:25Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -1414,7 +1436,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.6572901730838786
+      "excess": 0.6572901730838786,
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-21T01:26Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -1530,7 +1554,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": 1.4100549776608216
+      "excess": 1.4100549776608216,
+      "collected_from": "2026-09-20T10:35Z",
+      "collected_to": "2026-09-20T10:36Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -1648,7 +1674,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.8248120419557621
+      "excess": 0.8248120419557621,
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-21T01:26Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -1766,7 +1794,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.05565801006095668
+      "excess": -0.05565801006095668,
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-21T01:27Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -1884,7 +1914,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 19,
-      "excess": 0.951175905184571
+      "excess": 0.951175905184571,
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-21T01:40Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -2002,7 +2034,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": 1.3009953071662468
+      "excess": 1.3009953071662468,
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-21T01:41Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -2120,7 +2154,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.32856258936681043
+      "excess": -0.32856258936681043,
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-21T01:42Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -2236,7 +2272,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.838664928262428
+      "excess": 1.838664928262428,
+      "collected_from": "2026-09-20T10:35Z",
+      "collected_to": "2026-09-20T10:38Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -2354,7 +2392,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.39455548377176686
+      "excess": 0.39455548377176686,
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-21T01:42Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -2472,7 +2512,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.4562259676720368
+      "excess": 0.4562259676720368,
+      "collected_from": "2026-09-20T16:47Z",
+      "collected_to": "2026-09-21T01:42Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -2590,7 +2632,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 26,
-      "excess": -2.3737751831119454
+      "excess": -2.3737751831119454,
+      "collected_from": "2026-09-20T16:47Z",
+      "collected_to": "2026-09-21T01:45Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -2708,7 +2752,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": -0.016309385398626013
+      "excess": -0.016309385398626013,
+      "collected_from": "2026-09-20T16:48Z",
+      "collected_to": "2026-09-21T01:46Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -2826,7 +2872,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.3640439246976534
+      "excess": -0.3640439246976534,
+      "collected_from": "2026-09-20T16:48Z",
+      "collected_to": "2026-09-21T01:46Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -2944,7 +2992,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 21,
-      "excess": 2.62412763333716
+      "excess": 2.62412763333716,
+      "collected_from": "2026-09-21T15:40Z",
+      "collected_to": "2026-09-21T16:02Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -3062,7 +3112,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 31,
-      "excess": 1.3613273413835107
+      "excess": 1.3613273413835107,
+      "collected_from": "2026-09-21T15:41Z",
+      "collected_to": "2026-09-21T16:05Z"
     },
     {
       "model": "deepseek-v4p1-flash",
@@ -3180,7 +3232,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-21T15:42Z",
+      "collected_to": "2026-09-21T16:05Z"
     }
   ],
   "p_holm_by_prompt": {
@@ -3381,5 +3435,11 @@
       },
       "verdict_forced": "insufficient"
     }
-  ]
+  ],
+  "collected": {
+    "from": "2026-09-20T10:31Z",
+    "to": "2026-09-21T16:05Z",
+    "source": "cache"
+  },
+  "written": "2026-09-21T16:06Z"
 }

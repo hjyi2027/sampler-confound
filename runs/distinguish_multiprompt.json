@@ -116,7 +116,9 @@
       "empty_tight": 1,
       "empty_open": 0,
       "null_p95": 0.9749999999999998,
-      "excess": 0.16747799952236586
+      "excess": 0.16747799952236586,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -233,7 +235,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.9999999999999998,
-      "excess": 0.11890510483524462
+      "excess": 0.11890510483524462,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -350,7 +354,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.9749999999999999,
-      "excess": 0.3572255854718796
+      "excess": 0.3572255854718796,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -467,7 +473,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.9999999999999997,
-      "excess": 0.11650743561614312
+      "excess": 0.11650743561614312,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -582,7 +590,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.9249999999999998,
-      "excess": 0.6771104685452248
+      "excess": 0.6771104685452248,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -699,7 +709,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.9499999999999997,
-      "excess": 0.05213982709395085
+      "excess": 0.05213982709395085,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -816,7 +828,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.9249999999999998,
-      "excess": 0.44050467317007924
+      "excess": 0.44050467317007924,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -933,7 +947,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.9499999999999996,
-      "excess": 0.1695061049297138
+      "excess": 0.1695061049297138,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1048,7 +1064,9 @@
       "empty_tight": 1,
       "empty_open": 0,
       "null_p95": 0.9499999999999996,
-      "excess": 0.08007445160261253
+      "excess": 0.08007445160261253,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1165,7 +1183,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.95,
-      "excess": 0.24705039612504878
+      "excess": 0.24705039612504878,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1282,7 +1302,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.9999999999999998,
-      "excess": 0.04976499999999985
+      "excess": 0.04976499999999985,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1399,7 +1421,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.95,
-      "excess": -0.15042692231524646
+      "excess": -0.15042692231524646,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1514,7 +1538,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.8249999999999998,
-      "excess": 0.4635444005937908
+      "excess": 0.4635444005937908,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1631,7 +1657,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.8499999999999999,
-      "excess": 0.052327255624891655
+      "excess": 0.052327255624891655,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1748,7 +1776,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.8749999999999997,
-      "excess": -0.13024666203942997
+      "excess": -0.13024666203942997,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1865,7 +1895,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.825,
-      "excess": 0.2581534920140524
+      "excess": 0.2581534920140524,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "gpt-oss-120b",
@@ -1980,7 +2012,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.6,
-      "excess": 5.315547563732878
+      "excess": 5.315547563732878,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "gpt-oss-120b",
@@ -2097,7 +2131,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.6499999999999999,
-      "excess": 4.316894092862989
+      "excess": 4.316894092862989,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "gpt-oss-120b",
@@ -2214,7 +2250,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.5499999999999998,
-      "excess": 5.119872012689018
+      "excess": 5.119872012689018,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "gpt-oss-120b",
@@ -2331,7 +2369,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.6249999999999997,
-      "excess": 4.257871038685958
+      "excess": 4.257871038685958,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "gpt-oss-120b",
@@ -2446,7 +2486,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.5749999999999997,
-      "excess": 5.025913339577201
+      "excess": 5.025913339577201,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "gpt-oss-120b",
@@ -2563,7 +2605,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.47500000000000014,
-      "excess": 4.533776463469054
+      "excess": 4.533776463469054,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "gpt-oss-120b",
@@ -2680,7 +2724,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.5000000000000001,
-      "excess": 4.676144748149999
+      "excess": 4.676144748149999,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "gpt-oss-120b",
@@ -2797,7 +2843,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.5,
-      "excess": 4.706066777318889
+      "excess": 4.706066777318889,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "gpt-oss-120b",
@@ -2912,7 +2960,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.525,
-      "excess": 4.846270000495836
+      "excess": 4.846270000495836,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "gpt-oss-120b",
@@ -3029,7 +3079,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.37500000000000006,
-      "excess": 3.6106541800895866
+      "excess": 3.6106541800895866,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "gpt-oss-120b",
@@ -3146,7 +3198,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.325,
-      "excess": 2.9424677048963157
+      "excess": 2.9424677048963157,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "gpt-oss-120b",
@@ -3263,7 +3317,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.325,
-      "excess": 3.0910022756941204
+      "excess": 3.0910022756941204,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "gpt-oss-120b",
@@ -3378,7 +3434,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.5,
-      "excess": 4.730596498696282
+      "excess": 4.730596498696282,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "gpt-oss-120b",
@@ -3495,7 +3553,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.30000000000000004,
-      "excess": 2.8229455473496117
+      "excess": 2.8229455473496117,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "gpt-oss-120b",
@@ -3612,7 +3672,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.37500000000000006,
-      "excess": 3.554448592752246
+      "excess": 3.554448592752246,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "gpt-oss-120b",
@@ -3729,7 +3791,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.30000000000000004,
-      "excess": 2.740154693186068
+      "excess": 2.740154693186068,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -3844,7 +3908,9 @@
       "empty_tight": 0,
       "empty_open": 3,
       "null_p95": 0.9249999999999998,
-      "excess": 0.6623891040688463
+      "excess": 0.6623891040688463,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -3961,7 +4027,9 @@
       "empty_tight": 1,
       "empty_open": 0,
       "null_p95": 0.9999999999999998,
-      "excess": 0.15022000000000035
+      "excess": 0.15022000000000035,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -4078,7 +4146,9 @@
       "empty_tight": 1,
       "empty_open": 0,
       "null_p95": 0.8999999999999999,
-      "excess": 0.9963034512899245
+      "excess": 0.9963034512899245,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -4195,7 +4265,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.9749999999999999,
-      "excess": 0.2687272101481236
+      "excess": 0.2687272101481236,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -4310,7 +4382,9 @@
       "empty_tight": 0,
       "empty_open": 2,
       "null_p95": 0.6999999999999997,
-      "excess": 3.803391395791679
+      "excess": 3.803391395791679,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -4427,7 +4501,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.6999999999999997,
-      "excess": 3.4265163048366785
+      "excess": 3.4265163048366785,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -4544,7 +4620,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.6499999999999999,
-      "excess": 4.698423419238531
+      "excess": 4.698423419238531,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -4661,7 +4739,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.6999999999999997,
-      "excess": 3.332805310228121
+      "excess": 3.332805310228121,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -4776,7 +4856,9 @@
       "empty_tight": 4,
       "empty_open": 17,
       "null_p95": 0.4750000000000001,
-      "excess": 0.9217372910973909
+      "excess": 0.9217372910973909,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -4893,7 +4975,9 @@
       "empty_tight": 7,
       "empty_open": 0,
       "null_p95": 0.4750000000000001,
-      "excess": 1.4414941043462832
+      "excess": 1.4414941043462832,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -5010,7 +5094,9 @@
       "empty_tight": 6,
       "empty_open": 3,
       "null_p95": 0.47500000000000014,
-      "excess": 2.1389057765168356
+      "excess": 2.1389057765168356,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -5127,7 +5213,9 @@
       "empty_tight": 9,
       "empty_open": 2,
       "null_p95": 0.5249999999999999,
-      "excess": 1.893973920792039
+      "excess": 1.893973920792039,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -5242,7 +5330,9 @@
       "empty_tight": 1,
       "empty_open": 13,
       "null_p95": 0.6749999999999999,
-      "excess": 0.6705276230881634
+      "excess": 0.6705276230881634,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -5359,7 +5449,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.7999999999999998,
-      "excess": 1.1166482891596206
+      "excess": 1.1166482891596206,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -5476,7 +5568,9 @@
       "empty_tight": 2,
       "empty_open": 2,
       "null_p95": 0.7499999999999999,
-      "excess": 0.8529206211051034
+      "excess": 0.8529206211051034,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -5593,7 +5687,9 @@
       "empty_tight": 3,
       "empty_open": 1,
       "null_p95": 0.7999999999999997,
-      "excess": 1.096867887301661
+      "excess": 1.096867887301661,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "minimax-m3",
@@ -5708,7 +5804,9 @@
       "empty_tight": 0,
       "empty_open": 24,
       "null_p95": 0.5249999999999999,
-      "excess": -0.5175304902328657
+      "excess": -0.5175304902328657,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "minimax-m3",
@@ -5825,7 +5923,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.8999999999999999,
-      "excess": 0.8364282021076545
+      "excess": 0.8364282021076545,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "minimax-m3",
@@ -5942,7 +6042,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.7749999999999998,
-      "excess": 2.2636164118389654
+      "excess": 2.2636164118389654,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "minimax-m3",
@@ -6059,7 +6161,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.8999999999999999,
-      "excess": 0.7749782840601673
+      "excess": 0.7749782840601673,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "minimax-m3",
@@ -6174,7 +6278,9 @@
       "empty_tight": 0,
       "empty_open": 8,
       "null_p95": 0.5499999999999999,
-      "excess": 4.7165354748206205
+      "excess": 4.7165354748206205,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "minimax-m3",
@@ -6291,7 +6397,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.5249999999999999,
-      "excess": 4.821968322117215
+      "excess": 4.821968322117215,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "minimax-m3",
@@ -6408,7 +6516,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.5249999999999999,
-      "excess": 4.920218321563878
+      "excess": 4.920218321563878,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "minimax-m3",
@@ -6525,7 +6635,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.525,
-      "excess": 4.827140532471037
+      "excess": 4.827140532471037,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "minimax-m3",
@@ -6640,7 +6752,9 @@
       "empty_tight": 0,
       "empty_open": 22,
       "null_p95": 0.47500000000000003,
-      "excess": 1.2053707126677218
+      "excess": 1.2053707126677218,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "minimax-m3",
@@ -6757,7 +6871,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.5,
-      "excess": 2.095916418797237
+      "excess": 2.095916418797237,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "minimax-m3",
@@ -6874,7 +6990,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.5249999999999999,
-      "excess": 2.7751544840695113
+      "excess": 2.7751544840695113,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "minimax-m3",
@@ -6991,7 +7109,9 @@
       "empty_tight": 0,
       "empty_open": 1,
       "null_p95": 0.47500000000000003,
-      "excess": 2.3501532384411545
+      "excess": 2.3501532384411545,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "minimax-m3",
@@ -7106,7 +7226,9 @@
       "empty_tight": 0,
       "empty_open": 18,
       "null_p95": 0.45000000000000007,
-      "excess": 3.1545039412390263
+      "excess": 3.1545039412390263,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "minimax-m3",
@@ -7223,7 +7345,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.6249999999999998,
-      "excess": 2.4207779614006144
+      "excess": 2.4207779614006144,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "minimax-m3",
@@ -7340,7 +7464,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.4750000000000001,
-      "excess": 4.289276743447612
+      "excess": 4.289276743447612,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "minimax-m3",
@@ -7457,7 +7583,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.6249999999999998,
-      "excess": 2.058139353098275
+      "excess": 2.058139353098275,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "muse-glimmer-30b",
@@ -7572,7 +7700,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.6999999999999998,
-      "excess": 2.9843859786808915
+      "excess": 2.9843859786808915,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "muse-glimmer-30b",
@@ -7689,7 +7819,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.6999999999999997,
-      "excess": 3.5316734765211506
+      "excess": 3.5316734765211506,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "muse-glimmer-30b",
@@ -7806,7 +7938,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.6249999999999998,
-      "excess": 3.307154221283405
+      "excess": 3.307154221283405,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "muse-glimmer-30b",
@@ -7923,7 +8057,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.6749999999999999,
-      "excess": 3.0843360275869705
+      "excess": 3.0843360275869705,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "muse-glimmer-30b",
@@ -8038,7 +8174,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.5249999999999999,
-      "excess": 3.7645747146544277
+      "excess": 3.7645747146544277,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "muse-glimmer-30b",
@@ -8155,7 +8293,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.45000000000000007,
-      "excess": 2.564969372095544
+      "excess": 2.564969372095544,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "muse-glimmer-30b",
@@ -8272,7 +8412,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.4250000000000001,
-      "excess": 2.800634070982522
+      "excess": 2.800634070982522,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "muse-glimmer-30b",
@@ -8389,7 +8531,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.4,
-      "excess": 2.597797889843498
+      "excess": 2.597797889843498,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "muse-glimmer-30b",
@@ -8504,7 +8648,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.47500000000000003,
-      "excess": 4.443934084506927
+      "excess": 4.443934084506927,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "muse-glimmer-30b",
@@ -8621,7 +8767,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.35000000000000003,
-      "excess": 3.4239766742227182
+      "excess": 3.4239766742227182,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "muse-glimmer-30b",
@@ -8738,7 +8886,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.325,
-      "excess": 3.057906446131878
+      "excess": 3.057906446131878,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "muse-glimmer-30b",
@@ -8855,7 +9005,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.25,
-      "excess": 2.4152978126290154
+      "excess": 2.4152978126290154,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "muse-glimmer-30b",
@@ -8970,7 +9122,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.575,
-      "excess": 3.930170701591058
+      "excess": 3.930170701591058,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "muse-glimmer-30b",
@@ -9087,7 +9241,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.5749999999999997,
-      "excess": 1.6833175333142187
+      "excess": 1.6833175333142187,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "muse-glimmer-30b",
@@ -9204,7 +9360,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.5249999999999999,
-      "excess": 2.1352676254482468
+      "excess": 2.1352676254482468,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "muse-glimmer-30b",
@@ -9321,7 +9479,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.5499999999999999,
-      "excess": 0.7953042209421615
+      "excess": 0.7953042209421615,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -9436,7 +9596,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.625,
-      "excess": 4.516343364029447
+      "excess": 4.516343364029447,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -9553,7 +9715,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.5499999999999999,
-      "excess": 4.175870136909689
+      "excess": 4.175870136909689,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -9670,7 +9834,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.4750000000000001,
-      "excess": 3.5179035132076737
+      "excess": 3.5179035132076737,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -9787,7 +9953,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.4500000000000001,
-      "excess": 3.2507731780399274
+      "excess": 3.2507731780399274,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -9902,7 +10070,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.5499999999999998,
-      "excess": 3.7642152096605432
+      "excess": 3.7642152096605432,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -10019,7 +10189,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.45000000000000007,
-      "excess": 2.9078820489355355
+      "excess": 2.9078820489355355,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -10136,7 +10308,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.475,
-      "excess": 3.332577085959134
+      "excess": 3.332577085959134,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -10253,7 +10427,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.375,
-      "excess": 2.627135459735259
+      "excess": 2.627135459735259,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -10368,7 +10544,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.5249999999999999,
-      "excess": 2.7297424028737827
+      "excess": 2.7297424028737827,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -10485,7 +10663,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.45000000000000007,
-      "excess": 1.2677584165766331
+      "excess": 1.2677584165766331,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -10602,7 +10782,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.3750000000000001,
-      "excess": 1.081428079702823
+      "excess": 1.081428079702823,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -10719,7 +10901,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.4,
-      "excess": 0.8383323840296816
+      "excess": 0.8383323840296816,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -10834,7 +11018,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.4750000000000001,
-      "excess": 3.5633103375653756
+      "excess": 3.5633103375653756,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -10951,7 +11137,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.375,
-      "excess": 2.620463502478807
+      "excess": 2.620463502478807,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -11068,7 +11256,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.3500000000000001,
-      "excess": 2.030871358756403
+      "excess": 2.030871358756403,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -11185,7 +11375,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.3500000000000001,
-      "excess": 2.6141792969503483
+      "excess": 2.6141792969503483,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "kimi-k2p6",
@@ -11300,7 +11492,9 @@
       "empty_tight": 8,
       "empty_open": 24,
       "null_p95": 0.7,
-      "excess": -2.147303586509239
+      "excess": -2.147303586509239,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "kimi-k2p6",
@@ -11417,7 +11611,9 @@
       "empty_tight": 7,
       "empty_open": 12,
       "null_p95": 0.8499999999999998,
-      "excess": -0.5795890439264333
+      "excess": -0.5795890439264333,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "kimi-k2p6",
@@ -11534,7 +11730,9 @@
       "empty_tight": 6,
       "empty_open": 13,
       "null_p95": 0.8499999999999998,
-      "excess": -0.812323090931299
+      "excess": -0.812323090931299,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "kimi-k2p6",
@@ -11651,7 +11849,9 @@
       "empty_tight": 3,
       "empty_open": 13,
       "null_p95": 0.875,
-      "excess": -1.0323724450744025
+      "excess": -1.0323724450744025,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "kimi-k2p6",
@@ -11766,7 +11966,9 @@
       "empty_tight": 0,
       "empty_open": 6,
       "null_p95": 0.7999999999999997,
-      "excess": 1.0334375552295554
+      "excess": 1.0334375552295554,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "kimi-k2p6",
@@ -11883,7 +12085,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.725,
-      "excess": 1.8966613320215855
+      "excess": 1.8966613320215855,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "kimi-k2p6",
@@ -12000,7 +12204,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.6749999999999999,
-      "excess": 0.20945939476069556
+      "excess": 0.20945939476069556,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "kimi-k2p6",
@@ -12117,7 +12323,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.5999999999999999,
-      "excess": 0.34611592098564736
+      "excess": 0.34611592098564736,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "kimi-k2p6",
@@ -12232,7 +12440,9 @@
       "empty_tight": 0,
       "empty_open": 33,
       "null_p95": 0.425,
-      "excess": -1.5032974407581057
+      "excess": -1.5032974407581057,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "kimi-k2p6",
@@ -12349,7 +12559,9 @@
       "empty_tight": 1,
       "empty_open": 3,
       "null_p95": 0.6249999999999999,
-      "excess": 0.6816017797275942
+      "excess": 0.6816017797275942,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "kimi-k2p6",
@@ -12466,7 +12678,9 @@
       "empty_tight": 1,
       "empty_open": 4,
       "null_p95": 0.5499999999999998,
-      "excess": 0.34755251137162163
+      "excess": 0.34755251137162163,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "kimi-k2p6",
@@ -12583,7 +12797,9 @@
       "empty_tight": 3,
       "empty_open": 4,
       "null_p95": 0.5749999999999997,
-      "excess": 0.21387253425695824
+      "excess": 0.21387253425695824,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "kimi-k2p6",
@@ -12698,7 +12914,9 @@
       "empty_tight": 0,
       "empty_open": 18,
       "null_p95": 0.6999999999999997,
-      "excess": -0.7632926474382016
+      "excess": -0.7632926474382016,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "kimi-k2p6",
@@ -12815,7 +13033,9 @@
       "empty_tight": 0,
       "empty_open": 1,
       "null_p95": 0.8499999999999999,
-      "excess": 0.4441218700562373
+      "excess": 0.4441218700562373,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "kimi-k2p6",
@@ -12932,7 +13152,9 @@
       "empty_tight": 0,
       "empty_open": 0,
       "null_p95": 0.7499999999999999,
-      "excess": 1.0878177451716393
+      "excess": 1.0878177451716393,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     },
     {
       "model": "kimi-k2p6",
@@ -13049,7 +13271,9 @@
       "empty_tight": 0,
       "empty_open": 2,
       "null_p95": 0.725,
-      "excess": 1.463581894391217
+      "excess": 1.463581894391217,
+      "collected_from": "2026-09-17T19:56",
+      "collected_to": "2026-09-17T19:56"
     }
   ],
   "p_holm_by_prompt": {
@@ -13842,5 +14066,11 @@
       },
       "verdict": "underpowered"
     }
-  ]
+  ],
+  "collected": {
+    "from": "2026-09-17T19:56",
+    "to": "2026-09-17T19:56",
+    "source": "git author date of the adding commit (predates the cache)"
+  },
+  "written": "2026-09-15T09:36Z"
 }

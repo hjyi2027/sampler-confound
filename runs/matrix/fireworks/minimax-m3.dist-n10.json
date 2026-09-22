@@ -58,7 +58,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 7,
-      "excess": -0.41051376854975513
+      "excess": -0.41051376854975513,
+      "collected_from": "2026-09-20T16:47Z",
+      "collected_to": "2026-09-20T16:48Z"
     },
     {
       "model": "minimax-m3",
@@ -116,7 +118,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T16:48Z",
+      "collected_to": "2026-09-20T16:48Z"
     },
     {
       "model": "minimax-m3",
@@ -174,7 +178,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T14:39Z",
+      "collected_to": "2026-09-20T16:48Z"
     },
     {
       "model": "minimax-m3",
@@ -232,7 +238,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 9,
-      "excess": -2.8459165847602983
+      "excess": -2.8459165847602983,
+      "collected_from": "2026-09-20T16:48Z",
+      "collected_to": "2026-09-20T16:49Z"
     },
     {
       "model": "minimax-m3",
@@ -290,7 +298,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-20T16:49Z"
     },
     {
       "model": "minimax-m3",
@@ -348,7 +358,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-20T16:49Z"
     },
     {
       "model": "minimax-m3",
@@ -404,7 +416,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 3,
-      "excess": 2.836724471594298
+      "excess": 2.836724471594298,
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-20T16:50Z"
     },
     {
       "model": "minimax-m3",
@@ -462,7 +476,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.8726501334647461
+      "excess": 0.8726501334647461,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-20T16:50Z"
     },
     {
       "model": "minimax-m3",
@@ -520,7 +536,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.6738985547162604
+      "excess": 0.6738985547162604,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-20T16:50Z"
     },
     {
       "model": "minimax-m3",
@@ -578,7 +596,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 9,
-      "excess": -2.851490823359448
+      "excess": -2.851490823359448,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-20T16:50Z"
     },
     {
       "model": "minimax-m3",
@@ -636,7 +656,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-20T16:51Z"
     },
     {
       "model": "minimax-m3",
@@ -694,7 +716,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.3982871578748489
+      "excess": 0.3982871578748489,
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-20T16:51Z"
     },
     {
       "model": "minimax-m3",
@@ -750,7 +774,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 4,
-      "excess": 1.3590218992496492
+      "excess": 1.3590218992496492,
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-20T16:51Z"
     },
     {
       "model": "minimax-m3",
@@ -808,7 +834,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.18963188448418308
+      "excess": -0.18963188448418308,
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-20T16:51Z"
     },
     {
       "model": "minimax-m3",
@@ -866,7 +894,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.20347557912636316
+      "excess": 0.20347557912636316,
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-20T16:52Z"
     },
     {
       "model": "minimax-m3",
@@ -924,7 +954,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 9,
-      "excess": -2.45185209111224
+      "excess": -2.45185209111224,
+      "collected_from": "2026-09-20T16:52Z",
+      "collected_to": "2026-09-20T16:52Z"
     },
     {
       "model": "minimax-m3",
@@ -982,7 +1014,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": 0.47268301019715464
+      "excess": 0.47268301019715464,
+      "collected_from": "2026-09-20T16:52Z",
+      "collected_to": "2026-09-20T16:53Z"
     },
     {
       "model": "minimax-m3",
@@ -1040,7 +1074,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.39153251328561584
+      "excess": 0.39153251328561584,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-20T16:53Z"
     },
     {
       "model": "minimax-m3",
@@ -1096,7 +1132,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 4,
-      "excess": 1.2256130290271352
+      "excess": 1.2256130290271352,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-20T16:53Z"
     },
     {
       "model": "minimax-m3",
@@ -1154,7 +1192,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.542540250559328
+      "excess": 1.542540250559328,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-20T16:53Z"
     },
     {
       "model": "minimax-m3",
@@ -1212,7 +1252,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.3949233382492648
+      "excess": 0.3949233382492648,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-20T16:53Z"
     },
     {
       "model": "minimax-m3",
@@ -1270,7 +1312,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 9,
-      "excess": -2.366031125555638
+      "excess": -2.366031125555638,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-20T16:54Z"
     },
     {
       "model": "minimax-m3",
@@ -1328,7 +1372,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T16:54Z",
+      "collected_to": "2026-09-20T16:54Z"
     },
     {
       "model": "minimax-m3",
@@ -1386,7 +1432,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T16:54Z",
+      "collected_to": "2026-09-20T16:55Z"
     }
   ],
   "p_holm_by_prompt": {
@@ -1571,5 +1619,11 @@
       "forced": {},
       "verdict_forced": ""
     }
-  ]
+  ],
+  "collected": {
+    "from": "2026-09-20T14:39Z",
+    "to": "2026-09-20T16:55Z",
+    "source": "cache"
+  },
+  "written": "2026-09-21T16:06Z"
 }

@@ -48,7 +48,7 @@ sys.path.insert(0, str(ROOT))
 
 from samplerconfound.benchmarks import sweep_split
 from samplerconfound.config import FIXED
-from samplerconfound.paths import resolve_out, show
+from samplerconfound.paths import iso, resolve_out, show, window
 from samplerconfound.adapters import ADAPTERS
 from samplerconfound.provider import DEFAULT_PROVIDER, complete, default_cache, load_key
 from scripts.probe_distinguishability import PROMPTS, resolve_models
@@ -78,13 +78,13 @@ def one(key, model, prompt, extra, max_tokens, effort, replicate, provider):
         body["reasoning_effort"] = effort
     c, err = complete(key, body, replicate, provider=provider)
     if err:
-        return None, None, err
+        return None, None, err, None
     # A condition whose parameter the adapter could not put on the wire was not
     # tested; reporting its output as "seed_0" would measure nothing.
     missing = set(extra) & set(c.dropped)
     if missing:
-        return None, None, f"unsupported: {sorted(missing)} has no wire form on {provider}"
-    return c.text, c.reasoning, None
+        return None, None, f"unsupported: {sorted(missing)} has no wire form on {provider}", None
+    return c.text, c.reasoning, None, c.collected_at
 
 
 def match_rate(xs: list[str]) -> tuple[float, int, str]:
@@ -125,11 +125,12 @@ def main() -> int:
                         lambda i: one(key, model, text, extra, args.max_tokens,
                                       args.effort, i, args.provider),
                         range(N)))
-                errs = [e for _, _, e in outs if e]
-                content = [c for c, _, e in outs if not e]
-                reasoning = [r for _, r, e in outs if not e]
+                errs = [e for _, _, e, _ in outs if e]
+                content = [c for c, _, e, _ in outs if not e]
+                reasoning = [r for _, r, e, _ in outs if not e]
                 res[cond] = {
                     "n": len(content), "errors": errs[:2],
+                    "collected": window(t for _, _, _, t in outs),
                     "content": match_rate(content),
                     "reasoning": match_rate(reasoning),
                     "modal_content": match_rate(content)[2][:200],
@@ -142,6 +143,8 @@ def main() -> int:
                       for e in res[c]["errors"])
             row = {"provider": args.provider, "model": model, "prompt": pid,
                    "conditions": res,
+                   "collected": {"from": min((r["collected"]["from"] for r in res.values() if r["collected"]["from"]), default=""),
+                                 "to": max((r["collected"]["to"] for r in res.values() if r["collected"]["to"]), default="")},
                    "seed_rejected": rej, "seed0_eq_seed1": same}
             rows.append(row)
 
@@ -196,6 +199,10 @@ def main() -> int:
         dest = resolve_out(args.out)
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(json.dumps({"provider": args.provider,
+                                    "max_tokens": args.max_tokens, "reasoning_effort": args.effort,
+                                    "collected": {"from": min((r["collected"]["from"] for r in rows if r["collected"]["from"]), default=""),
+                                                  "to": max((r["collected"]["to"] for r in rows if r["collected"]["to"]), default="")},
+                                    "written": iso(time.time()),
                                     "n_per_condition": N, "conditions": CONDITIONS,
                                     "rows": rows, "summary": summary},
                                    indent=2, default=str) + "\n")

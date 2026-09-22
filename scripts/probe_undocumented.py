@@ -27,6 +27,7 @@ import argparse
 import json
 import re
 import sys
+import time
 from collections import Counter
 from pathlib import Path
 
@@ -34,7 +35,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from samplerconfound.adapters import ADAPTERS
-from samplerconfound.paths import resolve_out, show
+from samplerconfound.paths import iso, resolve_out, show, window
 from samplerconfound.provider import DEFAULT_PROVIDER, complete, default_cache, load_key
 
 ONE_WORD = "Reply with the single word: cat"
@@ -47,9 +48,13 @@ def run(key, provider, model, effort):
     base = {"model": model, "max_tokens": 48, "reasoning_effort": effort} if effort else {"model": model, "max_tokens": 48}
     out = {"model": model, "provider": provider}
 
+    when = []
+
     def get(prompt, rep, **extra):
         c, err = complete(key, {**base, "messages": [{"role": "user", "content": prompt}], **extra},
                           rep, provider=provider, timeout=120)
+        if c is not None:
+            when.append(c.collected_at)
         return c, err
 
     # ignore_eos: does a one-word answer run to the cap?
@@ -100,6 +105,7 @@ def run(key, provider, model, effort):
     c, err = get(ONE_WORD, 0, temperature=1.0, best_of=2)
     out["best_of"] = {"accepted": err is None, "error": err,
                       "verdict": "rejected" if err and err.startswith("rejected") else "accepted, untestable from outside"}
+    out["collected"] = window(when)
     return out
 
 
@@ -123,7 +129,12 @@ def main() -> int:
     dest.parent.mkdir(parents=True, exist_ok=True)
     prior = json.loads(dest.read_text()) if dest.exists() else {"rows": []}
     keep = [x for x in prior["rows"] if (x["provider"], x["model"]) not in {(r["provider"], r["model"]) for r in rows}]
-    dest.write_text(json.dumps({"rows": keep + rows}, indent=2) + "\n")
+    allrows = keep + rows
+    fr = [r["collected"]["from"] for r in allrows if r.get("collected", {}).get("from")]
+    to = [r["collected"]["to"] for r in allrows if r.get("collected", {}).get("to")]
+    dest.write_text(json.dumps({"written": iso(time.time()),
+                                "collected": {"from": min(fr), "to": max(to), "source": "cache"} if fr else {"from": "", "to": ""},
+                                "rows": allrows}, indent=2) + "\n")
     print(f"wrote {show(dest)}")
     return 0
 

@@ -118,7 +118,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.9853586291802903
+      "excess": 2.9853586291802903,
+      "collected_from": "2026-09-20T10:31Z",
+      "collected_to": "2026-09-20T10:32Z"
     },
     {
       "model": "qwen3p8-max",
@@ -236,7 +238,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.1302540978582147
+      "excess": 1.1302540978582147,
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-21T07:26Z"
     },
     {
       "model": "qwen3p8-max",
@@ -354,7 +358,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.24914623225686358
+      "excess": 0.24914623225686358,
+      "collected_from": "2026-09-20T14:39Z",
+      "collected_to": "2026-09-21T07:27Z"
     },
     {
       "model": "qwen3p8-max",
@@ -472,7 +478,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 39,
-      "excess": -4.928553244955416
+      "excess": -4.928553244955416,
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-21T08:18Z"
     },
     {
       "model": "qwen3p8-max",
@@ -590,7 +598,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.06946566874146776
+      "excess": -0.06946566874146776,
+      "collected_from": "2026-09-20T16:52Z",
+      "collected_to": "2026-09-21T08:32Z"
     },
     {
       "model": "qwen3p8-max",
@@ -708,7 +718,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.020633544015701534
+      "excess": 0.020633544015701534,
+      "collected_from": "2026-09-20T16:52Z",
+      "collected_to": "2026-09-21T08:48Z"
     },
     {
       "model": "qwen3p8-max",
@@ -824,7 +836,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 3.0131962150978095
+      "excess": 3.0131962150978095,
+      "collected_from": "2026-09-20T10:33Z",
+      "collected_to": "2026-09-20T10:34Z"
     },
     {
       "model": "qwen3p8-max",
@@ -942,7 +956,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.4389539972478888
+      "excess": 0.4389539972478888,
+      "collected_from": "2026-09-20T16:52Z",
+      "collected_to": "2026-09-21T08:48Z"
     },
     {
       "model": "qwen3p8-max",
@@ -1060,7 +1076,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.20204256642949792
+      "excess": 0.20204256642949792,
+      "collected_from": "2026-09-20T16:52Z",
+      "collected_to": "2026-09-21T08:55Z"
     },
     {
       "model": "qwen3p8-max",
@@ -1178,7 +1196,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 37,
-      "excess": -4.109038977379589
+      "excess": -4.109038977379589,
+      "collected_from": "2026-09-20T16:52Z",
+      "collected_to": "2026-09-21T09:07Z"
     },
     {
       "model": "qwen3p8-max",
@@ -1296,7 +1316,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.03645447427550672
+      "excess": -0.03645447427550672,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-21T09:19Z"
     },
     {
       "model": "qwen3p8-max",
@@ -1414,7 +1436,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.096789237844669
+      "excess": -0.096789237844669,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-21T09:20Z"
     },
     {
       "model": "qwen3p8-max",
@@ -1530,7 +1554,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.4807763927453133
+      "excess": 2.4807763927453133,
+      "collected_from": "2026-09-20T10:35Z",
+      "collected_to": "2026-09-20T10:35Z"
     },
     {
       "model": "qwen3p8-max",
@@ -1648,7 +1674,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.384605670972844
+      "excess": -0.384605670972844,
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-21T10:21Z"
     },
     {
       "model": "qwen3p8-max",
@@ -1766,7 +1794,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.13251756305322643
+      "excess": 0.13251756305322643,
+      "collected_from": "2026-09-20T16:54Z",
+      "collected_to": "2026-09-21T10:34Z"
     },
     {
       "model": "qwen3p8-max",
@@ -1884,7 +1914,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 39,
-      "excess": -0.9830829234182256
+      "excess": -0.9830829234182256,
+      "collected_from": "2026-09-20T16:54Z",
+      "collected_to": "2026-09-21T11:43Z"
     },
     {
       "model": "qwen3p8-max",
@@ -2002,7 +2034,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 6,
-      "excess": 0.5379149378132753
+      "excess": 0.5379149378132753,
+      "collected_from": "2026-09-20T16:55Z",
+      "collected_to": "2026-09-21T11:44Z"
     },
     {
       "model": "qwen3p8-max",
@@ -2120,7 +2154,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.2626045004170315
+      "excess": -0.2626045004170315,
+      "collected_from": "2026-09-20T16:55Z",
+      "collected_to": "2026-09-21T11:44Z"
     },
     {
       "model": "qwen3p8-max",
@@ -2236,7 +2272,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 4.010957273723035
+      "excess": 4.010957273723035,
+      "collected_from": "2026-09-20T10:38Z",
+      "collected_to": "2026-09-20T10:38Z"
     },
     {
       "model": "qwen3p8-max",
@@ -2354,7 +2392,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.9646953331087343
+      "excess": 0.9646953331087343,
+      "collected_from": "2026-09-20T16:55Z",
+      "collected_to": "2026-09-21T11:45Z"
     },
     {
       "model": "qwen3p8-max",
@@ -2472,7 +2512,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.1674956225786092
+      "excess": -0.1674956225786092,
+      "collected_from": "2026-09-20T16:55Z",
+      "collected_to": "2026-09-21T12:00Z"
     },
     {
       "model": "qwen3p8-max",
@@ -2590,7 +2632,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 40,
-      "excess": -4.5917566556416824
+      "excess": -4.5917566556416824,
+      "collected_from": "2026-09-20T16:55Z",
+      "collected_to": "2026-09-21T12:21Z"
     },
     {
       "model": "qwen3p8-max",
@@ -2708,7 +2752,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.5371279974702012
+      "excess": 0.5371279974702012,
+      "collected_from": "2026-09-20T16:56Z",
+      "collected_to": "2026-09-21T12:22Z"
     },
     {
       "model": "qwen3p8-max",
@@ -2826,7 +2872,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.20781267756247454
+      "excess": -0.20781267756247454,
+      "collected_from": "2026-09-20T16:56Z",
+      "collected_to": "2026-09-21T12:22Z"
     },
     {
       "model": "qwen3p8-max",
@@ -2944,7 +2992,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 40,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-21T12:22Z",
+      "collected_to": "2026-09-21T12:25Z"
     },
     {
       "model": "qwen3p8-max",
@@ -3062,7 +3112,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 34,
-      "excess": 0.9904458995419523
+      "excess": 0.9904458995419523,
+      "collected_from": "2026-09-21T12:25Z",
+      "collected_to": "2026-09-21T12:28Z"
     },
     {
       "model": "qwen3p8-max",
@@ -3180,7 +3232,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-21T12:28Z",
+      "collected_to": "2026-09-21T12:36Z"
     }
   ],
   "p_holm_by_prompt": {
@@ -3380,5 +3434,11 @@
       },
       "verdict_forced": "insufficient"
     }
-  ]
+  ],
+  "collected": {
+    "from": "2026-09-20T10:31Z",
+    "to": "2026-09-21T12:36Z",
+    "source": "cache"
+  },
+  "written": "2026-09-21T16:07Z"
 }

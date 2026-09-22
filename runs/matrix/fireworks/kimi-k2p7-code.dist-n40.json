@@ -118,7 +118,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 19,
-      "excess": 0.1298998141805748
+      "excess": 0.1298998141805748,
+      "collected_from": "2026-09-20T10:31Z",
+      "collected_to": "2026-09-20T10:34Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -236,7 +238,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.30724875499311594
+      "excess": -0.30724875499311594,
+      "collected_from": "2026-09-20T16:54Z",
+      "collected_to": "2026-09-21T09:07Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -354,7 +358,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.3926433932535458
+      "excess": 0.3926433932535458,
+      "collected_from": "2026-09-20T14:39Z",
+      "collected_to": "2026-09-21T09:20Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -472,7 +478,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 10,
-      "excess": -0.28559190212289454
+      "excess": -0.28559190212289454,
+      "collected_from": "2026-09-20T16:55Z",
+      "collected_to": "2026-09-21T11:45Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -590,7 +598,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 6,
-      "excess": -0.33668022504879863
+      "excess": -0.33668022504879863,
+      "collected_from": "2026-09-20T16:56Z",
+      "collected_to": "2026-09-21T12:19Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -708,7 +718,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.34315556878801035
+      "excess": 0.34315556878801035,
+      "collected_from": "2026-09-20T16:56Z",
+      "collected_to": "2026-09-21T12:20Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -824,7 +836,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 23,
-      "excess": 1.8625011023641076
+      "excess": 1.8625011023641076,
+      "collected_from": "2026-09-20T10:35Z",
+      "collected_to": "2026-09-20T10:37Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -942,7 +956,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.466064181263635
+      "excess": 1.466064181263635,
+      "collected_from": "2026-09-20T16:56Z",
+      "collected_to": "2026-09-21T12:21Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -1060,7 +1076,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.9871327017185272
+      "excess": 0.9871327017185272,
+      "collected_from": "2026-09-20T16:56Z",
+      "collected_to": "2026-09-21T12:22Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -1178,7 +1196,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": 2.5316760153687055
+      "excess": 2.5316760153687055,
+      "collected_from": "2026-09-20T16:56Z",
+      "collected_to": "2026-09-21T12:26Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -1296,7 +1316,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.7025002245668587
+      "excess": 0.7025002245668587,
+      "collected_from": "2026-09-20T16:58Z",
+      "collected_to": "2026-09-21T12:27Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -1414,7 +1436,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.2839178821997307
+      "excess": 0.2839178821997307,
+      "collected_from": "2026-09-20T16:58Z",
+      "collected_to": "2026-09-21T12:28Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -1530,7 +1554,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 27,
-      "excess": -0.8202883687518588
+      "excess": -0.8202883687518588,
+      "collected_from": "2026-09-20T10:37Z",
+      "collected_to": "2026-09-20T10:41Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -1648,7 +1674,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.30615826215706443
+      "excess": 0.30615826215706443,
+      "collected_from": "2026-09-20T16:58Z",
+      "collected_to": "2026-09-21T12:36Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -1766,7 +1794,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.8110002573016699
+      "excess": -0.8110002573016699,
+      "collected_from": "2026-09-20T16:58Z",
+      "collected_to": "2026-09-21T12:37Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -1884,7 +1914,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 7,
-      "excess": 0.9295438980993735
+      "excess": 0.9295438980993735,
+      "collected_from": "2026-09-20T16:58Z",
+      "collected_to": "2026-09-21T13:03Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -2002,7 +2034,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.7739255596065335
+      "excess": 0.7739255596065335,
+      "collected_from": "2026-09-20T16:59Z",
+      "collected_to": "2026-09-21T13:06Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -2120,7 +2154,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.1771428646661655
+      "excess": 0.1771428646661655,
+      "collected_from": "2026-09-20T17:00Z",
+      "collected_to": "2026-09-21T13:08Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -2236,7 +2272,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 24,
-      "excess": -0.3994799878882163
+      "excess": -0.3994799878882163,
+      "collected_from": "2026-09-20T10:37Z",
+      "collected_to": "2026-09-20T10:44Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -2354,7 +2392,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.35671317194206736
+      "excess": 0.35671317194206736,
+      "collected_from": "2026-09-20T17:00Z",
+      "collected_to": "2026-09-21T13:09Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -2472,7 +2512,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.5770931979530901
+      "excess": 0.5770931979530901,
+      "collected_from": "2026-09-20T17:00Z",
+      "collected_to": "2026-09-21T13:10Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -2590,7 +2632,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 2,
-      "excess": 0.24966632331253244
+      "excess": 0.24966632331253244,
+      "collected_from": "2026-09-20T17:00Z",
+      "collected_to": "2026-09-21T13:14Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -2708,7 +2752,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-20T17:02Z",
+      "collected_to": "2026-09-21T13:18Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -2826,7 +2872,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.14943510160068332
+      "excess": -0.14943510160068332,
+      "collected_from": "2026-09-20T17:02Z",
+      "collected_to": "2026-09-21T13:19Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -2944,7 +2992,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 5,
-      "excess": 4.856502963748823
+      "excess": 4.856502963748823,
+      "collected_from": "2026-09-21T13:19Z",
+      "collected_to": "2026-09-21T13:28Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -3062,7 +3112,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 6,
-      "excess": 4.811649966210722
+      "excess": 4.811649966210722,
+      "collected_from": "2026-09-21T13:28Z",
+      "collected_to": "2026-09-21T13:32Z"
     },
     {
       "model": "kimi-k2p7-code",
@@ -3180,7 +3232,9 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN
+      "excess": NaN,
+      "collected_from": "2026-09-21T13:32Z",
+      "collected_to": "2026-09-21T13:38Z"
     }
   ],
   "p_holm_by_prompt": {
@@ -3380,5 +3434,11 @@
       },
       "verdict_forced": "insufficient"
     }
-  ]
+  ],
+  "collected": {
+    "from": "2026-09-20T10:31Z",
+    "to": "2026-09-21T13:38Z",
+    "source": "cache"
+  },
+  "written": "2026-09-21T16:06Z"
 }
