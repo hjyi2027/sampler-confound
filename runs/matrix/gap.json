@@ -1,0 +1,2904 @@
+{
+  "documented": {
+    "fireworks": {
+      "source": "https://docs.fireworks.ai/api-reference/post-chatcompletions",
+      "read_on": "2026-09-22",
+      "params": {
+        "temperature": {
+          "status": "documented",
+          "claim": "What sampling temperature to use, between 0 and 2.",
+          "range": "0\u20132"
+        },
+        "top_p": {
+          "status": "documented",
+          "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+          "range": "0\u20131"
+        },
+        "top_k": {
+          "status": "documented",
+          "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+          "range": "0\u2013100"
+        },
+        "min_p": {
+          "status": "documented",
+          "claim": "Only tokens with probability >= min_p are considered for selection.",
+          "range": "0\u20131"
+        },
+        "typical_p": {
+          "status": "documented",
+          "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+          "range": "0\u20131"
+        },
+        "mirostat": {
+          "status": "documented",
+          "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+          "range": ""
+        },
+        "repetition_penalty": {
+          "status": "documented",
+          "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+          "range": "0\u20132"
+        },
+        "frequency_penalty": {
+          "status": "documented",
+          "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+          "range": "-2\u20132"
+        },
+        "presence_penalty": {
+          "status": "documented",
+          "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+          "range": "-2\u20132"
+        },
+        "seed": {
+          "status": "documented",
+          "claim": "Random seed for deterministic sampling.",
+          "range": ""
+        },
+        "best_of": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "use_beam_search": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "ignore_eos": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "skip_special_tokens": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        }
+      }
+    },
+    "groq": {
+      "source": "https://console.groq.com/docs/api-reference#chat-create",
+      "read_on": "2026-09-22",
+      "params": {
+        "temperature": {
+          "status": "documented",
+          "claim": "What sampling temperature to use, between 0 and 2.",
+          "range": "0\u20132"
+        },
+        "top_p": {
+          "status": "documented",
+          "claim": "nucleus sampling ... We generally recommend altering this or temperature but not both.",
+          "range": "0\u20131"
+        },
+        "top_k": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "min_p": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "typical_p": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "mirostat": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "repetition_penalty": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "frequency_penalty": {
+          "status": "documented",
+          "claim": "This is not yet supported by any of our models.",
+          "range": "-2\u20132"
+        },
+        "presence_penalty": {
+          "status": "documented",
+          "claim": "This is not yet supported by any of our models.",
+          "range": "-2\u20132"
+        },
+        "seed": {
+          "status": "documented",
+          "claim": "our system will make a best effort to sample deterministically ... Determinism is not guaranteed",
+          "range": ""
+        },
+        "best_of": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "use_beam_search": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "ignore_eos": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "skip_special_tokens": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        }
+      }
+    },
+    "cerebras": {
+      "source": "https://inference-docs.cerebras.ai/api-reference/chat-completions",
+      "read_on": "2026-09-22",
+      "params": {
+        "temperature": {
+          "status": "documented",
+          "claim": "Sampling temperature between 0 and 2.",
+          "range": "0\u20132"
+        },
+        "top_p": {
+          "status": "documented",
+          "claim": "nucleus sampling ... alter this or temperature, but not both",
+          "range": "0\u20131"
+        },
+        "top_k": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "min_p": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "typical_p": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "mirostat": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "repetition_penalty": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "frequency_penalty": {
+          "status": "documented",
+          "claim": "Positive values reduce the likelihood of the model repeating tokens by applying a penalty proportional to frequency",
+          "range": "-2\u20132"
+        },
+        "presence_penalty": {
+          "status": "documented",
+          "claim": "Positive values reduce the likelihood of the model repeating tokens that have already appeared",
+          "range": "-2\u20132"
+        },
+        "seed": {
+          "status": "documented",
+          "claim": "the system will make a best effort to sample deterministically ... Determinism is not guaranteed",
+          "range": ""
+        },
+        "best_of": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "use_beam_search": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "ignore_eos": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "skip_special_tokens": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        }
+      }
+    },
+    "google": {
+      "source": "https://ai.google.dev/api/generate-content#generationconfig",
+      "read_on": "2026-09-22",
+      "params": {
+        "temperature": {
+          "status": "documented",
+          "claim": "Controls the randomness of the output.",
+          "range": ""
+        },
+        "top_p": {
+          "status": "documented",
+          "claim": "topP: The maximum cumulative probability of tokens to consider when sampling.",
+          "range": ""
+        },
+        "top_k": {
+          "status": "documented",
+          "claim": "topK: The maximum number of tokens to consider when sampling. ... An empty topK attribute [on the model] indicates that the model doesn't apply top-k sampling and doesn't allow setting topK on requests.",
+          "range": ""
+        },
+        "min_p": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "typical_p": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "mirostat": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "repetition_penalty": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "frequency_penalty": {
+          "status": "documented",
+          "claim": "frequencyPenalty: a penalty that increases with each use. A positive penalty will discourage the use of tokens that have already been used",
+          "range": ""
+        },
+        "presence_penalty": {
+          "status": "documented",
+          "claim": "presencePenalty: applied to the next token's logprobs if the token has already been seen in the response. This penalty is binary on/off",
+          "range": ""
+        },
+        "seed": {
+          "status": "documented",
+          "claim": "Seed used in decoding. If not set, the request uses a randomly generated seed.",
+          "range": ""
+        },
+        "best_of": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "use_beam_search": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "ignore_eos": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "skip_special_tokens": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        }
+      }
+    },
+    "openrouter": {
+      "source": "https://openrouter.ai/docs/api-reference/parameters",
+      "read_on": "2026-09-22",
+      "params": {
+        "temperature": {
+          "status": "documented",
+          "claim": "This setting influences the variety in the model's responses.",
+          "range": "0\u20132"
+        },
+        "top_p": {
+          "status": "documented",
+          "claim": "limits the model's choices to a percentage of likely tokens",
+          "range": "0\u20131"
+        },
+        "top_k": {
+          "status": "documented",
+          "claim": "limits the model's choice of tokens at each step",
+          "range": "0+"
+        },
+        "min_p": {
+          "status": "documented",
+          "claim": "the minimum probability for a token to be considered, relative to the probability of the most likely token",
+          "range": "0\u20131"
+        },
+        "typical_p": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "mirostat": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "repetition_penalty": {
+          "status": "documented",
+          "claim": "Helps to reduce the repetition of tokens from the input.",
+          "range": "0\u20132"
+        },
+        "frequency_penalty": {
+          "status": "documented",
+          "claim": "control the repetition of tokens based on how often they appear in the input",
+          "range": "-2\u20132"
+        },
+        "presence_penalty": {
+          "status": "documented",
+          "claim": "Adjusts how often the model repeats specific tokens already used in the input.",
+          "range": "-2\u20132"
+        },
+        "seed": {
+          "status": "documented",
+          "claim": "the inferencing will sample deterministically ... Determinism is not guaranteed for some models.",
+          "range": ""
+        },
+        "best_of": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "use_beam_search": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "ignore_eos": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "skip_special_tokens": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        }
+      }
+    },
+    "nvidia": {
+      "source": "https://docs.api.nvidia.com/nim/reference/ (per-model; read for muse-glimmer-30b)",
+      "read_on": "2026-09-22",
+      "params": {
+        "temperature": {
+          "status": "documented",
+          "claim": "The sampling temperature to use for text generation.",
+          "range": "0\u20131"
+        },
+        "top_p": {
+          "status": "documented",
+          "claim": "The top-p sampling mass used for text generation.",
+          "range": "\u22641"
+        },
+        "top_k": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "min_p": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "typical_p": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "mirostat": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "repetition_penalty": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "frequency_penalty": {
+          "status": "documented",
+          "claim": "Penalises new tokens by their existing frequency in the text so far, reducing verbatim repetition.",
+          "range": "-2\u20132"
+        },
+        "presence_penalty": {
+          "status": "documented",
+          "claim": "Positive values penalise tokens that have already appeared",
+          "range": "-2\u20132"
+        },
+        "seed": {
+          "status": "documented",
+          "claim": "our system will make a best effort to sample deterministically",
+          "range": ""
+        },
+        "best_of": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "use_beam_search": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "ignore_eos": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "skip_special_tokens": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        }
+      }
+    },
+    "mistral": {
+      "source": "https://docs.mistral.ai/api/",
+      "read_on": "2026-09-22",
+      "params": {
+        "temperature": {
+          "status": "documented",
+          "claim": "What sampling temperature to use, we recommend between 0.0 and 0.7.",
+          "range": ""
+        },
+        "top_p": {
+          "status": "documented",
+          "claim": "Nucleus sampling ... The default value varies depending on the model",
+          "range": ""
+        },
+        "top_k": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "min_p": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "typical_p": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "mirostat": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "repetition_penalty": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "frequency_penalty": {
+          "status": "documented",
+          "claim": "penalizes the repetition of words based on their frequency in the generated text",
+          "range": ""
+        },
+        "presence_penalty": {
+          "status": "documented",
+          "claim": "determines how much the model penalizes the repetition of words or phrases",
+          "range": ""
+        },
+        "seed": {
+          "status": "documented",
+          "claim": "random_seed: The seed to use for random sampling. If set, different calls will generate deterministic results.",
+          "range": ""
+        },
+        "best_of": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "use_beam_search": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "ignore_eos": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        },
+        "skip_special_tokens": {
+          "status": "absent",
+          "claim": "",
+          "range": ""
+        }
+      }
+    }
+  },
+  "cells": [
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "parameter": "ignore_eos",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "honoured",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "undocumented, accepted, works"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "parameter": "use_beam_search",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "ignored",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "parameter": "skip_special_tokens",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "ignored",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "parameter": "best_of",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "accepted, untestable from outside",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "undocumented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "parameter": "ignore_eos",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "honoured",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "undocumented, accepted, works"
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "parameter": "use_beam_search",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "ignored",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "parameter": "skip_special_tokens",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "ignored",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "parameter": "best_of",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "accepted, untestable from outside",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "undocumented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "parameter": "ignore_eos",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "honoured",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "undocumented, accepted, works"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "parameter": "use_beam_search",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "undetermined",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "undocumented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "parameter": "skip_special_tokens",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "ignored",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "parameter": "best_of",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "accepted, untestable from outside",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "undocumented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "parameter": "ignore_eos",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "undetermined (control already at cap)",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "undocumented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "parameter": "use_beam_search",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "ignored",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "parameter": "skip_special_tokens",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "ignored",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "parameter": "best_of",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "accepted, untestable from outside",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "undocumented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "parameter": "ignore_eos",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "hung",
+      "honoured": "hung",
+      "verdict": "error (http 500)",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "accepted, then the server fails"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "parameter": "use_beam_search",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "ignored",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "parameter": "skip_special_tokens",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "ignored",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "UNDOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "parameter": "best_of",
+      "documented": "absent",
+      "claim": "",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "accepted, untestable from outside",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "undocumented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "underpowered",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "distinguishable",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "no effect seen",
+      "free_text": "underpowered",
+      "n_per_arm": 40,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "NO",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "mixed",
+      "verdict": "mixed",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "distinguishable",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "no effect seen",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "no effect seen",
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "NO",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "distinguishable",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "no effect seen",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "no effect seen",
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "n/a",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-0731",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-0731",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-0731",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-0731",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "mixed",
+      "verdict": "mixed",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-0731",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-0731",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "distinguishable",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-0731",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "distinguishable",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-0731",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "underpowered",
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-0731",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "NO",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "minimax-m3",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "minimax-m3",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "minimax-m3",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "minimax-m3",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "minimax-m3",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "minimax-m3",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "distinguishable",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "minimax-m3",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "mixed",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "minimax-m3",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "underpowered",
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "minimax-m3",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "NO",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "no effect seen",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "distinguishable",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "mixed",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "no effect seen",
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "NO",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "no effect seen",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "no effect seen",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "no effect seen",
+      "free_text": "distinguishable",
+      "n_per_arm": 40,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "mixed",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "no effect seen",
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "NO",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-3-ultra-nvfp4",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-3-ultra-nvfp4",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-3-ultra-nvfp4",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-3-ultra-nvfp4",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-3-ultra-nvfp4",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "no effect seen",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-3-ultra-nvfp4",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "distinguishable",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-3-ultra-nvfp4",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "no effect seen",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-3-ultra-nvfp4",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "no effect seen",
+      "free_text": "no effect seen",
+      "n_per_arm": 40,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-3-ultra-nvfp4",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "NO",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "mixed",
+      "verdict": "mixed",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "no effect seen",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "distinguishable",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "no effect seen",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "no effect seen",
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "NO",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p6",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p6",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p6",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p6",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p6",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p6",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "underpowered",
+      "n_per_arm": 10,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p6",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "distinguishable",
+      "n_per_arm": 10,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p6",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "underpowered",
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p6",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "NO",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "distinguishable",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "underpowered",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "underpowered",
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "NO",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "distinguishable",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "no effect seen",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "no effect seen",
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "NO",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "distinguishable",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "distinguishable",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "underpowered",
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "NO",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "mixed",
+      "verdict": "mixed",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "no effect seen",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "distinguishable",
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "no effect seen",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "no effect seen",
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "NO",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "distinguishable",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "no effect seen",
+      "n_per_arm": 40,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "no effect seen",
+      "n_per_arm": 40,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "NO",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 10,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "distinguishable",
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "underpowered",
+      "n_per_arm": 10,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "underpowered",
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "NO",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-2p4t-a95b",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 10,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-2p4t-a95b",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 10,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-2p4t-a95b",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "mixed",
+      "verdict": "mixed",
+      "free_text": null,
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-2p4t-a95b",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "mixed",
+      "verdict": "mixed",
+      "free_text": null,
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-2p4t-a95b",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "no effect seen",
+      "free_text": null,
+      "n_per_arm": 10,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-2p4t-a95b",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "distinguishable",
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-2p4t-a95b",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "no effect seen",
+      "n_per_arm": 10,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-2p4t-a95b",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "no effect seen",
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-2p4t-a95b",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "NO",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-vision-exp",
+      "parameter": "top_p",
+      "documented": "documented",
+      "claim": "nucleus sampling, where the model considers the results of the tokens with top_p probability mass",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-vision-exp",
+      "parameter": "top_k",
+      "documented": "documented",
+      "claim": "Top-k sampling ... the k most probable next tokens are filtered and the probability mass is redistributed among only those k",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": null,
+      "n_per_arm": 10,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-vision-exp",
+      "parameter": "min_p",
+      "documented": "documented",
+      "claim": "Only tokens with probability >= min_p are considered for selection.",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-vision-exp",
+      "parameter": "typical_p",
+      "documented": "documented",
+      "claim": "considers the most typical tokens whose cumulative probability is at most typical_p",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-vision-exp",
+      "parameter": "mirostat",
+      "documented": "documented",
+      "claim": "mirostat_target: Defines the target perplexity for the Mirostat algorithm. mirostat_lr: the learning rate for the Mirostat sampling algorithm",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "underpowered",
+      "free_text": null,
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-vision-exp",
+      "parameter": "repetition_penalty",
+      "documented": "documented",
+      "claim": "A value of 1.0 means no penalty ... Values above 1.0 penalize repetition",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "underpowered",
+      "n_per_arm": 10,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-vision-exp",
+      "parameter": "frequency_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on their existing frequency in the text so far",
+      "accepted": "yes",
+      "honoured": "yes",
+      "verdict": "distinguishable",
+      "free_text": "distinguishable",
+      "n_per_arm": 10,
+      "label": "as documented"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-vision-exp",
+      "parameter": "presence_penalty",
+      "documented": "documented",
+      "claim": "Positive values penalize new tokens based on whether they appear in the text so far",
+      "accepted": "yes",
+      "honoured": "undetermined",
+      "verdict": "insufficient",
+      "free_text": "underpowered",
+      "n_per_arm": 10,
+      "label": "documented, accepted, undetermined"
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-vision-exp",
+      "parameter": "seed",
+      "documented": "documented",
+      "claim": "Random seed for deterministic sampling.",
+      "accepted": "yes",
+      "honoured": "no",
+      "verdict": "NO",
+      "free_text": null,
+      "n_per_arm": null,
+      "label": "DOCUMENTED, ACCEPTED, IGNORED"
+    }
+  ]
+}

@@ -386,6 +386,75 @@ it off before it stops reasoning (739 reasoning tokens on this prompt), so at
 collector that drops empty strings reports that as `n=0, insufficient` with no
 sign that anything was wrong.
 
+### Documented, accepted, honoured: three facts, kept apart
+
+Everything above measures what the output distribution does. What the
+provider *says* a parameter does is a separate fact, and the two are now
+recorded separately: `samplerconfound/documented.py` is a dated transcription
+of each provider's API reference — a quote per parameter, with the URL, and an
+explicit `absent` where the page was read and does not mention it — and
+`scripts/gap.py` puts it beside the measurements. Three columns per
+(provider, model, parameter): **documented** (the reference), **accepted**
+(the HTTP status), **honoured** (the distribution). Every cell gets one label
+for the gap between them.
+
+On Fireworks (reference read 2026-09-22), 182 cells across eighteen models
+and thirteen parameters:
+
+| label | cells | parameters |
+|---|--:|---|
+| as documented | 88 | top_p, top_k, min_p, most of typical_p, repetition_penalty, frequency_penalty; ignore_eos on 3 |
+| documented, accepted, undetermined | 47 | presence_penalty (16), mirostat (7), typical_p (9), … |
+| **documented, accepted, ignored** | **27** | **seed (17)**, mirostat (6), typical_p (1), repetition_penalty (1), presence_penalty (2) |
+| **undocumented, accepted, ignored** | **9** | **use_beam_search (4), skip_special_tokens (5)** |
+| undocumented, accepted, works | 3 | ignore_eos |
+| undocumented, accepted, undetermined | 7 | best_of (5, no signature observable from outside), one each of use_beam_search and ignore_eos |
+| accepted, then the server fails | 1 | ignore_eos on kimi-k3 (HTTP 500, every time) |
+
+**The largest documented gap is `seed`.** The Fireworks reference says, in
+full, "Random seed for deterministic sampling." §2 measures it: a fixed seed
+reproduces a non-deterministic prompt on 10 of 73 (model, prompt) cells and on
+no model consistently. Seventeen of eighteen models carry the label
+*documented, accepted, ignored* for it; the eighteenth is deterministic
+without one. This is the sentence a harness author reads before writing
+"seed=0" into a config and "reproducible" into a paper.
+
+**The worst case exists, and its names are `use_beam_search` and
+`skip_special_tokens`.** Fireworks validates request bodies strictly — fifteen
+sampler names from other stacks (`top_a`, `tfs`, `dry_multiplier`, …) come
+back `400 Extra inputs are not permitted` — but four names from vLLM's
+`SamplingParams` pass validation and appear nowhere in the reference:
+`best_of`, `use_beam_search`, `ignore_eos`, `skip_special_tokens`. A decisive
+test for each (`scripts/probe_undocumented.py`; beam search must make
+temperature-1.0 sampling deterministic, `skip_special_tokens=false` must expose
+an end-of-turn marker, `ignore_eos` must push a one-word answer to the token
+cap) on five models:
+
+| parameter | documented | accepted | honoured |
+|---|---|---|---|
+| `use_beam_search` | absent | 5/5 | ignored on 4, undetermined on 1 |
+| `skip_special_tokens` | absent | 5/5 | ignored on 5 |
+| `best_of` | absent | 5/5 | no observable signature from outside |
+| `ignore_eos` | absent | 5/5 | **honoured on 3**, undetermined on 1, HTTP 500 on 1 |
+
+A user who sets `use_beam_search=true` on Fireworks gets HTTP 200, no warning,
+and sampling. That is the cell the audit exists to find. And `ignore_eos` is
+its mirror image, arguably worse for a benchmark: an undocumented knob that
+*works* — the model is pushed past its end-of-turn token and keeps generating,
+with the raw control token in the returned text
+(`cat<|assistant|>We need answer…` on glm-5p3-flash). Nothing in the
+reference says it exists.
+
+Two smaller entries from the transcription itself. Groq's reference lists
+`frequency_penalty` and `presence_penalty` with the sentence "This is not yet
+supported by any of our models" — a parameter documented so the reader knows
+it does nothing, which is the honest version of the mirostat row above and
+gets its own label. And Mistral's reference documents `reasoning_effort`,
+which the adapter had been withholding on the belief that it did not; the
+transcription corrected the code. The six providers without keys are
+transcribed and waiting; their gap tables fill in when `run_probe_matrix.py`
+can reach them.
+
 ## 2. Greedy decoding is not reproducible, and the seed parameter does nothing
 
 The cleanest version of the question: send the identical request at temperature
@@ -604,6 +673,7 @@ extrapolation and is far better powered.
 | §1 | `scripts/probe_distinguishability.py`, `samplerconfound/distinguish.py` | `runs/distinguish.json`, `runs/negative_control.json`, `runs/distinguish_multiprompt.json`, `runs/matrix/fireworks/<model>.json`, `<model>.dist-n{10,40}.json` |
 | §2 | `scripts/probe_determinism.py` | `runs/determinism.json`, `runs/matrix/fireworks/determinism.json` |
 | coverage | `scripts/probe_matrix.py`, `scripts/probe_spend.py` | `runs/matrix/matrix.json` |
+| documented vs measured | `samplerconfound/documented.py`, `scripts/gap.py`, `scripts/probe_undocumented.py` | `runs/matrix/gap.json`, `runs/matrix/undocumented.json` |
 | §3 | — | `MODEL_CANDIDATES` in `samplerconfound/config.py` |
 | §4 | `scripts/verify_grader.py`, `scripts/sample_for_grader_check.py` | `runs/grader_check/` |
 | §5 | `tests/test_variance.py`, `tests/test_inversion.py` | simulation |

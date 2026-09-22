@@ -1037,3 +1037,36 @@ worker to sleep through the per-minute refill and burst again (a full token
 bucket and zero throughput); it is now short and honours Retry-After. The
 account limit is 72k generated tokens a minute, which caps any probe at about
 70 capped-length calls a minute regardless of workers.
+
+## 2026-09-22 — documented versus measured, kept apart
+
+`samplerconfound/documented.py`: a transcription of each of the seven
+providers' API references — a quote per sampling parameter, the URL, the date
+read, and an explicit `absent` where the page does not mention it. No
+measurement in that file. `scripts/gap.py` joins it to the probe outputs and
+labels every (provider, model, parameter) by the gap between documented,
+accepted (HTTP status) and honoured (distribution).
+
+Fireworks: 182 cells. 88 as documented. 27 documented-accepted-ignored, led
+by `seed` on 17 of 18 models against a reference that says "Random seed for
+deterministic sampling." — the largest documented gap on the provider.
+
+The worst case, by name. Fireworks rejects unknown fields (fifteen sampler
+names from other stacks: `400 Extra inputs are not permitted`) but accepts
+four vLLM SamplingParams names it does not document: `best_of`,
+`use_beam_search`, `ignore_eos`, `skip_special_tokens`. Tested with a decisive
+design each on five models (`scripts/probe_undocumented.py`):
+`use_beam_search` and `skip_special_tokens` are accepted and ignored (9 cells
+— undocumented, accepted, ignored); `ignore_eos` is accepted and HONOURED on 3
+of 5, pushing the model past its end-of-turn token with the raw control token
+in the returned text, and returns HTTP 500 every time on kimi-k3; `best_of`
+has no signature observable from outside.
+
+Two corrections the transcription forced on the code: Mistral documents
+`reasoning_effort` (the adapter had withheld it as undocumented — wrong), and
+Groq documents `frequency_penalty`/`presence_penalty` as "not yet supported by
+any of our models", which is its own label ("documented as unsupported, and
+is") because it is the honest form of the mirostat row.
+
+Transport: 5xx retries capped at four with a 20s ceiling — ten exponential
+attempts on a recurring 500 was seventeen minutes a call.

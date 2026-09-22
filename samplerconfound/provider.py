@@ -36,6 +36,7 @@ from .cache import CacheMiss, ResponseCache
 DEFAULT_PROVIDER = "fireworks"
 MAX_RETRIES = 10
 NETWORK_RETRIES = 2      # attempts after a timeout or dropped connection
+SERVER_ERROR_RETRIES = 3 # attempts after a 5xx
 BACKOFF_BASE = 2.0
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -126,8 +127,13 @@ def _http(url: str, headers: dict, payload: dict, timeout: float,
             time.sleep(wait + random.uniform(0, 1))
             continue
         if r.status_code in (500, 502, 503, 504):
+            # A server error that recurs is a finding about the request
+            # (ignore_eos on kimi-k3 is a 500 every time); four tries, then
+            # report it. Ten exponential tries was seventeen minutes a call.
             last = f"http {r.status_code}"
-            time.sleep(BACKOFF_BASE * 2 ** attempt + random.uniform(0, 1))
+            if attempt >= SERVER_ERROR_RETRIES:
+                break
+            time.sleep(min(BACKOFF_BASE * 2 ** attempt, 20.0) + random.uniform(0, 1))
             continue
         raise Transient(f"http {r.status_code}")
     raise Transient(last or "exhausted")

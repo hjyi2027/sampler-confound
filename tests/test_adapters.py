@@ -124,11 +124,11 @@ def test_fireworks_wire_body_is_what_the_cache_hashed_before_adapters_existed():
         "332ce864dc120b8f2b93c4d7350d55e3ab63d90709d20b71c83cb8e23af7f1c6"
 
 
-def test_mistral_spells_seed_random_seed_and_reports_what_it_cannot_say():
+def test_mistral_spells_seed_random_seed_and_withholds_nothing():
     wire, dropped = ADAPTERS["mistral"].encode(REQ)
     assert wire["random_seed"] == 7 and "seed" not in wire
-    assert dropped == ("reasoning_effort",)
-    assert "reasoning_effort" not in wire
+    assert dropped == ()
+    assert wire["reasoning_effort"] == "low"      # documented by Mistral; sent
     # top_k is NOT pre-emptively dropped: whether Mistral takes it is the measurement
     wire, dropped = ADAPTERS["mistral"].encode({**REQ, "top_k": 40})
     assert wire["top_k"] == 40 and "top_k" not in dropped

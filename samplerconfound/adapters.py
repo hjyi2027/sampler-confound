@@ -43,6 +43,10 @@ SAMPLER_PARAMS = frozenset({
     "repetition_penalty", "frequency_penalty", "presence_penalty",
     "mirostat_target", "mirostat_lr",
     "seed", "reasoning_effort",
+    # vLLM SamplingParams names that Fireworks accepts without documenting
+    # (2026-09-22). In the vocabulary so the probe can send them; every other
+    # provider's 4xx on them is "undocumented, refused", which is correct.
+    "best_of", "use_beam_search", "ignore_eos", "skip_special_tokens",
 })
 CANONICAL_PARAMS = frozenset({"model", "messages", "max_tokens"}) | SAMPLER_PARAMS
 
@@ -208,11 +212,13 @@ class Mistral(Adapter):
     env = "MISTRAL_API_KEY"
     signup = "https://console.mistral.ai/api-keys"
     rename = {"seed": "random_seed"}
-    # Mistral validates the body and 422s on any field it does not define;
-    # reasoning_effort is not one of its fields (Magistral reasons by default).
-    # top_k and min_p are deliberately NOT listed: they are the parameters under
-    # test, and Mistral's 422 on them is the measurement.
-    no_wire_form = frozenset({"reasoning_effort"})
+    # Mistral validates the body and 422s on any field it does not define.
+    # Nothing is withheld: its reference (read 2026-09-22, documented.py) lists
+    # reasoning_effort, and top_k / min_p are the parameters under test — the
+    # 422 on those is the measurement. An earlier version withheld
+    # reasoning_effort on the belief it was undocumented; the transcription
+    # corrected the belief.
+    no_wire_form = frozenset()
 
 
 class Google(Adapter):
