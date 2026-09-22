@@ -386,6 +386,55 @@ it off before it stops reasoning (739 reasoning tokens on this prompt), so at
 collector that drops empty strings reports that as `n=0, insufficient` with no
 sign that anything was wrong.
 
+### What an ignored parameter does downstream, on the smoke corpus
+
+The paper's mechanism, made concrete on real generations. The design's
+`minp` cell is {temperature 1.0, min_p 0.05}; its `hightemp` cell is
+{temperature 1.0, top_p 1.0}. On a backend that applies `min_p` these are two
+conditions. On a backend that accepts it and ignores it they are *the same
+condition run twice*: the minp request returns a fresh draw from the hightemp
+distribution. So on a grid where some models sit behind the first kind of
+backend and some behind the second, the minp − hightemp contrast is real for
+some models and zero for others, and the two-way decomposition books the
+difference as a model × sampler interaction.
+
+Rather than simulate that, `scripts/demo_minp_confound.py` builds it from
+the smoke run's three surviving models and ten MATH-500 problems, through the
+sweep's own `generate()`: a real `minp` cell (Fireworks applies `min_p` on
+every model probed), and five more `hightemp` replicates, which are — by the
+definition of "ignored" — exactly what an ignoring backend returns for the
+minp request. 300 generations, collected 2026-09-22. Then the study's own
+analysis on every combination of which backend served which model:
+
+| grid | model × sampler share | inversion rate | minp − hightemp: deepseek / gpt-oss / minimax |
+|---|--:|--:|---|
+| A — every backend applies min_p (the honest grid) | **7.9%** | 31.1% | +0.02 / −0.04 / +0.06 |
+| B — deepseek's backend ignores it | 5.3% | 31.1% | 0.00 / −0.04 / +0.06 |
+| B — gpt-oss's backend ignores it | 3.3% | 20.0% | +0.02 / +0.02 / +0.06 |
+| B — minimax's backend ignores it | 5.6% | 20.0% | +0.02 / −0.04 / +0.02 |
+| C — every backend ignores it | 1.0% | 20.0% | 0.00 / +0.02 / +0.02 |
+| D — only deepseek's applies it | 3.4% | 20.0% | +0.02 / +0.02 / +0.02 |
+| D — only gpt-oss's applies it | 2.4% | 20.0% | 0.00 / −0.04 / +0.02 |
+| D — only minimax's applies it | 1.7% | 20.0% | 0.00 / +0.02 / +0.06 |
+
+Two things to read off. First, the honest grid's interaction is mostly
+`min_p` itself: its effect on accuracy is genuinely model-specific here
+(+0.02, −0.04, +0.06), and removing it everywhere (C) takes the interaction
+from 7.9% to 1.0%. Second, and the point: **which grid a paper is looking at
+is a fact about the serving stack that leaves no trace in the accuracy
+table.** One silent backend moves the interaction share to anywhere between
+3.3% and 5.6% and the inversion rate between 20% and 31%, depending on which
+model it serves; one honouring backend among ignoring ones manufactures an
+interaction of 1.7–3.4% from a uniform 1.0%. Every row is a legitimate
+analysis of a legitimately collected table. Only the probe in §1 says which
+row you are in.
+
+Smoke scale — ten problems, five replicates, three models — so the numbers
+are the mechanism, not an estimate; the sampler/model ratio is zero on this
+corpus because three models of very different accuracy leave nothing for the
+sampler component after clamping. The direction and the arithmetic are what
+the full sweep would inherit.
+
 ### Documented, accepted, honoured: three facts, kept apart
 
 Everything above measures what the output distribution does. What the
@@ -674,6 +723,7 @@ extrapolation and is far better powered.
 | §2 | `scripts/probe_determinism.py` | `runs/determinism.json`, `runs/matrix/fireworks/determinism.json` |
 | coverage | `scripts/probe_matrix.py`, `scripts/probe_spend.py` | `runs/matrix/matrix.json` |
 | documented vs measured | `samplerconfound/documented.py`, `scripts/gap.py`, `scripts/probe_undocumented.py` | `runs/matrix/gap.json`, `runs/matrix/undocumented.json` |
+| ignored parameter, downstream | `scripts/demo_minp_confound.py` | `runs/smoke/minp_confound.jsonl`, `runs/smoke/minp_confound.json` |
 | §3 | — | `MODEL_CANDIDATES` in `samplerconfound/config.py` |
 | §4 | `scripts/verify_grader.py`, `scripts/sample_for_grader_check.py` | `runs/grader_check/` |
 | §5 | `tests/test_variance.py`, `tests/test_inversion.py` | simulation |
@@ -699,6 +749,7 @@ added them, which is an upper bound, and say so.
 | §1 nine parameters, full | `runs/matrix/fireworks/ (14 files)` | 2026-09-20T05:50 | 2026-09-21T16:05 | cache |
 | §1 negative control per model | `runs/matrix/fireworks/ (12 files)` | 2026-09-20T14:39 | 2026-09-20T14:48 | cache |
 | §2 determinism, paid tier + thin | `runs/matrix/fireworks/ (4 files)` | 2026-09-20T10:31 | 2026-09-20T14:34 | cache |
+| §1 ignored min_p, downstream | `runs/smoke/minp_confound.jsonl` | 2026-09-22T05:36 | 2026-09-22T05:43 | cache |
 | §1 undocumented parameters | `runs/matrix/undocumented.json` | 2026-09-22T03:07 | 2026-09-22T04:59 | cache |
 
 Documentation was read on 2026-09-22 (`samplerconfound/documented.py`).

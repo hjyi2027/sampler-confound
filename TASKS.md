@@ -1118,3 +1118,21 @@ probe running twice, to be found and killed by hand — and the probes print
 the pacer's state beside the cache stats so hour-six diagnosis starts with a
 number. Twelve tests drive the real transport against a fake throttled
 provider, one per failure mode that was met first in production.
+
+## 2026-09-22 — the ignored-parameter mechanism, on real generations
+
+`scripts/demo_minp_confound.py`: the smoke corpus never had a minp cell (it
+was dropped before the smoke run on the heuristic later overturned), so the
+cell was collected now — 300 generations through the sweep's own generate(),
+same prompt and fixed settings — as a real minp cell plus five more hightemp
+replicates. The second is not a simulation of "ignored": an ignoring backend
+answers the minp request with a hightemp draw, so fresh hightemp replicates
+ARE that answer. Every combination of which backend served which model was
+then put through decompose_accuracy and inversion_rate_paired.
+
+Honest grid: model x sampler 7.9%, inversion rate 31.1%. One silent backend:
+3.3–5.6% and 20–31%, depending on which model it serves. Every backend
+ignoring: 1.0%. One honouring backend among ignoring ones: 1.7–3.4%
+manufactured from 1.0%. Every row is a legitimate analysis of a legitimately
+collected table; only the §1 probe says which row you are in. Smoke scale —
+the mechanism and the arithmetic, not an estimate.

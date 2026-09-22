@@ -1,0 +1,323 @@
+{
+  "written": "2026-09-22T05:44Z",
+  "models": [
+    "deepseek-v4-flash-0731",
+    "gpt-oss-120b",
+    "minimax-m3"
+  ],
+  "problems": [
+    "test/algebra/1004.json",
+    "test/algebra/2080.json",
+    "test/algebra/425.json",
+    "test/counting_and_probability/119.json",
+    "test/geometry/547.json",
+    "test/intermediate_algebra/1350.json",
+    "test/intermediate_algebra/515.json",
+    "test/number_theory/459.json",
+    "test/prealgebra/1572.json",
+    "test/precalculus/1199.json"
+  ],
+  "n_replicates": 5,
+  "cells": {
+    "minp": {
+      "id": "minp",
+      "temperature": 1.0,
+      "min_p": 0.05
+    },
+    "hightemp": {
+      "id": "hightemp",
+      "temperature": 1.0,
+      "top_p": 1.0
+    }
+  },
+  "ignored_construction": "hightemp replicates 5-9 relabelled as minp replicates 0-4",
+  "collected": {
+    "from": "2026-09-22T05:36Z",
+    "to": "2026-09-22T05:43Z"
+  },
+  "scenarios": {
+    "A: all honoured": {
+      "var_share": {
+        "model": 0.14903474903474942,
+        "sampler": 0.0,
+        "model:sampler": 0.07876447876447916,
+        "resampling": 0.7722007722007714
+      },
+      "sampler_to_model": 0.0,
+      "interaction_share": 0.07876447876447916,
+      "inversion_rate": 0.3111111111111111,
+      "decisive_rate": 0.0,
+      "n_inversions": 14,
+      "n_decisive": 0,
+      "n_comparisons": 45,
+      "minp_minus_hightemp": {
+        "deepseek-v4-flash-0731": [
+          0.019999999999999907,
+          0.9400000000000001,
+          0.9200000000000002
+        ],
+        "gpt-oss-120b": [
+          -0.040000000000000036,
+          0.86,
+          0.9
+        ],
+        "minimax-m3": [
+          0.06000000000000005,
+          0.8800000000000001,
+          0.8200000000000001
+        ]
+      },
+      "ignored": []
+    },
+    "B: deepseek-v4-flash-0731 ignores min_p": {
+      "var_share": {
+        "model": 0.14252873563218432,
+        "sampler": 0.0,
+        "model:sampler": 0.052873563218391054,
+        "resampling": 0.8045977011494246
+      },
+      "sampler_to_model": 0.0,
+      "interaction_share": 0.052873563218391054,
+      "inversion_rate": 0.3111111111111111,
+      "decisive_rate": 0.0,
+      "n_inversions": 14,
+      "n_decisive": 0,
+      "n_comparisons": 45,
+      "minp_minus_hightemp": {
+        "deepseek-v4-flash-0731": [
+          -2.220446049250313e-16,
+          0.9199999999999999,
+          0.9200000000000002
+        ],
+        "gpt-oss-120b": [
+          -0.040000000000000036,
+          0.86,
+          0.9
+        ],
+        "minimax-m3": [
+          0.06000000000000005,
+          0.8800000000000001,
+          0.8200000000000001
+        ]
+      },
+      "ignored": [
+        "deepseek-v4-flash-0731"
+      ]
+    },
+    "B: gpt-oss-120b ignores min_p": {
+      "var_share": {
+        "model": 0.24253393665158463,
+        "sampler": 0.0,
+        "model:sampler": 0.03348416289592798,
+        "resampling": 0.7239819004524874
+      },
+      "sampler_to_model": 0.0,
+      "interaction_share": 0.03348416289592798,
+      "inversion_rate": 0.2,
+      "decisive_rate": 0.0,
+      "n_inversions": 9,
+      "n_decisive": 0,
+      "n_comparisons": 45,
+      "minp_minus_hightemp": {
+        "deepseek-v4-flash-0731": [
+          0.019999999999999907,
+          0.9400000000000001,
+          0.9200000000000002
+        ],
+        "gpt-oss-120b": [
+          0.019999999999999907,
+          0.9199999999999999,
+          0.9
+        ],
+        "minimax-m3": [
+          0.06000000000000005,
+          0.8800000000000001,
+          0.8200000000000001
+        ]
+      },
+      "ignored": [
+        "gpt-oss-120b"
+      ]
+    },
+    "B: minimax-m3 ignores min_p": {
+      "var_share": {
+        "model": 0.1910780669144981,
+        "sampler": 0.0,
+        "model:sampler": 0.05613382899628281,
+        "resampling": 0.752788104089219
+      },
+      "sampler_to_model": 0.0,
+      "interaction_share": 0.05613382899628281,
+      "inversion_rate": 0.2,
+      "decisive_rate": 0.0,
+      "n_inversions": 9,
+      "n_decisive": 0,
+      "n_comparisons": 45,
+      "minp_minus_hightemp": {
+        "deepseek-v4-flash-0731": [
+          0.019999999999999907,
+          0.9400000000000001,
+          0.9200000000000002
+        ],
+        "gpt-oss-120b": [
+          -0.040000000000000036,
+          0.86,
+          0.9
+        ],
+        "minimax-m3": [
+          0.020000000000000018,
+          0.8400000000000001,
+          0.8200000000000001
+        ]
+      },
+      "ignored": [
+        "minimax-m3"
+      ]
+    },
+    "C: all ignore": {
+      "var_share": {
+        "model": 0.2708333333333339,
+        "sampler": 0.0,
+        "model:sampler": 0.010416666666666902,
+        "resampling": 0.7187499999999991
+      },
+      "sampler_to_model": 0.0,
+      "interaction_share": 0.010416666666666902,
+      "inversion_rate": 0.2,
+      "decisive_rate": 0.0,
+      "n_inversions": 9,
+      "n_decisive": 0,
+      "n_comparisons": 45,
+      "minp_minus_hightemp": {
+        "deepseek-v4-flash-0731": [
+          -2.220446049250313e-16,
+          0.9199999999999999,
+          0.9200000000000002
+        ],
+        "gpt-oss-120b": [
+          0.019999999999999907,
+          0.9199999999999999,
+          0.9
+        ],
+        "minimax-m3": [
+          0.020000000000000018,
+          0.8400000000000001,
+          0.8200000000000001
+        ]
+      },
+      "ignored": [
+        "deepseek-v4-flash-0731",
+        "gpt-oss-120b",
+        "minimax-m3"
+      ]
+    },
+    "D: only deepseek-v4-flash-0731 honours min_p": {
+      "var_share": {
+        "model": 0.2801687763713085,
+        "sampler": 0.0,
+        "model:sampler": 0.034177215189873725,
+        "resampling": 0.6856540084388177
+      },
+      "sampler_to_model": 0.0,
+      "interaction_share": 0.034177215189873725,
+      "inversion_rate": 0.2,
+      "decisive_rate": 0.0,
+      "n_inversions": 9,
+      "n_decisive": 0,
+      "n_comparisons": 45,
+      "minp_minus_hightemp": {
+        "deepseek-v4-flash-0731": [
+          0.019999999999999907,
+          0.9400000000000001,
+          0.9200000000000002
+        ],
+        "gpt-oss-120b": [
+          0.019999999999999907,
+          0.9199999999999999,
+          0.9
+        ],
+        "minimax-m3": [
+          0.020000000000000018,
+          0.8400000000000001,
+          0.8200000000000001
+        ]
+      },
+      "ignored": [
+        "gpt-oss-120b",
+        "minimax-m3"
+      ]
+    },
+    "D: only gpt-oss-120b honours min_p": {
+      "var_share": {
+        "model": 0.18587360594795546,
+        "sampler": 0.0,
+        "model:sampler": 0.0241635687732344,
+        "resampling": 0.7899628252788101
+      },
+      "sampler_to_model": 0.0,
+      "interaction_share": 0.0241635687732344,
+      "inversion_rate": 0.2,
+      "decisive_rate": 0.0,
+      "n_inversions": 9,
+      "n_decisive": 0,
+      "n_comparisons": 45,
+      "minp_minus_hightemp": {
+        "deepseek-v4-flash-0731": [
+          -2.220446049250313e-16,
+          0.9199999999999999,
+          0.9200000000000002
+        ],
+        "gpt-oss-120b": [
+          -0.040000000000000036,
+          0.86,
+          0.9
+        ],
+        "minimax-m3": [
+          0.020000000000000018,
+          0.8400000000000001,
+          0.8200000000000001
+        ]
+      },
+      "ignored": [
+        "deepseek-v4-flash-0731",
+        "minimax-m3"
+      ]
+    },
+    "D: only minimax-m3 honours min_p": {
+      "var_share": {
+        "model": 0.2309734513274346,
+        "sampler": 0.0,
+        "model:sampler": 0.016814159292035787,
+        "resampling": 0.7522123893805296
+      },
+      "sampler_to_model": 0.0,
+      "interaction_share": 0.016814159292035787,
+      "inversion_rate": 0.2,
+      "decisive_rate": 0.0,
+      "n_inversions": 9,
+      "n_decisive": 0,
+      "n_comparisons": 45,
+      "minp_minus_hightemp": {
+        "deepseek-v4-flash-0731": [
+          -2.220446049250313e-16,
+          0.9199999999999999,
+          0.9200000000000002
+        ],
+        "gpt-oss-120b": [
+          0.019999999999999907,
+          0.9199999999999999,
+          0.9
+        ],
+        "minimax-m3": [
+          0.06000000000000005,
+          0.8800000000000001,
+          0.8200000000000001
+        ]
+      },
+      "ignored": [
+        "deepseek-v4-flash-0731",
+        "gpt-oss-120b"
+      ]
+    }
+  }
+}
