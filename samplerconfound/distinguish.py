@@ -433,9 +433,22 @@ class Aggregate:
     model: str
     parameter: str
     n_prompts: int = 0
-    n_powered: int = 0               # prompts whose positive control passed
-    n_distinguishable: int = 0       # among powered prompts
-    n_no_effect: int = 0             # among powered prompts
+    # Two different things, kept apart because conflating them was a defect:
+    #   n_control_passed  prompts whose POSITIVE CONTROL passed — the probe is
+    #                     known to have power on that (model, prompt)
+    #   n_verdict         prompts that produced a verdict at all, i.e. a
+    #                     detected effect (which needs no control to be
+    #                     believed) or a null with a passed control
+    # The majority below is over n_verdict; a reader judging how much to trust
+    # a null needs n_control_passed, and the two can differ sharply — a model
+    # whose control fails on three prompts of four can still show an effect on
+    # all four.
+    n_control_passed: int = -1       # -1 = not supplied by the caller
+    n_verdict: int = 0
+    n_powered: int = 0               # DEPRECATED alias of n_verdict; kept so
+                                     # reports written before 2026-09-23 parse
+    n_distinguishable: int = 0       # among prompts with a verdict
+    n_no_effect: int = 0             # among prompts with a verdict
     per_prompt: dict = field(default_factory=dict)   # prompt_id -> verdict
     verdict: str = "underpowered"
     # For a penalty: the verdict on the forced-repetition prompt, which is the
@@ -449,7 +462,8 @@ class Aggregate:
         return dict(self.__dict__)
 
 
-def aggregate(per_prompt_verdicts: dict[str, str], model: str, parameter: str) -> Aggregate:
+def aggregate(per_prompt_verdicts: dict[str, str], model: str, parameter: str,
+              control_passed: dict[str, bool] | None = None) -> Aggregate:
     """Majority over powered prompts.
 
     per_prompt_verdicts: {prompt_id: verdict} where verdict is one of
@@ -467,21 +481,24 @@ def aggregate(per_prompt_verdicts: dict[str, str], model: str, parameter: str) -
     agg.n_prompts = len(per_prompt_verdicts)
     powered = [v for v in per_prompt_verdicts.values()
                if v in ("distinguishable", "no effect seen")]
-    agg.n_powered = len(powered)
+    agg.n_verdict = agg.n_powered = len(powered)
+    if control_passed is not None:
+        agg.n_control_passed = sum(bool(control_passed.get(pid))
+                                   for pid in per_prompt_verdicts)
     agg.n_distinguishable = sum(v == "distinguishable" for v in powered)
     agg.n_no_effect = sum(v == "no effect seen" for v in powered)
     statuses = set(per_prompt_verdicts.values())
-    if agg.n_powered < MIN_POWERED_PROMPTS and len(statuses) == 1 and statuses <= {
+    if agg.n_verdict < MIN_POWERED_PROMPTS and len(statuses) == 1 and statuses <= {
             "rejected", "unsupported", "transport"}:
         # Every prompt failed the same way BEFORE any statistics: the provider
         # refused the parameter, the adapter could not send it, or the request
         # never completed. That is the verdict, not "underpowered".
         agg.verdict = statuses.pop()
-    elif agg.n_powered < MIN_POWERED_PROMPTS:
+    elif agg.n_verdict < MIN_POWERED_PROMPTS:
         agg.verdict = "underpowered"
-    elif agg.n_distinguishable * 2 > agg.n_powered:
+    elif agg.n_distinguishable * 2 > agg.n_verdict:
         agg.verdict = "distinguishable"
-    elif agg.n_no_effect * 2 > agg.n_powered:
+    elif agg.n_no_effect * 2 > agg.n_verdict:
         agg.verdict = "no effect seen"
     else:
         agg.verdict = "mixed"

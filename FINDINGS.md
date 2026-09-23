@@ -173,31 +173,39 @@ narrowing at all. It is measuring whether temperature 1.5 breaks the reasoning
 loop. The positive-control gate does the right thing with that: those cells go
 to *underpowered*, evidence of nothing, rather than to *no effect*.
 
-Verdicts per prompt and aggregate:
+Verdicts per prompt and aggregate. **Two counts, because they are two
+different things and an earlier version of this table conflated them under one
+heading called "powered":** *ctrl ok* is how many prompts passed the positive
+control — the probe is known to have power there — and *verdict on* is how many
+prompts produced a verdict at all, a detected effect (which needs no control to
+be believed) or a null with a passed control. The majority is over the second;
+a reader deciding how much to trust a null needs the first. They differ sharply
+for minimax-m3, which shows every parameter on all four prompts while its
+control passes on two.
 
-| model | param | word_prob | sentence | opener | question | powered | verdict |
-|---|---|--:|--:|--:|--:|--:|---|
-| nemotron-lightning-3p5-30b-a3b | top_p | ? | ? | ? | ? | 0/4 | underpowered |
-| nemotron-lightning-3p5-30b-a3b | top_k | ? | **yes** | ? | ? | 1/4 | underpowered |
-| nemotron-lightning-3p5-30b-a3b | min_p | ? | ? | ? | ? | 0/4 | underpowered |
-| gpt-oss-120b | top_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
-| gpt-oss-120b | top_k | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
-| gpt-oss-120b | min_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
-| deepseek-v4-flash-0731 | top_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
-| deepseek-v4-flash-0731 | top_k | **yes** | **yes** | **yes** | ? | 3/4 | distinguishable |
-| deepseek-v4-flash-0731 | min_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
-| minimax-m3 | top_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
-| minimax-m3 | top_k | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
-| minimax-m3 | min_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
-| muse-glimmer-30b | top_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
-| muse-glimmer-30b | top_k | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
-| muse-glimmer-30b | min_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
-| nemotron-3-ultra-nvfp4 | top_p | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
-| nemotron-3-ultra-nvfp4 | top_k | **yes** | **yes** | **yes** | **yes** | 4/4 | distinguishable |
-| nemotron-3-ultra-nvfp4 | min_p | **yes** | **yes** | **NO** | **yes** | 4/4 | distinguishable |
-| kimi-k2p6 | top_p | ? | **yes** | ? | ? | 1/4 | underpowered |
-| kimi-k2p6 | top_k | ? | ? | ? | ? | 0/4 | underpowered |
-| kimi-k2p6 | min_p | ? | ? | ? | **yes** | 1/4 | underpowered |
+| model | param | word_prob | sentence | opener | question | ctrl ok | verdict on | verdict |
+|---|---|--:|--:|--:|--:|--:|--:|---|
+| nemotron-lightning-3p5-30b-a3b | top_p | ? | ? | ? | ? | 0/4 | 0/4 | underpowered |
+| nemotron-lightning-3p5-30b-a3b | top_k | ? | **yes** | ? | ? | 0/4 | 1/4 | underpowered |
+| nemotron-lightning-3p5-30b-a3b | min_p | ? | ? | ? | ? | 0/4 | 0/4 | underpowered |
+| gpt-oss-120b | top_p | **yes** | **yes** | **yes** | **yes** | 4/4 | 4/4 | distinguishable |
+| gpt-oss-120b | top_k | **yes** | **yes** | **yes** | **yes** | 4/4 | 4/4 | distinguishable |
+| gpt-oss-120b | min_p | **yes** | **yes** | **yes** | **yes** | 4/4 | 4/4 | distinguishable |
+| deepseek-v4-flash-0731 | top_p | **yes** | **yes** | **yes** | **yes** | 1/4 | 4/4 | distinguishable |
+| deepseek-v4-flash-0731 | top_k | **yes** | **yes** | **yes** | ? | 1/4 | 3/4 | distinguishable |
+| deepseek-v4-flash-0731 | min_p | **yes** | **yes** | **yes** | **yes** | 1/4 | 4/4 | distinguishable |
+| minimax-m3 | top_p | **yes** | **yes** | **yes** | **yes** | 2/4 | 4/4 | distinguishable |
+| minimax-m3 | top_k | **yes** | **yes** | **yes** | **yes** | 2/4 | 4/4 | distinguishable |
+| minimax-m3 | min_p | **yes** | **yes** | **yes** | **yes** | 2/4 | 4/4 | distinguishable |
+| muse-glimmer-30b | top_p | **yes** | **yes** | **yes** | **yes** | 4/4 | 4/4 | distinguishable |
+| muse-glimmer-30b | top_k | **yes** | **yes** | **yes** | **yes** | 4/4 | 4/4 | distinguishable |
+| muse-glimmer-30b | min_p | **yes** | **yes** | **yes** | **yes** | 4/4 | 4/4 | distinguishable |
+| nemotron-3-ultra-nvfp4 | top_p | **yes** | **yes** | **yes** | **yes** | 4/4 | 4/4 | distinguishable |
+| nemotron-3-ultra-nvfp4 | top_k | **yes** | **yes** | **yes** | **yes** | 4/4 | 4/4 | distinguishable |
+| nemotron-3-ultra-nvfp4 | min_p | **yes** | **yes** | **NO** | **yes** | 4/4 | 4/4 | distinguishable |
+| kimi-k2p6 | top_p | ? | **yes** | ? | ? | 0/4 | 1/4 | underpowered |
+| kimi-k2p6 | top_k | ? | ? | ? | ? | 0/4 | 0/4 | underpowered |
+| kimi-k2p6 | min_p | ? | ? | ? | **yes** | 0/4 | 1/4 | underpowered |
 
 Five of seven models are cleanly distinguishable on every parameter across every
 powered prompt. The other two — nemotron-lightning and kimi-k2p6 — fail the

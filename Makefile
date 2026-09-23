@@ -1,4 +1,4 @@
-.PHONY: test keys data probe freeze pilot select smoke sweep analyse power offline clean
+.PHONY: test keys data probe probe-heuristic freeze pilot select smoke sweep analyse power offline clean
 
 test:
 	python3 -m pytest tests/ -q
@@ -14,8 +14,17 @@ data:
 # Does the provider actually honour every parameter the grid varies? Behavioural
 # checks, not acceptance: a parameter that is accepted and silently discarded
 # turns its cell into a duplicate of another and fabricates an interaction.
-# Probing eight models found min_p honoured by three of them.
+#
+# RETRACTED: the eight-sample distinct-count heuristic this used to run called
+# min_p ignored on 3/8 models, and a properly powered two-sample test overturned
+# every retestable cell (FINDINGS 1). `probe` now runs that test; the heuristic
+# is kept only as `probe-heuristic`, reproducible for the record and not to be
+# believed.
 probe:
+	python3 scripts/probe_distinguishability.py --models gpt-oss-120b \
+		deepseek-v4-flash-0731 --out runs/matrix/fireworks/probe.json
+
+probe-heuristic:
 	python3 scripts/probe_fireworks.py --models gpt-oss-120b deepseek-v4-flash-0731 \
 		nemotron-lightning-3p5-30b-a3b --skip-cost
 

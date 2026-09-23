@@ -21,16 +21,15 @@ this file is the narrative a fresh session needs and does not duplicate it.
 Model Choice in LLM Mathematical Reasoning." MATH-AI 2026 (NeurIPS workshop),
 4 pages, deadline **Sept 6**, target submit **Sept 5**.
 
-- Local: `~/AIscend/sampler-confound`
+- Local: the project working copy
 - Remote: `https://github.com/hjyi2027/sampler-confound` (**private, personal
   account `hjyi2027`** — deliberately not under AIscend)
 - 4 commits on `main`, all pushed. `.venv/` has anthropic, numpy, pytest.
 - **85 tests passing**: `.venv/bin/python -m pytest tests/ -q`
 
-Extends *Unauthored by Design* (`~/AIscend/seed-study-creative`) by swapping the
+Extends *Unauthored by Design* (a prior internal study) by swapping the
 dependent variable from style features to correctness. The point of picking it is
 that the machinery already exists — it is a seven-day project, not a six-week one,
-and that margin is why it fits before the Nov 1 ED deadline.
 
 ## Deadline context
 
@@ -39,7 +38,6 @@ and that margin is why it fits before the Nov 1 ED deadline.
 | ai4math | **Aug 29** | LiteFNO Phase 4-5 — comes first, not this repo |
 | MATH-AI | **Sept 6** | this repo; formally starts Aug 30 |
 | IAAI-27 | **Sept 8** | repro-report, experience track, no new experiments |
-| ED | Nov 1 | hard stop; Sept 8 onward is essays only |
 
 ## What is built
 
@@ -67,7 +65,7 @@ new EMS algebra written here, not ported.
 
 ## Decisions, and why
 
-- **No GPU.** MacBook Air M4, 16 GB, ~18 GB free disk. Local inference caps near
+- **No GPU.** a 16 GB laptop with no discrete GPU. Local inference caps near
   1-1.5B, too weak for correctness variance to mean anything. Sweep is API-only.
 - **Anthropic API is ruled out — the independent variable does not exist there.**
   In `anthropic` 1.0.0, `temperature` / `top_p` / `top_k` are absent from the

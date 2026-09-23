@@ -391,3 +391,19 @@ def test_a_parameter_that_fails_the_same_way_on_every_prompt_gets_that_verdict()
     assert aggregate({"a": "transport", "b": "transport"}, "m", "rep").verdict == "transport"
     assert aggregate({"a": "rejected", "b": "rejected", "c": "rejected"}, "m", "top_k").verdict == "rejected"
     assert aggregate({"a": "transport", "b": "underpowered"}, "m", "rep").verdict == "underpowered"
+
+
+def test_control_passed_and_verdict_count_are_reported_separately():
+    """They are different questions and were once one column called 'powered'.
+    A detected effect needs no control, so a parameter can have a verdict on
+    more prompts than passed the control — minimax-m3 is 4 and 2."""
+    from samplerconfound.distinguish import aggregate
+    verdicts = {"a": "distinguishable", "b": "distinguishable",
+                "c": "distinguishable", "d": "distinguishable"}
+    control = {"a": False, "b": True, "c": False, "d": True}
+    agg = aggregate(verdicts, "m", "top_k", control_passed=control)
+    assert agg.n_verdict == 4 and agg.n_control_passed == 2
+    assert agg.n_powered == agg.n_verdict, "deprecated alias still parses"
+    assert agg.verdict == "distinguishable"
+    # without the control map the count is explicitly unknown, not zero
+    assert aggregate(verdicts, "m", "top_k").n_control_passed == -1

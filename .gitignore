@@ -11,7 +11,11 @@ runs/main/
 runs/aime/
 runs/sweep*/
 
-# Content-addressed response cache. Regenerable from the provider; too large
-# and too churny to version. The analysis-facing records (runs/) are committed.
+# Content-addressed response cache: too large and too churny to version, and
+# NOT regenerable — three models have been withdrawn from the provider and
+# temperature 0 does not reproduce on 17 of 18 (FINDINGS 2, 3). What makes the
+# results reproducible is the committed `runs/**/*.cells.jsonl`, which retain
+# the raw completions, so every verdict re-derives without the cache. Archive
+# the cache alongside a submission rather than assuming it can be rebuilt.
 cache/
 runs/matrix/.budget.json

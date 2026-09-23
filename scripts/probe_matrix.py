@@ -60,6 +60,12 @@ SYM = {"distinguishable": "yes", "no effect seen": "NO", "underpowered": "?",
        "transport": "err"}
 
 
+def _pct(x) -> str:
+    """Nested same-type quotes inside an f-string are 3.12+ only; this keeps
+    the module importable on 3.11, which is what CI and reviewers will have."""
+    return f"{x:.0%}" if isinstance(x, (int, float)) else "—"
+
+
 def _load(p: Path) -> dict | None:
     try:
         return json.loads(p.read_text())
@@ -173,7 +179,7 @@ def main() -> int:
     args = ap.parse_args()
     rows = collect()
 
-    print(f"{'provider':<11}{'model':<32}{'collected':<24}{'$/1M out':>9}{'n':>6}{'ctrl':>6}{'pwr':>5}"
+    print(f"{'provider':<11}{'model':<32}{'collected':<24}{'$/1M out':>9}{'n':>6}{'ctrl':>6}{'c-ok':>6}"
           + "".join(f"{SHORT[p]:>7}" for p in PARAMS) + f"{'greedy':>8}{'seed':>6}")
     for r in rows:
         ctrl = r.get("control_removed", float("nan"))
@@ -185,14 +191,16 @@ def main() -> int:
               f"{(f'{ctrl:.0%}' if ctrl == ctrl else '—'):>6}"
               f"{str(r.get('powered_prompts', '—')) + '/' + str(r.get('n_prompts', '—')):>5}"
               + "".join(f"{SYM.get(r.get(p, ''), '—'):>7}" for p in PARAMS)
-              + f"{(f'{r['greedy_match']:.0%}' if 'greedy_match' in r else '—'):>8}"
+              + f"{_pct(r.get('greedy_match')):>8}"
               + f"{r.get('seed', '—'):>6}")
     n_prov = len({r["provider"] for r in rows})
     priced = [r["usd_out_per_1m"] for r in rows if r["usd_out_per_1m"] == r["usd_out_per_1m"]]
     print(f"\n{len(rows)} models on {n_prov} provider(s); output price spans "
           f"${min(priced):.2f}–${max(priced):.2f}/1M")
     print("ctrl = share of open-arm entropy temperature removes (positive control), mean over prompts;"
-          " pwr = prompts whose control passed / prompts run;"
+          " c-ok = prompts whose positive control passed / prompts run; it is NOT"
+          " the number of prompts with a verdict, since a detected effect needs no"
+          " control — a parameter can read yes on more prompts than c-ok;"
           " yes/NO/? = distinguishable / no effect seen with power / underpowered;"
           " rej = provider refused the parameter; n/a = adapter has no wire form for it;"
           " collected = when the provider answered (window over the row's files);"

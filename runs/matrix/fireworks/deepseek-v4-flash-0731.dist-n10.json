@@ -2,7 +2,17 @@
   "provider": "fireworks",
   "prompt": "Write a one-sentence arithmetic word problem suitable for a ten-year-old. Reply with the problem only.",
   "n_per_arm": 10,
+  "max_tokens": 1024,
+  "reasoning_effort": "low",
   "permutations": 10000,
+  "collected": {
+    "from": "2026-09-20T14:39Z",
+    "to": "2026-09-20T16:51Z"
+  },
+  "written": "2026-09-23T06:11Z",
+  "reassessed_at": [
+    "2026-09-23T06:11Z"
+  ],
   "results": [
     {
       "model": "deepseek-v4-flash-0731",
@@ -15,6 +25,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:41Z",
+      "collected_to": "2026-09-20T16:42Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 6,
@@ -58,9 +70,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 2,
-      "excess": 0.7470868235562875,
-      "collected_from": "2026-09-20T16:41Z",
-      "collected_to": "2026-09-20T16:42Z"
+      "excess": 0.7470868235562875
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -75,6 +85,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:42Z",
+      "collected_to": "2026-09-20T16:42Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -118,9 +130,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:42Z",
-      "collected_to": "2026-09-20T16:42Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -135,6 +145,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:39Z",
+      "collected_to": "2026-09-20T16:43Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -178,9 +190,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T14:39Z",
-      "collected_to": "2026-09-20T16:43Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -195,6 +205,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:43Z",
+      "collected_to": "2026-09-20T16:44Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -238,9 +250,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 6,
-      "excess": -1.5479855729925722,
-      "collected_from": "2026-09-20T16:43Z",
-      "collected_to": "2026-09-20T16:44Z"
+      "excess": -1.5479855729925722
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -255,6 +265,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-20T16:44Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -298,9 +310,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 6,
-      "excess": -1.5458698585771904,
-      "collected_from": "2026-09-20T16:44Z",
-      "collected_to": "2026-09-20T16:44Z"
+      "excess": -1.5458698585771904
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -315,6 +325,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-20T16:44Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 9,
@@ -358,9 +370,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:44Z",
-      "collected_to": "2026-09-20T16:44Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -373,6 +383,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-20T16:45Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 3,
@@ -416,9 +428,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.1636254579533816,
-      "collected_from": "2026-09-20T16:44Z",
-      "collected_to": "2026-09-20T16:45Z"
+      "excess": 2.1636254579533816
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -433,6 +443,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-20T16:45Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 7,
@@ -476,9 +488,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.5986863758745029,
-      "collected_from": "2026-09-20T16:45Z",
-      "collected_to": "2026-09-20T16:45Z"
+      "excess": 0.5986863758745029
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -493,6 +503,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-20T16:45Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 9,
@@ -536,9 +548,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:45Z",
-      "collected_to": "2026-09-20T16:45Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -553,6 +563,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-20T16:45Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 9,
@@ -596,9 +608,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:45Z",
-      "collected_to": "2026-09-20T16:45Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -613,6 +623,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-20T16:46Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -656,9 +668,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:45Z",
-      "collected_to": "2026-09-20T16:46Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -673,6 +683,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-20T16:46Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 8,
@@ -716,9 +728,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.47526002834080633,
-      "collected_from": "2026-09-20T16:46Z",
-      "collected_to": "2026-09-20T16:46Z"
+      "excess": 0.47526002834080633
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -731,6 +741,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-20T16:46Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 4,
@@ -774,9 +786,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 5,
-      "excess": 0.11259840250442647,
-      "collected_from": "2026-09-20T16:46Z",
-      "collected_to": "2026-09-20T16:46Z"
+      "excess": 0.11259840250442647
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -791,6 +801,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-20T16:46Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 7,
@@ -834,9 +846,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.07625560746716849,
-      "collected_from": "2026-09-20T16:46Z",
-      "collected_to": "2026-09-20T16:46Z"
+      "excess": -0.07625560746716849
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -851,6 +861,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-20T16:47Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 7,
@@ -894,9 +906,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 0,
-      "excess": 0.6775744344666498,
-      "collected_from": "2026-09-20T16:46Z",
-      "collected_to": "2026-09-20T16:47Z"
+      "excess": 0.6775744344666498
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -911,6 +921,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:47Z",
+      "collected_to": "2026-09-20T16:47Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 9,
@@ -954,9 +966,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 2,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:47Z",
-      "collected_to": "2026-09-20T16:47Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -971,6 +981,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:47Z",
+      "collected_to": "2026-09-20T16:48Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -1014,9 +1026,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 3,
-      "excess": -0.6711686598402002,
-      "collected_from": "2026-09-20T16:47Z",
-      "collected_to": "2026-09-20T16:48Z"
+      "excess": -0.6711686598402002
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -1031,6 +1041,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:48Z",
+      "collected_to": "2026-09-20T16:49Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 9,
@@ -1074,9 +1086,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 0,
-      "excess": -0.19838000000000017,
-      "collected_from": "2026-09-20T16:48Z",
-      "collected_to": "2026-09-20T16:49Z"
+      "excess": -0.19838000000000017
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -1089,6 +1099,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-20T16:49Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 6,
@@ -1132,9 +1144,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 3,
-      "excess": 0.5230679115343888,
-      "collected_from": "2026-09-20T16:49Z",
-      "collected_to": "2026-09-20T16:49Z"
+      "excess": 0.5230679115343888
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -1149,6 +1159,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-20T16:50Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -1192,9 +1204,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:49Z",
-      "collected_to": "2026-09-20T16:50Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -1209,6 +1219,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-20T16:50Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -1252,9 +1264,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:50Z",
-      "collected_to": "2026-09-20T16:50Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -1269,6 +1279,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-20T16:50Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -1312,9 +1324,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:50Z",
-      "collected_to": "2026-09-20T16:50Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -1329,6 +1339,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-20T16:51Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -1372,9 +1384,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 2,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:50Z",
-      "collected_to": "2026-09-20T16:51Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -1389,6 +1399,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-20T16:51Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -1432,9 +1444,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:51Z",
-      "collected_to": "2026-09-20T16:51Z"
+      "excess": NaN
     }
   ],
   "p_holm_by_prompt": {
@@ -1533,6 +1543,8 @@
       "model": "deepseek-v4-flash-0731",
       "parameter": "typical_p",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 1,
       "n_no_effect": 0,
@@ -1550,6 +1562,8 @@
       "model": "deepseek-v4-flash-0731",
       "parameter": "mirostat",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 0,
       "n_powered": 0,
       "n_distinguishable": 0,
       "n_no_effect": 0,
@@ -1567,6 +1581,8 @@
       "model": "deepseek-v4-flash-0731",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 1,
       "n_no_effect": 0,
@@ -1584,6 +1600,8 @@
       "model": "deepseek-v4-flash-0731",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 1,
       "n_no_effect": 0,
@@ -1601,6 +1619,8 @@
       "model": "deepseek-v4-flash-0731",
       "parameter": "presence_penalty",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 0,
       "n_no_effect": 1,
@@ -1614,11 +1634,5 @@
       "forced": {},
       "verdict_forced": ""
     }
-  ],
-  "collected": {
-    "from": "2026-09-20T14:39Z",
-    "to": "2026-09-20T16:51Z",
-    "source": "cache"
-  },
-  "written": "2026-09-21T16:06Z"
+  ]
 }

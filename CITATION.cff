@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+title: >-
+  Documented, accepted, honoured: an audit of decoding parameters on hosted
+  LLM inference APIs
+message: If you use this software or its data, please cite it.
+type: software
+authors:
+  - name: "the sampler-confound authors"
+repository-code: "https://github.com/hjyi2027/sampler-confound"
+abstract: >-
+  An instrument and dataset for auditing what hosted LLM inference APIs do with
+  decoding parameters: what the vendor documents, what the API accepts, and what
+  the output distribution shows was honoured, measured per (provider, model,
+  parameter) with a permutation test, a positive control and a calibrated
+  negative control. Includes a determinism probe at temperature 0 and the raw
+  completions needed to re-derive every verdict.
+keywords:
+  - large language models
+  - evaluation
+  - reproducibility
+  - decoding
+  - inference providers
+license: MIT
+date-released: "2026-09-23"

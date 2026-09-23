@@ -55,8 +55,9 @@ than single-shot evaluation by an amount nobody has measured.
 
 ## Lineage
 
-This extends two published AIscend studies and deliberately reuses their
-machinery rather than building a method:
+This reuses machinery from two earlier unpublished studies by the same author
+rather than building a method from scratch. Neither is public, so neither is
+citable and nothing here rests on them; they are named for provenance only:
 
 - *Unauthored by Design* (`seed-study-creative`) — the fully crossed
   variance-decomposition design and the EMS-corrected component estimator. Ported
@@ -142,7 +143,7 @@ a validity check on every greedy-decoding paper.
 ## Machine constraints
 
 The roadmap says "open weights on your GPU for the bulk." There is no GPU. This
-is a MacBook Air M4, 16 GB unified memory, ~18 GB free disk. Local inference tops
+is a 16 GB consumer laptop with no discrete GPU. Local inference tops
 out near 1-1.5B parameters and swap eats any long run — established in prior
 work. Models at that scale cannot do MATH-500 well enough for correctness
 variance to mean anything.

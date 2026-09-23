@@ -558,7 +558,7 @@ def main() -> int:
     aggregates = []
     print(f"\nVERDICTS — per prompt, then majority over prompts whose control passed")
     print(f"{'model':<32}{'param':<20}" + "".join(f"{pid:>11}" for pid in prompt_ids)
-          + f"{'powered':>9}{'dist':>6}  verdict")
+          + f"{'ctrl ok':>8}{'verdict':>8}{'dist':>6}  verdict")
     sym = {"distinguishable": "yes", "no effect seen": "NO", "underpowered": "?",
            "rejected": "rej", "unsupported": "n/a", "insufficient": "n/a", "transport": "err"}
     for model in models:
@@ -584,7 +584,10 @@ def main() -> int:
                                             forced=True)
             if not pv and not fv:
                 continue                      # not run in this file; no verdict to report
-            agg = aggregate(pv, model, param) if pv else Aggregate(model=model, parameter=param)
+            ctrl_ok = {pid: bool(mp.powered) for pid, pw in power_by_prompt.items()
+                       for m2, mp in pw.items() if m2 == model}
+            agg = (aggregate(pv, model, param, control_passed=ctrl_ok) if pv
+                   else Aggregate(model=model, parameter=param))
             if fv:
                 agg.forced = fv
                 # One forced prompt is its own verdict; aggregate() wants two
@@ -595,7 +598,7 @@ def main() -> int:
             line = f"{model:<32}{param:<20}"
             for pid in prompt_ids:
                 line += f"{sym.get(pv.get(pid, ''), '—'):>11}"
-            line += f"{agg.n_powered:>9}{agg.n_distinguishable:>6}  {agg.verdict}"
+            line += f"{agg.n_control_passed:>8}{agg.n_verdict:>8}{agg.n_distinguishable:>6}  {agg.verdict}"
             if fv:
                 line += f"   forced: {sym.get(agg.verdict_forced, agg.verdict_forced)}"
             print(line)

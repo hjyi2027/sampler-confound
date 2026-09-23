@@ -1,3 +1,4 @@
+# Python >= 3.11 (CI runs 3.11, 3.12, 3.13; see .github/workflows/test.yml)
 numpy>=1.26
 requests>=2.31
 pytest>=8.0
