@@ -1,0 +1,66 @@
+\begin{thebibliography}{8}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Atil et~al.(2024)Atil, Aykent, Chittams, Fu, Passonneau, Radcliffe,
+  Rajagopal, Sloan, Tudrej, Ture, Wu, Xu, and Baldwin]{atil2024nondeterminism}
+Berk Atil, Sarp Aykent, Alexa Chittams, Lisheng Fu, Rebecca~J. Passonneau, Evan
+  Radcliffe, Guru~Rajan Rajagopal, Adam Sloan, Tomasz Tudrej, Ferhan Ture, Zhe
+  Wu, Lixinyu Xu, and Breck Baldwin.
+\newblock Non-determinism of ``deterministic'' {LLM} settings.
+\newblock \emph{arXiv preprint arXiv:2408.04667}, 2024.
+
+\bibitem[Gao et~al.(2025)Gao, Liang, and Guestrin]{gao2025modelequality}
+Irena Gao, Percy Liang, and Carlos Guestrin.
+\newblock Model equality testing: Which model is this {API} serving?
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2025.
+\newblock arXiv:2410.20247.
+
+\bibitem[He \& {Thinking Machines Lab}(2025)He and {Thinking Machines
+  Lab}]{he2025defeating}
+Horace He and {Thinking Machines Lab}.
+\newblock Defeating nondeterminism in {LLM} inference, 2025.
+\newblock Thinking Machines Lab, Connectionism.
+
+\bibitem[Hochlehnert et~al.(2025)Hochlehnert, Bhatnagar, Udandarao, Albanie,
+  Prabhu, and Bethge]{hochlehnert2025sober}
+Andreas Hochlehnert, Hardik Bhatnagar, Vishaal Udandarao, Samuel Albanie, Ameya
+  Prabhu, and Matthias Bethge.
+\newblock A sober look at progress in language model reasoning: Pitfalls and
+  paths to reproducibility.
+\newblock \emph{arXiv preprint arXiv:2504.07086}, 2025.
+
+\bibitem[Ippolito et~al.(2023)Ippolito, Carlini, Lee, Nasr, and
+  Yu]{ippolito2023reverse}
+Daphne Ippolito, Nicholas Carlini, Katherine Lee, Milad Nasr, and Yun~William
+  Yu.
+\newblock Reverse-engineering decoding strategies given blackbox access to a
+  language generation system.
+\newblock \emph{arXiv preprint arXiv:2309.04858}, 2023.
+
+\bibitem[Karvonen et~al.(2025)Karvonen, Reuter, Rinberg, Marks, Garriga-Alonso,
+  and Warr]{karvonen2025difr}
+Adam Karvonen, Daniel Reuter, Roy Rinberg, Luke Marks, Adri{\`a}
+  Garriga-Alonso, and Keri Warr.
+\newblock {DiFR}: Inference verification despite nondeterminism.
+\newblock \emph{arXiv preprint arXiv:2511.20621}, 2025.
+
+\bibitem[Li et~al.(2026)Li, He, Liu, Xu, Liu, Ma, Wu, Wu, Tang, and
+  Shi]{li2026sameservice}
+Haorui Li, Zhenghui He, Xuanzi Liu, Yang Xu, Dongsheng Liu, Jiakang Ma, Lupan
+  Wu, Yangjie Wu, Xiongchao Tang, and Tianhui Shi.
+\newblock When is the same model not the same service? a measurement study of
+  hosted open-weight {LLM} {API}s.
+\newblock \emph{arXiv preprint arXiv:2605.02821}, 2026.
+
+\bibitem[Pape et~al.(2026)Pape, Evertz, and Sch{\"o}nherr]{pape2026silent}
+David Pape, Jonathan Evertz, and Lea Sch{\"o}nherr.
+\newblock The silent hyperparameter: Quantifying the impact of inference
+  backends on {LLM} reproducibility.
+\newblock \emph{arXiv preprint arXiv:2605.19537}, 2026.
+
+\end{thebibliography}

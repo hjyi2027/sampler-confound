@@ -30,3 +30,4 @@ jobs:
           python scripts/gap.py
           python scripts/unparseable_report.py
           python scripts/date_probes.py --check
+          python scripts/paper_numbers.py

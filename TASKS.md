@@ -1171,3 +1171,46 @@ determinism, grader, dated), which stands at full scale on one provider; and
 the smoke-corpus illustrations (ignored min_p, unparseable scoring), which
 run the study's own code on real generations at ten problems and show the
 arithmetic, not the magnitude.
+
+## 2026-09-23 — readiness review acted on: manuscript, and the 'powered' defect
+
+An external readiness review of 2138f48. Every checkable claim in it was
+checked and every one held, so it was acted on rather than argued with.
+
+The substantive defect it found: "powered" meant two things. `aggregate()`
+counted a prompt as powered when it produced a verdict — which a detected
+effect does regardless of the positive control — while the coverage table's
+column of the same name meant "the control passed". minimax-m3 read 4/4 in
+one table and 1/4 in the other, both correct under their own definition and
+neither labelled. Split into `n_control_passed` and `n_verdict`, reported as
+two columns, old name kept as a parsing alias, every report reassessed
+offline to carry both.
+
+Manuscript written: `paper/main.tex` against the real TMLR style file, 7
+pages, builds clean. Retitled to what the evidence supports — the audit, not
+the sweep — with the variance study as an explicit future-work section giving
+the level-uncertainty reason. The nine prior works the review listed were
+verified on arXiv by id before being cited (all seven with ids exist, titles
+and first authors as given); two of them, Hochlehnert 2025 and Pape 2026,
+pre-empt the original headline in spirit, which is the second reason the
+retitle is right rather than merely convenient.
+
+`scripts/paper_numbers.py` recomputes every number in the paper from
+committed records; `make numbers` writes paper/NUMBERS.md and CI runs it. It
+immediately earned its keep: the negative-control denominator in the paper
+was 0/37 and the script said 0/40, because `runs/negative_control.json`
+predates the all-unique degeneracy rule and still stores three such pairs as
+"ok". 37 is right; the script now applies the current rule rather than the
+stored status.
+
+Also: the 3.12-only f-string that broke three test modules on 3.11, CI across
+3.11/3.12/3.13 that regenerates every report offline, MIT LICENSE,
+CITATION.cff, `scripts/anonymize.py` for the double-blind copy, superseded
+artifacts quarantined, the retracted heuristic demoted out of `make probe`,
+and the .gitignore comment that called the cache regenerable corrected —
+this repo's own findings say it is not.
+
+Not done, and left to the owner because they cost money or need keys: the
+multi-provider extension, the llama-server ground-truth control, the frozen
+sweep as fixed effects, effective-k estimation, the sequential determinism
+arm, and the positive-control temperature fix.

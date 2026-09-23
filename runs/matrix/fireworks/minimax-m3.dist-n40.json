@@ -2,7 +2,17 @@
   "provider": "fireworks",
   "prompt": "Write a one-sentence arithmetic word problem suitable for a ten-year-old. Reply with the problem only.",
   "n_per_arm": 40,
+  "max_tokens": 1024,
+  "reasoning_effort": "low",
   "permutations": 10000,
+  "collected": {
+    "from": "2026-09-20T14:39Z",
+    "to": "2026-09-21T05:19Z"
+  },
+  "written": "2026-09-23T06:11Z",
+  "reassessed_at": [
+    "2026-09-23T06:11Z"
+  ],
   "results": [
     {
       "model": "minimax-m3",
@@ -15,6 +25,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:47Z",
+      "collected_to": "2026-09-21T01:58Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 20,
@@ -118,9 +130,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 28,
-      "excess": -2.0400651322963377,
-      "collected_from": "2026-09-20T16:47Z",
-      "collected_to": "2026-09-21T01:58Z"
+      "excess": -2.0400651322963377
     },
     {
       "model": "minimax-m3",
@@ -135,6 +145,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:48Z",
+      "collected_to": "2026-09-21T01:59Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 38,
@@ -238,9 +250,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.09996999999999964,
-      "collected_from": "2026-09-20T16:48Z",
-      "collected_to": "2026-09-21T01:59Z"
+      "excess": 0.09996999999999964
     },
     {
       "model": "minimax-m3",
@@ -255,6 +265,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:39Z",
+      "collected_to": "2026-09-21T02:06Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 39,
@@ -358,9 +370,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T14:39Z",
-      "collected_to": "2026-09-21T02:06Z"
+      "excess": NaN
     },
     {
       "model": "minimax-m3",
@@ -375,6 +385,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:48Z",
+      "collected_to": "2026-09-21T02:25Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 40,
@@ -478,9 +490,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 37,
-      "excess": -4.817021645906844,
-      "collected_from": "2026-09-20T16:48Z",
-      "collected_to": "2026-09-21T02:25Z"
+      "excess": -4.817021645906844
     },
     {
       "model": "minimax-m3",
@@ -495,6 +505,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-21T02:27Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 40,
@@ -598,9 +610,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 4,
-      "excess": -0.2025585263754545,
-      "collected_from": "2026-09-20T16:49Z",
-      "collected_to": "2026-09-21T02:27Z"
+      "excess": -0.2025585263754545
     },
     {
       "model": "minimax-m3",
@@ -615,6 +625,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-21T02:28Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 40,
@@ -718,9 +730,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:49Z",
-      "collected_to": "2026-09-21T02:28Z"
+      "excess": NaN
     },
     {
       "model": "minimax-m3",
@@ -733,6 +743,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-21T02:29Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -836,9 +848,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 9,
-      "excess": 4.4972871144796684,
-      "collected_from": "2026-09-20T16:49Z",
-      "collected_to": "2026-09-21T02:29Z"
+      "excess": 4.4972871144796684
     },
     {
       "model": "minimax-m3",
@@ -853,6 +863,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-21T02:30Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 17,
@@ -956,9 +968,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.2742369043813582,
-      "collected_from": "2026-09-20T16:50Z",
-      "collected_to": "2026-09-21T02:30Z"
+      "excess": 1.2742369043813582
     },
     {
       "model": "minimax-m3",
@@ -973,6 +983,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-21T02:30Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 13,
@@ -1076,9 +1088,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.972292388515447,
-      "collected_from": "2026-09-20T16:50Z",
-      "collected_to": "2026-09-21T02:30Z"
+      "excess": 1.972292388515447
     },
     {
       "model": "minimax-m3",
@@ -1093,6 +1103,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-21T02:32Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 32,
@@ -1196,9 +1208,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 38,
-      "excess": -4.471306280694338,
-      "collected_from": "2026-09-20T16:50Z",
-      "collected_to": "2026-09-21T02:32Z"
+      "excess": -4.471306280694338
     },
     {
       "model": "minimax-m3",
@@ -1213,6 +1223,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-21T02:32Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 31,
@@ -1316,9 +1328,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.1880679800170184,
-      "collected_from": "2026-09-20T16:50Z",
-      "collected_to": "2026-09-21T02:32Z"
+      "excess": 0.1880679800170184
     },
     {
       "model": "minimax-m3",
@@ -1333,6 +1343,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-21T02:34Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 28,
@@ -1436,9 +1448,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.5213098455232851,
-      "collected_from": "2026-09-20T16:51Z",
-      "collected_to": "2026-09-21T02:34Z"
+      "excess": 0.5213098455232851
     },
     {
       "model": "minimax-m3",
@@ -1451,6 +1461,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-21T03:34Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 10,
@@ -1554,9 +1566,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 17,
-      "excess": 1.5251524413136872,
-      "collected_from": "2026-09-20T16:51Z",
-      "collected_to": "2026-09-21T03:34Z"
+      "excess": 1.5251524413136872
     },
     {
       "model": "minimax-m3",
@@ -1571,6 +1581,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-21T03:35Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 21,
@@ -1674,9 +1686,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.2918669290963812,
-      "collected_from": "2026-09-20T16:51Z",
-      "collected_to": "2026-09-21T03:35Z"
+      "excess": 0.2918669290963812
     },
     {
       "model": "minimax-m3",
@@ -1691,6 +1701,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-21T03:35Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 12,
@@ -1794,9 +1806,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.0925589007154832,
-      "collected_from": "2026-09-20T16:51Z",
-      "collected_to": "2026-09-21T03:35Z"
+      "excess": 1.0925589007154832
     },
     {
       "model": "minimax-m3",
@@ -1811,6 +1821,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:52Z",
+      "collected_to": "2026-09-21T04:00Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 21,
@@ -1914,9 +1926,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 38,
-      "excess": -3.7577248392122753,
-      "collected_from": "2026-09-20T16:52Z",
-      "collected_to": "2026-09-21T04:00Z"
+      "excess": -3.7577248392122753
     },
     {
       "model": "minimax-m3",
@@ -1931,6 +1941,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:52Z",
+      "collected_to": "2026-09-21T04:00Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 24,
@@ -2034,9 +2046,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 1,
-      "excess": 0.34368351073417985,
-      "collected_from": "2026-09-20T16:52Z",
-      "collected_to": "2026-09-21T04:00Z"
+      "excess": 0.34368351073417985
     },
     {
       "model": "minimax-m3",
@@ -2051,6 +2061,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-21T04:01Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 21,
@@ -2154,9 +2166,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 1,
-      "excess": 0.584581884747834,
-      "collected_from": "2026-09-20T16:53Z",
-      "collected_to": "2026-09-21T04:01Z"
+      "excess": 0.584581884747834
     },
     {
       "model": "minimax-m3",
@@ -2169,6 +2179,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-21T04:02Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 7,
@@ -2272,9 +2284,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 18,
-      "excess": 1.5836698395454907,
-      "collected_from": "2026-09-20T16:53Z",
-      "collected_to": "2026-09-21T04:02Z"
+      "excess": 1.5836698395454907
     },
     {
       "model": "minimax-m3",
@@ -2289,6 +2299,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-21T04:02Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 12,
@@ -2392,9 +2404,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.1893575716241385,
-      "collected_from": "2026-09-20T16:53Z",
-      "collected_to": "2026-09-21T04:02Z"
+      "excess": 2.1893575716241385
     },
     {
       "model": "minimax-m3",
@@ -2409,6 +2419,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-21T04:02Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 23,
@@ -2512,9 +2524,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.6313889174753693,
-      "collected_from": "2026-09-20T16:53Z",
-      "collected_to": "2026-09-21T04:02Z"
+      "excess": 0.6313889174753693
     },
     {
       "model": "minimax-m3",
@@ -2529,6 +2539,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:53Z",
+      "collected_to": "2026-09-21T04:06Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 27,
@@ -2632,9 +2644,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 38,
-      "excess": -3.803701493882895,
-      "collected_from": "2026-09-20T16:53Z",
-      "collected_to": "2026-09-21T04:06Z"
+      "excess": -3.803701493882895
     },
     {
       "model": "minimax-m3",
@@ -2649,6 +2659,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:54Z",
+      "collected_to": "2026-09-21T04:06Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 32,
@@ -2752,9 +2764,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.30730217104270324,
-      "collected_from": "2026-09-20T16:54Z",
-      "collected_to": "2026-09-21T04:06Z"
+      "excess": 0.30730217104270324
     },
     {
       "model": "minimax-m3",
@@ -2769,6 +2779,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:54Z",
+      "collected_to": "2026-09-21T04:12Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 29,
@@ -2872,9 +2884,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.516561317255707,
-      "collected_from": "2026-09-20T16:54Z",
-      "collected_to": "2026-09-21T04:12Z"
+      "excess": 0.516561317255707
     },
     {
       "model": "minimax-m3",
@@ -2889,6 +2899,8 @@
       },
       "prompt": "repeat",
       "provider": "fireworks",
+      "collected_from": "2026-09-21T04:12Z",
+      "collected_to": "2026-09-21T04:23Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -2992,9 +3004,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 38,
-      "excess": 0.3403439802820087,
-      "collected_from": "2026-09-21T04:12Z",
-      "collected_to": "2026-09-21T04:23Z"
+      "excess": 0.3403439802820087
     },
     {
       "model": "minimax-m3",
@@ -3009,6 +3019,8 @@
       },
       "prompt": "repeat",
       "provider": "fireworks",
+      "collected_from": "2026-09-21T04:23Z",
+      "collected_to": "2026-09-21T05:10Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -3112,9 +3124,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 7,
-      "excess": 4.5038386845043075,
-      "collected_from": "2026-09-21T04:23Z",
-      "collected_to": "2026-09-21T05:10Z"
+      "excess": 4.5038386845043075
     },
     {
       "model": "minimax-m3",
@@ -3129,6 +3139,8 @@
       },
       "prompt": "repeat",
       "provider": "fireworks",
+      "collected_from": "2026-09-21T05:10Z",
+      "collected_to": "2026-09-21T05:19Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -3232,9 +3244,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-21T05:10Z",
-      "collected_to": "2026-09-21T05:19Z"
+      "excess": NaN
     }
   ],
   "p_holm_by_prompt": {
@@ -3346,6 +3356,8 @@
       "model": "minimax-m3",
       "parameter": "typical_p",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 3,
       "n_powered": 3,
       "n_distinguishable": 3,
       "n_no_effect": 0,
@@ -3363,6 +3375,8 @@
       "model": "minimax-m3",
       "parameter": "mirostat",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 2,
       "n_powered": 2,
       "n_distinguishable": 2,
       "n_no_effect": 0,
@@ -3380,6 +3394,8 @@
       "model": "minimax-m3",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
       "n_no_effect": 0,
@@ -3399,6 +3415,8 @@
       "model": "minimax-m3",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 2,
       "n_powered": 2,
       "n_distinguishable": 1,
       "n_no_effect": 1,
@@ -3418,6 +3436,8 @@
       "model": "minimax-m3",
       "parameter": "presence_penalty",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 0,
       "n_no_effect": 1,
@@ -3433,11 +3453,5 @@
       },
       "verdict_forced": "insufficient"
     }
-  ],
-  "collected": {
-    "from": "2026-09-20T14:39Z",
-    "to": "2026-09-21T05:19Z",
-    "source": "cache"
-  },
-  "written": "2026-09-21T16:07Z"
+  ]
 }

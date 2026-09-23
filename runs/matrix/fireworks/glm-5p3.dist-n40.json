@@ -2,7 +2,17 @@
   "provider": "fireworks",
   "prompt": "Write a one-sentence arithmetic word problem suitable for a ten-year-old. Reply with the problem only.",
   "n_per_arm": 40,
+  "max_tokens": 1024,
+  "reasoning_effort": "low",
   "permutations": 10000,
+  "collected": {
+    "from": "2026-09-20T10:31Z",
+    "to": "2026-09-21T09:06Z"
+  },
+  "written": "2026-09-23T06:11Z",
+  "reassessed_at": [
+    "2026-09-23T06:11Z"
+  ],
   "results": [
     {
       "model": "glm-5p3",
@@ -15,6 +25,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T10:31Z",
+      "collected_to": "2026-09-20T10:32Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 4,
@@ -118,9 +130,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 2,
-      "excess": 3.826329672225989,
-      "collected_from": "2026-09-20T10:31Z",
-      "collected_to": "2026-09-20T10:32Z"
+      "excess": 3.826329672225989
     },
     {
       "model": "glm-5p3",
@@ -135,6 +145,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:48Z",
+      "collected_to": "2026-09-21T02:06Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 11,
@@ -238,9 +250,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.3333038395402435,
-      "collected_from": "2026-09-20T16:48Z",
-      "collected_to": "2026-09-21T02:06Z"
+      "excess": 2.3333038395402435
     },
     {
       "model": "glm-5p3",
@@ -255,6 +265,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:39Z",
+      "collected_to": "2026-09-21T02:06Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 5,
@@ -358,9 +370,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 3.4168306845209964,
-      "collected_from": "2026-09-20T14:39Z",
-      "collected_to": "2026-09-21T02:06Z"
+      "excess": 3.4168306845209964
     },
     {
       "model": "glm-5p3",
@@ -375,6 +385,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:48Z",
+      "collected_to": "2026-09-21T02:27Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 31,
@@ -478,9 +490,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.5863775069565162,
-      "collected_from": "2026-09-20T16:48Z",
-      "collected_to": "2026-09-21T02:27Z"
+      "excess": 0.5863775069565162
     },
     {
       "model": "glm-5p3",
@@ -495,6 +505,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-21T02:32Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 37,
@@ -598,9 +610,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.3884770204732754,
-      "collected_from": "2026-09-20T16:49Z",
-      "collected_to": "2026-09-21T02:32Z"
+      "excess": -0.3884770204732754
     },
     {
       "model": "glm-5p3",
@@ -615,6 +625,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-21T02:35Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 34,
@@ -718,9 +730,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.055343908572562946,
-      "collected_from": "2026-09-20T16:49Z",
-      "collected_to": "2026-09-21T02:35Z"
+      "excess": -0.055343908572562946
     },
     {
       "model": "glm-5p3",
@@ -733,6 +743,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T10:34Z",
+      "collected_to": "2026-09-20T10:35Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 3,
@@ -836,9 +848,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 2,
-      "excess": 4.699416574379054,
-      "collected_from": "2026-09-20T10:34Z",
-      "collected_to": "2026-09-20T10:35Z"
+      "excess": 4.699416574379054
     },
     {
       "model": "glm-5p3",
@@ -853,6 +863,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-21T02:35Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 11,
@@ -956,9 +968,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.092682952332148,
-      "collected_from": "2026-09-20T16:50Z",
-      "collected_to": "2026-09-21T02:35Z"
+      "excess": 2.092682952332148
     },
     {
       "model": "glm-5p3",
@@ -973,6 +983,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-21T02:47Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 24,
@@ -1076,9 +1088,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.5895324617079285,
-      "collected_from": "2026-09-20T16:50Z",
-      "collected_to": "2026-09-21T02:47Z"
+      "excess": 0.5895324617079285
     },
     {
       "model": "glm-5p3",
@@ -1093,6 +1103,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:50Z",
+      "collected_to": "2026-09-21T04:00Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 30,
@@ -1196,9 +1208,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.5657172401160567,
-      "collected_from": "2026-09-20T16:50Z",
-      "collected_to": "2026-09-21T04:00Z"
+      "excess": 0.5657172401160567
     },
     {
       "model": "glm-5p3",
@@ -1213,6 +1223,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-21T04:00Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 34,
@@ -1316,9 +1328,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.04990838343733756,
-      "collected_from": "2026-09-20T16:51Z",
-      "collected_to": "2026-09-21T04:00Z"
+      "excess": 0.04990838343733756
     },
     {
       "model": "glm-5p3",
@@ -1333,6 +1343,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-21T04:00Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 38,
@@ -1436,9 +1448,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.3581041620226824,
-      "collected_from": "2026-09-20T16:51Z",
-      "collected_to": "2026-09-21T04:00Z"
+      "excess": -0.3581041620226824
     },
     {
       "model": "glm-5p3",
@@ -1451,6 +1461,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T10:36Z",
+      "collected_to": "2026-09-20T10:37Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -1554,9 +1566,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 7,
-      "excess": 4.535394512501524,
-      "collected_from": "2026-09-20T10:36Z",
-      "collected_to": "2026-09-20T10:37Z"
+      "excess": 4.535394512501524
     },
     {
       "model": "glm-5p3",
@@ -1571,6 +1581,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-21T04:01Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 8,
@@ -1674,9 +1686,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.0996171220756656,
-      "collected_from": "2026-09-20T16:51Z",
-      "collected_to": "2026-09-21T04:01Z"
+      "excess": 1.0996171220756656
     },
     {
       "model": "glm-5p3",
@@ -1691,6 +1701,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:51Z",
+      "collected_to": "2026-09-21T04:01Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 2,
@@ -1794,9 +1806,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 3.7871866121706548,
-      "collected_from": "2026-09-20T16:51Z",
-      "collected_to": "2026-09-21T04:01Z"
+      "excess": 3.7871866121706548
     },
     {
       "model": "glm-5p3",
@@ -1811,6 +1821,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:52Z",
+      "collected_to": "2026-09-21T04:05Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 21,
@@ -1914,9 +1926,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": 1.2878703001351894,
-      "collected_from": "2026-09-20T16:52Z",
-      "collected_to": "2026-09-21T04:05Z"
+      "excess": 1.2878703001351894
     },
     {
       "model": "glm-5p3",
@@ -1931,6 +1941,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:54Z",
+      "collected_to": "2026-09-21T04:05Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 23,
@@ -2034,9 +2046,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.7153691657869227,
-      "collected_from": "2026-09-20T16:54Z",
-      "collected_to": "2026-09-21T04:05Z"
+      "excess": -0.7153691657869227
     },
     {
       "model": "glm-5p3",
@@ -2051,6 +2061,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:54Z",
+      "collected_to": "2026-09-21T04:06Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 14,
@@ -2154,9 +2166,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.8416380759785967,
-      "collected_from": "2026-09-20T16:54Z",
-      "collected_to": "2026-09-21T04:06Z"
+      "excess": 0.8416380759785967
     },
     {
       "model": "glm-5p3",
@@ -2169,6 +2179,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T10:38Z",
+      "collected_to": "2026-09-20T10:38Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 3,
@@ -2272,9 +2284,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 3,
-      "excess": 4.019590937831486,
-      "collected_from": "2026-09-20T10:38Z",
-      "collected_to": "2026-09-20T10:38Z"
+      "excess": 4.019590937831486
     },
     {
       "model": "glm-5p3",
@@ -2289,6 +2299,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:54Z",
+      "collected_to": "2026-09-21T04:06Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 7,
@@ -2392,9 +2404,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.9901329410987714,
-      "collected_from": "2026-09-20T16:54Z",
-      "collected_to": "2026-09-21T04:06Z"
+      "excess": 1.9901329410987714
     },
     {
       "model": "glm-5p3",
@@ -2409,6 +2419,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:54Z",
+      "collected_to": "2026-09-21T04:12Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 9,
@@ -2512,9 +2524,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.8886116577323029,
-      "collected_from": "2026-09-20T16:54Z",
-      "collected_to": "2026-09-21T04:12Z"
+      "excess": 1.8886116577323029
     },
     {
       "model": "glm-5p3",
@@ -2529,6 +2539,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:54Z",
+      "collected_to": "2026-09-21T05:10Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 21,
@@ -2632,9 +2644,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.0981620670122367,
-      "collected_from": "2026-09-20T16:54Z",
-      "collected_to": "2026-09-21T05:10Z"
+      "excess": 1.0981620670122367
     },
     {
       "model": "glm-5p3",
@@ -2649,6 +2659,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:56Z",
+      "collected_to": "2026-09-21T05:19Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 23,
@@ -2752,9 +2764,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.020811021688802896,
-      "collected_from": "2026-09-20T16:56Z",
-      "collected_to": "2026-09-21T05:19Z"
+      "excess": -0.020811021688802896
     },
     {
       "model": "glm-5p3",
@@ -2769,6 +2779,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:56Z",
+      "collected_to": "2026-09-21T05:19Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 19,
@@ -2872,9 +2884,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.8236188517370409,
-      "collected_from": "2026-09-20T16:56Z",
-      "collected_to": "2026-09-21T05:19Z"
+      "excess": 0.8236188517370409
     },
     {
       "model": "glm-5p3",
@@ -2889,6 +2899,8 @@
       },
       "prompt": "repeat",
       "provider": "fireworks",
+      "collected_from": "2026-09-21T05:19Z",
+      "collected_to": "2026-09-21T08:02Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -2992,9 +3004,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 4,
-      "excess": 5.11337888704541,
-      "collected_from": "2026-09-21T05:19Z",
-      "collected_to": "2026-09-21T08:02Z"
+      "excess": 5.11337888704541
     },
     {
       "model": "glm-5p3",
@@ -3009,6 +3019,8 @@
       },
       "prompt": "repeat",
       "provider": "fireworks",
+      "collected_from": "2026-09-21T08:02Z",
+      "collected_to": "2026-09-21T08:55Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -3112,9 +3124,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 4.633996970376511,
-      "collected_from": "2026-09-21T08:02Z",
-      "collected_to": "2026-09-21T08:55Z"
+      "excess": 4.633996970376511
     },
     {
       "model": "glm-5p3",
@@ -3129,6 +3139,8 @@
       },
       "prompt": "repeat",
       "provider": "fireworks",
+      "collected_from": "2026-09-21T08:55Z",
+      "collected_to": "2026-09-21T09:06Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -3232,9 +3244,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-21T08:55Z",
-      "collected_to": "2026-09-21T09:06Z"
+      "excess": NaN
     }
   ],
   "p_holm_by_prompt": {
@@ -3348,6 +3358,8 @@
       "model": "glm-5p3",
       "parameter": "typical_p",
       "n_prompts": 4,
+      "n_control_passed": 4,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
       "n_no_effect": 0,
@@ -3365,6 +3377,8 @@
       "model": "glm-5p3",
       "parameter": "mirostat",
       "n_prompts": 4,
+      "n_control_passed": 4,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
       "n_no_effect": 0,
@@ -3382,6 +3396,8 @@
       "model": "glm-5p3",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
+      "n_control_passed": 4,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
       "n_no_effect": 0,
@@ -3401,6 +3417,8 @@
       "model": "glm-5p3",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
+      "n_control_passed": 4,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 0,
       "n_no_effect": 4,
@@ -3420,6 +3438,8 @@
       "model": "glm-5p3",
       "parameter": "presence_penalty",
       "n_prompts": 4,
+      "n_control_passed": 4,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 0,
       "n_no_effect": 4,
@@ -3435,11 +3455,5 @@
       },
       "verdict_forced": "insufficient"
     }
-  ],
-  "collected": {
-    "from": "2026-09-20T10:31Z",
-    "to": "2026-09-21T09:06Z",
-    "source": "cache"
-  },
-  "written": "2026-09-21T16:06Z"
+  ]
 }

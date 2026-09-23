@@ -304,4 +304,15 @@ covered cells, runs only missing contrasts, continues its budget window
 across relaunches, and kills its child probes on SIGINT/SIGTERM — every
 finished cell is on disk; rerun the same command to resume.
 
+## The manuscript
+
+[paper/main.tex](paper/main.tex) — *Documented, accepted, honoured: an audit of
+decoding parameters on hosted LLM inference APIs*, built against the TMLR
+style file (`make paper`). The audit is the paper; the variance study is
+future work for the reason given above. Every number in it is regenerated
+from committed records by `make numbers` into
+[paper/NUMBERS.md](paper/NUMBERS.md), so a stale figure shows up as a diff
+rather than surviving into review. `scripts/anonymize.py` builds the
+double-blind copy.
+
 Full decision log in [TASKS.md](TASKS.md).

@@ -2,7 +2,17 @@
   "provider": "fireworks",
   "prompt": "Write a one-sentence arithmetic word problem suitable for a ten-year-old. Reply with the problem only.",
   "n_per_arm": 40,
+  "max_tokens": 1024,
+  "reasoning_effort": "low",
   "permutations": 10000,
+  "collected": {
+    "from": "2026-09-20T14:39Z",
+    "to": "2026-09-21T16:01Z"
+  },
+  "written": "2026-09-23T06:11Z",
+  "reassessed_at": [
+    "2026-09-23T06:11Z"
+  ],
   "results": [
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -15,6 +25,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:41Z",
+      "collected_to": "2026-09-20T19:46Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 23,
@@ -118,9 +130,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.4650093804829027,
-      "collected_from": "2026-09-20T16:41Z",
-      "collected_to": "2026-09-20T19:46Z"
+      "excess": 1.4650093804829027
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -135,6 +145,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:42Z",
+      "collected_to": "2026-09-20T21:17Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 39,
@@ -238,9 +250,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:42Z",
-      "collected_to": "2026-09-20T21:17Z"
+      "excess": NaN
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -255,6 +265,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:39Z",
+      "collected_to": "2026-09-20T21:17Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 39,
@@ -358,9 +370,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T14:39Z",
-      "collected_to": "2026-09-20T21:17Z"
+      "excess": NaN
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -375,6 +385,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:42Z",
+      "collected_to": "2026-09-21T00:40Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 39,
@@ -478,9 +490,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:42Z",
-      "collected_to": "2026-09-21T00:40Z"
+      "excess": NaN
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -495,6 +505,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:42Z",
+      "collected_to": "2026-09-21T01:25Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 39,
@@ -598,9 +610,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:42Z",
-      "collected_to": "2026-09-21T01:25Z"
+      "excess": NaN
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -615,6 +625,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:43Z",
+      "collected_to": "2026-09-21T01:25Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 40,
@@ -718,9 +730,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:43Z",
-      "collected_to": "2026-09-21T01:25Z"
+      "excess": NaN
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -733,6 +743,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:43Z",
+      "collected_to": "2026-09-21T01:26Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 19,
@@ -836,9 +848,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.657379150793729,
-      "collected_from": "2026-09-20T16:43Z",
-      "collected_to": "2026-09-21T01:26Z"
+      "excess": 1.657379150793729
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -853,6 +863,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:43Z",
+      "collected_to": "2026-09-21T01:26Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 32,
@@ -956,9 +968,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.46530670617776737,
-      "collected_from": "2026-09-20T16:43Z",
-      "collected_to": "2026-09-21T01:26Z"
+      "excess": 0.46530670617776737
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -973,6 +983,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:43Z",
+      "collected_to": "2026-09-21T01:27Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 37,
@@ -1076,9 +1088,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.1999184811873812,
-      "collected_from": "2026-09-20T16:43Z",
-      "collected_to": "2026-09-21T01:27Z"
+      "excess": 0.1999184811873812
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1093,6 +1103,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:43Z",
+      "collected_to": "2026-09-21T01:28Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 39,
@@ -1196,9 +1208,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:43Z",
-      "collected_to": "2026-09-21T01:28Z"
+      "excess": NaN
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1213,6 +1223,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-21T01:29Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 40,
@@ -1316,9 +1328,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:44Z",
-      "collected_to": "2026-09-21T01:29Z"
+      "excess": NaN
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1333,6 +1343,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-21T01:29Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 39,
@@ -1436,9 +1448,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:44Z",
-      "collected_to": "2026-09-21T01:29Z"
+      "excess": NaN
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1451,6 +1461,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-21T01:40Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 27,
@@ -1554,9 +1566,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.9452203881681603,
-      "collected_from": "2026-09-20T16:44Z",
-      "collected_to": "2026-09-21T01:40Z"
+      "excess": 0.9452203881681603
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1571,6 +1581,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:44Z",
+      "collected_to": "2026-09-21T01:41Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 38,
@@ -1674,9 +1686,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.01935902221087238,
-      "collected_from": "2026-09-20T16:44Z",
-      "collected_to": "2026-09-21T01:41Z"
+      "excess": 0.01935902221087238
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1691,6 +1701,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-21T01:41Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 39,
@@ -1794,9 +1806,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:45Z",
-      "collected_to": "2026-09-21T01:41Z"
+      "excess": NaN
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1811,6 +1821,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-21T01:42Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 39,
@@ -1914,9 +1926,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:45Z",
-      "collected_to": "2026-09-21T01:42Z"
+      "excess": NaN
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1931,6 +1941,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-21T01:43Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 36,
@@ -2034,9 +2046,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 0,
-      "excess": 0.2200020372420739,
-      "collected_from": "2026-09-20T16:45Z",
-      "collected_to": "2026-09-21T01:43Z"
+      "excess": 0.2200020372420739
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -2051,6 +2061,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-21T01:44Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 37,
@@ -2154,9 +2166,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.10028227821892903,
-      "collected_from": "2026-09-20T16:46Z",
-      "collected_to": "2026-09-21T01:44Z"
+      "excess": 0.10028227821892903
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -2169,6 +2179,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-21T01:44Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 30,
@@ -2272,9 +2284,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.4382667779974054,
-      "collected_from": "2026-09-20T16:46Z",
-      "collected_to": "2026-09-21T01:44Z"
+      "excess": 0.4382667779974054
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -2289,6 +2299,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-21T01:45Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 32,
@@ -2392,9 +2404,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.4707546929341531,
-      "collected_from": "2026-09-20T16:46Z",
-      "collected_to": "2026-09-21T01:45Z"
+      "excess": 0.4707546929341531
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -2409,6 +2419,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:46Z",
+      "collected_to": "2026-09-21T01:45Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 36,
@@ -2512,9 +2524,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.181585883076789,
-      "collected_from": "2026-09-20T16:46Z",
-      "collected_to": "2026-09-21T01:45Z"
+      "excess": -0.181585883076789
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -2529,6 +2539,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:47Z",
+      "collected_to": "2026-09-21T01:46Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 33,
@@ -2632,9 +2644,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.3979558871242864,
-      "collected_from": "2026-09-20T16:47Z",
-      "collected_to": "2026-09-21T01:46Z"
+      "excess": 0.3979558871242864
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -2649,6 +2659,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:47Z",
+      "collected_to": "2026-09-21T01:47Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 34,
@@ -2752,9 +2764,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.33709976610834674,
-      "collected_from": "2026-09-20T16:47Z",
-      "collected_to": "2026-09-21T01:47Z"
+      "excess": 0.33709976610834674
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -2769,6 +2779,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:47Z",
+      "collected_to": "2026-09-21T01:59Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 37,
@@ -2872,9 +2884,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.18417306237277506,
-      "collected_from": "2026-09-20T16:47Z",
-      "collected_to": "2026-09-21T01:59Z"
+      "excess": -0.18417306237277506
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -2889,6 +2899,8 @@
       },
       "prompt": "repeat",
       "provider": "fireworks",
+      "collected_from": "2026-09-21T15:40Z",
+      "collected_to": "2026-09-21T16:00Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 5,
@@ -2992,9 +3004,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 3.6718927116015427,
-      "collected_from": "2026-09-21T15:40Z",
-      "collected_to": "2026-09-21T16:00Z"
+      "excess": 3.6718927116015427
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -3009,6 +3019,8 @@
       },
       "prompt": "repeat",
       "provider": "fireworks",
+      "collected_from": "2026-09-21T15:41Z",
+      "collected_to": "2026-09-21T16:01Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 6,
@@ -3112,9 +3124,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 3.765955584629693,
-      "collected_from": "2026-09-21T15:41Z",
-      "collected_to": "2026-09-21T16:01Z"
+      "excess": 3.765955584629693
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -3129,6 +3139,8 @@
       },
       "prompt": "repeat",
       "provider": "fireworks",
+      "collected_from": "2026-09-21T15:41Z",
+      "collected_to": "2026-09-21T16:01Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 4,
@@ -3232,9 +3244,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.38427166785998723,
-      "collected_from": "2026-09-21T15:41Z",
-      "collected_to": "2026-09-21T16:01Z"
+      "excess": -0.38427166785998723
     }
   ],
   "p_holm_by_prompt": {
@@ -3339,6 +3349,8 @@
       "model": "nemotron-lightning-3p5-30b-a3b",
       "parameter": "typical_p",
       "n_prompts": 4,
+      "n_control_passed": 0,
+      "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 1,
       "n_no_effect": 0,
@@ -3356,6 +3368,8 @@
       "model": "nemotron-lightning-3p5-30b-a3b",
       "parameter": "mirostat",
       "n_prompts": 4,
+      "n_control_passed": 0,
+      "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 1,
       "n_no_effect": 0,
@@ -3373,6 +3387,8 @@
       "model": "nemotron-lightning-3p5-30b-a3b",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
+      "n_control_passed": 0,
+      "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 1,
       "n_no_effect": 0,
@@ -3392,6 +3408,8 @@
       "model": "nemotron-lightning-3p5-30b-a3b",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
+      "n_control_passed": 0,
+      "n_verdict": 2,
       "n_powered": 2,
       "n_distinguishable": 2,
       "n_no_effect": 0,
@@ -3411,6 +3429,8 @@
       "model": "nemotron-lightning-3p5-30b-a3b",
       "parameter": "presence_penalty",
       "n_prompts": 4,
+      "n_control_passed": 0,
+      "n_verdict": 0,
       "n_powered": 0,
       "n_distinguishable": 0,
       "n_no_effect": 0,
@@ -3426,11 +3446,5 @@
       },
       "verdict_forced": "no effect seen"
     }
-  ],
-  "collected": {
-    "from": "2026-09-20T14:39Z",
-    "to": "2026-09-21T16:01Z",
-    "source": "cache"
-  },
-  "written": "2026-09-21T16:07Z"
+  ]
 }

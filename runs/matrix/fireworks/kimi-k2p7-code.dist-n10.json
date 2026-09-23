@@ -2,7 +2,17 @@
   "provider": "fireworks",
   "prompt": "Write a one-sentence arithmetic word problem suitable for a ten-year-old. Reply with the problem only.",
   "n_per_arm": 10,
+  "max_tokens": 1024,
+  "reasoning_effort": "low",
   "permutations": 10000,
+  "collected": {
+    "from": "2026-09-20T10:31Z",
+    "to": "2026-09-20T17:02Z"
+  },
+  "written": "2026-09-23T06:11Z",
+  "reassessed_at": [
+    "2026-09-23T06:11Z"
+  ],
   "results": [
     {
       "model": "kimi-k2p7-code",
@@ -15,6 +25,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T10:31Z",
+      "collected_to": "2026-09-20T10:32Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 5,
@@ -58,9 +70,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 6,
-      "excess": 0.0003580386073862634,
-      "collected_from": "2026-09-20T10:31Z",
-      "collected_to": "2026-09-20T10:32Z"
+      "excess": 0.0003580386073862634
     },
     {
       "model": "kimi-k2p7-code",
@@ -75,6 +85,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:54Z",
+      "collected_to": "2026-09-20T16:54Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 9,
@@ -118,9 +130,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:54Z",
-      "collected_to": "2026-09-20T16:54Z"
+      "excess": NaN
     },
     {
       "model": "kimi-k2p7-code",
@@ -135,6 +145,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:39Z",
+      "collected_to": "2026-09-20T16:55Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 8,
@@ -178,9 +190,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.47414914121652024,
-      "collected_from": "2026-09-20T14:39Z",
-      "collected_to": "2026-09-20T16:55Z"
+      "excess": 0.47414914121652024
     },
     {
       "model": "kimi-k2p7-code",
@@ -195,6 +205,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:55Z",
+      "collected_to": "2026-09-20T16:56Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 9,
@@ -238,9 +250,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 4,
-      "excess": -0.5922783456231612,
-      "collected_from": "2026-09-20T16:55Z",
-      "collected_to": "2026-09-20T16:56Z"
+      "excess": -0.5922783456231612
     },
     {
       "model": "kimi-k2p7-code",
@@ -255,6 +265,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:56Z",
+      "collected_to": "2026-09-20T16:56Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -298,9 +310,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:56Z",
-      "collected_to": "2026-09-20T16:56Z"
+      "excess": NaN
     },
     {
       "model": "kimi-k2p7-code",
@@ -315,6 +325,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:56Z",
+      "collected_to": "2026-09-20T16:56Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -358,9 +370,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:56Z",
-      "collected_to": "2026-09-20T16:56Z"
+      "excess": NaN
     },
     {
       "model": "kimi-k2p7-code",
@@ -373,6 +383,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T10:35Z",
+      "collected_to": "2026-09-20T10:36Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 2,
@@ -416,9 +428,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 7,
-      "excess": 0.8802812669258319,
-      "collected_from": "2026-09-20T10:35Z",
-      "collected_to": "2026-09-20T10:36Z"
+      "excess": 0.8802812669258319
     },
     {
       "model": "kimi-k2p7-code",
@@ -433,6 +443,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:56Z",
+      "collected_to": "2026-09-20T16:56Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 4,
@@ -476,9 +488,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.4748331385842286,
-      "collected_from": "2026-09-20T16:56Z",
-      "collected_to": "2026-09-20T16:56Z"
+      "excess": 0.4748331385842286
     },
     {
       "model": "kimi-k2p7-code",
@@ -493,6 +503,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:56Z",
+      "collected_to": "2026-09-20T16:56Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 4,
@@ -536,9 +548,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.12084533756815954,
-      "collected_from": "2026-09-20T16:56Z",
-      "collected_to": "2026-09-20T16:56Z"
+      "excess": -0.12084533756815954
     },
     {
       "model": "kimi-k2p7-code",
@@ -553,6 +563,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:56Z",
+      "collected_to": "2026-09-20T16:58Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 6,
@@ -596,9 +608,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.9497017110584511,
-      "collected_from": "2026-09-20T16:56Z",
-      "collected_to": "2026-09-20T16:58Z"
+      "excess": 0.9497017110584511
     },
     {
       "model": "kimi-k2p7-code",
@@ -613,6 +623,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:58Z",
+      "collected_to": "2026-09-20T16:58Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 6,
@@ -656,9 +668,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.6029546221327967,
-      "collected_from": "2026-09-20T16:58Z",
-      "collected_to": "2026-09-20T16:58Z"
+      "excess": 0.6029546221327967
     },
     {
       "model": "kimi-k2p7-code",
@@ -673,6 +683,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:58Z",
+      "collected_to": "2026-09-20T16:58Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 4,
@@ -716,9 +728,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.6374741532061738,
-      "collected_from": "2026-09-20T16:58Z",
-      "collected_to": "2026-09-20T16:58Z"
+      "excess": 0.6374741532061738
     },
     {
       "model": "kimi-k2p7-code",
@@ -731,6 +741,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T10:37Z",
+      "collected_to": "2026-09-20T10:39Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 5,
@@ -774,9 +786,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 8,
-      "excess": -1.2491089308547103,
-      "collected_from": "2026-09-20T10:37Z",
-      "collected_to": "2026-09-20T10:39Z"
+      "excess": -1.2491089308547103
     },
     {
       "model": "kimi-k2p7-code",
@@ -791,6 +801,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:58Z",
+      "collected_to": "2026-09-20T16:58Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 6,
@@ -834,9 +846,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.7529740808679389,
-      "collected_from": "2026-09-20T16:58Z",
-      "collected_to": "2026-09-20T16:58Z"
+      "excess": -0.7529740808679389
     },
     {
       "model": "kimi-k2p7-code",
@@ -851,6 +861,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:58Z",
+      "collected_to": "2026-09-20T16:58Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 6,
@@ -894,9 +906,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -1.2829829160626354,
-      "collected_from": "2026-09-20T16:58Z",
-      "collected_to": "2026-09-20T16:58Z"
+      "excess": -1.2829829160626354
     },
     {
       "model": "kimi-k2p7-code",
@@ -911,6 +921,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:58Z",
+      "collected_to": "2026-09-20T16:59Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 9,
@@ -954,9 +966,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": NaN,
-      "collected_from": "2026-09-20T16:58Z",
-      "collected_to": "2026-09-20T16:59Z"
+      "excess": NaN
     },
     {
       "model": "kimi-k2p7-code",
@@ -971,6 +981,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T16:59Z",
+      "collected_to": "2026-09-20T17:00Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 6,
@@ -1014,9 +1026,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.9997065649754776,
-      "collected_from": "2026-09-20T16:59Z",
-      "collected_to": "2026-09-20T17:00Z"
+      "excess": 0.9997065649754776
     },
     {
       "model": "kimi-k2p7-code",
@@ -1031,6 +1041,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:00Z",
+      "collected_to": "2026-09-20T17:00Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 8,
@@ -1074,9 +1086,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.19939090958072184,
-      "collected_from": "2026-09-20T17:00Z",
-      "collected_to": "2026-09-20T17:00Z"
+      "excess": -0.19939090958072184
     },
     {
       "model": "kimi-k2p7-code",
@@ -1089,6 +1099,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T10:37Z",
+      "collected_to": "2026-09-20T10:43Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 6,
@@ -1132,9 +1144,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 6,
-      "excess": -0.5520577433456244,
-      "collected_from": "2026-09-20T10:37Z",
-      "collected_to": "2026-09-20T10:43Z"
+      "excess": -0.5520577433456244
     },
     {
       "model": "kimi-k2p7-code",
@@ -1149,6 +1159,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:00Z",
+      "collected_to": "2026-09-20T17:00Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -1192,9 +1204,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T17:00Z",
-      "collected_to": "2026-09-20T17:00Z"
+      "excess": NaN
     },
     {
       "model": "kimi-k2p7-code",
@@ -1209,6 +1219,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:00Z",
+      "collected_to": "2026-09-20T17:00Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -1252,9 +1264,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T17:00Z",
-      "collected_to": "2026-09-20T17:00Z"
+      "excess": NaN
     },
     {
       "model": "kimi-k2p7-code",
@@ -1269,6 +1279,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:00Z",
+      "collected_to": "2026-09-20T17:02Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 9,
@@ -1312,9 +1324,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T17:00Z",
-      "collected_to": "2026-09-20T17:02Z"
+      "excess": NaN
     },
     {
       "model": "kimi-k2p7-code",
@@ -1329,6 +1339,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:02Z",
+      "collected_to": "2026-09-20T17:02Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 9,
@@ -1372,9 +1384,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T17:02Z",
-      "collected_to": "2026-09-20T17:02Z"
+      "excess": NaN
     },
     {
       "model": "kimi-k2p7-code",
@@ -1389,6 +1399,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:02Z",
+      "collected_to": "2026-09-20T17:02Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -1432,9 +1444,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T17:02Z",
-      "collected_to": "2026-09-20T17:02Z"
+      "excess": NaN
     }
   ],
   "p_holm_by_prompt": {
@@ -1536,6 +1546,8 @@
       "model": "kimi-k2p7-code",
       "parameter": "typical_p",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 0,
       "n_no_effect": 1,
@@ -1553,6 +1565,8 @@
       "model": "kimi-k2p7-code",
       "parameter": "mirostat",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 2,
       "n_powered": 2,
       "n_distinguishable": 1,
       "n_no_effect": 1,
@@ -1570,6 +1584,8 @@
       "model": "kimi-k2p7-code",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 0,
       "n_no_effect": 1,
@@ -1587,6 +1603,8 @@
       "model": "kimi-k2p7-code",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 0,
       "n_no_effect": 1,
@@ -1604,6 +1622,8 @@
       "model": "kimi-k2p7-code",
       "parameter": "presence_penalty",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 0,
       "n_no_effect": 1,
@@ -1617,11 +1637,5 @@
       "forced": {},
       "verdict_forced": ""
     }
-  ],
-  "collected": {
-    "from": "2026-09-20T10:31Z",
-    "to": "2026-09-20T17:02Z",
-    "source": "cache"
-  },
-  "written": "2026-09-21T16:06Z"
+  ]
 }

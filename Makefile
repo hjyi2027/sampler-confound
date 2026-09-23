@@ -1,4 +1,4 @@
-.PHONY: test keys data probe probe-heuristic freeze pilot select smoke sweep analyse power offline clean
+.PHONY: test keys data numbers paper probe probe-heuristic freeze pilot select smoke sweep analyse power offline clean
 
 test:
 	python3 -m pytest tests/ -q
@@ -67,6 +67,15 @@ analyse:
 # Re-run any probe's analysis from cached responses with the network forbidden.
 # A cache miss is an error, not an API call: re-analysis can never re-generate.
 #   make offline CMD="scripts/probe_determinism.py --all --out runs/determinism.json"
+# The manuscript's numbers, recomputed from committed records. If this and
+# paper/main.tex disagree, the paper is stale.
+numbers:
+	SAMPLERCONFOUND_OFFLINE=1 python3 scripts/paper_numbers.py --md > paper/NUMBERS.md
+	@echo "wrote paper/NUMBERS.md"
+
+paper:
+	cd paper && latexmk -pdf -interaction=nonstopmode main.tex
+
 offline:
 	SAMPLERCONFOUND_OFFLINE=1 python3 $(CMD)
 

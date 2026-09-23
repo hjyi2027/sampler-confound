@@ -2,7 +2,17 @@
   "provider": "fireworks",
   "prompt": "Write a one-sentence arithmetic word problem suitable for a ten-year-old. Reply with the problem only.",
   "n_per_arm": 10,
+  "max_tokens": 1024,
+  "reasoning_effort": "low",
   "permutations": 10000,
+  "collected": {
+    "from": "2026-09-20T14:08Z",
+    "to": "2026-09-21T15:43Z"
+  },
+  "written": "2026-09-23T06:11Z",
+  "reassessed_at": [
+    "2026-09-23T06:11Z"
+  ],
   "results": [
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -15,6 +25,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:08Z",
+      "collected_to": "2026-09-20T14:35Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -58,9 +70,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 6,
-      "excess": -1.5497010971112015,
-      "collected_from": "2026-09-20T14:08Z",
-      "collected_to": "2026-09-20T14:35Z"
+      "excess": -1.5497010971112015
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -75,6 +85,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:35Z",
+      "collected_to": "2026-09-20T14:35Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -118,9 +130,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T14:35Z",
-      "collected_to": "2026-09-20T14:35Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -135,6 +145,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:35Z",
+      "collected_to": "2026-09-20T14:35Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 9,
@@ -178,9 +190,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": NaN,
-      "collected_from": "2026-09-20T14:35Z",
-      "collected_to": "2026-09-20T14:35Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -195,6 +205,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:35Z",
+      "collected_to": "2026-09-20T14:36Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -238,9 +250,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": NaN,
-      "collected_from": "2026-09-20T14:35Z",
-      "collected_to": "2026-09-20T14:36Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -255,6 +265,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:02Z",
+      "collected_to": "2026-09-20T17:02Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -298,9 +310,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T17:02Z",
-      "collected_to": "2026-09-20T17:02Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -315,6 +325,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:40Z",
+      "collected_to": "2026-09-20T17:02Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -358,9 +370,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T14:40Z",
-      "collected_to": "2026-09-20T17:02Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -375,6 +385,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:02Z",
+      "collected_to": "2026-09-20T17:03Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -418,9 +430,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 4,
-      "excess": -0.7974084212515147,
-      "collected_from": "2026-09-20T17:02Z",
-      "collected_to": "2026-09-20T17:03Z"
+      "excess": -0.7974084212515147
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -435,6 +445,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:03Z",
+      "collected_to": "2026-09-20T17:03Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -478,9 +490,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 6,
-      "excess": -1.5540802323369614,
-      "collected_from": "2026-09-20T17:03Z",
-      "collected_to": "2026-09-20T17:03Z"
+      "excess": -1.5540802323369614
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -495,6 +505,8 @@
       },
       "prompt": "word_prob",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:03Z",
+      "collected_to": "2026-09-20T17:04Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -538,9 +550,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T17:03Z",
-      "collected_to": "2026-09-20T17:04Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -553,6 +563,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:09Z",
+      "collected_to": "2026-09-20T14:36Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 3,
@@ -596,9 +608,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 3,
-      "excess": 1.9199667349900522,
-      "collected_from": "2026-09-20T14:09Z",
-      "collected_to": "2026-09-20T14:36Z"
+      "excess": 1.9199667349900522
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -613,6 +623,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:36Z",
+      "collected_to": "2026-09-20T14:36Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 5,
@@ -656,9 +668,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.1487208386819585,
-      "collected_from": "2026-09-20T14:36Z",
-      "collected_to": "2026-09-20T14:36Z"
+      "excess": 1.1487208386819585
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -673,6 +683,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:36Z",
+      "collected_to": "2026-09-20T14:36Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 3,
@@ -716,9 +728,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.7587528673966484,
-      "collected_from": "2026-09-20T14:36Z",
-      "collected_to": "2026-09-20T14:36Z"
+      "excess": 1.7587528673966484
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -733,6 +743,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:36Z",
+      "collected_to": "2026-09-20T14:36Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 4,
@@ -776,9 +788,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.7487843089685042,
-      "collected_from": "2026-09-20T14:36Z",
-      "collected_to": "2026-09-20T14:36Z"
+      "excess": 1.7487843089685042
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -793,6 +803,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:04Z",
+      "collected_to": "2026-09-20T17:04Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 9,
@@ -836,9 +848,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T17:04Z",
-      "collected_to": "2026-09-20T17:04Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -853,6 +863,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:04Z",
+      "collected_to": "2026-09-20T17:04Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 9,
@@ -896,9 +908,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T17:04Z",
-      "collected_to": "2026-09-20T17:04Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -913,6 +923,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:04Z",
+      "collected_to": "2026-09-20T17:04Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 9,
@@ -956,9 +968,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 2,
-      "excess": NaN,
-      "collected_from": "2026-09-20T17:04Z",
-      "collected_to": "2026-09-20T17:04Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -973,6 +983,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:04Z",
+      "collected_to": "2026-09-20T17:05Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -1016,9 +1028,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 2,
-      "excess": NaN,
-      "collected_from": "2026-09-20T17:04Z",
-      "collected_to": "2026-09-20T17:05Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -1033,6 +1043,8 @@
       },
       "prompt": "sentence",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:05Z",
+      "collected_to": "2026-09-20T17:05Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -1076,9 +1088,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T17:05Z",
-      "collected_to": "2026-09-20T17:05Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -1091,6 +1101,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:33Z",
+      "collected_to": "2026-09-20T14:37Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 3,
@@ -1134,9 +1146,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 7,
-      "excess": 0.19158579742414644,
-      "collected_from": "2026-09-20T14:33Z",
-      "collected_to": "2026-09-20T14:37Z"
+      "excess": 0.19158579742414644
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -1151,6 +1161,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:37Z",
+      "collected_to": "2026-09-20T14:37Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 5,
@@ -1194,9 +1206,7 @@
       ],
       "empty_tight": 2,
       "empty_open": 2,
-      "excess": 0.7971643010019037,
-      "collected_from": "2026-09-20T14:37Z",
-      "collected_to": "2026-09-20T14:37Z"
+      "excess": 0.7971643010019037
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -1211,6 +1221,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:37Z",
+      "collected_to": "2026-09-20T14:37Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 4,
@@ -1254,9 +1266,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.5584022504171402,
-      "collected_from": "2026-09-20T14:37Z",
-      "collected_to": "2026-09-20T14:37Z"
+      "excess": 1.5584022504171402
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -1271,6 +1281,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:37Z",
+      "collected_to": "2026-09-20T14:37Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 4,
@@ -1314,9 +1326,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.0296085357149234,
-      "collected_from": "2026-09-20T14:37Z",
-      "collected_to": "2026-09-20T14:37Z"
+      "excess": 1.0296085357149234
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -1331,6 +1341,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:05Z",
+      "collected_to": "2026-09-20T17:05Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 5,
@@ -1374,9 +1386,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": 0.5267473102863359,
-      "collected_from": "2026-09-20T17:05Z",
-      "collected_to": "2026-09-20T17:05Z"
+      "excess": 0.5267473102863359
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -1391,6 +1401,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:05Z",
+      "collected_to": "2026-09-20T17:10Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 8,
@@ -1434,9 +1446,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": -0.4019569328791754,
-      "collected_from": "2026-09-20T17:05Z",
-      "collected_to": "2026-09-20T17:10Z"
+      "excess": -0.4019569328791754
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -1451,6 +1461,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:10Z",
+      "collected_to": "2026-09-20T17:10Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -1494,9 +1506,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 4,
-      "excess": -0.7997720620817387,
-      "collected_from": "2026-09-20T17:10Z",
-      "collected_to": "2026-09-20T17:10Z"
+      "excess": -0.7997720620817387
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -1511,6 +1521,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:10Z",
+      "collected_to": "2026-09-20T17:28Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 7,
@@ -1554,9 +1566,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 6,
-      "excess": -0.8736334217041943,
-      "collected_from": "2026-09-20T17:10Z",
-      "collected_to": "2026-09-20T17:28Z"
+      "excess": -0.8736334217041943
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -1571,6 +1581,8 @@
       },
       "prompt": "opener",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:28Z",
+      "collected_to": "2026-09-20T17:29Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 8,
@@ -1614,9 +1626,7 @@
       ],
       "empty_tight": 3,
       "empty_open": 0,
-      "excess": 0.07606796821600066,
-      "collected_from": "2026-09-20T17:28Z",
-      "collected_to": "2026-09-20T17:29Z"
+      "excess": 0.07606796821600066
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -1629,6 +1639,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:33Z",
+      "collected_to": "2026-09-20T14:38Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 6,
@@ -1672,9 +1684,7 @@
       ],
       "empty_tight": 3,
       "empty_open": 9,
-      "excess": -1.8997202921592646,
-      "collected_from": "2026-09-20T14:33Z",
-      "collected_to": "2026-09-20T14:38Z"
+      "excess": -1.8997202921592646
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -1689,6 +1699,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:38Z",
+      "collected_to": "2026-09-20T14:38Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 8,
@@ -1732,9 +1744,7 @@
       ],
       "empty_tight": 3,
       "empty_open": 2,
-      "excess": -0.1913334574809586,
-      "collected_from": "2026-09-20T14:38Z",
-      "collected_to": "2026-09-20T14:38Z"
+      "excess": -0.1913334574809586
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -1749,6 +1759,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:38Z",
+      "collected_to": "2026-09-20T14:38Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 5,
@@ -1792,9 +1804,7 @@
       ],
       "empty_tight": 3,
       "empty_open": 0,
-      "excess": 1.2728144767751868,
-      "collected_from": "2026-09-20T14:38Z",
-      "collected_to": "2026-09-20T14:38Z"
+      "excess": 1.2728144767751868
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -1809,6 +1819,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T14:38Z",
+      "collected_to": "2026-09-20T14:39Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 7,
@@ -1852,9 +1864,7 @@
       ],
       "empty_tight": 2,
       "empty_open": 2,
-      "excess": 0.4776253215909357,
-      "collected_from": "2026-09-20T14:38Z",
-      "collected_to": "2026-09-20T14:39Z"
+      "excess": 0.4776253215909357
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -1869,6 +1879,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:29Z",
+      "collected_to": "2026-09-20T17:29Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -1912,9 +1924,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 1,
-      "excess": NaN,
-      "collected_from": "2026-09-20T17:29Z",
-      "collected_to": "2026-09-20T17:29Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -1929,6 +1939,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:29Z",
+      "collected_to": "2026-09-20T17:29Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 9,
@@ -1972,9 +1984,7 @@
       ],
       "empty_tight": 2,
       "empty_open": 1,
-      "excess": NaN,
-      "collected_from": "2026-09-20T17:29Z",
-      "collected_to": "2026-09-20T17:29Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -1989,6 +1999,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:29Z",
+      "collected_to": "2026-09-20T17:29Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -2032,9 +2044,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 3,
-      "excess": -0.9493175908088406,
-      "collected_from": "2026-09-20T17:29Z",
-      "collected_to": "2026-09-20T17:29Z"
+      "excess": -0.9493175908088406
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -2049,6 +2059,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:29Z",
+      "collected_to": "2026-09-20T17:30Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 9,
@@ -2092,9 +2104,7 @@
       ],
       "empty_tight": 2,
       "empty_open": 5,
-      "excess": -0.9598705913551916,
-      "collected_from": "2026-09-20T17:29Z",
-      "collected_to": "2026-09-20T17:30Z"
+      "excess": -0.9598705913551916
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -2109,6 +2119,8 @@
       },
       "prompt": "question",
       "provider": "fireworks",
+      "collected_from": "2026-09-20T17:30Z",
+      "collected_to": "2026-09-20T17:48Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 10,
@@ -2152,9 +2164,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-20T17:30Z",
-      "collected_to": "2026-09-20T17:48Z"
+      "excess": NaN
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -2169,6 +2179,8 @@
       },
       "prompt": "repeat",
       "provider": "fireworks",
+      "collected_from": "2026-09-21T15:42Z",
+      "collected_to": "2026-09-21T15:42Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 1,
@@ -2212,9 +2224,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 2,
-      "excess": 2.915626154311943,
-      "collected_from": "2026-09-21T15:42Z",
-      "collected_to": "2026-09-21T15:42Z"
+      "excess": 2.915626154311943
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -2229,6 +2239,8 @@
       },
       "prompt": "repeat",
       "provider": "fireworks",
+      "collected_from": "2026-09-21T15:42Z",
+      "collected_to": "2026-09-21T15:43Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 1,
@@ -2272,9 +2284,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 7,
-      "excess": 1.3535707947494926,
-      "collected_from": "2026-09-21T15:42Z",
-      "collected_to": "2026-09-21T15:43Z"
+      "excess": 1.3535707947494926
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
@@ -2289,6 +2299,8 @@
       },
       "prompt": "repeat",
       "provider": "fireworks",
+      "collected_from": "2026-09-21T15:43Z",
+      "collected_to": "2026-09-21T15:43Z",
       "n_tight": 10,
       "n_open": 10,
       "support_tight": 1,
@@ -2332,9 +2344,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": NaN,
-      "collected_from": "2026-09-21T15:43Z",
-      "collected_to": "2026-09-21T15:43Z"
+      "excess": NaN
     }
   ],
   "p_holm_by_prompt": {
@@ -2446,6 +2456,8 @@
       "model": "deepseek-v4-flash-vision-exp",
       "parameter": "top_p",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 1,
       "n_no_effect": 0,
@@ -2463,6 +2475,8 @@
       "model": "deepseek-v4-flash-vision-exp",
       "parameter": "top_k",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 3,
       "n_powered": 3,
       "n_distinguishable": 3,
       "n_no_effect": 0,
@@ -2480,6 +2494,8 @@
       "model": "deepseek-v4-flash-vision-exp",
       "parameter": "min_p",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 1,
       "n_no_effect": 0,
@@ -2497,6 +2513,8 @@
       "model": "deepseek-v4-flash-vision-exp",
       "parameter": "typical_p",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 0,
       "n_powered": 0,
       "n_distinguishable": 0,
       "n_no_effect": 0,
@@ -2514,6 +2532,8 @@
       "model": "deepseek-v4-flash-vision-exp",
       "parameter": "mirostat",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 0,
       "n_powered": 0,
       "n_distinguishable": 0,
       "n_no_effect": 0,
@@ -2531,6 +2551,8 @@
       "model": "deepseek-v4-flash-vision-exp",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 0,
       "n_powered": 0,
       "n_distinguishable": 0,
       "n_no_effect": 0,
@@ -2550,6 +2572,8 @@
       "model": "deepseek-v4-flash-vision-exp",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 2,
       "n_powered": 2,
       "n_distinguishable": 2,
       "n_no_effect": 0,
@@ -2569,6 +2593,8 @@
       "model": "deepseek-v4-flash-vision-exp",
       "parameter": "presence_penalty",
       "n_prompts": 4,
+      "n_control_passed": 1,
+      "n_verdict": 0,
       "n_powered": 0,
       "n_distinguishable": 0,
       "n_no_effect": 0,
@@ -2584,11 +2610,5 @@
       },
       "verdict_forced": "insufficient"
     }
-  ],
-  "collected": {
-    "from": "2026-09-20T14:08Z",
-    "to": "2026-09-21T15:43Z",
-    "source": "cache"
-  },
-  "written": "2026-09-21T16:06Z"
+  ]
 }

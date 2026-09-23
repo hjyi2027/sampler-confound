@@ -1,0 +1,474 @@
+\documentclass{article}
+\usepackage{tmlr}
+% Anonymous for submission. Swap for \usepackage[accepted]{tmlr} on acceptance.
+
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage{xcolor}
+
+\title{Documented, accepted, honoured: an audit of decoding parameters\\
+on hosted LLM inference APIs}
+
+\author{Anonymous authors\\Paper under double-blind review}
+
+\def\month{09}
+\def\year{2026}
+\def\openreview{\url{https://openreview.net/forum?id=XXXXXXXXXX}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Evaluation results for hosted language models are reported with a decoding
+configuration --- a temperature, a nucleus threshold, sometimes a seed --- on
+the assumption that the provider applies what the request asks for. We test
+that assumption. For every chat model one provider serves (18 models, \$0.20
+to \$15.00 per million output tokens) and every sampling parameter that
+provider documents (nine), we separate three facts that are routinely
+conflated: what the vendor's reference \emph{documents}, what the API
+\emph{accepts}, and what the output distribution shows was \emph{honoured},
+the last established by a permutation test on 40 completions per arm with a
+positive control, a negative control calibrated on real output, and
+per-prompt reporting. Of 182 (model, parameter) cells, 88 behave as
+documented and 27 are documented, accepted and inert. The largest single gap
+is \texttt{seed}, described in the reference as ``Random seed for
+deterministic sampling'' and without measurable effect on 17 of 18 models;
+\texttt{mirostat} is accepted everywhere and inert on six models, which is
+the first parameter we find whose honouring differs \emph{between models
+behind one serving stack}. The provider also accepts four parameters it does
+not document: two are inert, one --- \texttt{ignore\_eos} --- works, pushing
+generation past the end-of-turn token and returning the raw control token in
+the response. Separately, only one model in 18 reproduces byte-identical
+output across ten identical temperature-0 requests. We release the instrument,
+the raw completions for every verdict, and the dated provenance for each.
+Because provider behaviour changes --- three models were withdrawn during this
+study --- every result is dated from the timestamp of the calls it was made
+of.
+\end{abstract}
+
+\section{Introduction}
+
+A reported benchmark number is a function of the model, the prompt, the
+benchmark, and the decoding configuration. The first three are usually
+reported. The fourth is reported inconsistently, and when it is reported, it
+is reported as the \emph{request} the harness sent, not as the behaviour the
+provider applied to it.
+
+Those differ. This paper measures how much, on one hosted provider, across
+every chat model it serves.
+
+Our contribution is an audit and an instrument, not a claim about how much
+decoding configuration moves benchmark accuracy --- a question already
+addressed for self-hosted inference by \citet{hochlehnert2025sober} and
+\citet{pape2026silent}, and which we discuss as future work in
+Section~\ref{sec:future}. The audit answers a prior question that those
+studies assume away by controlling the serving stack: on a hosted API, does
+the decoding parameter you sent do anything at all?
+
+We make three distinctions the literature and the tooling collapse:
+
+\begin{itemize}
+\item \textbf{Documented} --- the vendor's API reference describes the
+parameter. We transcribe each provider's reference verbatim, with URL and
+date of reading, and record ``absent'' as a positive statement about a page
+read on a date rather than as a missing key.
+\item \textbf{Accepted} --- the HTTP status when the parameter is sent. A
+strict validator returning \texttt{400 Extra inputs are not permitted} is a
+different fact from a 200.
+\item \textbf{Honoured} --- the output distribution differs between two
+settings of the parameter, far apart in its documented range, with everything
+else held fixed.
+\end{itemize}
+
+The gap between the first and the third is the audit's subject. Its worst
+case --- accepted by the API, absent from the documentation, and inert at
+runtime --- is a parameter a user can set and receive no error, no warning,
+and no effect from. We find nine such cells and name them.
+
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Is the API serving the model it claims?}
+\citet{gao2025modelequality} test whether a hosted endpoint serves the
+advertised weights, using a maximum mean discrepancy two-sample test on
+completions across 31 endpoints and 9 providers. We share the statistical
+family --- a distribution-level two-sample test on completions, since neither
+question can be settled from a single response --- and ask a different
+question: not \emph{which model} is behind the endpoint, but \emph{what the
+serving stack does with the request's decoding parameters}. Model equality
+testing holds the decoding configuration fixed as a nuisance; here it is the
+treatment. \citet{karvonen2025difr} audit providers for quantization through
+a seeded verifier, again taking the decoding path as given.
+\citet{li2026sameservice} measure hosted open-weight APIs at the service
+level --- latency, throughput, price, protocol compatibility --- and
+recommend, without running, exactly the decoding-compliance checks we
+implement.
+
+\paragraph{Does decoding configuration move benchmark scores?}
+\citet{hochlehnert2025sober} show on local vLLM that seed alone moves AIME24
+accuracy by 5--15 points and that temperature and \texttt{top\_p} move it
+comparably; \citet{pape2026silent} show that swapping inference backends
+moves GSM8K by up to 16.6 points, and trace part of it to a hidden default
+repetition penalty in one backend. Both establish that decoding
+configuration and serving stack matter for reported numbers, and both
+deliberately work where the stack is under the experimenter's control. Our
+finding that a documented parameter can be accepted and inert is the hosted
+counterpart of their hidden-default finding: in one case the stack applies
+something you did not ask for, in the other it does not apply something you
+did.
+
+\paragraph{Is temperature-0 decoding reproducible?}
+\citet{atil2024nondeterminism} report that identical requests at temperature
+0 with a fixed seed agree at rates from 0\% to 86\% across five models. We
+replicate this on 18 hosted models behind one stack, and add the comparison
+the provider's documentation invites: the reference promises
+``deterministic sampling'' from \texttt{seed}, and we measure whether a fixed
+seed makes a non-deterministic prompt reproducible. \citet{he2025defeating}
+identify batch-invariance as the mechanism, which bears on how such a probe
+must be run (Section~\ref{sec:limitations}).
+
+\paragraph{Inferring the decoding strategy.}
+\citet{ippolito2023reverse} recover $k$ or $p$ from unique-count statistics
+on engineered small-support prompts, given blackbox access. That is a strictly
+stronger measurement than ours, which is binary per cell
+(distinguishable/not), and it is the natural next version of this instrument:
+estimating the \emph{effective} $k$ a provider applies rather than only
+whether $k$ is applied. It answers a different question, though --- what the
+system does --- rather than whether the system complies with what the caller
+asked for.
+
+To our knowledge, no prior work tests per-(provider, model, parameter)
+compliance with user-supplied decoding parameters, compares it against the
+vendor's own documentation, or reports parameters a provider accepts without
+documenting.
+
+\section{Method}
+
+\subsection{Design}
+
+For each (model, parameter) we run a two-sample test: $n=40$ completions at a
+\emph{tight} setting and 40 at an \emph{open} setting, far apart in the
+parameter's documented range, with every other field of the request
+identical. Arms are named by direction rather than by label, so a truncation
+parameter's tight arm is the one that should narrow the output distribution
+if honoured.
+
+\paragraph{Statistic and null.}
+The null is exchangeability of the two arms, which is exactly the hypothesis
+``the parameter did nothing''. We permute arm labels 10{,}000 times. For a
+truncation parameter (\texttt{top\_p}, \texttt{top\_k}, \texttt{min\_p},
+\texttt{typical\_p}, mirostat) the primary statistic is the one-sided entropy
+drop $\Delta H = H(\text{open}) - H(\text{tight})$, since an honoured
+truncation reduces entropy in a known direction. For a penalty
+(\texttt{repetition\_penalty}, \texttt{frequency\_penalty},
+\texttt{presence\_penalty}) the direction is not known --- a strong penalty
+can raise or lower the entropy of a short reply --- so the primary is the
+two-sided total variation distance. This mattered empirically: on one model
+\texttt{frequency\_penalty} emptied the open arm, giving $\Delta H = -3.3$
+with one-sided $p = 1.0$ while the two-sided test saw the same shift at
+$p = 0.0002$. Holm--Bonferroni is applied across the grid; per-cell claims
+use the per-cell $p$-value and we report both.
+
+\paragraph{Positive control.}
+A null result is uninterpretable unless the probe is known to have power on
+that (model, prompt). Temperature is the control: moving from 0 to 1.5 must
+remove at least half the open-arm entropy, or every null on that cell is
+reported as \emph{underpowered} --- evidence of nothing --- rather than as
+\emph{no effect seen}. The three-way distinction between ``the provider
+refused it'', ``the provider took it and nothing changed'', and ``the probe
+could not have seen a change'' is the reason the instrument exists; an
+earlier boolean version of this classification conflated the first two and
+nearly excluded a model on a $p=0.063$ cell.
+
+For the penalties the temperature control is the wrong control, because a
+penalty acts only on tokens that have already appeared and a one-sentence
+reply has few. Those parameters are additionally tested on a prompt that
+\emph{forces} repetition (``Repeat the word `yes' twenty times''), where the
+penalty must act if it is applied. That cell is its own control, and we report
+``applied'' (forced prompt) separately from ``matters on free text''.
+
+\paragraph{Negative control.}
+Two arms at \emph{identical} settings must not be distinguishable. Collected
+in the same order as a real test, so that anything in the collection process
+that breaks exchangeability --- provider state drifting between the first arm
+and the second --- is exposed rather than assumed away. Pairs where both arms
+are all-unique are excluded: the statistic has no range there and $p=1$ by
+construction, so counting them flatters the calibration. Pooled over the
+informative pairs, the primary statistic's false-positive rate is 0/37.
+
+\paragraph{Prompts.}
+Four prompts with genuine output entropy, reported per prompt, with the
+aggregate a majority over prompts that produced a verdict. A single degenerate
+prompt cannot drive a verdict; an earlier single-prompt version using a
+one-word noun with a strong mode did not predict task-level sampler
+sensitivity and was replaced.
+
+\subsection{Determinism}
+
+Ten byte-identical requests at temperature 0, under three conditions (no
+seed, \texttt{seed=0}, \texttt{seed=1}), on five prompts per model --- the
+four above plus one real MATH-500 problem, so the measurement speaks to the
+greedy cell an evaluation would actually run. We report the modal share: the
+fraction of the ten responses equal to the most common response. The test for
+``is the seed honoured'' is whether ten calls with the \emph{same} seed agree,
+not whether \texttt{seed=0} and \texttt{seed=1} differ; on a model whose
+seeded runs are 40\% self-consistent the latter differ because everything
+differs.
+
+\subsection{Provenance}
+
+Provider behaviour changes: three models were withdrawn from the catalogue
+during this study, and one returned. Every response is cached under a hash of
+its exact request body plus a replicate index, with the time the provider
+answered; every reported cell carries the collection window derived from
+those timestamps, not from when a report was written. Documentation is
+transcribed with its URL and date of reading. The raw completions for every
+verdict are released, so every verdict re-derives without the cache and
+without a key.
+
+\section{Results}
+
+\subsection{Documented versus honoured}
+
+Table~\ref{tab:gap} summarises 182 cells: 18 models $\times$ nine documented
+parameters, plus four undocumented parameters on a five-model subset.
+
+\begin{table}[t]
+\centering
+\caption{Every sampling parameter the provider documents, across all 18 chat
+models it serves. \emph{Accepted} counts HTTP 200; \emph{honoured} counts
+cells distinguishable at $p<0.05$; \emph{inert} counts nulls where the
+positive control passed; \emph{undet.} counts cells where the control failed
+or every prompt was degenerate. Collected 2026-09-17 to 2026-09-22.}
+\label{tab:gap}
+\begin{tabular}{llrrrr}
+\toprule
+Parameter & Documented as & Accepted & Honoured & Inert & Undet. \\
+\midrule
+\texttt{top\_p}              & nucleus sampling            & 18/18 & 14 & 0 & 4 \\
+\texttt{top\_k}              & top-$k$ filtering           & 18/18 & 16 & 0 & 2 \\
+\texttt{min\_p}              & min.\ probability threshold & 18/18 & 13 & 0 & 5 \\
+\texttt{typical\_p}          & typical-$p$ sampling        & 18/18 &  8 & 1 & 9 \\
+mirostat                     & target perplexity           & 18/18 &  5 & \textbf{6} & 7 \\
+\texttt{repetition\_penalty} & penalty above 1.0           & 18/18 & 14 & 1 & 3 \\
+\texttt{frequency\_penalty}  & frequency penalty           & 18/18 & 18 & 0 & 0 \\
+\texttt{presence\_penalty}   & presence penalty            & 18/18 &  0 & 2 & 16 \\
+\texttt{seed}                & ``deterministic sampling''  & 18/18 &  0 & \textbf{17} & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{The largest documented gap is \texttt{seed}.}
+The reference entry reads, in full, ``Random seed for deterministic
+sampling.'' Across 73 (model, prompt) cells that were not already
+deterministic without a seed, a fixed seed made the run reproducible in 10,
+and on no model in more than half of its non-deterministic prompts. Seventeen
+of eighteen models are therefore \emph{documented, accepted, ignored} for
+this parameter. A harness that writes \texttt{seed=0} into a configuration
+and ``reproducible'' into a paper is relying on this sentence.
+
+\paragraph{Honouring is not uniform behind one serving stack.}
+For the truncation parameters, every model that the probe had power on
+behaved the same way, which suggested that compliance is a property of the
+stack rather than the model. Mirostat refutes that: accepted on all 18 and
+measurably inert on six. \texttt{typical\_p} is inert on one model, which also
+ignores mirostat and \texttt{repetition\_penalty} --- three accepted, inert
+parameters on a single model behind a stack that honours them elsewhere.
+
+\paragraph{Applied is not the same as consequential.}
+\texttt{frequency\_penalty} at its maximum breaks forced repetition on 18 of
+18 models, so it is applied everywhere. On a free-text prompt it leaves the
+output distribution indistinguishable from the control on 8 of 18. Both are
+true, and a harness reporting ``\texttt{frequency\_penalty}=2.0'' is
+reporting a setting that is real and, for short generation on most of these
+models, inconsequential. \texttt{presence\_penalty} is undetermined by this
+design: bounded at 2 logits, it cannot overturn a forced token, so the forced
+prompt cannot separate ``not applied'' from ``applied but too small to
+matter''. We report it as undetermined rather than resolving it by assumption.
+
+\subsection{Accepted, undocumented, inert}
+
+The provider validates request bodies strictly: of fifteen sampler names
+drawn from other inference stacks (\texttt{top\_a}, \texttt{tfs},
+\texttt{dry\_multiplier}, \dots) all fifteen return \texttt{400 Extra inputs
+are not permitted}. Four names from vLLM's \texttt{SamplingParams} pass
+validation and appear nowhere in the reference. Table~\ref{tab:undoc} gives
+the result of a decisive test for each on five models.
+
+\begin{table}[t]
+\centering
+\caption{Parameters the provider accepts and does not document. Each is
+tested by a design in which an applied parameter must show: beam search must
+make temperature-1.0 sampling deterministic; \texttt{skip\_special\_tokens}
+=false must expose an end-of-turn marker; \texttt{ignore\_eos} must push a
+one-word answer to the token cap. Collected 2026-09-22.}
+\label{tab:undoc}
+\begin{tabular}{llll}
+\toprule
+Parameter & Documented & Accepted & Honoured \\
+\midrule
+\texttt{use\_beam\_search}     & absent & 5/5 & \textbf{inert on 4}, undet.\ on 1 \\
+\texttt{skip\_special\_tokens} & absent & 5/5 & \textbf{inert on 5} \\
+\texttt{ignore\_eos}           & absent & 5/5 & \textbf{honoured on 3}; HTTP 500 on 1 \\
+\texttt{best\_of}              & absent & 5/5 & no signature observable externally \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A caller who sets \texttt{use\_beam\_search=true} receives HTTP 200, no
+warning, and sampling. These nine cells are the audit's worst case. Its
+mirror is arguably worse for evaluation: \texttt{ignore\_eos} is
+\emph{undocumented and honoured}, pushing the model past its end-of-turn
+token, with the raw control token appearing in the returned text
+(\texttt{cat<|assistant|>We need answer\dots}). Nothing in the reference says
+it exists.
+
+We also record that \texttt{repetition\_penalty=2.0}, the documented maximum,
+is accepted and then hangs: generation streams roughly 300 chunks in 7.6
+seconds and then stalls until the connection drops at 742 seconds, with one
+non-streaming call held for 55 minutes. ``Accepted and unusable at a
+documented value'' is a fourth category, distinct from inert.
+
+\subsection{Temperature-0 decoding is not reproducible}
+
+One model in 18 returns byte-identical output across ten identical
+temperature-0 requests. The rest range from 20\% to 78\% modal agreement, and
+price does not predict it: a \$15.00/M model reproduces at 74\%, a \$0.50/M
+model at 76\%. On the embedded MATH-500 problem, six models reproduce 10/10
+and the worst reproduces 2/10 --- for those, a reported greedy accuracy is
+one draw from a distribution, not a fixed quantity.
+
+\subsection{Grader failure modes are temperature-correlated}
+\label{sec:grader}
+
+Hand-verifying an exact-match grader with normalisation against 50 stratified
+samples moved it from 30/50 to 50/50 agreement, finding five distinct bugs.
+The one that matters methodologically: a last-number fallback credited
+truncated responses, and in one case the number the model was last
+manipulating \emph{was} the gold answer, scoring a response that never stated
+an answer as correct. Several of these bugs track temperature, because high
+temperature produces longer and messier output; a grader whose error rate
+rises with temperature injects sampler-correlated error into exactly the
+quantity a decoding study reports. After the fixes the lenient path is used
+0\% of the time in every configuration.
+
+The three-valued verdict (correct / incorrect / unparseable) is load-bearing.
+Unparseable is not uniform across models: on a 1000-generation corpus one
+model of four produces unparseable responses at 10\% (greedy) rising
+monotonically to 18\% (temperature 1.0), and 27--33\% on an AIME subset,
+while the other three produce none. Nearly all are responses that exhausted
+the token budget mid-reasoning. Scoring them as incorrect gives that model
+alone a $+0.06$ temperature effect --- which vanishes among the responses it
+finishes, where it is the most accurate model of the four --- and inverts 12
+of 30 pairwise model comparisons. Whether to fold unparseable into
+``incorrect'' is a choice, it is model-specific, and it is
+temperature-correlated, so it must be reported rather than absorbed.
+
+\section{Why an ignored parameter corrupts a decoding study}
+\label{sec:illustration}
+
+The audit's practical consequence is best shown on the analysis it threatens.
+Consider two grid cells: \{temperature 1.0, \texttt{min\_p} 0.05\} and
+\{temperature 1.0, \texttt{top\_p} 1.0\}. On a stack that applies
+\texttt{min\_p} these are two conditions. On a stack that accepts and ignores
+it they are the same condition run twice. If a grid mixes the two kinds of
+model --- which the results above show is possible within a single provider
+--- the contrast between those cells is real for some models and zero for
+others, and a two-way decomposition books the difference as a
+model $\times$ sampler interaction.
+
+We illustrate this on a small corpus (three models, ten MATH-500 problems,
+five replicates) using real generations for both cases: a genuine
+\texttt{min\_p} cell, and additional replicates of the \texttt{top\_p} cell,
+which is by definition what an ignoring stack returns for the
+\texttt{min\_p} request. With every stack honouring the parameter the
+interaction share is 7.9\%; with one model's stack ignoring it, 3.3--5.6\%
+depending on which model; with all ignoring, 1.0\%; with all ignoring but
+one, 1.7--3.4\% manufactured from that 1.0\%. Each is a legitimate analysis
+of a legitimately collected accuracy table, and the table carries no trace of
+which case it is. Only a compliance probe distinguishes them.
+
+We stress that these magnitudes are those of a ten-problem grid and are an
+illustration of the mechanism, not an estimate of its size in practice.
+
+\section{Limitations}
+\label{sec:limitations}
+
+\paragraph{One provider.} All 18 models sit behind one serving stack. The
+mirostat result shows that honouring can differ between models within a
+stack, but the cross-provider question --- whether the same model behind two
+providers complies differently --- is the natural next measurement and is not
+answered here. The instrument is provider-agnostic: each provider sits behind
+an adapter and the probe is invoked with a provider name.
+
+\paragraph{Probe concurrency is a variable.} The determinism probe issues its
+ten identical requests concurrently. Since batch composition is a mechanism
+for nondeterminism \citep{he2025defeating}, concurrency is part of the
+treatment, and a sequential arm is needed to separate ``this model is
+nondeterministic'' from ``this model is nondeterministic under concurrent
+load''. We report modal share, not pairwise agreement.
+
+\paragraph{The positive control's ceiling is not the control's range.} The
+control contrasts temperature 0 against 1.5 while the parameter arms both sit
+at temperature 1.0. An honoured \texttt{top\_k}=1 arm should approach the
+temperature-0 distribution, so the entropy a truncation parameter can remove
+is bounded by $H(T{=}1.0) - H(T{=}0)$, which is smaller than what the control
+demonstrates. Our threshold of half the open-arm entropy is a convention, not
+a derived quantity.
+
+\paragraph{The per-prompt aggregate is a majority vote} with no stated error
+rate. A stratified permutation test --- permuting arm labels within prompt and
+pooling the statistic --- would be exact and is the correct replacement.
+
+\paragraph{Drift.} Repeating cells a few days apart moved some quantities
+materially (one model's distinct-count at temperature 0 went from 11/40 to
+20/40 between 2026-09-17 and 2026-09-20). This is a finding about hosted
+providers as much as a limitation, and it is why every cell is dated.
+
+\section{The variance study is future work, and why}
+\label{sec:future}
+
+This instrument was built for a different study: a fully crossed
+model $\times$ sampler $\times$ problem $\times$ replicate design, reporting
+the share of benchmark-accuracy variance attributable to decoding
+configuration against the share attributable to model choice. We are not
+reporting that study, and the reason is not compute.
+
+A variance component estimated from $k$ factor levels has relative scatter of
+roughly $\sqrt{2/(k-1)}$: 100\% at three levels, 82\% at four, 58\% at seven.
+Simulating the frozen grid, a level-aware interval for the sampler-to-model
+ratio clears a threshold of 0.1 only 57\% of the time \emph{when the two
+components are exactly equal}. A three-model grid can measure that ratio but
+cannot test it. The grid as designed costs roughly \$16 and was affordable;
+it was not run because its headline quantity would not have been testable.
+More problems, more replicates and more spend do not change this. More model
+levels do, and a near-peer band on a single provider does not contain enough
+of them --- which is the same conclusion the audit reaches from the other
+direction, and the reason both point at cross-provider work.
+
+A defensible version of the consequence study, which we leave to future work,
+reports fixed effects for the models actually run plus the
+comparison-inversion rate --- how often a ranking between two models flips
+when only the sampler changes --- with an interval bootstrapped over
+problems. That statistic counts outcomes over observed cells and needs no
+few-level extrapolation.
+
+\section{Reproducibility}
+
+The instrument, the raw completions behind every verdict, the documentation
+transcription, and the dated provenance are released. Every table in this
+paper regenerates from committed records with no API key and no network: the
+response cache is not required, because each probe cell retains its
+completions. Verdicts can therefore be re-derived, and re-derived under a
+\emph{changed} test, which we exercised when the degeneracy rule and the
+penalty statistic changed after collection. The continuous integration
+configuration runs the test suite and regenerates every report offline on
+three Python versions.
+
+\bibliographystyle{tmlr}
+\bibliography{refs}
+
+\end{document}
