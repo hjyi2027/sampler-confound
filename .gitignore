@@ -19,3 +19,14 @@ runs/sweep*/
 # the cache alongside a submission rather than assuming it can be rebuilt.
 cache/
 runs/matrix/.budget.json
+
+# LaTeX build products. main.pdf IS tracked: it is the submission artifact and
+# reviewers of this repo should not need a TeX install to read the paper.
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.log
+paper/*.out
+paper/*.synctex.gz
