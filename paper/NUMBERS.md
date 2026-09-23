@@ -9,16 +9,16 @@ value in `paper/main.tex` disagree, the paper is stale.
 | models audited | `18` | `runs/matrix/ via scripts/probe_matrix.py` |
 | output price span ($/M) | `0.20-15.00` | `samplerconfound/pricing.py` |
 | gap cells, total | `182` | `scripts/gap.py` |
-| cells: as documented | `88` | `scripts/gap.py` |
+| cells: as documented | `98` | `scripts/gap.py` |
 | cells: documented, accepted, ignored | `27` | `scripts/gap.py` |
 | cells: UNDOCUMENTED, ACCEPTED, IGNORED | `9` | `scripts/gap.py` |
 | cells: undocumented, accepted, works | `3` | `scripts/gap.py` |
 | cells: accepted then the server fails | `1` | `scripts/gap.py` |
-| Table 1 top_p | `accepted 18/18, honoured 14, inert 0, undet 4` | `scripts/gap.py` |
+| Table 1 top_p | `accepted 18/18, honoured 16, inert 0, undet 2` | `scripts/gap.py` |
 | Table 1 top_k | `accepted 18/18, honoured 16, inert 0, undet 2` | `scripts/gap.py` |
-| Table 1 min_p | `accepted 18/18, honoured 13, inert 0, undet 5` | `scripts/gap.py` |
-| Table 1 typical_p | `accepted 18/18, honoured 8, inert 1, undet 9` | `scripts/gap.py` |
-| Table 1 mirostat | `accepted 18/18, honoured 5, inert 6, undet 7` | `scripts/gap.py` |
+| Table 1 min_p | `accepted 18/18, honoured 15, inert 0, undet 3` | `scripts/gap.py` |
+| Table 1 typical_p | `accepted 18/18, honoured 13, inert 1, undet 4` | `scripts/gap.py` |
+| Table 1 mirostat | `accepted 18/18, honoured 6, inert 6, undet 6` | `scripts/gap.py` |
 | Table 1 repetition_penalty | `accepted 18/18, honoured 14, inert 1, undet 3` | `scripts/gap.py` |
 | Table 1 frequency_penalty | `accepted 18/18, honoured 18, inert 0, undet 0` | `scripts/gap.py` |
 | Table 1 presence_penalty | `accepted 18/18, honoured 0, inert 2, undet 16` | `scripts/gap.py` |
@@ -33,6 +33,13 @@ value in `paper/main.tex` disagree, the paper is stale.
 | models honouring seed | `0` | `scripts/probe_matrix.py` |
 | (model,prompt) cells non-deterministic without a seed | `73` | `runs/**/determinism*.json` |
 |   of those, made reproducible by a fixed seed | `10` | `runs/**/determinism*.json` |
+| models reproducing on every prompt, sequential / concurrent | `2/18 / 1/18` | `runs/matrix/fireworks/determinism_sequential.json` |
+| models whose pairwise match rises >= 10 pts when sequential | `8: glm-5p2, glm-5p3, inkling, kimi-k3, minimax-m3, muse-glimmer-30b, nemotron-3-ultra-nvfp4, qwen3p8-max` | `runs/matrix/fireworks/determinism_sequential.json` |
+| (model,prompt) pairs: sequential more / less / equal agreement | `48 / 25 / 17` | `runs/matrix/fireworks/determinism_sequential.json` |
+| sequential collection date | `2026-09-23T06:28` | `runs/matrix/fireworks/determinism_sequential.json` |
+| stratified test agrees with majority vote | `111/187` | `every report's aggregates` |
+|   disagreements by kind | `{'-> mixed (effect on some prompts only)': 20, 'undetermined -> resolved by pooling': 46, 'definite verdict reversed': 6, 'mixed -> distinguishable': 4}` | `every report's aggregates` |
+|   where they differ | `deepseek-v4-flash-0731/frequency_penalty/deepseek-v4-flash-0731.dist-n10.json: underpowered -> distinguishable; deepseek-v4-flash-0731/presence_penalty/deepseek-v4-flash-0731.dist-n10.json: underpowered -> no effect seen; deepseek-v4-flash-0731/presence_penalty/deepseek-v4-flash-0731.dist-n40.json: no effect seen -> mixed; deepseek-v4-flash-0731/repetition_penalty/deepseek-v4-flash-0731.dist-n10.json: underpowered -> mixed; deepseek-v4-flash-0731/typical_p/deepseek-v4-flash-0731.dist-n10.json: underpowered -> mixed; deepseek-v4-flash-0731/typical_p/deepseek-v4-flash-0731.dist-n40.json: no effect seen -> distinguishable; deepseek-v4-flash-vision-exp/min_p/deepseek-v4-flash-vision-exp.dist-n10.json: underpowered -> distinguishable; deepseek-v4-flash-vision-exp/top_p/deepseek-v4-flash-vision-exp.dist-n10.json: underpowered -> mixed; deepseek-v4-pro-0813/frequency_penalty/deepseek-v4-pro-0813.dist-n10.json: underpowered -> no effect seen; deepseek-v4-pro-0813/frequency_penalty/deepseek-v4-pro-0813.dist-n40.json: no effect seen -> mixed; deepseek-v4-pro-0813/presence_penalty/deepseek-v4-pro-0813.dist-n40.json: no effect seen -> mixed; deepseek-v4-pro-0813/repetition_penalty/deepseek-v4-pro-0813.dist-n10.json: underpowered -> distinguishable ...` | `every report's aggregates` |
 | negative control: dH false positives / informative pairs | `0/37` | `runs/**/*.neg-n40.json, runs/negative_control.json` |
 | unparseable, math500, minimax-m3 | `greedy 10% lowtemp 12% standard 14% topk 16% hightemp 18%` | `runs/smoke/unparseable.json` |
 | unparseable, aime, gpt-oss-120b | `greedy 0% lowtemp 7% standard 0% topk 0% hightemp 0%` | `runs/smoke/unparseable.json` |

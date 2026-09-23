@@ -9,9 +9,12 @@
     "from": "2026-09-20T14:39Z",
     "to": "2026-09-21T12:27Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:29Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -3299,56 +3302,76 @@
     "word_prob": {
       "nemotron-3-ultra-nvfp4": {
         "model": "nemotron-3-ultra-nvfp4",
-        "control_dh": 4.24331978480211,
-        "control_h_open": 5.153055907333276,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.5393767377751146,
+        "control_h_open": 3.449112860306281,
         "control_h_tight": 0.9097361225311662,
         "control_support_tight": 2,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.8234569663339908,
+        "fraction_removed": 0.736240546663242,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.8234569663339908,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "sentence": {
       "nemotron-3-ultra-nvfp4": {
         "model": "nemotron-3-ultra-nvfp4",
-        "control_dh": 4.2009775004326935,
-        "control_h_open": 5.171928094887362,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.5943609377704338,
+        "control_h_open": 4.5653115322251026,
         "control_h_tight": 0.9709505944546686,
         "control_support_tight": 2,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.8122652564689582,
+        "fraction_removed": 0.787319969820015,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.8122652564689582,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "opener": {
       "nemotron-3-ultra-nvfp4": {
         "model": "nemotron-3-ultra-nvfp4",
-        "control_dh": 2.3800211937775297,
-        "control_h_open": 4.203701696057348,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 0.242961775815834,
+        "control_h_open": 2.0666422780956526,
         "control_h_tight": 1.8236805022798186,
         "control_support_tight": 5,
         "control_n_tight": 40,
-        "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.5661727129709874,
-        "powered": true,
-        "detail": ""
+        "control_p": 0.25237476252374763,
+        "fraction_removed": 0.11756353694637266,
+        "control_alpha": 0.01,
+        "control_power": 0.03,
+        "powered": false,
+        "legacy_fraction_removed": 0.5661727129709874,
+        "legacy_powered": true,
+        "detail": "power 3% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+0.24; 5/40 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "question": {
       "nemotron-3-ultra-nvfp4": {
         "model": "nemotron-3-ultra-nvfp4",
-        "control_dh": 2.357052427207594,
-        "control_h_open": 3.3939427079182685,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.72697484124018,
+        "control_h_open": 2.7638651219508543,
         "control_h_tight": 1.0368902807106744,
         "control_support_tight": 3,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.6944879834619635,
+        "fraction_removed": 0.6248404915002536,
+        "control_alpha": 0.01,
+        "control_power": 0.985,
         "powered": true,
+        "legacy_fraction_removed": 0.6944879834619635,
+        "legacy_powered": true,
         "detail": ""
       }
     },
@@ -3359,45 +3382,59 @@
       "model": "nemotron-3-ultra-nvfp4",
       "parameter": "typical_p",
       "n_prompts": 4,
-      "n_control_passed": 4,
-      "n_verdict": 4,
-      "n_powered": 4,
+      "n_control_passed": 3,
+      "n_verdict": 3,
+      "n_powered": 3,
       "n_distinguishable": 3,
-      "n_no_effect": 1,
+      "n_no_effect": 0,
       "per_prompt": {
         "word_prob": "distinguishable",
         "sentence": "distinguishable",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "distinguishable"
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 6.573819443809791,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
       "parameter": "mirostat",
       "n_prompts": 4,
-      "n_control_passed": 4,
-      "n_verdict": 4,
-      "n_powered": 4,
+      "n_control_passed": 3,
+      "n_verdict": 3,
+      "n_powered": 3,
       "n_distinguishable": 1,
-      "n_no_effect": 3,
+      "n_no_effect": 2,
       "per_prompt": {
         "word_prob": "no effect seen",
         "sentence": "distinguishable",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "no effect seen"
       },
-      "verdict": "no effect seen",
+      "verdict": "mixed",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 1.2454462056919984,
+      "stratified_p": 0.07779222077792221,
+      "stratified_p_holm": 0.08139186081391861,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
-      "n_control_passed": 4,
+      "n_control_passed": 3,
       "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
@@ -3412,13 +3449,20 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 3.999999999999999,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
-      "n_control_passed": 4,
+      "n_control_passed": 3,
       "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 1,
@@ -3429,32 +3473,46 @@
         "opener": "distinguishable",
         "question": "no effect seen"
       },
-      "verdict": "no effect seen",
+      "verdict": "mixed",
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 2.3,
+      "stratified_p": 0.040695930406959305,
+      "stratified_p_holm": 0.08139186081391861,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
       "parameter": "presence_penalty",
       "n_prompts": 4,
-      "n_control_passed": 4,
-      "n_verdict": 4,
-      "n_powered": 4,
+      "n_control_passed": 3,
+      "n_verdict": 3,
+      "n_powered": 3,
       "n_distinguishable": 1,
-      "n_no_effect": 3,
+      "n_no_effect": 2,
       "per_prompt": {
         "word_prob": "no effect seen",
         "sentence": "no effect seen",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "distinguishable"
       },
-      "verdict": "no effect seen",
+      "verdict": "distinguishable",
       "forced": {
         "repeat": "no effect seen"
       },
-      "verdict_forced": "no effect seen"
+      "verdict_forced": "no effect seen",
+      "stratified_stat": 2.175,
+      "stratified_p": 0.0052994700529947,
+      "stratified_p_holm": 0.015898410158984102,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     }
   ]
 }

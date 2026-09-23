@@ -38,7 +38,12 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from samplerconfound.distinguish import (
+    CONTROL_ALPHA,
+    CONTROL_POWER,
+    estimate_power,
+    CONTROL_REFERENCES,
     Aggregate,
+    stratified_test,
     Distinguishability,
     assess_parameter,
     holm_adjust,
@@ -539,7 +544,12 @@ def main() -> int:
     # ---- per-prompt positive control, then the cross-prompt aggregate -------
     from samplerconfound.distinguish import aggregate
 
-    power_by_prompt = {pid: positive_control(rs) for pid, rs in per_prompt_results.items()}
+    # The power analysis is done at the level the parameter tests actually face:
+    # Holm's first step, CONTROL_ALPHA / m, with m the tests in the family.
+    def _m(rs):
+        return max(1, sum(r.parameter != "temperature" for r in rs))
+    power_by_prompt = {pid: positive_control(rs, alpha=CONTROL_ALPHA / _m(rs))
+                       for pid, rs in per_prompt_results.items()}
     adj_by_prompt = {pid: holm_adjust(rs) for pid, rs in per_prompt_results.items()}
 
     print(f"\nPOSITIVE CONTROL BY PROMPT (fraction of open-arm entropy temperature removes)")
@@ -556,28 +566,54 @@ def main() -> int:
     print("  ! = control failed on that prompt; the prompt drops out of that model's verdicts")
 
     aggregates = []
-    print(f"\nVERDICTS — per prompt, then majority over prompts whose control passed")
-    print(f"{'model':<32}{'param':<20}" + "".join(f"{pid:>11}" for pid in prompt_ids)
-          + f"{'ctrl ok':>8}{'verdict':>8}{'dist':>6}  verdict")
     sym = {"distinguishable": "yes", "no effect seen": "NO", "underpowered": "?",
            "rejected": "rej", "unsupported": "n/a", "insufficient": "n/a", "transport": "err"}
+    primaries = {c[0]: c[3] for c in CONTRASTS}
+    rows_out = []
+
+    def cell(pid, model, param):
+        return next((x for x in per_prompt_results[pid]
+                     if x.model == model and x.parameter == param), None)
+
     for model in models:
+        # The control arms per free-text prompt, for the stratified control:
+        # T=0 (the temperature cell's tight arm) against unrestricted T=1.0
+        # (the top_p cell's open arm), the same pair positive_control() uses.
+        ctrl_cells = []
+        ctrl_by_prompt: dict[str, tuple[list[str], list[str]]] = {}
+        for pid in prompt_ids:
+            t = cell(pid, model, "temperature")
+            r = next((c for c in (cell(pid, model, n) for n in CONTROL_REFERENCES)
+                      if c is not None and c.completions_open), None)
+            if t is not None and r is not None and t.completions_tight and r.completions_open:
+                c = assess_parameter(model, "control", {}, {}, t.completions_tight,
+                                     r.completions_open, n_permutations=200)
+                # assess_parameter returns statistics, not data; the stratified
+                # test permutes the data, so attach it (without this the pooled
+                # control saw empty cells and returned NaN on every model)
+                c.completions_tight, c.completions_open = t.completions_tight, r.completions_open
+                ctrl_cells.append(c)
+                if c.status == "ok":
+                    ctrl_by_prompt[pid] = (t.completions_tight, r.completions_open)
+        _, ctrl_p, _ = stratified_test(ctrl_cells, "dh", n_permutations=args.permutations)
+        n_family = max(1, len(models) * sum(1 for c in CONTRASTS if c[0] != "temperature"
+                                            and any(cell(pid, model, c[0]) for pid in prompt_ids)))
+
         for param, _, _, _ in CONTRASTS:
             if param == "temperature":
                 continue                      # it is the control, not a test subject
-            pv = {}
+            pv, cells_free = {}, []
             for pid in prompt_ids:
-                r = next((x for x in per_prompt_results[pid]
-                          if x.model == model and x.parameter == param), None)
+                r = cell(pid, model, param)
                 if r is None:
                     continue
+                cells_free.append(r)
                 pv[pid] = interpret(r, power_by_prompt[pid],
                                     adj_by_prompt[pid].get((model, param), 1.0))
             fv = {}
             if param in FORCED_FOR:
                 for pid in forced_ids:
-                    r = next((x for x in per_prompt_results[pid]
-                              if x.model == model and x.parameter == param), None)
+                    r = cell(pid, model, param)
                     if r is not None:
                         fv[pid] = interpret(r, power_by_prompt.get(pid, {}),
                                             adj_by_prompt[pid].get((model, param), 1.0),
@@ -588,6 +624,23 @@ def main() -> int:
                        for m2, mp in pw.items() if m2 == model}
             agg = (aggregate(pv, model, param, control_passed=ctrl_ok) if pv
                    else Aggregate(model=model, parameter=param))
+            agg.verdict_majority = agg.verdict
+            if pv:
+                agg.stratified_stat, agg.stratified_p, agg.stratified_prompts = stratified_test(
+                    cells_free, primaries.get(param, "dh"), n_permutations=args.permutations)
+                agg.stratified_control_p = ctrl_p
+                # Power for THIS test: the prompts it actually pooled, the
+                # statistic it actually uses, the corrected level it faces.
+                # (A first version credited power from every prompt with a
+                # control, while the parameter's test had pooled only the
+                # usable ones — one prompt of four on some thin runs.)
+                used = [c.prompt for c in cells_free if c.status == "ok"
+                        and c.completions_tight and c.completions_open]
+                pairs = [ctrl_by_prompt[pid] for pid in used if pid in ctrl_by_prompt]
+                agg.stratified_control_power = (
+                    estimate_power(pairs, CONTROL_ALPHA / n_family,
+                                   primary=primaries.get(param, "dh"))
+                    if len(pairs) == len(used) and pairs else float("nan"))
             if fv:
                 agg.forced = fv
                 # One forced prompt is its own verdict; aggregate() wants two
@@ -595,13 +648,46 @@ def main() -> int:
                 agg.verdict_forced = (next(iter(fv.values())) if len(fv) == 1
                                       else aggregate(fv, model, f"{param}[forced]").verdict)
             aggregates.append(agg)
-            line = f"{model:<32}{param:<20}"
-            for pid in prompt_ids:
-                line += f"{sym.get(pv.get(pid, ''), '—'):>11}"
-            line += f"{agg.n_control_passed:>8}{agg.n_verdict:>8}{agg.n_distinguishable:>6}  {agg.verdict}"
-            if fv:
-                line += f"   forced: {sym.get(agg.verdict_forced, agg.verdict_forced)}"
-            print(line)
+            rows_out.append((agg, pv, fv))
+
+    # Holm across every (model, parameter) stratified test in this report, then
+    # the verdict. The stratified test is primary; the majority vote is kept on
+    # the aggregate as `verdict_majority` so the two can be compared.
+    tested = sorted((a for a in aggregates if np.isfinite(a.stratified_p)),
+                    key=lambda a: a.stratified_p)
+    running = 0.0
+    for i, a in enumerate(tested):
+        running = max(running, min(1.0, (len(tested) - i) * a.stratified_p))
+        a.stratified_p_holm = running
+    for a in aggregates:
+        if a.verdict in ("rejected", "unsupported", "transport") or not a.stratified_prompts:
+            continue                          # failed before statistics, or nothing usable
+        if a.stratified_p_holm < 0.05:
+            a.verdict = "distinguishable"
+        elif any(v == "distinguishable" for v in a.per_prompt.values()):
+            # The pooled statistic is a sum, so it tests the effect ON AVERAGE
+            # over prompts; an effect confined to one prompt can wash out. A
+            # prompt that shows it individually (at its own corrected level)
+            # forbids calling the parameter inert.
+            a.verdict = "mixed"
+        elif np.isfinite(a.stratified_control_power) and a.stratified_control_power >= CONTROL_POWER:
+            a.verdict = "no effect seen"     # >= 80% power for a full-strength effect, and none
+        else:
+            a.verdict = "underpowered"
+
+    print(f"\nVERDICTS — per prompt, then a stratified permutation test over prompts "
+          f"(labels permuted within prompt, Holm across this report)")
+    print(f"{'model':<32}{'param':<20}" + "".join(f"{pid:>11}" for pid in prompt_ids)
+          + f"{'ctrl ok':>8}{'p strat':>9}{'p holm':>8}  verdict   (majority)")
+    for agg, pv, fv in rows_out:
+        line = f"{agg.model:<32}{agg.parameter:<20}"
+        for pid in prompt_ids:
+            line += f"{sym.get(pv.get(pid, ''), '—'):>11}"
+        line += (f"{agg.n_control_passed:>8}{agg.stratified_p:>9.4f}{agg.stratified_p_holm:>8.4f}"
+                 f"  {agg.verdict}   ({agg.verdict_majority})")
+        if fv:
+            line += f"   forced: {sym.get(agg.verdict_forced, agg.verdict_forced)}"
+        print(line)
 
     print(f"\n{len(results)} tests over {len(prompt_ids)} prompts, {tokens:,} output tokens, "
           f"{(time.time()-t0)/60:.1f} min   [{default_cache().stats}; {pacer(args.provider).status()}]")

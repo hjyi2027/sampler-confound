@@ -75,7 +75,9 @@ def rows() -> list[tuple[str, str, str]]:
     add("models honouring seed", sum(r.get("seed") == "yes" for r in det), "scripts/probe_matrix.py")
     seeded = 0
     total = 0
-    for f in [ROOT / "runs" / "determinism.json"] + sorted((ROOT / "runs" / "matrix").glob("*/*det*.json")):
+    det_files = [f for f in sorted((ROOT / "runs" / "matrix").glob("*/*det*.json"))
+                 if "sequential" not in f.name]              # different schema, reported below
+    for f in [ROOT / "runs" / "determinism.json"] + det_files:
         try:
             d = json.loads(f.read_text())
         except OSError:
@@ -88,6 +90,55 @@ def rows() -> list[tuple[str, str, str]]:
                               r["conditions"]["seed_1"]["content"][0]) >= 1.0
     add("(model,prompt) cells non-deterministic without a seed", total, "runs/**/determinism*.json")
     add("  of those, made reproducible by a fixed seed", seeded, "runs/**/determinism*.json")
+
+    # sequential vs concurrent determinism, same day (section 4.3)
+    sq = json.loads((ROOT / "runs" / "matrix" / "fireworks" / "determinism_sequential.json").read_text())
+    dm = sq["deterministic_models"]
+    add("models reproducing on every prompt, sequential / concurrent",
+        f"{dm['sequential']}/{dm['of']} / {dm['concurrent']}/{dm['of']}",
+        "runs/matrix/fireworks/determinism_sequential.json")
+    summ = sq["summary"]
+    up_ = [m for m, v in summ.items() if v["sequential_pairwise"] - v["concurrent_pairwise"] >= 0.10]
+    add("models whose pairwise match rises >= 10 pts when sequential", f"{len(up_)}: {', '.join(sorted(up_))}",
+        "runs/matrix/fireworks/determinism_sequential.json")
+    diffs = [r["sequential"]["pairwise"] - r["concurrent"]["pairwise"] for r in sq["rows"]
+             if r["sequential"]["n"] == 10 and r["concurrent"]["n"] == 10]
+    add("(model,prompt) pairs: sequential more / less / equal agreement",
+        f"{sum(d > 0 for d in diffs)} / {sum(d < 0 for d in diffs)} / {sum(d == 0 for d in diffs)}",
+        "runs/matrix/fireworks/determinism_sequential.json")
+    add("sequential collection date", sq["collected"]["from"][:16], "runs/matrix/fireworks/determinism_sequential.json")
+
+    # stratified test vs majority vote (section 3)
+    import glob as _g
+    agree = total_ = 0
+    flips = []
+    for f in [ROOT / "runs" / "distinguish_multiprompt.json"] + [Path(x) for x in _g.glob(str(ROOT / "runs" / "matrix" / "*" / "*.json"))]:
+        try:
+            d = json.loads(Path(f).read_text())
+        except (OSError, json.JSONDecodeError):
+            continue
+        for a in d.get("aggregates", []) if isinstance(d, dict) else []:
+            if a.get("verdict_majority") and a.get("stratified_prompts"):
+                total_ += 1
+                agree += a["verdict"] == a["verdict_majority"]
+                if a["verdict"] != a["verdict_majority"]:
+                    flips.append(f"{a['model']}/{a['parameter']}/{Path(f).name}: {a['verdict_majority']} -> {a['verdict']}")
+    add("stratified test agrees with majority vote", f"{agree}/{total_}", "every report's aggregates")
+    kinds = Counter()
+    for f_ in flips:
+        a_, b_ = f_.split(": ", 1)[1].split(" -> ")
+        definite = {"distinguishable", "no effect seen"}
+        if a_ in definite and b_ in definite:
+            kinds["definite verdict reversed"] += 1
+        elif a_ == "underpowered" and b_ in definite:
+            kinds["undetermined -> resolved by pooling"] += 1
+        elif b_ == "mixed":
+            kinds["-> mixed (effect on some prompts only)"] += 1
+        else:
+            kinds[f"{a_} -> {b_}"] += 1
+    add("  disagreements by kind", dict(kinds), "every report's aggregates")
+    add("  where they differ", "; ".join(sorted(set(flips))[:12]) + (" ..." if len(set(flips)) > 12 else ""),
+        "every report's aggregates")
 
     # negative control
     neg_dh = neg_n = 0

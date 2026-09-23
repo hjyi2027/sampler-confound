@@ -9,9 +9,12 @@
     "from": "2026-09-20T05:50Z",
     "to": "2026-09-21T15:40Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:28Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -1674,6 +1677,7 @@
     "word_prob": {
       "gpt-oss-120b": {
         "model": "gpt-oss-120b",
+        "contrast": "T=0 vs T=1.0",
         "control_dh": 3.3219280948873626,
         "control_h_open": 3.3219280948873626,
         "control_h_tight": -0.0,
@@ -1681,50 +1685,69 @@
         "control_n_tight": 10,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 1.0,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "sentence": {
       "gpt-oss-120b": {
         "model": "gpt-oss-120b",
-        "control_dh": 3.3219280948873626,
-        "control_h_open": 3.3219280948873626,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.9219280948873623,
+        "control_h_open": 2.9219280948873623,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 10,
-        "control_p": 9.999000099990002e-05,
+        "control_p": 0.00019998000199980003,
         "fraction_removed": 1.0,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "opener": {
       "gpt-oss-120b": {
         "model": "gpt-oss-120b",
-        "control_dh": 3.3219280948873626,
-        "control_h_open": 3.3219280948873626,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.3567796494470397,
+        "control_h_open": 1.3567796494470397,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 10,
-        "control_p": 9.999000099990002e-05,
+        "control_p": 0.09969003099690031,
         "fraction_removed": 1.0,
-        "powered": true,
-        "detail": ""
+        "control_alpha": 0.01,
+        "control_power": 0.055,
+        "powered": false,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
+        "detail": "power 6% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.36; 1/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "question": {
       "gpt-oss-120b": {
         "model": "gpt-oss-120b",
-        "control_dh": 2.8464393446710154,
-        "control_h_open": 2.8464393446710154,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.5709505944546687,
+        "control_h_open": 1.5709505944546687,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 10,
-        "control_p": 0.000999900009999,
+        "control_p": 0.040695930406959305,
         "fraction_removed": 1.0,
-        "powered": true,
-        "detail": ""
+        "control_alpha": 0.01,
+        "control_power": 0.185,
+        "powered": false,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
+        "detail": "power 18% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.57; 1/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "repeat": {}
@@ -1734,7 +1757,7 @@
       "model": "gpt-oss-120b",
       "parameter": "typical_p",
       "n_prompts": 4,
-      "n_control_passed": 4,
+      "n_control_passed": 2,
       "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
@@ -1747,32 +1770,46 @@
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 9.765784284662086,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "gpt-oss-120b",
       "parameter": "mirostat",
       "n_prompts": 4,
-      "n_control_passed": 4,
-      "n_verdict": 3,
-      "n_powered": 3,
+      "n_control_passed": 2,
+      "n_verdict": 1,
+      "n_powered": 1,
       "n_distinguishable": 0,
-      "n_no_effect": 3,
+      "n_no_effect": 1,
       "per_prompt": {
         "word_prob": "insufficient",
         "sentence": "no effect seen",
-        "opener": "no effect seen",
-        "question": "no effect seen"
+        "opener": "underpowered",
+        "question": "underpowered"
       },
       "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 0.2713043522197056,
+      "stratified_p": 0.38636136386361364,
+      "stratified_p_holm": 0.7727227277272273,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "gpt-oss-120b",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
-      "n_control_passed": 4,
+      "n_control_passed": 2,
       "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
@@ -1787,49 +1824,70 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 4.0,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "gpt-oss-120b",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
-      "n_control_passed": 4,
-      "n_verdict": 2,
-      "n_powered": 2,
+      "n_control_passed": 2,
+      "n_verdict": 0,
+      "n_powered": 0,
       "n_distinguishable": 0,
-      "n_no_effect": 2,
+      "n_no_effect": 0,
       "per_prompt": {
         "word_prob": "insufficient",
         "sentence": "insufficient",
-        "opener": "no effect seen",
-        "question": "no effect seen"
+        "opener": "underpowered",
+        "question": "underpowered"
       },
-      "verdict": "no effect seen",
+      "verdict": "underpowered",
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 1.0,
+      "stratified_p": 0.8995100489951005,
+      "stratified_p_holm": 0.8995100489951005,
+      "stratified_prompts": 2,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.375,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "gpt-oss-120b",
       "parameter": "presence_penalty",
       "n_prompts": 4,
-      "n_control_passed": 4,
-      "n_verdict": 3,
-      "n_powered": 3,
+      "n_control_passed": 2,
+      "n_verdict": 1,
+      "n_powered": 1,
       "n_distinguishable": 0,
-      "n_no_effect": 3,
+      "n_no_effect": 1,
       "per_prompt": {
         "word_prob": "insufficient",
         "sentence": "no effect seen",
-        "opener": "no effect seen",
-        "question": "no effect seen"
+        "opener": "underpowered",
+        "question": "underpowered"
       },
       "verdict": "no effect seen",
       "forced": {
         "repeat": "insufficient"
       },
-      "verdict_forced": "insufficient"
+      "verdict_forced": "insufficient",
+      "stratified_stat": 1.7999999999999998,
+      "stratified_p": 0.23807619238076191,
+      "stratified_p_holm": 0.7142285771422857,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "underpowered"
     }
   ]
 }

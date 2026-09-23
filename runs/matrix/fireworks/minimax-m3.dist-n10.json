@@ -9,9 +9,12 @@
     "from": "2026-09-20T14:39Z",
     "to": "2026-09-20T16:55Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:28Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -1488,57 +1491,77 @@
     "word_prob": {
       "minimax-m3": {
         "model": "minimax-m3",
-        "control_dh": -0.41417094500762897,
-        "control_h_open": 1.3567796494470397,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.550977500432694,
+        "control_h_open": 3.3219280948873626,
         "control_h_tight": 1.7709505944546686,
         "control_support_tight": 5,
         "control_n_tight": 10,
-        "control_p": 0.8231176882311769,
-        "fraction_removed": -0.305260286868561,
+        "control_p": 9.999000099990002e-05,
+        "fraction_removed": 0.4668907502301862,
+        "control_alpha": 0.01,
+        "control_power": 0.45,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only -31% of 1.36 bits; 1.77 bits remain at temperature 0 (5/10 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": -0.305260286868561,
+        "legacy_powered": false,
+        "detail": "power 45% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.55; 5/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "sentence": {
       "minimax-m3": {
         "model": "minimax-m3",
-        "control_dh": 2.8464393446710154,
-        "control_h_open": 2.8464393446710154,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.3219280948873626,
+        "control_h_open": 3.3219280948873626,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 10,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 1.0,
+        "control_alpha": 0.01,
+        "control_power": 0.995,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "opener": {
       "minimax-m3": {
         "model": "minimax-m3",
-        "control_dh": 1.3651484454403229,
-        "control_h_open": 2.5219280948873624,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.965148445440323,
+        "control_h_open": 3.1219280948873624,
         "control_h_tight": 1.1567796494470395,
         "control_support_tight": 3,
         "control_n_tight": 10,
-        "control_p": 0.014498550144985502,
-        "fraction_removed": 0.5413114070174531,
-        "powered": true,
-        "detail": ""
+        "control_p": 0.0005999400059994001,
+        "fraction_removed": 0.6294662739537646,
+        "control_alpha": 0.01,
+        "control_power": 0.55,
+        "powered": false,
+        "legacy_fraction_removed": 0.5413114070174531,
+        "legacy_powered": true,
+        "detail": "power 55% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.97; 3/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "question": {
       "minimax-m3": {
         "model": "minimax-m3",
-        "control_dh": 1.2264662506490405,
-        "control_h_open": 2.5219280948873624,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.8264662506490406,
+        "control_h_open": 3.1219280948873624,
         "control_h_tight": 1.295461844238322,
         "control_support_tight": 3,
         "control_n_tight": 10,
-        "control_p": 0.0173982601739826,
-        "fraction_removed": 0.48632086423693954,
+        "control_p": 0.0032996700329967,
+        "fraction_removed": 0.5850443043964273,
+        "control_alpha": 0.01,
+        "control_power": 0.5,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 49% of 2.52 bits; 1.30 bits remain at temperature 0 (3/10 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.48632086423693954,
+        "legacy_powered": false,
+        "detail": "power 50% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.83; 3/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "repeat": {}
@@ -1548,45 +1571,59 @@
       "model": "minimax-m3",
       "parameter": "typical_p",
       "n_prompts": 4,
-      "n_control_passed": 2,
-      "n_verdict": 3,
-      "n_powered": 3,
+      "n_control_passed": 1,
+      "n_verdict": 2,
+      "n_powered": 2,
       "n_distinguishable": 2,
-      "n_no_effect": 1,
+      "n_no_effect": 0,
       "per_prompt": {
         "word_prob": "insufficient",
         "sentence": "distinguishable",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "distinguishable"
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 2.2264662506490405,
+      "stratified_p": 0.010298970102989701,
+      "stratified_p_holm": 0.041195880411958805,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "minimax-m3",
       "parameter": "mirostat",
       "n_prompts": 4,
-      "n_control_passed": 2,
-      "n_verdict": 2,
-      "n_powered": 2,
+      "n_control_passed": 1,
+      "n_verdict": 1,
+      "n_powered": 1,
       "n_distinguishable": 0,
-      "n_no_effect": 2,
+      "n_no_effect": 1,
       "per_prompt": {
         "word_prob": "insufficient",
         "sentence": "no effect seen",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "underpowered"
       },
       "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 1.2754887502163461,
+      "stratified_p": 0.031996800319968,
+      "stratified_p_holm": 0.09599040095990401,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "minimax-m3",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
-      "n_control_passed": 2,
+      "n_control_passed": 1,
       "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
@@ -1599,45 +1636,66 @@
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 4.0,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "minimax-m3",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
-      "n_control_passed": 2,
+      "n_control_passed": 1,
+      "n_verdict": 0,
+      "n_powered": 0,
+      "n_distinguishable": 0,
+      "n_no_effect": 0,
+      "per_prompt": {
+        "word_prob": "insufficient",
+        "sentence": "insufficient",
+        "opener": "underpowered",
+        "question": "insufficient"
+      },
+      "verdict": "no effect seen",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 0.8000000000000003,
+      "stratified_p": 0.6261373862613738,
+      "stratified_p_holm": 0.6261373862613738,
+      "stratified_prompts": 1,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.865,
+      "verdict_majority": "underpowered"
+    },
+    {
+      "model": "minimax-m3",
+      "parameter": "presence_penalty",
+      "n_prompts": 4,
+      "n_control_passed": 1,
       "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 0,
       "n_no_effect": 1,
       "per_prompt": {
         "word_prob": "insufficient",
-        "sentence": "insufficient",
-        "opener": "no effect seen",
-        "question": "insufficient"
-      },
-      "verdict": "underpowered",
-      "forced": {},
-      "verdict_forced": ""
-    },
-    {
-      "model": "minimax-m3",
-      "parameter": "presence_penalty",
-      "n_prompts": 4,
-      "n_control_passed": 2,
-      "n_verdict": 2,
-      "n_powered": 2,
-      "n_distinguishable": 0,
-      "n_no_effect": 2,
-      "per_prompt": {
-        "word_prob": "insufficient",
         "sentence": "no effect seen",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "insufficient"
       },
       "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 1.7000000000000002,
+      "stratified_p": 0.29617038296170384,
+      "stratified_p_holm": 0.5923407659234077,
+      "stratified_prompts": 2,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "underpowered"
     }
   ]
 }

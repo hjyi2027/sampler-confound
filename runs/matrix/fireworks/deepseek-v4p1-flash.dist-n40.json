@@ -9,9 +9,12 @@
     "from": "2026-09-20T10:31Z",
     "to": "2026-09-21T16:05Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:28Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -3298,57 +3301,77 @@
     "word_prob": {
       "deepseek-v4p1-flash": {
         "model": "deepseek-v4p1-flash",
-        "control_dh": 4.499872175652692,
-        "control_h_open": 4.953055907333276,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 4.162127800544519,
+        "control_h_open": 4.615311532225102,
         "control_h_tight": 0.4531837316805838,
         "control_support_tight": 3,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.908504216354671,
+        "fraction_removed": 0.9018086366399414,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.908504216354671,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "sentence": {
       "deepseek-v4p1-flash": {
         "model": "deepseek-v4p1-flash",
-        "control_dh": 2.801048124732783,
-        "control_h_open": 5.221928094887363,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.9908888258186153,
+        "control_h_open": 4.411768795973195,
         "control_h_tight": 2.42087997015458,
         "control_support_tight": 13,
         "control_n_tight": 40,
-        "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.5364011288235101,
+        "control_p": 0.00029997000299970003,
+        "fraction_removed": 0.45126771548767064,
+        "control_alpha": 0.01,
+        "control_power": 0.935,
         "powered": true,
+        "legacy_fraction_removed": 0.5364011288235101,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "opener": {
       "deepseek-v4p1-flash": {
         "model": "deepseek-v4p1-flash",
-        "control_dh": 1.4097283808996697,
-        "control_h_open": 2.3437964362751607,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 0.7420526914671897,
+        "control_h_open": 1.6761207468426806,
         "control_h_tight": 0.934068055375491,
         "control_support_tight": 2,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.60147219232915,
+        "fraction_removed": 0.44272030691404485,
+        "control_alpha": 0.01,
+        "control_power": 0.98,
         "powered": true,
+        "legacy_fraction_removed": 0.60147219232915,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "question": {
       "deepseek-v4p1-flash": {
         "model": "deepseek-v4p1-flash",
-        "control_dh": 1.8387218755408674,
-        "control_h_open": 4.8719280948873624,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.8198496879867814,
+        "control_h_open": 4.853055907333276,
         "control_h_tight": 3.033206219346495,
         "control_support_tight": 12,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.3774115380459814,
-        "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 38% of 4.87 bits; 3.03 bits remain at temperature 0 (12/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "fraction_removed": 0.374990464304537,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
+        "powered": true,
+        "legacy_fraction_removed": 0.3774115380459814,
+        "legacy_powered": false,
+        "detail": ""
       }
     },
     "repeat": {}
@@ -3358,45 +3381,59 @@
       "model": "deepseek-v4p1-flash",
       "parameter": "typical_p",
       "n_prompts": 4,
-      "n_control_passed": 3,
-      "n_verdict": 3,
-      "n_powered": 3,
+      "n_control_passed": 4,
+      "n_verdict": 4,
+      "n_powered": 4,
       "n_distinguishable": 3,
-      "n_no_effect": 0,
+      "n_no_effect": 1,
       "per_prompt": {
         "word_prob": "distinguishable",
         "sentence": "distinguishable",
         "opener": "distinguishable",
-        "question": "underpowered"
+        "question": "no effect seen"
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 4.298193720461354,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "deepseek-v4p1-flash",
       "parameter": "mirostat",
       "n_prompts": 4,
-      "n_control_passed": 3,
-      "n_verdict": 3,
-      "n_powered": 3,
+      "n_control_passed": 4,
+      "n_verdict": 4,
+      "n_powered": 4,
       "n_distinguishable": 1,
-      "n_no_effect": 2,
+      "n_no_effect": 3,
       "per_prompt": {
         "word_prob": "distinguishable",
         "sentence": "no effect seen",
         "opener": "no effect seen",
-        "question": "underpowered"
+        "question": "no effect seen"
       },
-      "verdict": "no effect seen",
+      "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 2.072170883544734,
+      "stratified_p": 0.00029997000299970003,
+      "stratified_p_holm": 0.0008999100089991002,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     },
     {
       "model": "deepseek-v4p1-flash",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
-      "n_control_passed": 3,
+      "n_control_passed": 4,
       "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
@@ -3411,13 +3448,20 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 3.8749999999999996,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "deepseek-v4p1-flash",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
-      "n_control_passed": 3,
+      "n_control_passed": 4,
       "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 2,
@@ -3428,17 +3472,24 @@
         "opener": "no effect seen",
         "question": "distinguishable"
       },
-      "verdict": "mixed",
+      "verdict": "distinguishable",
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 2.75,
+      "stratified_p": 0.0031996800319968005,
+      "stratified_p_holm": 0.006399360063993601,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "mixed"
     },
     {
       "model": "deepseek-v4p1-flash",
       "parameter": "presence_penalty",
       "n_prompts": 4,
-      "n_control_passed": 3,
+      "n_control_passed": 4,
       "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 1,
@@ -3449,11 +3500,18 @@
         "opener": "no effect seen",
         "question": "distinguishable"
       },
-      "verdict": "no effect seen",
+      "verdict": "distinguishable",
       "forced": {
         "repeat": "insufficient"
       },
-      "verdict_forced": "insufficient"
+      "verdict_forced": "insufficient",
+      "stratified_stat": 2.3499999999999996,
+      "stratified_p": 0.028997100289971003,
+      "stratified_p_holm": 0.028997100289971003,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     }
   ]
 }

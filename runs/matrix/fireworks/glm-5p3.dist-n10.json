@@ -9,9 +9,12 @@
     "from": "2026-09-20T10:31Z",
     "to": "2026-09-20T16:56Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:28Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -1488,56 +1491,76 @@
     "word_prob": {
       "glm-5p3": {
         "model": "glm-5p3",
+        "contrast": "T=0 vs T=1.0",
         "control_dh": 1.6364527976600283,
         "control_h_open": 3.3219280948873626,
         "control_h_tight": 1.6854752972273344,
         "control_support_tight": 4,
         "control_n_tight": 10,
-        "control_p": 9.999000099990002e-05,
+        "control_p": 0.00029997000299970003,
         "fraction_removed": 0.49262137858390814,
+        "control_alpha": 0.01,
+        "control_power": 0.515,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 49% of 3.32 bits; 1.69 bits remain at temperature 0 (4/10 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.49262137858390814,
+        "legacy_powered": false,
+        "detail": "power 52% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.64; 4/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "sentence": {
       "glm-5p3": {
         "model": "glm-5p3",
-        "control_dh": 2.6000000000000005,
-        "control_h_open": 3.3219280948873626,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.4000000000000004,
+        "control_h_open": 3.1219280948873624,
         "control_h_tight": 0.7219280948873623,
         "control_support_tight": 2,
         "control_n_tight": 10,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.7826779887263512,
+        "fraction_removed": 0.7687556942552167,
+        "control_alpha": 0.01,
+        "control_power": 0.955,
         "powered": true,
+        "legacy_fraction_removed": 0.7826779887263512,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "opener": {
       "glm-5p3": {
         "model": "glm-5p3",
-        "control_dh": 2.9219280948873623,
-        "control_h_open": 2.9219280948873623,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.8464393446710154,
+        "control_h_open": 2.8464393446710154,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 10,
-        "control_p": 9.999000099990002e-05,
+        "control_p": 0.00019998000199980003,
         "fraction_removed": 1.0,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "question": {
       "glm-5p3": {
         "model": "glm-5p3",
+        "contrast": "T=0 vs T=1.0",
         "control_dh": 2.2,
         "control_h_open": 3.1219280948873624,
         "control_h_tight": 0.9219280948873623,
         "control_support_tight": 3,
         "control_n_tight": 10,
-        "control_p": 0.00029997000299970003,
+        "control_p": 9.999000099990002e-05,
         "fraction_removed": 0.7046927197339486,
+        "control_alpha": 0.01,
+        "control_power": 0.8,
         "powered": true,
+        "legacy_fraction_removed": 0.7046927197339486,
+        "legacy_powered": true,
         "detail": ""
       }
     },
@@ -1561,7 +1584,14 @@
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 4.101955000865386,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "glm-5p3",
@@ -1578,9 +1608,16 @@
         "opener": "distinguishable",
         "question": "no effect seen"
       },
-      "verdict": "mixed",
+      "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 5.962565290544031,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "mixed"
     },
     {
       "model": "glm-5p3",
@@ -1597,9 +1634,16 @@
         "opener": "insufficient",
         "question": "no effect seen"
       },
-      "verdict": "underpowered",
+      "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 1.0,
+      "stratified_p": 0.23797620237976203,
+      "stratified_p_holm": 0.47595240475952405,
+      "stratified_prompts": 1,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.88,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "glm-5p3",
@@ -1618,7 +1662,14 @@
       },
       "verdict": "mixed",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 1.7000000000000004,
+      "stratified_p": 0.016698330166983303,
+      "stratified_p_holm": 0.05009499050094991,
+      "stratified_prompts": 2,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "mixed"
     },
     {
       "model": "glm-5p3",
@@ -1637,7 +1688,14 @@
       },
       "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 1.1,
+      "stratified_p": 0.7486251374862514,
+      "stratified_p_holm": 0.7486251374862514,
+      "stratified_prompts": 2,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     }
   ]
 }

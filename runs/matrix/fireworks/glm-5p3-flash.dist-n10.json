@@ -9,9 +9,12 @@
     "from": "2026-09-20T10:31Z",
     "to": "2026-09-21T15:41Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:28Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -1669,56 +1672,76 @@
     "word_prob": {
       "glm-5p3-flash": {
         "model": "glm-5p3-flash",
-        "control_dh": 1.6000000000000005,
-        "control_h_open": 3.3219280948873626,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.4000000000000004,
+        "control_h_open": 3.1219280948873624,
         "control_h_tight": 1.721928094887362,
         "control_support_tight": 4,
         "control_n_tight": 10,
-        "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.48164799306237005,
+        "control_p": 0.0025997400259974,
+        "fraction_removed": 0.44844082164887644,
+        "control_alpha": 0.01,
+        "control_power": 0.38,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 48% of 3.32 bits; 1.72 bits remain at temperature 0 (4/10 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.48164799306237005,
+        "legacy_powered": false,
+        "detail": "power 38% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.40; 4/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "sentence": {
       "glm-5p3-flash": {
         "model": "glm-5p3-flash",
-        "control_dh": 2.8529325012980813,
-        "control_h_open": 3.3219280948873626,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.452932501298081,
+        "control_h_open": 2.9219280948873623,
         "control_h_tight": 0.4689955935892812,
         "control_support_tight": 2,
         "control_n_tight": 10,
-        "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.8588182584953924,
-        "powered": true,
-        "detail": ""
+        "control_p": 0.0023997600239976003,
+        "fraction_removed": 0.8394910557826849,
+        "control_alpha": 0.01,
+        "control_power": 0.755,
+        "powered": false,
+        "legacy_fraction_removed": 0.8588182584953924,
+        "legacy_powered": true,
+        "detail": "power 76% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+2.45; 2/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "opener": {
       "glm-5p3-flash": {
         "model": "glm-5p3-flash",
-        "control_dh": 0.8655022032053594,
-        "control_h_open": 2.1609640474436813,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 0.5509775004326936,
+        "control_h_open": 1.8464393446710154,
         "control_h_tight": 1.295461844238322,
         "control_support_tight": 3,
         "control_n_tight": 10,
-        "control_p": 0.08189181081891811,
-        "fraction_removed": 0.4005167065269817,
+        "control_p": 0.145985401459854,
+        "fraction_removed": 0.29839999999071865,
+        "control_alpha": 0.01,
+        "control_power": 0.06,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 40% of 2.16 bits; 1.30 bits remain at temperature 0 (3/10 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.4005167065269817,
+        "legacy_powered": false,
+        "detail": "power 6% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+0.55; 3/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "question": {
       "glm-5p3-flash": {
         "model": "glm-5p3-flash",
-        "control_dh": 2.8529325012980813,
-        "control_h_open": 3.3219280948873626,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.652932501298081,
+        "control_h_open": 3.1219280948873624,
         "control_h_tight": 0.4689955935892812,
         "control_support_tight": 2,
         "control_n_tight": 10,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.8588182584953924,
+        "fraction_removed": 0.8497737361865144,
+        "control_alpha": 0.01,
+        "control_power": 0.98,
         "powered": true,
+        "legacy_fraction_removed": 0.8588182584953924,
+        "legacy_powered": true,
         "detail": ""
       }
     },
@@ -1729,7 +1752,7 @@
       "model": "glm-5p3-flash",
       "parameter": "typical_p",
       "n_prompts": 4,
-      "n_control_passed": 2,
+      "n_control_passed": 1,
       "n_verdict": 3,
       "n_powered": 3,
       "n_distinguishable": 2,
@@ -1740,15 +1763,22 @@
         "opener": "underpowered",
         "question": "no effect seen"
       },
-      "verdict": "distinguishable",
+      "verdict": "mixed",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 1.9286956477802952,
+      "stratified_p": 0.016698330166983303,
+      "stratified_p_holm": 0.06679332066793321,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "glm-5p3-flash",
       "parameter": "mirostat",
       "n_prompts": 4,
-      "n_control_passed": 2,
+      "n_control_passed": 1,
       "n_verdict": 2,
       "n_powered": 2,
       "n_distinguishable": 2,
@@ -1761,13 +1791,20 @@
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 3.687076540327684,
+      "stratified_p": 0.0005999400059994001,
+      "stratified_p_holm": 0.0029997000299970002,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "glm-5p3-flash",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
-      "n_control_passed": 2,
+      "n_control_passed": 1,
       "n_verdict": 0,
       "n_powered": 0,
       "n_distinguishable": 0,
@@ -1782,13 +1819,20 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 1.0000000000000002,
+      "stratified_p": 0.024397560243975602,
+      "stratified_p_holm": 0.0731926807319268,
+      "stratified_prompts": 1,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.025,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "glm-5p3-flash",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
-      "n_control_passed": 2,
+      "n_control_passed": 1,
       "n_verdict": 0,
       "n_powered": 0,
       "n_distinguishable": 0,
@@ -1803,13 +1847,20 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 0.6000000000000001,
+      "stratified_p": 0.0775922407759224,
+      "stratified_p_holm": 0.1551844815518448,
+      "stratified_prompts": 1,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.025,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "glm-5p3-flash",
       "parameter": "presence_penalty",
       "n_prompts": 4,
-      "n_control_passed": 2,
+      "n_control_passed": 1,
       "n_verdict": 0,
       "n_powered": 0,
       "n_distinguishable": 0,
@@ -1824,7 +1875,14 @@
       "forced": {
         "repeat": "insufficient"
       },
-      "verdict_forced": "insufficient"
+      "verdict_forced": "insufficient",
+      "stratified_stat": 0.2,
+      "stratified_p": 1.0,
+      "stratified_p_holm": 1.0,
+      "stratified_prompts": 1,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.025,
+      "verdict_majority": "underpowered"
     }
   ]
 }

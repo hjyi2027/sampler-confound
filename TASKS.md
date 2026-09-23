@@ -1214,3 +1214,32 @@ Not done, and left to the owner because they cost money or need keys: the
 multi-provider extension, the llama-server ground-truth control, the frozen
 sweep as fixed effects, effective-k estimation, the sequential determinism
 arm, and the positive-control temperature fix.
+
+## 2026-09-23 — the positive control and the aggregate, corrected; concurrency measured
+
+Two Limitations items from the review turned into fixes, applied to every
+cell on disk offline. The positive control now contrasts T=0 with
+unrestricted T=1.0 (the range the parameter arms span; both arms already
+collected) and is a bootstrap power analysis at the Holm-corrected level:
+powered = power >= 0.8 to see a full-strength effect. The aggregate is a
+stratified permutation test over prompts with Holm across the family, and a
+parameter shown on any single prompt is "mixed", never inert.
+
+Three intermediate versions were wrong and were caught before commit, each by
+looking at the verdicts it produced rather than the tests it passed:
+(1) control = mere detectability at p < 0.05 — turned nemotron-lightning's
+truncation cells "inert" with roughly even power; (2) pooled power computed
+over every prompt with a control while the parameter's test pooled only the
+usable ones (one of four on thin runs) — credited power the test did not have;
+(3) no rule for an effect confined to one prompt — the sum statistic washed it
+out and called it inert. All three are now tests.
+
+Headline counts held (no truncation parameter inert; mirostat inert on six,
+membership revised; seed on 17/18). As documented 88 -> 98. Stratified vs
+majority: 111/187 agree; every one of the 6 definite reversals goes from the
+vote's "no effect" to an effect.
+
+Sequential determinism arm, same day as a fresh concurrent arm, $0.75: 2/18
+models fully reproducible sequential vs 1/18 concurrent; agreement higher
+sequentially on 48 of 90 pairs, lower on 25; nemotron-3-ultra 56% -> 100%.
+Paper, FINDINGS and NUMBERS.md updated; the paper is 8 pages.

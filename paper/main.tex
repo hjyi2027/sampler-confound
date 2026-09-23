@@ -30,10 +30,10 @@ to \$15.00 per million output tokens) and every sampling parameter that
 provider documents (nine), we separate three facts that are routinely
 conflated: what the vendor's reference \emph{documents}, what the API
 \emph{accepts}, and what the output distribution shows was \emph{honoured},
-the last established by a permutation test on 40 completions per arm with a
-positive control, a negative control calibrated on real output, and
-per-prompt reporting. Of 182 (model, parameter) cells, 88 behave as
-documented and 27 are documented, accepted and inert. The largest single gap
+the last established by a permutation test on 40 completions per arm,
+stratified across prompts, with a power-analysed positive control and a
+negative control calibrated on real output. Of 182 (model, parameter) cells,
+98 behave as documented and 27 are documented, accepted and inert. The largest single gap
 is \texttt{seed}, described in the reference as ``Random seed for
 deterministic sampling'' and without measurable effect on 17 of 18 models;
 \texttt{mirostat} is accepted everywhere and inert on six models, which is
@@ -42,7 +42,9 @@ behind one serving stack}. The provider also accepts four parameters it does
 not document: two are inert, one --- \texttt{ignore\_eos} --- works, pushing
 generation past the end-of-turn token and returning the raw control token in
 the response. Separately, only one model in 18 reproduces byte-identical
-output across ten identical temperature-0 requests. We release the instrument,
+output across ten identical, concurrently issued temperature-0 requests, and
+only two when the requests are issued one at a time: for eight models the
+probe's own concurrency measurably lowers agreement, for the rest it does not. We release the instrument,
 the raw completions for every verdict, and the dated provenance for each.
 Because provider behaviour changes --- three models were withdrawn during this
 study --- every result is dated from the timestamp of the calls it was made
@@ -127,8 +129,9 @@ replicate this on 18 hosted models behind one stack, and add the comparison
 the provider's documentation invites: the reference promises
 ``deterministic sampling'' from \texttt{seed}, and we measure whether a fixed
 seed makes a non-deterministic prompt reproducible. \citet{he2025defeating}
-identify batch-invariance as the mechanism, which bears on how such a probe
-must be run (Section~\ref{sec:limitations}).
+identify batch-invariance as the mechanism, which makes a probe's own
+concurrency part of the treatment; we measure it directly
+(Section~\ref{sec:determinism}).
 
 \paragraph{Inferring the decoding strategy.}
 \citet{ippolito2023reverse} recover $k$ or $p$ from unique-count statistics
@@ -174,10 +177,32 @@ use the per-cell $p$-value and we report both.
 
 \paragraph{Positive control.}
 A null result is uninterpretable unless the probe is known to have power on
-that (model, prompt). Temperature is the control: moving from 0 to 1.5 must
-remove at least half the open-arm entropy, or every null on that cell is
-reported as \emph{underpowered} --- evidence of nothing --- rather than as
-\emph{no effect seen}. The three-way distinction between ``the provider
+that (model, prompt). The tight settings under test (\texttt{top\_k}=1,
+\texttt{top\_p}=0.01, \texttt{min\_p}=0.9, \texttt{typical\_p}=0.1) are
+greedy-equivalent when honoured, and every open arm is unrestricted sampling
+at temperature 1.0, so the largest effect an honoured parameter can produce is
+exactly the contrast between temperature 0 and temperature 1.0. Both arms are
+already collected. We estimate the test's \emph{power} to detect that
+contrast by bootstrapping the two arms and re-running the same test at the
+same $n$, at the Holm-corrected level the parameter tests face
+($\alpha/m$, with $m$ the tests in the family), and call a prompt powered when
+that power is at least 0.8. A null on an unpowered prompt is reported as
+\emph{underpowered} --- evidence of nothing --- rather than \emph{no effect
+seen}. ``No effect seen'' therefore means that a fully honoured setting would
+have been detected with at least 80\% power and was not; it does not exclude a
+partially honoured parameter with a smaller effect.
+
+Two earlier versions of this control are worth recording because each failed
+in a way that changes verdicts. The first contrasted temperature 0 with 1.5
+and required half the open-arm entropy to be removed: the range was wrong
+(the arms under test sit at 1.0, and at 1.5 several reasoning models run to
+the token cap and return nothing, collapsing the open arm), and the
+threshold had no derivation. The second required only that the correct
+contrast be \emph{detectable} at $p<0.05$. That is too weak: a control that
+clears the threshold by a hair has roughly even power, and the parameter
+tests face a multiplicity correction on top; it turned several truncation
+cells on low-headroom models from undetermined into ``inert''. The power
+criterion reverses those. The three-way distinction between ``the provider
 refused it'', ``the provider took it and nothing changed'', and ``the probe
 could not have seen a change'' is the reason the instrument exists; an
 earlier boolean version of this classification conflated the first two and
@@ -199,19 +224,37 @@ are all-unique are excluded: the statistic has no range there and $p=1$ by
 construction, so counting them flatters the calibration. Pooled over the
 informative pairs, the primary statistic's false-positive rate is 0/37.
 
-\paragraph{Prompts.}
-Four prompts with genuine output entropy, reported per prompt, with the
-aggregate a majority over prompts that produced a verdict. A single degenerate
-prompt cannot drive a verdict; an earlier single-prompt version using a
-one-word noun with a strong mode did not predict task-level sampler
-sensitivity and was replaced.
+\paragraph{Prompts and aggregation.}
+Four prompts with genuine output entropy, each reported on its own. The
+aggregate verdict for a (model, parameter) is a stratified permutation test:
+arm labels are permuted \emph{within} each prompt, the per-prompt statistic is
+summed, and the observed sum is compared with that null, giving one exact
+$p$-value however many prompts contribute. Holm--Bonferroni is applied across
+the (model, parameter) family. Because the sum tests the effect on average, an
+effect confined to one prompt can wash out, so if any single prompt shows the
+effect at its own corrected level the aggregate is reported as \emph{mixed},
+never as inert. Prompts on which both arms are all-unique or both constant are
+excluded: the statistic has no range there.
+
+An earlier version aggregated by majority vote over prompts, which has no
+stated error rate. Kept for comparison, it agrees with the stratified test on
+111 of 187 aggregates. Of the 76 disagreements, 46 are cells the vote left
+undetermined that pooling resolves; 20 become \emph{mixed}; 4 move from mixed
+to distinguishable; and 6 are reversals of a definite verdict --- all six from
+the vote's ``no effect seen'' to an effect the pooled test detects, none in
+the other direction. One of those six is a model the first version of this
+paper listed as ignoring mirostat.
 
 \subsection{Determinism}
 
 Ten byte-identical requests at temperature 0, under three conditions (no
 seed, \texttt{seed=0}, \texttt{seed=1}), on five prompts per model --- the
 four above plus one real MATH-500 problem, so the measurement speaks to the
-greedy cell an evaluation would actually run. We report the modal share: the
+greedy cell an evaluation would actually run. The ten requests are issued
+five at a time; a separate same-day arm issues them strictly one at a time
+(Section~\ref{sec:determinism}). We report the modal share, and for the
+concurrency comparison also pairwise agreement (the share of the 45 pairs that
+are byte-identical), since the two are easily read for each other: the
 fraction of the ten responses equal to the most common response. The test for
 ``is the seed honoured'' is whether ten calls with the \emph{same} seed agree,
 not whether \texttt{seed=0} and \texttt{seed=1} differ; on a model whose
@@ -240,19 +283,21 @@ parameters, plus four undocumented parameters on a five-model subset.
 \centering
 \caption{Every sampling parameter the provider documents, across all 18 chat
 models it serves. \emph{Accepted} counts HTTP 200; \emph{honoured} counts
-cells distinguishable at $p<0.05$; \emph{inert} counts nulls where the
-positive control passed; \emph{undet.} counts cells where the control failed
-or every prompt was degenerate. Collected 2026-09-17 to 2026-09-22.}
+cells distinguishable by the stratified test after Holm correction;
+\emph{inert} counts nulls with at least 80\% power to have seen a fully honoured
+setting; \emph{undet.} counts cells without that power, cells where every
+prompt was degenerate, and cells where prompts disagree (\emph{mixed}).
+Collected 2026-09-17 to 2026-09-22.}
 \label{tab:gap}
 \begin{tabular}{llrrrr}
 \toprule
 Parameter & Documented as & Accepted & Honoured & Inert & Undet. \\
 \midrule
-\texttt{top\_p}              & nucleus sampling            & 18/18 & 14 & 0 & 4 \\
+\texttt{top\_p}              & nucleus sampling            & 18/18 & 16 & 0 & 2 \\
 \texttt{top\_k}              & top-$k$ filtering           & 18/18 & 16 & 0 & 2 \\
-\texttt{min\_p}              & min.\ probability threshold & 18/18 & 13 & 0 & 5 \\
-\texttt{typical\_p}          & typical-$p$ sampling        & 18/18 &  8 & 1 & 9 \\
-mirostat                     & target perplexity           & 18/18 &  5 & \textbf{6} & 7 \\
+\texttt{min\_p}              & min.\ probability threshold & 18/18 & 15 & 0 & 3 \\
+\texttt{typical\_p}          & typical-$p$ sampling        & 18/18 & 13 & 1 & 4 \\
+mirostat                     & target perplexity           & 18/18 &  6 & \textbf{6} & 6 \\
 \texttt{repetition\_penalty} & penalty above 1.0           & 18/18 & 14 & 1 & 3 \\
 \texttt{frequency\_penalty}  & frequency penalty           & 18/18 & 18 & 0 & 0 \\
 \texttt{presence\_penalty}   & presence penalty            & 18/18 &  0 & 2 & 16 \\
@@ -271,17 +316,21 @@ this parameter. A harness that writes \texttt{seed=0} into a configuration
 and ``reproducible'' into a paper is relying on this sentence.
 
 \paragraph{Honouring is not uniform behind one serving stack.}
-For the truncation parameters, every model that the probe had power on
-behaved the same way, which suggested that compliance is a property of the
-stack rather than the model. Mirostat refutes that: accepted on all 18 and
-measurably inert on six. \texttt{typical\_p} is inert on one model, which also
+For the truncation parameters no model is inert: every cell is either
+honoured or undetermined, which suggests that compliance is a property of the
+stack rather than the model. Mirostat refutes that: accepted on all 18,
+honoured on six, and inert --- with at least 80\% power to have seen a
+full-strength effect --- on six others (deepseek-v4-flash-0731,
+deepseek-v4-pro-0813, glm-5p2, muse-glimmer-30b, qwen3p8-max,
+qwen3p8-2p4t-a95b). \texttt{typical\_p} is inert on one model, which also
 ignores mirostat and \texttt{repetition\_penalty} --- three accepted, inert
 parameters on a single model behind a stack that honours them elsewhere.
 
 \paragraph{Applied is not the same as consequential.}
 \texttt{frequency\_penalty} at its maximum breaks forced repetition on 18 of
-18 models, so it is applied everywhere. On a free-text prompt it leaves the
-output distribution indistinguishable from the control on 8 of 18. Both are
+18 models, so it is applied everywhere. On free-text prompts it moves the
+output distribution on only 8 of 18; on 6 it is inert with power, and on 4 the
+prompts disagree. Both are
 true, and a harness reporting ``\texttt{frequency\_penalty}=2.0'' is
 reporting a setting that is real and, for short generation on most of these
 models, inconsequential. \texttt{presence\_penalty} is undetermined by this
@@ -333,11 +382,29 @@ non-streaming call held for 55 minutes. ``Accepted and unusable at a
 documented value'' is a fourth category, distinct from inert.
 
 \subsection{Temperature-0 decoding is not reproducible}
+\label{sec:determinism}
 
 One model in 18 returns byte-identical output across ten identical
-temperature-0 requests. The rest range from 20\% to 78\% modal agreement, and
+temperature-0 requests issued concurrently. The rest range from 20\% to 78\%
+modal agreement (the share of the ten equal to the most common response), and
 price does not predict it: a \$15.00/M model reproduces at 74\%, a \$0.50/M
-model at 76\%. On the embedded MATH-500 problem, six models reproduce 10/10
+model at 76\%.
+
+Batch composition is a known mechanism \citep{he2025defeating}, so concurrency
+is part of the treatment. On 2026-09-23 we ran both arms on the same day for
+all 18 models --- ten requests issued one at a time, and the same ten in
+flight together --- alternating which arm went first by prompt so a time trend
+could not load onto one arm. Two models reproduce on every prompt when
+sequential, against one when concurrent. Across the 90 (model, prompt) pairs,
+pairwise agreement is higher sequentially in 48, lower in 25, equal in 17;
+mean modal share is 70\% sequential against 61\% concurrent. The effect is
+concentrated: for eight models pairwise agreement rises by at least ten
+points when sequential, and one --- nemotron-3-ultra --- is fully
+deterministic sequentially (100\%) and far from it concurrently (56\%
+modal, 39\% pairwise). For others, including kimi-k2p6 at 22\% in both
+arms, the nondeterminism is independent of this client's load. ``Sequential''
+means sequential from the client; the provider still batches our request with
+other traffic, which no client controls. On the embedded MATH-500 problem, six models reproduce 10/10
 and the worst reproduces 2/10 --- for those, a reported greedy accuracy is
 one draw from a distribution, not a fixed quantity.
 
@@ -404,24 +471,12 @@ providers complies differently --- is the natural next measurement and is not
 answered here. The instrument is provider-agnostic: each provider sits behind
 an adapter and the probe is invoked with a provider name.
 
-\paragraph{Probe concurrency is a variable.} The determinism probe issues its
-ten identical requests concurrently. Since batch composition is a mechanism
-for nondeterminism \citep{he2025defeating}, concurrency is part of the
-treatment, and a sequential arm is needed to separate ``this model is
-nondeterministic'' from ``this model is nondeterministic under concurrent
-load''. We report modal share, not pairwise agreement.
-
-\paragraph{The positive control's ceiling is not the control's range.} The
-control contrasts temperature 0 against 1.5 while the parameter arms both sit
-at temperature 1.0. An honoured \texttt{top\_k}=1 arm should approach the
-temperature-0 distribution, so the entropy a truncation parameter can remove
-is bounded by $H(T{=}1.0) - H(T{=}0)$, which is smaller than what the control
-demonstrates. Our threshold of half the open-arm entropy is a convention, not
-a derived quantity.
-
-\paragraph{The per-prompt aggregate is a majority vote} with no stated error
-rate. A stratified permutation test --- permuting arm labels within prompt and
-pooling the statistic --- would be exact and is the correct replacement.
+\paragraph{The power estimate is a bootstrap.} Power is estimated by
+resampling the observed control arms, which treats the observed arms as the
+truth; at $n=10$ (four of the 18 models) this is optimistic, and those rows are
+marked thin in the released tables. It is computed for the reference effect of
+a fully honoured setting, not for the parameter's own observed effect, so it
+is not post-hoc power in the usual, circular sense.
 
 \paragraph{Drift.} Repeating cells a few days apart moved some quantities
 materially (one model's distinct-count at temperature 0 went from 11/40 to

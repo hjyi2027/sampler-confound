@@ -9,9 +9,12 @@
     "from": "2026-09-20T10:31Z",
     "to": "2026-09-21T14:21Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:28Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -3296,57 +3299,77 @@
     "word_prob": {
       "glm-5p2": {
         "model": "glm-5p2",
-        "control_dh": 1.7150839733531944,
-        "control_h_open": 5.031687083026442,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.0053249852141146,
+        "control_h_open": 5.321928094887363,
         "control_h_tight": 3.316603109673248,
         "control_support_tight": 18,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.3408566441142066,
-        "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 34% of 5.03 bits; 3.32 bits remain at temperature 0 (18/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "fraction_removed": 0.3768042238564963,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
+        "powered": true,
+        "legacy_fraction_removed": 0.3408566441142066,
+        "legacy_powered": false,
+        "detail": ""
       }
     },
     "sentence": {
       "glm-5p2": {
         "model": "glm-5p2",
-        "control_dh": 2.6145768204497775,
-        "control_h_open": 5.271928094887363,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.3957046328956904,
+        "control_h_open": 5.053055907333276,
         "control_h_tight": 2.6573512744375853,
         "control_support_tight": 10,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.4959431868931132,
-        "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 50% of 5.27 bits; 2.66 bits remain at temperature 0 (10/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "fraction_removed": 0.47411005871098927,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
+        "powered": true,
+        "legacy_fraction_removed": 0.4959431868931132,
+        "legacy_powered": false,
+        "detail": ""
       }
     },
     "opener": {
       "glm-5p2": {
         "model": "glm-5p2",
-        "control_dh": 2.1036890078950155,
-        "control_h_open": 4.643942707918269,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.4184412695395885,
+        "control_h_open": 3.958694969562842,
         "control_h_tight": 2.5402537000232535,
         "control_support_tight": 8,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.452996330964219,
-        "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 45% of 4.64 bits; 2.54 bits remain at temperature 0 (8/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "fraction_removed": 0.35831032207470803,
+        "control_alpha": 0.01,
+        "control_power": 0.97,
+        "powered": true,
+        "legacy_fraction_removed": 0.452996330964219,
+        "legacy_powered": false,
+        "detail": ""
       }
     },
     "question": {
       "glm-5p2": {
         "model": "glm-5p2",
-        "control_dh": 1.6852477383554265,
-        "control_h_open": 4.4939427079182686,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.6066165626622602,
+        "control_h_open": 4.415311532225102,
         "control_h_tight": 2.808694969562842,
         "control_support_tight": 10,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.37500427751026777,
-        "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 38% of 4.49 bits; 2.81 bits remain at temperature 0 (10/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "fraction_removed": 0.36387388544078647,
+        "control_alpha": 0.01,
+        "control_power": 0.985,
+        "powered": true,
+        "legacy_fraction_removed": 0.37500427751026777,
+        "legacy_powered": false,
+        "detail": ""
       }
     },
     "repeat": {}
@@ -3356,45 +3379,59 @@
       "model": "glm-5p2",
       "parameter": "typical_p",
       "n_prompts": 4,
-      "n_control_passed": 0,
-      "n_verdict": 3,
-      "n_powered": 3,
+      "n_control_passed": 4,
+      "n_verdict": 4,
+      "n_powered": 4,
       "n_distinguishable": 3,
-      "n_no_effect": 0,
+      "n_no_effect": 1,
       "per_prompt": {
         "word_prob": "distinguishable",
         "sentence": "distinguishable",
-        "opener": "underpowered",
+        "opener": "no effect seen",
         "question": "distinguishable"
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 3.93475678245746,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "glm-5p2",
       "parameter": "mirostat",
       "n_prompts": 4,
-      "n_control_passed": 0,
-      "n_verdict": 0,
-      "n_powered": 0,
+      "n_control_passed": 4,
+      "n_verdict": 3,
+      "n_powered": 3,
       "n_distinguishable": 0,
-      "n_no_effect": 0,
+      "n_no_effect": 3,
       "per_prompt": {
         "word_prob": "insufficient",
-        "sentence": "underpowered",
-        "opener": "underpowered",
-        "question": "underpowered"
+        "sentence": "no effect seen",
+        "opener": "no effect seen",
+        "question": "no effect seen"
       },
-      "verdict": "underpowered",
+      "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 0.20708547250381804,
+      "stratified_p": 0.33486651334866513,
+      "stratified_p_holm": 0.33486651334866513,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     },
     {
       "model": "glm-5p2",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
-      "n_control_passed": 0,
+      "n_control_passed": 4,
       "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
@@ -3409,13 +3446,20 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 3.9749999999999996,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "glm-5p2",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
-      "n_control_passed": 0,
+      "n_control_passed": 4,
       "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
@@ -3430,28 +3474,42 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 3.799999999999999,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "glm-5p2",
       "parameter": "presence_penalty",
       "n_prompts": 4,
-      "n_control_passed": 0,
-      "n_verdict": 0,
-      "n_powered": 0,
+      "n_control_passed": 4,
+      "n_verdict": 3,
+      "n_powered": 3,
       "n_distinguishable": 0,
-      "n_no_effect": 0,
+      "n_no_effect": 3,
       "per_prompt": {
         "word_prob": "insufficient",
-        "sentence": "underpowered",
-        "opener": "underpowered",
-        "question": "underpowered"
+        "sentence": "no effect seen",
+        "opener": "no effect seen",
+        "question": "no effect seen"
       },
-      "verdict": "underpowered",
+      "verdict": "no effect seen",
       "forced": {
         "repeat": "insufficient"
       },
-      "verdict_forced": "insufficient"
+      "verdict_forced": "insufficient",
+      "stratified_stat": 1.975,
+      "stratified_p": 0.13058694130586943,
+      "stratified_p_holm": 0.26117388261173885,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     }
   ]
 }

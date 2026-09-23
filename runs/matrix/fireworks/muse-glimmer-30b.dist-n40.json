@@ -9,9 +9,12 @@
     "from": "2026-09-20T14:39Z",
     "to": "2026-09-21T02:05Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:28Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -3298,56 +3301,76 @@
     "word_prob": {
       "muse-glimmer-30b": {
         "model": "muse-glimmer-30b",
-        "control_dh": 3.9225632206827243,
-        "control_h_open": 5.321928094887363,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.7036910331286372,
+        "control_h_open": 5.1030559073332755,
         "control_h_tight": 1.3993648742046383,
         "control_support_tight": 4,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.7370567867031177,
+        "fraction_removed": 0.7257790430644312,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.7370567867031177,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "sentence": {
       "muse-glimmer-30b": {
         "model": "muse-glimmer-30b",
-        "control_dh": 4.233863078320262,
-        "control_h_open": 5.003055907333276,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.732416668046014,
+        "control_h_open": 3.5016094970590275,
         "control_h_tight": 0.7691928290130138,
         "control_support_tight": 2,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.8462554000474865,
+        "fraction_removed": 0.7803316361635836,
+        "control_alpha": 0.01,
+        "control_power": 0.995,
         "powered": true,
+        "legacy_fraction_removed": 0.8462554000474865,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "opener": {
       "muse-glimmer-30b": {
         "model": "muse-glimmer-30b",
-        "control_dh": 3.902078406900582,
-        "control_h_open": 3.902078406900582,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.1068441215341682,
+        "control_h_open": 3.1068441215341682,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 1.0,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "question": {
       "muse-glimmer-30b": {
         "model": "muse-glimmer-30b",
-        "control_dh": 3.6357678405135507,
-        "control_h_open": 4.953055907333276,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.066895652959464,
+        "control_h_open": 4.384183719779189,
         "control_h_tight": 1.317288066819725,
         "control_support_tight": 4,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.7340453870368379,
+        "fraction_removed": 0.6995362988834621,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.7340453870368379,
+        "legacy_powered": true,
         "detail": ""
       }
     },
@@ -3371,7 +3394,14 @@
       },
       "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": -0.03930714509571276,
+      "stratified_p": 0.521947805219478,
+      "stratified_p_holm": 1.0,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     },
     {
       "model": "muse-glimmer-30b",
@@ -3390,7 +3420,14 @@
       },
       "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": -0.2951094416434974,
+      "stratified_p": 0.6452354764523548,
+      "stratified_p_holm": 1.0,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     },
     {
       "model": "muse-glimmer-30b",
@@ -3411,7 +3448,14 @@
       "forced": {
         "repeat": "no effect seen"
       },
-      "verdict_forced": "no effect seen"
+      "verdict_forced": "no effect seen",
+      "stratified_stat": 3.6249999999999996,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "muse-glimmer-30b",
@@ -3428,11 +3472,18 @@
         "opener": "distinguishable",
         "question": "no effect seen"
       },
-      "verdict": "mixed",
+      "verdict": "distinguishable",
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 2.999999999999999,
+      "stratified_p": 0.0026997300269973002,
+      "stratified_p_holm": 0.010798920107989201,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "mixed"
     },
     {
       "model": "muse-glimmer-30b",
@@ -3453,7 +3504,14 @@
       "forced": {
         "repeat": "insufficient"
       },
-      "verdict_forced": "insufficient"
+      "verdict_forced": "insufficient",
+      "stratified_stat": 2.4999999999999996,
+      "stratified_p": 0.3370662933706629,
+      "stratified_p_holm": 1.0,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     }
   ]
 }

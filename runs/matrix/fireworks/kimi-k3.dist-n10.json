@@ -9,9 +9,12 @@
     "from": "2026-09-20T10:31Z",
     "to": "2026-09-20T17:30Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:28Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -1484,6 +1487,7 @@
     "word_prob": {
       "kimi-k3": {
         "model": "kimi-k3",
+        "contrast": "T=0 vs T=1.0",
         "control_dh": 2.8529325012980813,
         "control_h_open": 3.3219280948873626,
         "control_h_tight": 0.4689955935892812,
@@ -1491,41 +1495,56 @@
         "control_n_tight": 10,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 0.8588182584953924,
+        "control_alpha": 0.01,
+        "control_power": 0.98,
         "powered": true,
+        "legacy_fraction_removed": 0.8588182584953924,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "sentence": {
       "kimi-k3": {
         "model": "kimi-k3",
-        "control_dh": 1.8364527976600282,
-        "control_h_open": 3.3219280948873626,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.636452797660028,
+        "control_h_open": 3.1219280948873624,
         "control_h_tight": 1.4854752972273344,
         "control_support_tight": 3,
         "control_n_tight": 10,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.5528273777167044,
-        "powered": true,
-        "detail": ""
+        "fraction_removed": 0.524180169408761,
+        "control_alpha": 0.01,
+        "control_power": 0.675,
+        "powered": false,
+        "legacy_fraction_removed": 0.5528273777167044,
+        "legacy_powered": true,
+        "detail": "power 68% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.64; 3/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "opener": {
       "kimi-k3": {
         "model": "kimi-k3",
-        "control_dh": 3.3219280948873626,
-        "control_h_open": 3.3219280948873626,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.321928094887362,
+        "control_h_open": 2.321928094887362,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 10,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 1.0,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "question": {
       "kimi-k3": {
         "model": "kimi-k3",
+        "contrast": "T=0 vs T=1.0",
         "control_dh": 1.4754887502163472,
         "control_h_open": 3.3219280948873626,
         "control_h_tight": 1.8464393446710154,
@@ -1533,8 +1552,12 @@
         "control_n_tight": 10,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 0.44416637207987997,
+        "control_alpha": 0.01,
+        "control_power": 0.495,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 44% of 3.32 bits; 1.85 bits remain at temperature 0 (4/10 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.44416637207987997,
+        "legacy_powered": false,
+        "detail": "power 50% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.48; 4/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "repeat": {}
@@ -1544,7 +1567,7 @@
       "model": "kimi-k3",
       "parameter": "typical_p",
       "n_prompts": 4,
-      "n_control_passed": 3,
+      "n_control_passed": 2,
       "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 2,
@@ -1557,13 +1580,20 @@
       },
       "verdict": "mixed",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 1.5999999999999996,
+      "stratified_p": 0.0108989101089891,
+      "stratified_p_holm": 0.0544945505449455,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "mixed"
     },
     {
       "model": "kimi-k3",
       "parameter": "mirostat",
       "n_prompts": 4,
-      "n_control_passed": 3,
+      "n_control_passed": 2,
       "n_verdict": 2,
       "n_powered": 2,
       "n_distinguishable": 1,
@@ -1576,13 +1606,20 @@
       },
       "verdict": "mixed",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 0.6754887502163469,
+      "stratified_p": 0.12468753124687532,
+      "stratified_p_holm": 0.37406259374062595,
+      "stratified_prompts": 2,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.995,
+      "verdict_majority": "mixed"
     },
     {
       "model": "kimi-k3",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
-      "n_control_passed": 3,
+      "n_control_passed": 2,
       "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 0,
@@ -1593,15 +1630,22 @@
         "opener": "no effect seen",
         "question": "insufficient"
       },
-      "verdict": "underpowered",
+      "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 1.0,
+      "stratified_p": 0.033096690330966905,
+      "stratified_p_holm": 0.13238676132386762,
+      "stratified_prompts": 1,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.99,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "kimi-k3",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
-      "n_control_passed": 3,
+      "n_control_passed": 2,
       "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 0,
@@ -1612,15 +1656,22 @@
         "opener": "no effect seen",
         "question": "insufficient"
       },
-      "verdict": "underpowered",
+      "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 0.6000000000000001,
+      "stratified_p": 0.4771522847715228,
+      "stratified_p_holm": 0.9543045695430457,
+      "stratified_prompts": 1,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.99,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "kimi-k3",
       "parameter": "presence_penalty",
       "n_prompts": 4,
-      "n_control_passed": 3,
+      "n_control_passed": 2,
       "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 0,
@@ -1631,9 +1682,16 @@
         "opener": "no effect seen",
         "question": "insufficient"
       },
-      "verdict": "underpowered",
+      "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 0.4,
+      "stratified_p": 1.0,
+      "stratified_p_holm": 1.0,
+      "stratified_prompts": 1,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.99,
+      "verdict_majority": "underpowered"
     }
   ]
 }

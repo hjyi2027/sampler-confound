@@ -9,9 +9,12 @@
     "from": "2026-09-20T10:31Z",
     "to": "2026-09-21T16:02Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:28Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -3298,56 +3301,76 @@
     "word_prob": {
       "glm-5p3-flash": {
         "model": "glm-5p3-flash",
-        "control_dh": 3.799790075821262,
-        "control_h_open": 5.321928094887363,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.5997900758212618,
+        "control_h_open": 5.1219280948873624,
         "control_h_tight": 1.522138019066101,
         "control_support_tight": 5,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.7139874887583734,
+        "fraction_removed": 0.7028193307544716,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.7139874887583734,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "sentence": {
       "glm-5p3-flash": {
         "model": "glm-5p3-flash",
-        "control_dh": 4.953267163390692,
-        "control_h_open": 5.1219280948873624,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 4.1742356769224385,
+        "control_h_open": 4.3428966084191085,
         "control_h_tight": 0.16866093149667025,
         "control_support_tight": 2,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.967070812324557,
+        "fraction_removed": 0.9611639542213127,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.967070812324557,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "opener": {
       "glm-5p3-flash": {
         "model": "glm-5p3-flash",
-        "control_dh": 3.450711665942494,
-        "control_h_open": 4.442896608419108,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 0.8555459796425471,
+        "control_h_open": 1.847730922119161,
         "control_h_tight": 0.9921849424766138,
         "control_support_tight": 3,
         "control_n_tight": 40,
-        "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.7766806140398442,
-        "powered": true,
-        "detail": ""
+        "control_p": 0.001999800019998,
+        "fraction_removed": 0.46302519993621266,
+        "control_alpha": 0.01,
+        "control_power": 0.68,
+        "powered": false,
+        "legacy_fraction_removed": 0.7766806140398442,
+        "legacy_powered": true,
+        "detail": "power 68% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+0.86; 3/40 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "question": {
       "glm-5p3-flash": {
         "model": "glm-5p3-flash",
-        "control_dh": 4.288122639826846,
-        "control_h_open": 4.953055907333276,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.9815060771645854,
+        "control_h_open": 4.646439344671015,
         "control_h_tight": 0.66493326750643,
         "control_support_tight": 3,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.8657529250735977,
+        "fraction_removed": 0.8568940175084736,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.8657529250735977,
+        "legacy_powered": true,
         "detail": ""
       }
     },
@@ -3358,7 +3381,7 @@
       "model": "glm-5p3-flash",
       "parameter": "typical_p",
       "n_prompts": 4,
-      "n_control_passed": 4,
+      "n_control_passed": 3,
       "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
@@ -3371,32 +3394,46 @@
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 4.7116878367942245,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "glm-5p3-flash",
       "parameter": "mirostat",
       "n_prompts": 4,
-      "n_control_passed": 4,
-      "n_verdict": 4,
-      "n_powered": 4,
+      "n_control_passed": 3,
+      "n_verdict": 3,
+      "n_powered": 3,
       "n_distinguishable": 2,
-      "n_no_effect": 2,
+      "n_no_effect": 1,
       "per_prompt": {
         "word_prob": "no effect seen",
         "sentence": "distinguishable",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "distinguishable"
       },
-      "verdict": "mixed",
+      "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 4.756216646988662,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "glm-5p3-flash",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
-      "n_control_passed": 4,
+      "n_control_passed": 3,
       "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
@@ -3411,49 +3448,70 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 3.749999999999999,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "glm-5p3-flash",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
-      "n_control_passed": 4,
-      "n_verdict": 4,
-      "n_powered": 4,
+      "n_control_passed": 3,
+      "n_verdict": 3,
+      "n_powered": 3,
       "n_distinguishable": 0,
-      "n_no_effect": 4,
+      "n_no_effect": 3,
       "per_prompt": {
         "word_prob": "no effect seen",
         "sentence": "no effect seen",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "no effect seen"
       },
       "verdict": "no effect seen",
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 2.4249999999999994,
+      "stratified_p": 0.9497050294970503,
+      "stratified_p_holm": 0.9497050294970503,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     },
     {
       "model": "glm-5p3-flash",
       "parameter": "presence_penalty",
       "n_prompts": 4,
-      "n_control_passed": 4,
-      "n_verdict": 4,
-      "n_powered": 4,
+      "n_control_passed": 3,
+      "n_verdict": 3,
+      "n_powered": 3,
       "n_distinguishable": 0,
-      "n_no_effect": 4,
+      "n_no_effect": 3,
       "per_prompt": {
         "word_prob": "no effect seen",
         "sentence": "no effect seen",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "no effect seen"
       },
       "verdict": "no effect seen",
       "forced": {
         "repeat": "insufficient"
       },
-      "verdict_forced": "insufficient"
+      "verdict_forced": "insufficient",
+      "stratified_stat": 2.55,
+      "stratified_p": 0.1603839616038396,
+      "stratified_p_holm": 0.3207679232076792,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     }
   ]
 }

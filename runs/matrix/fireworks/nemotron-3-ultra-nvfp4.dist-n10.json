@@ -9,9 +9,12 @@
     "from": "2026-09-20T14:39Z",
     "to": "2026-09-20T16:54Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:29Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -1495,57 +1498,77 @@
     "word_prob": {
       "nemotron-3-ultra-nvfp4": {
         "model": "nemotron-3-ultra-nvfp4",
-        "control_dh": 2.350977500432694,
-        "control_h_open": 3.3219280948873626,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.9509775004326937,
+        "control_h_open": 2.9219280948873623,
         "control_h_tight": 0.9709505944546686,
         "control_support_tight": 2,
         "control_n_tight": 10,
-        "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.7077147467613711,
-        "powered": true,
-        "detail": ""
+        "control_p": 0.0008999100089991,
+        "fraction_removed": 0.6677020915902799,
+        "control_alpha": 0.01,
+        "control_power": 0.74,
+        "powered": false,
+        "legacy_fraction_removed": 0.7077147467613711,
+        "legacy_powered": true,
+        "detail": "power 74% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.95; 2/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "sentence": {
       "nemotron-3-ultra-nvfp4": {
         "model": "nemotron-3-ultra-nvfp4",
+        "contrast": "T=0 vs T=1.0",
         "control_dh": 2.1219280948873624,
         "control_h_open": 3.1219280948873624,
         "control_h_tight": 1.0,
         "control_support_tight": 2,
         "control_n_tight": 10,
-        "control_p": 9.999000099990002e-05,
+        "control_p": 0.00029997000299970003,
         "fraction_removed": 0.6796851273936597,
+        "control_alpha": 0.01,
+        "control_power": 0.84,
         "powered": true,
+        "legacy_fraction_removed": 0.6796851273936597,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "opener": {
       "nemotron-3-ultra-nvfp4": {
         "model": "nemotron-3-ultra-nvfp4",
-        "control_dh": 1.1509775004326936,
-        "control_h_open": 2.721928094887362,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": -0.2141709450076288,
+        "control_h_open": 1.3567796494470397,
         "control_h_tight": 1.5709505944546684,
         "control_support_tight": 3,
         "control_n_tight": 10,
-        "control_p": 0.0103989601039896,
-        "fraction_removed": 0.42285374936780723,
+        "control_p": 0.6871312868713129,
+        "fraction_removed": -0.15785241553034415,
+        "control_alpha": 0.01,
+        "control_power": 0.0,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 42% of 2.72 bits; 1.57 bits remain at temperature 0 (3/10 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.42285374936780723,
+        "legacy_powered": false,
+        "detail": "power 0% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=-0.21; 3/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "question": {
       "nemotron-3-ultra-nvfp4": {
         "model": "nemotron-3-ultra-nvfp4",
-        "control_dh": 1.9774437510817342,
-        "control_h_open": 2.4464393446710155,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.2529325012980808,
+        "control_h_open": 1.721928094887362,
         "control_h_tight": 0.4689955935892812,
         "control_support_tight": 2,
         "control_n_tight": 10,
-        "control_p": 0.0005999400059994001,
-        "fraction_removed": 0.8082946161690555,
-        "powered": true,
-        "detail": ""
+        "control_p": 0.021097890210978902,
+        "fraction_removed": 0.7276334621742959,
+        "control_alpha": 0.01,
+        "control_power": 0.4,
+        "powered": false,
+        "legacy_fraction_removed": 0.8082946161690555,
+        "legacy_powered": true,
+        "detail": "power 40% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.25; 2/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "repeat": {}
@@ -1555,7 +1578,7 @@
       "model": "nemotron-3-ultra-nvfp4",
       "parameter": "typical_p",
       "n_prompts": 4,
-      "n_control_passed": 3,
+      "n_control_passed": 1,
       "n_verdict": 3,
       "n_powered": 3,
       "n_distinguishable": 3,
@@ -1568,83 +1591,118 @@
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 4.211587790111339,
+      "stratified_p": 0.0004999500049995,
+      "stratified_p_holm": 0.001999800019998,
+      "stratified_prompts": 4,
+      "stratified_control_p": 0.00019998000199980003,
+      "stratified_control_power": 0.95,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
       "parameter": "mirostat",
       "n_prompts": 4,
-      "n_control_passed": 3,
-      "n_verdict": 3,
-      "n_powered": 3,
+      "n_control_passed": 1,
+      "n_verdict": 1,
+      "n_powered": 1,
       "n_distinguishable": 0,
-      "n_no_effect": 3,
+      "n_no_effect": 1,
       "per_prompt": {
-        "word_prob": "no effect seen",
+        "word_prob": "underpowered",
         "sentence": "no effect seen",
         "opener": "underpowered",
-        "question": "no effect seen"
+        "question": "underpowered"
       },
       "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 0.022281852652399348,
+      "stratified_p": 0.48835116488351166,
+      "stratified_p_holm": 0.48835116488351166,
+      "stratified_prompts": 4,
+      "stratified_control_p": 0.00019998000199980003,
+      "stratified_control_power": 0.95,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
-      "n_control_passed": 3,
-      "n_verdict": 3,
-      "n_powered": 3,
+      "n_control_passed": 1,
+      "n_verdict": 1,
+      "n_powered": 1,
       "n_distinguishable": 0,
-      "n_no_effect": 3,
+      "n_no_effect": 1,
       "per_prompt": {
-        "word_prob": "no effect seen",
+        "word_prob": "underpowered",
         "sentence": "no effect seen",
         "opener": "underpowered",
-        "question": "no effect seen"
+        "question": "underpowered"
       },
-      "verdict": "no effect seen",
+      "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 4.0,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 0.00019998000199980003,
+      "stratified_control_power": 0.985,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
-      "n_control_passed": 3,
-      "n_verdict": 3,
-      "n_powered": 3,
+      "n_control_passed": 1,
+      "n_verdict": 1,
+      "n_powered": 1,
       "n_distinguishable": 0,
-      "n_no_effect": 3,
+      "n_no_effect": 1,
       "per_prompt": {
-        "word_prob": "no effect seen",
+        "word_prob": "underpowered",
         "sentence": "no effect seen",
         "opener": "underpowered",
-        "question": "no effect seen"
+        "question": "underpowered"
       },
       "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 3.000000000000001,
+      "stratified_p": 0.05219478052194781,
+      "stratified_p_holm": 0.15658434156584342,
+      "stratified_prompts": 4,
+      "stratified_control_p": 0.00019998000199980003,
+      "stratified_control_power": 0.985,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
       "parameter": "presence_penalty",
       "n_prompts": 4,
-      "n_control_passed": 3,
-      "n_verdict": 3,
-      "n_powered": 3,
+      "n_control_passed": 1,
+      "n_verdict": 1,
+      "n_powered": 1,
       "n_distinguishable": 0,
-      "n_no_effect": 3,
+      "n_no_effect": 1,
       "per_prompt": {
-        "word_prob": "no effect seen",
+        "word_prob": "underpowered",
         "sentence": "no effect seen",
         "opener": "underpowered",
-        "question": "no effect seen"
+        "question": "underpowered"
       },
       "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 2.7000000000000006,
+      "stratified_p": 0.11428857114288571,
+      "stratified_p_holm": 0.22857714228577142,
+      "stratified_prompts": 4,
+      "stratified_control_p": 0.00019998000199980003,
+      "stratified_control_power": 0.985,
+      "verdict_majority": "underpowered"
     }
   ]
 }

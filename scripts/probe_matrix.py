@@ -145,7 +145,7 @@ def collect() -> list[dict]:
             files: list[tuple[int, str, Path]] = []
             for f in pdir.glob("*.json"):
                 name = f.name
-                if name in ("determinism.json", "matrix.json") or ".neg-n" in name:
+                if name in ("determinism.json", "matrix.json", "determinism_sequential.json") or ".neg-n" in name:
                     continue
                 if name.endswith(".det.json"):
                     merge(prov, None, _load(f))

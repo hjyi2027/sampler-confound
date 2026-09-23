@@ -9,9 +9,12 @@
     "from": "2026-09-20T14:39Z",
     "to": "2026-09-21T15:41Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:28Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -1661,6 +1664,7 @@
     "word_prob": {
       "nemotron-lightning-3p5-30b-a3b": {
         "model": "nemotron-lightning-3p5-30b-a3b",
+        "contrast": "T=0 vs T=1.0",
         "control_dh": 0.4754887502163472,
         "control_h_open": 3.3219280948873626,
         "control_h_tight": 2.8464393446710154,
@@ -1668,13 +1672,18 @@
         "control_n_tight": 10,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 0.14313637641589882,
+        "control_alpha": 0.01,
+        "control_power": 0.03,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 14% of 3.32 bits; 2.85 bits remain at temperature 0 (8/10 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.14313637641589882,
+        "legacy_powered": false,
+        "detail": "power 3% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+0.48; 8/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "sentence": {
       "nemotron-lightning-3p5-30b-a3b": {
         "model": "nemotron-lightning-3p5-30b-a3b",
+        "contrast": "T=0 vs T=1.0",
         "control_dh": 1.1609640474436813,
         "control_h_open": 3.3219280948873626,
         "control_h_tight": 2.1609640474436813,
@@ -1682,36 +1691,50 @@
         "control_n_tight": 10,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 0.34948500216800943,
+        "control_alpha": 0.01,
+        "control_power": 0.25,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 35% of 3.32 bits; 2.16 bits remain at temperature 0 (6/10 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.34948500216800943,
+        "legacy_powered": false,
+        "detail": "power 25% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.16; 6/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "opener": {
       "nemotron-lightning-3p5-30b-a3b": {
         "model": "nemotron-lightning-3p5-30b-a3b",
+        "contrast": "T=0 vs T=1.0",
         "control_dh": 1.1609640474436813,
         "control_h_open": 3.3219280948873626,
         "control_h_tight": 2.1609640474436813,
         "control_support_tight": 6,
         "control_n_tight": 10,
-        "control_p": 9.999000099990002e-05,
+        "control_p": 0.0013998600139986002,
         "fraction_removed": 0.34948500216800943,
+        "control_alpha": 0.01,
+        "control_power": 0.285,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 35% of 3.32 bits; 2.16 bits remain at temperature 0 (6/10 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.34948500216800943,
+        "legacy_powered": false,
+        "detail": "power 28% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.16; 6/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "question": {
       "nemotron-lightning-3p5-30b-a3b": {
         "model": "nemotron-lightning-3p5-30b-a3b",
+        "contrast": "T=0 vs T=1.0",
         "control_dh": NaN,
-        "control_h_open": NaN,
-        "control_h_tight": NaN,
-        "control_support_tight": 0,
-        "control_n_tight": 0,
+        "control_h_open": 3.3219280948873626,
+        "control_h_tight": 3.1219280948873624,
+        "control_support_tight": 9,
+        "control_n_tight": 10,
         "control_p": NaN,
         "fraction_removed": NaN,
+        "control_alpha": NaN,
+        "control_power": NaN,
         "powered": false,
-        "detail": "control not run: insufficient"
+        "legacy_fraction_removed": NaN,
+        "legacy_powered": false,
+        "detail": "control insufficient: both arms all-unique (9/10, 10/10); exact-match statistics have no range here and cannot discriminate"
       }
     },
     "repeat": {}
@@ -1734,7 +1757,14 @@
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 1.2754887502163466,
+      "stratified_p": 0.0024997500249975004,
+      "stratified_p_holm": 0.004999500049995001,
+      "stratified_prompts": 2,
+      "stratified_control_p": 0.00019998000199980003,
+      "stratified_control_power": NaN,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1751,9 +1781,16 @@
         "opener": "insufficient",
         "question": "insufficient"
       },
-      "verdict": "underpowered",
+      "verdict": "mixed",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 0.47548875021634673,
+      "stratified_p": 0.10928907109289071,
+      "stratified_p_holm": 0.10928907109289071,
+      "stratified_prompts": 1,
+      "stratified_control_p": 0.00019998000199980003,
+      "stratified_control_power": 0.25,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1774,7 +1811,14 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": NaN,
+      "stratified_p": NaN,
+      "stratified_p_holm": NaN,
+      "stratified_prompts": 0,
+      "stratified_control_p": 0.00019998000199980003,
+      "stratified_control_power": NaN,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1795,7 +1839,14 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": NaN,
+      "stratified_p": NaN,
+      "stratified_p_holm": NaN,
+      "stratified_prompts": 0,
+      "stratified_control_p": 0.00019998000199980003,
+      "stratified_control_power": NaN,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1816,7 +1867,14 @@
       "forced": {
         "repeat": "no effect seen"
       },
-      "verdict_forced": "no effect seen"
+      "verdict_forced": "no effect seen",
+      "stratified_stat": NaN,
+      "stratified_p": NaN,
+      "stratified_p_holm": NaN,
+      "stratified_prompts": 0,
+      "stratified_control_p": 0.00019998000199980003,
+      "stratified_control_power": NaN,
+      "verdict_majority": "underpowered"
     }
   ]
 }

@@ -9,9 +9,12 @@
     "from": "2026-09-20T10:31Z",
     "to": "2026-09-20T17:48Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:28Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -1485,6 +1488,7 @@
     "word_prob": {
       "glm-5p2": {
         "model": "glm-5p2",
+        "contrast": "T=0 vs T=1.0",
         "control_dh": 1.750977500432694,
         "control_h_open": 3.3219280948873626,
         "control_h_tight": 1.5709505944546687,
@@ -1492,49 +1496,68 @@
         "control_n_tight": 10,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 0.5270967493629825,
-        "powered": true,
-        "detail": ""
+        "control_alpha": 0.01,
+        "control_power": 0.58,
+        "powered": false,
+        "legacy_fraction_removed": 0.5270967493629825,
+        "legacy_powered": true,
+        "detail": "power 58% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.75; 4/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "sentence": {
       "glm-5p2": {
         "model": "glm-5p2",
-        "control_dh": 0.6000000000000005,
-        "control_h_open": 3.3219280948873626,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 0.40000000000000036,
+        "control_h_open": 3.1219280948873624,
         "control_h_tight": 2.721928094887362,
         "control_support_tight": 7,
         "control_n_tight": 10,
-        "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.18061799739838885,
+        "control_p": 0.07189281071892811,
+        "fraction_removed": 0.1281259490425362,
+        "control_alpha": 0.01,
+        "control_power": 0.03,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 18% of 3.32 bits; 2.72 bits remain at temperature 0 (7/10 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.18061799739838885,
+        "legacy_powered": false,
+        "detail": "power 3% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+0.40; 7/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "opener": {
       "glm-5p2": {
         "model": "glm-5p2",
-        "control_dh": 1.4264662506490402,
-        "control_h_open": 2.721928094887362,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.2264662506490405,
+        "control_h_open": 2.5219280948873624,
         "control_h_tight": 1.295461844238322,
         "control_support_tight": 3,
         "control_n_tight": 10,
-        "control_p": 0.007999200079992,
-        "fraction_removed": 0.5240646339366543,
-        "powered": true,
-        "detail": ""
+        "control_p": 0.007899210078992101,
+        "fraction_removed": 0.48632086423693954,
+        "control_alpha": 0.01,
+        "control_power": 0.295,
+        "powered": false,
+        "legacy_fraction_removed": 0.5240646339366543,
+        "legacy_powered": true,
+        "detail": "power 30% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.23; 3/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "question": {
       "glm-5p2": {
         "model": "glm-5p2",
+        "contrast": "T=0 vs T=1.0",
         "control_dh": 2.44063719565667,
         "control_h_open": 3.3219280948873626,
         "control_h_tight": 0.8812908992306927,
         "control_support_tight": 2,
         "control_n_tight": 10,
-        "control_p": 9.999000099990002e-05,
+        "control_p": 0.00019998000199980003,
         "fraction_removed": 0.7347050044258786,
+        "control_alpha": 0.01,
+        "control_power": 0.915,
         "powered": true,
+        "legacy_fraction_removed": 0.7347050044258786,
+        "legacy_powered": true,
         "detail": ""
       }
     },
@@ -1545,45 +1568,59 @@
       "model": "glm-5p2",
       "parameter": "typical_p",
       "n_prompts": 4,
-      "n_control_passed": 3,
-      "n_verdict": 3,
-      "n_powered": 3,
+      "n_control_passed": 1,
+      "n_verdict": 2,
+      "n_powered": 2,
       "n_distinguishable": 1,
-      "n_no_effect": 2,
+      "n_no_effect": 1,
       "per_prompt": {
         "word_prob": "distinguishable",
         "sentence": "insufficient",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "no effect seen"
       },
-      "verdict": "no effect seen",
+      "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 1.6364527976600278,
+      "stratified_p": 0.014898510148985102,
+      "stratified_p_holm": 0.0446955304469553,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.99,
+      "verdict_majority": "mixed"
     },
     {
       "model": "glm-5p2",
       "parameter": "mirostat",
       "n_prompts": 4,
-      "n_control_passed": 3,
-      "n_verdict": 1,
-      "n_powered": 1,
+      "n_control_passed": 1,
+      "n_verdict": 0,
+      "n_powered": 0,
       "n_distinguishable": 0,
-      "n_no_effect": 1,
+      "n_no_effect": 0,
       "per_prompt": {
         "word_prob": "insufficient",
         "sentence": "insufficient",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "insufficient"
       },
       "verdict": "underpowered",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": -0.3999999999999999,
+      "stratified_p": 0.8941105889411058,
+      "stratified_p_holm": 1.0,
+      "stratified_prompts": 1,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.295,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "glm-5p2",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
-      "n_control_passed": 3,
+      "n_control_passed": 1,
       "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 1,
@@ -1594,47 +1631,68 @@
         "opener": "distinguishable",
         "question": "insufficient"
       },
-      "verdict": "underpowered",
+      "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 2.0,
+      "stratified_p": 0.0004999500049995,
+      "stratified_p_holm": 0.0024997500249975,
+      "stratified_prompts": 2,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.885,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "glm-5p2",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
-      "n_control_passed": 3,
-      "n_verdict": 2,
-      "n_powered": 2,
+      "n_control_passed": 1,
+      "n_verdict": 1,
+      "n_powered": 1,
       "n_distinguishable": 1,
-      "n_no_effect": 1,
+      "n_no_effect": 0,
       "per_prompt": {
-        "word_prob": "no effect seen",
+        "word_prob": "underpowered",
         "sentence": "insufficient",
         "opener": "distinguishable",
         "question": "insufficient"
       },
-      "verdict": "mixed",
+      "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 2.0,
+      "stratified_p": 0.0022997700229977,
+      "stratified_p_holm": 0.0091990800919908,
+      "stratified_prompts": 2,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.99,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "glm-5p2",
       "parameter": "presence_penalty",
       "n_prompts": 4,
-      "n_control_passed": 3,
-      "n_verdict": 2,
-      "n_powered": 2,
+      "n_control_passed": 1,
+      "n_verdict": 1,
+      "n_powered": 1,
       "n_distinguishable": 0,
-      "n_no_effect": 2,
+      "n_no_effect": 1,
       "per_prompt": {
         "word_prob": "insufficient",
         "sentence": "insufficient",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "no effect seen"
       },
       "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 1.2000000000000002,
+      "stratified_p": 0.963003699630037,
+      "stratified_p_holm": 1.0,
+      "stratified_prompts": 2,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.98,
+      "verdict_majority": "underpowered"
     }
   ]
 }

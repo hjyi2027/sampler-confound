@@ -1,0 +1,2613 @@
+{
+  "provider": "fireworks",
+  "n_per_arm": 10,
+  "max_tokens": 1024,
+  "reasoning_effort": "low",
+  "written": "2026-09-23T06:38Z",
+  "collected": {
+    "from": "2026-09-23T06:28Z",
+    "to": "2026-09-23T06:38Z",
+    "source": "cache"
+  },
+  "deterministic_models": {
+    "sequential": 2,
+    "concurrent": 1,
+    "of": 18
+  },
+  "summary": {
+    "deepseek-v4-flash-0731": {
+      "sequential_modal": 0.45999999999999996,
+      "concurrent_modal": 0.52,
+      "sequential_pairwise": 0.32,
+      "concurrent_pairwise": 0.32,
+      "sequential_full_prompts": 1,
+      "concurrent_full_prompts": 0,
+      "prompts": 5
+    },
+    "deepseek-v4-flash-vision-exp": {
+      "sequential_modal": 0.5,
+      "concurrent_modal": 0.5,
+      "sequential_pairwise": 0.3911111111111111,
+      "concurrent_pairwise": 0.3688888888888889,
+      "sequential_full_prompts": 1,
+      "concurrent_full_prompts": 1,
+      "prompts": 5
+    },
+    "deepseek-v4-pro-0813": {
+      "sequential_modal": 0.62,
+      "concurrent_modal": 0.58,
+      "sequential_pairwise": 0.4666666666666667,
+      "concurrent_pairwise": 0.4133333333333334,
+      "sequential_full_prompts": 1,
+      "concurrent_full_prompts": 0,
+      "prompts": 5
+    },
+    "deepseek-v4p1-flash": {
+      "sequential_modal": 0.5599999999999999,
+      "concurrent_modal": 0.6,
+      "sequential_pairwise": 0.40888888888888886,
+      "concurrent_pairwise": 0.4222222222222222,
+      "sequential_full_prompts": 0,
+      "concurrent_full_prompts": 0,
+      "prompts": 5
+    },
+    "glm-5p2": {
+      "sequential_modal": 0.62,
+      "concurrent_modal": 0.44000000000000006,
+      "sequential_pairwise": 0.4,
+      "concurrent_pairwise": 0.27555555555555555,
+      "sequential_full_prompts": 0,
+      "concurrent_full_prompts": 0,
+      "prompts": 5
+    },
+    "glm-5p3": {
+      "sequential_modal": 0.82,
+      "concurrent_modal": 0.64,
+      "sequential_pairwise": 0.7466666666666667,
+      "concurrent_pairwise": 0.5333333333333333,
+      "sequential_full_prompts": 2,
+      "concurrent_full_prompts": 1,
+      "prompts": 5
+    },
+    "glm-5p3-flash": {
+      "sequential_modal": 0.9,
+      "concurrent_modal": 0.86,
+      "sequential_pairwise": 0.8177777777777777,
+      "concurrent_pairwise": 0.7511111111111111,
+      "sequential_full_prompts": 2,
+      "concurrent_full_prompts": 2,
+      "prompts": 5
+    },
+    "gpt-oss-120b": {
+      "sequential_modal": 1.0,
+      "concurrent_modal": 1.0,
+      "sequential_pairwise": 1.0,
+      "concurrent_pairwise": 1.0,
+      "sequential_full_prompts": 5,
+      "concurrent_full_prompts": 5,
+      "prompts": 5
+    },
+    "inkling": {
+      "sequential_modal": 0.9,
+      "concurrent_modal": 0.48,
+      "sequential_pairwise": 0.8488888888888889,
+      "concurrent_pairwise": 0.28888888888888886,
+      "sequential_full_prompts": 4,
+      "concurrent_full_prompts": 0,
+      "prompts": 5
+    },
+    "kimi-k2p6": {
+      "sequential_modal": 0.22000000000000003,
+      "concurrent_modal": 0.22000000000000003,
+      "sequential_pairwise": 0.05333333333333333,
+      "concurrent_pairwise": 0.04,
+      "sequential_full_prompts": 0,
+      "concurrent_full_prompts": 0,
+      "prompts": 5
+    },
+    "kimi-k2p7-code": {
+      "sequential_modal": 0.4,
+      "concurrent_modal": 0.42000000000000004,
+      "sequential_pairwise": 0.26222222222222225,
+      "concurrent_pairwise": 0.27555555555555555,
+      "sequential_full_prompts": 1,
+      "concurrent_full_prompts": 1,
+      "prompts": 5
+    },
+    "kimi-k3": {
+      "sequential_modal": 0.78,
+      "concurrent_modal": 0.64,
+      "sequential_pairwise": 0.6444444444444445,
+      "concurrent_pairwise": 0.4533333333333333,
+      "sequential_full_prompts": 1,
+      "concurrent_full_prompts": 0,
+      "prompts": 5
+    },
+    "minimax-m3": {
+      "sequential_modal": 0.78,
+      "concurrent_modal": 0.62,
+      "sequential_pairwise": 0.6666666666666667,
+      "concurrent_pairwise": 0.4666666666666667,
+      "sequential_full_prompts": 1,
+      "concurrent_full_prompts": 1,
+      "prompts": 5
+    },
+    "muse-glimmer-30b": {
+      "sequential_modal": 0.9800000000000001,
+      "concurrent_modal": 0.8400000000000001,
+      "sequential_pairwise": 0.96,
+      "concurrent_pairwise": 0.7422222222222222,
+      "sequential_full_prompts": 4,
+      "concurrent_full_prompts": 2,
+      "prompts": 5
+    },
+    "nemotron-3-ultra-nvfp4": {
+      "sequential_modal": 1.0,
+      "concurrent_modal": 0.5599999999999999,
+      "sequential_pairwise": 1.0,
+      "concurrent_pairwise": 0.38666666666666666,
+      "sequential_full_prompts": 5,
+      "concurrent_full_prompts": 0,
+      "prompts": 5
+    },
+    "nemotron-lightning-3p5-30b-a3b": {
+      "sequential_modal": 0.58,
+      "concurrent_modal": 0.48,
+      "sequential_pairwise": 0.33333333333333337,
+      "concurrent_pairwise": 0.3022222222222222,
+      "sequential_full_prompts": 0,
+      "concurrent_full_prompts": 0,
+      "prompts": 5
+    },
+    "qwen3p8-2p4t-a95b": {
+      "sequential_modal": 0.72,
+      "concurrent_modal": 0.8,
+      "sequential_pairwise": 0.5733333333333334,
+      "concurrent_pairwise": 0.711111111111111,
+      "sequential_full_prompts": 1,
+      "concurrent_full_prompts": 2,
+      "prompts": 5
+    },
+    "qwen3p8-max": {
+      "sequential_modal": 0.8400000000000001,
+      "concurrent_modal": 0.72,
+      "sequential_pairwise": 0.72,
+      "concurrent_pairwise": 0.5955555555555556,
+      "sequential_full_prompts": 1,
+      "concurrent_full_prompts": 2,
+      "prompts": 5
+    }
+  },
+  "rows": [
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-0731",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 0.3,
+        "pairwise": 0.08888888888888889,
+        "distinct": 7,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:28Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.13333333333333333,
+        "distinct": 7,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-0731",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.15555555555555556,
+        "distinct": 6,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.5,
+        "pairwise": 0.24444444444444444,
+        "distinct": 5,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-0731",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 0.3,
+        "pairwise": 0.2,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.26666666666666666,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-0731",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.5,
+        "pairwise": 0.24444444444444444,
+        "distinct": 5,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.2,
+        "pairwise": 0.06666666666666667,
+        "distinct": 7,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-0731",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.9,
+        "pairwise": 0.8,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-vision-exp",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 0.1,
+        "pairwise": 0.0,
+        "distinct": 10,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:28Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.2,
+        "pairwise": 0.044444444444444446,
+        "distinct": 8,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-vision-exp",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-vision-exp",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6222222222222222,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.7,
+        "pairwise": 0.5333333333333333,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-vision-exp",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.2,
+        "pairwise": 0.044444444444444446,
+        "distinct": 8,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.26666666666666666,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-flash-vision-exp",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 0.2,
+        "pairwise": 0.06666666666666667,
+        "distinct": 7,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.2222222222222222,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 0.5,
+        "pairwise": 0.24444444444444444,
+        "distinct": 5,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:28Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.2,
+        "pairwise": 0.06666666666666667,
+        "distinct": 7,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.9,
+        "pairwise": 0.8,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.7,
+        "pairwise": 0.5333333333333333,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.2,
+        "distinct": 5,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.6,
+        "pairwise": 0.3333333333333333,
+        "distinct": 5,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.2222222222222222,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.5,
+        "pairwise": 0.35555555555555557,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4-pro-0813",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6444444444444445,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 0.7,
+        "pairwise": 0.4888888888888889,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:28Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6444444444444445,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.2,
+        "distinct": 5,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.5,
+        "pairwise": 0.35555555555555557,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 0.6,
+        "pairwise": 0.4666666666666667,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.7,
+        "pairwise": 0.4888888888888889,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.3,
+        "pairwise": 0.13333333333333333,
+        "distinct": 5,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.2,
+        "pairwise": 0.08888888888888889,
+        "distinct": 6,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "deepseek-v4p1-flash",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6444444444444445,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6444444444444445,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.17777777777777778,
+        "distinct": 5,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:28Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.2,
+        "pairwise": 0.06666666666666667,
+        "distinct": 7,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.6,
+        "pairwise": 0.37777777777777777,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.6,
+        "pairwise": 0.35555555555555557,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6222222222222222,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.26666666666666666,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.6,
+        "pairwise": 0.4,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.6,
+        "pairwise": 0.35555555555555557,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p2",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 0.7,
+        "pairwise": 0.4888888888888889,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.26666666666666666,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 0.7,
+        "pairwise": 0.4888888888888889,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:28Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.26666666666666666,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.5,
+        "pairwise": 0.3111111111111111,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.9,
+        "pairwise": 0.8,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:29Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:29Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6444444444444445,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 0.5,
+        "pairwise": 0.4444444444444444,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.5,
+        "pairwise": 0.4444444444444444,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.7,
+        "pairwise": 0.4666666666666667,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6444444444444445,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:30Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 0.7,
+        "pairwise": 0.4888888888888889,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6444444444444445,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.9,
+        "pairwise": 0.8,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "glm-5p3-flash",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 0.9,
+        "pairwise": 0.8,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:30Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "gpt-oss-120b",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.3,
+        "pairwise": 0.1111111111111111,
+        "distinct": 6,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.6,
+        "pairwise": 0.4,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.6,
+        "pairwise": 0.37777777777777777,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.3,
+        "pairwise": 0.15555555555555556,
+        "distinct": 5,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:31Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.5,
+        "pairwise": 0.24444444444444444,
+        "distinct": 5,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "inkling",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.6,
+        "pairwise": 0.4,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p6",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 0.1,
+        "pairwise": 0.0,
+        "distinct": 10,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.1,
+        "pairwise": 0.0,
+        "distinct": 10,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p6",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.2,
+        "pairwise": 0.022222222222222223,
+        "distinct": 9,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.3,
+        "pairwise": 0.08888888888888889,
+        "distinct": 7,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p6",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 0.2,
+        "pairwise": 0.06666666666666667,
+        "distinct": 7,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.2,
+        "pairwise": 0.022222222222222223,
+        "distinct": 9,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:35Z",
+          "to": "2026-09-23T06:35Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p6",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.13333333333333333,
+        "distinct": 7,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:35Z",
+          "to": "2026-09-23T06:35Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.2,
+        "pairwise": 0.022222222222222223,
+        "distinct": 9,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:35Z",
+          "to": "2026-09-23T06:37Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p6",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 0.3,
+        "pairwise": 0.08888888888888889,
+        "distinct": 7,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:37Z",
+          "to": "2026-09-23T06:37Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.2,
+        "pairwise": 0.022222222222222223,
+        "distinct": 9,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:37Z",
+          "to": "2026-09-23T06:37Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 0.1,
+        "pairwise": 0.0,
+        "distinct": 10,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:31Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.3,
+        "pairwise": 0.08888888888888889,
+        "distinct": 7,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 0.3,
+        "pairwise": 0.13333333333333333,
+        "distinct": 5,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.2,
+        "pairwise": 0.044444444444444446,
+        "distinct": 8,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.3,
+        "pairwise": 0.1111111111111111,
+        "distinct": 6,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.3,
+        "pairwise": 0.06666666666666667,
+        "distinct": 8,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k2p7-code",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 0.3,
+        "pairwise": 0.1111111111111111,
+        "distinct": 6,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.3,
+        "pairwise": 0.13333333333333333,
+        "distinct": 6,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 0.9,
+        "pairwise": 0.8,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6222222222222222,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.17777777777777778,
+        "distinct": 5,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.5,
+        "pairwise": 0.26666666666666666,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.9,
+        "pairwise": 0.8,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.5,
+        "pairwise": 0.28888888888888886,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.6,
+        "pairwise": 0.35555555555555557,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "kimi-k3",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 0.9,
+        "pairwise": 0.8,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:35Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.6,
+        "pairwise": 0.37777777777777777,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:35Z",
+          "to": "2026-09-23T06:35Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "minimax-m3",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 0.5,
+        "pairwise": 0.35555555555555557,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.2222222222222222,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "minimax-m3",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "minimax-m3",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 0.9,
+        "pairwise": 0.8,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.6,
+        "pairwise": 0.35555555555555557,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "minimax-m3",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.2222222222222222,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.7,
+        "pairwise": 0.5333333333333333,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "minimax-m3",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6444444444444445,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.7,
+        "pairwise": 0.5333333333333333,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 0.9,
+        "pairwise": 0.8,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:32Z",
+          "to": "2026-09-23T06:32Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6222222222222222,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6222222222222222,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "muse-glimmer-30b",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.6,
+        "pairwise": 0.4666666666666667,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-3-ultra-nvfp4",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.6,
+        "pairwise": 0.4666666666666667,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-3-ultra-nvfp4",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.7,
+        "pairwise": 0.5333333333333333,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-3-ultra-nvfp4",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.2222222222222222,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-3-ultra-nvfp4",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.7,
+        "pairwise": 0.5333333333333333,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:33Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-3-ultra-nvfp4",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:33Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.17777777777777778,
+        "distinct": 5,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 0.6,
+        "pairwise": 0.35555555555555557,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.2,
+        "pairwise": 0.044444444444444446,
+        "distinct": 8,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.5,
+        "pairwise": 0.28888888888888886,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.7,
+        "pairwise": 0.4888888888888889,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:35Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 0.5,
+        "pairwise": 0.2222222222222222,
+        "distinct": 6,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:35Z",
+          "to": "2026-09-23T06:35Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.5,
+        "pairwise": 0.24444444444444444,
+        "distinct": 5,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:35Z",
+          "to": "2026-09-23T06:35Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.3,
+        "pairwise": 0.13333333333333333,
+        "distinct": 6,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:36Z",
+          "to": "2026-09-23T06:36Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.13333333333333333,
+        "distinct": 7,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:36Z",
+          "to": "2026-09-23T06:36Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "nemotron-lightning-3p5-30b-a3b",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 0.7,
+        "pairwise": 0.4666666666666667,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:36Z",
+          "to": "2026-09-23T06:36Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.9,
+        "pairwise": 0.8,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:36Z",
+          "to": "2026-09-23T06:36Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-2p4t-a95b",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 0.6,
+        "pairwise": 0.4,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6222222222222222,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-2p4t-a95b",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.28888888888888886,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.2222222222222222,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:35Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-2p4t-a95b",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:35Z",
+          "to": "2026-09-23T06:36Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:36Z",
+          "to": "2026-09-23T06:36Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-2p4t-a95b",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6444444444444445,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:36Z",
+          "to": "2026-09-23T06:36Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6222222222222222,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:36Z",
+          "to": "2026-09-23T06:37Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-2p4t-a95b",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6222222222222222,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:37Z",
+          "to": "2026-09-23T06:38Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:38Z",
+          "to": "2026-09-23T06:38Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "prompt": "word_prob",
+      "sequential": {
+        "n": 10,
+        "modal": 0.9,
+        "pairwise": 0.8,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 0.4,
+        "pairwise": 0.2,
+        "distinct": 5,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "prompt": "sentence",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.5,
+        "pairwise": 0.3111111111111111,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:34Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.6,
+        "pairwise": 0.37777777777777777,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:34Z",
+          "to": "2026-09-23T06:35Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "prompt": "opener",
+      "sequential": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:35Z",
+          "to": "2026-09-23T06:36Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:36Z",
+          "to": "2026-09-23T06:36Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "prompt": "question",
+      "concurrent": {
+        "n": 10,
+        "modal": 0.7,
+        "pairwise": 0.4666666666666667,
+        "distinct": 4,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:36Z",
+          "to": "2026-09-23T06:36Z"
+        }
+      },
+      "sequential": {
+        "n": 10,
+        "modal": 0.8,
+        "pairwise": 0.6222222222222222,
+        "distinct": 3,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:36Z",
+          "to": "2026-09-23T06:37Z"
+        }
+      }
+    },
+    {
+      "provider": "fireworks",
+      "model": "qwen3p8-max",
+      "prompt": "math500",
+      "sequential": {
+        "n": 10,
+        "modal": 0.9,
+        "pairwise": 0.8,
+        "distinct": 2,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:37Z",
+          "to": "2026-09-23T06:38Z"
+        }
+      },
+      "concurrent": {
+        "n": 10,
+        "modal": 1.0,
+        "pairwise": 1.0,
+        "distinct": 1,
+        "errors": [],
+        "collected": {
+          "from": "2026-09-23T06:38Z",
+          "to": "2026-09-23T06:38Z"
+        }
+      }
+    }
+  ]
+}

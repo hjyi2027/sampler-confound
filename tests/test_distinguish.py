@@ -209,27 +209,57 @@ def _cell(model, param, dh, h_open, h_tight, support_tight=5, n=40, status="ok")
     return r
 
 
-def test_control_that_removes_most_entropy_powers_the_model():
-    power = positive_control([_cell("m", "temperature", dh=4.0, h_open=5.0, h_tight=1.0)])
+def _control(t0: list[str], t1: list[str], model="m"):
+    """A temperature cell whose tight arm is T=0, and a top_p cell whose open
+    arm is unrestricted T=1.0 — the two arms the control now contrasts."""
+    temp = Distinguishability(model=model, parameter="temperature", setting_a={}, setting_b={})
+    temp.status, temp.completions_tight = "ok", t0
+    temp.completions_open = t1
+    temp.entropy_open, temp.dh = 5.0, 1.0
+    top = Distinguishability(model=model, parameter="top_p", setting_a={}, setting_b={})
+    top.status, top.completions_open = "ok", t1
+    return positive_control([temp, top], n_permutations=2000)
+
+
+SPREAD = [f"s{i % 20}" for i in range(40)]          # 20 distinct, ~4.3 bits
+
+
+def test_control_passes_when_t0_vs_t1_is_detectable():
+    power = _control(["a"] * 38 + ["b"] * 2, SPREAD)
     assert power["m"].powered
-    assert power["m"].fraction_removed == pytest.approx(0.8)
+    assert power["m"].contrast == "T=0 vs T=1.0"
+    assert power["m"].fraction_removed > 0.8
 
 
-def test_control_that_barely_moves_leaves_the_model_underpowered():
-    # nemotron-lightning: 5.29 bits open, 4.47 remain at temperature 0.
-    power = positive_control([_cell("m", "temperature", dh=0.81, h_open=5.29,
-                                    h_tight=4.47, support_tight=29)])
+def test_control_fails_when_t0_is_as_spread_as_t1():
+    # nemotron-lightning: temperature 0 leaves most of the entropy in place
+    t0 = [f"s{(i * 3) % 20}" for i in range(40)]
+    power = _control(t0, SPREAD)
     assert not power["m"].powered
-    assert "uninterpretable" in power["m"].detail
+    assert "means nothing" in power["m"].detail
 
 
 def test_a_null_reads_differently_depending_on_the_control():
     """The whole point. Same cell, same p-value, opposite meaning."""
     cell = _cell("m", "top_p", dh=0.10, h_open=5.0, h_tight=4.9)
-    strong = positive_control([_cell("m", "temperature", dh=4.5, h_open=5.0, h_tight=0.5)])
-    weak = positive_control([_cell("m", "temperature", dh=0.5, h_open=5.0, h_tight=4.5)])
+    strong = _control(["a"] * 40, SPREAD)
+    weak = _control([f"s{(i * 3) % 20}" for i in range(40)], SPREAD)
     assert interpret(cell, strong, p_adjusted=0.4) == "no effect seen"
     assert interpret(cell, weak, p_adjusted=0.4) == "underpowered"
+
+
+def test_control_needs_the_unrestricted_arm_and_says_so_when_missing():
+    temp = Distinguishability(model="m", parameter="temperature", setting_a={}, setting_b={})
+    temp.status, temp.completions_tight = "ok", ["a"] * 40
+    power = positive_control([temp], n_permutations=200)
+    assert not power["m"].powered and "missing" in power["m"].detail
+
+
+def test_legacy_rule_is_reported_but_never_decides():
+    """The T=0 vs 1.5 fraction rule is kept for comparison only."""
+    power = _control(["a"] * 40, SPREAD)
+    assert power["m"].legacy_fraction_removed == pytest.approx(0.2)   # dh 1.0 / 5.0
+    assert not power["m"].legacy_powered and power["m"].powered
 
 
 def test_a_significant_effect_is_distinguishable_regardless_of_control():
@@ -244,12 +274,55 @@ def test_a_model_without_a_control_is_underpowered_not_no_effect():
     assert interpret(cell, {}, p_adjusted=0.6) == "underpowered"
 
 
-def test_the_control_is_the_ceiling_on_what_any_cell_can_show():
-    # No truncation parameter can remove entropy the control could not: if
-    # temperature 0 leaves 4.5 bits, top_p=0.01 cannot get below that either.
-    power = positive_control([_cell("m", "temperature", dh=0.8, h_open=5.3, h_tight=4.5)])
-    assert power["m"].control_h_tight == pytest.approx(4.5)
-    assert not power["m"].powered
+def test_a_significant_effect_is_distinguishable_regardless_of_control_ceiling():
+    weak = _control([f"s{(i * 3) % 20}" for i in range(40)], SPREAD)
+    cell = _cell("m", "top_k", dh=3.0, h_open=5.0, h_tight=2.0)
+    assert interpret(cell, weak, p_adjusted=0.001) == "distinguishable"
+
+
+# --------------------------------------------------------------------------
+# stratified permutation test over prompts
+# --------------------------------------------------------------------------
+
+def _arm_cell(tight, open_, status="ok"):
+    c = Distinguishability(model="m", parameter="top_k", setting_a={}, setting_b={})
+    c.status, c.completions_tight, c.completions_open = status, tight, open_
+    return c
+
+
+def test_stratified_test_pools_weak_signal_across_prompts():
+    """Four prompts each too weak alone; together decisive."""
+    from samplerconfound.distinguish import stratified_test
+    weak = [_arm_cell(["a"] * 14 + [f"x{i}" for i in range(6)],
+                      ["a"] * 8 + [f"y{i}" for i in range(12)]) for _ in range(4)]
+    single = [assess_parameter("m", "top_k", {}, {}, c.completions_tight, c.completions_open,
+                               n_permutations=2000).dh_p for c in weak]
+    _, p, k = stratified_test(weak, "dh", n_permutations=4000)
+    assert k == 4 and p < min(single) and p < 0.05
+
+
+def test_stratified_test_is_calibrated_under_the_null():
+    """Exchangeable arms on every prompt: rejection rate near alpha."""
+    from samplerconfound.distinguish import stratified_test
+    rng = np.random.default_rng(1)
+    rejects = 0
+    trials = 120
+    for t in range(trials):
+        cells = []
+        for _ in range(4):
+            pool = [f"w{int(x)}" for x in rng.zipf(1.6, 80) % 25]
+            cells.append(_arm_cell(pool[:40], pool[40:]))
+        _, p, _ = stratified_test(cells, "dh", n_permutations=400, random_state=t)
+        rejects += p < 0.05
+    assert rejects / trials < 0.12
+
+
+def test_stratified_test_skips_degenerate_prompts():
+    from samplerconfound.distinguish import stratified_test
+    cells = [_arm_cell(["a"] * 40, [f"s{i % 20}" for i in range(40)]),
+             _arm_cell([], [], status="insufficient")]
+    _, p, k = stratified_test(cells, "dh", n_permutations=1000)
+    assert k == 1 and p < 0.01
 
 
 # --------------------------------------------------------------------------
@@ -407,3 +480,36 @@ def test_control_passed_and_verdict_count_are_reported_separately():
     assert agg.verdict == "distinguishable"
     # without the control map the count is explicitly unknown, not zero
     assert aggregate(verdicts, "m", "top_k").n_control_passed == -1
+
+
+def test_stratified_test_needs_the_completions_attached():
+    """Regression: assess_parameter returns statistics without the samples, and
+    a cell built from it alone gives the stratified test nothing to permute."""
+    from samplerconfound.distinguish import stratified_test
+    bare = assess_parameter("m", "control", {}, {}, ["a"] * 40, SPREAD, n_permutations=100)
+    assert stratified_test([bare], "dh", n_permutations=100)[2] == 0
+    bare.completions_tight, bare.completions_open = ["a"] * 40, SPREAD
+    _, p, k = stratified_test([bare], "dh", n_permutations=500)
+    assert k == 1 and p < 0.01
+
+
+def test_a_barely_detectable_control_is_not_powered():
+    """Regression. T=0 at 18 distinct values against T=1.0 at 20 is detectable
+    (p ~ 0.01) but far from reliably so; at the Holm-corrected level a family of
+    eight tests faces, the power to see a full-strength effect is low, and a
+    null licensed by it would be a coin flip. It must read underpowered."""
+    t0 = [f"s{(i * 7) % 18}" for i in range(40)]
+    temp = Distinguishability(model="m", parameter="temperature", setting_a={}, setting_b={})
+    temp.status, temp.completions_tight, temp.entropy_open, temp.dh = "ok", t0, 5.0, 1.0
+    top = Distinguishability(model="m", parameter="top_p", setting_a={}, setting_b={})
+    top.status, top.completions_open = "ok", SPREAD
+    mp = positive_control([temp, top], n_permutations=2000, alpha=0.05 / 8)["m"]
+    assert mp.control_p < 0.05, "the contrast IS detectable at 0.05"
+    assert mp.control_power < 0.8 and not mp.powered, "but not with the power a null needs"
+
+
+def test_power_estimate_is_high_for_a_large_effect_and_near_alpha_for_none():
+    from samplerconfound.distinguish import estimate_power
+    assert estimate_power([(["a"] * 40, SPREAD)], alpha=0.05 / 8, boot=60) > 0.95
+    same = [f"s{(i * 3) % 20}" for i in range(40)]
+    assert estimate_power([(same, SPREAD)], alpha=0.05, boot=60) < 0.3

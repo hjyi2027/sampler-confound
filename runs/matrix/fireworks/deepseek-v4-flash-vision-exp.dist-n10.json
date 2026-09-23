@@ -9,9 +9,13 @@
     "from": "2026-09-20T14:08Z",
     "to": "2026-09-21T15:43Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:28Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:40Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -2396,57 +2400,77 @@
     "word_prob": {
       "deepseek-v4-flash-vision-exp": {
         "model": "deepseek-v4-flash-vision-exp",
-        "control_dh": -1.550977500432694,
-        "control_h_open": 1.7709505944546686,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": NaN,
+        "control_h_open": 3.3219280948873626,
         "control_h_tight": 3.3219280948873626,
         "control_support_tight": 10,
         "control_n_tight": 10,
-        "control_p": 0.9987001299870013,
-        "fraction_removed": -0.875788124913947,
+        "control_p": NaN,
+        "fraction_removed": NaN,
+        "control_alpha": NaN,
+        "control_power": NaN,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only -88% of 1.77 bits; 3.32 bits remain at temperature 0 (10/10 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": -0.875788124913947,
+        "legacy_powered": false,
+        "detail": "control insufficient: both arms all-unique (10/10, 10/10); exact-match statistics have no range here and cannot discriminate"
       }
     },
     "sentence": {
       "deepseek-v4-flash-vision-exp": {
         "model": "deepseek-v4-flash-vision-exp",
-        "control_dh": 1.9245112497836532,
-        "control_h_open": 2.8464393446710154,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.4000000000000004,
+        "control_h_open": 3.3219280948873626,
         "control_h_tight": 0.9219280948873623,
         "control_support_tight": 3,
         "control_n_tight": 10,
-        "control_p": 0.0013998600139986002,
-        "fraction_removed": 0.676111807331023,
-        "powered": true,
-        "detail": ""
+        "control_p": 0.00019998000199980003,
+        "fraction_removed": 0.722471989593555,
+        "control_alpha": 0.00625,
+        "control_power": 0.685,
+        "powered": false,
+        "legacy_fraction_removed": 0.676111807331023,
+        "legacy_powered": true,
+        "detail": "power 68% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0063 (dH=+2.40; 3/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "opener": {
       "deepseek-v4-flash-vision-exp": {
         "model": "deepseek-v4-flash-vision-exp",
-        "control_dh": 0.20000000000000018,
-        "control_h_open": 1.3567796494470397,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.3651484454403229,
+        "control_h_open": 2.5219280948873624,
         "control_h_tight": 1.1567796494470395,
         "control_support_tight": 3,
         "control_n_tight": 10,
-        "control_p": 0.40305969403059694,
-        "fraction_removed": 0.14740787133821684,
+        "control_p": 0.025297470252974703,
+        "fraction_removed": 0.5413114070174531,
+        "control_alpha": 0.00625,
+        "control_power": 0.235,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 15% of 1.36 bits; 1.16 bits remain at temperature 0 (3/10 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.14740787133821684,
+        "legacy_powered": false,
+        "detail": "power 24% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0063 (dH=+1.37; 3/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "question": {
       "deepseek-v4-flash-vision-exp": {
         "model": "deepseek-v4-flash-vision-exp",
-        "control_dh": -1.9019550008653874,
-        "control_h_open": 0.4689955935892812,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 0.9509775004326939,
+        "control_h_open": 3.3219280948873626,
         "control_h_tight": 2.3709505944546687,
         "control_support_tight": 6,
         "control_n_tight": 10,
-        "control_p": 0.9966003399660034,
-        "fraction_removed": -4.055379254865682,
+        "control_p": 0.018998100189981004,
+        "fraction_removed": 0.2862727528317975,
+        "control_alpha": 0.00625,
+        "control_power": 0.09,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only -406% of 0.47 bits; 2.37 bits remain at temperature 0 (6/10 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": -4.055379254865682,
+        "legacy_powered": false,
+        "detail": "power 9% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0063 (dH=+0.95; 6/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "repeat": {}
@@ -2456,7 +2480,7 @@
       "model": "deepseek-v4-flash-vision-exp",
       "parameter": "top_p",
       "n_prompts": 4,
-      "n_control_passed": 1,
+      "n_control_passed": 0,
       "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 1,
@@ -2467,15 +2491,22 @@
         "opener": "underpowered",
         "question": "underpowered"
       },
-      "verdict": "underpowered",
+      "verdict": "mixed",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 1.7509775004326933,
+      "stratified_p": 0.0221977802219778,
+      "stratified_p_holm": 0.110988901109889,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.955,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
       "parameter": "top_k",
       "n_prompts": 4,
-      "n_control_passed": 1,
+      "n_control_passed": 0,
       "n_verdict": 3,
       "n_powered": 3,
       "n_distinguishable": 3,
@@ -2488,13 +2519,20 @@
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 4.60160124310035,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0007999200079992001,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.955,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
       "parameter": "min_p",
       "n_prompts": 4,
-      "n_control_passed": 1,
+      "n_control_passed": 0,
       "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 1,
@@ -2505,15 +2543,22 @@
         "opener": "underpowered",
         "question": "underpowered"
       },
-      "verdict": "underpowered",
+      "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 3.262919048309067,
+      "stratified_p": 0.00019998000199980003,
+      "stratified_p_holm": 0.0011998800119988001,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.955,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
       "parameter": "typical_p",
       "n_prompts": 4,
-      "n_control_passed": 1,
+      "n_control_passed": 0,
       "n_verdict": 0,
       "n_powered": 0,
       "n_distinguishable": 0,
@@ -2526,13 +2571,20 @@
       },
       "verdict": "underpowered",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 0.5245112497836533,
+      "stratified_p": 0.1014898510148985,
+      "stratified_p_holm": 0.30446955304469553,
+      "stratified_prompts": 1,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.235,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
       "parameter": "mirostat",
       "n_prompts": 4,
-      "n_control_passed": 1,
+      "n_control_passed": 0,
       "n_verdict": 0,
       "n_powered": 0,
       "n_distinguishable": 0,
@@ -2545,13 +2597,20 @@
       },
       "verdict": "underpowered",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": -0.3999999999999999,
+      "stratified_p": 0.8306169383061693,
+      "stratified_p_holm": 0.8521147885211479,
+      "stratified_prompts": 1,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.235,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
-      "n_control_passed": 1,
+      "n_control_passed": 0,
       "n_verdict": 0,
       "n_powered": 0,
       "n_distinguishable": 0,
@@ -2566,13 +2625,20 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 2.7,
+      "stratified_p": 0.048095190480951906,
+      "stratified_p_holm": 0.19238076192380762,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": NaN,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
-      "n_control_passed": 1,
+      "n_control_passed": 0,
       "n_verdict": 2,
       "n_powered": 2,
       "n_distinguishable": 2,
@@ -2587,13 +2653,20 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 2.8000000000000007,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0007999200079992001,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": NaN,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "deepseek-v4-flash-vision-exp",
       "parameter": "presence_penalty",
       "n_prompts": 4,
-      "n_control_passed": 1,
+      "n_control_passed": 0,
       "n_verdict": 0,
       "n_powered": 0,
       "n_distinguishable": 0,
@@ -2608,7 +2681,14 @@
       "forced": {
         "repeat": "insufficient"
       },
-      "verdict_forced": "insufficient"
+      "verdict_forced": "insufficient",
+      "stratified_stat": 0.8000000000000003,
+      "stratified_p": 0.42605739426057393,
+      "stratified_p_holm": 0.8521147885211479,
+      "stratified_prompts": 1,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.575,
+      "verdict_majority": "underpowered"
     }
   ]
 }

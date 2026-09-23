@@ -9,9 +9,12 @@
     "from": "2026-09-20T10:31Z",
     "to": "2026-09-21T09:06Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:28Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -3298,56 +3301,76 @@
     "word_prob": {
       "glm-5p3": {
         "model": "glm-5p3",
-        "control_dh": 3.829836234997768,
-        "control_h_open": 5.271928094887363,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.539595223136848,
+        "control_h_open": 4.981687083026443,
         "control_h_tight": 1.4420918598895944,
         "control_support_tight": 4,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.7264583594590158,
+        "fraction_removed": 0.7105213884663538,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.7264583594590158,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "sentence": {
       "glm-5p3": {
         "model": "glm-5p3",
-        "control_dh": 4.702932501298082,
-        "control_h_open": 5.271928094887363,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 4.334060313743995,
+        "control_h_open": 4.903055907333276,
         "control_h_tight": 0.5689955935892812,
         "control_support_tight": 3,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.8920706839417851,
+        "fraction_removed": 0.8839508248848926,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.8920706839417851,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "opener": {
       "glm-5p3": {
         "model": "glm-5p3",
-        "control_dh": 4.5403999716663614,
-        "control_h_open": 4.5403999716663614,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 4.075070520364182,
+        "control_h_open": 4.075070520364182,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 1.0,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "question": {
       "glm-5p3": {
         "model": "glm-5p3",
-        "control_dh": 4.021368824306834,
-        "control_h_open": 4.934183719779189,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.5275850761940064,
+        "control_h_open": 4.440399971666362,
         "control_h_tight": 0.9128148954723553,
         "control_support_tight": 3,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.8150018427945354,
+        "fraction_removed": 0.7944295781242876,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.8150018427945354,
+        "legacy_powered": true,
         "detail": ""
       }
     },
@@ -3371,7 +3394,14 @@
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 7.519583601669103,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "glm-5p3",
@@ -3390,7 +3420,14 @@
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 9.702199231858966,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "glm-5p3",
@@ -3411,7 +3448,14 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 3.9499999999999993,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "glm-5p3",
@@ -3432,7 +3476,14 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 2.799999999999999,
+      "stratified_p": 0.0922907709229077,
+      "stratified_p_holm": 0.1845815418458154,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     },
     {
       "model": "glm-5p3",
@@ -3453,7 +3504,14 @@
       "forced": {
         "repeat": "insufficient"
       },
-      "verdict_forced": "insufficient"
+      "verdict_forced": "insufficient",
+      "stratified_stat": 2.675,
+      "stratified_p": 0.47565243475652436,
+      "stratified_p_holm": 0.47565243475652436,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     }
   ]
 }

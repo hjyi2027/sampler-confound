@@ -9,9 +9,12 @@
     "from": "2026-09-20T14:39Z",
     "to": "2026-09-21T05:19Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:28Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -3296,57 +3299,77 @@
     "word_prob": {
       "minimax-m3": {
         "model": "minimax-m3",
-        "control_dh": -2.0396596952239765,
-        "control_h_open": 1.9567796494470395,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.3254887502163468,
+        "control_h_open": 5.321928094887363,
         "control_h_tight": 3.996439344671016,
         "control_support_tight": 20,
         "control_n_tight": 40,
-        "control_p": 1.0,
-        "fraction_removed": -1.0423553289714342,
-        "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only -104% of 1.96 bits; 4.00 bits remain at temperature 0 (20/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "control_p": 9.999000099990002e-05,
+        "fraction_removed": 0.24906175479704606,
+        "control_alpha": 0.01,
+        "control_power": 0.985,
+        "powered": true,
+        "legacy_fraction_removed": -1.0423553289714342,
+        "legacy_powered": false,
+        "detail": ""
       }
     },
     "sentence": {
       "minimax-m3": {
         "model": "minimax-m3",
-        "control_dh": 4.508694969562843,
-        "control_h_open": 4.508694969562843,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 4.865311532225102,
+        "control_h_open": 4.865311532225102,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 1.0,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "opener": {
       "minimax-m3": {
         "model": "minimax-m3",
-        "control_dh": 1.5218549737400688,
-        "control_h_open": 3.5847563873559682,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.1080491808387696,
+        "control_h_open": 4.170950594454669,
         "control_h_tight": 2.0629014136158994,
         "control_support_tight": 10,
         "control_n_tight": 40,
-        "control_p": 0.001999800019998,
-        "fraction_removed": 0.424535117395398,
-        "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 42% of 3.58 bits; 2.06 bits remain at temperature 0 (10/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "control_p": 9.999000099990002e-05,
+        "fraction_removed": 0.5054121675863165,
+        "control_alpha": 0.01,
+        "control_power": 0.975,
+        "powered": true,
+        "legacy_fraction_removed": 0.424535117395398,
+        "legacy_powered": false,
+        "detail": ""
       }
     },
     "question": {
       "minimax-m3": {
         "model": "minimax-m3",
-        "control_dh": 1.59338343733774,
-        "control_h_open": 3.395461844238322,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.8285625766267004,
+        "control_h_open": 4.630640983527282,
         "control_h_tight": 1.802078406900582,
         "control_support_tight": 7,
         "control_n_tight": 40,
-        "control_p": 0.0005999400059994001,
-        "fraction_removed": 0.46926854443719174,
-        "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 47% of 3.40 bits; 1.80 bits remain at temperature 0 (7/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "control_p": 9.999000099990002e-05,
+        "fraction_removed": 0.6108360779185497,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
+        "powered": true,
+        "legacy_fraction_removed": 0.46926854443719174,
+        "legacy_powered": false,
+        "detail": ""
       }
     },
     "repeat": {}
@@ -3356,45 +3379,59 @@
       "model": "minimax-m3",
       "parameter": "typical_p",
       "n_prompts": 4,
-      "n_control_passed": 1,
-      "n_verdict": 3,
-      "n_powered": 3,
+      "n_control_passed": 4,
+      "n_verdict": 4,
+      "n_powered": 4,
       "n_distinguishable": 3,
-      "n_no_effect": 0,
+      "n_no_effect": 1,
       "per_prompt": {
         "word_prob": "distinguishable",
         "sentence": "distinguishable",
-        "opener": "underpowered",
+        "opener": "no effect seen",
         "question": "distinguishable"
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 3.8485514879800418,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "minimax-m3",
       "parameter": "mirostat",
       "n_prompts": 4,
-      "n_control_passed": 1,
-      "n_verdict": 2,
-      "n_powered": 2,
+      "n_control_passed": 4,
+      "n_verdict": 3,
+      "n_powered": 3,
       "n_distinguishable": 2,
-      "n_no_effect": 0,
+      "n_no_effect": 1,
       "per_prompt": {
         "word_prob": "insufficient",
         "sentence": "distinguishable",
         "opener": "distinguishable",
-        "question": "underpowered"
+        "question": "no effect seen"
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 3.6935423971431836,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "minimax-m3",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
-      "n_control_passed": 1,
+      "n_control_passed": 4,
       "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
@@ -3409,49 +3446,70 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 3.9749999999999996,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "minimax-m3",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
-      "n_control_passed": 1,
-      "n_verdict": 2,
-      "n_powered": 2,
+      "n_control_passed": 4,
+      "n_verdict": 4,
+      "n_powered": 4,
       "n_distinguishable": 1,
-      "n_no_effect": 1,
+      "n_no_effect": 3,
       "per_prompt": {
         "word_prob": "distinguishable",
         "sentence": "no effect seen",
-        "opener": "underpowered",
-        "question": "underpowered"
+        "opener": "no effect seen",
+        "question": "no effect seen"
       },
       "verdict": "mixed",
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 3.249999999999999,
+      "stratified_p": 0.46005399460054,
+      "stratified_p_holm": 0.46005399460054,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     },
     {
       "model": "minimax-m3",
       "parameter": "presence_penalty",
       "n_prompts": 4,
-      "n_control_passed": 1,
-      "n_verdict": 1,
-      "n_powered": 1,
+      "n_control_passed": 4,
+      "n_verdict": 3,
+      "n_powered": 3,
       "n_distinguishable": 0,
-      "n_no_effect": 1,
+      "n_no_effect": 3,
       "per_prompt": {
         "word_prob": "insufficient",
         "sentence": "no effect seen",
-        "opener": "underpowered",
-        "question": "underpowered"
+        "opener": "no effect seen",
+        "question": "no effect seen"
       },
-      "verdict": "underpowered",
+      "verdict": "no effect seen",
       "forced": {
         "repeat": "insufficient"
       },
-      "verdict_forced": "insufficient"
+      "verdict_forced": "insufficient",
+      "stratified_stat": 2.1999999999999997,
+      "stratified_p": 0.1718828117188281,
+      "stratified_p_holm": 0.3437656234376562,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     }
   ]
 }

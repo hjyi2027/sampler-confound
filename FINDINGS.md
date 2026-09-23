@@ -348,18 +348,25 @@ or every prompt degenerate; mix = prompts disagree; n/a = both arms constant
 What the five add to the four:
 
 **`frequency_penalty` is applied on 18 of 18 models and matters on a sentence
-on 5.** Every model breaks forced repetition under it; on eight, the same
+on 8.** Every model breaks forced repetition under it; on six, the same
 parameter at its maximum leaves the distribution of a one-sentence reply
-indistinguishable from the control. Both are true. A harness that reports
+indistinguishable from the control with power to have seen it, and on four the
+prompts disagree. *(Revised 2026-09-23 under the stratified test and the
+power-analysed control; it read 5 under the majority vote.)* Both are true. A harness that reports
 "frequency_penalty=2.0" is reporting a setting that is real and, on most of
 these models, inert for short generation.
 
 **`mirostat` is accepted everywhere and inert on six models.** This is the
 first parameter on this provider whose honouring differs *between models
 behind one stack*: applied on gpt-oss-120b, minimax-m3, kimi-k2p7-code,
-glm-5p3 and kimi-k3; accepted and doing nothing on deepseek-v4p1-flash,
-muse-glimmer-30b, nemotron-3-ultra, deepseek-v4-pro-0813, qwen3p8-max and
-qwen3p8-2p4t. The earlier claim that honouring is uniform on a single serving
+glm-5p3, kimi-k3 and deepseek-v4p1-flash; accepted and doing nothing, with
+at least 80% power to have seen a full-strength effect, on
+deepseek-v4-flash-0731, deepseek-v4-pro-0813, glm-5p2, muse-glimmer-30b,
+qwen3p8-max and qwen3p8-2p4t. *(Revised 2026-09-23: the count is unchanged but
+the membership is not. Under the majority vote deepseek-v4p1-flash read inert;
+the stratified test finds its effect, Holm p = 0.0009. nemotron-3-ultra moved
+to mixed; deepseek-v4-flash-0731 and glm-5p2, previously undetermined, now
+have the power to be called inert.)* The earlier claim that honouring is uniform on a single serving
 stack was true of the parameters tested then and is false of this one.
 
 **`typical_p` is honoured on most models and ignored on muse-glimmer-30b**,
@@ -476,6 +483,47 @@ corpus because three models of very different accuracy leave nothing for the
 sampler component after clamping. The direction and the arithmetic are what
 the full sweep would inherit.
 
+### Re-analysis, 2026-09-23: the control and the aggregate, corrected
+
+Two methodological fixes from a readiness review, applied to every cell on
+disk with `--reassess` (no API calls; the completions are the data).
+
+*The positive control now spans the range the tests span, and is a power
+analysis.* It had contrasted temperature 0 with 1.5 and required half the
+open-arm entropy removed. The parameter arms sit at 1.0, and at 1.5 several
+reasoning models run to the cap and return nothing, so the control failed on
+models where it said nothing about the arms tested; the 0.5 had no
+derivation. It is now T=0 against unrestricted T=1.0 — both arms already
+collected — and a prompt counts as powered when the bootstrap-estimated power
+to detect that contrast, at the Holm-corrected level the parameter tests face,
+is at least 0.8. An intermediate version that asked only for p < 0.05 on the
+contrast was tried and rejected before anything was committed: it made
+truncation cells on low-headroom models (nemotron-lightning) read "inert"
+when they could not have shown a full-strength effect.
+
+*The aggregate is a stratified permutation test.* Labels are permuted within
+prompt and the per-prompt statistic summed, one exact p per (model,
+parameter), Holm across the family; a parameter shown on any single prompt is
+"mixed", never inert. Against the old majority vote: 111 of 187 aggregates
+agree; of 76 disagreements, 46 are undetermined cells pooling resolves, 20
+become mixed, 4 go from mixed to distinguishable, and 6 reverse a definite
+verdict — all six from the vote's "no effect seen" to an effect, none the
+other way.
+
+Headline counts held: no truncation parameter is inert on any model, mirostat
+is inert on six (membership revised, above), `seed` on 17 of 18. "As
+documented" rose from 88 to 98 cells as undetermined cells resolved.
+
+*Concurrency, measured.* The determinism probe issued its ten requests five
+at a time, and batch composition is a mechanism for nondeterminism. A same-day
+arm on 2026-09-23 issued them one at a time as well
+(`scripts/probe_sequential.py`, $0.75): two models reproduce on every prompt
+sequentially against one concurrently; pairwise agreement is higher
+sequentially on 48 of 90 (model, prompt) pairs and lower on 25; for eight
+models it rises by ten points or more, and nemotron-3-ultra goes from 56% modal
+concurrent to 100% sequential. For others (kimi-k2p6: 22% both ways) the
+nondeterminism does not depend on this client's load.
+
 ### Documented, accepted, honoured: three facts, kept apart
 
 Everything above measures what the output distribution does. What the
@@ -493,7 +541,7 @@ and thirteen parameters:
 
 | label | cells | parameters |
 |---|--:|---|
-| as documented | 88 | top_p, top_k, min_p, most of typical_p, repetition_penalty, frequency_penalty; ignore_eos on 3 |
+| as documented | 98 (was 88 before 2026-09-23) | top_p, top_k, min_p, most of typical_p, repetition_penalty, frequency_penalty; ignore_eos on 3 |
 | documented, accepted, undetermined | 47 | presence_penalty (16), mirostat (7), typical_p (9), … |
 | **documented, accepted, ignored** | **27** | **seed (17)**, mirostat (6), typical_p (1), repetition_penalty (1), presence_penalty (2) |
 | **undocumented, accepted, ignored** | **9** | **use_beam_search (4), skip_special_tokens (5)** |

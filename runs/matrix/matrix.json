@@ -4,10 +4,10 @@
     "model": "nemotron-lightning-3p5-30b-a3b",
     "top_p": "underpowered",
     "n_prompts": 4,
-    "top_k": "underpowered",
+    "top_k": "mixed",
     "min_p": "underpowered",
-    "powered_prompts": 0,
-    "control_removed": 0.21319623161071805,
+    "powered_prompts": 2,
+    "control_removed": 0.20391076687292184,
     "n_by_param": {
       "top_p": 40,
       "top_k": 40,
@@ -19,19 +19,19 @@
       "presence_penalty": 40
     },
     "collected": {
-      "from": "2026-09-17T19:56",
+      "from": "2026-09-17T20:12",
       "to": "2026-09-21T16:01Z"
     },
     "greedy_match": 0.38,
     "seed": "NO",
-    "typical_p": "underpowered",
-    "mirostat": "underpowered",
+    "typical_p": "distinguishable",
+    "mirostat": "mixed",
     "repetition_penalty": "distinguishable",
-    "repetition_penalty_free_text": "underpowered",
+    "repetition_penalty_free_text": "distinguishable",
     "frequency_penalty": "distinguishable",
     "frequency_penalty_free_text": "distinguishable",
     "presence_penalty": "no effect seen",
-    "presence_penalty_free_text": "underpowered",
+    "presence_penalty_free_text": "no effect seen",
     "n_per_arm": 40,
     "usd_out_per_1m": 0.2,
     "tier": "paid"
@@ -47,7 +47,7 @@
     },
     "typical_p": "distinguishable",
     "n_prompts": 4,
-    "mirostat": "mixed",
+    "mirostat": "distinguishable",
     "repetition_penalty": "distinguishable",
     "repetition_penalty_free_text": "distinguishable",
     "frequency_penalty": "distinguishable",
@@ -93,7 +93,7 @@
       "presence_penalty": 40
     },
     "collected": {
-      "from": "2026-09-17T19:56",
+      "from": "2026-09-17T20:12",
       "to": "2026-09-21T16:00Z"
     },
     "greedy_match": 1.0,
@@ -103,7 +103,7 @@
     "repetition_penalty": "distinguishable",
     "repetition_penalty_free_text": "distinguishable",
     "frequency_penalty": "distinguishable",
-    "frequency_penalty_free_text": "no effect seen",
+    "frequency_penalty_free_text": "mixed",
     "presence_penalty": "insufficient",
     "presence_penalty_free_text": "no effect seen",
     "n_per_arm": 40,
@@ -117,8 +117,8 @@
     "n_prompts": 4,
     "top_k": "distinguishable",
     "min_p": "distinguishable",
-    "powered_prompts": 1,
-    "control_removed": 0.3897276243086083,
+    "powered_prompts": 4,
+    "control_removed": 0.42926278720783484,
     "n_by_param": {
       "top_p": 40,
       "top_k": 40,
@@ -130,19 +130,19 @@
       "presence_penalty": 40
     },
     "collected": {
-      "from": "2026-09-17T19:56",
+      "from": "2026-09-17T20:12",
       "to": "2026-09-21T07:11Z"
     },
     "greedy_match": 0.58,
     "seed": "NO",
-    "typical_p": "mixed",
-    "mirostat": "underpowered",
+    "typical_p": "distinguishable",
+    "mirostat": "no effect seen",
     "repetition_penalty": "distinguishable",
     "frequency_penalty": "distinguishable",
     "presence_penalty": "insufficient",
     "repetition_penalty_free_text": "distinguishable",
     "frequency_penalty_free_text": "distinguishable",
-    "presence_penalty_free_text": "underpowered",
+    "presence_penalty_free_text": "mixed",
     "n_per_arm": 40,
     "usd_out_per_1m": 0.66,
     "tier": "paid"
@@ -154,8 +154,8 @@
     "n_prompts": 4,
     "top_k": "distinguishable",
     "min_p": "distinguishable",
-    "powered_prompts": 1,
-    "control_removed": 0.21286208321528888,
+    "powered_prompts": 4,
+    "control_removed": 0.5913275000754781,
     "n_by_param": {
       "top_p": 40,
       "top_k": 40,
@@ -167,7 +167,7 @@
       "presence_penalty": 40
     },
     "collected": {
-      "from": "2026-09-17T19:56",
+      "from": "2026-09-17T20:12",
       "to": "2026-09-21T05:19Z"
     },
     "greedy_match": 0.5,
@@ -179,7 +179,7 @@
     "presence_penalty": "insufficient",
     "repetition_penalty_free_text": "distinguishable",
     "frequency_penalty_free_text": "mixed",
-    "presence_penalty_free_text": "underpowered",
+    "presence_penalty_free_text": "no effect seen",
     "n_per_arm": 40,
     "usd_out_per_1m": 1.2,
     "tier": "paid"
@@ -195,13 +195,13 @@
     },
     "typical_p": "distinguishable",
     "n_prompts": 4,
-    "mirostat": "no effect seen",
+    "mirostat": "distinguishable",
     "repetition_penalty": "distinguishable",
     "repetition_penalty_free_text": "distinguishable",
     "frequency_penalty": "distinguishable",
-    "frequency_penalty_free_text": "mixed",
+    "frequency_penalty_free_text": "distinguishable",
     "presence_penalty": "insufficient",
-    "presence_penalty_free_text": "no effect seen",
+    "presence_penalty_free_text": "distinguishable",
     "powered_prompts": 3,
     "control_removed": 0.6059472688883281,
     "n_by_param": {
@@ -229,7 +229,7 @@
     "top_k": "distinguishable",
     "min_p": "distinguishable",
     "powered_prompts": 4,
-    "control_removed": 0.8293393934468605,
+    "control_removed": 0.8014117445278692,
     "n_by_param": {
       "top_p": 40,
       "top_k": 40,
@@ -241,8 +241,8 @@
       "presence_penalty": 40
     },
     "collected": {
-      "from": "2026-09-17T19:56",
-      "to": "2026-09-21T02:05Z"
+      "from": "2026-09-17T20:12",
+      "to": "2026-09-21T02:28Z"
     },
     "greedy_match": 0.78,
     "seed": "NO",
@@ -252,7 +252,7 @@
     "frequency_penalty": "distinguishable",
     "presence_penalty": "insufficient",
     "repetition_penalty_free_text": "distinguishable",
-    "frequency_penalty_free_text": "mixed",
+    "frequency_penalty_free_text": "distinguishable",
     "presence_penalty_free_text": "no effect seen",
     "n_per_arm": 40,
     "usd_out_per_1m": 1.5,
@@ -265,8 +265,8 @@
     "n_prompts": 4,
     "top_k": "distinguishable",
     "min_p": "distinguishable",
-    "powered_prompts": 4,
-    "control_removed": 0.724095729808975,
+    "powered_prompts": 3,
+    "control_removed": 0.5664911362324708,
     "n_by_param": {
       "top_p": 40,
       "top_k": 40,
@@ -278,19 +278,19 @@
       "presence_penalty": 40
     },
     "collected": {
-      "from": "2026-09-17T19:56",
+      "from": "2026-09-17T20:12",
       "to": "2026-09-21T12:27Z"
     },
     "greedy_match": 0.64,
     "seed": "NO",
     "typical_p": "distinguishable",
-    "mirostat": "no effect seen",
+    "mirostat": "mixed",
     "repetition_penalty": "distinguishable",
     "frequency_penalty": "distinguishable",
     "presence_penalty": "no effect seen",
     "repetition_penalty_free_text": "distinguishable",
-    "frequency_penalty_free_text": "no effect seen",
-    "presence_penalty_free_text": "no effect seen",
+    "frequency_penalty_free_text": "mixed",
+    "presence_penalty_free_text": "distinguishable",
     "n_per_arm": 40,
     "usd_out_per_1m": 2.4,
     "tier": "paid"
@@ -304,7 +304,7 @@
       "from": "2026-09-20T10:31Z",
       "to": "2026-09-21T10:21Z"
     },
-    "typical_p": "mixed",
+    "typical_p": "distinguishable",
     "n_prompts": 4,
     "mirostat": "no effect seen",
     "repetition_penalty": "distinguishable",
@@ -323,8 +323,8 @@
       "min_p": 40
     },
     "repetition_penalty_free_text": "distinguishable",
-    "frequency_penalty_free_text": "no effect seen",
-    "presence_penalty_free_text": "no effect seen",
+    "frequency_penalty_free_text": "mixed",
+    "presence_penalty_free_text": "mixed",
     "top_p": "distinguishable",
     "top_k": "distinguishable",
     "min_p": "distinguishable",
@@ -335,12 +335,12 @@
   {
     "provider": "fireworks",
     "model": "kimi-k2p6",
-    "top_p": "underpowered",
+    "top_p": "distinguishable",
     "n_prompts": 4,
     "top_k": "underpowered",
-    "min_p": "underpowered",
+    "min_p": "mixed",
     "powered_prompts": 0,
-    "control_removed": -0.6106762679774469,
+    "control_removed": 0.021149340030038807,
     "n_by_param": {
       "top_p": 40,
       "top_k": 40,
@@ -352,7 +352,7 @@
       "presence_penalty": 10
     },
     "collected": {
-      "from": "2026-09-17T19:56",
+      "from": "2026-09-17T20:12",
       "to": "2026-09-21T15:59Z"
     },
     "greedy_match": 0.2,
@@ -360,7 +360,7 @@
     "typical_p": "underpowered",
     "mirostat": "underpowered",
     "repetition_penalty": "distinguishable",
-    "repetition_penalty_free_text": "underpowered",
+    "repetition_penalty_free_text": "distinguishable",
     "frequency_penalty": "distinguishable",
     "frequency_penalty_free_text": "distinguishable",
     "presence_penalty": "insufficient",
@@ -378,9 +378,9 @@
       "from": "2026-09-20T10:31Z",
       "to": "2026-09-21T13:38Z"
     },
-    "typical_p": "underpowered",
+    "typical_p": "distinguishable",
     "n_prompts": 4,
-    "mirostat": "distinguishable",
+    "mirostat": "mixed",
     "repetition_penalty": "distinguishable",
     "frequency_penalty": "distinguishable",
     "presence_penalty": "insufficient",
@@ -397,8 +397,8 @@
       "min_p": 40
     },
     "repetition_penalty_free_text": "distinguishable",
-    "frequency_penalty_free_text": "underpowered",
-    "presence_penalty_free_text": "underpowered",
+    "frequency_penalty_free_text": "no effect seen",
+    "presence_penalty_free_text": "no effect seen",
     "top_p": "distinguishable",
     "top_k": "distinguishable",
     "min_p": "distinguishable",
@@ -454,7 +454,7 @@
     },
     "typical_p": "distinguishable",
     "n_prompts": 4,
-    "mirostat": "underpowered",
+    "mirostat": "no effect seen",
     "repetition_penalty": "distinguishable",
     "frequency_penalty": "distinguishable",
     "presence_penalty": "insufficient",
@@ -472,7 +472,7 @@
     },
     "repetition_penalty_free_text": "distinguishable",
     "frequency_penalty_free_text": "distinguishable",
-    "presence_penalty_free_text": "underpowered",
+    "presence_penalty_free_text": "no effect seen",
     "top_p": "distinguishable",
     "top_k": "distinguishable",
     "min_p": "distinguishable",
@@ -489,7 +489,7 @@
       "from": "2026-09-20T10:31Z",
       "to": "2026-09-21T12:36Z"
     },
-    "typical_p": "mixed",
+    "typical_p": "distinguishable",
     "n_prompts": 4,
     "mirostat": "no effect seen",
     "repetition_penalty": "insufficient",
@@ -508,7 +508,7 @@
       "min_p": 40
     },
     "repetition_penalty_free_text": "distinguishable",
-    "frequency_penalty_free_text": "no effect seen",
+    "frequency_penalty_free_text": "distinguishable",
     "presence_penalty_free_text": "no effect seen",
     "top_p": "distinguishable",
     "top_k": "distinguishable",
@@ -563,7 +563,7 @@
       "from": "2026-09-20T14:08Z",
       "to": "2026-09-21T15:42Z"
     },
-    "top_p": "underpowered",
+    "top_p": "distinguishable",
     "n_prompts": 4,
     "top_k": "distinguishable",
     "min_p": "underpowered",
@@ -572,11 +572,11 @@
     "repetition_penalty": "insufficient",
     "repetition_penalty_free_text": "distinguishable",
     "frequency_penalty": "distinguishable",
-    "frequency_penalty_free_text": "underpowered",
+    "frequency_penalty_free_text": "no effect seen",
     "presence_penalty": "insufficient",
-    "presence_penalty_free_text": "underpowered",
-    "powered_prompts": 1,
-    "control_removed": 0.3664072905520083,
+    "presence_penalty_free_text": "no effect seen",
+    "powered_prompts": 0,
+    "control_removed": 0.3787354603693656,
     "n_by_param": {
       "top_p": 10,
       "top_k": 10,
@@ -603,7 +603,7 @@
     "top_p": "distinguishable",
     "n_prompts": 4,
     "top_k": "distinguishable",
-    "min_p": "mixed",
+    "min_p": "distinguishable",
     "typical_p": "mixed",
     "mirostat": "no effect seen",
     "repetition_penalty": "insufficient",
@@ -612,8 +612,8 @@
     "frequency_penalty_free_text": "no effect seen",
     "presence_penalty": "insufficient",
     "presence_penalty_free_text": "no effect seen",
-    "powered_prompts": 2,
-    "control_removed": 0.5797528607517277,
+    "powered_prompts": 1,
+    "control_removed": 0.6124986336377527,
     "n_by_param": {
       "top_p": 10,
       "top_k": 10,
@@ -637,10 +637,10 @@
       "from": "2026-09-20T14:08Z",
       "to": "2026-09-21T15:43Z"
     },
-    "top_p": "underpowered",
+    "top_p": "mixed",
     "n_prompts": 4,
     "top_k": "distinguishable",
-    "min_p": "underpowered",
+    "min_p": "distinguishable",
     "typical_p": "underpowered",
     "mirostat": "underpowered",
     "repetition_penalty": "distinguishable",
@@ -649,8 +649,8 @@
     "frequency_penalty_free_text": "distinguishable",
     "presence_penalty": "insufficient",
     "presence_penalty_free_text": "underpowered",
-    "powered_prompts": 1,
-    "control_removed": -1.0269119252775971,
+    "powered_prompts": 0,
+    "control_removed": 0.5166853831476018,
     "n_by_param": {
       "top_p": 10,
       "top_k": 10,

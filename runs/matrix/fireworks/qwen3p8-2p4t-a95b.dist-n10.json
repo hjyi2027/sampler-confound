@@ -9,9 +9,12 @@
     "from": "2026-09-20T14:08Z",
     "to": "2026-09-21T15:42Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:29Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -2405,56 +2408,76 @@
     "word_prob": {
       "qwen3p8-2p4t-a95b": {
         "model": "qwen3p8-2p4t-a95b",
+        "contrast": "T=0 vs T=1.0",
         "control_dh": 0.6754887502163469,
         "control_h_open": 3.3219280948873626,
         "control_h_tight": 2.6464393446710157,
         "control_support_tight": 7,
         "control_n_tight": 10,
-        "control_p": 0.0122987701229877,
+        "control_p": 0.05169483051694831,
         "fraction_removed": 0.20334237554869497,
+        "control_alpha": 0.00625,
+        "control_power": 0.065,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 20% of 3.32 bits; 2.65 bits remain at temperature 0 (7/10 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.20334237554869497,
+        "legacy_powered": false,
+        "detail": "power 6% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0063 (dH=+0.68; 7/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "sentence": {
       "qwen3p8-2p4t-a95b": {
         "model": "qwen3p8-2p4t-a95b",
-        "control_dh": 1.036452797660028,
-        "control_h_open": 2.5219280948873624,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.636452797660028,
+        "control_h_open": 3.1219280948873624,
         "control_h_tight": 1.4854752972273344,
         "control_support_tight": 3,
         "control_n_tight": 10,
-        "control_p": 0.017198280171982803,
-        "fraction_removed": 0.41097634772426744,
+        "control_p": 9.999000099990002e-05,
+        "fraction_removed": 0.524180169408761,
+        "control_alpha": 0.00625,
+        "control_power": 0.495,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 41% of 2.52 bits; 1.49 bits remain at temperature 0 (3/10 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.41097634772426744,
+        "legacy_powered": false,
+        "detail": "power 50% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0063 (dH=+1.64; 3/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "opener": {
       "qwen3p8-2p4t-a95b": {
         "model": "qwen3p8-2p4t-a95b",
-        "control_dh": 1.7709505944546686,
-        "control_h_open": 1.7709505944546686,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 0.4689955935892812,
+        "control_h_open": 0.4689955935892812,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 10,
-        "control_p": 0.04609539046095391,
+        "control_p": 0.5022497750224978,
         "fraction_removed": 1.0,
-        "powered": true,
-        "detail": ""
+        "control_alpha": 0.00625,
+        "control_power": 0.0,
+        "powered": false,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
+        "detail": "power 0% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0063 (dH=+0.47; 1/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "question": {
       "qwen3p8-2p4t-a95b": {
         "model": "qwen3p8-2p4t-a95b",
-        "control_dh": 2.2,
-        "control_h_open": 3.1219280948873624,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.4000000000000004,
+        "control_h_open": 3.3219280948873626,
         "control_h_tight": 0.9219280948873623,
         "control_support_tight": 3,
         "control_n_tight": 10,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.7046927197339486,
+        "fraction_removed": 0.722471989593555,
+        "control_alpha": 0.00625,
+        "control_power": 0.82,
         "powered": true,
+        "legacy_fraction_removed": 0.7046927197339486,
+        "legacy_powered": true,
         "detail": ""
       }
     },
@@ -2465,26 +2488,33 @@
       "model": "qwen3p8-2p4t-a95b",
       "parameter": "top_p",
       "n_prompts": 4,
-      "n_control_passed": 2,
-      "n_verdict": 3,
-      "n_powered": 3,
+      "n_control_passed": 1,
+      "n_verdict": 2,
+      "n_powered": 2,
       "n_distinguishable": 2,
-      "n_no_effect": 1,
+      "n_no_effect": 0,
       "per_prompt": {
         "word_prob": "distinguishable",
         "sentence": "underpowered",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "distinguishable"
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 7.51934493999107,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0007999200079992001,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.985,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "qwen3p8-2p4t-a95b",
       "parameter": "top_k",
       "n_prompts": 4,
-      "n_control_passed": 2,
+      "n_control_passed": 1,
       "n_verdict": 2,
       "n_powered": 2,
       "n_distinguishable": 2,
@@ -2497,70 +2527,98 @@
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 4.397416845103709,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0007999200079992001,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.97,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "qwen3p8-2p4t-a95b",
       "parameter": "min_p",
       "n_prompts": 4,
-      "n_control_passed": 2,
-      "n_verdict": 2,
-      "n_powered": 2,
+      "n_control_passed": 1,
+      "n_verdict": 1,
+      "n_powered": 1,
       "n_distinguishable": 1,
-      "n_no_effect": 1,
+      "n_no_effect": 0,
       "per_prompt": {
         "word_prob": "underpowered",
         "sentence": "underpowered",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "distinguishable"
       },
-      "verdict": "mixed",
+      "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 4.082892142331043,
+      "stratified_p": 0.0006999300069993001,
+      "stratified_p_holm": 0.0034996500349965005,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.985,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "qwen3p8-2p4t-a95b",
       "parameter": "typical_p",
       "n_prompts": 4,
-      "n_control_passed": 2,
-      "n_verdict": 2,
-      "n_powered": 2,
+      "n_control_passed": 1,
+      "n_verdict": 1,
+      "n_powered": 1,
       "n_distinguishable": 1,
-      "n_no_effect": 1,
+      "n_no_effect": 0,
       "per_prompt": {
         "word_prob": "underpowered",
         "sentence": "underpowered",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "distinguishable"
       },
       "verdict": "mixed",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 1.0490224995673059,
+      "stratified_p": 0.14358564143585642,
+      "stratified_p_holm": 0.5743425657434257,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.985,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "qwen3p8-2p4t-a95b",
       "parameter": "mirostat",
       "n_prompts": 4,
-      "n_control_passed": 2,
-      "n_verdict": 2,
-      "n_powered": 2,
+      "n_control_passed": 1,
+      "n_verdict": 1,
+      "n_powered": 1,
       "n_distinguishable": 0,
-      "n_no_effect": 2,
+      "n_no_effect": 1,
       "per_prompt": {
         "word_prob": "insufficient",
         "sentence": "underpowered",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "no effect seen"
       },
       "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 0.5470674987019187,
+      "stratified_p": 0.2501749825017498,
+      "stratified_p_holm": 0.7505249475052493,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.985,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "qwen3p8-2p4t-a95b",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
-      "n_control_passed": 2,
+      "n_control_passed": 1,
       "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
@@ -2575,49 +2633,70 @@
       "forced": {
         "repeat": "insufficient"
       },
-      "verdict_forced": "insufficient"
+      "verdict_forced": "insufficient",
+      "stratified_stat": 4.0,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0007999200079992001,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "qwen3p8-2p4t-a95b",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
-      "n_control_passed": 2,
-      "n_verdict": 2,
-      "n_powered": 2,
+      "n_control_passed": 1,
+      "n_verdict": 1,
+      "n_powered": 1,
       "n_distinguishable": 0,
-      "n_no_effect": 2,
+      "n_no_effect": 1,
       "per_prompt": {
         "word_prob": "insufficient",
         "sentence": "underpowered",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "no effect seen"
       },
       "verdict": "no effect seen",
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 1.9,
+      "stratified_p": 0.5052494750524947,
+      "stratified_p_holm": 0.7851214878512148,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "qwen3p8-2p4t-a95b",
       "parameter": "presence_penalty",
       "n_prompts": 4,
-      "n_control_passed": 2,
-      "n_verdict": 2,
-      "n_powered": 2,
+      "n_control_passed": 1,
+      "n_verdict": 1,
+      "n_powered": 1,
       "n_distinguishable": 0,
-      "n_no_effect": 2,
+      "n_no_effect": 1,
       "per_prompt": {
         "word_prob": "insufficient",
         "sentence": "underpowered",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "no effect seen"
       },
       "verdict": "no effect seen",
       "forced": {
         "repeat": "insufficient"
       },
-      "verdict_forced": "insufficient"
+      "verdict_forced": "insufficient",
+      "stratified_stat": 1.8000000000000003,
+      "stratified_p": 0.3925607439256074,
+      "stratified_p_holm": 0.7851214878512148,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "underpowered"
     }
   ]
 }

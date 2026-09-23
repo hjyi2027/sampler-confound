@@ -9,9 +9,12 @@
     "from": "2026-09-20T10:31Z",
     "to": "2026-09-21T14:39Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:28Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -3298,56 +3301,76 @@
     "word_prob": {
       "kimi-k3": {
         "model": "kimi-k3",
-        "control_dh": 4.380497336024811,
-        "control_h_open": 5.321928094887363,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 4.280497336024811,
+        "control_h_open": 5.221928094887363,
         "control_h_tight": 0.9414307588625517,
         "control_support_tight": 4,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.8231034425724466,
+        "fraction_removed": 0.8197158708898579,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.8231034425724466,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "sentence": {
       "kimi-k3": {
         "model": "kimi-k3",
-        "control_dh": 3.275488750216347,
-        "control_h_open": 5.321928094887363,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.075488750216347,
+        "control_h_open": 5.1219280948873624,
         "control_h_tight": 2.0464393446710156,
         "control_support_tight": 7,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.6154703129798058,
+        "fraction_removed": 0.6004552764585386,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.6154703129798058,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "opener": {
       "kimi-k3": {
         "model": "kimi-k3",
-        "control_dh": 4.815522788282519,
-        "control_h_open": 4.984183719779189,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.4437536532005977,
+        "control_h_open": 3.6124145846972677,
         "control_h_tight": 0.16866093149667025,
         "control_support_tight": 2,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.9661607715567632,
+        "fraction_removed": 0.9533107489347588,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.9661607715567632,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "question": {
       "kimi-k3": {
         "model": "kimi-k3",
-        "control_dh": 3.4525487544298583,
-        "control_h_open": 5.321928094887363,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.1148043793216846,
+        "control_h_open": 4.984183719779189,
         "control_h_tight": 1.869379340457504,
         "control_support_tight": 6,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.6487402108545269,
+        "fraction_removed": 0.6249377138649451,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.6487402108545269,
+        "legacy_powered": true,
         "detail": ""
       }
     },
@@ -3371,7 +3394,14 @@
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 5.6976776353556655,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "kimi-k3",
@@ -3390,7 +3420,14 @@
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 3.462987647375539,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "kimi-k3",
@@ -3411,7 +3448,14 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 3.999999999999999,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "kimi-k3",
@@ -3432,7 +3476,14 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 2.999999999999999,
+      "stratified_p": 0.5436456354364564,
+      "stratified_p_holm": 1.0,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     },
     {
       "model": "kimi-k3",
@@ -3453,7 +3504,14 @@
       "forced": {
         "repeat": "insufficient"
       },
-      "verdict_forced": "insufficient"
+      "verdict_forced": "insufficient",
+      "stratified_stat": 2.75,
+      "stratified_p": 0.8078192180781922,
+      "stratified_p_holm": 1.0,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     }
   ]
 }

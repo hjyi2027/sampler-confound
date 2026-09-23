@@ -9,9 +9,15 @@
     "from": "2026-09-20T05:50Z",
     "to": "2026-09-21T16:00Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:26Z",
+    "2026-09-23T06:27Z",
+    "2026-09-23T06:27Z",
+    "2026-09-23T06:28Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -3297,56 +3303,76 @@
     "word_prob": {
       "gpt-oss-120b": {
         "model": "gpt-oss-120b",
-        "control_dh": 5.321928094887363,
-        "control_h_open": 5.321928094887363,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 5.203055907333276,
+        "control_h_open": 5.203055907333276,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 1.0,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "sentence": {
       "gpt-oss-120b": {
         "model": "gpt-oss-120b",
-        "control_dh": 5.221928094887363,
-        "control_h_open": 5.221928094887363,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 4.3341837197791895,
+        "control_h_open": 4.3341837197791895,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 1.0,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "opener": {
       "gpt-oss-120b": {
         "model": "gpt-oss-120b",
-        "control_dh": 4.865311532225102,
-        "control_h_open": 4.865311532225102,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.197730922119161,
+        "control_h_open": 3.197730922119161,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 1.0,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       }
     },
     "question": {
       "gpt-oss-120b": {
         "model": "gpt-oss-120b",
-        "control_dh": 4.141446071165522,
-        "control_h_open": 4.141446071165522,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.0107206712404126,
+        "control_h_open": 2.0107206712404126,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 1.0,
+        "control_alpha": 0.01,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       }
     },
@@ -3370,7 +3396,14 @@
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 13.962082588604742,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "gpt-oss-120b",
@@ -3389,7 +3422,14 @@
       },
       "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 4.4111803558409814,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "gpt-oss-120b",
@@ -3410,7 +3450,14 @@
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 3.999999999999999,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0004999500049995,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "gpt-oss-120b",
@@ -3427,11 +3474,18 @@
         "opener": "no effect seen",
         "question": "no effect seen"
       },
-      "verdict": "no effect seen",
+      "verdict": "mixed",
       "forced": {
         "repeat": "distinguishable"
       },
-      "verdict_forced": "distinguishable"
+      "verdict_forced": "distinguishable",
+      "stratified_stat": 2.4499999999999997,
+      "stratified_p": 0.29087091290870914,
+      "stratified_p_holm": 0.5817418258174183,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     },
     {
       "model": "gpt-oss-120b",
@@ -3452,7 +3506,14 @@
       "forced": {
         "repeat": "insufficient"
       },
-      "verdict_forced": "insufficient"
+      "verdict_forced": "insufficient",
+      "stratified_stat": 1.275,
+      "stratified_p": 0.8594140585941406,
+      "stratified_p_holm": 0.8594140585941406,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "no effect seen"
     }
   ]
 }

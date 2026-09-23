@@ -9,9 +9,12 @@
     "from": "2026-09-20T14:39Z",
     "to": "2026-09-20T16:48Z"
   },
-  "written": "2026-09-23T06:11Z",
+  "written": "2026-09-23T06:41Z",
   "reassessed_at": [
-    "2026-09-23T06:11Z"
+    "2026-09-23T06:11Z",
+    "2026-09-23T06:28Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
   ],
   "results": [
     {
@@ -1489,57 +1492,77 @@
     "word_prob": {
       "muse-glimmer-30b": {
         "model": "muse-glimmer-30b",
-        "control_dh": 1.9609640474436816,
-        "control_h_open": 3.3219280948873626,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.7609640474436814,
+        "control_h_open": 3.1219280948873624,
         "control_h_tight": 1.360964047443681,
         "control_support_tight": 3,
         "control_n_tight": 10,
-        "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.5903089986991944,
-        "powered": true,
-        "detail": ""
+        "control_p": 0.00019998000199980003,
+        "fraction_removed": 0.5640629745212681,
+        "control_alpha": 0.01,
+        "control_power": 0.755,
+        "powered": false,
+        "legacy_fraction_removed": 0.5903089986991944,
+        "legacy_powered": true,
+        "detail": "power 76% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.76; 3/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "sentence": {
       "muse-glimmer-30b": {
         "model": "muse-glimmer-30b",
-        "control_dh": 2.1509775004326936,
-        "control_h_open": 3.1219280948873624,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.5509775004326938,
+        "control_h_open": 2.5219280948873624,
         "control_h_tight": 0.9709505944546686,
         "control_support_tight": 2,
         "control_n_tight": 10,
-        "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.6889900840302025,
-        "powered": true,
-        "detail": ""
+        "control_p": 0.016298370162983702,
+        "fraction_removed": 0.6149967176213109,
+        "control_alpha": 0.01,
+        "control_power": 0.435,
+        "powered": false,
+        "legacy_fraction_removed": 0.6889900840302025,
+        "legacy_powered": true,
+        "detail": "power 44% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.55; 2/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "opener": {
       "muse-glimmer-30b": {
         "model": "muse-glimmer-30b",
-        "control_dh": 2.6464393446710157,
-        "control_h_open": 2.6464393446710157,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.1567796494470395,
+        "control_h_open": 1.1567796494470395,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 10,
-        "control_p": 0.0012998700129987,
+        "control_p": 0.10488951104889511,
         "fraction_removed": 1.0,
-        "powered": true,
-        "detail": ""
+        "control_alpha": 0.01,
+        "control_power": 0.06,
+        "powered": false,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
+        "detail": "power 6% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+1.16; 1/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "question": {
       "muse-glimmer-30b": {
         "model": "muse-glimmer-30b",
-        "control_dh": 2.4000000000000004,
-        "control_h_open": 3.3219280948873626,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.0,
+        "control_h_open": 2.9219280948873623,
         "control_h_tight": 0.9219280948873623,
         "control_support_tight": 3,
         "control_n_tight": 10,
-        "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.722471989593555,
-        "powered": true,
-        "detail": ""
+        "control_p": 0.000999900009999,
+        "fraction_removed": 0.6844795405812675,
+        "control_alpha": 0.01,
+        "control_power": 0.75,
+        "powered": false,
+        "legacy_fraction_removed": 0.722471989593555,
+        "legacy_powered": true,
+        "detail": "power 75% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+2.00; 3/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "repeat": {}
@@ -1549,96 +1572,131 @@
       "model": "muse-glimmer-30b",
       "parameter": "typical_p",
       "n_prompts": 4,
-      "n_control_passed": 4,
-      "n_verdict": 1,
-      "n_powered": 1,
+      "n_control_passed": 0,
+      "n_verdict": 0,
+      "n_powered": 0,
       "n_distinguishable": 0,
-      "n_no_effect": 1,
+      "n_no_effect": 0,
       "per_prompt": {
         "word_prob": "insufficient",
         "sentence": "insufficient",
-        "opener": "no effect seen",
+        "opener": "underpowered",
         "question": "insufficient"
       },
       "verdict": "underpowered",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": -0.36096404744368105,
+      "stratified_p": 0.7279272072792721,
+      "stratified_p_holm": 1.0,
+      "stratified_prompts": 1,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.06,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "muse-glimmer-30b",
       "parameter": "mirostat",
       "n_prompts": 4,
-      "n_control_passed": 4,
-      "n_verdict": 3,
-      "n_powered": 3,
+      "n_control_passed": 0,
+      "n_verdict": 0,
+      "n_powered": 0,
       "n_distinguishable": 0,
-      "n_no_effect": 3,
+      "n_no_effect": 0,
       "per_prompt": {
         "word_prob": "insufficient",
-        "sentence": "no effect seen",
-        "opener": "no effect seen",
-        "question": "no effect seen"
+        "sentence": "underpowered",
+        "opener": "underpowered",
+        "question": "underpowered"
       },
       "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": -0.6631934445749355,
+      "stratified_p": 0.7442255774422558,
+      "stratified_p_holm": 1.0,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.985,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "muse-glimmer-30b",
       "parameter": "repetition_penalty",
       "n_prompts": 4,
-      "n_control_passed": 4,
-      "n_verdict": 3,
-      "n_powered": 3,
+      "n_control_passed": 0,
+      "n_verdict": 0,
+      "n_powered": 0,
       "n_distinguishable": 0,
-      "n_no_effect": 3,
+      "n_no_effect": 0,
       "per_prompt": {
         "word_prob": "insufficient",
-        "sentence": "no effect seen",
-        "opener": "no effect seen",
-        "question": "no effect seen"
+        "sentence": "underpowered",
+        "opener": "underpowered",
+        "question": "underpowered"
       },
-      "verdict": "no effect seen",
+      "verdict": "distinguishable",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 2.9,
+      "stratified_p": 0.006399360063993601,
+      "stratified_p_holm": 0.031996800319968,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.975,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "muse-glimmer-30b",
       "parameter": "frequency_penalty",
       "n_prompts": 4,
-      "n_control_passed": 4,
-      "n_verdict": 3,
-      "n_powered": 3,
+      "n_control_passed": 0,
+      "n_verdict": 0,
+      "n_powered": 0,
       "n_distinguishable": 0,
-      "n_no_effect": 3,
+      "n_no_effect": 0,
       "per_prompt": {
         "word_prob": "insufficient",
-        "sentence": "no effect seen",
-        "opener": "no effect seen",
-        "question": "no effect seen"
+        "sentence": "underpowered",
+        "opener": "underpowered",
+        "question": "underpowered"
       },
       "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 2.1,
+      "stratified_p": 0.839016098390161,
+      "stratified_p_holm": 1.0,
+      "stratified_prompts": 3,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.975,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "muse-glimmer-30b",
       "parameter": "presence_penalty",
       "n_prompts": 4,
-      "n_control_passed": 4,
-      "n_verdict": 4,
-      "n_powered": 4,
+      "n_control_passed": 0,
+      "n_verdict": 0,
+      "n_powered": 0,
       "n_distinguishable": 0,
-      "n_no_effect": 4,
+      "n_no_effect": 0,
       "per_prompt": {
-        "word_prob": "no effect seen",
-        "sentence": "no effect seen",
-        "opener": "no effect seen",
-        "question": "no effect seen"
+        "word_prob": "underpowered",
+        "sentence": "underpowered",
+        "opener": "underpowered",
+        "question": "underpowered"
       },
       "verdict": "no effect seen",
       "forced": {},
-      "verdict_forced": ""
+      "verdict_forced": "",
+      "stratified_stat": 3.0000000000000004,
+      "stratified_p": 0.48975102489751027,
+      "stratified_p_holm": 1.0,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "underpowered"
     }
   ]
 }

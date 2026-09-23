@@ -1,7 +1,20 @@
 {
+  "provider": "fireworks",
   "prompt": "Write a one-sentence arithmetic word problem suitable for a ten-year-old. Reply with the problem only.",
   "n_per_arm": 40,
+  "max_tokens": 1024,
+  "reasoning_effort": "low",
   "permutations": 10000,
+  "collected": {
+    "from": "2026-09-20T05:50Z",
+    "to": "2026-09-21T02:28Z"
+  },
+  "written": "2026-09-23T06:41Z",
+  "reassessed_at": [
+    "2026-09-23T06:29Z",
+    "2026-09-23T06:32Z",
+    "2026-09-23T06:41Z"
+  ],
   "results": [
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -13,6 +26,9 @@
         "temperature": 1.5
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 37,
@@ -25,6 +41,7 @@
       "tv": 0.9500000000000001,
       "tv_null_mean": 0.9428999999999998,
       "tv_p": 0.204979502049795,
+      "primary": "dh",
       "p_value": 0.0192980701929807,
       "n_permutations": 10000,
       "status": "ok",
@@ -115,10 +132,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 0,
-      "null_p95": 0.9749999999999998,
-      "excess": 0.16747799952236586,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.16747799952236586
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -132,6 +146,9 @@
         "top_p": 1.0
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 38,
@@ -144,6 +161,7 @@
       "tv": 0.9750000000000001,
       "tv_null_mean": 0.9681549999999995,
       "tv_p": 0.11798820117988201,
+      "primary": "dh",
       "p_value": 0.0268973102689731,
       "n_permutations": 10000,
       "status": "ok",
@@ -234,10 +252,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.9999999999999998,
-      "excess": 0.11890510483524462,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.11890510483524462
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -251,6 +266,9 @@
         "top_k": 100
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 34,
@@ -263,6 +281,7 @@
       "tv": 1.0,
       "tv_null_mean": 0.92868,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 0.008899110088991101,
       "n_permutations": 10000,
       "status": "ok",
@@ -353,10 +372,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.9749999999999999,
-      "excess": 0.3572255854718796,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.3572255854718796
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -370,6 +386,9 @@
         "min_p": 0.0
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 38,
@@ -382,6 +401,7 @@
       "tv": 0.9750000000000001,
       "tv_null_mean": 0.9684599999999995,
       "tv_p": 0.12288771122887711,
+      "primary": "dh",
       "p_value": 0.029997000299970003,
       "n_permutations": 10000,
       "status": "ok",
@@ -472,10 +492,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.9999999999999997,
-      "excess": 0.11650743561614312,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.11650743561614312
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -487,6 +504,9 @@
         "temperature": 1.5
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 30,
@@ -499,6 +519,7 @@
       "tv": 0.9750000000000001,
       "tv_null_mean": 0.8842899999999998,
       "tv_p": 0.00029997000299970003,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -589,10 +610,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.9249999999999998,
-      "excess": 0.6771104685452248,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.6771104685452248
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -606,6 +624,9 @@
         "top_p": 1.0
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 37,
@@ -618,6 +639,7 @@
       "tv": 0.875,
       "tv_null_mean": 0.8923699999999997,
       "tv_p": 0.551044895510449,
+      "primary": "dh",
       "p_value": 0.388961103889611,
       "n_permutations": 10000,
       "status": "ok",
@@ -708,10 +730,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.9499999999999997,
-      "excess": 0.05213982709395085,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.05213982709395085
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -725,6 +744,9 @@
         "top_k": 100
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 32,
@@ -737,6 +759,7 @@
       "tv": 0.925,
       "tv_null_mean": 0.8654274999999998,
       "tv_p": 0.0230976902309769,
+      "primary": "dh",
       "p_value": 0.0022997700229977,
       "n_permutations": 10000,
       "status": "ok",
@@ -827,10 +850,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.9249999999999998,
-      "excess": 0.44050467317007924,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.44050467317007924
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -844,6 +864,9 @@
         "min_p": 0.0
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 37,
@@ -856,6 +879,7 @@
       "tv": 0.8500000000000001,
       "tv_null_mean": 0.8918824999999997,
       "tv_p": 0.8051194880511949,
+      "primary": "dh",
       "p_value": 0.10568943105689431,
       "n_permutations": 10000,
       "status": "ok",
@@ -946,10 +970,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.9499999999999996,
-      "excess": 0.1695061049297138,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.1695061049297138
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -961,6 +982,9 @@
         "temperature": 1.5
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 35,
@@ -973,6 +997,7 @@
       "tv": 0.925,
       "tv_null_mean": 0.8856399999999996,
       "tv_p": 0.06429357064293571,
+      "primary": "dh",
       "p_value": 0.29017098290170984,
       "n_permutations": 10000,
       "status": "ok",
@@ -1063,10 +1088,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 0,
-      "null_p95": 0.9499999999999996,
-      "excess": 0.08007445160261253,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.08007445160261253
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1080,6 +1102,9 @@
         "top_p": 1.0
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 35,
@@ -1092,6 +1117,7 @@
       "tv": 0.9500000000000001,
       "tv_null_mean": 0.9097299999999999,
       "tv_p": 0.036896310368963105,
+      "primary": "dh",
       "p_value": 0.0453954604539546,
       "n_permutations": 10000,
       "status": "ok",
@@ -1182,10 +1208,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.95,
-      "excess": 0.24705039612504878,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.24705039612504878
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1199,6 +1222,9 @@
         "top_k": 100
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 38,
@@ -1211,6 +1237,7 @@
       "tv": 0.9750000000000001,
       "tv_null_mean": 0.9494849999999997,
       "tv_p": 0.05579442055794421,
+      "primary": "dh",
       "p_value": 0.22617738226177383,
       "n_permutations": 10000,
       "status": "ok",
@@ -1301,10 +1328,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.9999999999999998,
-      "excess": 0.04976499999999985,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.04976499999999985
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1318,6 +1342,9 @@
         "min_p": 0.0
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 39,
@@ -1330,6 +1357,7 @@
       "tv": 0.875,
       "tv_null_mean": 0.9093599999999998,
       "tv_p": 0.8327167283271673,
+      "primary": "dh",
       "p_value": 0.7432256774322568,
       "n_permutations": 10000,
       "status": "ok",
@@ -1420,10 +1448,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.95,
-      "excess": -0.15042692231524646,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": -0.15042692231524646
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1435,6 +1460,9 @@
         "temperature": 1.5
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 30,
@@ -1447,6 +1475,7 @@
       "tv": 0.8250000000000001,
       "tv_null_mean": 0.7546949999999999,
       "tv_p": 0.0344965503449655,
+      "primary": "dh",
       "p_value": 0.06259374062593741,
       "n_permutations": 10000,
       "status": "ok",
@@ -1537,10 +1566,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.8249999999999998,
-      "excess": 0.4635444005937908,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.4635444005937908
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1554,6 +1580,9 @@
         "top_p": 1.0
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 33,
@@ -1566,6 +1595,7 @@
       "tv": 0.7250000000000001,
       "tv_null_mean": 0.7653074999999999,
       "tv_p": 0.7252274772522748,
+      "primary": "dh",
       "p_value": 0.411958804119588,
       "n_permutations": 10000,
       "status": "ok",
@@ -1656,10 +1686,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.8499999999999999,
-      "excess": 0.052327255624891655,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.052327255624891655
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1673,6 +1700,9 @@
         "top_k": 100
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 35,
@@ -1685,6 +1715,7 @@
       "tv": 0.8250000000000001,
       "tv_null_mean": 0.8033424999999996,
       "tv_p": 0.21257874212578742,
+      "primary": "dh",
       "p_value": 0.7453254674532547,
       "n_permutations": 10000,
       "status": "ok",
@@ -1775,10 +1806,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.8749999999999997,
-      "excess": -0.13024666203942997,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": -0.13024666203942997
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
@@ -1792,6 +1820,9 @@
         "min_p": 0.0
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 29,
@@ -1804,6 +1835,7 @@
       "tv": 0.8250000000000001,
       "tv_null_mean": 0.736865,
       "tv_p": 0.022397760223977603,
+      "primary": "dh",
       "p_value": 0.13738626137386262,
       "n_permutations": 10000,
       "status": "ok",
@@ -1894,10 +1926,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.825,
-      "excess": 0.2581534920140524,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.2581534920140524
     },
     {
       "model": "gpt-oss-120b",
@@ -1909,6 +1938,9 @@
         "temperature": 1.5
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "2026-09-20T05:50Z",
+      "collected_to": "2026-09-20T17:48Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -1921,6 +1953,7 @@
       "tv": 1.0,
       "tv_null_mean": 0.5440849999999999,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -2011,10 +2044,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.6,
-      "excess": 5.315547563732878,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 5.315547563732878
     },
     {
       "model": "gpt-oss-120b",
@@ -2028,6 +2058,9 @@
         "top_p": 1.0
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 2,
@@ -2040,6 +2073,7 @@
       "tv": 0.95,
       "tv_null_mean": 0.5556875,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -2130,10 +2164,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.6499999999999999,
-      "excess": 4.316894092862989,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 4.316894092862989
     },
     {
       "model": "gpt-oss-120b",
@@ -2147,6 +2178,9 @@
         "top_k": 100
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -2159,6 +2193,7 @@
       "tv": 0.9,
       "tv_null_mean": 0.4938125,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -2249,10 +2284,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.5499999999999998,
-      "excess": 5.119872012689018,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 5.119872012689018
     },
     {
       "model": "gpt-oss-120b",
@@ -2266,6 +2298,9 @@
         "min_p": 0.0
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 2,
@@ -2278,6 +2313,7 @@
       "tv": 0.95,
       "tv_null_mean": 0.5412024999999999,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -2368,10 +2404,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.6249999999999997,
-      "excess": 4.257871038685958,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 4.257871038685958
     },
     {
       "model": "gpt-oss-120b",
@@ -2383,6 +2416,9 @@
         "temperature": 1.5
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "2026-09-20T05:51Z",
+      "collected_to": "2026-09-20T19:46Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -2395,6 +2431,7 @@
       "tv": 1.0,
       "tv_null_mean": 0.5046875,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -2485,10 +2522,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.5749999999999997,
-      "excess": 5.025913339577201,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 5.025913339577201
     },
     {
       "model": "gpt-oss-120b",
@@ -2502,6 +2536,9 @@
         "top_p": 1.0
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -2514,6 +2551,7 @@
       "tv": 0.875,
       "tv_null_mean": 0.39990250000000005,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -2604,10 +2642,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.47500000000000014,
-      "excess": 4.533776463469054,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 4.533776463469054
     },
     {
       "model": "gpt-oss-120b",
@@ -2621,6 +2656,9 @@
         "top_k": 100
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -2633,6 +2671,7 @@
       "tv": 0.925,
       "tv_null_mean": 0.41946000000000006,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -2723,10 +2762,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.5000000000000001,
-      "excess": 4.676144748149999,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 4.676144748149999
     },
     {
       "model": "gpt-oss-120b",
@@ -2740,6 +2776,9 @@
         "min_p": 0.0
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -2752,6 +2791,7 @@
       "tv": 0.925,
       "tv_null_mean": 0.40670500000000004,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -2842,10 +2882,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.5,
-      "excess": 4.706066777318889,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 4.706066777318889
     },
     {
       "model": "gpt-oss-120b",
@@ -2857,6 +2894,9 @@
         "temperature": 1.5
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "2026-09-20T05:51Z",
+      "collected_to": "2026-09-20T20:51Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -2869,6 +2909,7 @@
       "tv": 0.95,
       "tv_null_mean": 0.4431675,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -2959,10 +3000,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.525,
-      "excess": 4.846270000495836,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 4.846270000495836
     },
     {
       "model": "gpt-oss-120b",
@@ -2976,6 +3014,9 @@
         "top_p": 1.0
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -2988,6 +3029,7 @@
       "tv": 0.85,
       "tv_null_mean": 0.27761,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -3078,10 +3120,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.37500000000000006,
-      "excess": 3.6106541800895866,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.6106541800895866
     },
     {
       "model": "gpt-oss-120b",
@@ -3095,6 +3134,9 @@
         "top_k": 100
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -3107,6 +3149,7 @@
       "tv": 0.775,
       "tv_null_mean": 0.22109250000000003,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -3197,10 +3240,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.325,
-      "excess": 2.9424677048963157,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.9424677048963157
     },
     {
       "model": "gpt-oss-120b",
@@ -3214,6 +3254,9 @@
         "min_p": 0.0
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -3226,6 +3269,7 @@
       "tv": 0.7,
       "tv_null_mean": 0.2280675,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -3316,10 +3360,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.325,
-      "excess": 3.0910022756941204,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.0910022756941204
     },
     {
       "model": "gpt-oss-120b",
@@ -3331,6 +3372,9 @@
         "temperature": 1.5
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "2026-09-20T05:51Z",
+      "collected_to": "2026-09-20T21:17Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -3343,6 +3387,7 @@
       "tv": 0.825,
       "tv_null_mean": 0.4313275,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -3433,10 +3478,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.5,
-      "excess": 4.730596498696282,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 4.730596498696282
     },
     {
       "model": "gpt-oss-120b",
@@ -3450,6 +3492,9 @@
         "top_p": 1.0
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -3462,6 +3507,7 @@
       "tv": 0.625,
       "tv_null_mean": 0.20756750000000002,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -3552,10 +3598,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.30000000000000004,
-      "excess": 2.8229455473496117,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.8229455473496117
     },
     {
       "model": "gpt-oss-120b",
@@ -3569,6 +3612,9 @@
         "top_k": 100
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -3581,6 +3627,7 @@
       "tv": 0.625,
       "tv_null_mean": 0.2967775,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -3671,10 +3718,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.37500000000000006,
-      "excess": 3.554448592752246,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.554448592752246
     },
     {
       "model": "gpt-oss-120b",
@@ -3688,6 +3732,9 @@
         "min_p": 0.0
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -3700,6 +3747,7 @@
       "tv": 0.625,
       "tv_null_mean": 0.20776750000000002,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -3790,10 +3838,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.30000000000000004,
-      "excess": 2.740154693186068,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.740154693186068
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -3805,6 +3850,9 @@
         "temperature": 1.5
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 29,
@@ -3817,6 +3865,7 @@
       "tv": 1.0,
       "tv_null_mean": 0.8697074999999997,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 0.0006999300069993001,
       "n_permutations": 10000,
       "status": "ok",
@@ -3907,10 +3956,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 3,
-      "null_p95": 0.9249999999999998,
-      "excess": 0.6623891040688463,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.6623891040688463
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -3924,6 +3970,9 @@
         "top_p": 1.0
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 37,
@@ -3936,6 +3985,7 @@
       "tv": 1.0,
       "tv_null_mean": 0.9618999999999996,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -4026,10 +4076,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 0,
-      "null_p95": 0.9999999999999998,
-      "excess": 0.15022000000000035,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.15022000000000035
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -4043,6 +4090,9 @@
         "top_k": 100
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 26,
@@ -4055,6 +4105,7 @@
       "tv": 1.0,
       "tv_null_mean": 0.8436099999999999,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -4145,10 +4196,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 0,
-      "null_p95": 0.8999999999999999,
-      "excess": 0.9963034512899245,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.9963034512899245
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -4162,6 +4210,9 @@
         "min_p": 0.0
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 35,
@@ -4174,6 +4225,7 @@
       "tv": 0.9750000000000001,
       "tv_null_mean": 0.9305749999999998,
       "tv_p": 0.014598540145985401,
+      "primary": "dh",
       "p_value": 0.0004999500049995,
       "n_permutations": 10000,
       "status": "ok",
@@ -4264,10 +4316,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.9749999999999999,
-      "excess": 0.2687272101481236,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.2687272101481236
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -4279,6 +4328,9 @@
         "temperature": 1.5
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 7,
@@ -4291,6 +4343,7 @@
       "tv": 1.0,
       "tv_null_mean": 0.6162774999999998,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -4381,10 +4434,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 2,
-      "null_p95": 0.6999999999999997,
-      "excess": 3.803391395791679,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.803391395791679
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -4398,6 +4448,9 @@
         "top_p": 1.0
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 8,
@@ -4410,6 +4463,7 @@
       "tv": 0.9750000000000001,
       "tv_null_mean": 0.6335574999999997,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -4500,10 +4554,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.6999999999999997,
-      "excess": 3.4265163048366785,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.4265163048366785
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -4517,6 +4568,9 @@
         "top_k": 100
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 4,
@@ -4529,6 +4583,7 @@
       "tv": 1.0,
       "tv_null_mean": 0.5810474999999998,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -4619,10 +4674,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.6499999999999999,
-      "excess": 4.698423419238531,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 4.698423419238531
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -4636,6 +4688,9 @@
         "min_p": 0.0
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 8,
@@ -4648,6 +4703,7 @@
       "tv": 0.9500000000000001,
       "tv_null_mean": 0.6284599999999998,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -4738,10 +4794,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.6999999999999997,
-      "excess": 3.332805310228121,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.332805310228121
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -4753,6 +4806,9 @@
         "temperature": 1.5
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 8,
@@ -4765,6 +4821,7 @@
       "tv": 0.775,
       "tv_null_mean": 0.3727150000000001,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 0.015798420157984203,
       "n_permutations": 10000,
       "status": "ok",
@@ -4855,10 +4912,7 @@
       ],
       "empty_tight": 4,
       "empty_open": 17,
-      "null_p95": 0.4750000000000001,
-      "excess": 0.9217372910973909,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.9217372910973909
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -4872,6 +4926,9 @@
         "top_p": 1.0
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 8,
@@ -4884,6 +4941,7 @@
       "tv": 0.6,
       "tv_null_mean": 0.37759500000000007,
       "tv_p": 0.00029997000299970003,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -4974,10 +5032,7 @@
       ],
       "empty_tight": 7,
       "empty_open": 0,
-      "null_p95": 0.4750000000000001,
-      "excess": 1.4414941043462832,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 1.4414941043462832
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -4991,6 +5046,9 @@
         "top_k": 100
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 5,
@@ -5003,6 +5061,7 @@
       "tv": 0.65,
       "tv_null_mean": 0.3868950000000001,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -5093,10 +5152,7 @@
       ],
       "empty_tight": 6,
       "empty_open": 3,
-      "null_p95": 0.47500000000000014,
-      "excess": 2.1389057765168356,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.1389057765168356
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -5110,6 +5166,9 @@
         "min_p": 0.0
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 7,
@@ -5122,6 +5181,7 @@
       "tv": 0.7000000000000001,
       "tv_null_mean": 0.40778250000000005,
       "tv_p": 0.00019998000199980003,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -5212,10 +5272,7 @@
       ],
       "empty_tight": 9,
       "empty_open": 2,
-      "null_p95": 0.5249999999999999,
-      "excess": 1.893973920792039,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 1.893973920792039
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -5227,6 +5284,9 @@
         "temperature": 1.5
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 16,
@@ -5239,6 +5299,7 @@
       "tv": 0.9500000000000001,
       "tv_null_mean": 0.5909224999999999,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 0.04659534046595341,
       "n_permutations": 10000,
       "status": "ok",
@@ -5329,10 +5390,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 13,
-      "null_p95": 0.6749999999999999,
-      "excess": 0.6705276230881634,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.6705276230881634
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -5346,6 +5404,9 @@
         "top_p": 1.0
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 22,
@@ -5358,6 +5419,7 @@
       "tv": 0.8500000000000001,
       "tv_null_mean": 0.7210774999999998,
       "tv_p": 0.0010998900109989002,
+      "primary": "dh",
       "p_value": 0.00019998000199980003,
       "n_permutations": 10000,
       "status": "ok",
@@ -5448,10 +5510,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.7999999999999998,
-      "excess": 1.1166482891596206,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 1.1166482891596206
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -5465,6 +5524,9 @@
         "top_k": 100
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 19,
@@ -5477,6 +5539,7 @@
       "tv": 0.775,
       "tv_null_mean": 0.6665924999999999,
       "tv_p": 0.0082991700829917,
+      "primary": "dh",
       "p_value": 0.012398760123987601,
       "n_permutations": 10000,
       "status": "ok",
@@ -5567,10 +5630,7 @@
       ],
       "empty_tight": 2,
       "empty_open": 2,
-      "null_p95": 0.7499999999999999,
-      "excess": 0.8529206211051034,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.8529206211051034
     },
     {
       "model": "deepseek-v4-flash-0731",
@@ -5584,6 +5644,9 @@
         "min_p": 0.0
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 20,
@@ -5596,6 +5659,7 @@
       "tv": 0.875,
       "tv_null_mean": 0.7216399999999997,
       "tv_p": 0.0005999400059994001,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -5686,10 +5750,7 @@
       ],
       "empty_tight": 3,
       "empty_open": 1,
-      "null_p95": 0.7999999999999997,
-      "excess": 1.096867887301661,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 1.096867887301661
     },
     {
       "model": "minimax-m3",
@@ -5701,6 +5762,9 @@
         "temperature": 1.5
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 11,
@@ -5713,6 +5777,7 @@
       "tv": 1.0,
       "tv_null_mean": 0.43199000000000004,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 0.887011298870113,
       "n_permutations": 10000,
       "status": "ok",
@@ -5803,10 +5868,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 24,
-      "null_p95": 0.5249999999999999,
-      "excess": -0.5175304902328657,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": -0.5175304902328657
     },
     {
       "model": "minimax-m3",
@@ -5820,6 +5882,9 @@
         "top_p": 1.0
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 25,
@@ -5832,6 +5897,7 @@
       "tv": 1.0,
       "tv_null_mean": 0.8301175,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -5922,10 +5988,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.8999999999999999,
-      "excess": 0.8364282021076545,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.8364282021076545
     },
     {
       "model": "minimax-m3",
@@ -5939,6 +6002,9 @@
         "top_k": 100
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 12,
@@ -5951,6 +6017,7 @@
       "tv": 1.0,
       "tv_null_mean": 0.7030874999999999,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -6041,10 +6108,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.7749999999999998,
-      "excess": 2.2636164118389654,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.2636164118389654
     },
     {
       "model": "minimax-m3",
@@ -6058,6 +6122,9 @@
         "min_p": 0.0
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 26,
@@ -6070,6 +6137,7 @@
       "tv": 1.0,
       "tv_null_mean": 0.8476925,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -6160,10 +6228,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.8999999999999999,
-      "excess": 0.7749782840601673,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.7749782840601673
     },
     {
       "model": "minimax-m3",
@@ -6175,6 +6240,9 @@
         "temperature": 1.5
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "2026-09-20T16:49Z",
+      "collected_to": "2026-09-21T02:28Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -6187,6 +6255,7 @@
       "tv": 1.0,
       "tv_null_mean": 0.4700675000000001,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -6277,10 +6346,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 8,
-      "null_p95": 0.5499999999999999,
-      "excess": 4.7165354748206205,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 4.7165354748206205
     },
     {
       "model": "minimax-m3",
@@ -6294,6 +6360,9 @@
         "top_p": 1.0
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -6306,6 +6375,7 @@
       "tv": 0.9,
       "tv_null_mean": 0.43695750000000005,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -6396,10 +6466,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.5249999999999999,
-      "excess": 4.821968322117215,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 4.821968322117215
     },
     {
       "model": "minimax-m3",
@@ -6413,6 +6480,9 @@
         "top_k": 100
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -6425,6 +6495,7 @@
       "tv": 0.875,
       "tv_null_mean": 0.45752,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -6515,10 +6586,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.5249999999999999,
-      "excess": 4.920218321563878,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 4.920218321563878
     },
     {
       "model": "minimax-m3",
@@ -6532,6 +6600,9 @@
         "min_p": 0.0
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -6544,6 +6615,7 @@
       "tv": 0.9,
       "tv_null_mean": 0.44327,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -6634,10 +6706,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.525,
-      "excess": 4.827140532471037,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 4.827140532471037
     },
     {
       "model": "minimax-m3",
@@ -6649,6 +6718,9 @@
         "temperature": 1.5
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 5,
@@ -6661,6 +6733,7 @@
       "tv": 1.0,
       "tv_null_mean": 0.3796325000000001,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 0.0040995900409959,
       "n_permutations": 10000,
       "status": "ok",
@@ -6751,10 +6824,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 22,
-      "null_p95": 0.47500000000000003,
-      "excess": 1.2053707126677218,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 1.2053707126677218
     },
     {
       "model": "minimax-m3",
@@ -6768,6 +6838,9 @@
         "top_p": 1.0
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 8,
@@ -6780,6 +6853,7 @@
       "tv": 0.7,
       "tv_null_mean": 0.38534000000000007,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -6870,10 +6944,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.5,
-      "excess": 2.095916418797237,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.095916418797237
     },
     {
       "model": "minimax-m3",
@@ -6887,6 +6958,9 @@
         "top_k": 100
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 5,
@@ -6899,6 +6973,7 @@
       "tv": 0.85,
       "tv_null_mean": 0.41546000000000005,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -6989,10 +7064,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.5249999999999999,
-      "excess": 2.7751544840695113,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.7751544840695113
     },
     {
       "model": "minimax-m3",
@@ -7006,6 +7078,9 @@
         "min_p": 0.0
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 6,
@@ -7018,6 +7093,7 @@
       "tv": 0.525,
       "tv_null_mean": 0.36599750000000003,
       "tv_p": 0.006299370062993701,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -7108,10 +7184,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "null_p95": 0.47500000000000003,
-      "excess": 2.3501532384411545,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.3501532384411545
     },
     {
       "model": "minimax-m3",
@@ -7123,6 +7196,9 @@
         "temperature": 1.5
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 2,
@@ -7135,6 +7211,7 @@
       "tv": 0.975,
       "tv_null_mean": 0.35642750000000006,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -7225,10 +7302,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 18,
-      "null_p95": 0.45000000000000007,
-      "excess": 3.1545039412390263,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.1545039412390263
     },
     {
       "model": "minimax-m3",
@@ -7242,6 +7316,9 @@
         "top_p": 1.0
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 11,
@@ -7254,6 +7331,7 @@
       "tv": 0.8500000000000001,
       "tv_null_mean": 0.5447024999999999,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -7344,10 +7422,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.6249999999999998,
-      "excess": 2.4207779614006144,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.4207779614006144
     },
     {
       "model": "minimax-m3",
@@ -7361,6 +7436,9 @@
         "top_k": 100
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 2,
@@ -7373,6 +7451,7 @@
       "tv": 0.775,
       "tv_null_mean": 0.4056350000000001,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -7463,10 +7542,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.4750000000000001,
-      "excess": 4.289276743447612,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 4.289276743447612
     },
     {
       "model": "minimax-m3",
@@ -7480,6 +7556,9 @@
         "min_p": 0.0
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 11,
@@ -7492,6 +7571,7 @@
       "tv": 0.75,
       "tv_null_mean": 0.5252924999999999,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -7582,10 +7662,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.6249999999999998,
-      "excess": 2.058139353098275,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.058139353098275
     },
     {
       "model": "muse-glimmer-30b",
@@ -7597,6 +7674,9 @@
         "temperature": 1.5
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 5,
@@ -7609,6 +7689,7 @@
       "tv": 1.0,
       "tv_null_mean": 0.6111449999999999,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -7699,10 +7780,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.6999999999999998,
-      "excess": 2.9843859786808915,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.9843859786808915
     },
     {
       "model": "muse-glimmer-30b",
@@ -7716,6 +7794,9 @@
         "top_p": 1.0
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 5,
@@ -7728,6 +7809,7 @@
       "tv": 1.0,
       "tv_null_mean": 0.6085424999999998,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -7818,10 +7900,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.6999999999999997,
-      "excess": 3.5316734765211506,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.5316734765211506
     },
     {
       "model": "muse-glimmer-30b",
@@ -7835,6 +7914,9 @@
         "top_k": 100
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 3,
@@ -7847,6 +7929,7 @@
       "tv": 1.0,
       "tv_null_mean": 0.5358324999999999,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -7937,10 +8020,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.6249999999999998,
-      "excess": 3.307154221283405,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.307154221283405
     },
     {
       "model": "muse-glimmer-30b",
@@ -7954,6 +8034,9 @@
         "min_p": 0.0
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 6,
@@ -7966,6 +8049,7 @@
       "tv": 0.975,
       "tv_null_mean": 0.5933025,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -8056,10 +8140,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.6749999999999999,
-      "excess": 3.0843360275869705,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.0843360275869705
     },
     {
       "model": "muse-glimmer-30b",
@@ -8071,6 +8152,9 @@
         "temperature": 1.5
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 2,
@@ -8083,6 +8167,7 @@
       "tv": 0.775,
       "tv_null_mean": 0.44014750000000014,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -8173,10 +8258,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.5249999999999999,
-      "excess": 3.7645747146544277,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.7645747146544277
     },
     {
       "model": "muse-glimmer-30b",
@@ -8190,6 +8272,9 @@
         "top_p": 1.0
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 2,
@@ -8202,6 +8287,7 @@
       "tv": 0.575,
       "tv_null_mean": 0.3338500000000001,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -8292,10 +8378,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.45000000000000007,
-      "excess": 2.564969372095544,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.564969372095544
     },
     {
       "model": "muse-glimmer-30b",
@@ -8309,6 +8392,9 @@
         "top_k": 100
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 2,
@@ -8321,6 +8407,7 @@
       "tv": 0.675,
       "tv_null_mean": 0.32747500000000007,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -8411,10 +8498,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.4250000000000001,
-      "excess": 2.800634070982522,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.800634070982522
     },
     {
       "model": "muse-glimmer-30b",
@@ -8428,6 +8512,9 @@
         "min_p": 0.0
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 2,
@@ -8440,6 +8527,7 @@
       "tv": 0.7000000000000001,
       "tv_null_mean": 0.2925475,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -8530,10 +8618,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.4,
-      "excess": 2.597797889843498,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.597797889843498
     },
     {
       "model": "muse-glimmer-30b",
@@ -8545,6 +8630,9 @@
         "temperature": 1.5
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "2026-09-20T16:45Z",
+      "collected_to": "2026-09-21T01:28Z",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -8557,6 +8645,7 @@
       "tv": 0.9,
       "tv_null_mean": 0.39035000000000003,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -8647,10 +8736,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.47500000000000003,
-      "excess": 4.443934084506927,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 4.443934084506927
     },
     {
       "model": "muse-glimmer-30b",
@@ -8664,6 +8750,9 @@
         "top_p": 1.0
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -8676,6 +8765,7 @@
       "tv": 0.725,
       "tv_null_mean": 0.2625125,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -8766,10 +8856,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.35000000000000003,
-      "excess": 3.4239766742227182,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.4239766742227182
     },
     {
       "model": "muse-glimmer-30b",
@@ -8783,6 +8870,9 @@
         "top_k": 100
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -8795,6 +8885,7 @@
       "tv": 0.55,
       "tv_null_mean": 0.2492,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -8885,10 +8976,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.325,
-      "excess": 3.057906446131878,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.057906446131878
     },
     {
       "model": "muse-glimmer-30b",
@@ -8902,6 +8990,9 @@
         "min_p": 0.0
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 1,
@@ -8914,6 +9005,7 @@
       "tv": 0.475,
       "tv_null_mean": 0.17930500000000005,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -9004,10 +9096,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.25,
-      "excess": 2.4152978126290154,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.4152978126290154
     },
     {
       "model": "muse-glimmer-30b",
@@ -9019,6 +9108,9 @@
         "temperature": 1.5
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 3,
@@ -9031,6 +9123,7 @@
       "tv": 0.9500000000000001,
       "tv_null_mean": 0.4886424999999999,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -9121,10 +9214,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.575,
-      "excess": 3.930170701591058,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.930170701591058
     },
     {
       "model": "muse-glimmer-30b",
@@ -9138,6 +9228,9 @@
         "top_p": 1.0
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 10,
@@ -9150,6 +9243,7 @@
       "tv": 0.775,
       "tv_null_mean": 0.48686499999999994,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -9240,10 +9334,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.5749999999999997,
-      "excess": 1.6833175333142187,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 1.6833175333142187
     },
     {
       "model": "muse-glimmer-30b",
@@ -9257,6 +9348,9 @@
         "top_k": 100
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 7,
@@ -9269,6 +9363,7 @@
       "tv": 0.9,
       "tv_null_mean": 0.43035500000000004,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -9359,10 +9454,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.5249999999999999,
-      "excess": 2.1352676254482468,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.1352676254482468
     },
     {
       "model": "muse-glimmer-30b",
@@ -9376,6 +9468,9 @@
         "min_p": 0.0
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 13,
@@ -9388,6 +9483,7 @@
       "tv": 0.7250000000000001,
       "tv_null_mean": 0.43506000000000006,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 0.0033996600339966003,
       "n_permutations": 10000,
       "status": "ok",
@@ -9478,10 +9574,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.5499999999999999,
-      "excess": 0.7953042209421615,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.7953042209421615
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -9493,6 +9586,9 @@
         "temperature": 1.5
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 4,
@@ -9505,6 +9601,7 @@
       "tv": 0.95,
       "tv_null_mean": 0.5679274999999999,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -9595,10 +9692,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.625,
-      "excess": 4.516343364029447,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 4.516343364029447
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -9612,6 +9706,9 @@
         "top_p": 1.0
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 3,
@@ -9624,6 +9721,7 @@
       "tv": 0.85,
       "tv_null_mean": 0.45973500000000006,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -9714,10 +9812,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.5499999999999999,
-      "excess": 4.175870136909689,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 4.175870136909689
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -9731,6 +9826,9 @@
         "top_k": 100
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 3,
@@ -9743,6 +9841,7 @@
       "tv": 0.7,
       "tv_null_mean": 0.39527500000000004,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -9833,10 +9932,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.4750000000000001,
-      "excess": 3.5179035132076737,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.5179035132076737
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -9850,6 +9946,9 @@
         "min_p": 0.0
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 4,
@@ -9862,6 +9961,7 @@
       "tv": 0.65,
       "tv_null_mean": 0.37958500000000006,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -9952,10 +10052,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.4500000000000001,
-      "excess": 3.2507731780399274,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.2507731780399274
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -9967,6 +10064,9 @@
         "temperature": 1.5
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 2,
@@ -9979,6 +10079,7 @@
       "tv": 0.8250000000000001,
       "tv_null_mean": 0.449625,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -10069,10 +10170,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.5499999999999998,
-      "excess": 3.7642152096605432,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.7642152096605432
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -10086,6 +10184,9 @@
         "top_p": 1.0
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 2,
@@ -10098,6 +10199,7 @@
       "tv": 0.725,
       "tv_null_mean": 0.3477200000000001,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -10188,10 +10290,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.45000000000000007,
-      "excess": 2.9078820489355355,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.9078820489355355
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -10205,6 +10304,9 @@
         "top_k": 100
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 2,
@@ -10217,6 +10319,7 @@
       "tv": 0.725,
       "tv_null_mean": 0.35558,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -10307,10 +10410,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.475,
-      "excess": 3.332577085959134,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.332577085959134
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -10324,6 +10424,9 @@
         "min_p": 0.0
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 2,
@@ -10336,6 +10439,7 @@
       "tv": 0.6,
       "tv_null_mean": 0.26499750000000005,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -10426,10 +10530,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.375,
-      "excess": 2.627135459735259,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.627135459735259
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -10441,6 +10542,9 @@
         "temperature": 1.5
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 4,
@@ -10453,6 +10557,7 @@
       "tv": 0.9,
       "tv_null_mean": 0.4255175000000001,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -10543,10 +10648,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.5249999999999999,
-      "excess": 2.7297424028737827,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.7297424028737827
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -10560,6 +10662,9 @@
         "top_p": 1.0
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 7,
@@ -10572,6 +10677,7 @@
       "tv": 0.7250000000000001,
       "tv_null_mean": 0.34439000000000003,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 0.0014998500149985001,
       "n_permutations": 10000,
       "status": "ok",
@@ -10662,10 +10768,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.45000000000000007,
-      "excess": 1.2677584165766331,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 1.2677584165766331
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -10679,6 +10782,9 @@
         "top_k": 100
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 5,
@@ -10691,6 +10797,7 @@
       "tv": 0.825,
       "tv_null_mean": 0.27773000000000003,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 0.0035996400359964,
       "n_permutations": 10000,
       "status": "ok",
@@ -10781,10 +10888,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.3750000000000001,
-      "excess": 1.081428079702823,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 1.081428079702823
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -10798,6 +10902,9 @@
         "min_p": 0.0
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 6,
@@ -10810,6 +10917,7 @@
       "tv": 0.625,
       "tv_null_mean": 0.2785075000000001,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 0.0058994100589941,
       "n_permutations": 10000,
       "status": "ok",
@@ -10900,10 +11008,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.4,
-      "excess": 0.8383323840296816,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.8383323840296816
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -10915,6 +11020,9 @@
         "temperature": 1.5
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 2,
@@ -10927,6 +11035,7 @@
       "tv": 0.8,
       "tv_null_mean": 0.38216000000000006,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -11017,10 +11126,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.4750000000000001,
-      "excess": 3.5633103375653756,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 3.5633103375653756
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -11034,6 +11140,9 @@
         "top_p": 1.0
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 2,
@@ -11046,6 +11155,7 @@
       "tv": 0.575,
       "tv_null_mean": 0.2669625,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -11136,10 +11246,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.375,
-      "excess": 2.620463502478807,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.620463502478807
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -11153,6 +11260,9 @@
         "top_k": 100
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 2,
@@ -11165,6 +11275,7 @@
       "tv": 0.475,
       "tv_null_mean": 0.24183500000000005,
       "tv_p": 0.0021997800219978004,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -11255,10 +11366,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.3500000000000001,
-      "excess": 2.030871358756403,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.030871358756403
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
@@ -11272,6 +11380,9 @@
         "min_p": 0.0
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 2,
@@ -11284,6 +11395,7 @@
       "tv": 0.625,
       "tv_null_mean": 0.2582875000000001,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -11374,10 +11486,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.3500000000000001,
-      "excess": 2.6141792969503483,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 2.6141792969503483
     },
     {
       "model": "kimi-k2p6",
@@ -11389,6 +11498,9 @@
         "temperature": 1.5
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 33,
@@ -11401,6 +11513,7 @@
       "tv": 0.8,
       "tv_null_mean": 0.6432074999999999,
       "tv_p": 0.0006999300069993001,
+      "primary": "dh",
       "p_value": 0.9997000299970003,
       "n_permutations": 10000,
       "status": "ok",
@@ -11491,10 +11604,7 @@
       ],
       "empty_tight": 8,
       "empty_open": 24,
-      "null_p95": 0.7,
-      "excess": -2.147303586509239,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": -2.147303586509239
     },
     {
       "model": "kimi-k2p6",
@@ -11508,6 +11618,9 @@
         "top_p": 1.0
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 34,
@@ -11520,6 +11633,7 @@
       "tv": 0.8,
       "tv_null_mean": 0.7882749999999996,
       "tv_p": 0.20177982201779823,
+      "primary": "dh",
       "p_value": 0.8767123287671232,
       "n_permutations": 10000,
       "status": "ok",
@@ -11610,10 +11724,7 @@
       ],
       "empty_tight": 7,
       "empty_open": 12,
-      "null_p95": 0.8499999999999998,
-      "excess": -0.5795890439264333,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": -0.5795890439264333
     },
     {
       "model": "kimi-k2p6",
@@ -11627,6 +11738,9 @@
         "top_k": 100
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 35,
@@ -11639,6 +11753,7 @@
       "tv": 0.8500000000000001,
       "tv_null_mean": 0.8011624999999998,
       "tv_p": 0.034596540345965404,
+      "primary": "dh",
       "p_value": 0.9457054294570543,
       "n_permutations": 10000,
       "status": "ok",
@@ -11729,10 +11844,7 @@
       ],
       "empty_tight": 6,
       "empty_open": 13,
-      "null_p95": 0.8499999999999998,
-      "excess": -0.812323090931299,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": -0.812323090931299
     },
     {
       "model": "kimi-k2p6",
@@ -11746,6 +11858,9 @@
         "min_p": 0.0
       },
       "prompt": "word_prob",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 37,
@@ -11758,6 +11873,7 @@
       "tv": 0.925,
       "tv_null_mean": 0.821945,
       "tv_p": 0.004199580041995801,
+      "primary": "dh",
       "p_value": 0.9949005099490051,
       "n_permutations": 10000,
       "status": "ok",
@@ -11848,10 +11964,7 @@
       ],
       "empty_tight": 3,
       "empty_open": 13,
-      "null_p95": 0.875,
-      "excess": -1.0323724450744025,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": -1.0323724450744025
     },
     {
       "model": "kimi-k2p6",
@@ -11863,6 +11976,9 @@
         "temperature": 1.5
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 22,
@@ -11875,6 +11991,7 @@
       "tv": 0.925,
       "tv_null_mean": 0.7197824999999997,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 0.0012998700129987,
       "n_permutations": 10000,
       "status": "ok",
@@ -11965,10 +12082,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 6,
-      "null_p95": 0.7999999999999997,
-      "excess": 1.0334375552295554,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 1.0334375552295554
     },
     {
       "model": "kimi-k2p6",
@@ -11982,6 +12096,9 @@
         "top_p": 1.0
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 16,
@@ -11994,6 +12111,7 @@
       "tv": 0.8500000000000001,
       "tv_null_mean": 0.657515,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
       "status": "ok",
@@ -12084,10 +12202,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.725,
-      "excess": 1.8966613320215855,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 1.8966613320215855
     },
     {
       "model": "kimi-k2p6",
@@ -12101,6 +12216,9 @@
         "top_k": 100
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 22,
@@ -12113,6 +12231,7 @@
       "tv": 0.7000000000000001,
       "tv_null_mean": 0.6012024999999998,
       "tv_p": 0.018098190180981903,
+      "primary": "dh",
       "p_value": 0.3066693330666933,
       "n_permutations": 10000,
       "status": "ok",
@@ -12203,10 +12322,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.6749999999999999,
-      "excess": 0.20945939476069556,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.20945939476069556
     },
     {
       "model": "kimi-k2p6",
@@ -12220,6 +12336,9 @@
         "min_p": 0.0
       },
       "prompt": "sentence",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 20,
@@ -12232,6 +12351,7 @@
       "tv": 0.5,
       "tv_null_mean": 0.49463500000000005,
       "tv_p": 0.5013498650134987,
+      "primary": "dh",
       "p_value": 0.20887911208879112,
       "n_permutations": 10000,
       "status": "ok",
@@ -12322,10 +12442,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.5999999999999999,
-      "excess": 0.34611592098564736,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.34611592098564736
     },
     {
       "model": "kimi-k2p6",
@@ -12337,6 +12454,9 @@
         "temperature": 1.5
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 12,
@@ -12349,6 +12469,7 @@
       "tv": 0.975,
       "tv_null_mean": 0.3168875,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 0.9997000299970003,
       "n_permutations": 10000,
       "status": "ok",
@@ -12439,10 +12560,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 33,
-      "null_p95": 0.425,
-      "excess": -1.5032974407581057,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": -1.5032974407581057
     },
     {
       "model": "kimi-k2p6",
@@ -12456,6 +12574,9 @@
         "top_p": 1.0
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 16,
@@ -12468,6 +12589,7 @@
       "tv": 0.7,
       "tv_null_mean": 0.5233625,
       "tv_p": 0.0020997900209979003,
+      "primary": "dh",
       "p_value": 0.023397660233976603,
       "n_permutations": 10000,
       "status": "ok",
@@ -12558,10 +12680,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 3,
-      "null_p95": 0.6249999999999999,
-      "excess": 0.6816017797275942,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.6816017797275942
     },
     {
       "model": "kimi-k2p6",
@@ -12575,6 +12694,9 @@
         "top_k": 100
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 17,
@@ -12587,6 +12709,7 @@
       "tv": 0.55,
       "tv_null_mean": 0.441925,
       "tv_p": 0.023797620237976203,
+      "primary": "dh",
       "p_value": 0.15998400159984003,
       "n_permutations": 10000,
       "status": "ok",
@@ -12677,10 +12800,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 4,
-      "null_p95": 0.5499999999999998,
-      "excess": 0.34755251137162163,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.34755251137162163
     },
     {
       "model": "kimi-k2p6",
@@ -12694,6 +12814,9 @@
         "min_p": 0.0
       },
       "prompt": "opener",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 19,
@@ -12706,6 +12829,7 @@
       "tv": 0.45,
       "tv_null_mean": 0.47277749999999996,
       "tv_p": 0.7182281771822818,
+      "primary": "dh",
       "p_value": 0.3000699930006999,
       "n_permutations": 10000,
       "status": "ok",
@@ -12796,10 +12920,7 @@
       ],
       "empty_tight": 3,
       "empty_open": 4,
-      "null_p95": 0.5749999999999997,
-      "excess": 0.21387253425695824,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.21387253425695824
     },
     {
       "model": "kimi-k2p6",
@@ -12811,6 +12932,9 @@
         "temperature": 1.5
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 24,
@@ -12823,6 +12947,7 @@
       "tv": 0.9500000000000001,
       "tv_null_mean": 0.6139824999999998,
       "tv_p": 9.999000099990002e-05,
+      "primary": "dh",
       "p_value": 0.9639036096390361,
       "n_permutations": 10000,
       "status": "ok",
@@ -12913,10 +13038,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 18,
-      "null_p95": 0.6999999999999997,
-      "excess": -0.7632926474382016,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": -0.7632926474382016
     },
     {
       "model": "kimi-k2p6",
@@ -12930,6 +13052,9 @@
         "top_p": 1.0
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 30,
@@ -12942,6 +13067,7 @@
       "tv": 0.775,
       "tv_null_mean": 0.7737199999999997,
       "tv_p": 0.3705629437056294,
+      "primary": "dh",
       "p_value": 0.0654934506549345,
       "n_permutations": 10000,
       "status": "ok",
@@ -13032,10 +13158,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "null_p95": 0.8499999999999999,
-      "excess": 0.4441218700562373,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 0.4441218700562373
     },
     {
       "model": "kimi-k2p6",
@@ -13049,6 +13172,9 @@
         "top_k": 100
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 23,
@@ -13061,6 +13187,7 @@
       "tv": 0.75,
       "tv_null_mean": 0.6884024999999998,
       "tv_p": 0.0463953604639536,
+      "primary": "dh",
       "p_value": 0.0096990300969903,
       "n_permutations": 10000,
       "status": "ok",
@@ -13151,10 +13278,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "null_p95": 0.7499999999999999,
-      "excess": 1.0878177451716393,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 1.0878177451716393
     },
     {
       "model": "kimi-k2p6",
@@ -13168,6 +13292,9 @@
         "min_p": 0.0
       },
       "prompt": "question",
+      "provider": "fireworks",
+      "collected_from": "",
+      "collected_to": "",
       "n_tight": 40,
       "n_open": 40,
       "support_tight": 20,
@@ -13180,6 +13307,7 @@
       "tv": 0.775,
       "tv_null_mean": 0.6530849999999999,
       "tv_p": 0.009099090090990901,
+      "primary": "dh",
       "p_value": 0.0006999300069993001,
       "n_permutations": 10000,
       "status": "ok",
@@ -13270,10 +13398,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 2,
-      "null_p95": 0.725,
-      "excess": 1.463581894391217,
-      "collected_from": "2026-09-17T19:56",
-      "collected_to": "2026-09-17T19:56"
+      "excess": 1.463581894391217
     }
   ],
   "p_holm_by_prompt": {
@@ -13396,7 +13521,8 @@
       "nemotron-lightning-3p5-30b-a3b|top_p": 1.0,
       "nemotron-lightning-3p5-30b-a3b|top_k": 1.0,
       "kimi-k2p6|temperature": 1.0
-    }
+    },
+    "repeat": {}
   },
   "prompts": {
     "word_prob": "Write a one-sentence arithmetic word problem suitable for a ten-year-old. Reply with the problem only.",
@@ -13404,22 +13530,31 @@
     "opener": "Write the opening three words of a story. Reply with those three words only.",
     "question": "Ask one question about anything. Reply with the question only."
   },
+  "forced_prompts": {
+    "repeat": "Repeat the word 'yes' twenty times, separated by spaces. Reply with only that."
+  },
   "positive_control_by_prompt": {
     "word_prob": {
       "nemotron-lightning-3p5-30b-a3b": {
         "model": "nemotron-lightning-3p5-30b-a3b",
+        "contrast": "T=0 vs T=1.0",
         "control_dh": 0.1688721875540864,
         "control_h_open": 5.321928094887363,
         "control_h_tight": 5.153055907333276,
         "control_support_tight": 37,
         "control_n_tight": 40,
-        "control_p": 0.0192980701929807,
+        "control_p": 9.999000099990002e-05,
         "fraction_removed": 0.03173139218403148,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 0.005,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 3% of 5.32 bits; 5.15 bits remain at temperature 0 (37/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.03173139218403148,
+        "legacy_powered": false,
+        "detail": "power 0% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0024 (dH=+0.17; 37/40 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       },
       "gpt-oss-120b": {
         "model": "gpt-oss-120b",
+        "contrast": "T=0 vs T=1.0",
         "control_dh": 5.321928094887363,
         "control_h_open": 5.321928094887363,
         "control_h_tight": -0.0,
@@ -13427,334 +13562,471 @@
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 1.0,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       },
       "deepseek-v4-flash-0731": {
         "model": "deepseek-v4-flash-0731",
-        "control_dh": 0.6601592989141674,
-        "control_h_open": 5.203055907333276,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 0.7790314864682539,
+        "control_h_open": 5.321928094887363,
         "control_h_tight": 4.542896608419109,
         "control_support_tight": 29,
         "control_n_tight": 40,
-        "control_p": 0.0006999300069993001,
-        "fraction_removed": 0.12687914769159553,
+        "control_p": 9.999000099990002e-05,
+        "fraction_removed": 0.14638143781323334,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 0.25,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 13% of 5.20 bits; 4.54 bits remain at temperature 0 (29/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.12687914769159553,
+        "legacy_powered": false,
+        "detail": "power 25% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0024 (dH=+0.78; 29/40 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       },
       "minimax-m3": {
         "model": "minimax-m3",
-        "control_dh": -0.5132331253245201,
-        "control_h_open": 2.570950594454669,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.2377443751081736,
+        "control_h_open": 5.321928094887363,
         "control_h_tight": 3.084183719779189,
         "control_support_tight": 11,
         "control_n_tight": 40,
-        "control_p": 0.887011298870113,
-        "fraction_removed": -0.19962776664457194,
-        "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only -20% of 2.57 bits; 3.08 bits remain at temperature 0 (11/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "control_p": 9.999000099990002e-05,
+        "fraction_removed": 0.4204762513153675,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 1.0,
+        "powered": true,
+        "legacy_fraction_removed": -0.19962776664457194,
+        "legacy_powered": false,
+        "detail": ""
       },
       "muse-glimmer-30b": {
         "model": "muse-glimmer-30b",
-        "control_dh": 2.9887218755408678,
-        "control_h_open": 5.203055907333276,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.0575940630949545,
+        "control_h_open": 5.271928094887363,
         "control_h_tight": 2.2143340317924083,
         "control_support_tight": 5,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.5744166368323108,
+        "fraction_removed": 0.579976435198379,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.5744166368323108,
+        "legacy_powered": true,
         "detail": ""
       },
       "nemotron-3-ultra-nvfp4": {
         "model": "nemotron-3-ultra-nvfp4",
-        "control_dh": 4.524343415062789,
-        "control_h_open": 5.321928094887363,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 4.015230215647781,
+        "control_h_open": 4.812814895472355,
         "control_h_tight": 0.7975846798245739,
         "control_support_tight": 4,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.8501323833009332,
+        "fraction_removed": 0.8342789620737544,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.8501323833009332,
+        "legacy_powered": true,
         "detail": ""
       },
       "kimi-k2p6": {
         "model": "kimi-k2p6",
-        "control_dh": -2.150977500432693,
-        "control_h_open": 2.570950594454669,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": -0.4754887502163463,
+        "control_h_open": 4.246439344671016,
         "control_h_tight": 4.721928094887362,
         "control_support_tight": 33,
         "control_n_tight": 40,
-        "control_p": 0.9997000299970003,
-        "fraction_removed": -0.8366467660141648,
+        "control_p": 0.8047195280471953,
+        "fraction_removed": -0.11197351748660943,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 0.0,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only -84% of 2.57 bits; 4.72 bits remain at temperature 0 (33/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": -0.8366467660141648,
+        "legacy_powered": false,
+        "detail": "power 0% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0024 (dH=-0.48; 33/40 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "sentence": {
       "nemotron-lightning-3p5-30b-a3b": {
         "model": "nemotron-lightning-3p5-30b-a3b",
-        "control_dh": 0.6754887502163474,
-        "control_h_open": 5.321928094887363,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 0.5754887502163477,
+        "control_h_open": 5.221928094887363,
         "control_h_tight": 4.646439344671015,
         "control_support_tight": 30,
         "control_n_tight": 40,
-        "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.12692556873612626,
+        "control_p": 0.0040995900409959,
+        "fraction_removed": 0.11020618050635203,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 0.055,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 13% of 5.32 bits; 4.65 bits remain at temperature 0 (30/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.12692556873612626,
+        "legacy_powered": false,
+        "detail": "power 6% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0024 (dH=+0.58; 30/40 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       },
       "gpt-oss-120b": {
         "model": "gpt-oss-120b",
-        "control_dh": 5.031687083026442,
-        "control_h_open": 5.031687083026442,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 4.543942707918269,
+        "control_h_open": 4.543942707918269,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 1.0,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       },
       "deepseek-v4-flash-0731": {
         "model": "deepseek-v4-flash-0731",
-        "control_dh": 3.8122772333284107,
-        "control_h_open": 5.271928094887363,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.8622772333284106,
+        "control_h_open": 5.321928094887363,
         "control_h_tight": 1.4596508615589523,
         "control_support_tight": 7,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.7231276991477749,
+        "fraction_removed": 0.725728939674852,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.7231276991477749,
+        "legacy_powered": true,
         "detail": ""
       },
       "minimax-m3": {
         "model": "minimax-m3",
-        "control_dh": 4.721928094887362,
-        "control_h_open": 4.721928094887362,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 4.821928094887363,
+        "control_h_open": 4.821928094887363,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 1.0,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       },
       "muse-glimmer-30b": {
         "model": "muse-glimmer-30b",
-        "control_dh": 3.7678946871213936,
-        "control_h_open": 4.489822782008756,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.8500000000000005,
+        "control_h_open": 3.5719280948873626,
         "control_h_tight": 0.7219280948873623,
         "control_support_tight": 2,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.839207886382462,
+        "fraction_removed": 0.7978884020871849,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 0.985,
         "powered": true,
+        "legacy_fraction_removed": 0.839207886382462,
+        "legacy_powered": true,
         "detail": ""
       },
       "nemotron-3-ultra-nvfp4": {
         "model": "nemotron-3-ultra-nvfp4",
-        "control_dh": 3.7700404414845474,
-        "control_h_open": 4.7628148954723555,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.9109272420695405,
+        "control_h_open": 3.9037016960573485,
         "control_h_tight": 0.9927744539878083,
         "control_support_tight": 2,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.7915572039275424,
+        "fraction_removed": 0.7456838326067567,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.7915572039275424,
+        "legacy_powered": true,
         "detail": ""
       },
       "kimi-k2p6": {
         "model": "kimi-k2p6",
-        "control_dh": 1.0324715075711701,
-        "control_h_open": 4.934183719779189,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.1702158826793436,
+        "control_h_open": 5.071928094887363,
         "control_h_tight": 3.901712212208019,
         "control_support_tight": 22,
         "control_n_tight": 40,
-        "control_p": 0.0012998700129987,
-        "fraction_removed": 0.20924869567227516,
+        "control_p": 0.0007999200079992001,
+        "fraction_removed": 0.23072406800462178,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 0.265,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 21% of 4.93 bits; 3.90 bits remain at temperature 0 (22/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.20924869567227516,
+        "legacy_powered": false,
+        "detail": "power 26% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0024 (dH=+1.17; 22/40 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "opener": {
       "nemotron-lightning-3p5-30b-a3b": {
         "model": "nemotron-lightning-3p5-30b-a3b",
-        "control_dh": 0.0811278124459136,
-        "control_h_open": 5.153055907333276,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 0.20000000000000018,
+        "control_h_open": 5.271928094887363,
         "control_h_tight": 5.071928094887363,
         "control_support_tight": 35,
         "control_n_tight": 40,
-        "control_p": 0.29017098290170984,
-        "fraction_removed": 0.015743631333489164,
+        "control_p": 0.0491950804919508,
+        "fraction_removed": 0.037936784493316056,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 0.01,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 2% of 5.15 bits; 5.07 bits remain at temperature 0 (35/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.015743631333489164,
+        "legacy_powered": false,
+        "detail": "power 1% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0024 (dH=+0.20; 35/40 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       },
       "gpt-oss-120b": {
         "model": "gpt-oss-120b",
-        "control_dh": 4.8530559073332755,
-        "control_h_open": 4.8530559073332755,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.6149112214500145,
+        "control_h_open": 3.6149112214500145,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 1.0,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       },
       "deepseek-v4-flash-0731": {
         "model": "deepseek-v4-flash-0731",
-        "control_dh": 0.9272664770977279,
-        "control_h_open": 3.3158841998018818,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.4766938095209485,
+        "control_h_open": 3.8653115322251024,
         "control_h_tight": 2.388617722704154,
         "control_support_tight": 8,
         "control_n_tight": 40,
-        "control_p": 0.015798420157984203,
-        "fraction_removed": 0.2796438057617122,
-        "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 28% of 3.32 bits; 2.39 bits remain at temperature 0 (8/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "control_p": 9.999000099990002e-05,
+        "fraction_removed": 0.38203746249422643,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 0.8,
+        "powered": true,
+        "legacy_fraction_removed": 0.2796438057617122,
+        "legacy_powered": false,
+        "detail": ""
       },
       "minimax-m3": {
         "model": "minimax-m3",
-        "control_dh": 1.209723067467416,
-        "control_h_open": 2.869240704636849,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.4557938950556695,
+        "control_h_open": 4.115311532225102,
         "control_h_tight": 1.659517637169433,
         "control_support_tight": 5,
         "control_n_tight": 40,
-        "control_p": 0.0040995900409959,
-        "fraction_removed": 0.42161783969969396,
-        "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 42% of 2.87 bits; 1.66 bits remain at temperature 0 (5/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "control_p": 9.999000099990002e-05,
+        "fraction_removed": 0.5967455624745497,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 1.0,
+        "powered": true,
+        "legacy_fraction_removed": 0.42161783969969396,
+        "legacy_powered": false,
+        "detail": ""
       },
       "muse-glimmer-30b": {
         "model": "muse-glimmer-30b",
-        "control_dh": 4.446439344671016,
-        "control_h_open": 4.446439344671016,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.420584399762106,
+        "control_h_open": 3.420584399762106,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 1.0,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       },
       "nemotron-3-ultra-nvfp4": {
         "model": "nemotron-3-ultra-nvfp4",
-        "control_dh": 2.7339179178454183,
-        "control_h_open": 4.151712212208019,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.7950206011097545,
+        "control_h_open": 3.212814895472355,
         "control_h_tight": 1.4177942943626007,
         "control_support_tight": 4,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.658503715601094,
+        "fraction_removed": 0.558706511115651,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 0.81,
         "powered": true,
+        "legacy_fraction_removed": 0.658503715601094,
+        "legacy_powered": true,
         "detail": ""
       },
       "kimi-k2p6": {
         "model": "kimi-k2p6",
-        "control_dh": -1.495197479992273,
-        "control_h_open": 1.1603029464166383,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.5695700939552713,
+        "control_h_open": 4.2250705203641825,
         "control_h_tight": 2.6555004264089113,
         "control_support_tight": 12,
         "control_n_tight": 40,
-        "control_p": 0.9997000299970003,
-        "fraction_removed": -1.2886268061370427,
+        "control_p": 9.999000099990002e-05,
+        "fraction_removed": 0.3714896796136745,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 0.595,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only -129% of 1.16 bits; 2.66 bits remain at temperature 0 (12/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": -1.2886268061370427,
+        "legacy_powered": false,
+        "detail": "power 60% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0024 (dH=+1.57; 12/40 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
     },
     "question": {
       "nemotron-lightning-3p5-30b-a3b": {
         "model": "nemotron-lightning-3p5-30b-a3b",
-        "control_dh": 0.4632331253245203,
-        "control_h_open": 4.971928094887363,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 0.4943609377704332,
+        "control_h_open": 5.003055907333276,
         "control_h_tight": 4.508694969562843,
         "control_support_tight": 30,
         "control_n_tight": 40,
-        "control_p": 0.06259374062593741,
-        "fraction_removed": 0.09316971534662041,
+        "control_p": 0.052894710528947106,
+        "fraction_removed": 0.09881179561591927,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 0.035,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 9% of 4.97 bits; 4.51 bits remain at temperature 0 (30/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": 0.09316971534662041,
+        "legacy_powered": false,
+        "detail": "power 4% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0024 (dH=+0.49; 30/40 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       },
       "gpt-oss-120b": {
         "model": "gpt-oss-120b",
-        "control_dh": 4.730640983527282,
-        "control_h_open": 4.730640983527282,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.8263620978123276,
+        "control_h_open": 2.8263620978123276,
         "control_h_tight": -0.0,
         "control_support_tight": 1,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
         "fraction_removed": 1.0,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 1.0,
+        "legacy_powered": true,
         "detail": ""
       },
       "deepseek-v4-flash-0731": {
         "model": "deepseek-v4-flash-0731",
-        "control_dh": 0.669703416343673,
-        "control_h_open": 4.119285186491508,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 1.5846019496313537,
+        "control_h_open": 5.034183719779189,
         "control_h_tight": 3.449581770147835,
         "control_support_tight": 16,
         "control_n_tight": 40,
-        "control_p": 0.04659534046595341,
-        "fraction_removed": 0.1625775798528956,
-        "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only 16% of 4.12 bits; 3.45 bits remain at temperature 0 (16/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "control_p": 9.999000099990002e-05,
+        "fraction_removed": 0.3147683989770755,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 0.815,
+        "powered": true,
+        "legacy_fraction_removed": 0.1625775798528956,
+        "legacy_powered": false,
+        "detail": ""
       },
       "minimax-m3": {
         "model": "minimax-m3",
-        "control_dh": 3.1590648871223657,
-        "control_h_open": 3.445461844238322,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 4.395290125910487,
+        "control_h_open": 4.681687083026443,
         "control_h_tight": 0.28639695711595625,
         "control_support_tight": 2,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.916877048690908,
+        "fraction_removed": 0.9388261214308204,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.916877048690908,
+        "legacy_powered": true,
         "detail": ""
       },
       "muse-glimmer-30b": {
         "model": "muse-glimmer-30b",
-        "control_dh": 3.934287872615903,
-        "control_h_open": 4.862814895472356,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 3.5679123218145627,
+        "control_h_open": 4.496439344671016,
         "control_h_tight": 0.9285270228564532,
         "control_support_tight": 3,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.8090556513428094,
+        "fraction_removed": 0.7934972649065304,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.8090556513428094,
+        "legacy_powered": true,
         "detail": ""
       },
       "nemotron-3-ultra-nvfp4": {
         "model": "nemotron-3-ultra-nvfp4",
-        "control_dh": 3.5747498789052554,
-        "control_h_open": 4.343942707918269,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 2.5309661307924274,
+        "control_h_open": 3.300158959805441,
         "control_h_tight": 0.7691928290130138,
         "control_support_tight": 2,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.8229274922040509,
+        "fraction_removed": 0.7669224911946784,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 1.0,
         "powered": true,
+        "legacy_fraction_removed": 0.8229274922040509,
+        "legacy_powered": true,
         "detail": ""
       },
       "kimi-k2p6": {
         "model": "kimi-k2p6",
-        "control_dh": -0.7632331253245201,
-        "control_h_open": 3.395461844238322,
+        "contrast": "T=0 vs T=1.0",
+        "control_dh": 0.9132331253245205,
+        "control_h_open": 5.071928094887363,
         "control_h_tight": 4.158694969562842,
         "control_support_tight": 24,
         "control_n_tight": 40,
-        "control_p": 0.9639036096390361,
-        "fraction_removed": -0.2247803569401412,
+        "control_p": 0.0023997600239976003,
+        "fraction_removed": 0.18005640226743033,
+        "control_alpha": 0.002380952380952381,
+        "control_power": 0.185,
         "powered": false,
-        "detail": "temperature 0 vs 1.5 removed only -22% of 3.40 bits; 4.16 bits remain at temperature 0 (24/40 distinct). Something other than the sampler generates that variation, and no truncation parameter can remove it \u2014 a null on this model is uninterpretable."
+        "legacy_fraction_removed": -0.2247803569401412,
+        "legacy_powered": false,
+        "detail": "power 18% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0024 (dH=+0.91; 24/40 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
-    }
+    },
+    "repeat": {}
   },
   "aggregates": [
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
       "parameter": "top_p",
       "n_prompts": 4,
+      "n_control_passed": 0,
+      "n_verdict": 0,
       "n_powered": 0,
       "n_distinguishable": 0,
       "n_no_effect": 0,
@@ -13764,12 +14036,23 @@
         "opener": "underpowered",
         "question": "underpowered"
       },
-      "verdict": "underpowered"
+      "verdict": "underpowered",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 0.46887218755409066,
+      "stratified_p": 0.05749425057494251,
+      "stratified_p_holm": 0.22997700229977003,
+      "stratified_prompts": 4,
+      "stratified_control_p": 0.00019998000199980003,
+      "stratified_control_power": 0.195,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
       "parameter": "top_k",
       "n_prompts": 4,
+      "n_control_passed": 0,
+      "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 1,
       "n_no_effect": 0,
@@ -13779,12 +14062,23 @@
         "opener": "underpowered",
         "question": "underpowered"
       },
-      "verdict": "underpowered"
+      "verdict": "mixed",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 0.7182263988300193,
+      "stratified_p": 0.0110988901109889,
+      "stratified_p_holm": 0.0554944505549445,
+      "stratified_prompts": 4,
+      "stratified_control_p": 0.00019998000199980003,
+      "stratified_control_power": 0.195,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "nemotron-lightning-3p5-30b-a3b",
       "parameter": "min_p",
       "n_prompts": 4,
+      "n_control_passed": 0,
+      "n_verdict": 0,
       "n_powered": 0,
       "n_distinguishable": 0,
       "n_no_effect": 0,
@@ -13794,12 +14088,23 @@
         "opener": "underpowered",
         "question": "underpowered"
       },
-      "verdict": "underpowered"
+      "verdict": "underpowered",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 0.39685757452318526,
+      "stratified_p": 0.11338866113388661,
+      "stratified_p_holm": 0.3401659834016598,
+      "stratified_prompts": 4,
+      "stratified_control_p": 0.00019998000199980003,
+      "stratified_control_power": 0.195,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "gpt-oss-120b",
       "parameter": "top_p",
       "n_prompts": 4,
+      "n_control_passed": 4,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
       "n_no_effect": 0,
@@ -13809,12 +14114,23 @@
         "opener": "distinguishable",
         "question": "distinguishable"
       },
-      "verdict": "distinguishable"
+      "verdict": "distinguishable",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 15.307144122067974,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0020997900209979003,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "gpt-oss-120b",
       "parameter": "top_k",
       "n_prompts": 4,
+      "n_control_passed": 4,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
       "n_no_effect": 0,
@@ -13824,12 +14140,23 @@
         "opener": "distinguishable",
         "question": "distinguishable"
       },
-      "verdict": "distinguishable"
+      "verdict": "distinguishable",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 16.30302419615846,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0020997900209979003,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "gpt-oss-120b",
       "parameter": "min_p",
       "n_prompts": 4,
+      "n_control_passed": 4,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
       "n_no_effect": 0,
@@ -13839,12 +14166,23 @@
         "opener": "distinguishable",
         "question": "distinguishable"
       },
-      "verdict": "distinguishable"
+      "verdict": "distinguishable",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 14.817462380787584,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0020997900209979003,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "deepseek-v4-flash-0731",
       "parameter": "top_p",
       "n_prompts": 4,
+      "n_control_passed": 3,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
       "n_no_effect": 0,
@@ -13854,27 +14192,49 @@
         "opener": "distinguishable",
         "question": "distinguishable"
       },
-      "verdict": "distinguishable"
+      "verdict": "distinguishable",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 6.132402290368484,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0020997900209979003,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "deepseek-v4-flash-0731",
       "parameter": "top_k",
       "n_prompts": 4,
-      "n_powered": 3,
+      "n_control_passed": 3,
+      "n_verdict": 4,
+      "n_powered": 4,
       "n_distinguishable": 3,
-      "n_no_effect": 0,
+      "n_no_effect": 1,
       "per_prompt": {
         "word_prob": "distinguishable",
         "sentence": "distinguishable",
         "opener": "distinguishable",
-        "question": "underpowered"
+        "question": "no effect seen"
       },
-      "verdict": "distinguishable"
+      "verdict": "distinguishable",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 8.692494003453895,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0020997900209979003,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "deepseek-v4-flash-0731",
       "parameter": "min_p",
       "n_prompts": 4,
+      "n_control_passed": 3,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
       "n_no_effect": 0,
@@ -13884,12 +14244,23 @@
         "opener": "distinguishable",
         "question": "distinguishable"
       },
-      "verdict": "distinguishable"
+      "verdict": "distinguishable",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 6.595897708783662,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0020997900209979003,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "minimax-m3",
       "parameter": "top_p",
       "n_prompts": 4,
+      "n_control_passed": 4,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
       "n_no_effect": 0,
@@ -13899,12 +14270,23 @@
         "opener": "distinguishable",
         "question": "distinguishable"
       },
-      "verdict": "distinguishable"
+      "verdict": "distinguishable",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 10.184270348640315,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0020997900209979003,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "minimax-m3",
       "parameter": "top_k",
       "n_prompts": 4,
+      "n_control_passed": 4,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
       "n_no_effect": 0,
@@ -13914,12 +14296,23 @@
         "opener": "distinguishable",
         "question": "distinguishable"
       },
-      "verdict": "distinguishable"
+      "verdict": "distinguishable",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 14.264286837354604,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0020997900209979003,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "minimax-m3",
       "parameter": "min_p",
       "n_prompts": 4,
+      "n_control_passed": 4,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
       "n_no_effect": 0,
@@ -13929,12 +14322,23 @@
         "opener": "distinguishable",
         "question": "distinguishable"
       },
-      "verdict": "distinguishable"
+      "verdict": "distinguishable",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 10.024441885047528,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0020997900209979003,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "muse-glimmer-30b",
       "parameter": "top_p",
       "n_prompts": 4,
+      "n_control_passed": 4,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
       "n_no_effect": 0,
@@ -13944,12 +14348,23 @@
         "opener": "distinguishable",
         "question": "distinguishable"
       },
-      "verdict": "distinguishable"
+      "verdict": "distinguishable",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 11.213321282706115,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0020997900209979003,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "muse-glimmer-30b",
       "parameter": "top_k",
       "n_prompts": 4,
+      "n_control_passed": 4,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
       "n_no_effect": 0,
@@ -13959,12 +14374,23 @@
         "opener": "distinguishable",
         "question": "distinguishable"
       },
-      "verdict": "distinguishable"
+      "verdict": "distinguishable",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 11.309162710318013,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0020997900209979003,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "muse-glimmer-30b",
       "parameter": "min_p",
       "n_prompts": 4,
+      "n_control_passed": 4,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
       "n_no_effect": 0,
@@ -13974,12 +14400,23 @@
         "opener": "distinguishable",
         "question": "distinguishable"
       },
-      "verdict": "distinguishable"
+      "verdict": "distinguishable",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 8.902453308201903,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0020997900209979003,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
       "parameter": "top_p",
       "n_prompts": 4,
+      "n_control_passed": 4,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
       "n_no_effect": 0,
@@ -13989,12 +14426,23 @@
         "opener": "distinguishable",
         "question": "distinguishable"
       },
-      "verdict": "distinguishable"
+      "verdict": "distinguishable",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 10.98083879536934,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0020997900209979003,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
       "parameter": "top_k",
       "n_prompts": 4,
+      "n_control_passed": 4,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 4,
       "n_no_effect": 0,
@@ -14004,12 +14452,23 @@
         "opener": "distinguishable",
         "question": "distinguishable"
       },
-      "verdict": "distinguishable"
+      "verdict": "distinguishable",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 9.976679748466703,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0020997900209979003,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "nemotron-3-ultra-nvfp4",
       "parameter": "min_p",
       "n_prompts": 4,
+      "n_control_passed": 4,
+      "n_verdict": 4,
       "n_powered": 4,
       "n_distinguishable": 3,
       "n_no_effect": 1,
@@ -14019,12 +14478,23 @@
         "opener": "no effect seen",
         "question": "distinguishable"
       },
-      "verdict": "distinguishable"
+      "verdict": "distinguishable",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 9.334677875435675,
+      "stratified_p": 9.999000099990002e-05,
+      "stratified_p_holm": 0.0020997900209979003,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 1.0,
+      "verdict_majority": "distinguishable"
     },
     {
       "model": "kimi-k2p6",
       "parameter": "top_p",
       "n_prompts": 4,
+      "n_control_passed": 0,
+      "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 1,
       "n_no_effect": 0,
@@ -14034,12 +14504,23 @@
         "opener": "underpowered",
         "question": "underpowered"
       },
-      "verdict": "underpowered"
+      "verdict": "distinguishable",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 2.440395844687025,
+      "stratified_p": 0.0011998800119988001,
+      "stratified_p_holm": 0.007199280071992801,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.65,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "kimi-k2p6",
       "parameter": "top_k",
       "n_prompts": 4,
+      "n_control_passed": 0,
+      "n_verdict": 0,
       "n_powered": 0,
       "n_distinguishable": 0,
       "n_no_effect": 0,
@@ -14049,12 +14530,23 @@
         "opener": "underpowered",
         "question": "underpowered"
       },
-      "verdict": "underpowered"
+      "verdict": "underpowered",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 0.8410036415840403,
+      "stratified_p": 0.15798420157984203,
+      "stratified_p_holm": 0.3401659834016598,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.65,
+      "verdict_majority": "underpowered"
     },
     {
       "model": "kimi-k2p6",
       "parameter": "min_p",
       "n_prompts": 4,
+      "n_control_passed": 0,
+      "n_verdict": 1,
       "n_powered": 1,
       "n_distinguishable": 1,
       "n_no_effect": 0,
@@ -14064,13 +14556,16 @@
         "opener": "underpowered",
         "question": "distinguishable"
       },
-      "verdict": "underpowered"
+      "verdict": "mixed",
+      "forced": {},
+      "verdict_forced": "",
+      "stratified_stat": 0.9949466886110341,
+      "stratified_p": 0.11698830116988301,
+      "stratified_p_holm": 0.3401659834016598,
+      "stratified_prompts": 4,
+      "stratified_control_p": 9.999000099990002e-05,
+      "stratified_control_power": 0.65,
+      "verdict_majority": "underpowered"
     }
-  ],
-  "collected": {
-    "from": "2026-09-17T19:56",
-    "to": "2026-09-17T19:56",
-    "source": "git author date of the adding commit (predates the cache)"
-  },
-  "written": "2026-09-15T09:36Z"
+  ]
 }
