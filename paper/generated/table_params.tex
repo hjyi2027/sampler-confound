@@ -1,0 +1,10 @@
+\texttt{top\_p} & nucleus sampling & 18/18 & 16 & 1 & 0 & 1 \\
+\texttt{top\_k} & top-$k$ filtering & 18/18 & 16 & 1 & 0 & 1 \\
+\texttt{min\_p} & minimum-probability filter & 18/18 & 15 & 1 & 0 & 2 \\
+\texttt{typical\_p} & typical-$p$ sampling & 18/18 & 13 & 1 & \textbf{1} & 3 \\
+mirostat & target perplexity & 18/18 & 6 & 3 & \textbf{6} & 3 \\
+\texttt{repetition\_penalty} & penalty above 1.0 & 18/18 & 18 & 0 & 0 & 0 \\
+\texttt{frequency\_penalty} & penalty by frequency & 18/18 & 18 & 0 & 0 & 0 \\
+\texttt{presence\_penalty} & penalty by presence & 18/18 & 2 & 2 & 0 & 14 \\
+\midrule
+all eight & & 144/144 & 104 & 9 & 7 & 24 \\

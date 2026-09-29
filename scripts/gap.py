@@ -37,7 +37,46 @@ from scripts.probe_matrix import collect
 HONOURED = {"distinguishable": "yes", "no effect seen": "no", "mixed": "mixed",
             "underpowered": "undetermined", "insufficient": "undetermined",
             "unsupported": "not sent", "transport": "hung", "rejected": "refused"}
-SEED_HONOURED = {"yes": "yes", "NO": "no", "n/a": "undetermined", "rej": "refused"}
+
+# The seed is tested at temperature 0 (scripts/probe_determinism.py): ten
+# identical requests with the same seed, byte-identical or not. At T=0 there
+# is no random draw for a seed to fix, so the test cannot show that the seed
+# is ignored by the sampler; it shows whether the documented promise,
+# "deterministic sampling", is delivered to a caller who sets one. The labels
+# say that and nothing stronger.
+SEED_NOT_DELIVERED = "not delivered at T=0"
+SEED_MOOT = "deterministic without it"
+SEED_HONOURED = {"yes": "yes", "NO": SEED_NOT_DELIVERED, "n/a": SEED_MOOT, "rej": "refused"}
+
+# A penalty is tested twice: on free-text prompts (does it change the output
+# distribution?) and on a prompt that forces repetition (does it break the
+# forced string?). Evidence of an effect from EITHER test means the provider
+# applies the parameter. A null on the forced prompt is decisive only where an
+# applied penalty must overturn the forced token: frequency_penalty subtracts
+# 2.0 per prior occurrence, so by the sixth "yes" the token has lost 10 logits.
+# repetition_penalty rescales a logit by 1/2, so its effect depends on the
+# logit's absolute level (muse-glimmer-30b changes free text under it while
+# forced repetition survives), and presence_penalty is a flat 2 logits. For
+# those two a forced null is not evidence that the parameter is ignored.
+PENALTIES = ("repetition_penalty", "frequency_penalty", "presence_penalty")
+FORCED_DECISIVE = {"frequency_penalty"}
+
+
+def penalty_honoured(param: str, forced: str | None, free: str | None) -> str:
+    """One honoured value from the forced-repetition and free-text verdicts."""
+    vs = (forced, free)
+    if "distinguishable" in vs:
+        return "yes"
+    if "rejected" in vs:
+        return "refused"
+    if "transport" in vs:
+        return "hung"
+    if "mixed" in vs:
+        return "mixed"
+    if param in FORCED_DECISIVE and forced == "no effect seen":
+        return "no"
+    return "undetermined"
+
 
 WORST = "UNDOCUMENTED, ACCEPTED, IGNORED"
 
@@ -54,6 +93,10 @@ def label(doc: dict | None, accepted: str, honoured: str) -> str:
         return "documented, refused" if documented else "undocumented, refused (correct)"
     if accepted == "hung":
         return "accepted, then the server fails"
+    if honoured == SEED_NOT_DELIVERED:
+        return "documented determinism not delivered at T=0"
+    if honoured == SEED_MOOT:
+        return "deterministic without it"
     if honoured in ("undetermined", "mixed"):
         return ("documented, " if documented else "undocumented, ") + "accepted, undetermined"
     if honoured == "yes":
@@ -112,6 +155,14 @@ def cells() -> list[dict]:
                 honoured = SEED_HONOURED.get(v, "undetermined")
                 accepted = "refused" if v == "rej" else "yes"
                 measured = v
+            elif param in PENALTIES:
+                v = r.get(param)                        # forced-repetition verdict
+                free = r.get(param + "_free_text")
+                if v is None and free is None:
+                    continue
+                honoured = penalty_honoured(param, v, free)
+                accepted = {"refused": "refused", "hung": "hung"}.get(honoured, "yes")
+                measured = v
             else:
                 v = r.get(param)
                 if v is None:
@@ -145,7 +196,7 @@ def main() -> int:
     for c in rows:
         by[(c["provider"], c["parameter"])].append(c)
     print(f"{'provider':<11}{'parameter':<20}{'documented':<12}{'accepted':>9}{'honoured':>9}"
-          f"{'ignored':>8}{'undet.':>7}  claim")
+          f"{'mixed':>6}{'inert':>6}{'undet.':>7}{'other':>6}  claim")
     order = list(PARAMS) + list(UNDOC_PARAMS)
     for (prov, param), cs in sorted(by.items(), key=lambda kv: (kv[0][0], order.index(kv[0][1]))):
         doc = claim(prov, param)
@@ -154,9 +205,11 @@ def main() -> int:
             d = "as unsupported"
         acc = sum(c["accepted"] == "yes" for c in cs)
         hon = sum(c["honoured"] == "yes" for c in cs)
+        mix = sum(c["honoured"] == "mixed" for c in cs)
         ign = sum(c["honoured"] == "no" for c in cs)
-        und = sum(c["honoured"] in ("undetermined", "mixed") for c in cs)
-        print(f"{prov:<11}{param:<20}{d:<12}{acc:>6}/{len(cs):<2}{hon:>9}{ign:>8}{und:>7}  "
+        und = sum(c["honoured"] == "undetermined" for c in cs)
+        oth = len(cs) - hon - mix - ign - und
+        print(f"{prov:<11}{param:<20}{d:<12}{acc:>6}/{len(cs):<2}{hon:>9}{mix:>6}{ign:>6}{und:>7}{oth:>6}  "
               f"{(doc['claim'][:60] if doc and doc['claim'] else '—')}")
 
     # ---- the named cells ------------------------------------------------

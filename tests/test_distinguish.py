@@ -144,6 +144,19 @@ def test_a_constant_output_is_reported_as_no_power_not_as_no_effect():
     assert "entropy" in r.detail
 
 
+def test_two_different_constants_are_a_total_shift_not_no_power():
+    """Penalty off: the forced word forty times. Penalty on: an empty reply
+    forty times. Each arm is constant, but they are different constants, so
+    the parameter changed every output. That is the largest effect the test
+    can see, and calling it 'insufficient' hid it."""
+    r = assess_parameter("m", "repetition_penalty", {"repetition_penalty": 1.0},
+                         {"repetition_penalty": 2.0}, ["yes yes yes"] * 40, ["<empty>"] * 40,
+                         n_permutations=2000, primary="tv")
+    assert r.status == "ok"
+    assert r.tv == 1.0
+    assert r.p_value < 0.001
+
+
 def test_too_few_completions_is_refused():
     r = assess_parameter("m", "top_k", {"top_k": 1}, {"top_k": 100},
                        ["a", "b"], ["c", "d"])

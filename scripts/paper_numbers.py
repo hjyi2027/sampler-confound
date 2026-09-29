@@ -40,27 +40,39 @@ def rows() -> list[tuple[str, str, str]]:
 
     labels = Counter(c["label"] for c in gap)
     add("gap cells, total", len(gap), "scripts/gap.py")
-    add("cells: as documented", labels["as documented"], "scripts/gap.py")
-    add("cells: documented, accepted, ignored", labels["DOCUMENTED, ACCEPTED, IGNORED"], "scripts/gap.py")
-    add("cells: UNDOCUMENTED, ACCEPTED, IGNORED", labels[
-        "UNDOCUMENTED, ACCEPTED, IGNORED"], "scripts/gap.py")
-    add("cells: undocumented, accepted, works", labels["undocumented, accepted, works"], "scripts/gap.py")
-    add("cells: accepted then the server fails", labels["accepted, then the server fails"], "scripts/gap.py")
+    for lab in ("as documented", "documented, accepted, undetermined", "DOCUMENTED, ACCEPTED, IGNORED",
+                "documented determinism not delivered at T=0", "deterministic without it",
+                "UNDOCUMENTED, ACCEPTED, IGNORED", "undocumented, accepted, works",
+                "undocumented, accepted, undetermined", "accepted, then the server fails"):
+        add(f"cells: {lab}", labels[lab], "scripts/gap.py")
 
-    # Table 1: per-parameter accepted / honoured / inert / undetermined
+    # Table 1: per-parameter accepted / honoured / mixed / inert / no verdict,
+    # for the eight parameters that shape the distribution (seed is tested
+    # separately, at temperature 0; see the determinism rows below)
     by = defaultdict(list)
     for c in gap:
         by[c["parameter"]].append(c)
+    tot = Counter()
     for p in ("top_p", "top_k", "min_p", "typical_p", "mirostat", "repetition_penalty",
-              "frequency_penalty", "presence_penalty", "seed"):
+              "frequency_penalty", "presence_penalty"):
         cs = by[p]
+        h = Counter(c["honoured"] for c in cs)
+        tot.update(h)
         add(f"Table 1 {p}",
-            f"accepted {sum(c['accepted'] == 'yes' for c in cs)}/{len(cs)}, "
-            f"honoured {sum(c['honoured'] == 'yes' for c in cs)}, "
-            f"inert {sum(c['honoured'] == 'no' for c in cs)}, "
-            f"undet {sum(c['honoured'] in ('undetermined', 'mixed') for c in cs)}",
+            f"accepted {sum(c['accepted'] == 'yes' for c in cs)}/{len(cs)}, honoured {h['yes']}, "
+            f"mixed {h['mixed']}, inert {h['no']}, no verdict {h['undetermined']}",
             "scripts/gap.py")
+    add("Table 1 all eight", f"honoured {tot['yes']}, mixed {tot['mixed']}, inert {tot['no']}, "
+        f"no verdict {tot['undetermined']} of {sum(tot.values())}", "scripts/gap.py")
+    inert = sorted(f"{c['model']}/{c['parameter']}" for c in gap if c["honoured"] == "no"
+                   and c["documented"] == "documented")
+    add("inert cells (documented parameters)", "; ".join(inert), "scripts/gap.py")
     add("seed, as documented", repr(claim("fireworks", "seed")["claim"]), "samplerconfound/documented.py")
+    add("Table 1 seed (T=0 test)",
+        f"accepted {sum(c['accepted'] == 'yes' for c in by['seed'])}/{len(by['seed'])}, "
+        f"not delivered {sum(c['honoured'] == 'not delivered at T=0' for c in by['seed'])}, "
+        f"deterministic without it {sum(c['honoured'] == 'deterministic without it' for c in by['seed'])}",
+        "scripts/gap.py")
 
     # Table 2: the undocumented four
     for p in ("use_beam_search", "skip_special_tokens", "ignore_eos", "best_of"):
@@ -179,6 +191,56 @@ def rows() -> list[tuple[str, str, str]]:
     add("  one stack ignoring", f"{min(bs):.1%}-{max(bs):.1%}", "runs/smoke/minp_confound.json")
     add("  all ignoring", f"{mp['C: all ignore']['interaction_share']:.1%}", "runs/smoke/minp_confound.json")
     add("  all ignoring but one", f"{min(ds):.1%}-{max(ds):.1%}", "runs/smoke/minp_confound.json")
+
+    # derived statistics (scripts/paper_assets.py): seed at T=0, concurrency,
+    # MATH-500 at T=0, the controls, and two sensitivity analyses
+    from scripts.paper_assets import derive
+    D = derive()
+    sd, cc, ng, sn = D["seed"], D["conc"], D["neg"], D["sens"]
+    add("seed at T=0: cells tested (models not deterministic)", sd["cells_tested"], "scripts/paper_assets.py")
+    add("  mean change in modal share with a fixed seed", f"{sd['mean_diff']:+.3f}", "scripts/paper_assets.py")
+    add("  permutation p (two-sided / one-sided)", f"{sd['p_two']:.2f} / {sd['p_one']:.2f}", "scripts/paper_assets.py")
+    add("  reverse check: seed=0 / seed=1 cells made reproducible by another condition",
+        f"{sd['seed0_rescued_by_other']}/{sd['seed0_nonrepro']} / {sd['seed1_rescued_by_other']}/{sd['seed1_nonrepro']}",
+        "scripts/paper_assets.py")
+    add("concurrency: mean modal share, sequential / concurrent",
+        f"{cc['mean_modal_seq']:.1%} / {cc['mean_modal_conc']:.1%}", "runs/matrix/fireworks/determinism_sequential.json")
+    add("  sign test over (model, prompt) pairs", f"{cc['up']} up, {cc['down']} down, p = {cc['sign_p']:.4f}",
+        "runs/matrix/fireworks/determinism_sequential.json")
+    add("  models whose pairwise match falls >= 10 pts when sequential", ", ".join(cc["fall10"]),
+        "runs/matrix/fireworks/determinism_sequential.json")
+    s_ = cc["summary"]
+    for m in ("nemotron-3-ultra-nvfp4", "kimi-k2p6"):
+        v = s_[m]
+        add(f"  {m}: modal seq/conc, pairwise seq/conc",
+            f"{v['sequential_modal']:.2f}/{v['concurrent_modal']:.2f}, {v['sequential_pairwise']:.2f}/{v['concurrent_pairwise']:.2f}",
+            "runs/matrix/fireworks/determinism_sequential.json")
+    m5 = D["math500"]
+    add("MATH-500 problem at T=0, models reproducing 10/10", f"{sum(v[0] == 1.0 for v in m5.values())}/{len(m5)}",
+        "runs/**/determinism*.json")
+    worst = min(m5, key=lambda m: m5[m][0])
+    add("  least reproducible", f"{worst} {round(m5[worst][0] * 10)}/10", "runs/**/determinism*.json")
+    add("negative control, TV false positives / informative pairs", f"{ng['tv_fp']}/{ng['pairs']}",
+        "runs/**/*.neg-n40.json, runs/negative_control.json")
+    add("  one-sided 95% upper bounds, dH / TV", f"{ng['dh_upper']:.1%} / {ng['tv_upper']:.1%}",
+        "scripts/paper_assets.py")
+    add("sensitivity: tests under one grid-wide Holm correction", sn["n_tests_grid"], "scripts/paper_assets.py")
+    add("  honoured cells that lose significance", "; ".join(f"{m}/{p}" for m, p in sn["lost_under_grid_holm"]),
+        "scripts/paper_assets.py")
+    add("  inert cells with unadjusted p < 0.05", "; ".join(f"{m}/{p}" for m, p in sn["inert_failing_strict_rule"]),
+        "scripts/paper_assets.py")
+    ds = D["sel"][("deepseek-v4-pro-0813", "mirostat")]["a"]
+    add("  deepseek-v4-pro-0813 mirostat p, unadjusted / Holm in its report",
+        f"{ds['stratified_p']:.3f} / {ds['stratified_p_holm']:.3f}", "runs/matrix/fireworks/deepseek-v4-pro-0813.dist-n40.json")
+    # a drift example: the same cell collected on two dates
+    import json as _j
+    leg = _j.loads((ROOT / "runs" / "distinguish_multiprompt.json").read_text())
+    new_ = _j.loads((ROOT / "runs" / "matrix" / "fireworks" / "minimax-m3.dist-n40.json").read_text())
+    def _t0(d):
+        return next(len(set(r["completions_tight"])) for r in d["results"]
+                    if r["model"] == "minimax-m3" and r["parameter"] == "temperature" and r["prompt"] == "word_prob")
+    add("drift: minimax-m3 word_prob, distinct at T=0 of 40 (first run / 2026-09-20)",
+        f"{_t0(leg)} / {_t0(new_)}", "runs/distinguish_multiprompt.json, runs/matrix/fireworks/minimax-m3.dist-n40.json")
 
     # dates
     dates = [r["collected"]["from"] for r in matrix if r.get("collected", {}).get("from")]

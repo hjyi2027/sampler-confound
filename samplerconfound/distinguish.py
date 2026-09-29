@@ -254,11 +254,16 @@ def assess_parameter(
     res.entropy_tight = entropy(completions_tight)
     res.entropy_open = entropy(completions_open)
 
-    if res.support_tight == 1 and res.support_open == 1:
-        # Both arms collapsed to one string: exchangeable by construction, so the
-        # test has no power here at all. Reporting p = 1.0 would read as evidence
-        # of no effect when it is evidence of nothing — the prompt carried no
-        # entropy for this model.
+    if (res.support_tight == 1 and res.support_open == 1
+            and completions_tight[0] == completions_open[0]):
+        # Both arms collapsed to the SAME string: exchangeable by construction,
+        # so the test has no power here at all. Reporting p = 1.0 would read as
+        # evidence of no effect when it is evidence of nothing — the prompt
+        # carried no entropy for this model. Two DIFFERENT constants are the
+        # opposite case, a total shift (TV = 1), and go to the test: under
+        # repetition_penalty=2.0 three models answer the forced-repetition
+        # prompt with an empty reply every time, where the penalty-off arm
+        # repeats the word every time.
         res.status = "insufficient"
         res.detail = (
             "both arms are a single constant completion; the prompt has no "

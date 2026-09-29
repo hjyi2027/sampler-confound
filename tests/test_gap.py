@@ -50,5 +50,29 @@ def test_labels_rank_the_gap():
 
 
 def test_fireworks_documents_seed_as_deterministic():
-    """The claim the determinism probe falsifies on 17 of 18 models."""
+    """The claim the determinism probe tests at temperature 0."""
     assert "deterministic" in claim("fireworks", "seed")["claim"]
+
+
+def test_seed_at_t0_is_labelled_as_a_promise_not_as_ignored():
+    """At T=0 there is no random draw for a seed to fix, so a non-reproducible
+    seeded run says the documented determinism was not delivered, not that the
+    sampler ignored the seed."""
+    from scripts.gap import SEED_HONOURED
+    assert label(DOC, "yes", SEED_HONOURED["NO"]) == "documented determinism not delivered at T=0"
+    assert label(DOC, "yes", SEED_HONOURED["n/a"]) == "deterministic without it"
+    assert SEED_HONOURED["NO"] not in ("yes", "no")
+
+
+def test_penalty_evidence_from_either_prompt_counts():
+    from scripts.gap import penalty_honoured
+    # applied on free text though forced repetition survives: honoured
+    assert penalty_honoured("repetition_penalty", "no effect seen", "distinguishable") == "yes"
+    assert penalty_honoured("presence_penalty", "insufficient", "distinguishable") == "yes"
+    assert penalty_honoured("frequency_penalty", "distinguishable", "no effect seen") == "yes"
+    # a forced null is decisive only for the penalty that must break the string
+    assert penalty_honoured("frequency_penalty", "no effect seen", "no effect seen") == "no"
+    assert penalty_honoured("repetition_penalty", "no effect seen", "no effect seen") == "undetermined"
+    assert penalty_honoured("presence_penalty", "no effect seen", "no effect seen") == "undetermined"
+    assert penalty_honoured("presence_penalty", "insufficient", "mixed") == "mixed"
+    assert penalty_honoured("frequency_penalty", "rejected", None) == "refused"

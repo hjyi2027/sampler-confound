@@ -1,0 +1,9 @@
+control & $T=0$ & $T=1.0$, no truncation & power reference \\
+\texttt{top\_p} & 0.01 & 1.0 & $\Delta H$, one-sided \\
+\texttt{top\_k} & 1 & 100 & $\Delta H$, one-sided \\
+\texttt{min\_p} & 0.9 & 0.0 & $\Delta H$, one-sided \\
+\texttt{typical\_p} & 0.1 & 1.0 & $\Delta H$, one-sided \\
+mirostat & target 1.0, rate 0.1 & off & $\Delta H$, one-sided \\
+\texttt{repetition\_penalty} & 1.0 & 2.0 & TV, two-sided \\
+\texttt{frequency\_penalty} & 0.0 & 2.0 & TV, two-sided \\
+\texttt{presence\_penalty} & 0.0 & 2.0 & TV, two-sided \\
