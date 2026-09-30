@@ -9,12 +9,13 @@
     "from": "2026-09-20T14:39Z",
     "to": "2026-09-21T15:59Z"
   },
-  "written": "2026-09-23T06:41Z",
+  "written": "2026-09-30T00:51Z",
   "reassessed_at": [
     "2026-09-23T06:11Z",
     "2026-09-23T06:28Z",
     "2026-09-23T06:32Z",
-    "2026-09-23T06:41Z"
+    "2026-09-23T06:41Z",
+    "2026-09-30T00:51Z"
   ],
   "results": [
     {
@@ -34,12 +35,12 @@
       "n_open": 10,
       "support_tight": 8,
       "support_open": 4,
-      "entropy_tight": 2.8464393446710154,
+      "entropy_tight": 2.846439344671015,
       "entropy_open": 1.3567796494470397,
       "dh": -1.4896596952239758,
       "dh_null_mean": -0.004043281719219513,
       "dh_p": 0.9884011598840116,
-      "tv": 0.7,
+      "tv": 0.7000000000000002,
       "tv_null_mean": 0.5854999999999999,
       "tv_p": 0.17718228177182282,
       "primary": "dh",
@@ -95,15 +96,15 @@
       "support_tight": 8,
       "support_open": 9,
       "entropy_tight": 2.8464393446710154,
-      "entropy_open": 3.1219280948873624,
-      "dh": 0.275488750216347,
+      "entropy_open": 3.121928094887362,
+      "dh": 0.27548875021634656,
       "dh_null_mean": 0.004916864959464906,
-      "dh_p": 0.1541845815418458,
+      "dh_p": 0.5049495050494951,
       "tv": 0.8,
       "tv_null_mean": 0.8330399999999998,
       "tv_p": 1.0,
       "primary": "dh",
-      "p_value": 0.1541845815418458,
+      "p_value": 0.5049495050494951,
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
@@ -133,7 +134,7 @@
       ],
       "empty_tight": 3,
       "empty_open": 2,
-      "excess": 0.2705718852568821
+      "excess": 0.27057188525688164
     },
     {
       "model": "kimi-k2p6",
@@ -219,7 +220,7 @@
       "dh": -2.377443751081734,
       "dh_null_mean": -0.013386532805998044,
       "dh_p": 0.9998000199980002,
-      "tv": 0.7000000000000001,
+      "tv": 0.7000000000000002,
       "tv_null_mean": 0.48408999999999996,
       "tv_p": 0.0211978802119788,
       "primary": "tv",
@@ -274,9 +275,9 @@
       "n_open": 10,
       "support_tight": 10,
       "support_open": 1,
-      "entropy_tight": 3.3219280948873626,
+      "entropy_tight": 3.321928094887362,
       "entropy_open": -0.0,
-      "dh": -3.3219280948873626,
+      "dh": -3.321928094887362,
       "dh_null_mean": -0.005108088240024684,
       "dh_p": 1.0,
       "tv": 0.9,
@@ -313,7 +314,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 10,
-      "excess": -3.316820006647338
+      "excess": -3.3168200066473377
     },
     {
       "model": "kimi-k2p6",
@@ -334,11 +335,11 @@
       "n_open": 10,
       "support_tight": 8,
       "support_open": 9,
-      "entropy_tight": 2.8464393446710154,
+      "entropy_tight": 2.846439344671015,
       "entropy_open": 3.1219280948873624,
-      "dh": 0.275488750216347,
+      "dh": 0.27548875021634656,
       "dh_null_mean": 0.003248595597332559,
-      "dh_p": 0.15008499150084992,
+      "dh_p": 0.5052494750524947,
       "tv": 0.8,
       "tv_null_mean": 0.8341400000000001,
       "tv_p": 1.0,
@@ -373,7 +374,7 @@
       ],
       "empty_tight": 3,
       "empty_open": 2,
-      "excess": 0.27224015461901446
+      "excess": 0.272240154619014
     },
     {
       "model": "kimi-k2p6",
@@ -393,15 +394,15 @@
       "support_tight": 7,
       "support_open": 9,
       "entropy_tight": 2.5219280948873624,
-      "entropy_open": 3.1219280948873624,
-      "dh": 0.6000000000000001,
+      "entropy_open": 3.121928094887362,
+      "dh": 0.5999999999999996,
       "dh_null_mean": 0.003515936166680769,
-      "dh_p": 0.06999300069993,
-      "tv": 0.8,
+      "dh_p": 0.3194680531946805,
+      "tv": 0.8000000000000003,
       "tv_null_mean": 0.7795300000000003,
       "tv_p": 0.6373362663733627,
       "primary": "dh",
-      "p_value": 0.06999300069993,
+      "p_value": 0.3194680531946805,
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
@@ -431,7 +432,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": 0.5964840638333193
+      "excess": 0.5964840638333189
     },
     {
       "model": "kimi-k2p6",
@@ -457,7 +458,7 @@
       "dh": 0.16096404744368087,
       "dh_null_mean": -0.0023845497357881584,
       "dh_p": 0.49335066493350666,
-      "tv": 0.6,
+      "tv": 0.6000000000000001,
       "tv_null_mean": 0.59211,
       "tv_p": 0.657034296570343,
       "primary": "dh",
@@ -517,7 +518,7 @@
       "dh": 0.19999999999999973,
       "dh_null_mean": 0.00201655661943228,
       "dh_p": 0.4256574342565743,
-      "tv": 0.7000000000000001,
+      "tv": 0.7000000000000002,
       "tv_null_mean": 0.6196300000000001,
       "tv_p": 0.38636136386361364,
       "primary": "dh",
@@ -572,9 +573,9 @@
       "n_open": 10,
       "support_tight": 9,
       "support_open": 7,
-      "entropy_tight": 3.1219280948873624,
+      "entropy_tight": 3.121928094887362,
       "entropy_open": 2.5219280948873624,
-      "dh": -0.6000000000000001,
+      "dh": -0.5999999999999996,
       "dh_null_mean": -0.00796673737908895,
       "dh_p": 0.9305069493050695,
       "tv": 1.0,
@@ -611,7 +612,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 4,
-      "excess": -0.5920332626209112
+      "excess": -0.5920332626209107
     },
     {
       "model": "kimi-k2p6",
@@ -637,7 +638,7 @@
       "dh": 0.15097750043269365,
       "dh_null_mean": 0.003025413121862973,
       "dh_p": 0.44985501449855014,
-      "tv": 0.9,
+      "tv": 0.9000000000000001,
       "tv_null_mean": 0.65313,
       "tv_p": 0.0316968303169683,
       "primary": "tv",
@@ -692,8 +693,8 @@
       "n_open": 10,
       "support_tight": 9,
       "support_open": 9,
-      "entropy_tight": 3.1219280948873624,
-      "entropy_open": 3.1219280948873624,
+      "entropy_tight": 3.121928094887362,
+      "entropy_open": 3.121928094887362,
       "dh": 0.0,
       "dh_null_mean": NaN,
       "dh_p": NaN,
@@ -752,10 +753,10 @@
       "support_open": 3,
       "entropy_tight": 2.0464393446710156,
       "entropy_open": 0.9219280948873623,
-      "dh": -1.1245112497836534,
+      "dh": -1.124511249783653,
       "dh_null_mean": -0.009248742567431623,
       "dh_p": 0.9784021597840216,
-      "tv": 0.9,
+      "tv": 0.9000000000000001,
       "tv_null_mean": 0.41935,
       "tv_p": 0.0004999500049995,
       "primary": "dh",
@@ -789,7 +790,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 8,
-      "excess": -1.1152625072162217
+      "excess": -1.1152625072162212
     },
     {
       "model": "kimi-k2p6",
@@ -811,15 +812,15 @@
       "support_tight": 8,
       "support_open": 9,
       "entropy_tight": 2.9219280948873623,
-      "entropy_open": 3.1219280948873624,
-      "dh": 0.20000000000000018,
+      "entropy_open": 3.121928094887362,
+      "dh": 0.19999999999999973,
       "dh_null_mean": -0.002797052750908656,
-      "dh_p": 0.2916708329167083,
+      "dh_p": 0.39386061393860616,
       "tv": 0.8,
       "tv_null_mean": 0.81316,
       "tv_p": 0.7717228277172283,
       "primary": "dh",
-      "p_value": 0.2916708329167083,
+      "p_value": 0.39386061393860616,
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
@@ -849,7 +850,7 @@
       ],
       "empty_tight": 2,
       "empty_open": 0,
-      "excess": 0.20279705275090884
+      "excess": 0.2027970527509084
     },
     {
       "model": "kimi-k2p6",
@@ -870,12 +871,12 @@
       "n_open": 10,
       "support_tight": 9,
       "support_open": 6,
-      "entropy_tight": 3.1219280948873624,
+      "entropy_tight": 3.121928094887362,
       "entropy_open": 2.321928094887362,
-      "dh": -0.8000000000000003,
+      "dh": -0.7999999999999998,
       "dh_null_mean": -0.007986418845168129,
       "dh_p": 0.9292070792920708,
-      "tv": 0.7000000000000001,
+      "tv": 0.7000000000000002,
       "tv_null_mean": 0.6724100000000002,
       "tv_p": 0.5752424757524247,
       "primary": "dh",
@@ -909,7 +910,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 0,
-      "excess": -0.7920135811548321
+      "excess": -0.7920135811548317
     },
     {
       "model": "kimi-k2p6",
@@ -930,12 +931,12 @@
       "n_open": 10,
       "support_tight": 7,
       "support_open": 3,
-      "entropy_tight": 2.721928094887362,
+      "entropy_tight": 2.7219280948873625,
       "entropy_open": 0.9219280948873623,
       "dh": -1.7999999999999998,
       "dh_null_mean": -0.008905227603001576,
-      "dh_p": 0.9907009299070093,
-      "tv": 0.8,
+      "dh_p": 0.9928007199280072,
+      "tv": 0.8000000000000002,
       "tv_null_mean": 0.47939,
       "tv_p": 0.0084991500849915,
       "primary": "tv",
@@ -990,12 +991,12 @@
       "n_open": 10,
       "support_tight": 7,
       "support_open": 5,
-      "entropy_tight": 2.6464393446710157,
-      "entropy_open": 1.7709505944546686,
-      "dh": -0.8754887502163471,
+      "entropy_tight": 2.6464393446710153,
+      "entropy_open": 1.7709505944546688,
+      "dh": -0.8754887502163464,
       "dh_null_mean": -0.007910761493479876,
       "dh_p": 0.9383061693830617,
-      "tv": 1.0,
+      "tv": 1.0000000000000002,
       "tv_null_mean": 0.6481500000000002,
       "tv_p": 0.0022997700229977,
       "primary": "tv",
@@ -1029,7 +1030,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 6,
-      "excess": -0.8675779887228672
+      "excess": -0.8675779887228665
     },
     {
       "model": "kimi-k2p6",
@@ -1051,11 +1052,11 @@
       "support_tight": 8,
       "support_open": 10,
       "entropy_tight": 2.8464393446710154,
-      "entropy_open": 3.3219280948873626,
-      "dh": 0.4754887502163472,
+      "entropy_open": 3.321928094887362,
+      "dh": 0.47548875021634673,
       "dh_null_mean": -0.0007524511249783623,
-      "dh_p": 0.032596740325967405,
-      "tv": 0.7000000000000001,
+      "dh_p": 0.0664933506649335,
+      "tv": 0.7000000000000002,
       "tv_null_mean": 0.7623400000000001,
       "tv_p": 0.8780121987801219,
       "primary": "tv",
@@ -1089,7 +1090,7 @@
       ],
       "empty_tight": 1,
       "empty_open": 0,
-      "excess": 0.4762412013413255
+      "excess": 0.4762412013413251
     },
     {
       "model": "kimi-k2p6",
@@ -1108,9 +1109,9 @@
       "n_open": 10,
       "support_tight": 10,
       "support_open": 7,
-      "entropy_tight": 3.3219280948873626,
+      "entropy_tight": 3.321928094887362,
       "entropy_open": 2.5219280948873624,
-      "dh": -0.8000000000000003,
+      "dh": -0.7999999999999998,
       "dh_null_mean": 0.0011463758745024022,
       "dh_p": 1.0,
       "tv": 1.0,
@@ -1147,7 +1148,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 4,
-      "excess": -0.8011463758745027
+      "excess": -0.8011463758745022
     },
     {
       "model": "kimi-k2p6",
@@ -1169,15 +1170,15 @@
       "support_tight": 7,
       "support_open": 10,
       "entropy_tight": 2.5219280948873624,
-      "entropy_open": 3.3219280948873626,
-      "dh": 0.8000000000000003,
+      "entropy_open": 3.321928094887362,
+      "dh": 0.7999999999999998,
       "dh_null_mean": 0.0029442817824784223,
-      "dh_p": 0.0336966303369663,
+      "dh_p": 0.07899210078992101,
       "tv": 0.6000000000000001,
       "tv_null_mean": 0.6750100000000001,
-      "tv_p": 0.7977202279772023,
+      "tv_p": 0.8876112388761124,
       "primary": "dh",
-      "p_value": 0.0336966303369663,
+      "p_value": 0.07899210078992101,
       "n_permutations": 10000,
       "status": "ok",
       "detail": "",
@@ -1207,7 +1208,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 1,
-      "excess": 0.7970557182175219
+      "excess": 0.7970557182175214
     },
     {
       "model": "kimi-k2p6",
@@ -1228,7 +1229,7 @@
       "n_open": 10,
       "support_tight": 10,
       "support_open": 9,
-      "entropy_tight": 3.3219280948873626,
+      "entropy_tight": 3.321928094887362,
       "entropy_open": 3.1219280948873624,
       "dh": 0.0,
       "dh_null_mean": NaN,
@@ -1288,8 +1289,8 @@
       "n_open": 10,
       "support_tight": 9,
       "support_open": 10,
-      "entropy_tight": 3.1219280948873624,
-      "entropy_open": 3.3219280948873626,
+      "entropy_tight": 3.121928094887362,
+      "entropy_open": 3.321928094887362,
       "dh": 0.0,
       "dh_null_mean": NaN,
       "dh_p": NaN,
@@ -1348,9 +1349,9 @@
       "n_open": 10,
       "support_tight": 9,
       "support_open": 3,
-      "entropy_tight": 3.1219280948873624,
+      "entropy_tight": 3.121928094887362,
       "entropy_open": 0.9219280948873623,
-      "dh": -2.2,
+      "dh": -2.1999999999999997,
       "dh_null_mean": -0.005712243092354187,
       "dh_p": 1.0,
       "tv": 1.0,
@@ -1387,7 +1388,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 8,
-      "excess": -2.194287756907646
+      "excess": -2.1942877569076455
     },
     {
       "model": "kimi-k2p6",
@@ -1408,8 +1409,8 @@
       "n_open": 10,
       "support_tight": 10,
       "support_open": 10,
-      "entropy_tight": 3.3219280948873626,
-      "entropy_open": 3.3219280948873626,
+      "entropy_tight": 3.321928094887362,
+      "entropy_open": 3.321928094887362,
       "dh": 0.0,
       "dh_null_mean": NaN,
       "dh_p": NaN,
@@ -1634,7 +1635,7 @@
     "word_prob": {
       "kimi-k2p6|frequency_penalty": 0.0011998800119988001,
       "kimi-k2p6|repetition_penalty": 0.105989401059894,
-      "kimi-k2p6|typical_p": 0.6167383261673832,
+      "kimi-k2p6|typical_p": 1.0,
       "kimi-k2p6|mirostat": 1.0,
       "kimi-k2p6|temperature": 1.0,
       "kimi-k2p6|presence_penalty": 1.0
@@ -1642,9 +1643,9 @@
     "sentence": {
       "kimi-k2p6|frequency_penalty": 0.1584841515848415,
       "kimi-k2p6|repetition_penalty": 0.18438156184381563,
-      "kimi-k2p6|temperature": 0.20997900209979,
-      "kimi-k2p6|mirostat": 0.8513148685131486,
-      "kimi-k2p6|typical_p": 0.8513148685131486
+      "kimi-k2p6|temperature": 0.9584041595840416,
+      "kimi-k2p6|mirostat": 0.9584041595840416,
+      "kimi-k2p6|typical_p": 0.9584041595840416
     },
     "opener": {
       "kimi-k2p6|frequency_penalty": 0.0137986201379862,
@@ -1656,7 +1657,7 @@
     },
     "question": {
       "kimi-k2p6|frequency_penalty": 0.0017998200179982003,
-      "kimi-k2p6|typical_p": 0.0673932606739326,
+      "kimi-k2p6|typical_p": 0.15798420157984203,
       "kimi-k2p6|temperature": 1.0
     },
     "repeat": {
@@ -1680,7 +1681,7 @@
         "contrast": "T=0 vs T=1.0",
         "control_dh": -0.3245112497836531,
         "control_h_open": 2.5219280948873624,
-        "control_h_tight": 2.8464393446710154,
+        "control_h_tight": 2.846439344671015,
         "control_support_tight": 8,
         "control_n_tight": 10,
         "control_p": 0.8287171282871713,
@@ -1707,7 +1708,7 @@
         "control_alpha": 0.01,
         "control_power": 0.0,
         "powered": false,
-        "legacy_fraction_removed": 0.19218892356380418,
+        "legacy_fraction_removed": 0.19218892356380407,
         "legacy_powered": false,
         "detail": "power 0% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+0.20; 7/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
@@ -1726,7 +1727,7 @@
         "control_alpha": 0.01,
         "control_power": 0.02,
         "powered": false,
-        "legacy_fraction_removed": -1.2197385631479665,
+        "legacy_fraction_removed": -1.219738563147966,
         "legacy_powered": false,
         "detail": "power 2% (< 80%) to detect temperature 0 vs 1.0 at alpha=0.0100 (dH=+0.28; 5/10 distinct at T=0). Even a fully honoured truncation parameter could have been missed, so a null on this prompt means nothing."
       }
@@ -1737,7 +1738,7 @@
         "contrast": "T=0 vs T=1.0",
         "control_dh": NaN,
         "control_h_open": 3.1219280948873624,
-        "control_h_tight": 3.3219280948873626,
+        "control_h_tight": 3.321928094887362,
         "control_support_tight": 10,
         "control_n_tight": 10,
         "control_p": NaN,
@@ -1745,7 +1746,7 @@
         "control_alpha": NaN,
         "control_power": NaN,
         "powered": false,
-        "legacy_fraction_removed": -0.3172176088691105,
+        "legacy_fraction_removed": -0.3172176088691103,
         "legacy_powered": false,
         "detail": "control insufficient: both arms all-unique (10/10, 9/10); exact-match statistics have no range here and cannot discriminate"
       }

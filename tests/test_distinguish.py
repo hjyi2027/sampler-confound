@@ -144,6 +144,22 @@ def test_a_constant_output_is_reported_as_no_power_not_as_no_effect():
     assert "entropy" in r.detail
 
 
+def test_exact_ties_with_the_observed_statistic_count_toward_the_p_value():
+    """Two arms drawn from one small support: many relabellings reproduce the
+    observed TV exactly. Every one of them must count, whatever the order in
+    which the observed value happened to be summed."""
+    from samplerconfound.distinguish import permutation_test, tv_distance, entropy_drop
+    a = ["x"] * 20 + ["y"] * 20
+    b = ["y"] * 20 + ["x"] * 20          # identical multiset, relabelled
+    obs, _, _, p = permutation_test(a, b, statistic=tv_distance, n_permutations=500)
+    assert obs == 0.0 and p == 1.0
+    a = [f"s{i}" for i in range(38)] + ["r", "r"]
+    b = [f"t{i}" for i in range(38)] + ["r", "r"]
+    for stat, one_sided in ((tv_distance, False), (entropy_drop, True)):
+        obs, _, _, p = permutation_test(a, b, statistic=stat, one_sided=one_sided, n_permutations=500)
+        assert p > 0.5, (stat.__name__, obs, p)
+
+
 def test_two_different_constants_are_a_total_shift_not_no_power():
     """Penalty off: the forced word forty times. Penalty on: an empty reply
     forty times. Each arm is constant, but they are different constants, so

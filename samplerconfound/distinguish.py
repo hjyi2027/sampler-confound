@@ -195,15 +195,29 @@ def permutation_test(
             lb = [w for w, c in zip(inv, cb) for _ in range(int(c))]
             return statistic(la, lb)
 
+    # The observed statistic is recomputed here exactly as the null draws are.
+    # Both statistics are discrete, so many relabellings give EXACTLY the
+    # observed value, and a tie must count toward the p-value. The first
+    # version compared the list-based value above with the array-based null:
+    # the two differ in the last bit (for TV the summation order even depends
+    # on string hashing, so it varied between processes), exact ties were
+    # dropped at random, and p-values came out too small, by up to 0.6 on
+    # near-degenerate cells. A tolerance far above rounding error and far below
+    # any real gap between distinct values of either statistic closes it.
+    obs = fast(np.bincount(codes[:na], minlength=K), np.bincount(codes[na:], minlength=K))
     for i in range(n_permutations):
         rng.shuffle(codes)
         ca = np.bincount(codes[:na], minlength=K)
         cb = np.bincount(codes[na:], minlength=K)
         null[i] = fast(ca, cb)
 
-    hits = np.sum(null >= obs) if one_sided else np.sum(np.abs(null) >= abs(obs))
+    hits = (np.sum(null >= obs - TIE_TOL) if one_sided
+            else np.sum(np.abs(null) >= abs(obs) - TIE_TOL))
     p = (1 + int(hits)) / (1 + n_permutations)
     return obs, float(null.mean()), float(np.percentile(null, 95)), p
+
+
+TIE_TOL = 1e-9
 
 
 def assess_parameter(

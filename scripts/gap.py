@@ -181,7 +181,26 @@ def cells() -> list[dict]:
                 "collected": r.get("collected"),
                 "label": label(doc, accepted, honoured),
             })
+    apply_effect_bound(out)
     return out
+
+
+def apply_effect_bound(rows: list[dict]) -> None:
+    """A null on a truncation parameter is 'ignored' only if its effect is also
+    bounded below the smallest effect the parameter has on any model that
+    honours it (scripts/paper_assets.py, effect_bounds). Power against a
+    greedy-strength effect alone overstates what the test can exclude where the
+    honoured effect is much weaker than greedy, as it is for mirostat."""
+    from scripts.paper_assets import EFFECT_PARAMS, effect_bounds, inert_by_effect_bound
+    bounds, thresholds = effect_bounds()
+    for c in rows:
+        if c["parameter"] not in EFFECT_PARAMS or c["honoured"] != "no":
+            continue
+        b = bounds.get((c["model"], c["parameter"]))
+        c["effect_upper"] = b["upper"] if b else None
+        if b is None or not inert_by_effect_bound(b["upper"], thresholds[c["parameter"]]):
+            c["honoured"] = "undetermined"
+            c["label"] = label(claim(c["provider"], c["parameter"]), c["accepted"], "undetermined")
 
 
 def main() -> int:

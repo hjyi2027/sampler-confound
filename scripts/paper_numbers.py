@@ -19,6 +19,8 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
+import numpy as np
+
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
@@ -152,23 +154,11 @@ def rows() -> list[tuple[str, str, str]]:
     add("  where they differ", "; ".join(sorted(set(flips))[:12]) + (" ..." if len(set(flips)) > 12 else ""),
         "every report's aggregates")
 
-    # negative control
-    neg_dh = neg_n = 0
-    for f in sorted((ROOT / "runs" / "matrix").glob("*/*.neg-n40.json")) + [ROOT / "runs" / "negative_control.json"]:
-        try:
-            d = json.loads(f.read_text())
-        except OSError:
-            continue
-        # Apply the CURRENT degeneracy rule rather than the stored status:
-        # runs/negative_control.json predates it and still marks three
-        # all-unique pairs "ok", which would inflate the denominator to 40.
-        ok = [r for r in d["results"] if r["status"] == "ok"
-              and not (r["support_tight"] >= r["n_tight"] - 1
-                       and r["support_open"] >= r["n_open"] - 1)]
-        neg_n += len(ok)
-        neg_dh += sum(r["dh_p"] < 0.05 for r in ok)
+    # negative control, re-derived from the stored completions (scripts/paper_assets.py)
+    from scripts.paper_assets import negative_control as _neg
+    _n = _neg()
     add("negative control: dH false positives / informative pairs",
-        f"{neg_dh}/{neg_n}", "runs/**/*.neg-n40.json, runs/negative_control.json")
+        f"{_n['dh_fp']}/{_n['pairs']}", "runs/**/*.neg-n40.json, runs/negative_control.json")
 
     # unparseable (section 4.4)
     up = json.loads((ROOT / "runs" / "smoke" / "unparseable.json").read_text())
@@ -232,6 +222,25 @@ def rows() -> list[tuple[str, str, str]]:
     ds = D["sel"][("deepseek-v4-pro-0813", "mirostat")]["a"]
     add("  deepseek-v4-pro-0813 mirostat p, unadjusted / Holm in its report",
         f"{ds['stratified_p']:.3f} / {ds['stratified_p_holm']:.3f}", "runs/matrix/fireworks/deepseek-v4-pro-0813.dist-n40.json")
+    eff, thr = D["effect"], D["thresholds"]
+    for par in ("mirostat", "typical_p", "top_p", "top_k", "min_p"):
+        hon = sorted(e["fraction"] for (m, q), e in eff.items() if q == par
+                     and D["sel"][(m, q)]["a"]["verdict"] == "distinguishable")
+        add(f"effect size where {par} is honoured (fraction of the T=0 entropy drop): min / median / max",
+            f"{hon[0]:.2f} / {float(np.median(hon)):.2f} / {hon[-1]:.2f} (n={len(hon)})", "scripts/paper_assets.py")
+    add("  inert threshold per parameter (smallest honoured fraction)",
+        ", ".join(f"{q} {t:.2f}" for q, t in thr.items()), "scripts/paper_assets.py")
+    for (m, q), e in sorted(eff.items()):
+        if D["sel"][(m, q)]["a"]["verdict"] == "no effect seen":
+            add(f"  null {m}/{q}: fraction, 95% upper bound",
+                f"{e['fraction']:+.2f}, {e['upper']:+.2f} -> "
+                f"{'inert' if e['upper'] < thr[q] else 'effect not excluded, no verdict'}", "scripts/paper_assets.py")
+    for q, g in D["greedy"].items():
+        add(f"greedy check {q}: tight arm differs from the T=0 arm (TV, p < 0.05)",
+            f"{g['differ']} of {g['informative']} informative pairs ({g['pairs']} pairs)", "scripts/paper_assets.py")
+    g_oss = [r for r in D["greedy"]["top_p"]["rows"] if r[0] == "gpt-oss-120b" and r[1] == "word_prob"][0]
+    add("  gpt-oss-120b word_prob: distinct at T=0 / at top_p=0.01, modal share at top_p=0.01",
+        f"{g_oss[4]} / {g_oss[5]}, {g_oss[6]:.2f}", "scripts/paper_assets.py")
     # a drift example: the same cell collected on two dates
     import json as _j
     leg = _j.loads((ROOT / "runs" / "distinguish_multiprompt.json").read_text())

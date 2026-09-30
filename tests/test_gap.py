@@ -76,3 +76,12 @@ def test_penalty_evidence_from_either_prompt_counts():
     assert penalty_honoured("presence_penalty", "no effect seen", "no effect seen") == "undetermined"
     assert penalty_honoured("presence_penalty", "insufficient", "mixed") == "mixed"
     assert penalty_honoured("frequency_penalty", "rejected", None) == "refused"
+
+
+def test_a_null_is_inert_only_if_the_effect_bound_excludes_the_weakest_honoured_effect():
+    from scripts.paper_assets import inert_by_effect_bound
+    assert inert_by_effect_bound(0.10, 0.24)
+    assert not inert_by_effect_bound(0.26, 0.24)
+    assert not inert_by_effect_bound(0.24, 0.24)
+    assert not inert_by_effect_bound(float("nan"), 0.24)
+    assert not inert_by_effect_bound(0.10, float("nan"))

@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import functools
 import json
 import math
 import re
@@ -186,11 +187,17 @@ def negative_control() -> dict:
         d = _load(f)
         if not d:
             continue
-        ok = [r for r in d["results"] if r["status"] == "ok"
-              and not (r["support_tight"] >= r["n_tight"] - 1 and r["support_open"] >= r["n_open"] - 1)]
-        n += len(ok)
-        dh += sum(r["dh_p"] < 0.05 for r in ok)
-        tv += sum(r["tv_p"] < 0.05 for r in ok)
+        from samplerconfound.distinguish import assess_parameter
+        for r in d["results"]:
+            # Re-derived from the stored completions with the current test,
+            # which also applies the current degeneracy rules; the stored
+            # p-values predate the fix to tie counting.
+            c = assess_parameter(r["model"], "negative", {}, {}, r["completions_tight"], r["completions_open"])
+            if c.status != "ok":
+                continue
+            n += 1
+            dh += c.dh_p < 0.05
+            tv += c.tv_p < 0.05
     return {"pairs": n, "dh_fp": dh, "tv_fp": tv,
             "dh_upper": clopper_pearson_upper(dh, n), "tv_upper": clopper_pearson_upper(tv, n)}
 
@@ -311,6 +318,126 @@ def control_coverage(sel: dict) -> dict:
     return {"pairs": total, "powered": powered, "latest": latest}
 
 
+# --------------------------------------------------------------------------
+# effect size relative to the reference, and a bound for calling a cell inert
+# --------------------------------------------------------------------------
+# The power analysis asks whether a greedy-strength effect would have been
+# detected. Where mirostat is honoured on this API its tight setting removes
+# only a quarter to two thirds of the entropy that temperature 0 removes, so
+# power against the greedy-strength effect overstates the power against what
+# an honoured mirostat actually does. A null is therefore called inert only if
+# the effect is also BOUNDED: the 95% bootstrap upper bound on its size must lie
+# below the smallest size observed on any model where the parameter is honoured.
+
+EFFECT_PARAMS = ("top_p", "top_k", "min_p", "typical_p", "mirostat")
+EFFECT_BOOT = 2000
+
+
+def _H(xs: list[str]) -> float:
+    _, c = np.unique(np.asarray(xs, dtype=object).astype(str), return_counts=True)
+    p = c / c.sum()
+    return float(-(p * np.log2(p)).sum())
+
+
+def _effect_arms(model: str, param: str, fname: str) -> list[tuple]:
+    """Per free-text prompt of the report the verdict came from: the T=0 arm,
+    the unrestricted T=1.0 arm (the same reference the positive control uses),
+    and the parameter's tight and open arms. Prompts where the parameter's own
+    test was degenerate are left out, as in the stratified test."""
+    f = next(x for x in ordered_distinguish_files() if x.name == fname)
+    res = [r for r in _load(f)["results"] if r["model"] == model and r.get("prompt") in PROMPTS]
+    t0 = {r["prompt"]: r["completions_tight"] for r in res
+          if r["parameter"] == "temperature" and r.get("completions_tight")}
+    t1: dict[str, list[str]] = {}
+    for ref in ("mirostat", "top_p", "min_p", "typical_p"):
+        for r in res:
+            if r["parameter"] == ref and r.get("completions_open") and r["prompt"] not in t1:
+                t1[r["prompt"]] = r["completions_open"]
+    return [(r["prompt"], t0[r["prompt"]], t1[r["prompt"]], r["completions_tight"], r["completions_open"])
+            for r in res if r["parameter"] == param and r["status"] == "ok"
+            and r["prompt"] in t0 and r["prompt"] in t1]
+
+
+def _pooled_fraction(arms: list[tuple], rng=None) -> float:
+    """Entropy the parameter removes, as a fraction of what temperature 0
+    removes, pooled over prompts. With `rng`, one bootstrap draw that resamples
+    completions within each arm (an arm used twice is resampled once)."""
+    num = den = 0.0
+    for _, a0, a1, at, ao in arms:
+        if rng is None:
+            b0, b1, bt, bo = a0, a1, at, ao
+        else:
+            def rs(a):
+                return [a[i] for i in rng.integers(0, len(a), len(a))]
+            b0, b1, bt = rs(a0), rs(a1), rs(at)
+            bo = b1 if ao == a1 else rs(ao)
+        num += _H(bo) - _H(bt)
+        den += _H(b1) - _H(b0)
+    return num / den if den > 0 else float("nan")
+
+
+def inert_by_effect_bound(upper: float, threshold: float) -> bool:
+    """A null counts as inert only if an effect as large as the smallest one
+    seen where the parameter works is excluded."""
+    return bool(upper == upper and threshold == threshold and upper < threshold)
+
+
+@functools.lru_cache(maxsize=1)
+def effect_bounds() -> tuple[dict, dict]:
+    """({(model, param): {fraction, upper, prompts}}, {param: threshold}).
+
+    The threshold for a parameter is the smallest pooled fraction among the
+    models on which its stratified test detected an effect."""
+    import zlib
+    sel = load_cells()
+    out: dict[tuple[str, str], dict] = {}
+    for (m, p), v in sorted(sel.items()):
+        if p not in EFFECT_PARAMS:
+            continue
+        arms = _effect_arms(m, p, v["file"])
+        if not arms:
+            continue
+        rng = np.random.default_rng(zlib.crc32(f"{m}/{p}".encode()))
+        boots = np.array([_pooled_fraction(arms, rng) for _ in range(EFFECT_BOOT)])
+        out[(m, p)] = {"fraction": _pooled_fraction(arms),
+                       "upper": float(np.nanpercentile(boots, 95)), "prompts": len(arms)}
+    thresholds = {}
+    for p in EFFECT_PARAMS:
+        hon = [out[k]["fraction"] for k in out if k[1] == p
+               and sel[k]["a"]["verdict"] == "distinguishable" and out[k]["fraction"] == out[k]["fraction"]]
+        thresholds[p] = min(hon) if hon else float("nan")
+    return out, thresholds
+
+
+def greedy_check(sel: dict) -> dict:
+    """Is the tight arm of a greedy-equivalent setting (top_k=1, top_p=0.01,
+    min_p=0.9, all at T=1.0) distributed like the temperature-0 arm of the same
+    report and prompt? If the sampler applies the setting as documented, both
+    are greedy decoding. Two-sided TV permutation test per (model, prompt)."""
+    from samplerconfound.distinguish import assess_parameter
+    out = {}
+    for p in ("top_k", "top_p", "min_p"):
+        rows = []
+        for (m, q), v in sorted(sel.items()):
+            if q != p:
+                continue
+            f = next(x for x in ordered_distinguish_files() if x.name == v["file"])
+            res = [r for r in _load(f)["results"] if r["model"] == m and r.get("prompt") in PROMPTS]
+            t0 = {r["prompt"]: r["completions_tight"] for r in res
+                  if r["parameter"] == "temperature" and r.get("completions_tight")}
+            for r in res:
+                if r["parameter"] == p and r.get("completions_tight") and r["prompt"] in t0:
+                    c = assess_parameter(m, "greedy-check", {}, {}, t0[r["prompt"]], r["completions_tight"],
+                                         n_permutations=2000, primary="tv")
+                    rows.append((m, r["prompt"], c.status, c.tv_p, len(set(t0[r["prompt"]])),
+                                 len(set(r["completions_tight"])),
+                                 Counter(r["completions_tight"]).most_common(1)[0][1] / len(r["completions_tight"])))
+        ok = [x for x in rows if x[2] == "ok"]
+        out[p] = {"pairs": len(rows), "informative": len(ok),
+                  "differ": sum(x[3] < 0.05 for x in ok), "rows": rows}
+    return out
+
+
 def derive() -> dict:
     sel = load_cells()
     cls = classification()
@@ -318,6 +445,7 @@ def derive() -> dict:
     by_param = defaultdict(Counter)
     for (m, p), c in cls.items():
         by_param[p][c["honoured"]] += 1
+    eff, thr = effect_bounds()
     return {
         "sel": sel, "cls": cls, "by_param": by_param,
         "sens": sensitivity(sel, cls),
@@ -327,6 +455,8 @@ def derive() -> dict:
         "math500": math500(rows),
         "control": control_coverage(sel),
         "models": models_in_order(),
+        "effect": eff, "thresholds": thr,
+        "greedy": greedy_check(sel),
     }
 
 
@@ -417,7 +547,7 @@ def fig_verdicts(D: dict, dest: Path) -> None:
     ax.axvline(5, color=INK2, linewidth=0.6)
     handles = [Patch(facecolor=BLUE, label="+  effect detected (F, T: forced, free-text prompts)"),
                Patch(facecolor=BLUE_LIGHT, label="±  effect on some prompts only"),
-               Patch(facecolor=ORANGE, label="–  no effect, power at least 0.8"),
+               Patch(facecolor=ORANGE, label="–  no effect: powered, effect bounded"),
                Patch(facecolor=GREY, hatch="////", edgecolor="#b9b8b2", label="?  no verdict")]
     ax.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, -0.01), ncol=2,
               frameon=False, handlelength=1.4, columnspacing=1.2, fontsize=6.8)
@@ -585,16 +715,23 @@ def table_cells_nonhonoured(D: dict) -> str:
     order = {r["model"]: i for i, r in enumerate(D["models"])}
     keys = sorted((k for k in sel if k[1] in P8 and cls[k]["honoured"] != "yes"),
                   key=lambda k: (P8.index(k[1]), order[k[0]]))
+    eff = D["effect"]
     lines = []
     for k in keys:
         a = sel[k]["a"]
         forced = a.get("verdict_forced", "")
         power = a.get("stratified_control_power")
+        e = eff.get(k)
+        if e is None or e["fraction"] != e["fraction"] or abs(e["upper"]) > 9.99:
+            eff_cells = "-- & --"
+        else:
+            eff_cells = f"{e['fraction']:.2f} & {e['upper']:.2f}"
         lines.append(
             f"{tt(k[0])} & {TEX_PARAM[k[1]]} & {sel[k]['n']} & {a.get('stratified_prompts', 0)} & "
             f"{_fmt_p(a.get('stratified_p'))} & {_fmt_p(a.get('stratified_p_holm'))} & "
             f"{_fmt_p(adj.get(('T',) + k))} & "
             f"{'--' if power is None or power != power else f'{power:.2f}'} & "
+            f"{eff_cells} & "
             f"{SYM.get(forced, forced) if k[1] in PENALTIES else ''} & "
             f"{ {'no': 'inert', 'mixed': 'mixed', 'undetermined': 'no verdict'}[cls[k]['honoured']] } \\\\")
     return "\n".join(lines) + "\n"
@@ -642,17 +779,19 @@ def write_csv(D: dict, dest: Path) -> None:
         w = csv.writer(fh)
         w.writerow(["model", "parameter", "n_per_arm", "source_file", "free_text_verdict",
                     "forced_verdict", "stratified_p", "p_holm_within_model", "p_holm_grid",
-                    "forced_p", "control_power", "prompts_pooled", "honoured", "label"])
+                    "forced_p", "control_power", "effect_fraction", "effect_upper95",
+                    "prompts_pooled", "honoured", "label"])
         for r in D["models"]:
             for p in P8:
                 k = (r["model"], p)
                 a = sel[k]["a"]
+                e = D["effect"].get(k, {})
                 w.writerow([k[0], p, sel[k]["n"], sel[k]["file"], a["verdict"],
                             a.get("verdict_forced", ""), a.get("stratified_p"),
                             a.get("stratified_p_holm"), adj.get(("T",) + k),
                             sel[k]["forced_p"] if p in PENALTIES else "",
-                            a.get("stratified_control_power"), a.get("stratified_prompts"),
-                            cls[k]["honoured"], cls[k]["label"]])
+                            a.get("stratified_control_power"), e.get("fraction", ""), e.get("upper", ""),
+                            a.get("stratified_prompts"), cls[k]["honoured"], cls[k]["label"]])
 
 
 def summary_lines(D: dict) -> list[str]:
@@ -679,6 +818,15 @@ def summary_lines(D: dict) -> list[str]:
         f"rise>=10: {cc['rise10']}; fall>=10: {cc['fall10']}",
         f"MATH-500 at T=0, 10/10 reproducible: {sorted(m for m, v in m5.items() if v[0] == 1.0)} "
         f"({sum(v[0] == 1.0 for v in m5.values())}/{len(m5)}); worst {min(v[0] for v in m5.values()):.1f}",
+        f"effect-size thresholds (smallest honoured pooled fraction): "
+        + ", ".join(f"{p} {t:.2f}" for p, t in D["thresholds"].items()),
+        "effect bound on nulls: " + "; ".join(
+            f"{m}/{p} F={e['fraction']:+.2f} upper={e['upper']:+.2f} -> "
+            f"{'inert' if inert_by_effect_bound(e['upper'], D['thresholds'][p]) else 'not excluded'}"
+            for (m, p), e in sorted(D["effect"].items())
+            if D["sel"][(m, p)]["a"]["verdict"] == "no effect seen"),
+        "greedy check (tight arm vs T=0 arm differ at 0.05): " + ", ".join(
+            f"{p} {g['differ']}/{g['informative']} (of {g['pairs']} pairs)" for p, g in D["greedy"].items()),
     ]
 
 

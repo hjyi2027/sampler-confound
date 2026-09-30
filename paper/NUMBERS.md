@@ -10,8 +10,8 @@ value in `paper/main.tex` disagree, the paper is stale.
 | output price span ($/M) | `0.20-15.00` | `samplerconfound/pricing.py` |
 | gap cells, total | `182` | `scripts/gap.py` |
 | cells: as documented | `104` | `scripts/gap.py` |
-| cells: documented, accepted, undetermined | `33` | `scripts/gap.py` |
-| cells: DOCUMENTED, ACCEPTED, IGNORED | `7` | `scripts/gap.py` |
+| cells: documented, accepted, undetermined | `35` | `scripts/gap.py` |
+| cells: DOCUMENTED, ACCEPTED, IGNORED | `5` | `scripts/gap.py` |
 | cells: documented determinism not delivered at T=0 | `17` | `scripts/gap.py` |
 | cells: deterministic without it | `1` | `scripts/gap.py` |
 | cells: UNDOCUMENTED, ACCEPTED, IGNORED | `9` | `scripts/gap.py` |
@@ -22,12 +22,12 @@ value in `paper/main.tex` disagree, the paper is stale.
 | Table 1 top_k | `accepted 18/18, honoured 16, mixed 1, inert 0, no verdict 1` | `scripts/gap.py` |
 | Table 1 min_p | `accepted 18/18, honoured 15, mixed 1, inert 0, no verdict 2` | `scripts/gap.py` |
 | Table 1 typical_p | `accepted 18/18, honoured 13, mixed 1, inert 1, no verdict 3` | `scripts/gap.py` |
-| Table 1 mirostat | `accepted 18/18, honoured 6, mixed 3, inert 6, no verdict 3` | `scripts/gap.py` |
+| Table 1 mirostat | `accepted 18/18, honoured 6, mixed 2, inert 4, no verdict 6` | `scripts/gap.py` |
 | Table 1 repetition_penalty | `accepted 18/18, honoured 18, mixed 0, inert 0, no verdict 0` | `scripts/gap.py` |
 | Table 1 frequency_penalty | `accepted 18/18, honoured 18, mixed 0, inert 0, no verdict 0` | `scripts/gap.py` |
-| Table 1 presence_penalty | `accepted 18/18, honoured 2, mixed 2, inert 0, no verdict 14` | `scripts/gap.py` |
-| Table 1 all eight | `honoured 104, mixed 9, inert 7, no verdict 24 of 144` | `scripts/gap.py` |
-| inert cells (documented parameters) | `deepseek-v4-flash-0731/mirostat; deepseek-v4-pro-0813/mirostat; glm-5p2/mirostat; muse-glimmer-30b/mirostat; muse-glimmer-30b/typical_p; qwen3p8-2p4t-a95b/mirostat; qwen3p8-max/mirostat` | `scripts/gap.py` |
+| Table 1 presence_penalty | `accepted 18/18, honoured 2, mixed 1, inert 0, no verdict 15` | `scripts/gap.py` |
+| Table 1 all eight | `honoured 104, mixed 7, inert 5, no verdict 28 of 144` | `scripts/gap.py` |
+| inert cells (documented parameters) | `deepseek-v4-flash-0731/mirostat; glm-5p2/mirostat; muse-glimmer-30b/mirostat; muse-glimmer-30b/typical_p; qwen3p8-max/mirostat` | `scripts/gap.py` |
 | seed, as documented | `'Random seed for deterministic sampling.'` | `samplerconfound/documented.py` |
 | Table 1 seed (T=0 test) | `accepted 18/18, not delivered 17, deterministic without it 1` | `scripts/gap.py` |
 | Table 2 use_beam_search | `[('no', 4), ('undetermined', 1)]` | `runs/matrix/undocumented.json` |
@@ -43,9 +43,9 @@ value in `paper/main.tex` disagree, the paper is stale.
 | models whose pairwise match rises >= 10 pts when sequential | `8: glm-5p2, glm-5p3, inkling, kimi-k3, minimax-m3, muse-glimmer-30b, nemotron-3-ultra-nvfp4, qwen3p8-max` | `runs/matrix/fireworks/determinism_sequential.json` |
 | (model,prompt) pairs: sequential more / less / equal agreement | `48 / 25 / 17` | `runs/matrix/fireworks/determinism_sequential.json` |
 | sequential collection date | `2026-09-23T06:28` | `runs/matrix/fireworks/determinism_sequential.json` |
-| stratified test agrees with majority vote | `135/211` | `every report's aggregates` |
-|   disagreements by kind | `{'-> mixed (effect on some prompts only)': 20, 'undetermined -> resolved by pooling': 46, 'definite verdict reversed': 6, 'mixed -> distinguishable': 4}` | `every report's aggregates` |
-|   where they differ | `deepseek-v4-flash-0731/frequency_penalty/deepseek-v4-flash-0731.dist-n10.json: underpowered -> distinguishable; deepseek-v4-flash-0731/presence_penalty/deepseek-v4-flash-0731.dist-n10.json: underpowered -> no effect seen; deepseek-v4-flash-0731/presence_penalty/deepseek-v4-flash-0731.dist-n40.json: no effect seen -> mixed; deepseek-v4-flash-0731/repetition_penalty/deepseek-v4-flash-0731.dist-n10.json: underpowered -> mixed; deepseek-v4-flash-0731/typical_p/deepseek-v4-flash-0731.dist-n10.json: underpowered -> mixed; deepseek-v4-flash-0731/typical_p/deepseek-v4-flash-0731.dist-n40.json: no effect seen -> distinguishable; deepseek-v4-flash-vision-exp/min_p/deepseek-v4-flash-vision-exp.dist-n10.json: underpowered -> distinguishable; deepseek-v4-flash-vision-exp/top_p/deepseek-v4-flash-vision-exp.dist-n10.json: underpowered -> mixed; deepseek-v4-pro-0813/frequency_penalty/deepseek-v4-pro-0813.dist-n10.json: underpowered -> no effect seen; deepseek-v4-pro-0813/frequency_penalty/deepseek-v4-pro-0813.dist-n40.json: no effect seen -> mixed; deepseek-v4-pro-0813/presence_penalty/deepseek-v4-pro-0813.dist-n40.json: no effect seen -> mixed; deepseek-v4-pro-0813/repetition_penalty/deepseek-v4-pro-0813.dist-n10.json: underpowered -> distinguishable ...` | `every report's aggregates` |
+| stratified test agrees with majority vote | `132/211` | `every report's aggregates` |
+|   disagreements by kind | `{'undetermined -> resolved by pooling': 55, '-> mixed (effect on some prompts only)': 11, 'definite verdict reversed': 9, 'mixed -> distinguishable': 4}` | `every report's aggregates` |
+|   where they differ | `deepseek-v4-flash-0731/frequency_penalty/deepseek-v4-flash-0731.dist-n10.json: underpowered -> distinguishable; deepseek-v4-flash-0731/presence_penalty/deepseek-v4-flash-0731.dist-n10.json: underpowered -> no effect seen; deepseek-v4-flash-0731/repetition_penalty/deepseek-v4-flash-0731.dist-n10.json: underpowered -> mixed; deepseek-v4-flash-0731/typical_p/deepseek-v4-flash-0731.dist-n10.json: underpowered -> no effect seen; deepseek-v4-flash-0731/typical_p/deepseek-v4-flash-0731.dist-n40.json: no effect seen -> distinguishable; deepseek-v4-flash-vision-exp/min_p/deepseek-v4-flash-vision-exp.dist-n10.json: underpowered -> distinguishable; deepseek-v4-flash-vision-exp/top_p/deepseek-v4-flash-vision-exp.dist-n10.json: underpowered -> mixed; deepseek-v4-pro-0813/frequency_penalty/deepseek-v4-pro-0813.dist-n10.json: underpowered -> no effect seen; deepseek-v4-pro-0813/frequency_penalty/deepseek-v4-pro-0813.dist-n40.json: no effect seen -> mixed; deepseek-v4-pro-0813/presence_penalty/deepseek-v4-pro-0813.dist-n40.json: no effect seen -> mixed; deepseek-v4-pro-0813/repetition_penalty/deepseek-v4-pro-0813.dist-n10.json: underpowered -> distinguishable; deepseek-v4-pro-0813/typical_p/deepseek-v4-pro-0813.dist-n10.json: underpowered -> distinguishable ...` | `every report's aggregates` |
 | negative control: dH false positives / informative pairs | `0/37` | `runs/**/*.neg-n40.json, runs/negative_control.json` |
 | unparseable, math500, minimax-m3 | `greedy 10% lowtemp 12% standard 14% topk 16% hightemp 18%` | `runs/smoke/unparseable.json` |
 | unparseable, aime, gpt-oss-120b | `greedy 0% lowtemp 7% standard 0% topk 0% hightemp 0%` | `runs/smoke/unparseable.json` |
@@ -66,11 +66,29 @@ value in `paper/main.tex` disagree, the paper is stale.
 |   kimi-k2p6: modal seq/conc, pairwise seq/conc | `0.22/0.22, 0.05/0.04` | `runs/matrix/fireworks/determinism_sequential.json` |
 | MATH-500 problem at T=0, models reproducing 10/10 | `7/18` | `runs/**/determinism*.json` |
 |   least reproducible | `kimi-k2p6 2/10` | `runs/**/determinism*.json` |
-| negative control, TV false positives / informative pairs | `1/37` | `runs/**/*.neg-n40.json, runs/negative_control.json` |
-|   one-sided 95% upper bounds, dH / TV | `7.8% / 12.2%` | `scripts/paper_assets.py` |
+| negative control, TV false positives / informative pairs | `0/37` | `runs/**/*.neg-n40.json, runs/negative_control.json` |
+|   one-sided 95% upper bounds, dH / TV | `7.8% / 7.8%` | `scripts/paper_assets.py` |
 | sensitivity: tests under one grid-wide Holm correction | `182` | `scripts/paper_assets.py` |
 |   honoured cells that lose significance | `deepseek-v4p1-flash/presence_penalty; inkling/top_p; kimi-k2p6/top_p; kimi-k2p7-code/typical_p; nemotron-3-ultra-nvfp4/presence_penalty` | `scripts/paper_assets.py` |
-|   inert cells with unadjusted p < 0.05 | `deepseek-v4-pro-0813/mirostat` | `scripts/paper_assets.py` |
+|   inert cells with unadjusted p < 0.05 | `` | `scripts/paper_assets.py` |
 |   deepseek-v4-pro-0813 mirostat p, unadjusted / Holm in its report | `0.019 / 0.055` | `runs/matrix/fireworks/deepseek-v4-pro-0813.dist-n40.json` |
+| effect size where mirostat is honoured (fraction of the T=0 entropy drop): min / median / max | `0.24 / 0.34 / 0.63 (n=6)` | `scripts/paper_assets.py` |
+| effect size where typical_p is honoured (fraction of the T=0 entropy drop): min / median / max | `0.20 / 0.41 / 0.95 (n=13)` | `scripts/paper_assets.py` |
+| effect size where top_p is honoured (fraction of the T=0 entropy drop): min / median / max | `0.73 / 0.93 / 1.45 (n=16)` | `scripts/paper_assets.py` |
+| effect size where top_k is honoured (fraction of the T=0 entropy drop): min / median / max | `0.72 / 0.93 / 1.24 (n=16)` | `scripts/paper_assets.py` |
+| effect size where min_p is honoured (fraction of the T=0 entropy drop): min / median / max | `0.63 / 0.83 / 1.10 (n=15)` | `scripts/paper_assets.py` |
+|   inert threshold per parameter (smallest honoured fraction) | `top_p 0.73, top_k 0.72, min_p 0.63, typical_p 0.20, mirostat 0.24` | `scripts/paper_assets.py` |
+|   null deepseek-v4-flash-0731/mirostat: fraction, 95% upper bound | `+0.08, +0.19 -> inert` | `scripts/paper_assets.py` |
+|   null deepseek-v4-pro-0813/mirostat: fraction, 95% upper bound | `+0.17, +0.27 -> effect not excluded, no verdict` | `scripts/paper_assets.py` |
+|   null glm-5p2/mirostat: fraction, 95% upper bound | `+0.04, +0.19 -> inert` | `scripts/paper_assets.py` |
+|   null muse-glimmer-30b/mirostat: fraction, 95% upper bound | `-0.02, +0.08 -> inert` | `scripts/paper_assets.py` |
+|   null muse-glimmer-30b/typical_p: fraction, 95% upper bound | `-0.00, +0.10 -> inert` | `scripts/paper_assets.py` |
+|   null nemotron-lightning-3p5-30b-a3b/mirostat: fraction, 95% upper bound | `+0.01, +0.34 -> effect not excluded, no verdict` | `scripts/paper_assets.py` |
+|   null qwen3p8-2p4t-a95b/mirostat: fraction, 95% upper bound | `+0.12, +0.36 -> effect not excluded, no verdict` | `scripts/paper_assets.py` |
+|   null qwen3p8-max/mirostat: fraction, 95% upper bound | `+0.04, +0.14 -> inert` | `scripts/paper_assets.py` |
+| greedy check top_k: tight arm differs from the T=0 arm (TV, p < 0.05) | `6 of 62 informative pairs (72 pairs)` | `scripts/paper_assets.py` |
+| greedy check top_p: tight arm differs from the T=0 arm (TV, p < 0.05) | `18 of 63 informative pairs (72 pairs)` | `scripts/paper_assets.py` |
+| greedy check min_p: tight arm differs from the T=0 arm (TV, p < 0.05) | `24 of 63 informative pairs (72 pairs)` | `scripts/paper_assets.py` |
+|   gpt-oss-120b word_prob: distinct at T=0 / at top_p=0.01, modal share at top_p=0.01 | `1 / 2, 0.50` | `scripts/paper_assets.py` |
 | drift: minimax-m3 word_prob, distinct at T=0 of 40 (first run / 2026-09-20) | `11 / 20` | `runs/distinguish_multiprompt.json, runs/matrix/fireworks/minimax-m3.dist-n40.json` |
 | collection window | `2026-09-17 to 2026-09-21` | `every cell, from its calls' cache timestamps` |

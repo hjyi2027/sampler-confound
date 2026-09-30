@@ -9,9 +9,10 @@
     "from": "2026-09-20T10:31Z",
     "to": "2026-09-20T10:44Z"
   },
-  "written": "2026-09-29T16:29Z",
+  "written": "2026-09-30T00:52Z",
   "reassessed_at": [
-    "2026-09-29T16:29Z"
+    "2026-09-29T16:29Z",
+    "2026-09-30T00:52Z"
   ],
   "results": [
     {
@@ -33,10 +34,10 @@
       "support_open": 36,
       "entropy_tight": 3.180709582593748,
       "entropy_open": 5.121928094887363,
-      "dh": 1.9412185122936152,
+      "dh": 1.941218512293616,
       "dh_null_mean": 0.005950963801308325,
       "dh_p": 9.999000099990002e-05,
-      "tv": 0.9249999999999993,
+      "tv": 0.9249999999999998,
       "tv_null_mean": 0.6439599999999996,
       "tv_p": 9.999000099990002e-05,
       "primary": "dh",
@@ -130,7 +131,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.935267548492307
+      "excess": 1.9352675484923079
     },
     {
       "model": "deepseek-v4-pro-0813",
@@ -153,10 +154,10 @@
       "support_open": 30,
       "entropy_tight": 3.217110262576664,
       "entropy_open": 4.693942707918269,
-      "dh": 1.4768324453416048,
+      "dh": 1.4768324453416062,
       "dh_null_mean": 0.0021418669820218307,
       "dh_p": 9.999000099990002e-05,
-      "tv": 0.8499999999999996,
+      "tv": 0.8500000000000001,
       "tv_null_mean": 0.589325,
       "tv_p": 9.999000099990002e-05,
       "primary": "dh",
@@ -250,7 +251,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.474690578359583
+      "excess": 1.4746905783595843
     },
     {
       "model": "deepseek-v4-pro-0813",
@@ -273,10 +274,10 @@
       "support_open": 25,
       "entropy_tight": 2.515961447928513,
       "entropy_open": 4.212814895472354,
-      "dh": 1.696853447543841,
+      "dh": 1.6968534475438428,
       "dh_null_mean": -0.006887777320619537,
       "dh_p": 9.999000099990002e-05,
-      "tv": 0.8999999999999997,
+      "tv": 0.9,
       "tv_null_mean": 0.4822425,
       "tv_p": 9.999000099990002e-05,
       "primary": "dh",
@@ -370,7 +371,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.7037412248644606
+      "excess": 1.7037412248644623
     },
     {
       "model": "deepseek-v4-pro-0813",
@@ -393,12 +394,12 @@
       "support_open": 27,
       "entropy_tight": 3.7026555965581873,
       "entropy_open": 4.446439344671015,
-      "dh": 0.7437837481128278,
+      "dh": 0.7437837481128287,
       "dh_null_mean": 0.00844409606110963,
       "dh_p": 0.0150984901509849,
-      "tv": 0.725,
+      "tv": 0.7249999999999998,
       "tv_null_mean": 0.5551074999999998,
-      "tv_p": 0.0013998600139986002,
+      "tv_p": 0.0046995300469953,
       "primary": "dh",
       "p_value": 0.0150984901509849,
       "n_permutations": 10000,
@@ -490,7 +491,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 0.7353396520517181
+      "excess": 0.735339652051719
     },
     {
       "model": "deepseek-v4-pro-0813",
@@ -511,10 +512,10 @@
       "support_open": 38,
       "entropy_tight": 1.1320689971054545,
       "entropy_open": 5.203055907333277,
-      "dh": 4.070986910227822,
+      "dh": 4.070986910227823,
       "dh_null_mean": 0.006890838664237643,
       "dh_p": 9.999000099990002e-05,
-      "tv": 0.9749999999999992,
+      "tv": 0.9750000000000001,
       "tv_null_mean": 0.5598375,
       "tv_p": 9.999000099990002e-05,
       "primary": "dh",
@@ -608,7 +609,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 4.0640960715635845
+      "excess": 4.064096071563585
     },
     {
       "model": "deepseek-v4-pro-0813",
@@ -631,10 +632,10 @@
       "support_open": 33,
       "entropy_tight": 1.3383057474344184,
       "entropy_open": 4.93418371977919,
-      "dh": 3.5958779723447716,
+      "dh": 3.5958779723447707,
       "dh_null_mean": -0.0017148764543171015,
       "dh_p": 9.999000099990002e-05,
-      "tv": 0.9249999999999994,
+      "tv": 0.9249999999999997,
       "tv_null_mean": 0.5049375,
       "tv_p": 9.999000099990002e-05,
       "primary": "dh",
@@ -728,7 +729,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 3.5975928487990885
+      "excess": 3.5975928487990876
     },
     {
       "model": "deepseek-v4-pro-0813",
@@ -751,10 +752,10 @@
       "support_open": 28,
       "entropy_tight": 1.468237061758725,
       "entropy_open": 4.471928094887362,
-      "dh": 3.003691033128637,
+      "dh": 3.003691033128639,
       "dh_null_mean": 0.0012261421091699209,
       "dh_p": 9.999000099990002e-05,
-      "tv": 0.9499999999999993,
+      "tv": 0.9499999999999998,
       "tv_null_mean": 0.45509000000000005,
       "tv_p": 9.999000099990002e-05,
       "primary": "dh",
@@ -848,7 +849,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 3.0024648910194673
+      "excess": 3.002464891019469
     },
     {
       "model": "deepseek-v4-pro-0813",
@@ -871,10 +872,10 @@
       "support_open": 28,
       "entropy_tight": 0.934068055375491,
       "entropy_open": 4.270584399762105,
-      "dh": 3.336516344386614,
+      "dh": 3.3365163443866157,
       "dh_null_mean": 0.007970083379276556,
       "dh_p": 9.999000099990002e-05,
-      "tv": 0.9499999999999993,
+      "tv": 0.95,
       "tv_null_mean": 0.4316825000000001,
       "tv_p": 9.999000099990002e-05,
       "primary": "dh",
@@ -968,7 +969,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 3.3285462610073373
+      "excess": 3.328546261007339
     },
     {
       "model": "deepseek-v4-pro-0813",
@@ -989,7 +990,7 @@
       "support_open": 26,
       "entropy_tight": 1.9292769644172392,
       "entropy_open": 4.396439344671015,
-      "dh": 2.467162380253776,
+      "dh": 2.467162380253777,
       "dh_null_mean": 0.007053986428861466,
       "dh_p": 9.999000099990002e-05,
       "tv": 0.7249999999999998,
@@ -1086,7 +1087,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.4601083938249144
+      "excess": 2.4601083938249153
     },
     {
       "model": "deepseek-v4-pro-0813",
@@ -1109,12 +1110,12 @@
       "support_open": 20,
       "entropy_tight": 1.6904685707328277,
       "entropy_open": 3.814334031792407,
-      "dh": 2.1238654610595793,
+      "dh": 2.12386546105958,
       "dh_null_mean": 0.0018758948668392292,
       "dh_p": 9.999000099990002e-05,
-      "tv": 0.55,
+      "tv": 0.5499999999999998,
       "tv_null_mean": 0.34627250000000004,
-      "tv_p": 0.0010998900109989002,
+      "tv_p": 0.0017998200179982,
       "primary": "dh",
       "p_value": 9.999000099990002e-05,
       "n_permutations": 10000,
@@ -1206,7 +1207,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.12198956619274
+      "excess": 2.121989566192741
     },
     {
       "model": "deepseek-v4-pro-0813",
@@ -1229,12 +1230,12 @@
       "support_open": 16,
       "entropy_tight": 2.203185025568965,
       "entropy_open": 3.3068441215341675,
-      "dh": 1.1036590959652024,
+      "dh": 1.1036590959652028,
       "dh_null_mean": -0.0005653719952563534,
       "dh_p": 0.0103989601039896,
-      "tv": 0.525,
+      "tv": 0.5249999999999999,
       "tv_null_mean": 0.3333825000000001,
-      "tv_p": 0.0022997700229977,
+      "tv_p": 0.0044995500449955,
       "primary": "dh",
       "p_value": 0.0103989601039896,
       "n_permutations": 10000,
@@ -1326,7 +1327,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.1042244679604587
+      "excess": 1.1042244679604591
     },
     {
       "model": "deepseek-v4-pro-0813",
@@ -1349,10 +1350,10 @@
       "support_open": 17,
       "entropy_tight": 1.7133185395326582,
       "entropy_open": 3.5212301884861774,
-      "dh": 1.8079116489535192,
+      "dh": 1.80791164895352,
       "dh_null_mean": -0.0055478113336588745,
       "dh_p": 9.999000099990002e-05,
-      "tv": 0.6,
+      "tv": 0.5999999999999999,
       "tv_null_mean": 0.3212825000000001,
       "tv_p": 9.999000099990002e-05,
       "primary": "dh",
@@ -1446,7 +1447,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.813459460287178
+      "excess": 1.813459460287179
     },
     {
       "model": "deepseek-v4-pro-0813",
@@ -1467,10 +1468,10 @@
       "support_open": 30,
       "entropy_tight": 2.770481684613114,
       "entropy_open": 4.7128148954723565,
-      "dh": 1.9423332108592426,
+      "dh": 1.9423332108592435,
       "dh_null_mean": 0.008860655570890066,
       "dh_p": 9.999000099990002e-05,
-      "tv": 0.8249999999999995,
+      "tv": 0.8249999999999997,
       "tv_null_mean": 0.52311,
       "tv_p": 9.999000099990002e-05,
       "primary": "dh",
@@ -1564,7 +1565,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.9334725552883525
+      "excess": 1.9334725552883534
     },
     {
       "model": "deepseek-v4-pro-0813",
@@ -1587,10 +1588,10 @@
       "support_open": 29,
       "entropy_tight": 2.664764949806906,
       "entropy_open": 4.715311532225103,
-      "dh": 2.050546582418197,
+      "dh": 2.0505465824181974,
       "dh_null_mean": -0.003653301557220425,
       "dh_p": 9.999000099990002e-05,
-      "tv": 0.8499999999999998,
+      "tv": 0.8499999999999999,
       "tv_null_mean": 0.51984,
       "tv_p": 9.999000099990002e-05,
       "primary": "dh",
@@ -1684,7 +1685,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 2.0541998839754174
+      "excess": 2.054199883975418
     },
     {
       "model": "deepseek-v4-pro-0813",
@@ -1707,10 +1708,10 @@
       "support_open": 23,
       "entropy_tight": 2.724670209589094,
       "entropy_open": 4.1530559073332745,
-      "dh": 1.4283856977441807,
+      "dh": 1.4283856977441816,
       "dh_null_mean": -0.002987394102475771,
       "dh_p": 9.999000099990002e-05,
-      "tv": 0.6749999999999997,
+      "tv": 0.6749999999999999,
       "tv_null_mean": 0.41436000000000006,
       "tv_p": 0.00029997000299970003,
       "primary": "dh",
@@ -1804,7 +1805,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.4313730918466565
+      "excess": 1.4313730918466574
     },
     {
       "model": "deepseek-v4-pro-0813",
@@ -1827,10 +1828,10 @@
       "support_open": 28,
       "entropy_tight": 3.0765896566842343,
       "entropy_open": 4.546439344671016,
-      "dh": 1.4698496879867813,
+      "dh": 1.4698496879867817,
       "dh_null_mean": 0.0005912956260806002,
       "dh_p": 9.999000099990002e-05,
-      "tv": 0.7999999999999997,
+      "tv": 0.7999999999999998,
       "tv_null_mean": 0.5165375,
       "tv_p": 9.999000099990002e-05,
       "primary": "dh",
@@ -1924,7 +1925,7 @@
       ],
       "empty_tight": 0,
       "empty_open": 0,
-      "excess": 1.4692583923607008
+      "excess": 1.4692583923607012
     }
   ],
   "p_holm_by_prompt": {
@@ -1968,17 +1969,17 @@
       "deepseek-v4-pro-0813": {
         "model": "deepseek-v4-pro-0813",
         "contrast": "T=0 vs T=1.0",
-        "control_dh": 1.5132331253245206,
+        "control_dh": 1.5132331253245228,
         "control_h_open": 4.693942707918269,
         "control_h_tight": 3.180709582593748,
         "control_support_tight": 13,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.3223799734010024,
+        "fraction_removed": 0.3223799734010029,
         "control_alpha": 0.016666666666666666,
         "control_power": 0.985,
         "powered": true,
-        "legacy_fraction_removed": 0.3790015159000987,
+        "legacy_fraction_removed": 0.37900151590009884,
         "legacy_powered": false,
         "detail": ""
       }
@@ -1987,17 +1988,17 @@
       "deepseek-v4-pro-0813": {
         "model": "deepseek-v4-pro-0813",
         "contrast": "T=0 vs T=1.0",
-        "control_dh": 3.8021147226737355,
+        "control_dh": 3.8021147226737346,
         "control_h_open": 4.93418371977919,
         "control_h_tight": 1.1320689971054545,
         "control_support_tight": 3,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.7705661034534572,
+        "fraction_removed": 0.770566103453457,
         "control_alpha": 0.016666666666666666,
         "control_power": 1.0,
         "powered": true,
-        "legacy_fraction_removed": 0.7824222885035894,
+        "legacy_fraction_removed": 0.7824222885035896,
         "legacy_powered": true,
         "detail": ""
       }
@@ -2006,17 +2007,17 @@
       "deepseek-v4-pro-0813": {
         "model": "deepseek-v4-pro-0813",
         "contrast": "T=0 vs T=1.0",
-        "control_dh": 1.8850570673751679,
+        "control_dh": 1.8850570673751688,
         "control_h_open": 3.814334031792407,
         "control_h_tight": 1.9292769644172392,
         "control_support_tight": 8,
         "control_n_tight": 40,
         "control_p": 0.00019998000199980003,
-        "fraction_removed": 0.49420345771063845,
+        "fraction_removed": 0.49420345771063867,
         "control_alpha": 0.016666666666666666,
         "control_power": 0.98,
         "powered": true,
-        "legacy_fraction_removed": 0.5611728462134381,
+        "legacy_fraction_removed": 0.5611728462134383,
         "legacy_powered": true,
         "detail": ""
       }
@@ -2025,17 +2026,17 @@
       "deepseek-v4-pro-0813": {
         "model": "deepseek-v4-pro-0813",
         "contrast": "T=0 vs T=1.0",
-        "control_dh": 1.944829847611989,
+        "control_dh": 1.9448298476119898,
         "control_h_open": 4.715311532225103,
         "control_h_tight": 2.770481684613114,
         "control_support_tight": 10,
         "control_n_tight": 40,
         "control_p": 9.999000099990002e-05,
-        "fraction_removed": 0.4124499164733333,
+        "fraction_removed": 0.4124499164733335,
         "control_alpha": 0.016666666666666666,
         "control_power": 1.0,
         "powered": true,
-        "legacy_fraction_removed": 0.41213865894144486,
+        "legacy_fraction_removed": 0.412138658941445,
         "legacy_powered": false,
         "detail": ""
       }
