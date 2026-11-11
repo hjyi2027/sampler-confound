@@ -1,5 +1,8 @@
 # Tasks
 
+*Status 2026-11-11: a standalone project, not submitted to any venue. See the
+last entry. Everything above it is the log as it was written.*
+
 Deadline **Sept 6**, submit **Sept 5**. Today is Aug 26; ai4math (Aug 29) comes
 first and this project formally starts Aug 30.
 
@@ -1243,3 +1246,33 @@ Sequential determinism arm, same day as a fresh concurrent arm, $0.75: 2/18
 models fully reproducible sequential vs 1/18 concurrent; agreement higher
 sequentially on 48 of 90 pairs, lower on 25; nemotron-3-ultra 56% -> 100%.
 Paper, FINDINGS and NUMBERS.md updated; the paper is 8 pages.
+
+## 2026-11-11: a standalone project
+
+This will not be submitted to TMLR or anywhere else. It stands on its own as a
+repository and a technical report, so the work that only served a submission
+is gone or changed. `scripts/anonymize.py` is deleted. The report uses the
+TMLR style in its `preprint` form, names the author, and points at this
+repository where it used to point at supplementary material. paper/README.md
+drops its before-submitting checklist. CITATION.cff and LICENSE name the
+author.
+
+The `tmlr-submission` branch (2026-09-30) held the latest analysis and had
+never been merged, and CI failed on both of its commits. `paper_assets.py`
+imports scipy, requirements.txt did not list it, and `paper_numbers.py` died
+on import. Locally it never showed, because system Python has scipy and the
+project venv was not the one running the scripts. scipy and matplotlib are now
+in requirements.txt. In a clean venv built from requirements.txt alone, 361
+tests pass and every CI report step exits 0.
+
+README and FINDINGS still carried the counts from before 2026-09-30: mirostat
+inert on six, the TV negative control at 1/37, and an ignored row of 27 cells
+with `seed` in it. README now leads with the audit and the current counts,
+with the variance study as a labelled future-work section. FINDINGS keeps its
+dated sections, revises present-tense claims in place with dated notes, gains
+a 2026-09-30 re-analysis section, and has its per-model table regenerated from
+paper/generated/cells.csv.
+
+Open, and optional now that nothing is due: a second provider (six adapters
+written, no keys), the variance study (needs more model levels than one
+provider has), and a dated re-run of the probe matrix.

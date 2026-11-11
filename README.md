@@ -1,94 +1,182 @@
 # sampler-confound
 
-**The Sampler Is a Confound: Decoding Configuration Rivals Model Choice in LLM
-Mathematical Reasoning**
+**Documented, accepted, honoured: an audit of decoding parameters on a hosted
+LLM inference API**
 
-Target was MATH-AI 2026 (NeurIPS workshop), 4 pages, Sept 6. **That deadline
-passed on 2026-09-06 and the sweep was never run** — see [Status](#status). The
-infrastructure is complete and validated; what is missing is one command and
-about $16 of API credit. Everything below describes the design as frozen, and
-the numbers quoted from `runs/` are from a 1/20 smoke run unless stated.
+A standalone research project by Hyunjun Yi. The write-up is a technical
+report in this repository, [paper/main.pdf](paper/main.pdf). It is not
+submitted to any venue.
 
-## The claim
+When an evaluation sets `temperature`, `top_p` or `seed` in a request to a
+hosted model, it assumes the provider applies them. This repository tests that
+assumption on one provider, Fireworks AI: all 18 chat models in its serverless
+catalogue, every sampling parameter its API reference documents, and four
+parameters it accepts without documenting. Each (model, parameter) cell gets
+three separate facts. *Documented* is what the reference says. *Accepted* is
+whether a request that sets the parameter succeeds. *Honoured* is whether the
+output distribution changes, decided by a two-sample permutation test on
+completions, with a positive control that measures the test's power and a
+negative control on identical arms. The data were collected 17 to 23 September
+2026, and every result carries its collection date.
 
-Every reported math-reasoning number is a function of model, prompt, benchmark,
-*and* decoding configuration. The last one is almost never reported and almost
-never held constant across papers. If sampler-attributable variance is within an
-order of magnitude of model-attributable variance, then cross-paper comparisons
-on math benchmarks are unsound — not noisy, unsound, because the comparison can
-invert under a change nobody documented.
+## Results
 
-Two numbers carry the paper. Their order was swapped on 2026-08-27 after a power
-analysis, and the reason is in `scripts/power_check.py`:
+- The API accepts every documented parameter on every model: 162 of 162
+  (model, parameter) pairs, `seed` included.
+- For the eight parameters that shape the sampling distribution, 104 of 144
+  cells show an effect, 7 are mixed (an effect on some prompts only), 5 are
+  inert and 28 have no verdict. Inert is a strict label. The test had at least
+  0.8 power against a greedy-strength effect, and the 95% upper bound on the
+  effect is below the weakest effect the parameter has on any model that
+  honours it.
+- `top_p`, `top_k` and `min_p` show an effect in 47 of 54 cells and are inert
+  in none.
+- Whether `mirostat` does anything depends on the model. It is honoured on six
+  models and inert on four behind the same endpoint (deepseek-v4-flash-0731,
+  glm-5p2, muse-glimmer-30b, qwen3p8-max). The split runs inside model
+  families: deepseek-v4p1-flash honours it and deepseek-v4-flash-0731 does
+  not. `typical_p` is inert on muse-glimmer-30b.
+- `frequency_penalty=2.0` breaks forced repetition on all 18 models. On short
+  free-text replies it changes nothing detectable on 8 of them.
+- Four vLLM parameters pass Fireworks' request validation and appear nowhere
+  in its reference. `use_beam_search` and `skip_special_tokens` change nothing
+  (9 cells that are accepted, undocumented and ignored). `ignore_eos` works on
+  three models and returns raw control tokens in the text.
+- At temperature 0, one model in 18 returns byte-identical text to ten
+  identical concurrent requests, and two do when the requests go one at a
+  time. On the others the most common reply is 20% to 78% of replies. A fixed
+  seed, documented as "Random seed for deterministic sampling", does not raise
+  agreement (permutation p = 0.52).
 
-1. **Comparison-inversion rate** (the headline). Across model pairs, how often
-   the ranking flips when only the sampler changes. One inverted comparison is a
-   concrete, quotable harm; a rate is a finding. `inversion.quotable()` renders
-   the strongest ones as sentences naming both accuracies and both configs.
-   Interval from a bootstrap over *problems* — a binomial over comparisons is
-   anti-conservative here, covering 84% against a nominal 95%, because each cell
-   feeds about twelve comparisons.
-2. **Sampler share vs model share** — variance components from a fully crossed
-   design, stated as a ratio against a threshold of 0.1 ("within an order of
-   magnitude"). Reported as a *measurement*, not a test: with three model levels
-   the interval clears 0.1 only 57% of the time even when sampler and model
-   variance are truly equal. That is a property of the level count, and no
-   budget fixes it.
+[FINDINGS.md](FINDINGS.md) has the detail, with the producing script for each
+number. [paper/NUMBERS.md](paper/NUMBERS.md) traces every number in the report
+to the committed record it comes from.
 
-**Neither number has been measured. The full variance study is future work,
-and the reason is level uncertainty, not compute.** A variance ratio from *k*
-model levels scatters as `sqrt(2/(k−1))`: 100% at three levels, 58% at seven.
-The frozen grid — three near-peer models, seven samplers, five replicates,
-200 problems, about $16 — was affordable and was not run, because a ratio
-estimated from three model levels cannot be tested against the threshold
-the claim needs; it can only be reported with an interval wider than itself.
-More problems and more replicates do not help. More model levels do, and one
-provider's near-peer band does not have them, which is what the
-cross-provider work below is for. What this repository contains instead is
-an audit of the infrastructure the study would run on, at full scale, and
-illustrations of the mechanisms on a 1/20-scale smoke corpus, each labelled
-as such in [FINDINGS.md](FINDINGS.md).
+## Reproducing the numbers
 
-The agentic extension is what makes this MATH-AI rather than generic: sampler
-variance compounds across multi-step reasoning, so agentic evaluation is noisier
-than single-shot evaluation by an amount nobody has measured.
+Nothing below needs an API key or the network. The records under `runs/` keep
+every completion behind every parameter verdict, so each verdict can be
+recomputed under a changed test.
 
-## Lineage
+```bash
+pip install -r requirements.txt
+make test
+make numbers                     # writes paper/NUMBERS.md
+python3 scripts/paper_assets.py  # tables and figures for the report
+make paper                       # builds paper/main.pdf, needs latexmk
+```
 
-This reuses machinery from two earlier unpublished studies by the same author
-rather than building a method from scratch. Neither is public, so neither is
-citable and nothing here rests on them; they are named for provenance only:
+Running a probe against the live API again gives a new dated observation, not
+a reproduction. Temperature 0 does not reproduce on 17 of 18 models, and three
+models were withdrawn from the catalogue while this project ran. The response
+cache is not committed (too large, and not regenerable for that reason).
 
-- *Unauthored by Design* (`seed-study-creative`) — the fully crossed
-  variance-decomposition design and the EMS-corrected component estimator. Ported
-  here in `variance.py`.
-- *Does the Decoding Algorithm Have a Voice?* — the finding that the sampler
-  leaves a recoverable signature in style.
+## What building the instrument taught
 
-The contribution here is changing the dependent variable from style features to
-**correctness**. That is a seven-day project. Building a method would not be.
+The first measurement of whether a parameter is honoured was wrong. An early
+heuristic (`scripts/probe_fireworks.py`: eight samples, count the distinct
+outputs) called `min_p` ignored on 3 of 8 models and `top_p` ignored on one,
+and two design decisions were taken on it. A two-sample test with 40
+completions per arm, a permutation null, a positive control and a negative
+control on identical arms overturned every cell it could retest. A verdict
+without a null and a power estimate cannot tell an ignored parameter from one
+the probe could not see. The heuristic is kept as `make probe-heuristic`, for
+the record.
 
-## The design
+What the documentation says is recorded apart from what the probe measures.
+`samplerconfound/documented.py` is a dated transcription of each provider's
+reference, with a quote and URL per parameter and an explicit `absent` where
+the page does not mention it. `scripts/gap.py` puts it beside the
+measurements. Fireworks rejects fifteen sampler names from other stacks
+(`top_a`, `tfs`, `dry_multiplier` and others) with HTTP 400, which is why the
+four vLLM names that pass get a table of their own.
 
-Fully crossed **model × sampler**, with **problems** as a crossed blocking factor
-and **repeated sampling** as the replicate dimension.
+A model in the frozen grid vanished mid-study. `gpt-oss-20b` began returning
+404 within hours of the grid being frozen with it as a level, while the public
+pricing page still listed it. It stays in `MODEL_CANDIDATES` with
+`available: False` rather than being deleted.
+
+Hand-verifying the grader on 50 stratified samples moved it from 30/50 to
+50/50 agreement and found five bugs: inline `\(...\)` math never stripped,
+`(3)/(5)` not matching `3/5`, markdown answer lines defeating the anchor, the
+worksheet truncating the wrong end of long responses, and a `last_number`
+fallback that credited a truncated response as correct because the number it
+stopped on was the gold answer. Several of these tracked temperature, so they
+would have put sampler-correlated error into the very component the study was
+meant to measure.
+
+Two intervals did not cover what they claimed. The bootstrap for the variance
+ratio resampled replicates within cells and covered a known truth 22% of the
+time against a nominal 95%. A binomial interval for the inversion rate covered
+84%. Both now resample the unit the claim is about.
+
+## Where this started: the variance study (future work)
+
+The project began as a different paper, *The Sampler Is a Confound: Decoding
+Configuration Rivals Model Choice in LLM Mathematical Reasoning*. Its claim
+was that a reported math-reasoning score depends on model, prompt, benchmark
+and decoding configuration, and that the last is rarely reported or held fixed
+across papers. If sampler-attributable variance is within an order of
+magnitude of model-attributable variance, a cross-paper comparison can invert
+under a change nobody documented.
+
+Two numbers were to carry it:
+
+1. The comparison-inversion rate: across model pairs, how often the ranking
+   flips when only the sampler changes. `inversion.quotable()` renders the
+   strongest flips as sentences naming both accuracies and both configs. The
+   interval comes from a bootstrap over problems. A binomial over comparisons
+   covers 84% against a nominal 95% here, because each cell feeds about twelve
+   comparisons.
+2. The ratio of sampler variance to model variance from a fully crossed
+   design, against a threshold of 0.1.
+
+Neither has been measured, and compute is not the reason. A variance ratio
+estimated from *k* model levels has a relative standard error of about
+`sqrt(2/(k−1))`, which is 100% at three levels and 58% at seven. The frozen
+grid (three near-peer models, seven samplers, five replicates, 260 problems,
+about $16) was affordable. It was not run because, with sampler and model
+variance truly equal, an interval for the ratio clears 0.1 in only 57% of
+simulated grids (`scripts/power_check.py`). More problems and more replicates
+do not change that. More model levels do, and one provider's band of near-peer
+models does not have enough of them. The audit above started as the check on
+the infrastructure the study would run on, and it became the project.
+
+A planned agentic extension, testing whether sampler variance compounds over
+multi-step reasoning, was never built.
+
+### What is ready for it
+
+Benchmarks pinned by sha256, the grader hand-verified, the grid frozen, a
+resumable runner that checks balance and logs full generations (including
+`reasoning_content`, a separate field that was being discarded), and both
+metrics with their power characterised. The sweep as frozen:
+
+```bash
+python3 scripts/run_sweep.py --config configs/main.json
+python3 scripts/run_sweep.py --config configs/aime.json
+python3 scripts/analyse.py runs/main/math500.jsonl --n-boot 2000
+```
+
+### The design
+
+Fully crossed model × sampler, with problems as a crossed blocking factor and
+repeated sampling as the replicate dimension.
 
 ```
 model (3)  x  sampler (7)  x  problem (200 MATH-500 + 60 AIME)  x  replicate (5)
 ```
 
-Frozen in `configs/main.json` and `configs/aime.json`; **27,300 generations**.
-Three models rather than four because `gpt-oss-20b` was withdrawn from the
-provider hours after the grid was frozen with it as a level. Seven samplers
-rather than six because `min_p` proved unusable (below) and two temperature/top-p
-configurations were added to buy back precision on the headline's numerator.
+Frozen in `configs/main.json` and `configs/aime.json`, 27,300 generations.
+There are three models rather than four because `gpt-oss-20b` was withdrawn
+from the provider hours after the grid was frozen with it as a level. There
+are seven samplers rather than six because the early heuristic made `min_p`
+look unusable and two temperature/top-p configurations were added to buy back
+precision on the ratio's numerator.
 
-Two analyses, answering different questions.
-
-**Primary — accuracy level.** Collapse to the number a paper would actually
-report: benchmark accuracy per (model, sampler, replicate). That is a balanced
-two-way design with 5 replicates per cell, and it maps exactly onto the ported
-estimator:
+The primary analysis is at the accuracy level. It collapses to the number a
+paper would report, benchmark accuracy per (model, sampler, replicate). That
+is a balanced two-way design with 5 replicates per cell:
 
 ```
 SS_total = SS_model + SS_sampler + SS_model:sampler + SS_within
@@ -96,223 +184,117 @@ SS_total = SS_model + SS_sampler + SS_model:sampler + SS_within
                                                       resampling
 ```
 
-The same 200 problems appear in every cell, so problem is a within-subject
-constant here and drops out. This is the analysis the headline ratio comes from,
-because it is stated in the units papers publish in.
+The same 200 problems appear in every cell, so problem drops out here. The
+ratio comes from this analysis because it is stated in the units papers
+publish in.
 
-**Secondary — item level.** Three-way random-effects decomposition with problem
-as a third crossed factor, run on two different responses:
+The secondary analysis is a three-way random-effects decomposition with
+problem as a third crossed factor, run on two responses. Binary correctness,
+one 0/1 per generation, shows where the variance lives. The per-problem solve
+rate, the fraction of replicates that solved each problem, breaks the coupling
+between a Bernoulli's variance p(1-p) and where the cell means sit. Its cost
+is the replicate stratum: one rate per cell means the three-way interaction
+becomes the error term. If the two responses agree, the result is a fact about
+the data rather than the response scale. If they disagree, that is the
+finding. Solve rates carry binomial noise of p(1-p)/R from running R
+replicates, all of it in the residual, so it is estimated and subtracted.
+Uncorrected, every variance share would depend on the replicate budget.
 
-- **binary correctness**, one 0/1 per generation. Shows where the variance lives.
-- **continuous per-problem solve rate**, the fraction of replicates that solved
-  each problem. A Bernoulli's variance is p(1-p), pinned to zero at both ends, so
-  a component estimated from 0/1 data partly reflects where the cell means sit
-  rather than how far the factor moves them. Averaging over replicates breaks that
-  coupling. The cost is the replicate stratum: one rate per cell means no
-  replication, so the three-way interaction becomes the error term.
+### The replicate dimension is not "seed"
 
-Reporting both is the point. If they agree, the result is a fact about the data
-rather than about the response scale. If they disagree, that is the finding.
+Within-cell variance is sampling variance at fixed configuration, whether or
+not a seed was honoured. Seed was never a main effect here, since its levels
+carry no meaning across cells. That matters because Fireworks does not honour
+`seed` on text completions, which the audit measures on all 18 models
+(FINDINGS §2). Calling the replicate dimension "seed variance" would be a
+claim about determinism the provider does not support. It is also the more
+useful quantity: the variance a practitioner gets when they rerun an eval.
 
-Solve rates carry binomial noise of p(1-p)/R from having run R replicates rather
-than infinitely many, and it lands entirely in the residual. It is estimated and
-subtracted; uncorrected, every variance share would depend on the replicate
-budget.
+The plan expected greedy cells to show near-zero within-cell variance and said
+that if they did not, that would be a finding. The audit found exactly that.
+Greedy decoding on this provider is a draw from a narrow distribution.
 
-### On the replicate dimension
+### Machine and provider constraints
 
-The roadmap calls this "seed." It is not, and the paper must not call it that.
+There is no GPU. This is a 16 GB laptop, local inference tops out near 1 to
+1.5B parameters, and models at that scale cannot do MATH-500 well enough for
+correctness variance to mean anything. So the study is API-only, on an
+open-weight provider.
 
-Fireworks silently ignores the `seed` parameter on text completions — established
-the hard way in `seed-study-creative`, and the reason that study's text arm was
-reframed. Any hosted provider may do the same, and none of them document it.
-
-This design does not need honoured seeds. Seed was never a main effect here: its
-levels carry no meaning across cells, so it is the **replicate** dimension, and
-within-cell variance *is* resampling variance whether or not a seed was honoured.
-Calling it "seed variance" would be a claim about determinism the provider will
-not support. Calling it **sampling variance at fixed configuration** is what the
-design actually measures, and it is the more useful quantity anyway: it is the
-variance a practitioner eats when they rerun an eval.
-
-One consequence to expect and report: **greedy cells should show near-zero
-within-cell variance.** If they do not, the provider is non-deterministic even at
-T=0 (batching, kernel non-determinism), which is itself a reportable finding and
-a validity check on every greedy-decoding paper.
-
-## Machine constraints
-
-The roadmap says "open weights on your GPU for the bulk." There is no GPU. This
-is a 16 GB consumer laptop with no discrete GPU. Local inference tops
-out near 1-1.5B parameters and swap eats any long run — established in prior
-work. Models at that scale cannot do MATH-500 well enough for correctness
-variance to mean anything.
-
-**Therefore the sweep is API-only, on an open-weight provider.**
-
-The Anthropic API was ruled out empirically, not on preference. As of `anthropic`
-1.0.0, `temperature`, `top_p` and `top_k` are gone from the signature of
-`messages.create()` and from `MessageCreateParams`; `min_p` and `seed` were never
-there. Sampling control was removed from current Claude models in favour of
+The Anthropic API was ruled out by measurement. As of `anthropic` 1.0.0,
+`temperature`, `top_p` and `top_k` are gone from the signature of
+`messages.create()` and from `MessageCreateParams`, and `min_p` and `seed`
+were never there. Sampling control on current Claude models moved to
 `output_config.effort`. Passing `temperature` raises `TypeError` client-side
-before a request is made — see `runs/sampler_support.json` and
-`scripts/probe_sampler_support.py`.
+before a request is made (`runs/sampler_support.json`,
+`scripts/probe_sampler_support.py`). The independent variable of this study
+does not exist on that provider.
 
-That is not a limitation to note in a Limitations section. This study's
-independent variable is decoding configuration, and on that provider it does not
-exist.
-
-The observation is worth keeping for the Discussion: the largest commercial
-provider has removed decoding parameters from its API entirely, which is evidence
-the field half-knows this matters. It does not rescue the experiment.
-
-Budget matters and is planned for:
-
-Measured, not estimated — the 1/20 smoke run replaced every guess here:
+Budget, measured on the 1/20 smoke run:
 
 | | |
 |---|---|
-| Generations | 3 models x 7 samplers x 5 reps x 260 problems = **27,300** |
-| Output tokens | **1,021** mean on MATH-500, **2,252** on AIME (not the ~600 first assumed) |
-| Cost | **$16.32** raw, $20.40 at 1.25x safety |
+| Generations | 3 models x 7 samplers x 5 reps x 260 problems = 27,300 |
+| Output tokens | 1,021 mean on MATH-500, 2,252 on AIME |
+| Cost | $16.32 raw, $20.40 at 1.25x safety |
 | Wall clock | ~15 hours at 1.0 gen/s (MATH-500) and 0.1-0.5 (AIME), 8 workers |
-| Agentic extension | multiplies by step count — budget separately |
 
-Output length varies four-fold *across models* and correlates with price, so
-`config.MODEL_TOKENS` holds a measured per-model profile; a model with no
+Output length varies four-fold across models and correlates with price, so
+`config.MODEL_TOKENS` holds a measured per-model profile. A model with no
 measured profile is costed optimistically and must be smoke-run before it is
-trusted. Results append to JSONL keyed by (model, sampler, replicate, problem),
-so an interrupted sweep resumes without re-spending, and `--verify` refuses to
-report an unbalanced grid rather than averaging over the gaps.
+trusted.
 
-## What the audit established, independent of the sweep
+### Lineage
 
-Written up in full in [FINDINGS.md](FINDINGS.md). In brief:
+The variance design reuses machinery from two earlier unpublished studies by
+the same author. Neither is public, so nothing here rests on them. They are
+named for provenance only:
 
-These came out of getting the instrument working and stand on their own. Several
-are perishable — the provider catalogue moved twice during one week.
+- *Unauthored by Design* (`seed-study-creative`): the fully crossed
+  variance-decomposition design and the EMS-corrected component estimator,
+  ported here in `variance.py`.
+- *Does the Decoding Algorithm Have a Voice?*: the finding that the sampler
+  leaves a recoverable signature in style.
 
-**Whether a decoding parameter is honoured has to be measured, and the first
-measurement was wrong.** An early heuristic (`scripts/probe_fireworks.py`,
-eight samples, count the distinct outputs) called `min_p` ignored on 3/8
-models and `top_p` ignored on one, and two design decisions were taken on it.
-A properly powered two-sample test — 40 completions per arm, permutation null,
-a positive control that temperature must pass and a negative control on
-identical arms — overturned every retestable cell. Run on **eighteen models — every chat model
-one provider serves — spanning $0.20 to $15.00 per million output tokens**, the paid
-tier included so the sample is not whichever models the provider gives away,
-`top_p`, `top_k` and `min_p` are all distinguishable wherever the probe has
-power. Extending to every parameter the API documents — nine — broke the
-uniformity: `mirostat` is accepted everywhere and inert on six models,
-`typical_p` is ignored on one, and `frequency_penalty` is applied on all
-eighteen yet moves a one-sentence reply on five. "Accepted", "applied" and
-"matters" are three different columns (FINDINGS §1;
-`scripts/probe_matrix.py` for the coverage table).
+## Providers
 
-**What the documentation claims is recorded separately from what the probe
-measures** (`samplerconfound/documented.py`, a dated transcription of each
-provider's reference; `scripts/gap.py` for the comparison). On Fireworks the
-reference says `seed` is a "Random seed for deterministic sampling" and
-seventeen of eighteen models ignore it; `mirostat` is documented and inert on
-six. And the worst case — accepted by the API, absent from the docs, ignored
-at runtime — exists by name: `use_beam_search` and `skip_special_tokens` are
-vLLM parameters Fireworks accepts with HTTP 200, documents nowhere, and does
-nothing with. Its mirror, `ignore_eos`, is undocumented and *works*, pushing
-the model past its end-of-turn token with the control token in the output.
-
-**One model in eighteen is deterministic at temperature 0, and none honours
-`seed`.** On the other seventeen, the identical greedy request returns the same
-bytes 20–78% of the time, and price predicts nothing: kimi-k3 at $15/M
-reproduces 74%, glm-5p3-flash at $0.50/M 76%. "Greedy" on this provider means
-a draw from a narrow distribution (FINDINGS §2).
-
-**A benchmark model vanished mid-study.** `gpt-oss-20b` began returning 404 from
-the inference API within hours of the grid being frozen with it as a level, while
-still listed on the public pricing page. Kept in `MODEL_CANDIDATES` with
-`available: False` rather than deleted.
-
-**Hand-verifying the grader on 50 stratified samples moved it from 30/50 to
-50/50 agreement**, finding five distinct bugs — inline `\(...\)` math never
-stripped, `(3)/(5)` not matching `3/5`, markdown answer lines defeating the
-anchor, the worksheet truncating the wrong end of long responses, and a
-`last_number` fallback that credited a truncated response as correct because the
-number it happened to stop on was the gold answer. Grader bugs are not
-symmetrical here: several of them tracked temperature, so they would have
-delivered sampler-correlated error straight into the component being reported.
-
-**Two reported intervals did not cover what they claimed.** The bootstrap for the
-variance ratio resampled replicates within cell and covered a known truth 22% of
-the time against a nominal 95%; a binomial interval for the inversion rate
-covered 84%. Both are replaced by resampling the unit the claim is actually
-about.
-
-## Status
-
-**The variance study is future work.** The sweep has not run, and the reason
-is stated above: three model levels give a ratio that cannot be tested, and
-compute does not change that. `runs/` holds the pilot, the 1/20 smoke run,
-the provider probe matrix (the audit, at full scale on one provider), and the
-smoke-corpus illustrations (labelled as such). Ready and validated for when
-the level count allows it: benchmarks pinned by sha256, grader hand-verified,
-grid frozen, runner resumable and balance-checked with full generation
-logging (including `reasoning_content`, which is a separate field and was
-being discarded), both metrics implemented with their power characterised.
-
-The sweep as frozen, when there are enough model levels to make its ratio
-testable:
-
-```
-python3 scripts/run_sweep.py --config configs/main.json
-python3 scripts/run_sweep.py --config configs/aime.json
-python3 scripts/analyse.py runs/main/math500.jsonl --n-boot 2000
-```
-
-Every provider sits behind an adapter (`samplerconfound/adapters.py`): the
+Every provider sits behind an adapter (`samplerconfound/adapters.py`). The
 probes build one canonical request and read one `Completion`, and never see a
-vendor's wire shape. Six providers speak the OpenAI chat shape and differ only
-in facts (URL, key header, a rename — Mistral says `random_seed`); Google
+vendor's wire shape. Seven providers are wired up: Fireworks, Groq, Cerebras,
+OpenRouter, NVIDIA and Mistral speak the OpenAI chat shape and differ only in
+facts (URL, key header, a rename: Mistral says `random_seed`), and Google
 speaks its native `generateContent`, because that is the surface with `topK`
 on it. `--provider groq` on either probe is the whole change. Keys go in
-`.env` (gitignored; slots in `.env.example`); `make keys` checks them.
+`.env` (gitignored, slots in `.env.example`), and `make keys` checks them.
+Only Fireworks has been run.
 
 ## Rate limits and resumability
 
 Rate limits bite at hour six, so both halves are built in and tested against
-a fake throttled provider (`tests/test_ratelimit.py`), and each rule below
-was met in production before it was a rule.
+a fake throttled provider (`tests/test_ratelimit.py`). Each rule below was met
+in production before it was a rule.
 
-**Pacing before the 429.** Every response carries the account's remaining
-budget; the adapter normalises those headers and a per-provider pacer
-(`samplerconfound/ratelimit.py`) makes callers wait toward the window's
-reset once headroom drops below 10%, instead of bursting into the wall.
-Three throttled responses in a row open a breaker that pauses the whole
-process once, not one sleep per worker. `Retry-After` is honoured exactly.
-Fireworks' binding limit is 72,000 generated tokens a minute, account-wide.
+Pacing starts before the 429. Every response carries the account's remaining
+budget. The adapter normalises those headers, and a per-provider pacer
+(`samplerconfound/ratelimit.py`) makes callers wait toward the window's reset
+once headroom drops below 10%. Three throttled responses in a row open a
+breaker that pauses the whole process once, not one sleep per worker.
+`Retry-After` is honoured exactly. Fireworks' binding limit is 72,000
+generated tokens a minute, account-wide.
 
-**Bounded retries.** Timeouts and dropped connections: two retries. A
-recurring 5xx: four tries. A 429: short, capped, jittered waits — never an
-exponential ladder, which put twenty workers to sleep through the refill and
-had them burst again.
+Retries are bounded. Timeouts and dropped connections get two retries, a
+recurring 5xx gets four tries, and a 429 gets short, capped, jittered waits.
+An exponential ladder put twenty workers to sleep through the refill and had
+them burst again, so it is gone.
 
-**Resumability at every level.** Every response is cached under its request
-hash and replicate, so a rerun of anything bills nothing it already has. The
-distinguishability probe checkpoints per cell and skips finished cells on
-restart; a cell the provider did not finish is recorded as `transport` and
-rerun only with `--retry-failed`. The sweep checkpoints per record with
-fsync and was hard-killed and resumed to prove it. The matrix runner skips
-covered cells, runs only missing contrasts, continues its budget window
-across relaunches, and kills its child probes on SIGINT/SIGTERM — every
-finished cell is on disk; rerun the same command to resume.
-
-## The manuscript
-
-[paper/main.tex](paper/main.tex) — *Documented, accepted, honoured: an audit of
-decoding parameters on hosted LLM inference APIs*, built against the TMLR
-style file (`make paper`). The audit is the paper; the variance study is
-future work for the reason given above. Every number in it is regenerated
-from committed records by `make numbers` into
-[paper/NUMBERS.md](paper/NUMBERS.md), so a stale figure shows up as a diff
-rather than surviving into review. `scripts/anonymize.py` builds the
-double-blind copy.
+Everything resumes. Every response is cached under its request hash and
+replicate, so a rerun bills nothing it already has. The distinguishability
+probe checkpoints per cell and skips finished cells on restart. A cell the
+provider did not finish is recorded as `transport` and rerun only with
+`--retry-failed`. The sweep checkpoints per record with fsync and was
+hard-killed and resumed to prove it. The matrix runner skips covered cells,
+runs only missing contrasts, continues its budget window across relaunches,
+and kills its child probes on SIGINT/SIGTERM. Rerun the same command to
+resume.
 
 Full decision log in [TASKS.md](TASKS.md).

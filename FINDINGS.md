@@ -1,10 +1,12 @@
 # What the instrument found
 
-Notes from building a measurement apparatus for *The Sampler Is a Confound*.
-**The study itself — the variance decomposition of benchmark accuracy into
-model, sampler and their interaction, and the comparison-inversion rate over
-a full grid — has not run and is future work.** Everything below is one of
-two things, and each section says which:
+Lab notes from building and running the audit written up in
+[paper/main.pdf](paper/main.pdf), a standalone report. The project started as
+a measurement apparatus for *The Sampler Is a Confound*. **That study (the
+variance decomposition of benchmark accuracy into model, sampler and their
+interaction, and the comparison-inversion rate over a full grid) has not run
+and is future work.** Everything below is one of two things, and each section
+says which:
 
 * **An audit of the infrastructure** LLM evaluation papers depend on, run at
   full scale on one provider: which decoding parameters a provider accepts,
@@ -40,6 +42,14 @@ one of the findings.
 
 All figures are measured, with the producing script named and the collection
 date given.
+
+The sections are dated, and a count inside a dated section is the count as of
+that date. Later sections revise earlier ones. The current value of every
+number in the report is in [paper/NUMBERS.md](paper/NUMBERS.md), regenerated
+from committed records by `make numbers`. The latest analysis is the
+2026-09-30 re-analysis in §1. Of 144 cells for the eight parameters that shape
+the sampling distribution, 104 are honoured, 7 mixed, 5 inert and 28 have no
+verdict.
 
 ---
 
@@ -322,57 +332,77 @@ disagreement is the finding.
 
 | model | n | typical_p | mirostat | rep (applied / free text) | freq (applied / free text) | pres (applied / free text) |
 |---|--:|---|---|---|---|---|
-| nemotron-lightning-3p5-30b-a3b | 40 | ? | ? | yes / ? | yes / yes | NO / ? |
-| glm-5p3-flash | 40 | yes | mix | yes / yes | yes / NO | n/a / NO |
+| nemotron-lightning-3p5-30b-a3b | 40 | yes | ? | yes / yes | yes / yes | NO / NO |
+| glm-5p3-flash | 40 | yes | yes | yes / yes | yes / NO | n/a / NO |
 | gpt-oss-120b | 40 | yes | yes | yes / yes | yes / NO | n/a / NO |
-| deepseek-v4-flash-0731 | 40 | mix | ? | yes / yes | yes / yes | n/a / ? |
-| minimax-m3 | 40 | yes | yes | yes / yes | yes / mix | n/a / ? |
-| deepseek-v4p1-flash | 40 | yes | **NO** | yes / yes | yes / mix | n/a / NO |
-| muse-glimmer-30b | 40 | **NO** | **NO** | **NO** / yes | yes / mix | n/a / NO |
-| nemotron-3-ultra-nvfp4 | 40 | yes | **NO** | yes / yes | yes / NO | NO / NO |
-| deepseek-v4-pro-0813 | 40 | mix | **NO** | yes / yes | yes / NO | n/a / NO |
-| kimi-k2p6 | 10–40 | ? | ? | yes / ? | yes / yes | n/a / ? |
-| kimi-k2p7-code | 40 | ? | yes | yes / yes | yes / ? | n/a / ? |
+| deepseek-v4-flash-0731 | 40 | yes | **NO** | yes / yes | yes / yes | n/a / NO |
+| minimax-m3 | 40 | yes | yes | yes / yes | yes / NO | n/a / NO |
+| deepseek-v4p1-flash | 40 | yes | yes | yes / yes | yes / yes | n/a / yes |
+| muse-glimmer-30b | 40 | **NO** | **NO** | NO / yes | yes / yes | n/a / NO |
+| nemotron-3-ultra-nvfp4 | 40 | yes | mix | yes / yes | yes / mix | NO / yes |
+| deepseek-v4-pro-0813 | 40 | yes | ? | yes / yes | yes / mix | n/a / mix |
+| kimi-k2p6 | 10 | ? | ? | yes / yes | yes / yes | n/a / ? |
+| kimi-k2p7-code | 40 | yes | mix | yes / yes | yes / NO | n/a / NO |
 | glm-5p3 | 40 | yes | yes | yes / yes | yes / NO | n/a / NO |
-| glm-5p2 | 40 | yes | ? | yes / yes | yes / yes | n/a / ? |
-| qwen3p8-max | 40 | mix | **NO** | n/a / yes | yes / NO | n/a / NO |
+| glm-5p2 | 40 | yes | **NO** | yes / yes | yes / yes | n/a / NO |
+| qwen3p8-max | 40 | yes | **NO** | yes / yes | yes / yes | n/a / NO |
 | kimi-k3 | 40 | yes | yes | yes / yes | yes / NO | n/a / NO |
-| inkling | 10 | ? | ? | n/a / yes | yes / ? | n/a / ? |
-| qwen3p8-2p4t-a95b | 10 | mix | **NO** | n/a / yes | yes / NO | n/a / NO |
+| inkling | 10 | ? | ? | yes / yes | yes / NO | n/a / NO |
+| qwen3p8-2p4t-a95b | 10 | mix | ? | yes / yes | yes / NO | n/a / NO |
 | deepseek-v4-flash-vision-exp | 10 | ? | ? | yes / ? | yes / yes | n/a / ? |
 
-yes = distinguishable; NO = no effect with a passed control; ? = control failed
-or every prompt degenerate; mix = prompts disagree; n/a = both arms constant
-(the forced token survived the penalty), no verdict.
+yes = an effect. For typical_p and mirostat, **NO** = inert: no effect, power
+of at least 0.8 against a greedy-strength effect, and a 95% upper bound on the
+effect below the weakest honoured one (0.20 for typical_p, 0.24 for mirostat).
+For the penalties, NO = no effect seen with a passed control. ? = no verdict
+(control failed, every prompt degenerate, or an effect as large as the weakest
+honoured one not excluded). mix = an effect on some prompts only. n/a = both
+arms constant (the forced token survived the penalty), no verdict.
+
+*Regenerated 2026-11-11 from `paper/generated/cells.csv`, the 2026-09-30
+analysis. The table as first written on 2026-09-22 is in git history.*
 
 What the five add to the four:
 
 **`frequency_penalty` is applied on 18 of 18 models and matters on a sentence
-on 8.** Every model breaks forced repetition under it; on six, the same
+on 8.** Every model breaks forced repetition under it. On eight, the same
 parameter at its maximum leaves the distribution of a one-sentence reply
-indistinguishable from the control with power to have seen it, and on four the
+indistinguishable from the control with power to have seen it, and on two the
 prompts disagree. *(Revised 2026-09-23 under the stratified test and the
-power-analysed control; it read 5 under the majority vote.)* Both are true. A harness that reports
+power-analysed control; it read 5 under the majority vote. Revised 2026-09-30
+under the tie-correct test, which turned two mixed cells into nulls: 8 / 6 / 4
+became 8 / 8 / 2.)* Both are true. A harness that reports
 "frequency_penalty=2.0" is reporting a setting that is real and, on most of
 these models, inert for short generation.
 
-**`mirostat` is accepted everywhere and inert on six models.** This is the
+**`mirostat` is accepted everywhere and inert on four models.** This is the
 first parameter on this provider whose honouring differs *between models
-behind one stack*: applied on gpt-oss-120b, minimax-m3, kimi-k2p7-code,
-glm-5p3, kimi-k3 and deepseek-v4p1-flash; accepted and doing nothing, with
-at least 80% power to have seen a full-strength effect, on
-deepseek-v4-flash-0731, deepseek-v4-pro-0813, glm-5p2, muse-glimmer-30b,
-qwen3p8-max and qwen3p8-2p4t. *(Revised 2026-09-23: the count is unchanged but
-the membership is not. Under the majority vote deepseek-v4p1-flash read inert;
-the stratified test finds its effect, Holm p = 0.0009. nemotron-3-ultra moved
-to mixed; deepseek-v4-flash-0731 and glm-5p2, previously undetermined, now
-have the power to be called inert.)* The earlier claim that honouring is uniform on a single serving
+behind one stack*: honoured on glm-5p3-flash, gpt-oss-120b, minimax-m3,
+deepseek-v4p1-flash, glm-5p3 and kimi-k3, and accepted and doing nothing on
+deepseek-v4-flash-0731, glm-5p2, muse-glimmer-30b and qwen3p8-max. On those
+four the test had power 1.00 against a greedy-strength effect, and the 95%
+upper bound on the effect is at most 0.19 of the temperature-0 contrast, below
+the 0.24 of the weakest model that honours mirostat. *(Revised 2026-09-23: the
+count is unchanged but the membership is not. Under the majority vote
+deepseek-v4p1-flash read inert; the stratified test finds its effect, Holm
+p = 0.0009. nemotron-3-ultra moved to mixed; deepseek-v4-flash-0731 and glm-5p2,
+previously undetermined, now have the power to be called inert.)* *(Revised
+2026-09-30: six became four. Inert now also needs the effect-size bound, and
+deepseek-v4-pro-0813 and qwen3p8-2p4t show no effect but cannot exclude one as
+large as the weakest honoured effect (upper bounds 0.27 and 0.36), so they have
+no verdict. Under the tie-correct test glm-5p3-flash moved from mixed to
+honoured and kimi-k2p7-code from honoured to mixed.)* The earlier claim that honouring is uniform on a single serving
 stack was true of the parameters tested then and is false of this one.
 
-**`typical_p` is honoured on most models and ignored on muse-glimmer-30b**,
-which also ignores `mirostat` and `repetition_penalty` — three accepted,
-inert parameters on one model, alongside the `top_p` it was wrongly accused of
-ignoring in §1.
+**`typical_p` is honoured on most models and ignored on muse-glimmer-30b**
+(p = 0.52 over four prompts, power 1.00, upper bound 0.10 against a threshold
+of 0.20). The same model ignores `mirostat` and honours the `top_p` it was
+wrongly accused of ignoring in §1. *(Revised 2026-09-30: this paragraph used
+to list `repetition_penalty` as a third inert parameter on muse-glimmer-30b,
+on the strength of the forced prompt. The forced reply is unchanged in 39 of
+40 calls, but the penalty changes the free-text output on all four prompts
+(pooled p < 0.001), so it is honoured. A forced null now decides only
+`frequency_penalty`.)*
 
 **`presence_penalty` is undetermined by this design.** It is an additive
 penalty bounded at 2.0 logits; a forced "yes" survives it on 16 of 18 models,
@@ -403,7 +433,8 @@ touches no API: the completions are the data, the verdicts are derived.
 originally 0/25 pairs across eight models. It now exists for every model with
 a usable pair: one pair of identical arms at n=40 per model, 12 informative
 pairs (six models are degenerate at temperature 1.0 — both arms all-unique —
-and are excluded, as before). Pooled: **dH 0/37 false positives, TV 1/37**.
+and are excluded, as before). Pooled: **dH 0/37 false positives, TV 0/37**
+*(TV read 1/37 before the 2026-09-30 tie correction)*.
 The primary statistic has yet to reject a true null on real output.
 
 Coverage in one table: `scripts/probe_matrix.py`, which reads every probe
@@ -524,6 +555,33 @@ models it rises by ten points or more, and nemotron-3-ultra goes from 56% modal
 concurrent to 100% sequential. For others (kimi-k2p6: 22% both ways) the
 nondeterminism does not depend on this client's load.
 
+### Re-analysis, 2026-09-30: ties, and a bound on what "inert" excludes
+
+Two more fixes, applied offline to all 41 reports with `--reassess`.
+
+*Ties.* The per-cell permutation test computed its observed statistic from a
+list and its null from an array. The two differed in the last bit (for TV the
+summation order depended on string hashing, so it changed between processes),
+exact ties were dropped at random, and per-prompt p-values came out too small,
+by up to 0.6 on near-degenerate cells. The observed value is now computed the
+way the null is, ties count, and a regression test pins it. The pooled
+stratified test was already tie-correct, so no honoured verdict moved. Six
+mixed verdicts became nulls, and the TV negative control went from 1/37 to
+0/37.
+
+*An effect-size bound for inert.* Power against a greedy-strength effect
+overstated what a null excludes. Where mirostat is honoured it removes only
+24% to 63% of the entropy that temperature 0 removes. A null is now inert only
+if the 95% bootstrap upper bound on that fraction is below the smallest
+honoured fraction for the parameter (0.24 for mirostat, 0.20 for typical_p).
+Mirostat went from inert on six models to four.
+
+The grid now reads 104 honoured, 7 mixed, 5 inert and 28 without a verdict, of
+144 cells. Against the old majority vote the stratified test agrees on 132 of
+211 aggregates. The report defines "honoured" behaviourally and adds a greedy
+check that ties `top_k=1` to its documented mechanism: the tight arm matches
+the temperature-0 arm on 56 of 62 informative pairs.
+
 ### Documented, accepted, honoured: three facts, kept apart
 
 Everything above measures what the output distribution does. What the
@@ -537,24 +595,35 @@ explicit `absent` where the page was read and does not mention it — and
 for the gap between them.
 
 On Fireworks (reference read 2026-09-22), 182 cells across eighteen models
-and thirteen parameters:
+and thirteen parameters, as of the 2026-09-30 analysis:
 
 | label | cells | parameters |
 |---|--:|---|
-| as documented | 98 (was 88 before 2026-09-23) | top_p, top_k, min_p, most of typical_p, repetition_penalty, frequency_penalty; ignore_eos on 3 |
-| documented, accepted, undetermined | 47 | presence_penalty (16), mirostat (7), typical_p (9), … |
-| **documented, accepted, ignored** | **27** | **seed (17)**, mirostat (6), typical_p (1), repetition_penalty (1), presence_penalty (2) |
+| as documented | 104 (98 on 2026-09-23, 88 before) | repetition_penalty (18), frequency_penalty (18), top_p (16), top_k (16), min_p (15), typical_p (13), mirostat (6), presence_penalty (2) |
+| documented, accepted, undetermined | 35 | presence_penalty (16), mirostat (8), typical_p (4), min_p (3), top_p (2), top_k (2) |
+| **documented, accepted, ignored** | **5** | **mirostat (4), typical_p (1)** |
+| documented determinism not delivered at T=0 | 17 | seed |
+| deterministic without it | 1 | seed, on gpt-oss-120b |
 | **undocumented, accepted, ignored** | **9** | **use_beam_search (4), skip_special_tokens (5)** |
 | undocumented, accepted, works | 3 | ignore_eos |
 | undocumented, accepted, undetermined | 7 | best_of (5, no signature observable from outside), one each of use_beam_search and ignore_eos |
 | accepted, then the server fails | 1 | ignore_eos on kimi-k3 (HTTP 500, every time) |
 
+*(Revised 2026-09-30. Until then `seed` sat in the ignored row with 17 cells,
+and repetition_penalty (1) and presence_penalty (2) were counted as ignored.
+`seed` now has its own label, because what it fails to deliver is determinism
+at temperature 0, which no other row tests. The penalty cells moved when a
+forced-prompt null stopped deciding anything but `frequency_penalty`. The
+`ignore_eos` cells that work are in the undocumented rows, not here.)*
+
 **The largest documented gap is `seed`.** The Fireworks reference says, in
 full, "Random seed for deterministic sampling." §2 measures it: a fixed seed
 reproduces a non-deterministic prompt on 10 of 73 (model, prompt) cells and on
-no model consistently. Seventeen of eighteen models carry the label
-*documented, accepted, ignored* for it; the eighteenth is deterministic
-without one. This is the sentence a harness author reads before writing
+no model consistently. Across the 85 (model, prompt) cells on models that are
+not already deterministic, a fixed seed changes the modal share by +0.012 on
+average (permutation p = 0.52). Seventeen of eighteen models carry the label
+*documented determinism not delivered at T=0* for it, and the eighteenth is
+deterministic without one. This is the sentence a harness author reads before writing
 "seed=0" into a config and "reproducible" into a paper.
 
 **The worst case exists, and its names are `use_beam_search` and

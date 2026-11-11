@@ -2,6 +2,10 @@
 numpy>=1.26
 requests>=2.31
 pytest>=8.0
+# scripts/paper_assets.py: Clopper-Pearson bounds and the sign test (scipy),
+# figures (matplotlib). paper_numbers.py and gap.py import it, so CI needs both.
+scipy>=1.11
+matplotlib>=3.8
 
 # Only for scripts/probe_sampler_support.py, which documents that the Anthropic
 # API no longer exposes decoding parameters at all. Kept as evidence for the

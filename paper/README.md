@@ -1,29 +1,30 @@
-# Manuscript
+# The report
 
-`main.tex` builds against the official TMLR style file (`tmlr.sty`, `tmlr.bst`,
-fetched from JmlrOrg/tmlr-style-file). Build with `make paper` from the repo
-root, or:
+`main.tex` is the write-up of the audit, a standalone technical report. It is
+not submitted to any venue. It uses the TMLR style file (`tmlr.sty`,
+`tmlr.bst`, from JmlrOrg/tmlr-style-file) in its `preprint` form, which prints
+the author and no review header. Build with `make paper` from the repo root,
+or:
 
     cd paper && latexmk -pdf main.tex
 
-Currently 7 pages plus references. `\usepackage{tmlr}` is the anonymous
-submission form; switch to `\usepackage[accepted]{tmlr}` on acceptance.
+`main.pdf` is tracked, so reading the report needs no TeX install.
 
 ## Numbers
 
-Every number in the manuscript is recomputed from committed records by
+Every number in the report is recomputed from committed records by
 `make numbers`, which writes [NUMBERS.md](NUMBERS.md). It reads no API key and
-no response cache. If a value there disagrees with `main.tex`, the paper is
-stale — this is how the stale negative-control denominator (0/37, not 0/40)
-was caught after the degeneracy rule changed.
+no response cache. If a value there disagrees with `main.tex`, the report is
+stale. This check caught the stale negative-control denominator (0/37, not
+0/40) after the degeneracy rule changed.
 
-## Before submitting
+Tables and figures come from `python3 scripts/paper_assets.py`, which writes
+`generated/` and `figures/`. `--check` derives everything and writes nothing.
 
-- `python3 scripts/anonymize.py --out ../sampler-confound-anon` and push that
-  copy to an anonymous remote; the public repo de-anonymises a double-blind
-  submission.
-- Re-run the probe matrix and report the drift. Provider behaviour moves, and
-  a table collected weeks before submission should say so.
-- Decide on the cross-provider extension (see the repo README's Status): the
-  single-provider limitation is stated in the paper's Limitations, but a
-  reviewer may reasonably ask for a second stack.
+## What the report does not cover
+
+The data were collected 17 to 23 September 2026 on one provider. Provider
+behaviour moves, so a rerun of the probe matrix today would be a new dated
+snapshot, not a correction of this one. A second provider would test whether
+the findings are specific to Fireworks. The adapters for six more providers
+exist (`samplerconfound/adapters.py`) and have not been run.
