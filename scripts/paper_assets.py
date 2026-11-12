@@ -551,7 +551,7 @@ def fig_verdicts(D: dict, dest: Path) -> None:
                Patch(facecolor=GREY, hatch="////", edgecolor="#b9b8b2", label="?  no verdict")]
     ax.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, -0.01), ncol=2,
               frameon=False, handlelength=1.4, columnspacing=1.2, fontsize=6.8)
-    fig.savefig(dest)
+    fig.savefig(dest, metadata={"CreationDate": None})  # no timestamp: same data, same bytes
     plt.close(fig)
 
 
@@ -597,7 +597,7 @@ def fig_determinism(D: dict, dest: Path) -> None:
     for s_ in ("top", "right"):
         a2.spines[s_].set_visible(False)
     fig.tight_layout(w_pad=1.5)
-    fig.savefig(dest)
+    fig.savefig(dest, metadata={"CreationDate": None})  # no timestamp: same data, same bytes
     plt.close(fig)
 
 

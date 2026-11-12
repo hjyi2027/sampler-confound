@@ -1,7 +1,9 @@
 # Tasks
 
-*Status 2026-11-11: a standalone project, not submitted to any venue. See the
-last entry. Everything above it is the log as it was written.*
+*Status 2026-11-12: closed. A standalone project, not submitted to any venue.
+See the last two entries. Everything above them is the log as it was written.
+The unchecked boxes in Phases 1 to 4 belong to the variance study, which never
+ran (see 2026-09-22). They stay unchecked because that is what happened.*
 
 Deadline **Sept 6**, submit **Sept 5**. Today is Aug 26; ai4math (Aug 29) comes
 first and this project formally starts Aug 30.
@@ -1276,3 +1278,42 @@ paper/generated/cells.csv.
 Open, and optional now that nothing is due: a second provider (six adapters
 written, no keys), the variance study (needs more model levels than one
 provider has), and a dated re-run of the probe matrix.
+
+## 2026-11-12: closed
+
+The last check was a fresh clone of the public repository, with a virtual
+environment built from requirements.txt alone. 361 tests passed and every
+report step exited 0. Regenerating the tables and figures there found three
+things a checkout that wrote the files could not show.
+
+Row order depended on the filesystem. Three models have no listed price and
+tie in the sort, and `collect()` kept them in the order their files were
+listed. The clone printed inkling above qwen3p8-2p4t-a95b where the checkout
+printed the reverse, in cells.csv and in both generated tables. The numbers
+were the same. The model name now breaks price ties and the file listing is
+sorted, with a test that reverses the listing. Two pairs of priced models with
+equal prices swapped places as well.
+
+`unparseable_report.py` stamped the current time into runs/smoke/unparseable.json
+on every run, so CI and `make` left the tree modified. It now keeps the old
+stamp when the content has not changed.
+
+The figure PDFs carried a creation time, so they changed on every
+regeneration. They are now written without one. Two runs in a row on one
+machine give the same bytes for every file under paper/figures and
+paper/generated. Across matplotlib versions the figure files still differ in
+bytes, and the tables do not.
+
+With those fixed, the tables, cells.csv and NUMBERS.md from the clone match
+the committed ones, and the report was rebuilt with the new row order.
+
+Left out, and staying out unless someone picks the project up again:
+
+- A second provider. The six other adapters are written and unit-tested and
+  have never been run against a live API. Running them needs accounts and keys.
+- The seed above temperature 0, which the report lists as untested. It would
+  cost Fireworks credit and would be a November observation set beside
+  September ones.
+- A dated re-run of the probe matrix, for the same reason.
+- The variance study. It needs more model levels than one provider's band of
+  similar models has (2026-09-22).

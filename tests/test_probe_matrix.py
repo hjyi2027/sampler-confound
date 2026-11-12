@@ -46,3 +46,25 @@ def test_a_penalty_column_reports_applied_and_keeps_free_text_alongside():
     r = probe_matrix.distinguish_rows("fireworks", d)["m"]
     assert r["frequency_penalty"] == "distinguishable"
     assert r["frequency_penalty_free_text"] == "no effect seen"
+
+
+def test_collect_does_not_depend_on_directory_listing_order(monkeypatch):
+    """Three models have no listed price and tie in the sort. They used to come
+    out in the order the filesystem listed their files, so a fresh clone
+    produced the tables in a different row order from the checkout that wrote
+    them. A reversed listing must give the same rows in the same order."""
+    import json
+    import pathlib
+
+    def dump(rows):
+        return json.dumps(rows, sort_keys=True, default=str)
+
+    collect = probe_matrix.collect
+    base = dump(collect())
+    real = pathlib.Path.glob
+    monkeypatch.setattr(pathlib.Path, "glob",
+                        lambda self, pattern: iter(sorted(real(self, pattern), reverse=True)))
+    assert dump(collect()) == base
+
+    unpriced = [r["model"] for r in collect() if r["tier"] == "unpriced"]
+    assert len(unpriced) > 1 and unpriced == sorted(unpriced)

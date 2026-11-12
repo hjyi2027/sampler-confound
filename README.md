@@ -5,7 +5,8 @@ LLM inference API**
 
 A standalone research project by Hyunjun Yi. The write-up is a technical
 report in this repository, [paper/main.pdf](paper/main.pdf). It is not
-submitted to any venue.
+submitted to any venue. The project was closed in November 2026, and
+[Status](#status) lists what was left out.
 
 When an evaluation sets `temperature`, `top_p` or `seed` in a request to a
 hosted model, it assumes the provider applies them. This repository tests that
@@ -298,3 +299,17 @@ and kills its child probes on SIGINT/SIGTERM. Rerun the same command to
 resume.
 
 Full decision log in [TASKS.md](TASKS.md).
+
+## Status
+
+Closed as of 12 November 2026. The audit is complete for the one provider it
+covers, and the report, the records and the code agree with each other. A
+fresh clone, with only `requirements.txt` installed, passes the test suite and
+regenerates the same tables and the same `paper/NUMBERS.md`.
+
+Four things were left out. A second provider would show whether the findings
+are specific to Fireworks, and it needs accounts and keys for the other six
+adapters. The seed was tested at temperature 0 only. A re-run of the probes
+would be a new dated snapshot. The variance study needs more model levels than
+one provider offers. [TASKS.md](TASKS.md) is the full log, including the
+decisions that were reversed.

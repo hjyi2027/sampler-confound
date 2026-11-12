@@ -143,7 +143,7 @@ def collect() -> list[dict]:
             # thicker run of the same parameter overrides a thinner one and a
             # parameter only the later file has is added rather than lost
             files: list[tuple[int, str, Path]] = []
-            for f in pdir.glob("*.json"):
+            for f in sorted(pdir.glob("*.json")):  # glob order is the filesystem's
                 name = f.name
                 if name in ("determinism.json", "matrix.json", "determinism_sequential.json") or ".neg-n" in name:
                     continue
@@ -169,7 +169,11 @@ def collect() -> list[dict]:
         r["usd_out_per_1m"] = p_out
         r["tier"] = "paid" if p_out == p_out else "unpriced"
         out.append(r)
-    out.sort(key=lambda r: (r["provider"], r["usd_out_per_1m"] if r["usd_out_per_1m"] == r["usd_out_per_1m"] else 1e9))
+    # The model name breaks price ties. Without it the unpriced models came out
+    # in directory-listing order, which differs between a checkout and a clone.
+    out.sort(key=lambda r: (r["provider"],
+                            r["usd_out_per_1m"] if r["usd_out_per_1m"] == r["usd_out_per_1m"] else 1e9,
+                            r["model"]))
     return out
 
 

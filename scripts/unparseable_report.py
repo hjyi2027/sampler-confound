@@ -111,6 +111,17 @@ def main() -> int:
     res["pilot_standard"] = {m: sum(s == "unparseable" for s in st) / len(st) for m, st in by.items()}
     print("\n== pilot, standard sampler, 100 problems: unparseable " +
           ", ".join(f"{m} {v:.0%}" for m, v in sorted(res["pilot_standard"].items())))
+    # "written" dates the content, not the run. A rerun over the same records
+    # keeps the old stamp, so the file does not change every time CI runs.
+    try:
+        old = json.loads(OUT.read_text())
+    except (OSError, ValueError):
+        old = None
+    new = json.loads(json.dumps(res, default=str))
+    if old is not None and {k: v for k, v in old.items() if k != "written"} == \
+            {k: v for k, v in new.items() if k != "written"}:
+        print(f"{show(OUT)} unchanged")
+        return 0
     OUT.write_text(json.dumps(res, indent=2, default=str) + "\n")
     print(f"wrote {show(OUT)}")
     return 0

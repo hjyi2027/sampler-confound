@@ -31,14 +31,6 @@ deepseek-v4-flash-0731,mirostat,40,deepseek-v4-flash-0731.dist-n40.json,no effec
 deepseek-v4-flash-0731,repetition_penalty,40,deepseek-v4-flash-0731.dist-n40.json,distinguishable,distinguishable,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,9.999000099990002e-05,1.0,,,4,yes,as documented
 deepseek-v4-flash-0731,frequency_penalty,40,deepseek-v4-flash-0731.dist-n40.json,distinguishable,distinguishable,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,9.999000099990002e-05,1.0,,,3,yes,as documented
 deepseek-v4-flash-0731,presence_penalty,40,deepseek-v4-flash-0731.dist-n40.json,no effect seen,insufficient,0.0685931406859314,0.1371862813718628,1.0,nan,1.0,,,3,undetermined,"documented, accepted, undetermined"
-minimax-m3,top_p,40,distinguish_multiprompt.json,distinguishable,,9.999000099990002e-05,0.0020997900209979003,0.018198180181981802,,1.0,0.732114774294079,0.7953044916485207,4,yes,as documented
-minimax-m3,top_k,40,distinguish_multiprompt.json,distinguishable,,9.999000099990002e-05,0.0020997900209979003,0.018198180181981802,,1.0,1.025414171157594,1.1207311638863977,4,yes,as documented
-minimax-m3,min_p,40,distinguish_multiprompt.json,distinguishable,,9.999000099990002e-05,0.0020997900209979003,0.018198180181981802,,1.0,0.7206252148515977,0.8003695826480973,4,yes,as documented
-minimax-m3,typical_p,40,minimax-m3.dist-n40.json,distinguishable,,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,,1.0,0.34586222512276354,0.4362823108718679,4,yes,as documented
-minimax-m3,mirostat,40,minimax-m3.dist-n40.json,distinguishable,,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,,1.0,0.3768181292571389,0.4378937250227811,3,yes,as documented
-minimax-m3,repetition_penalty,40,minimax-m3.dist-n40.json,distinguishable,distinguishable,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,9.999000099990002e-05,1.0,,,4,yes,as documented
-minimax-m3,frequency_penalty,40,minimax-m3.dist-n40.json,no effect seen,distinguishable,0.46005399460054,0.46005399460054,1.0,9.999000099990002e-05,1.0,,,4,yes,as documented
-minimax-m3,presence_penalty,40,minimax-m3.dist-n40.json,no effect seen,insufficient,0.1718828117188281,0.3437656234376562,1.0,nan,1.0,,,3,undetermined,"documented, accepted, undetermined"
 deepseek-v4p1-flash,top_p,40,deepseek-v4p1-flash.json,distinguishable,,9.999000099990002e-05,0.00029997000299970003,0.018198180181981802,,1.0,1.0443535165334779,1.2128394173218635,4,yes,as documented
 deepseek-v4p1-flash,top_k,40,deepseek-v4p1-flash.json,distinguishable,,9.999000099990002e-05,0.00029997000299970003,0.018198180181981802,,1.0,0.7974552037795584,0.9720374520457742,4,yes,as documented
 deepseek-v4p1-flash,min_p,40,deepseek-v4p1-flash.json,distinguishable,,9.999000099990002e-05,0.00029997000299970003,0.018198180181981802,,1.0,1.1031748371924566,1.3682536392002975,4,yes,as documented
@@ -47,6 +39,14 @@ deepseek-v4p1-flash,mirostat,40,deepseek-v4p1-flash.dist-n40.json,distinguishabl
 deepseek-v4p1-flash,repetition_penalty,40,deepseek-v4p1-flash.dist-n40.json,distinguishable,distinguishable,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,9.999000099990002e-05,1.0,,,4,yes,as documented
 deepseek-v4p1-flash,frequency_penalty,40,deepseek-v4p1-flash.dist-n40.json,distinguishable,distinguishable,0.0031996800319968005,0.006399360063993601,0.19198080191980804,9.999000099990002e-05,1.0,,,4,yes,as documented
 deepseek-v4p1-flash,presence_penalty,40,deepseek-v4p1-flash.dist-n40.json,distinguishable,insufficient,0.028997100289971003,0.028997100289971003,1.0,nan,1.0,,,4,yes,as documented
+minimax-m3,top_p,40,distinguish_multiprompt.json,distinguishable,,9.999000099990002e-05,0.0020997900209979003,0.018198180181981802,,1.0,0.732114774294079,0.7953044916485207,4,yes,as documented
+minimax-m3,top_k,40,distinguish_multiprompt.json,distinguishable,,9.999000099990002e-05,0.0020997900209979003,0.018198180181981802,,1.0,1.025414171157594,1.1207311638863977,4,yes,as documented
+minimax-m3,min_p,40,distinguish_multiprompt.json,distinguishable,,9.999000099990002e-05,0.0020997900209979003,0.018198180181981802,,1.0,0.7206252148515977,0.8003695826480973,4,yes,as documented
+minimax-m3,typical_p,40,minimax-m3.dist-n40.json,distinguishable,,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,,1.0,0.34586222512276354,0.4362823108718679,4,yes,as documented
+minimax-m3,mirostat,40,minimax-m3.dist-n40.json,distinguishable,,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,,1.0,0.3768181292571389,0.4378937250227811,3,yes,as documented
+minimax-m3,repetition_penalty,40,minimax-m3.dist-n40.json,distinguishable,distinguishable,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,9.999000099990002e-05,1.0,,,4,yes,as documented
+minimax-m3,frequency_penalty,40,minimax-m3.dist-n40.json,no effect seen,distinguishable,0.46005399460054,0.46005399460054,1.0,9.999000099990002e-05,1.0,,,4,yes,as documented
+minimax-m3,presence_penalty,40,minimax-m3.dist-n40.json,no effect seen,insufficient,0.1718828117188281,0.3437656234376562,1.0,nan,1.0,,,3,undetermined,"documented, accepted, undetermined"
 muse-glimmer-30b,top_p,40,distinguish_multiprompt.json,distinguishable,,9.999000099990002e-05,0.0020997900209979003,0.018198180181981802,,1.0,0.8695132090752914,0.9084620413357665,4,yes,as documented
 muse-glimmer-30b,top_k,40,distinguish_multiprompt.json,distinguishable,,9.999000099990002e-05,0.0020997900209979003,0.018198180181981802,,1.0,0.8769450292456187,0.9823538742482139,4,yes,as documented
 muse-glimmer-30b,min_p,40,distinguish_multiprompt.json,distinguishable,,9.999000099990002e-05,0.0020997900209979003,0.018198180181981802,,1.0,0.6903218546494272,0.7907665077883685,4,yes,as documented
@@ -87,14 +87,6 @@ kimi-k2p7-code,mirostat,40,kimi-k2p7-code.dist-n40.json,mixed,,0.057094290570942
 kimi-k2p7-code,repetition_penalty,40,kimi-k2p7-code.dist-n40.json,distinguishable,distinguishable,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,9.999000099990002e-05,1.0,,,4,yes,as documented
 kimi-k2p7-code,frequency_penalty,40,kimi-k2p7-code.dist-n40.json,no effect seen,distinguishable,0.5961403859614038,1.0,1.0,9.999000099990002e-05,1.0,,,3,yes,as documented
 kimi-k2p7-code,presence_penalty,40,kimi-k2p7-code.dist-n40.json,no effect seen,insufficient,0.8281171882811719,1.0,1.0,nan,1.0,,,4,undetermined,"documented, accepted, undetermined"
-glm-5p3,top_p,40,glm-5p3.json,distinguishable,,9.999000099990002e-05,0.00029997000299970003,0.018198180181981802,,1.0,0.9560278483765401,1.010718441345908,4,yes,as documented
-glm-5p3,top_k,40,glm-5p3.json,distinguishable,,9.999000099990002e-05,0.00029997000299970003,0.018198180181981802,,1.0,1.067095554253733,1.1895923567888853,4,yes,as documented
-glm-5p3,min_p,40,glm-5p3.json,distinguishable,,9.999000099990002e-05,0.00029997000299970003,0.018198180181981802,,1.0,0.9482307703300199,1.0469385092196253,4,yes,as documented
-glm-5p3,typical_p,40,glm-5p3.dist-n40.json,distinguishable,,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,,1.0,0.48587699851948873,0.5184461936614448,4,yes,as documented
-glm-5p3,mirostat,40,glm-5p3.dist-n40.json,distinguishable,,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,,1.0,0.6269064474218161,0.6671144186108631,4,yes,as documented
-glm-5p3,repetition_penalty,40,glm-5p3.dist-n40.json,distinguishable,distinguishable,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,9.999000099990002e-05,1.0,,,4,yes,as documented
-glm-5p3,frequency_penalty,40,glm-5p3.dist-n40.json,no effect seen,distinguishable,0.0922907709229077,0.1845815418458154,1.0,9.999000099990002e-05,1.0,,,4,yes,as documented
-glm-5p3,presence_penalty,40,glm-5p3.dist-n40.json,no effect seen,insufficient,0.47565243475652436,0.47565243475652436,1.0,nan,1.0,,,4,undetermined,"documented, accepted, undetermined"
 glm-5p2,top_p,40,glm-5p2.json,distinguishable,,9.999000099990002e-05,0.00029997000299970003,0.018198180181981802,,1.0,0.7273908999043865,0.8568504448791681,4,yes,as documented
 glm-5p2,top_k,40,glm-5p2.json,distinguishable,,9.999000099990002e-05,0.00029997000299970003,0.018198180181981802,,1.0,1.2373262346399347,1.548423894567975,4,yes,as documented
 glm-5p2,min_p,40,glm-5p2.json,distinguishable,,9.999000099990002e-05,0.00029997000299970003,0.018198180181981802,,1.0,0.6276877202129144,0.8367526402150233,4,yes,as documented
@@ -103,6 +95,14 @@ glm-5p2,mirostat,40,glm-5p2.dist-n40.json,no effect seen,,0.33486651334866513,0.
 glm-5p2,repetition_penalty,40,glm-5p2.dist-n40.json,distinguishable,distinguishable,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,9.999000099990002e-05,1.0,,,4,yes,as documented
 glm-5p2,frequency_penalty,40,glm-5p2.dist-n40.json,distinguishable,distinguishable,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,9.999000099990002e-05,1.0,,,4,yes,as documented
 glm-5p2,presence_penalty,40,glm-5p2.dist-n40.json,no effect seen,insufficient,0.13058694130586943,0.26117388261173885,1.0,nan,1.0,,,3,undetermined,"documented, accepted, undetermined"
+glm-5p3,top_p,40,glm-5p3.json,distinguishable,,9.999000099990002e-05,0.00029997000299970003,0.018198180181981802,,1.0,0.9560278483765401,1.010718441345908,4,yes,as documented
+glm-5p3,top_k,40,glm-5p3.json,distinguishable,,9.999000099990002e-05,0.00029997000299970003,0.018198180181981802,,1.0,1.067095554253733,1.1895923567888853,4,yes,as documented
+glm-5p3,min_p,40,glm-5p3.json,distinguishable,,9.999000099990002e-05,0.00029997000299970003,0.018198180181981802,,1.0,0.9482307703300199,1.0469385092196253,4,yes,as documented
+glm-5p3,typical_p,40,glm-5p3.dist-n40.json,distinguishable,,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,,1.0,0.48587699851948873,0.5184461936614448,4,yes,as documented
+glm-5p3,mirostat,40,glm-5p3.dist-n40.json,distinguishable,,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,,1.0,0.6269064474218161,0.6671144186108631,4,yes,as documented
+glm-5p3,repetition_penalty,40,glm-5p3.dist-n40.json,distinguishable,distinguishable,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,9.999000099990002e-05,1.0,,,4,yes,as documented
+glm-5p3,frequency_penalty,40,glm-5p3.dist-n40.json,no effect seen,distinguishable,0.0922907709229077,0.1845815418458154,1.0,9.999000099990002e-05,1.0,,,4,yes,as documented
+glm-5p3,presence_penalty,40,glm-5p3.dist-n40.json,no effect seen,insufficient,0.47565243475652436,0.47565243475652436,1.0,nan,1.0,,,4,undetermined,"documented, accepted, undetermined"
 qwen3p8-max,top_p,40,qwen3p8-max.json,distinguishable,,9.999000099990002e-05,0.00029997000299970003,0.018198180181981802,,1.0,0.9401613031001659,1.0279601815516826,4,yes,as documented
 qwen3p8-max,top_k,40,qwen3p8-max.json,distinguishable,,9.999000099990002e-05,0.00029997000299970003,0.018198180181981802,,1.0,0.7709856114489306,0.8866896523963852,4,yes,as documented
 qwen3p8-max,min_p,40,qwen3p8-max.json,distinguishable,,9.999000099990002e-05,0.00029997000299970003,0.018198180181981802,,1.0,0.7890944177139696,0.8983123976675107,4,yes,as documented
@@ -119,22 +119,6 @@ kimi-k3,mirostat,40,kimi-k3.dist-n40.json,distinguishable,,9.999000099990002e-05
 kimi-k3,repetition_penalty,40,kimi-k3.dist-n40.json,distinguishable,distinguishable,9.999000099990002e-05,0.0004999500049995,0.018198180181981802,9.999000099990002e-05,1.0,,,4,yes,as documented
 kimi-k3,frequency_penalty,40,kimi-k3.dist-n40.json,no effect seen,distinguishable,0.5436456354364564,1.0,1.0,9.999000099990002e-05,1.0,,,4,yes,as documented
 kimi-k3,presence_penalty,40,kimi-k3.dist-n40.json,no effect seen,insufficient,0.8078192180781922,1.0,1.0,nan,1.0,,,4,undetermined,"documented, accepted, undetermined"
-qwen3p8-2p4t-a95b,top_p,10,qwen3p8-2p4t-a95b.dist-n10.json,distinguishable,,9.999000099990002e-05,0.0007999200079992001,0.018198180181981802,,0.985,1.4513484210819616,2.5099933360319624,4,yes,as documented
-qwen3p8-2p4t-a95b,top_k,10,qwen3p8-2p4t-a95b.dist-n10.json,distinguishable,,9.999000099990002e-05,0.0007999200079992001,0.018198180181981802,,0.97,0.9332494472656566,1.576277441260996,3,yes,as documented
-qwen3p8-2p4t-a95b,min_p,10,qwen3p8-2p4t-a95b.dist-n10.json,distinguishable,,0.0006999300069993001,0.0034996500349965005,0.0461953804619538,,0.985,0.788060544038181,1.458593286394493,4,yes,as documented
-qwen3p8-2p4t-a95b,typical_p,10,qwen3p8-2p4t-a95b.dist-n10.json,mixed,,0.14358564143585642,0.5743425657434257,1.0,,0.985,0.2024773647939964,0.5302912342358556,4,mixed,"documented, accepted, undetermined"
-qwen3p8-2p4t-a95b,mirostat,10,qwen3p8-2p4t-a95b.dist-n10.json,no effect seen,,0.2501749825017498,0.7505249475052493,1.0,,0.985,0.12142354127603774,0.36020757071711107,3,undetermined,"documented, accepted, undetermined"
-qwen3p8-2p4t-a95b,repetition_penalty,10,qwen3p8-2p4t-a95b.dist-n10.json,distinguishable,distinguishable,9.999000099990002e-05,0.0007999200079992001,0.018198180181981802,9.999000099990002e-05,1.0,,,4,yes,as documented
-qwen3p8-2p4t-a95b,frequency_penalty,10,qwen3p8-2p4t-a95b.dist-n10.json,no effect seen,distinguishable,0.5052494750524947,0.7851214878512148,1.0,9.999000099990002e-05,1.0,,,3,yes,as documented
-qwen3p8-2p4t-a95b,presence_penalty,10,qwen3p8-2p4t-a95b.dist-n10.json,no effect seen,insufficient,0.3925607439256074,0.7851214878512148,1.0,nan,1.0,,,3,undetermined,"documented, accepted, undetermined"
-inkling,top_p,10,inkling.dist-n10.json,distinguishable,,0.0072992700729927005,0.043795620437956206,0.41605839416058393,,0.295,0.9146885248172305,3.827689737846521,2,yes,as documented
-inkling,top_k,10,inkling.dist-n10.json,distinguishable,,0.00019998000199980003,0.0013998600139986002,0.018198180181981802,,0.85,0.8276098806541596,1.729482567190046,4,yes,as documented
-inkling,min_p,10,inkling.dist-n10.json,underpowered,,0.9485051494850515,1.0,1.0,,0.415,-0.5762362081121851,0.18628316419636382,3,undetermined,"documented, accepted, undetermined"
-inkling,typical_p,10,inkling.dist-n10.json,underpowered,,0.8488151184881512,1.0,1.0,,0.295,-0.5361935808001794,0.31808041740609305,2,undetermined,"documented, accepted, undetermined"
-inkling,mirostat,10,inkling.dist-n10.json,underpowered,,0.38776122387761225,1.0,1.0,,0.05,0.8883405805791772,5.619638995317005,1,undetermined,"documented, accepted, undetermined"
-inkling,repetition_penalty,10,inkling.dist-n10.json,distinguishable,distinguishable,9.999000099990002e-05,0.0007999200079992001,0.018198180181981802,9.999000099990002e-05,1.0,,,3,yes,as documented
-inkling,frequency_penalty,10,inkling.dist-n10.json,no effect seen,distinguishable,0.9083091690830917,1.0,1.0,9.999000099990002e-05,0.81,,,1,yes,as documented
-inkling,presence_penalty,10,inkling.dist-n10.json,no effect seen,insufficient,0.4226577342265773,1.0,1.0,nan,1.0,,,2,undetermined,"documented, accepted, undetermined"
 deepseek-v4-flash-vision-exp,top_p,10,deepseek-v4-flash-vision-exp.dist-n10.json,mixed,,0.0221977802219778,0.110988901109889,1.0,,0.955,0.3712745419712418,0.7365573100957932,3,mixed,"documented, accepted, undetermined"
 deepseek-v4-flash-vision-exp,top_k,10,deepseek-v4-flash-vision-exp.dist-n10.json,distinguishable,,9.999000099990002e-05,0.0007999200079992001,0.018198180181981802,,0.955,0.9757163604010861,1.5822032342960772,3,yes,as documented
 deepseek-v4-flash-vision-exp,min_p,10,deepseek-v4-flash-vision-exp.dist-n10.json,distinguishable,,0.00019998000199980003,0.0011998800119988001,0.018198180181981802,,0.955,0.6918642728709103,1.2241456518430358,3,yes,as documented
@@ -143,3 +127,19 @@ deepseek-v4-flash-vision-exp,mirostat,10,deepseek-v4-flash-vision-exp.dist-n10.j
 deepseek-v4-flash-vision-exp,repetition_penalty,10,deepseek-v4-flash-vision-exp.dist-n10.json,underpowered,distinguishable,0.048095190480951906,0.19238076192380762,1.0,9.999000099990002e-05,nan,,,3,yes,as documented
 deepseek-v4-flash-vision-exp,frequency_penalty,10,deepseek-v4-flash-vision-exp.dist-n10.json,distinguishable,distinguishable,9.999000099990002e-05,0.0007999200079992001,0.018198180181981802,9.999000099990002e-05,nan,,,3,yes,as documented
 deepseek-v4-flash-vision-exp,presence_penalty,10,deepseek-v4-flash-vision-exp.dist-n10.json,underpowered,insufficient,0.42605739426057393,0.8521147885211479,1.0,nan,0.575,,,1,undetermined,"documented, accepted, undetermined"
+inkling,top_p,10,inkling.dist-n10.json,distinguishable,,0.0072992700729927005,0.043795620437956206,0.41605839416058393,,0.295,0.9146885248172305,3.827689737846521,2,yes,as documented
+inkling,top_k,10,inkling.dist-n10.json,distinguishable,,0.00019998000199980003,0.0013998600139986002,0.018198180181981802,,0.85,0.8276098806541596,1.729482567190046,4,yes,as documented
+inkling,min_p,10,inkling.dist-n10.json,underpowered,,0.9485051494850515,1.0,1.0,,0.415,-0.5762362081121851,0.18628316419636382,3,undetermined,"documented, accepted, undetermined"
+inkling,typical_p,10,inkling.dist-n10.json,underpowered,,0.8488151184881512,1.0,1.0,,0.295,-0.5361935808001794,0.31808041740609305,2,undetermined,"documented, accepted, undetermined"
+inkling,mirostat,10,inkling.dist-n10.json,underpowered,,0.38776122387761225,1.0,1.0,,0.05,0.8883405805791772,5.619638995317005,1,undetermined,"documented, accepted, undetermined"
+inkling,repetition_penalty,10,inkling.dist-n10.json,distinguishable,distinguishable,9.999000099990002e-05,0.0007999200079992001,0.018198180181981802,9.999000099990002e-05,1.0,,,3,yes,as documented
+inkling,frequency_penalty,10,inkling.dist-n10.json,no effect seen,distinguishable,0.9083091690830917,1.0,1.0,9.999000099990002e-05,0.81,,,1,yes,as documented
+inkling,presence_penalty,10,inkling.dist-n10.json,no effect seen,insufficient,0.4226577342265773,1.0,1.0,nan,1.0,,,2,undetermined,"documented, accepted, undetermined"
+qwen3p8-2p4t-a95b,top_p,10,qwen3p8-2p4t-a95b.dist-n10.json,distinguishable,,9.999000099990002e-05,0.0007999200079992001,0.018198180181981802,,0.985,1.4513484210819616,2.5099933360319624,4,yes,as documented
+qwen3p8-2p4t-a95b,top_k,10,qwen3p8-2p4t-a95b.dist-n10.json,distinguishable,,9.999000099990002e-05,0.0007999200079992001,0.018198180181981802,,0.97,0.9332494472656566,1.576277441260996,3,yes,as documented
+qwen3p8-2p4t-a95b,min_p,10,qwen3p8-2p4t-a95b.dist-n10.json,distinguishable,,0.0006999300069993001,0.0034996500349965005,0.0461953804619538,,0.985,0.788060544038181,1.458593286394493,4,yes,as documented
+qwen3p8-2p4t-a95b,typical_p,10,qwen3p8-2p4t-a95b.dist-n10.json,mixed,,0.14358564143585642,0.5743425657434257,1.0,,0.985,0.2024773647939964,0.5302912342358556,4,mixed,"documented, accepted, undetermined"
+qwen3p8-2p4t-a95b,mirostat,10,qwen3p8-2p4t-a95b.dist-n10.json,no effect seen,,0.2501749825017498,0.7505249475052493,1.0,,0.985,0.12142354127603774,0.36020757071711107,3,undetermined,"documented, accepted, undetermined"
+qwen3p8-2p4t-a95b,repetition_penalty,10,qwen3p8-2p4t-a95b.dist-n10.json,distinguishable,distinguishable,9.999000099990002e-05,0.0007999200079992001,0.018198180181981802,9.999000099990002e-05,1.0,,,4,yes,as documented
+qwen3p8-2p4t-a95b,frequency_penalty,10,qwen3p8-2p4t-a95b.dist-n10.json,no effect seen,distinguishable,0.5052494750524947,0.7851214878512148,1.0,9.999000099990002e-05,1.0,,,3,yes,as documented
+qwen3p8-2p4t-a95b,presence_penalty,10,qwen3p8-2p4t-a95b.dist-n10.json,no effect seen,insufficient,0.3925607439256074,0.7851214878512148,1.0,nan,1.0,,,3,undetermined,"documented, accepted, undetermined"
